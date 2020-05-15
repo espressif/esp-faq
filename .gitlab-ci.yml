@@ -1,0 +1,42 @@
+stages:
+    - build
+  
+variables:
+    PY_VERSION: 3.7.6
+    #bak: http://mirrors.sohu.com/python
+    PY_MIRRORS: https://npm.taobao.org/mirrors/python
+    #bak https://pypi.mirrors.ustc.edu.cn/simple
+    PIP_MIRRORS: https://pypi.tuna.tsinghua.edu.cn/simple
+  
+before_script:
+    - source /opt/pyenv/activate
+    - wget -nv -t 3 $PY_MIRRORS/$PY_VERSION/Python-$PY_VERSION.tar.xz -P "$PYENV_ROOT"/cache/; pyenv install $PY_VERSION; pyenv global $PY_VERSION
+    - pip install --upgrade pip -i $PIP_MIRRORS
+    - pip install -r docs/requirements.txt -i $PIP_MIRRORS
+  
+build_docs:
+    stage: build
+    image: $CI_DOCKER_REGISTRY/esp-idf-doc-env:v4
+    tags:
+        - build_docs
+    artifacts:
+        when: always
+        paths:
+            # English version of documentation
+            - docs/en/sphinx-warning-log.txt
+            - docs/en/_build/html
+            # Chinese version of documentation
+            - docs/cn/sphinx-warning-log.txt
+            - docs/cn/_build/html
+        expire_in: 1 day
+    script:
+      - cd docs
+      # make English version of documentation
+      - cd en
+      - make html
+      - ../check_doc_warnings.sh
+      # make Chinese version of documentation
+      - cd ../cn
+      - make html
+      - ../check_doc_warnings.sh
+  
