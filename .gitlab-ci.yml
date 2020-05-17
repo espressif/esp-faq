@@ -1,22 +1,9 @@
 stages:
     - build
-  
-variables:
-    PY_VERSION: 3.7.6
-    #bak: http://mirrors.sohu.com/python
-    PY_MIRRORS: https://npm.taobao.org/mirrors/python
-    #bak https://pypi.mirrors.ustc.edu.cn/simple
-    PIP_MIRRORS: https://pypi.tuna.tsinghua.edu.cn/simple
-  
-before_script:
-    - source /opt/pyenv/activate
-    - wget -nv -t 3 $PY_MIRRORS/$PY_VERSION/Python-$PY_VERSION.tar.xz -P "$PYENV_ROOT"/cache/; pyenv install $PY_VERSION; pyenv global $PY_VERSION
-    - pip install --upgrade pip -i $PIP_MIRRORS
-    - pip install -r docs/requirements.txt -i $PIP_MIRRORS
-  
+
 build_docs:
     stage: build
-    image: $CI_DOCKER_REGISTRY/esp-idf-doc-env:v4
+    image: $CI_SPHINX_DOCKER:latest
     tags:
         - build_docs
     artifacts:
