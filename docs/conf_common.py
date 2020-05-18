@@ -74,6 +74,7 @@ extensions = [
                    'sphinxcontrib.seqdiag',
                    'sphinxcontrib.actdiag',
                    'sphinxcontrib.nwdiag',
+                   'sphinx_markdown_tables',
                    'recommonmark'
                   ]
 
