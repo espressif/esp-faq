@@ -28,6 +28,8 @@
 * Organize Q & A according to sample template.
 
   ``` Markdown
+  ## SDK ESP-IDF support ESP8266 chip
+
   - `Q:`
     - SDK ESP-IDF support ESP8266 chip?
 

@@ -23,11 +23,13 @@
   NEW <new>>
   ```
 
-## 新增 QA
+## 新增 Q & A
 
 * 根据示例模板整理 Q & A
 
   ``` Markdown
+  ## ESP-IDF 是否支持 ESP8266 芯片
+
   - `Q:`
     - ESP-IDF 是否支持 ESP8266 芯片 ？
 
