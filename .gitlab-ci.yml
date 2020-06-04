@@ -13,17 +13,19 @@ build_docs:
             - docs/en/sphinx-warning-log.txt
             - docs/en/_build/html
             # Chinese version of documentation
-            - docs/cn/sphinx-warning-log.txt
-            - docs/cn/_build/html
-        expire_in: 1 day
+            - docs/zh_CN/sphinx-warning-log.txt
+            - docs/zh_CN/_build/html
+        expire_in: 3 day
     script:
       - cd docs
       # make English version of documentation
       - cd en
       - make html
       - ../check_doc_warnings.sh
+      - cd ..
       # make Chinese version of documentation
-      - cd ../cn
+      - cd zh_CN
       - make html
       - ../check_doc_warnings.sh
+      - cd ..
   
