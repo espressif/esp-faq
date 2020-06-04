@@ -10,55 +10,31 @@ ESP-FAQ is a summary document for common problems launched by Espressif.
 
 * The document framework supports reStructuredText and Markdown lightweight markup languages.
 
-### Configure the environment and compile
-
-* Test and verify the environment using ubuntu or debian system, configure the python environment to `3.7`.
-* It is recommended to use python virtual environment, or docker environment.
-  
-  ``` shell
-  # Install python3.7 and virtual environment
-  sudo apt-get install python3.7 python3.7-venv
-
-  # Create a virtual environment
-  python3.7 -m venv ~/.pyenv3_7
-
-  # Activate the virtual environment
-  source ~/.pyenv3_7/bin/activate
-
-  # Update pip
-  pip install --upgrade pip
-  
-  # Install pip components
-  pip install -r docs/requirements.txt
-  
-  # Compile the Chinese version
-  cd docs/cn/ && make html && cd -
-
-  # Compile the English version
-  cd docs/en/ && make html && cd -
-
-  # Exit the virtual environment
-  deactivate
-
-  ```
-
 ### Document structure
 
 ``` bash
 docs
 ├── _static
-│   ├── espressif-logo.svg    # web log
+│   ├── espressif-logo.svg    # Web log
 │   └── theme_overrides.css   # Web Style Sheet
-├── cn
-│   ├── config.py             # sphinx config
+├── zh_CN
+│   ├── get-started           # Set started
+│   ├── application-solution  # Application solution
+│   ├── hardware-selection    # Hardware selection
+│   ├── sdk-framework         # Sdk framework
+│   ├── test-verification     # Test verification
+│   ├── config.py             # Sphinx config
+│   ├── Makefile              # Compile file
 │   └── index.rst             # Home
-│   └── Makefile              # Compile file
-│   └── *.md                  # Specific documents
 └── en
-    ├── config.py             # sphinx config
+    ├── get-started           # get started
+    ├── application-solution  # Application solution
+    ├── hardware-selection    # Hardware selection
+    ├── sdk-framework         # Sdk framework
+    ├── test-verification     # Test verification
+    ├── config.py             # Sphinx config
+    ├── Makefile              # Compile file
     └── index.rst             # Home
-    └── Makefile              # Compile file
-    └── *.md                  # Specific documents
 ```
 
 ### format guide
