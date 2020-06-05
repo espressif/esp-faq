@@ -18,6 +18,8 @@ import sys, os
 import re
 from subprocess import Popen, PIPE
 import shlex
+import recommonmark
+from recommonmark.transform import AutoStructify
 
 # Note: If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -314,4 +316,12 @@ if not on_rtd:  # only import and set the theme if we're building docs locally
 # Override RTD CSS theme to introduce the theme corrections
 # https://github.com/rtfd/sphinx_rtd_theme/pull/432
 def setup(app):
+    app.add_config_value('recommonmark_config', {
+        #'url_resolver': lambda url: github_doc_root + url,
+        'auto_toc_tree_section': 'Contents',
+        'enable_math': False,
+        'enable_inline_math': False,
+        'enable_eval_rst': True,
+        'enable_auto_doc_ref': True,
+    }, True)
     app.add_css_file('theme_overrides.css')
