@@ -41,3 +41,9 @@ ESP32 AT 文档：[AT 指令集](https://github.com/espressif/esp-at/blob/master
 2. 确认是否烧录了 blank.bin 做初始化
 3. 确认 user1.bin 和 user2.bin 下载到了正确的地址
 4. 确认⽣成 user1.bin 和 user2.bin 使⽤了相同的 Flash、boot 配置
+
+---
+
+## ESP32-AT 编译过程中，出现 no module named yaml 的错误？
+
+安装 yaml 模块， 需使⽤ python -m pip install pyyaml。
