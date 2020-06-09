@@ -15,6 +15,7 @@ body {counter-reset: h2}
 ESP32 硬件不支持 BLE 5.0，支持 BLE4.2。
 ESP32 目前通过了 BLE 5.0 的认证，但 BLE 5.0 的新功能 ESP32 都不支持 。
 未来我们会有其它芯片支持 BLE 5.0 。
+可以使用蓝牙进行 OTA。如果是用 BT，可以基于 [bt_spp_acceptor](https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_acceptor) 和 [bt_spp_initiator](https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_initiator) 修改；如果是用 BLE，可以基于 [ble_spp_server](https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_spp_server) 和 [ble_spp_client](https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_spp_client) 修改。
 
 ---
 
