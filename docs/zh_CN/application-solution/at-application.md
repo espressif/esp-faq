@@ -8,14 +8,42 @@ body {counter-reset: h2}
   h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
 </style>
 
-## ESP8266 SmartConfig 配⽹失败有哪些原因？
+---
 
-请按如下顺序进⾏排查：
-1. APP 版本是否⽀持 SDK 版本或 SmartConfig 版本
-2. ⼿机连接的路由器不能是单 5G 路由（双频路路由器除外）
-3. SmartConfig 过程中不要调⽤其他 API 
-4. 使⽤ AT 时，设备没有获得 IP 之前，不要调⽤ smartconfig_stop
+## AT 提示 busy 是什么原因？
 
-如以上排除，请把连接失败和成功的 log 发至邮箱 sales@espressif.com 以便我们进行⽀持分析
+AT 指令的处理是线性的，也就是处理完前⼀条指令后，才能接收下⼀条指令进⾏处理。提示 "busy" 表示正在处理前⼀条指令，⽆法响应当前输⼊。
+
+⽽任何串⼝的输⼊，均被认为是指令输⼊，因此，当有多余的不可⻅字符输⼊时，系统也会提示 "busy" 或者 "ERROR"。
+
+例如，串⼝输⼊ AT+GMR (换⾏符 CR LF) (空格符)，由于 AT+GMR (换⾏符 CR LF) 已经是⼀条完整的 AT 指令了，系统会执⾏该指令。
+
+如果系统尚未完成 AT+GMR 操作，就收到了后⾯的空格符，将被认为是新的指令输⼊，系统提示 "busy"。
+
+如果系统已经完成了 AT+GMR 操作，再收到后⾯的空格符，空格符将被认为是⼀条错误的指令，系统提示 "ERROR"。
 
 ---
+
+## ESP32 AT 相关资源从哪里获得？
+
+ESP32 AT bin 文件：https://www.espressif.com/zh-hans/support/download/at \
+ESP32 AT 文档：[AT 指令集](https://github.com/espressif/esp-at/blob/master/docs/ESP_AT_Commands_Set.md)\
+此外，客户也可以基于乐鑫官方的 esp-at 工程开发更多的 AT 指令，ESP32 AT 工程可以在 GitHub 下载：https://github.com/espressif/esp32-at
+
+---
+
+## ESP8266 云端升级失败有哪些原因？
+
+远端升级的详细介绍参考⽂档为《ESP8266 云端升级指南》
+建议按如下顺序，进⾏排查：
+
+1. 确认使⽤了正确⼤⼩的 Flash
+2. 确认是否烧录了 blank.bin 做初始化
+3. 确认 user1.bin 和 user2.bin 下载到了正确的地址
+4. 确认⽣成 user1.bin 和 user2.bin 使⽤了相同的 Flash、boot 配置
+
+---
+
+## ESP32-AT 编译过程中，出现 no module named yaml 的错误？
+
+安装 yaml 模块， 需使⽤ python -m pip install pyyaml。
