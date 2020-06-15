@@ -8,6 +8,8 @@ body {counter-reset: h2}
   h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
 </style>
 
+---
+
 ## AT 提示 busy 是什么原因？
 
 AT 指令的处理是线性的，也就是处理完前⼀条指令后，才能接收下⼀条指令进⾏处理。提示 "busy" 表示正在处理前⼀条指令，⽆法响应当前输⼊。
@@ -19,5 +21,3 @@ AT 指令的处理是线性的，也就是处理完前⼀条指令后，才能�
 如果系统尚未完成 AT+GMR 操作，就收到了后⾯的空格符，将被认为是新的指令输⼊，系统提示 "busy"。
 
 如果系统已经完成了 AT+GMR 操作，再收到后⾯的空格符，空格符将被认为是⼀条错误的指令，系统提示 "ERROR"。
-
----
