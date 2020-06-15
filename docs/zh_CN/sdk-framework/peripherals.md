@@ -8,9 +8,8 @@ body {counter-reset: h2}
   h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
 </style>
 
+---
+
 ## 使⽤ ESP32 做触摸相关应⽤时，哪⾥有相关资料可参考？
 
 请参考推荐的[软硬件设计](https://github.com/espressif/esp-iot-solution/tree/master/examples/touch_pad_evb)
-
----
-
