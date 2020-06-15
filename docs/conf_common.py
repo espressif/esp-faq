@@ -182,7 +182,7 @@ html_logo = "../_static/espressif-logo.svg"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['../_static']
+html_static_path = ['../_static', '_static']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -317,11 +317,9 @@ if not on_rtd:  # only import and set the theme if we're building docs locally
 # https://github.com/rtfd/sphinx_rtd_theme/pull/432
 def setup(app):
     app.add_config_value('recommonmark_config', {
-        #'url_resolver': lambda url: github_doc_root + url,
-        'auto_toc_tree_section': 'Contents',
-        'enable_math': False,
-        'enable_inline_math': False,
-        'enable_eval_rst': True,
-        'enable_auto_doc_ref': True,
-    }, True)
+            'enable_math': True,
+            'enable_eval_rst': True,
+            'auto_code_block': True,
+            }, True)
+    app.add_transform(AutoStructify)
     app.add_css_file('theme_overrides.css')
