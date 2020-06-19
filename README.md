@@ -15,31 +15,33 @@ ESP-FAQ is a summary document for common problems launched by Espressif.
 ``` bash
 docs
 ├── _static
-│   ├── espressif-logo.svg    # Web log
-│   └── theme_overrides.css   # Web Style Sheet
+│   ├── espressif-logo.svg       # Web log
+│   └── theme_overrides.css      # Web Style Sheet
 ├── zh_CN
-│   ├── get-started           # Set started
-│   ├── application-solution  # Application solution
-│   ├── hardware-selection    # Hardware selection
-│   ├── sdk-framework         # Sdk framework
-│   ├── test-verification     # Test verification
-│   ├── config.py             # Sphinx config
-│   ├── Makefile              # Compile file
-│   └── index.rst             # Home
+│   ├── get-started              # Set started
+│   ├── development-environment  # Development environment
+│   ├── application-solution     # Application solution
+│   ├── hardware-related         # Hardware related
+│   ├── software-framework       # Software framework
+│   ├── test-verification        # Test verification
+│   ├── config.py                # Sphinx config
+│   ├── Makefile                 # Compile file
+│   └── index.rst                # Home
 └── en
-    ├── get-started           # get started
-    ├── application-solution  # Application solution
-    ├── hardware-selection    # Hardware selection
-    ├── sdk-framework         # Sdk framework
-    ├── test-verification     # Test verification
-    ├── config.py             # Sphinx config
-    ├── Makefile              # Compile file
-    └── index.rst             # Home
+    ├── get-started              # get started
+    ├── development-environment  # Development environment
+    ├── application-solution     # Application solution
+    ├── hardware-related         # Hardware related
+    ├── software-framework       # Software framework
+    ├── test-verification        # Test verification
+    ├── config.py                # Sphinx config
+    ├── Makefile                 # Compile file
+    └── index.rst                # Home
 ```
 
-### format guide
+### Document Contribution
 
-* Please read the code [format guide](docs/README.md)
+* Please read the code [Document Contribution](docs/zh_CN/get-started/document-contribution.md)
 
 ## Resources
 
