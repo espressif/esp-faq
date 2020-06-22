@@ -1,4 +1,4 @@
-# wifi
+# Wi-Fi
 
 <style>
 body {counter-reset: h2}
