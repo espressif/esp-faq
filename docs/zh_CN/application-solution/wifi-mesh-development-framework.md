@@ -1,4 +1,4 @@
-# wifi mesh 应用框架
+# Wi-Fi Mesh 应用框架
 
 <style>
 body {counter-reset: h2}
