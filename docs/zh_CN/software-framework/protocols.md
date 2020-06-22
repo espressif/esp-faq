@@ -25,7 +25,7 @@ body {counter-reset: h2}
 
 ## ESP32 如何优化通信延时？
 
-- 建议关闭 wifi 休眠功能，调用 esp_wifi_set_ps(WIFI_PS_NONE)。
+- 建议关闭 Wi-Fi 休眠功能，调用 API: esp_wifi_set_ps(WIFI_PS_NONE)。
 - 建议在 menucongfig 关掉 AMPDU 功能。
 
 ---
