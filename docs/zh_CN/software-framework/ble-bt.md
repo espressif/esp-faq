@@ -50,7 +50,7 @@ body {counter-reset: h2}
 ## ESP32 的 BLE 吞吐量是多少？
 
 - ESP32 的 BLE 吞吐率取决于各种因素，例如环境干扰、连接间隔、MTU 大小以及对端设备性能等等。
-- 具体可以参考 IDF 中的 ble_throughput example，ESP32 板子之间的 BLE 通信最大吞吐量量可达 700 Kbps，约 90 KB/s。
+- ESP32 板子之间的 BLE 通信最大吞吐量可达 700 Kbps，约 90 KB/s, 具体可以参考 IDF 中的 ble_throughput example。
 
 ---
 
