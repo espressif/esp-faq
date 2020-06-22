@@ -43,9 +43,10 @@ body {counter-reset: h2}
   - 电平： 0， 1， 0， 1, 0， 1
 
 ---
+
 ## 使用 ESP32 JLINK 调试，发现会报 ERROR：No Symbols For Freertos ，如何解决呢？
 
-首先，这个不影响使用，解决措施可以参考：https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd。
+- 首先，这个不影响使用，解决措施可以参考：https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd。
 
 
 

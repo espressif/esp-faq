@@ -12,5 +12,5 @@ body {counter-reset: h2}
 
 ## ESP32-Korvo V1.1 开发板是否集成 LED driver 芯片？
 
-我司出厂的 ESP32-Korvo V1.1 开发板未有 LED driver。
+- 我司出厂的 ESP32-Korvo V1.1 开发板未有 LED driver。
 
