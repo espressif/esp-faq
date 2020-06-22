@@ -60,6 +60,6 @@ ESP32 AT 文档：[AT 指令集](https://github.com/espressif/esp-at/blob/master
 
 ---
 
-## ESP32-AT 编译过程中，出现 no module named yaml 的错误？
+## ESP32-AT 编译过程中，出现 no module named yaml 的错误，应如何解决？
 
-安装 yaml 模块， 需使⽤ python -m pip install pyyaml。
+请安装 yaml 模块: `python -m pip install pyyaml`
