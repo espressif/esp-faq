@@ -10,10 +10,10 @@ body {counter-reset: h2}
 
 ---
 
-## ESP8266 openssl 是否⽀持 Hostname validation？
+## ESP8266 OpenSSL 是否⽀持 Hostname validation？
 
-- ⽀持的，目前 ESP8266 openssl 是基于 mbedtls 封装的接口，mbedtls 支持 Hostname validation。
-- 使用 esp-tls 可以根据配置切换 mbedtls 与 wolfssl。
+- ⽀持，目前 ESP8266 OpenSSL 是基于 mbedTLS 封装的接口，mbedTLS 支持 Hostname validation。
+- 使用 esp-tls 可以根据配置切换 mbedTLS 与 wolfSSL。
 
 ---
 
