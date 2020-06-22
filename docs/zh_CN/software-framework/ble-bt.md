@@ -89,7 +89,7 @@ body {counter-reset: h2}
 
 ## ESP32 的 BLE 工作电流是多少？
 
-| Current                                                         | Max (mA) | Min (mA) | Average |
+| 电流                                                         | 最大值 (mA) | 最小值 (mA) | 平均值 |
 | :-------------------------------------------------------------- | :------: | :------: | :-----: |
 | Advertising: <br> Adv Interval = 40ms                           |  142.1   |    32    |  42.67  |
 | Scanning: <br> Scan Interval = 160ms,Window = 20ms              |  142.1   |    32    |  44.4   |
