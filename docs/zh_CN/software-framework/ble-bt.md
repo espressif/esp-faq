@@ -100,8 +100,6 @@ body {counter-reset: h2}
 
 ## ESP32 支持哪些 BLE Profile？
 
-> 目前支持完整的 GATT/SMP 等基础模块，可自行实现自定义配置；已经实现的配置有 BLE HID（设备端）、电池、DIS、Blu-Fi（蓝牙配网）等。
-
 - 目前支持完整的 GATT/SMP 等基础模块，可自行实现自定义配置；已经实现的配置有 BLE HID（设备端）、电池、DIS、Blu-Fi（蓝牙配网）等。
 
 ---
