@@ -17,7 +17,7 @@ body {counter-reset: h2}
 
 ---
 
-## ESP32 是否⽀持 PCI-E 协议那？
+## ESP32 是否⽀持 PCI-E 协议？
 
 ESP32 不支持 PCI-E 协议。
 
