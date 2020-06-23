@@ -4,6 +4,11 @@
   
 ESP-FAQ 是由乐鑫官方推出的针对常见问题的总结文档。
 
+## 文档托管
+
+* English: https://docs.espressif.com/projects/espressif-esp-faq/en/latest/ (待完善)
+* 中文: https://docs.espressif.com/projects/espressif-esp-faq/zh_CN/latest/
+
 ## ESP-FAQ 文档框架
 
 ### 语言支持
@@ -46,8 +51,6 @@ docs
 * 请阅读 [贡献指南](docs/zh_CN/get-started/document-contribution.md)。
 
 ## 其它参考资源
-
-* 最新版的文档：https://docs.espressif.com/projects/esp-faq/ ，该文档是由本仓库 [docs 目录](docs) 构建得到。
 
 * 可以前往 [esp32.com 论坛](https://esp32.com/) 提问，挖掘社区资源。
 
