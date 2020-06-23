@@ -1,12 +1,11 @@
 ESP-FAQ
 =============
+:link_to_translation:`en:[English]`
 
 .. role:: bolditalics
    :class: bolditalics
           
-
-| Espressif 常见问题汇总.
-
+| ESP-FAQ 是由乐鑫官方推出的针对常见问题的总结文档。
 
 ==================  ==================  ==================
 |快速入门|_          |开发环境|_         |应用方案|_
