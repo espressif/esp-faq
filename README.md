@@ -4,6 +4,11 @@
 
 ESP-FAQ is a summary document for common problems launched by Espressif.
 
+## Hosted Documentation
+
+* English: https://docs.espressif.com/projects/espressif-esp-faq/en/latest/ (TODO)
+* 中文: https://docs.espressif.com/projects/espressif-esp-faq/zh_CN/latest/
+
 ## ESP-FAQ Document framework
 
 ### language support
@@ -46,8 +51,6 @@ docs
 * Please read the code [Document Contribution](docs/zh_CN/get-started/document-contribution.md)
 
 ## Resources
-
-* Documentation for the latest version: https://docs.espressif.com/projects/esp-faq/. This documentation is built from the [docs directory](docs) of this repository.
 
 * The [esp32.com forum](https://esp32.com/) is a place to ask questions and find community resources.
 
