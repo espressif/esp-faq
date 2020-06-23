@@ -1,12 +1,11 @@
 ESP-FAQ
 =============
+:link_to_translation:`zh_CN:[中文]`
 
 .. role:: bolditalics
    :class: bolditalics
           
-
-| Espressif FAQ (Frequently Asked Questions).
-
+| ESP-FAQ is a summary document for common problems launched by Espressif.
 
 .. toctree::
    :hidden:
