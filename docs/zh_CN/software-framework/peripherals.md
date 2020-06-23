@@ -39,3 +39,11 @@ body {counter-reset: h2}
 ## ESP8266 的 SDIO 是否⽀持 SD 卡？
 
 - ESP8266 是 SDIO Slave，不⽀持 SD 卡。
+
+---
+
+## ESP8266 是否支持 I2C slave 模式？
+
+- 不支持，如果要使用此功能，推荐使用 ESP32-S2 或者 ESP32 芯片。
+- ESP32 参考示例：[i2C_self_test](https://github.com/espressif/esp-idf/tree/master/examples/peripherals/i2c/i2c_self_test)
+
