@@ -18,6 +18,5 @@ body {counter-reset: h2}
 
 ## Wi-Fi Mesh 能否批量 OTA ？
 
-- wifi mesh 设备支持批量 ota 的。
-- ota 的⽅式是根节点下载固件，然后再发至其他节点。
-- 具体示例请参考: [mupgrade](https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mupgrade)
+- Wi-Fi Mesh 设备支持批量 OTA。
+- OTA ⽅式为：根节点下载固件，然后再发至其他节点。具体示例请参考: [mupgrade](https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mupgrade)
