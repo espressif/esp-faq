@@ -55,6 +55,6 @@ ESP8266 云端升级参考⽂档为[《ESP8266 云端升级指南》](https://ww
 
 ---
 
-## ESP32-AT 编译过程中，出现 no module named yaml 的错误？
+## ESP32-AT 编译过程中，出现 no module named yaml 的错误，应如何解决？
 
-- 安装 yaml 模块， 需使⽤ python -m pip install pyyaml。
+请安装 yaml 模块: `python -m pip install pyyaml`
