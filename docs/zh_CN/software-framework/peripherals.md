@@ -24,9 +24,7 @@ body {counter-reset: h2}
 
 ## ESP-WROOM-02D 模块是否可以外接 SPI Flash ？
 
-> ESP-WROOM-02D 模块，外接 64M SPI Flash 用于保存数据，WiFi 工作时，接收的数据写入 SPI Flash 。
-
-- ESP-WROOM-02D 有空闲 SPI 外设，可以使用该外设完成 flash 的读写功能。
+- ESP-WROOM-02D 有空闲 SPI 外设，可外接 SPI Flash, 用以存储数据。
 
 ---
 
