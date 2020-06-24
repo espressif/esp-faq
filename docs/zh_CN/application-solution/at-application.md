@@ -45,12 +45,13 @@ body {counter-reset: h2}
 
 ## ESP8266 云端升级失败有哪些原因？
 
-- 远端升级的详细介绍参考⽂档为《ESP8266 云端升级指南》
-- 建议按如下顺序，进⾏排查：
-  - 确认使⽤了正确⼤⼩的 Flash
-  - 确认是否烧录了 blank.bin 做初始化
-  - 确认 user1.bin 和 user2.bin 下载到了正确的地址
-  - 确认⽣成 user1.bin 和 user2.bin 使⽤了相同的 Flash、boot 配置
+ESP8266 云端升级参考⽂档为[《ESP8266 云端升级指南》](https://www.espressif.com/sites/default/files/documentation/99c-esp8266_fota_upgrade_cn.pdf)
+建议按如下顺序，进⾏排查：
+
+1. 确认使⽤了正确⼤⼩的 Flash
+2. 确认是否烧录了 blank.bin 做初始化
+3. 确认 user1.bin 和 user2.bin 下载到了正确的地址
+4. 确认⽣成 user1.bin 和 user2.bin 使⽤了相同的 Flash、boot 配置
 
 ---
 
