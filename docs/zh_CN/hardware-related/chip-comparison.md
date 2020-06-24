@@ -23,4 +23,4 @@ body {counter-reset: h2}
 
 ## ESP32 E03 版本芯⽚在使⽤上和之前芯⽚软件使⽤上有什么区别呢？
 
-软件上使⽤⽆区别，是可以兼容之前的固件的，硬件上修复了⼀些bug，具体的可以参考该⽂档：https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__CN.pdf
+- 软件上使⽤⽆区别，是可以兼容之前的固件的，硬件上修复了⼀些bug，具体的可以参考该⽂档：https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__CN.pdf

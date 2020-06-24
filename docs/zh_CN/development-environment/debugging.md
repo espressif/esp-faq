@@ -31,7 +31,7 @@ body {counter-reset: h2}
 
 - 上电时 RF 初始化默认采⽤部分校准的⽅案：打开 menuconfig 中 `CONFIG_ESP32_PHY_CALIBRATION_AND_DATA_STORAGE` 选项。
 - 不关注上电启动时间，可修改使⽤上电全校准⽅案：关闭 menuconfig 中 `CONFIG_ESP32_PHY_CALIBRATION_AND_DATA_STORAGE` 选项。
-- 建议默认使用部分校准的方案，这样可以保证上电启动的时间，并且可以在业务逻辑中增加擦除 NVS 种 RF 校准信息的操作，以触发全校准的操作。
+- 建议默认使用**部分校准**的方案，这样既可以保证上电启动的时间，也可以在业务逻辑中增加擦除 NVS 中 RF 校准信息的操作，以触发全校准的操作。
 
 ---
 
@@ -43,9 +43,10 @@ body {counter-reset: h2}
   - 电平： 0， 1， 0， 1, 0， 1
 
 ---
+
 ## 使用 ESP32 JLINK 调试，发现会报 ERROR：No Symbols For Freertos ，如何解决呢？
 
-首先，这个不影响使用，解决措施可以参考：https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd。
+- 首先，这个不影响使用，解决措施可以参考：https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd。
 
 
 

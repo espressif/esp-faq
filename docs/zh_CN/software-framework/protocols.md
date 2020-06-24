@@ -10,23 +10,23 @@ body {counter-reset: h2}
 
 ---
 
-## ESP8266 openssl 是否⽀持 Hostname validation？
+## ESP8266 OpenSSL 是否⽀持 Hostname validation？
 
-- ⽀持的，目前 ESP8266 openssl 是基于 mbedtls 封装的接口，mbedtls 支持 Hostname validation。
-- 使用 esp-tls 可以根据配置切换 mbedtls 与 wolfssl。
+- ⽀持，目前 ESP8266 OpenSSL 是基于 mbedTLS 封装的接口，mbedTLS 支持 Hostname validation。
+- 使用 esp-tls 可以根据配置切换 mbedTLS 与 wolfSSL。
 
 ---
 
-## ESP32 是否⽀持 PCI-E 协议那？
+## ESP32 是否⽀持 PCI-E 协议？
 
-ESP32 不支持 PCI-E 协议。
+- ESP32 不支持 PCI-E 协议。
 
 ---
 
 ## ESP32 如何优化通信延时？
 
-1. 建议关闭 wifi 休眠功能，调用 esp_wifi_set_ps(WIFI_PS_NONE)。
-2. 建议在 menucongfig 关掉 AMPDU 功能。
+- 建议关闭 Wi-Fi 休眠功能，调用 API: esp_wifi_set_ps(WIFI_PS_NONE)。
+- 建议在 menucongfig 关掉 AMPDU 功能。
 
 ---
 
@@ -38,11 +38,11 @@ ESP32 不支持 PCI-E 协议。
 
 ## ESP8266 ⽀持 HTTP 服务端吗？
 
-⽀持。ESP8266 在 SoftAP 和 Station 模式下都可以作服务端。
-1. 在 SoftAP 模式下，ESP8266 的服务端 IP 地址是 192.168.4.1。
-2. 如果 Station 模式，服务端的 IP 地址为路由器分配给 ESP8266 的 IP。
-3. 如果基于 SDK 进行⼆次开发，可参考相关应用示例。
-4. 如果使⽤ AT 指令，需使⽤ AT+CIPSERVER 开启服务端。
+- ⽀持。ESP8266 在 SoftAP 和 Station 模式下都可以作服务端。
+  - 在 SoftAP 模式下，ESP8266 的服务端 IP 地址是 192.168.4.1。
+  - 如果 Station 模式，服务端的 IP 地址为路由器分配给 ESP8266 的 IP。
+  - 如果基于 SDK 进行⼆次开发，可参考相关应用示例。
+  - 如果使⽤ AT 指令，需使⽤ AT+CIPSERVER 开启服务端。
 
 ---
 

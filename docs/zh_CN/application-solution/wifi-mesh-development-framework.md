@@ -1,4 +1,4 @@
-# wifi mesh 应用框架
+# Wi-Fi Mesh 应用框架
 
 <style>
 body {counter-reset: h2}
@@ -12,12 +12,11 @@ body {counter-reset: h2}
 
 ## Wi-Fi Mesh 占用多大内存？是否需要外部 PSRAM ？
 
-Wi-Fi Mesh 内存使用在 60KB 左右，是否需要使用外部 PSRAM 取决于应用业务的复杂情况，一般性应用可以无需使用外部 PSRAM。
+Wi-Fi Mesh 内存占用约 60KB，是否需要外部 PSRAM 取决于应用场景的复杂情况，一般性应用无需外部 PSRAM。
 
 ---
 
 ## Wi-Fi Mesh 能否批量 OTA ？
 
-- wifi mesh 设备支持批量 ota 的。
-- ota 的⽅式是根节点下载固件，然后再发至其他节点。
-- 具体示例请参考: [mupgrade](https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mupgrade)
+- Wi-Fi Mesh 设备支持批量 OTA。
+- OTA ⽅式为：根节点下载固件，然后再发至其他节点。具体示例请参考: [mupgrade](https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mupgrade)
