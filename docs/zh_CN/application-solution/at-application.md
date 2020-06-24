@@ -12,9 +12,8 @@ body {counter-reset: h2}
 
 ## ESP32 AT 吞吐量如何测试及优化？
 
-- AT 吞吐量测试受影响因素⽐较多，所以吞吐量测试建议使⽤ esp-idf 中的 iperf 示例。
-- 需要 AT 测试时，建议使用透传方式，并将数据量调整为 1460 字节连续发送。
-- 若测试速率仍然不满⾜需求，则可以⾃⼰编译 esp-at ，并修改 esp-idf 中 menuconfig 的 iperf 参数从⽽提⾼速率。
+- AT 吞吐量测试的影响因素较多，建议使⽤ esp-idf 中的 iperf 示例进行测试（用 AT 测试时，请使用透传方式，并将数据量调整为 1460 字节连续发送）。
+- 若测试速率不满⾜需求，可⾃行编译 esp-at ，修改 esp-idf 中 menuconfig iperf 参数，提⾼速率。
 
 ---
 
