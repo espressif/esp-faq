@@ -80,9 +80,10 @@ body {counter-reset: h2}
 
 ---
 
-## ESP32 可以实现 wifi 和 ble 桥接的功能吗？
+## ESP32 可以实现 Wi-Fi 和 BLE 桥接的功能吗？
 
-- 可以实现的，这个属于应⽤层开发，客户可以直接通过 ble 获取数据，wifi 转出去，我们⽬前没有 demo，但是客户可以参考⼀下 wifi 和蓝⽛共存的 demo：https://github.com/espressif/esp-idf/tree/release/v4.0/examples/bluetooth/esp_ble_mesh/ble_mesh_wifi_coexist， 修改为⾃⼰的应⽤即可
+- 可以实现，这个属于应⽤层开发：可以通过 BLE 获取数据，由 Wi-Fi 转出去。
+- 可参考 [Wi-Fi 和蓝⽛共存的 demo](https://github.com/espressif/esp-idf/tree/release/v4.0/examples/bluetooth/esp_ble_mesh/ble_mesh_wifi_coexist) ，修改为⾃⼰的应⽤即可。
 
 ---
 
