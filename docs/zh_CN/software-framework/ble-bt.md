@@ -12,9 +12,9 @@ body {counter-reset: h2}
 
 ## 移植例程 gatt_server 出现头文件不存在的错误 ？
 
-> 移植例程 gatt_server 出现错误 fatal error: esp_gap_ble_api.h: No such file or directory，但头文件已经包含。
+> 移植例程 gatt_server 出现错误提示 `fatal error: esp_gap_ble_api.h: No such file or directory`，但头文件已经包含此文件。
 
-- 检查 sdkconfig，是否未从例程中移植 sdkconfig.defaults, 通常 SDK 中蓝牙默认关闭不编译，需要配置开启。
+- 检查 sdkconfig，是否未从例程中移植 sdkconfig.defaults。通常 SDK 中蓝牙默认关闭不编译，需要配置开启。
 - 如果使用 cmake 需要将例程中 CMakeLists.txt 文件内的链接配置一同复制。
 
 ---
