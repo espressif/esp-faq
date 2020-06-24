@@ -10,6 +10,6 @@ body {counter-reset: h2}
 
 ---
 
-## ESP32 wifi RF 功率最高值是 ？
+## ESP32 Wi-Fi RF 功率最高值是多少？
 
-- ESP32 RF 功率 20 DB 即模组最大值。
+ESP32 RF 功率为 20 dB，即模组最大值。
