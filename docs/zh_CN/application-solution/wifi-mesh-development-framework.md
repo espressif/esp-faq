@@ -12,7 +12,7 @@ body {counter-reset: h2}
 
 ## Wi-Fi Mesh 占用多大内存？是否需要外部 PSRAM ？
 
-- Wi-Fi Mesh 内存使用在 60KB 左右，是否需要使用外部 PSRAM 取决于应用业务的复杂情况，一般性应用可以无需使用外部 PSRAM。
+Wi-Fi Mesh 内存占用约 60KB，是否需要外部 PSRAM 取决于应用场景的复杂情况，一般性应用无需外部 PSRAM。
 
 ---
 
