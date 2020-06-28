@@ -148,3 +148,11 @@ esp_netif_set_dns_info(eth_netif,ESP_NETIF_DNS_MAIN,&dns);
 ## ESP8266 SoftAP 模式支持几个设备 ？
 
 - 硬件上最多⽀持 8 个，我们推荐 4 个，这样可以保证模组性能。
+
+---
+
+## ESP8266/ESP32/ESP32-S2 是否支持 web 配网/ softAP 配网？
+
+- 支持。
+  - ESP8266 请参考此示例[softap_prov](https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/provisioning/softap_prov)
+  - ESP32/ESP32-S2 请参考此示例[softap_prov](https://github.com/espressif/esp-idf/tree/master/examples/provisioning/legacy/softap_prov)
