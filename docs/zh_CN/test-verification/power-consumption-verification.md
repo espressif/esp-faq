@@ -12,14 +12,14 @@ body {counter-reset: h2}
 
 ## ESP32 deep sleep 唤醒为何需要重启？
 
-&nbsp; 深度睡眠（deep sleep）唤醒都是需要重新启动，是因为深度睡眠时 CPU 电源域掉电，唤醒后需要重新引导固件并加载至内存。
-&nbsp; 在深度睡眠（deep sleep）时 RTC 内存保持供电，可以将需要保留的应用信息保存其中，在唤醒后进行加载保留信息。
+&emsp;深度睡眠（deep sleep）唤醒都是需要重新启动，是因为深度睡眠时 CPU 电源域掉电，唤醒后需要重新引导固件并加载至内存。\
+&emsp;在深度睡眠（deep sleep）时 RTC 内存保持供电，可以将需要保留的应用信息保存其中，在唤醒后进行加载保留信息。
 
 ---
 
 ## 休眠⽅式有哪⼏种？有什么区别？
 
-- 有 Modem-sleep、Light-sleep 和 Deep-sleep 三种休眠⽅式。
+&emsp;有 Modem-sleep、Light-sleep 和 Deep-sleep 三种休眠⽅式。
 - Modem-sleep
   - Wi-Fi 协议中规定的 Station Legacy Fast 休眠⽅式，Station 发送 NULL 数据帧通知 AP 休眠或唤醒
   - Station 连接上 AP 之后 ⾃动开启，进 ⼊休眠状态后关闭射频模块，休眠期间保持和 AP 的连接，AP 断开连接后 Modem-sleep 不⼯作
