@@ -12,17 +12,17 @@ body {counter-reset: h2}
 
 ## Host MCU 如何通过串口对 ESP32 进行烧录升级？
 
-- 相关协议说明请参考：[ESP32 串口协议](https://github.com/espressif/esptool/wiki/Serial-Protocol)
-- 示例实现代码参考: [esp-serial-flasher](https://github.com/espressif/esp-serial-flasher)
+&emsp;相关协议说明请参考：[ESP32 串口协议](https://github.com/espressif/esptool/wiki/Serial-Protocol)
+&emsp;示例实现代码参考: [esp-serial-flasher](https://github.com/espressif/esp-serial-flasher)
 
 ---
 
 ## 如何使用 USB 转串口工具对乐鑫模组进行自动烧录？
 
-- USB 转串口对乐鑫模组进行自动烧录接线方式如下：
+&emsp;USB 转串口对乐鑫模组进行自动烧录接线方式如下：
 
 | 乐鑫模组 | 3V3  | GND  | TXD  | RXD  | IO0  | EN   |
 | :------- | :--: | :--: | :--: | :--: | :--: | :--: |
 | 串口工具 | 3V3  | GND  | RXD  | TXD  | DTR  | RTS  |
 
-> ESP8266 模组需要额外将 IO15 接地。
+&emsp;注：ESP8266 模组需要额外将 IO15 接地。
