@@ -48,6 +48,11 @@ body {counter-reset: h2}
 
 - 首先，这个不影响使用，解决措施可以参考：https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd。
 
+---
+
+## 如何在不更改 menuconfig 输出级别的情况下改变 log 级别？
+
+&emsp;&emsp;无需使用 menuconfig，可以通过 API `esp_log_level_set()` 修改 log 的输出级别。
 
 
 
