@@ -19,3 +19,9 @@ body {counter-reset: h2}
 ## Provisioner 如何将节点添加至多个子网？
 
 &emsp;&emsp;节点配置期间，Provisioner 可以为节点添加多个网络密钥，拥有相同网络密钥的节点属于同一子网。Provisioner 可以通过不同的网络密钥与不同子网内的节点进行通信。
+
+---
+
+## BLE Mesh log `No free slots for new incoming segmented messages` 代表什么？
+
+&emsp;&emsp;当节点没有空间来接收新的分段消息时，会出现该警告。用户可以通过配置 [CONFIG_BLE_MESH_RX_SEG_MSG_COUNT](https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/kconfig.html#config-ble-mesh-rx-seg-msg-count) 扩大空间。
