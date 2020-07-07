@@ -19,3 +19,9 @@ body {counter-reset: h2}
 ## Provisioner 如何将节点添加至多个子网？
 
 &emsp;&emsp;节点配置期间，Provisioner 可以为节点添加多个网络密钥，拥有相同网络密钥的节点属于同一子网。Provisioner 可以通过不同的网络密钥与不同子网内的节点进行通信。
+
+---
+
+## BLE Mesh log `No matching TX context for ack` 代表什么？
+
+&emsp;&emsp;当节点收到一个分段 ack 且不能找到任何自己发送的与该 ack 相关的消息时，会出现该警告。
