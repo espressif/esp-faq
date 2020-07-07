@@ -19,3 +19,9 @@ body {counter-reset: h2}
 ## Provisioner 如何将节点添加至多个子网？
 
 &emsp;&emsp;节点配置期间，Provisioner 可以为节点添加多个网络密钥，拥有相同网络密钥的节点属于同一子网。Provisioner 可以通过不同的网络密钥与不同子网内的节点进行通信。
+
+---
+
+## 如何启用 IV Update 更新程序？
+
+&emsp;&emsp;节点可以使用带有 Secure Network Beacon 的 IV Update 更新程序。
