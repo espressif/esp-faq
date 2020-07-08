@@ -22,6 +22,12 @@ body {counter-reset: h2}
 
 ---
 
+## 什么时候应该使能节点的 [Proxy](https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-features) 功能？
+
+&emsp;&emsp;如果未配网设备将由电话配网，则未配网设备应该使能 Proxy 功能，因为当前几乎所有电话都不支持通过广播承载层发送 ESP-BLE-MESH 数据包。并且，未配网设备成功配网成为 Proxy 节点后，其会通过 GATT 承载层和广播承载层与 mesh 网络中的其他节点通信。
+
+---
+
 ## 如何使用代理过滤器?
 
 &emsp;&emsp;代理过滤器用于减少 Proxy Client（如手机）和 Proxy Server（如节点）之间交换的 Network PDU 的数量。另外，通过代理过滤器，Proxy Client 可以明确请求仅接收来自 Proxy Server 的某些目标地址的 mesh 消息。
