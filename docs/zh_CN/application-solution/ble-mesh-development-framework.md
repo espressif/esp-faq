@@ -22,6 +22,12 @@ body {counter-reset: h2}
 
 ---
 
+## 如何使用代理过滤器?
+
+&emsp;&emsp;代理过滤器用于减少 Proxy Client（如手机）和 Proxy Server（如节点）之间交换的 Network PDU 的数量。另外，通过代理过滤器，Proxy Client 可以明确请求仅接收来自 Proxy Server 的某些目标地址的 mesh 消息。
+
+---
+
 ## 如何实现将节点自检的信息发送出来？
 
 &emsp;&emsp;推荐节点通过 Health Server Model 定期发布其自检结果。
