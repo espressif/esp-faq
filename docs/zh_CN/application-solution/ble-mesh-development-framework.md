@@ -22,6 +22,12 @@ body {counter-reset: h2}
 
 ---
 
+## 如何实现将节点自检的信息发送出来？
+
+&emsp;&emsp;推荐节点通过 Health Server Model 定期发布其自检结果。
+
+---
+
 ## Relay 节点什么时候可以中继消息？
 
 &emsp;&emsp;如果要中继消息，消息需满足以下要求。
