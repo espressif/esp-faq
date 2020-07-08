@@ -22,6 +22,12 @@ body {counter-reset: h2}
 
 ---
 
+## 设备断电后上电，如何能继续在网络中进行通讯？
+
+&emsp;&emsp;在 menuconfig 中启用配置 `Store BLE Mesh Node configuration persistently` 。
+
+---
+
 ## 使用 [Low Power](https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-features) 功能降低功耗的原理是什么？
 
 - 开启无线电进行收听时，设备消耗能量。使能节点的低功耗功能后，它将在大多数时间内关闭无线电功能。
