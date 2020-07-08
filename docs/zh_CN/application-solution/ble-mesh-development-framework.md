@@ -22,6 +22,12 @@ body {counter-reset: h2}
 
 ---
 
+## 如果一条消息分成几段，那么其他 Relay 节点是接收到一段消息就中继还是等接收到完整的数据包才中继？
+
+&emsp;&emsp;Relay 节点收到其中一段消息时就中继，而非一直等到接收所有的消息。
+
+---
+
 ## 设备断电后上电，如何能继续在网络中进行通讯？
 
 &emsp;&emsp;在 menuconfig 中启用配置 `Store BLE Mesh Node configuration persistently` 。
