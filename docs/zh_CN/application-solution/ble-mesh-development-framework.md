@@ -16,6 +16,18 @@ body {counter-reset: h2}
 
 ---
 
+## Provisioner 如何知道网络中的某个设备是否离线？
+
+&emsp;&emsp;节点离线通常定义为：电源故障或其他原因导致的节点无法与 mesh 网络中的其他节点正常通信的情况。\
+&emsp;&emsp;ESP-BLE-MESH 网络中的节点间彼此不连接，它们通过广播通道进行通信。\
+&emsp;&emsp;此示例展示了如何通过 Provisioner 检测节点是否离线。
+
+- 节点定期给 Provisioner 发送心跳包。如果 Provisioner 超过一定的时间未接收到心跳包，则视该节点离线。
+
+&emsp;&emsp;**注：** 心跳包的设计应该采用单包（字节数小于 11 个字节）的方式，这样收发效率会更高。
+
+---
+
 ## Provisioner 如何将节点添加至多个子网？
 
 &emsp;&emsp;节点配置期间，Provisioner 可以为节点添加多个网络密钥，拥有相同网络密钥的节点属于同一子网。Provisioner 可以通过不同的网络密钥与不同子网内的节点进行通信。
