@@ -22,6 +22,14 @@ body {counter-reset: h2}
 
 ---
 
+## 节点的模型可以使用哪些函数发送消息？
+
+- 对于客户端模型，用户可以调用 API `esp_ble_mesh_client_model_send_msg()` 发送消息。
+- 对于服务器模型，用户可以调用 API `esp_ble_mesh_server_model_send_msg()` 发送消息。
+- 对于发布，用户可以调用 API `esp_ble_mesh_model_publish()` 发布消息。
+
+---
+
 ## 如何实现消息传输不丢包？
 
 &emsp;&emsp;如果用户要实现消息传输不丢包，则需有应答的消息。等待应答的默认时间在 [CONFIG_BLE_MESH_CLIENT_MSG_TIMEOUT](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/kconfig.html#config-ble-mesh-client-msg-timeout) 中设置。如果发送端等待应答超时，就会触发对应的超时事件。
