@@ -22,6 +22,12 @@ body {counter-reset: h2}
 
 ---
 
+## Provisioner 如何管理 mesh 网络中的节点？
+
+&emsp;&emsp;ESP-BLE-MESH 在示例中实现了一些基本的节点管理功能，比如 `esp_ble_mesh_store_node_info()`。 ESP-BLE-MESH 还提供可用于设置节点本地名称的 API `esp_ble_mesh_provisioner_set_node_name()` 和可用于获取节点本地名称的 API `esp_ble_mesh_provisioner_get_node_name()`。
+
+---
+
 ## Provisioner 想要控制节点的服务器模型时需要什么？
 
 &emsp;&emsp;Provisioner 在控制节点的服务器模型前，必须包括相应的客户端模型。
