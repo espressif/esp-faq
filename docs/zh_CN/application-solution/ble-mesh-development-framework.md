@@ -22,6 +22,16 @@ body {counter-reset: h2}
 
 ---
 
+##  Provisioner 删除网络中的节点时，需要进行哪些操作？
+
+&emsp;&emsp;通常而言，Provisioner 从网络中移除节点主要涉及三个步骤：
+
+- 首先，Provisioner 将需要移除的节点添加至“黑名单”。
+- 其次，Provisioner 启动 [密钥更新程序](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-network-management)。
+- 最后，节点执行节点重置程序，切换自身身份为未配网设备。
+
+---
+
 ## 在密钥更新的过程中，Provisioner 如何更新节点的网络密钥？
 
 - 通过正确设置参数 `esp_ble_mesh_cfg_client_set_state_t` 中的 `net_key_update`，使用 [Configuration Client Model](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-foundation-models) API `esp_ble_mesh_config_client_set_state()`，Provisioner 更新节点的网络密钥。
