@@ -22,6 +22,14 @@ body {counter-reset: h2}
 
 ---
 
+## 什么时候应该使能节点的 [Relay](https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-features) 功能？
+
+- 如果 mesh 网络中检测到的节点很稀疏，用户可以使能节点的 Relay 功能。
+- 如果 mesh 网络中检测到的节点很密集，用户可以选择仅使能一些节点的 Relay 功能。
+- 如果 mesh 网络大小未知，用户可以默认使能 Relay 功能。
+
+---
+
 ## 节点包含什么样的模型？
 
 - ESP-BLE-MESH 中，节点由一系列的模型组成，每个模型实现节点的某些功能。
