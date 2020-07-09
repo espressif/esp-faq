@@ -16,6 +16,61 @@ body {counter-reset: h2}
 
 ---
 
+## 节点可以自己添加相应的配置吗？
+
+&emsp;&emsp;本法可用于特殊情况，如测试阶段。
+- 此示例展示了节点如何为自己的模型添加新的组地址。
+```
+esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_addr)
+{
+    const esp_ble_mesh_comp_t *comp = NULL;
+    esp_ble_mesh_elem_t *element = NULL;
+    esp_ble_mesh_model_t *model = NULL;
+    int i, j;
+
+    if (!ESP_BLE_MESH_ADDR_IS_GROUP(group_addr)) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    comp = esp_ble_mesh_get_composition_data();
+    if (!comp) {
+        return ESP_FAIL;
+    }
+
+    for (i = 0; i < comp->element_count; i++) {
+        element = &comp->elements[i];
+        model = esp_ble_mesh_find_sig_model(element, model_id);
+        if (!model) {
+            continue;
+        }
+        for (j = 0; j < ARRAY_SIZE(model->groups); j++) {
+            if (model->groups[j] == group_addr) {
+                break;
+            }
+        }
+        if (j != ARRAY_SIZE(model->groups)) {
+            ESP_LOGW(TAG, "%s: Group address already exists, element index: %d", __func__, i);
+            continue;
+        }
+        for (j = 0; j < ARRAY_SIZE(model->groups); j++) {
+            if (model->groups[j] == ESP_BLE_MESH_ADDR_UNASSIGNED) {
+                model->groups[j] = group_addr;
+                break;
+            }
+        }
+        if (j == ARRAY_SIZE(model->groups)) {
+            ESP_LOGE(TAG, "%s: Model is full of group addresses, element index: %d", __func__, i);
+        }
+    }
+
+    return ESP_OK;
+}
+```
+
+&emsp;&emsp; **注：** 使能了节点的 NVS 存储器后，通过该方式添加的组地址以及绑定的应用密钥在设备掉电的情况下不能保存。这些配置信息只有通过 Configuration Client Model 配置时才会保存。
+
+---
+
 ## Provisioner 如何通过分组的方式控制节点？
 
 &emsp;&emsp;通常而言，在 ESP-BLE-MESH 网络中实现组控制有两种方法，即组地址方法和虚拟地址方法。假设有 10 个设备，即 5 个带蓝灯的设备和 5 个带红灯的设备。
