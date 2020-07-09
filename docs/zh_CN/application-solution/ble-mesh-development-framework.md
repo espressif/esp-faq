@@ -22,6 +22,14 @@ body {counter-reset: h2}
 
 ---
 
+## 如何实现消息传输不丢包？
+
+&emsp;&emsp;如果用户要实现消息传输不丢包，则需有应答的消息。等待应答的默认时间在 [CONFIG_BLE_MESH_CLIENT_MSG_TIMEOUT](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/kconfig.html#config-ble-mesh-client-msg-timeout) 中设置。如果发送端等待应答超时，就会触发对应的超时事件。
+
+&emsp;&emsp;**注：** API `esp_ble_mesh_client_model_send_msg()` 中可以设置应答的超时时间。如果参数 `msg_timeout` 设为 0， 那么超时时间便会采用默认值（4 秒）。
+
+---
+
 ## 如何发送无应答的消息？
 
 - 对于客户端模型，用户可以调用 API `esp_ble_mesh_client_model_send_msg()` with the parameter `need_rsp` set to `false` 发送无应答消息。
