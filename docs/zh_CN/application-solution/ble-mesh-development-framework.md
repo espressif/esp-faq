@@ -22,6 +22,14 @@ body {counter-reset: h2}
 
 ---
 
+## 如何发送无应答的消息？
+
+- 对于客户端模型，用户可以调用 API `esp_ble_mesh_client_model_send_msg()` with the parameter `need_rsp` set to `false` 发送无应答消息。
+
+- 对于服务器模型，调用 API `esp_ble_mesh_server_model_send_msg()` 发送的消息总是无应答的消息。
+
+---
+
 ## 发送不分包消息时，最多可携带多少有效字节？
 
 &emsp;&emsp;不分包消息的总有效载荷长度（可由用户设置）为 11 个八位位组，因此，如果消息的 opcode 为 2 个八位位组，则该消息可以携带 9 个八位位组的有效信息。 对于 vendor 消息，由于 opcode 是 3 个八位位组，剩余的有效负载长度为 8 个八位位组。
