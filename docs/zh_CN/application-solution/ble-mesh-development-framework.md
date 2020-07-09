@@ -22,6 +22,13 @@ body {counter-reset: h2}
 
 ---
 
+## 在密钥更新的过程中，Provisioner 如何更新节点的网络密钥？
+
+- 通过正确设置参数 `esp_ble_mesh_cfg_client_set_state_t` 中的 `net_key_update`，使用 [Configuration Client Model](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-foundation-models) API `esp_ble_mesh_config_client_set_state()`，Provisioner 更新节点的网络密钥。
+- 通过正确设置参数 `esp_ble_mesh_cfg_client_set_state_t` 中的 `app_key_update`，使用 [Configuration Client Model](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-foundation-models) API `esp_ble_mesh_config_client_set_state()`，Provisioner 更新节点的应用密钥。
+
+---
+
 ## Provisioner 如何管理 mesh 网络中的节点？
 
 &emsp;&emsp;ESP-BLE-MESH 在示例中实现了一些基本的节点管理功能，比如 `esp_ble_mesh_store_node_info()`。 ESP-BLE-MESH 还提供可用于设置节点本地名称的 API `esp_ble_mesh_provisioner_set_node_name()` 和可用于获取节点本地名称的 API `esp_ble_mesh_provisioner_get_node_name()`。
