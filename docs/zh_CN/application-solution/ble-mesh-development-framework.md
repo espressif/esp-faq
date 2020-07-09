@@ -22,6 +22,18 @@ body {counter-reset: h2}
 
 ---
 
+## Provisioner 想要控制节点的服务器模型时需要什么？
+
+&emsp;&emsp;Provisioner 在控制节点的服务器模型前，必须包括相应的客户端模型。
+&emsp;&emsp;Provisioner 应当添加本地的网络密钥和应用密钥。
+- Provisioner 调用 API `esp_ble_mesh_provisioner_add_local_net_key()` 以添加网络密钥。
+- Provisioner 调用 API `esp_ble_mesh_provisioner_add_local_app_key()` 以添加应用密钥。
+
+&emsp;&emsp;Provisioner 应当配置自己的客户端模型。
+- Provisioner 调用 API `esp_ble_mesh_provisioner_bind_app_key_to_local_model()` 以绑定应用密钥至自己的客户端模型。
+
+---
+
 ## 什么时候应该使能节点的 [Relay](https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-features) 功能？
 
 - 如果 mesh 网络中检测到的节点很稀疏，用户可以使能节点的 Relay 功能。
