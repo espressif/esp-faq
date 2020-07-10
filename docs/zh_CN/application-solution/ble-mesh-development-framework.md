@@ -16,6 +16,16 @@ body {counter-reset: h2}
 
 ---
 
+## Provisioner 如何通过获取的 Composition Data 进一步配置节点？
+
+&emsp;&emsp;Provisioner 通过调用 [Configuration Client Model](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-foundation-models) API `esp_ble_mesh_config_client_set_state()` 来进行如下配置。
+
+- 正确设置参数 `esp_ble_mesh_cfg_client_set_state_t` 中的 `app_key_add`，将应用密钥添加到节点中。
+- 正确设置参数 `esp_ble_mesh_cfg_client_set_state_t` 中的 `model_sub_add`，将订阅地址添加到节点的模型中。
+- 正确设置参数 `esp_ble_mesh_cfg_client_set_state_t` 中的 `model_pub_set`，将发布地址添加到节点的模型中。
+
+---
+
 ## 节点可以自己添加相应的配置吗？
 
 &emsp;&emsp;本法可用于特殊情况，如测试阶段。
