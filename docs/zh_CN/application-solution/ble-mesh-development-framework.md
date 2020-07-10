@@ -211,6 +211,12 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## 为什么会出现 EspBleMesh App 在快速配网期间长时间等待的情况？
+
+&emsp;&emsp;快速配网期间，代理节点在配置完一个节点后会断开与 APP 的连接，待所有节点配网完成后再与 APP 重新建立连接。
+
+---
+
 ## Provisoner 如何控制节点的服务器模型？
 
 &emsp;&emsp;ESP-BLE-MESH 支持所有 SIG 定义的客户端模型。Provisioner 可以使用这些客户端模型控制节点的服务器模型。客户端模型分为 6 类，每类有相应的功能。
