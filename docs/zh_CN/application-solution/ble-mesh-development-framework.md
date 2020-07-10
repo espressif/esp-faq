@@ -97,6 +97,31 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## Provisoner 如何控制节点的服务器模型？
+
+&emsp;&emsp;ESP-BLE-MESH 支持所有 SIG 定义的客户端模型。Provisioner 可以使用这些客户端模型控制节点的服务器模型。客户端模型分为 6 类，每类有相应的功能。
+
+- Configuration Client Model
+  -  API `esp_ble_mesh_config_client_get_state()` 可用于获取 Configuration Server Model 的 `esp_ble_mesh_cfg_client_get_state_t` 值。
+  - API `esp_ble_mesh_config_client_set_state()` 可用于获取 Configuration Server Model 的 `esp_ble_mesh_cfg_client_set_state_t` 值。
+- Health Client Model
+  - API `esp_ble_mesh_health_client_get_state()` 可用于获取 Health Server Model 的 `esp_ble_mesh_health_client_get_state_t` 值。
+  - API `esp_ble_mesh_health_client_set_state()` 可用于获取 Health Server Model 的 `esp_ble_mesh_health_client_set_state_t` 值。
+- Generic Client Models
+  - API `esp_ble_mesh_generic_client_get_state()` 可用于获取 Generic Server Model 的 `esp_ble_mesh_generic_client_get_state_t` 值。
+  - API `esp_ble_mesh_generic_client_set_state()` 可用于获取 Generic Server Model 的 `esp_ble_mesh_generic_client_set_state_t` 值。
+- Lighting Client Models
+  - API `esp_ble_mesh_light_client_get_state()` 可用于获取 Lighting Server Model 的 `esp_ble_mesh_light_client_get_state_t` 值。
+  - API `esp_ble_mesh_light_client_set_state()` 可用于获取 Lighting Server Model 的 `esp_ble_mesh_light_client_set_state_t` 值。
+- Sensor Client Models
+  - API `esp_ble_mesh_sensor_client_get_state()` 可用于获取 Sensor Server Model 的 `esp_ble_mesh_sensor_client_get_state_t` 值。
+  - API `esp_ble_mesh_sensor_client_set_state()` 可用于获取 Sensor Server Model 的 `esp_ble_mesh_sensor_client_set_state_t` 值。
+- Time and Scenes Client Models
+  - API `esp_ble_mesh_time_scene_client_get_state()` 可用于获取 Time and Scenes Server Model 的 `esp_ble_mesh_time_scene_client_get_state_t` 值。
+  - API `esp_ble_mesh_time_scene_client_set_state()` 可用于获取 Time and Scenes Server Model 的 `esp_ble_mesh_time_scene_client_set_state_t` 值。
+
+---
+
 ## 设备通信必须要网关吗？
 
 - 情况 1：节点仅在 mesh 网络内通信。这种情况下，不需要网关。ESP-BLE-MESH 网络是一个泛洪的网络，网络中的消息没有固定的路径，节点与节点之间可以随意通信.
