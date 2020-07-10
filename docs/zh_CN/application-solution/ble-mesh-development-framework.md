@@ -10,6 +10,12 @@ body {counter-reset: h2}
 
 ---
 
+## Device UUID 可以用于设备识别吗？
+
+&emsp;&emsp;是的。每个设备都有独一无二的 Device UUID, 用户可以通过 Device UUID 识别设备。
+
+---
+
 ## 如何知道当前 Provisioner 正在配网哪个未配网设备？
 
 &emsp;&emsp;`esp_ble_mesh_prov_t` 中 `prov_attention` 的值由 Provisioner 在配网过程中设置给未配网设备。该值只能在初始化期间设置一次，此后不能修改。未配网设备加入 mesh 网络后可以用特定的方式来显示自己正在配网，比如灯光闪烁，以告知 Provisioner 其正在配网。
