@@ -97,6 +97,13 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## 设备通信必须要网关吗？
+
+- 情况 1：节点仅在 mesh 网络内通信。这种情况下，不需要网关。ESP-BLE-MESH 网络是一个泛洪的网络，网络中的消息没有固定的路径，节点与节点之间可以随意通信.
+- 情况 2：如果用户想要远程控制网络，比如在到家之前打开某些节点，则需要网关。
+
+---
+
 ##  Provisioner 删除网络中的节点时，需要进行哪些操作？
 
 &emsp;&emsp;通常而言，Provisioner 从网络中移除节点主要涉及三个步骤：
