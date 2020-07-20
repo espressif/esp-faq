@@ -58,3 +58,16 @@ ESP8266 云端升级参考⽂档为[《ESP8266 云端升级指南》](https://ww
 ## ESP32-AT 编译过程中，出现 no module named yaml 的错误，应如何解决？
 
 请安装 yaml 模块: `python -m pip install pyyaml`
+
+---
+
+## ESP8266 如何通过 AT 指令建立 SSL 链接？
+
+- ESP8266 建立 SLL 连接服务器示例，请使用如下指令：
+
+ ``` shell
+  AT+CWMODE=1                                 // 设置 wifi 模式  为 station 
+  AT+CWJAP="espressif_2.4G","espressif"       // 连接 AP ，账号、密码
+  AT+CIPMUX=0                                 // 设置 单连接 
+  AT+CIPSTART="SSL","www.baidu.com",443       // 建立 SSL 连接
+  ```
