@@ -61,6 +61,15 @@ ESP8266 云端升级参考⽂档为[《ESP8266 云端升级指南》](https://ww
 
 ---
 
+## AT 命令中串口波特率是否可以修改？（默认：115200）
+
+AT 命令串口的波特率是可以修改的。
+  - 第一种方法，您可以通过串口命令 `AT+UART_CUR` 或者 `AT+UART_DEF`进行修改, 详情请参考 [AT 指令集](https://github.com/espressif/esp-at/blob/master/docs/en/get-started/ESP_AT_Commands_Set.md)。
+
+  - 第二种方法，您可以重新编译 AT 固件，编译介绍：[使用 esp-at 工程编译固件](https://github.com/espressif/esp-at/blob/master/docs/en/get-started/ESP_AT_Get_Started.md)，以及波特率修改介绍 [修改 UART 的波特率](https://github.com/espressif/esp-at/blob/master/docs/zh_CN/get-started/How_To_Set_AT_Port_Pin.md)。
+
+---
+
 ## ESP8266 如何通过 AT 指令建立 SSL 链接？
 
 - ESP8266 建立 SLL 连接服务器示例，请使用如下指令：
