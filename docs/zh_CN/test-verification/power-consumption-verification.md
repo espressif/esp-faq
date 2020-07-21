@@ -32,3 +32,9 @@ body {counter-reset: h2}
   - 进⼊休眠状态后，关闭除 RTC 模块外的所有其他模块
   - 退出休眠状态后，整个系统重新运⾏（类似于系统重启）
   - 休眠期间不保持到 AP 的连接
+
+---
+
+## ESP32 deep sleep 可以通过任意 RTC_GPIO 唤醒吗？
+
+- 是的，RTC_GPIO 管脚配置可以参考 [ESP32 datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf)    V2.2 章节。
