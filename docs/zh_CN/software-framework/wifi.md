@@ -156,3 +156,9 @@ esp_netif_set_dns_info(eth_netif,ESP_NETIF_DNS_MAIN,&dns);
 - 支持。
   - ESP8266 请参考此示例[softap_prov](https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/provisioning/softap_prov)
   - ESP32/ESP32-S2 请参考此示例[softap_prov](https://github.com/espressif/esp-idf/tree/master/examples/provisioning/legacy/softap_prov)
+
+---
+
+## [esp_wifi_802.11_tx](https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/wifi/esp_wifi.html?highlight=esp_wifi_802.11_tx#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib) 接口中的 buffer 参数中包括 FCS 吗？
+
+- 不包括， FCS 帧是硬件自动生成的。
