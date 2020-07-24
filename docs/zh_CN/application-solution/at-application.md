@@ -80,3 +80,9 @@ AT 命令串口的波特率是可以修改的。
   AT+CIPMUX=0                                 // 设置 单连接 
   AT+CIPSTART="SSL","www.baidu.com",443       // 建立 SSL 连接
   ```
+
+---
+
+## ESP32 是否可通过 HSPI 来传输 AT 指令？
+
+ESP32 作为从机不能通过 HSPI 来传输 AT 指令，但主机端 MCU 可通过 HSPI 来传输 AT 指令，ESP32 传输 AT 建议用 SDIO 来替代，参见[说明](https://github.com/espressif/esp-at/tree/master/examples/at_sdspi_host)。
