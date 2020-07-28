@@ -88,7 +88,13 @@ body {counter-reset: h2}
 
 ---
 
+## ESP32 进入低功耗模式时， PSRAM 中的数据会丢失吗？
+
+- Modem-sleep/Light-sleep 模式时，PSRAM 中的数据不会丢失。
+- Deep-sleep 模式时，CPU 和大部分外设都会掉电，PSRAM 的数据会丢失。
+
+---
+
 ## 请问 ESP32 CPU 系统时间是否由系统滴答时钟生成？精度如何？
 
 CPU 系统时间是由 esp_timer 内部的 64 位硬件定时器 CONFIG_ESP_TIMER_IMPL 产生的，是微秒级的时间分辨率。参见[说明](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/esp_timer.html?highlight=esp_timer_get_time#high-resolution-timer)。
-
