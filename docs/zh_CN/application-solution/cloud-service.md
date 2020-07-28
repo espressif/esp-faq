@@ -25,6 +25,16 @@ body {counter-reset: h2}
 
 ---
 
+## ESP RainMaker 方案中数据是通过乐鑫云中转数据吗？设备直接连接到 AWS, google 或者 homekit 吗？
+
+- 在 ESP RainMaker 方案中，设备直接连接到 AWS IOT，ESP RainMaker 服务托管在 AWS 上。
+- 对于 Alexa 和 Google Voice Assistant 而言，采用云对云的集成方案。\
+  以 Alexa 为例，数据流如下：\
+  Alexa device (Echo speaker) -> Alexa Cloud -> RainMaker Cloud -> Device
+- HomeKit 是完全独立的， 当前没有集成到 ESP RainMaker。
+
+---
+
 ## ESP32 如何对接天猫精灵，是否有相应的资料？
 
 ESP32 对接天猫精灵可以使用 esp-aliyun SDK，相关文档可以[参阅](https://github.com/espressif/esp-aliyun)。
