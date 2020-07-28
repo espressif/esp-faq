@@ -22,3 +22,9 @@ body {counter-reset: h2}
 - ESP8266 Cache 偏移仅支持 1MB 的单位偏移。
 - 当分区设置为 512+512 模式时，user1.bin 与 user2.bin 指令地址并不相同，不可以相互替换；所以，同一版本需要云端放置两个不同版本的固件用于设备升级。
 - 当分区设置为 1024+1024 模式时，分区大小满足 Cache 偏移，不受该限制。
+
+---
+
+## ESP32 如何对接天猫精灵，是否有相应的资料？
+
+ESP32 对接天猫精灵可以使用 esp-aliyun SDK，相关文档可以[参阅](https://github.com/espressif/esp-aliyun)。
