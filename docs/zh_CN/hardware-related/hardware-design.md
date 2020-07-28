@@ -72,6 +72,13 @@ body {counter-reset: h2}
 
 ---
 
+## ESP32-D2WD 外接 PSRAM 的参考设计？
+
+- 建议参考 ESP32-PICO-D4 外接 PSRAM 的设计 [datasheet V7 章节](https://www.espressif.com/sites/default/files/documentation/esp32-pico-d4_datasheet_en.pdf).
+- 注意：ESP32-D2WD 是 1.8V Flash，所以外部 VDD_SDIO 需要加电阻和电容，并且连接 1.8V PSRAM。
+
+---
+
 ## ESP32 是否可以用 PWM 或 DAC 来播放音乐?
 
 ESP32 可以用 PWM 或 DAC 来播放音乐，此功能有进行过播放测试，推荐用于提示音播放，示例工程可以通过邮件咨询获取。
