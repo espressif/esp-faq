@@ -18,4 +18,8 @@ body {counter-reset: h2}
 
 - 操作参考链接：http://www.mamicode.com/info-detail-2594302.html
 
+---
+ 
+## Windows 下 使用 ESP-IDF Tools 2.3 工具安装 master 版本的 esp-idf 出现错误：Installation has failed with exit code 2 是什么原因？
 
+此报错跟网络环境有关，该网路环境下无法流畅的下载 github 仓库，导致电脑 SDK 下载失败 。
