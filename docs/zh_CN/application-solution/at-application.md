@@ -83,6 +83,18 @@ AT 命令串口的波特率是可以修改的。
 
 ---
 
+## ESP32 AT 如何从 UART0 口通信？
+
+默认 AT 固件是通过 UART1 口通信的，如果要从 UART0 通信， 需要下载并编译 [esp-at](https://github.com/espressif/esp-at) code 。
+
+- 参考[入门指南](https://github.com/espressif/esp-at/blob/master/docs/en/get-started/ESP_AT_Get_Started.md#platform-esp32)搭建好环境
+
+- 修改 [factory_param_data.csv](https://github.com/espressif/esp-at/blob/master/components/customized_partitions/raw_data/factory_param/factory_param_data.csv) 表中对应模组的 UART 管脚，将 uart_tx_pin 修改为 GPIO1 , uart_tx_pin 修改为 GPIO3。
+
+- menuconfig 配置：make menuconfig > Component config > Common ESP-related > UART for console output(Custom) >Uart peripheral to use for console output(0-1)(UART1) > (1)UART TX on GPIO# (NEW) > (3)UART TX on GPIO# (NEW)。
+
+---
+
 ## 使用 ESP8266 ，如何用 AT 指令唤醒 light-sleep 模式？
 
 AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/en/release-v2.1.0.0_esp8266/AT_Command_Set/Basic_AT_Commands.html?highlight=wake#at-sleepwkcfgconfig-the-light-sleep-wakeup-source-and-awake-gpio)。
