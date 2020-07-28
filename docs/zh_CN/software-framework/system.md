@@ -85,3 +85,10 @@ body {counter-reset: h2}
 
 - 不可以，用户程序必须使用外挂 Flash 进行存储，片上 ROM 不能存储用户程序。
 - ROM 内存放的程序为芯片一级 bootloader ，为了保护出厂程序不被破坏，该区域为只读存储。
+
+---
+
+## 请问 ESP32 CPU 系统时间是否由系统滴答时钟生成？精度如何？
+
+CPU 系统时间是由 esp_timer 内部的 64 位硬件定时器 CONFIG_ESP_TIMER_IMPL 产生的，是微秒级的时间分辨率。参见[说明](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/esp_timer.html?highlight=esp_timer_get_time#high-resolution-timer)。
+
