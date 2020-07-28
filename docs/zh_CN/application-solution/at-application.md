@@ -83,6 +83,12 @@ AT 命令串口的波特率是可以修改的。
 
 ---
 
+## 使用 ESP8266 ，如何用 AT 指令唤醒 light-sleep 模式？
+
+AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/en/release-v2.1.0.0_esp8266/AT_Command_Set/Basic_AT_Commands.html?highlight=wake#at-sleepwkcfgconfig-the-light-sleep-wakeup-source-and-awake-gpio)。
+
+---
+
 ## ESP32 是否可通过 HSPI 来传输 AT 指令？
 
 ESP32 作为从机不能通过 HSPI 来传输 AT 指令，但主机端 MCU 可通过 HSPI 来传输 AT 指令，ESP32 传输 AT 建议用 SDIO 来替代，参见[说明](https://github.com/espressif/esp-at/tree/master/examples/at_sdspi_host)。
