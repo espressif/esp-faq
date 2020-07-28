@@ -72,6 +72,12 @@ body {counter-reset: h2}
 
 ---
 
+## ESP8285 作为 Wi-Fi 模块时，是否需要连接外部晶振？
+
+ESP8285 作为 Wi-Fi 模块时，需要连接外部晶振，芯片内部无晶振。
+
+---
+
 ## ESP32-D2WD 外接 PSRAM 的参考设计？
 
 - 建议参考 ESP32-PICO-D4 外接 PSRAM 的设计 [datasheet V7 章节](https://www.espressif.com/sites/default/files/documentation/esp32-pico-d4_datasheet_en.pdf).
