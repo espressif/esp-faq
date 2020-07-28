@@ -116,6 +116,14 @@ body {counter-reset: h2}
 
 - 使用两块 ESP32 开发板对跑 SPP，单向吞吐量量可达 1900 Kbps，约 235 KB/s，已接近规范里的理论值。
 
+---
+
+## ESP32 的 BLE 传输速率最大为多少？
+
+- 屏蔽箱测试 BLE 传输速率可以达到 800 kbits/s。
+
+---
+
 ## ESP32 BLE 如何进入 light sleep 模式呢？
 
 硬件上需要外加 32Khz 的外部晶振，否则 light sleep 模式不会生效。
