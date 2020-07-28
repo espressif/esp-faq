@@ -62,3 +62,11 @@ body {counter-reset: h2}
 ## 如何使用 mqtt 配置服务器地址为自主云平台 ?
 
 - 可以参考例程 [mqtt example](https://github.com/espressif/esp-idf/tree/master/examples/protocols/mqtt)
+
+---
+
+## 使用 ESP32 ，请问 ULP 里面用 jump 跳转到一个函数，是否有返回的指令？
+
+1. 目前 ULP CPU 指令列表以及说明[参见](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ulp_instruction_set.html#add-add-to-register)。
+
+2. 返回指令通常使用一个通用寄存器备份 PC 地址，用于后续跳回，由于目前 ULP 只有 4 个通用寄存器，所以需要合理使用。
