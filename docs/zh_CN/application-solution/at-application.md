@@ -92,3 +92,11 @@ AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/
 ## ESP32 是否可通过 HSPI 来传输 AT 指令？
 
 ESP32 作为从机不能通过 HSPI 来传输 AT 指令，但主机端 MCU 可通过 HSPI 来传输 AT 指令，ESP32 传输 AT 建议用 SDIO 来替代，参见[说明](https://github.com/espressif/esp-at/tree/master/examples/at_sdspi_host)。
+
+---
+
+## ESP32-SOLO-1C 如何使用 AT 与手机进行 BLE 透传？
+
+1. 设备端需要按照 BLE server 透传模式去设置，具体 BLE 透传模式流程参考[《ESP32 AT 指令集与使用示例》](https://www.espressif.com/sites/default/files/documentation/esp32_at_instruction_set_and_examples_cn.pdf)。
+
+2. 手机端需要下载 BLE 调试助手，例如 nRF Connect APP（安卓）和 lightblue（IOS），然后打开 SCAN 去寻找设备端的 MAC 地址，最后就可以发送命令了。
