@@ -138,3 +138,10 @@ Note : that the " additional current " option is a workaround for a hardware iss
 
 - Enable Bluetooth modem sleep with external 32.768kHz crystal as low power clock : \
 menuconfig ---> Component config ---> Bluetooth ---> Bluetooth controller ---> MODEM SLEEP Options --->[*] Bluetooth modem sleep
+
+---
+
+## 选择 ESP32 芯片实现蓝牙配网的方式，是否有文档可以提供参考？
+
+- 蓝牙配网说明可参考[ESP32 blufi](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/blufi.html?highlight=blufi)。
+- 蓝牙配网示例可以参考[blufi](https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/blufi)
