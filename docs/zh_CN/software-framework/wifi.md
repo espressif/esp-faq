@@ -168,3 +168,9 @@ esp_netif_set_dns_info(eth_netif,ESP_NETIF_DNS_MAIN,&dns);
 ## ESP-WROOM-32D 支持的 Wi-Fi 频段信息和功率表分别是什么？ 
 
 - Wi-Fi频段是  2412 ~ 2484 MHz，软件里可配置可用信道和对应的工作频率。功率表有默认值，也可支持软件配置。详细指导请参考[《ESP32 Phy Init Bin 重要参数配置说明》](https://www.espressif.com/sites/default/files/documentation/esp32_phy_init_bin_parameter_configuration_guide_cn.pdf)
+
+---
+
+## ESP32 Wi-Fi RF 功率最高值是多少？
+
+ESP32 RF 功率为 20 dB，即模组最大值。

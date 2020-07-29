@@ -7,9 +7,3 @@ body {counter-reset: h2}
   h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
   h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
 </style>
-
----
-
-## ESP32 Wi-Fi RF 功率最高值是多少？
-
-ESP32 RF 功率为 20 dB，即模组最大值。
