@@ -50,6 +50,12 @@ body {counter-reset: h2}
 
 ---
 
+## 如何监测任务栈的剩余空间？
+
+&emsp;&emsp;API `vTaskList()` 可以用于定期打印任务栈的剩余空间。
+
+---
+
 ## 如何在不更改 menuconfig 输出级别的情况下改变 log 级别？
 
 &emsp;&emsp;无需使用 menuconfig，可以通过 API `esp_log_level_set()` 修改 log 的输出级别。
