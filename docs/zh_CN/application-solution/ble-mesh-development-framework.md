@@ -10,6 +10,13 @@ body {counter-reset: h2}
 
 ---
 
+
+## 手机 App 首先配置的节点的单播地址是不是固定的？
+
+&emsp;&emsp;该 App 将确定单播地址，目前大多数单播地址是固定的。
+
+---
+
 ## 配网过程中，认证设备共有多少种方法？提供的范例中 [provided examples](https://github.com/espressif/esp-idf/tree/7d75213/examples/bluetooth/esp_ble_mesh) 使用了什么方法？
 
 &emsp;&emsp;共有四种设备认证方法，即 No OOB、Static OOB、Output OOB 和 Input OOB。提供的范例使用了 No OOB 的方式。
