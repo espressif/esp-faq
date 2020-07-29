@@ -153,3 +153,9 @@ menuconfig ---> Component config ---> Bluetooth ---> Bluetooth controller ---> M
 
 - 蓝牙配网说明可参考[ESP32 blufi](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/blufi.html?highlight=blufi)。
 - 蓝牙配网示例可以参考[blufi](https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/blufi)
+
+---
+
+## ESP32 经典蓝牙 SPP 的传输速率能达到多少？
+
+在开放环境下，双向同时收发，实测可达到 1400+ ～ 1590 kbit/s（此数据仅作为参考，实际情况建议客户根据应用环境实测）。
