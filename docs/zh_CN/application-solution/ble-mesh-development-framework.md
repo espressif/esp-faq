@@ -547,6 +547,14 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## 如果 Provisioner 想要改变节点状态，其需满足什么条件？
+
+- 需要有和节点的服务器模型相对应的客户端模型。
+- 需要和节点有相同的、可用于加密消息的网络密钥和应用密钥。
+- 需要知道节点的地址，可以是单播地址，也可以是订阅地址。
+
+---
+
 ## Provisioner 的单播地址是不是固定的？
 
 &emsp;&emsp;`esp_ble_mesh_prov_t` 中 `prov_unicast_addr` 的值用于设置 Provisioner 的单播地址，只能在初始化期间设置一次，此后不能更改。
