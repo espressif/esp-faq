@@ -529,3 +529,9 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 &emsp;&emsp;Provisioner 的单播地址只能在初始化期间设置一次，此后不能更改。理论而言，只要节点知道 Provisioner 的单播地址，此地址便可用作节点上报状态消息的目的地址。节点在网络配置的过程中可以知道 Provisioner 的单播地址，因为 Provisioner 往节点发送消息时，消息的源地址就是 Provisioner 的单播地址。
 
 &emsp;&emsp;订阅地址也可使用。Provisioner 订阅组地址或者虚拟地址，节点向该订阅地址发送消息。
+
+---
+
+## Provisioner 的单播地址是不是固定的？
+
+&emsp;&emsp;`esp_ble_mesh_prov_t` 中 `prov_unicast_addr` 的值用于设置 Provisioner 的单播地址，只能在初始化期间设置一次，此后不能更改。
