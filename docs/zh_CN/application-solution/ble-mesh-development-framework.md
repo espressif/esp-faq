@@ -217,6 +217,12 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## BLE MESH Log `ran out of retransmit attempts` 代表什么？
+
+&emsp;&emsp;节点发送分段消息时，由于某些原因，接收端未收到完整的消息。节点会重传消息。当重传次数达到最大重传数时，会出现该警告，当前最大重传数为 4。
+
+---
+
 ## BLE Mesh log `Duplicate found in Network Message Cache` 代表什么？
 
 &emsp;&emsp;当节点收到一条消息时，它会把该消息与网络缓存中存储的消息进行比较。如果在缓存中找到相同的消息，这意味着之前已接受过该消息，则该消息会被丢弃。
