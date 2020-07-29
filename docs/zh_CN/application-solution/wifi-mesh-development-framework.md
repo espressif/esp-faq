@@ -12,17 +12,18 @@ body {counter-reset: h2}
 
 ## Wi-Fi Mesh 占用多大内存？是否需要外部 PSRAM ？
 
-Wi-Fi Mesh 内存占用约 60KB，是否需要外部 PSRAM 取决于应用场景的复杂情况，一般性应用无需外部 PSRAM。
+&emsp;Wi-Fi Mesh 内存占用约 60KB，是否需要外部 PSRAM 取决于应用场景的复杂情况，一般性应用无需外部 PSRAM。
 
 ---
 
 ## Wi-Fi Mesh 能否批量 OTA ？
 
-- Wi-Fi Mesh 设备支持批量 OTA。
-- OTA ⽅式为：根节点下载固件，然后再发至其他节点。具体示例请参考: [mupgrade](https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mupgrade)
+&emsp;Wi-Fi Mesh 设备支持批量 OTA。\
+&emsp;OTA ⽅式为：根节点下载固件，然后再发至其他节点。具体示例请参考: [mupgrade](https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mupgrade)
 
 ---
 
 ## 使用 ESP32 Wi-Fi Mesh，如何设置可以在没连接到 Wi-Fi 的情况下形成自组网？
 
-需要指定一个设备作为 Root 节点，可参考[说明]（https://github.com/espressif/esp-mdf/blob/master/examples/function_demo/mwifi/README_cn.md）和[示例]（https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi）。
+&emsp;需要指定一个设备作为 Root 节点，可参考[说明]（https://github.com/espressif/esp-mdf/blob/master/examples/function_demo/mwifi/README_cn.md）和[示例]（https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi）。
+
