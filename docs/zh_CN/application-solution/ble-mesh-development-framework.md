@@ -513,3 +513,11 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 ## 如何启用 IV Update 更新程序？
 
 &emsp;&emsp;节点可以使用带有 Secure Network Beacon 的 IV Update 更新程序。
+
+---
+
+## 未配网设备加入 ESP-BLE-MESH 网络的流程是什么？
+
+&emsp;&emsp;设备通过 Provisioner 加入 ESP-BLE-MESH 网络分为两个阶段，配网阶段和配置阶段。
+- 配网阶段：为设备分配单播地址、添加网络密钥 (NetKey) 等。通过配网，设备加入 ESP-BLE-MESH 网络，身份从未配网设备变为节点。
+- 配置阶段：为节点添加应用密钥 (AppKey), 并将应用密钥绑定到相应模型。配置期间，有些选项是可选的，比如为节点添加订阅地址、设置发布地址等。通过配置，该节点实际上可以向 Provisioner 发送消息，也可以接收来自 Provisioner 的消息。
