@@ -10,6 +10,12 @@ body {counter-reset: h2}
 
 ---
 
+## 配网过程中，认证设备共有多少种方法？提供的范例中 [provided examples](https://github.com/espressif/esp-idf/tree/7d75213/examples/bluetooth/esp_ble_mesh) 使用了什么方法？
+
+&emsp;&emsp;共有四种设备认证方法，即 No OOB、Static OOB、Output OOB 和 Input OOB。提供的范例使用了 No OOB 的方式。
+
+---
+
 ## 配置入网前，未配网设备的广播包可以携带哪些信息？
 
 - Device UUID
