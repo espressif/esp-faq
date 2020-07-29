@@ -65,3 +65,8 @@ WROVER／WROVER-I／WROVER-B／WROVER-IB
 - ESP32 内置 GPIO 矩阵，部分外设接口可以配置到任意空闲 pin 脚上，即硬件设计时，不需要严格将某些功能固定在某些 pin 脚上。详细信息可以参考 [ESP32 datasheet](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf) 中表格 9 的内容
 - ESP32 有 3 组 UART，但下载只可使用 UART0，且 pin 脚固定
 
+---
+
+## ESP8266 I2C 是软件模拟的吗？
+
+- ESP8266 I2C 是使用 gpio 软件模拟。
