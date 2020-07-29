@@ -85,6 +85,14 @@ AT 命令串口的波特率是可以修改的。
 
 ---
 
+
+## 乐鑫芯片可以通过那些接口来传输 AT 指令？
+
+- ESP8266,ESP32,ESP32s2 可通过 SDIO, SPI UART 来传输 AT 指令。
+- 在 esp-at 工程中通过 menuconfig -> Component config -> AT 中进行配置。
+
+---
+
 ## ESP32 AT 如何从 UART0 口通信？
 
 默认 AT 固件是通过 UART1 口通信的，如果要从 UART0 通信， 需要下载并编译 [esp-at](https://github.com/espressif/esp-at) code 。
@@ -100,12 +108,6 @@ AT 命令串口的波特率是可以修改的。
 ## 使用 ESP8266 ，如何用 AT 指令唤醒 light-sleep 模式？
 
 AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/en/release-v2.1.0.0_esp8266/AT_Command_Set/Basic_AT_Commands.html?highlight=wake#at-sleepwkcfgconfig-the-light-sleep-wakeup-source-and-awake-gpio)。
-
----
-
-## ESP32 是否可通过 HSPI 来传输 AT 指令？
-
-ESP32 作为从机不能通过 HSPI 来传输 AT 指令，但主机端 MCU 可通过 HSPI 来传输 AT 指令，ESP32 传输 AT 建议用 SDIO 来替代，参见[说明](https://github.com/espressif/esp-at/tree/master/examples/at_sdspi_host)。
 
 ---
 
