@@ -217,6 +217,12 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## BLE Mesh log `No matching TX context for ack` 代表什么？
+
+&emsp;&emsp;当节点收到一个分段 ack 且不能找到任何自己发送的与该 ack 相关的消息时，会出现该警告。
+
+---
+
 ## BLE Mesh log `Model not bound to AppKey 0x0000` 代表什么？
 
 &emsp;&emsp;当节点发送带有模型的消息且该模型尚未绑定到索引为 0x000 的应用密钥时，会出现该报错。
