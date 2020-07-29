@@ -67,6 +67,12 @@ WROVER／WROVER-I／WROVER-B／WROVER-IB
 
 ---
 
+## ESP32 是否支持 A2DP 发送音频？
+
+ESP32 支持 A2DP 发送音频，可参考例程 [esp-idf/examples/bluetooth/bluedroid/classic_bt/a2dp_source](https://github.com/espressif/esp-idf/tree/d85d3d969ff4b42e2616fd40973d637ff337fae6/examples/bluetooth/bluedroid/classic_bt/a2dp_source#esp-idf-a2dp-source-demo)。
+
+---
+
 ## ESP8266 I2C 是软件模拟的吗？
 
 - ESP8266 I2C 是使用 gpio 软件模拟。
