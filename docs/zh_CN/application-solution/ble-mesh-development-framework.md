@@ -558,3 +558,10 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 ## Provisioner 的单播地址是不是固定的？
 
 &emsp;&emsp;`esp_ble_mesh_prov_t` 中 `prov_unicast_addr` 的值用于设置 Provisioner 的单播地址，只能在初始化期间设置一次，此后不能更改。
+
+---
+
+## 如何使用网络密钥和应用密钥？
+
+- 网络密钥用于加密网络层的消息。具有相同网络密钥的节点视作在同一网络中，具有不同网络密钥的节点相互之间不能进行通信。
+- 应用密钥用于加密上层传输层中的消息。如果服务器模型和客户端模型绑定的应用密钥不同，则无法实现相互通信。
