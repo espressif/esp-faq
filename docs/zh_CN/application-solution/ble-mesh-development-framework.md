@@ -516,6 +516,21 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## ESP-BLE-MESH 回调函数如何分类？
+
+- API `esp_ble_mesh_register_prov_callback()` 用于注册处理配网和入网相关事件的回调函数。
+- API `esp_ble_mesh_register_config_client_callback()` 用于注册处理 Configuration Client Model 相关事件的回调函数。
+- API `esp_ble_mesh_register_config_server_callback()` 用于注册处理 Configuration Server Model 相关事件的回调函数。
+- API `esp_ble_mesh_register_health_client_callback()` 用于注册处理 Health Client Model 相关事件的回调函数。
+- API `esp_ble_mesh_register_health_server_callback()` 用于注册处理 Health Server Model 相关事件的回调函数。
+- API `esp_ble_mesh_register_generic_client_callback()` 用于注册处理 Generic Client Models 相关事件的回调函数。
+- API `esp_ble_mesh_register_light_client_callback()` 用于注册处理 Lighting Client Models 相关事件的回调函数。
+- API `esp_ble_mesh_register_sensor_client_callback()` 用于注册处理 Sensor Client Model 相关事件的回调函数。
+- API `esp_ble_mesh_register_time_scene_client_callback()` 用于注册处理 Time and Scenes Client Models 相关事件的回调函数。
+- API `esp_ble_mesh_register_custom_model_callback()` 用于注册处理自定义模型和未实现服务器模型的相关事件的回调函数。
+
+---
+
 ## 未配网设备加入 ESP-BLE-MESH 网络的流程是什么？
 
 &emsp;&emsp;设备通过 Provisioner 加入 ESP-BLE-MESH 网络分为两个阶段，配网阶段和配置阶段。
