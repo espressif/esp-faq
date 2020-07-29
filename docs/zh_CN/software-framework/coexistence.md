@@ -8,7 +8,11 @@ body {counter-reset: h2}
   h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
 </style>
 
-## ··· 待完善
+## Wi-Fi 和 ESP-BLE-MESH 共存时，支持哪些模式？
+
+&emsp;&emsp;目前，只有 Wi-Fi STA 模式支持共存。
+
+---
 
 ## Wi-Fi 和 ESP-BLE-MESH 共存时，为什么 Wi-Fi 吞吐量很低？
 
