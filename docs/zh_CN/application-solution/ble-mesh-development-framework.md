@@ -217,6 +217,12 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## BLE Mesh log `Incomplete timer expired` 代表什么？
+
+&emsp;&emsp;当节点在一定时间段（比如 10 秒）内未收到分段消息的所有段时，则 Incomplete 计时器到时，并且出现该警告。
+
+---
+
 ## BLE Mesh log `No free slots for new incoming segmented messages` 代表什么？
 
 &emsp;&emsp;当节点没有空间来接收新的分段消息时，会出现该警告。用户可以通过配置 [CONFIG_BLE_MESH_RX_SEG_MSG_COUNT](https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/kconfig.html#config-ble-mesh-rx-seg-msg-count) 扩大空间。
