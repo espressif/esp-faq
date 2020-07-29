@@ -10,6 +10,19 @@ body {counter-reset: h2}
 
 ---
 
+## 使用 ESP32 ，在快速掉电再上电后，出现产品起不来的现象，是什么原因？
+
+- 场景描述：电源为 220V 转 5V ，5V 转 3.3V ，220V 掉电再上电出现故障。报错 log 如下：
+  brownout detector was triggered.
+  rst:0xc(SW_CPU_RESET),boot:0x13(SPI_FAST_FLASH_BOOT)
+  configsip:0,SPI
+
+  1. 打印此 log 是因为在快速掉电过程中，电压降到了触发硬件看门狗的电压阈值。
+  2. 由于上电时序不对，导致没有进入 bootloader ，可以将 chip_PU 强制拉低解除故障。
+  3. ESP32 上电、复位时序说明，详见[《ESP32 技术规格书》](https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf)。
+
+---
+
 ## Wi-Fi 设备的串口名称？
 
 - windows 系统中串口设备名称格式是：COM* 
