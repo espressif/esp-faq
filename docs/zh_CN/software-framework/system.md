@@ -98,3 +98,11 @@ body {counter-reset: h2}
 ## 请问 ESP32 CPU 系统时间是否由系统滴答时钟生成？精度如何？
 
 CPU 系统时间是由 esp_timer 内部的 64 位硬件定时器 CONFIG_ESP_TIMER_IMPL 产生的，是微秒级的时间分辨率。参见[说明](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/esp_timer.html?highlight=esp_timer_get_time#high-resolution-timer)。
+
+---
+
+##  ESP32 的 flash 和 psram 的时钟频率如何修改？
+
+在 menuconfig 中修改。
+  - flash 时钟频率：menuconfig -> Serial flasher config -> Flash SPI speed。
+  - PSRAM 时钟频率：Component config -> ESP32-specific -> SPI RAM config -> Set RAM clock speed
