@@ -223,6 +223,12 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## 运行以下示例 [fast_prov_server](https://github.com/espressif/esp-idf/tree/84b51781c/examples/bluetooth/esp_ble_mesh/ble_mesh_fast_provision/fast_prov_server) 的节点的 Configuration Client Model 何时开始工作？
+
+&emsp;&emsp;使能了 Temporary Provisioner 功能后，Configuration Client Model 会开始工作。
+
+---
+
 ## Temporary Provisioner 功能会一直处于使能的状态吗？
 
 &emsp;&emsp;节点收到打开/关闭电灯的消息后，所有节点会禁用其 Temporary Provisioner 功能并且转化为一般节点。
