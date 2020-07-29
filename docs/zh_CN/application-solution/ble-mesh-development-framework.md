@@ -223,6 +223,12 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## Temporary Provisioner 功能会一直处于使能的状态吗？
+
+&emsp;&emsp;节点收到打开/关闭电灯的消息后，所有节点会禁用其 Temporary Provisioner 功能并且转化为一般节点。
+
+---
+
 ## BLE MESH Log `ran out of retransmit attempts` 代表什么？
 
 &emsp;&emsp;节点发送分段消息时，由于某些原因，接收端未收到完整的消息。节点会重传消息。当重传次数达到最大重传数时，会出现该警告，当前最大重传数为 4。
