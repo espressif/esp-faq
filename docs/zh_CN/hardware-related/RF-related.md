@@ -8,4 +8,8 @@ body {counter-reset: h2}
   h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
 </style>
 
-## ··· 待完善
+---
+
+## ESP32 模组在 2.8 V 电源下运行，射频性能会有下降吗？
+
+射频会不稳定。建议按照[相应模组 datasheet](https://www.espressif.com/zh-hans/support/documents/technical-documents) 中说明的建议工作电压范围提供电压。
