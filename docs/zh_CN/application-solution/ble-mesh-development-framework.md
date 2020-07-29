@@ -223,6 +223,12 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## 在 EspBleMesh App 中输入的 ** count ** 值有什么用途？
+
+&emsp;&emsp;此 count 值提供给 App 配置的代理节点，以决定何时提前开始 Proxy 广播信息。
+
+---
+
 ## 运行以下示例 [fast_prov_server](https://github.com/espressif/esp-idf/tree/84b51781c/examples/bluetooth/esp_ble_mesh/ble_mesh_fast_provision/fast_prov_server) 的节点的 Configuration Client Model 何时开始工作？
 
 &emsp;&emsp;使能了 Temporary Provisioner 功能后，Configuration Client Model 会开始工作。
