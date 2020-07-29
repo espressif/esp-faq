@@ -58,3 +58,57 @@ ESP8266 云端升级参考⽂档为[《ESP8266 云端升级指南》](https://ww
 ## ESP32-AT 编译过程中，出现 no module named yaml 的错误，应如何解决？
 
 请安装 yaml 模块: `python -m pip install pyyaml`
+
+---
+
+## AT 命令中串口波特率是否可以修改？（默认：115200）
+
+AT 命令串口的波特率是可以修改的。
+  - 第一种方法，您可以通过串口命令 `AT+UART_CUR` 或者 `AT+UART_DEF`进行修改, 详情请参考 [AT 指令集](https://github.com/espressif/esp-at/blob/master/docs/en/get-started/ESP_AT_Commands_Set.md)。
+
+  - 第二种方法，您可以重新编译 AT 固件，编译介绍：[使用 esp-at 工程编译固件](https://github.com/espressif/esp-at/blob/master/docs/en/get-started/ESP_AT_Get_Started.md)，以及波特率修改介绍 [修改 UART 的波特率](https://github.com/espressif/esp-at/blob/master/docs/zh_CN/get-started/How_To_Set_AT_Port_Pin.md)。
+
+---
+
+## ESP8266 如何通过 AT 指令建立 SSL 链接？
+
+- ESP8266 建立 SLL 连接服务器示例，请使用如下指令：
+
+ ``` shell
+  AT+CWMODE=1                                 // 设置 wifi 模式  为 station 
+  AT+CWJAP="espressif_2.4G","espressif"       // 连接 AP ，账号、密码
+  AT+CIPMUX=0                                 // 设置 单连接 
+  AT+CIPSTART="SSL","www.baidu.com",443       // 建立 SSL 连接
+  ```
+
+---
+
+## ESP32 AT 如何从 UART0 口通信？
+
+默认 AT 固件是通过 UART1 口通信的，如果要从 UART0 通信， 需要下载并编译 [esp-at](https://github.com/espressif/esp-at) code 。
+
+- 参考[入门指南](https://github.com/espressif/esp-at/blob/master/docs/en/get-started/ESP_AT_Get_Started.md#platform-esp32)搭建好环境
+
+- 修改 [factory_param_data.csv](https://github.com/espressif/esp-at/blob/master/components/customized_partitions/raw_data/factory_param/factory_param_data.csv) 表中对应模组的 UART 管脚，将 uart_tx_pin 修改为 GPIO1 , uart_tx_pin 修改为 GPIO3。
+
+- menuconfig 配置：make menuconfig > Component config > Common ESP-related > UART for console output(Custom) >Uart peripheral to use for console output(0-1)(UART1) > (1)UART TX on GPIO# (NEW) > (3)UART TX on GPIO# (NEW)。
+
+---
+
+## 使用 ESP8266 ，如何用 AT 指令唤醒 light-sleep 模式？
+
+AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/en/release-v2.1.0.0_esp8266/AT_Command_Set/Basic_AT_Commands.html?highlight=wake#at-sleepwkcfgconfig-the-light-sleep-wakeup-source-and-awake-gpio)。
+
+---
+
+## ESP32 是否可通过 HSPI 来传输 AT 指令？
+
+ESP32 作为从机不能通过 HSPI 来传输 AT 指令，但主机端 MCU 可通过 HSPI 来传输 AT 指令，ESP32 传输 AT 建议用 SDIO 来替代，参见[说明](https://github.com/espressif/esp-at/tree/master/examples/at_sdspi_host)。
+
+---
+
+## ESP32-SOLO-1C 如何使用 AT 与手机进行 BLE 透传？
+
+1. 设备端需要按照 BLE server 透传模式去设置，具体 BLE 透传模式流程参考[《ESP32 AT 指令集与使用示例》](https://www.espressif.com/sites/default/files/documentation/esp32_at_instruction_set_and_examples_cn.pdf)。
+
+2. 手机端需要下载 BLE 调试助手，例如 nRF Connect APP（安卓）和 lightblue（IOS），然后打开 SCAN 去寻找设备端的 MAC 地址，最后就可以发送命令了。

@@ -69,3 +69,22 @@ body {counter-reset: h2}
 - ESP8266 电压范围为 2.7V ~ 3.6V，两节 AA 电池可以给 ESP8266 供电，需要注意电池压降是否满足芯片电压范围。
 - 锂电池电压范围超过模组要求，并且放电时压降较⼤，不适合直接给 ESP8266 供电。
 - 推荐电池使⽤ DC-DC 或 LDO 升降压后给 ESP8266 供电，并且注意电源芯片压差要求。
+
+---
+
+## ESP8285 作为 Wi-Fi 模块时，是否需要连接外部晶振？
+
+ESP8285 作为 Wi-Fi 模块时，需要连接外部晶振，芯片内部无晶振。
+
+---
+
+## ESP32-D2WD 外接 PSRAM 的参考设计？
+
+- 建议参考 ESP32-PICO-D4 外接 PSRAM 的设计 [datasheet V7 章节](https://www.espressif.com/sites/default/files/documentation/esp32-pico-d4_datasheet_en.pdf).
+- 注意：ESP32-D2WD 是 1.8V Flash，所以外部 VDD_SDIO 需要加电阻和电容，并且连接 1.8V PSRAM。
+
+---
+
+## ESP32 是否可以用 PWM 或 DAC 来播放音乐?
+
+ESP32 可以用 PWM 或 DAC 来播放音乐，此功能有进行过播放测试，推荐用于提示音播放，示例工程可以通过邮件咨询获取。
