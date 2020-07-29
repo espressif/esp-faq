@@ -565,3 +565,10 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 - 网络密钥用于加密网络层的消息。具有相同网络密钥的节点视作在同一网络中，具有不同网络密钥的节点相互之间不能进行通信。
 - 应用密钥用于加密上层传输层中的消息。如果服务器模型和客户端模型绑定的应用密钥不同，则无法实现相互通信。
+
+---
+
+## 是否可以采用固定的网络密钥或应用密钥？
+
+- API `esp_ble_mesh_provisioner_add_local_net_key()` 可以用来添加包含固定值或随机值的网络密钥。
+- API `esp_ble_mesh_provisioner_add_local_app_key()` 可以用来添加包含固定值或随机值的应用密钥。
