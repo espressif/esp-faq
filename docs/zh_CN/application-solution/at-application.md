@@ -85,6 +85,11 @@ AT 命令串口的波特率是可以修改的。
 
 ---
 
+## ESP32 AT 如何指定 TLS 协议版本？
+
+- 编译 esp-at 工程时，可以在 menuconfig 的 Component config/mbedTLS 目录下，可以将不需要的版本关闭使能。
+
+---
 
 ## 乐鑫芯片可以通过那些接口来传输 AT 指令？
 
