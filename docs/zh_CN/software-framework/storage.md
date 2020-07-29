@@ -18,6 +18,12 @@ body {counter-reset: h2}
 
 ---
 
+## ESP32 外接 PSRAM 后，如何更改 PSRAM 的 clock 来源？
+
+在 menuconfig 中修改。具体位置：menuconfig -> Component config -> ESP32-specific -> SPI RAM config 
+
+---
+
 ## ESP8266 是否可以搭配 TF 卡使用？
 
 不建议这么使用。
