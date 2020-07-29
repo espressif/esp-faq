@@ -23,6 +23,12 @@ body {counter-reset: h2}
 
 ---
 
+## ESP32 Wi-Fi Mesh 是否可自动修复网络？
+
+ESP32 Wi-Fi Mesh 可自动修复网络，Wi-Fi Mesh 有检测网络断线的机制。
+
+---
+
 ## 使用 ESP32 Wi-Fi Mesh，如何设置可以在没连接到 Wi-Fi 的情况下形成自组网？
 
 &emsp;需要指定一个设备作为 Root 节点，可参考[说明]（https://github.com/espressif/esp-mdf/blob/master/examples/function_demo/mwifi/README_cn.md）和[示例]（https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi）。
