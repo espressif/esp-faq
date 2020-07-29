@@ -10,6 +10,14 @@ body {counter-reset: h2}
 
 ---
 
+## 配置入网前，未配网设备的广播包可以携带哪些信息？
+
+- Device UUID
+- OOB Info
+- URL Hash (可选的)
+
+---
+
 ## ESP-BLE-MESH 如何打印数据包？
 
 &emsp;&emsp;示例使用如下函数 `ESP_LOG_BUFFER_HEX()` 打印信息语境，而 ESP-BLE-MESH 协议栈使用 `bt_hex()` 打印。
