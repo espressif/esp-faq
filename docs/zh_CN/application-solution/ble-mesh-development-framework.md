@@ -10,6 +10,12 @@ body {counter-reset: h2}
 
 ---
 
+## ESP-BLE-MESH 如何打印数据包？
+
+&emsp;&emsp;示例使用如下函数 `ESP_LOG_BUFFER_HEX()` 打印信息语境，而 ESP-BLE-MESH 协议栈使用 `bt_hex()` 打印。
+
+---
+
 ## Device UUID 可以用于设备识别吗？
 
 &emsp;&emsp;是的。每个设备都有独一无二的 Device UUID, 用户可以通过 Device UUID 识别设备。
