@@ -70,3 +70,31 @@ body {counter-reset: h2}
 
 - 乐鑫模组发售前已经过稳定性测试，测试可以支持 80 MHz 频率。
 - 根据稳定性测试数据，80 MHz 的频率不会影响使用寿命和稳定性。
+
+---
+
+## 使用 esp-idf 按汇编操作寄存器，是否涉及到调用不可编辑的库文件？
+
+- 如果单纯使用读写寄存器指令或者汇编指令，不存在调用库文件的问题。
+- 如果调用 esp-idf 预制的函数，则可能会遇到调用 lib 函数的情况。
+- 不推荐在 ESP32 中使用汇编操作，如果部分场景想要提高速度，可以读写寄存器来完成部分操作。
+
+---
+
+## 使用 ESP32-D0WD 芯片是否可以存储用户程序？
+
+- 不可以，用户程序必须使用外挂 Flash 进行存储，片上 ROM 不能存储用户程序。
+- ROM 内存放的程序为芯片一级 bootloader ，为了保护出厂程序不被破坏，该区域为只读存储。
+
+---
+
+## ESP32 进入低功耗模式时， PSRAM 中的数据会丢失吗？
+
+- Modem-sleep/Light-sleep 模式时，PSRAM 中的数据不会丢失。
+- Deep-sleep 模式时，CPU 和大部分外设都会掉电，PSRAM 的数据会丢失。
+
+---
+
+## 请问 ESP32 CPU 系统时间是否由系统滴答时钟生成？精度如何？
+
+CPU 系统时间是由 esp_timer 内部的 64 位硬件定时器 CONFIG_ESP_TIMER_IMPL 产生的，是微秒级的时间分辨率。参见[说明](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/esp_timer.html?highlight=esp_timer_get_time#high-resolution-timer)。

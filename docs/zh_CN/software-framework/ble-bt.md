@@ -115,3 +115,41 @@ body {counter-reset: h2}
 ## ESP32 的 SPP 性能如何？
 
 - 使用两块 ESP32 开发板对跑 SPP，单向吞吐量量可达 1900 Kbps，约 235 KB/s，已接近规范里的理论值。
+
+---
+
+## ESP32 的 BLE 传输速率最大为多少？
+
+- 屏蔽箱测试 BLE 传输速率可以达到 800 kbits/s。
+
+---
+
+## ESP32 BLE 如何进入 light sleep 模式呢？
+
+硬件上需要外加 32Khz 的外部晶振，否则 light sleep 模式不会生效。
+
+软件上（SDK4.0 以及以上版本才会支持）在 menuconfig 中需要使能以下配置：
+
+- Enable Power Management : \
+menuconfig ---> Component config ---> Power management --->[*] Support for power management
+
+- Enable Tickless Idle : \
+menuconfig ---> Component config ---> FreeRTOS --->[*] Tickless idle support (3) Minimum number of ticks to enter sleep mode for (NEW) \
+Note : Tickless idle needs to be enabled to allow automatic light sleep . FreeRTOS will enter light sleep if no tasks need to run
+for 3 (by default) ticks , that is 30ms if tick rate is 100Hz . Configure the FreeRTOS tick rate to be higher if you want to allow
+shorter duration light sleep , for example :
+menuconfig ---> Component config ---> FreeRTOS ->(1000) Tick rate (Hz)
+
+- Configure external 32.768Hz crystal as RTC clock source : \
+menuconfig ---> Component config ---> ESP32-specific --->RTC clock source (External 32kHz crystal)[*] Additional current for external 32kHz crystal \
+Note : that the " additional current " option is a workaround for a hardware issue on ESP32 that the crystal can fail in oscillating . Please enable this option when you use external 32kHz crystal . This hardware issue will be resolved in the next ECO chip .
+
+- Enable Bluetooth modem sleep with external 32.768kHz crystal as low power clock : \
+menuconfig ---> Component config ---> Bluetooth ---> Bluetooth controller ---> MODEM SLEEP Options --->[*] Bluetooth modem sleep
+
+---
+
+## 选择 ESP32 芯片实现蓝牙配网的方式，是否有文档可以提供参考？
+
+- 蓝牙配网说明可参考[ESP32 blufi](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/blufi.html?highlight=blufi)。
+- 蓝牙配网示例可以参考[blufi](https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/blufi)
