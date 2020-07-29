@@ -23,6 +23,13 @@ body {counter-reset: h2}
 
 ---
 
+
+## ESP32 的 Wi-Fi Mesh 能否在子设备搜索不到路由器信号时完成组网？
+
+ESP32 的 Wi-Fi Mesh 能实现：在拥有配置相同 Wi-Fi 的 SSID ，子设备没有搜索到 Wi-Fi 时，子设备也可以连接到根节点。
+
+---
+
 ## ESP32 Wi-Fi Mesh 是否可自动修复网络？
 
 ESP32 Wi-Fi Mesh 可自动修复网络，Wi-Fi Mesh 有检测网络断线的机制。
