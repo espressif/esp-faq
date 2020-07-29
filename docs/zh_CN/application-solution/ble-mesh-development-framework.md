@@ -217,6 +217,12 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## BLE Mesh log `Model not bound to AppKey 0x0000` 代表什么？
+
+&emsp;&emsp;当节点发送带有模型的消息且该模型尚未绑定到索引为 0x000 的应用密钥时，会出现该报错。
+
+---
+
 ## BLE Mesh log `Busy sending message to DST xxxx` 代表什么？
 
 &emsp;&emsp;该错误表示节点的客户端模型已将消息发送给目标节点，并且正在等待响应，用户无法将消息发送到单播地址相同的同一节点。接收到相应的响应或计时器到时后，可以发送另一条消息。
