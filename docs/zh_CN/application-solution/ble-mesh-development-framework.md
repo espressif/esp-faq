@@ -10,6 +10,11 @@ body {counter-reset: h2}
 
 ---
 
+## 被 Provisioner 配网到 ESP-BLE-MESH 网络中的第一个节点的单播地址是不是固定的？
+
+&emsp;&emsp;`esp_ble_mesh_prov_t` 中 `prov_start_address` 的值用于设置 Provisioner 配网未配网设备的起始地址，即其首先配网的节点的单播地址。单播地址只能在初始化期间设置一次，此后不能修改。
+
+---
 
 ## 手机 App 首先配置的节点的单播地址是不是固定的？
 
