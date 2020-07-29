@@ -223,6 +223,12 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## 为什么 APP 中显示的节点地址的数量比现有的节点地址更多？
+
+&emsp;&emsp;每完成一次快速配网后、开始新一次快速配网前，APP 会存有上次配网的数据，因此 APP 中显示的节点地址的数量比现有的节点地址更多。
+
+---
+
 ## 在 EspBleMesh App 中输入的 ** count ** 值有什么用途？
 
 &emsp;&emsp;此 count 值提供给 App 配置的代理节点，以决定何时提前开始 Proxy 广播信息。
