@@ -217,6 +217,12 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## BLE Mesh log `Busy sending message to DST xxxx` 代表什么？
+
+&emsp;&emsp;该错误表示节点的客户端模型已将消息发送给目标节点，并且正在等待响应，用户无法将消息发送到单播地址相同的同一节点。接收到相应的响应或计时器到时后，可以发送另一条消息。
+
+---
+
 ## 为什么会出现 EspBleMesh App 在快速配网期间长时间等待的情况？
 
 &emsp;&emsp;快速配网期间，代理节点在配置完一个节点后会断开与 APP 的连接，待所有节点配网完成后再与 APP 重新建立连接。
