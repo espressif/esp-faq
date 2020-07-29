@@ -217,6 +217,12 @@ esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_
 
 ---
 
+## BLE Mesh log `Duplicate found in Network Message Cache` 代表什么？
+
+&emsp;&emsp;当节点收到一条消息时，它会把该消息与网络缓存中存储的消息进行比较。如果在缓存中找到相同的消息，这意味着之前已接受过该消息，则该消息会被丢弃。
+
+---
+
 ## BLE Mesh log `Incomplete timer expired` 代表什么？
 
 &emsp;&emsp;当节点在一定时间段（比如 10 秒）内未收到分段消息的所有段时，则 Incomplete 计时器到时，并且出现该警告。
