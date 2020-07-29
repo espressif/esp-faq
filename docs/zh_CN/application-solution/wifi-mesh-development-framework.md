@@ -23,6 +23,13 @@ body {counter-reset: h2}
 
 ---
 
+## ESP32 支持多少设备进行 Wi-Fi Mesh 组网？
+
+1. ESP32 支持 1000 个设备进行 Wi-Fi Mesh 组网。
+2. 若要稳定连接大量设备，建议在每个 Wi-Fi Mesh 网络下，组网设备不超过 512 台设备。
+
+---
+
 ## ESP32 的 Wi-Fi Mesh Router 模式与 No Router 模式有什么区别？
 
 - WiFi Mesh 网络的 Router 模式是根据路由器进行组网，根节点连路由器。
