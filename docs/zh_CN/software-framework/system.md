@@ -87,6 +87,13 @@ body {counter-reset: h2}
 
 ---
 
+## 使用 esp-idf ,如何使能 ESP32 的双核模式？
+
+esp-idf 一般情况下默认配置的是双核模式，您可以在 menuconfig 中进行单双核的修改。
+  - menuconfig -> Component config -> FreeRTOS -> Run FreeRTOS only on first core 使能即为单核，未使能默认双核。
+
+---
+
 ## 使用 ESP32-D0WD 芯片是否可以存储用户程序？
 
 - 不可以，用户程序必须使用外挂 Flash 进行存储，片上 ROM 不能存储用户程序。
