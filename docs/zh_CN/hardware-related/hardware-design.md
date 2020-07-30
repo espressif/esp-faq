@@ -94,3 +94,9 @@ ESP8285 作为 Wi-Fi 模块时，需要连接外部晶振，芯片内部无晶�
 ## ESP32 是否可以用 PWM 或 DAC 来播放音乐?
 
 ESP32 可以用 PWM 或 DAC 来播放音乐，此功能有进行过播放测试，推荐用于提示音播放，示例工程可以通过邮件咨询获取。
+
+---
+
+## 为什么 ESP32 模组和 ESP32 芯片的建议工作电压范围不一样？
+
+因为模组要考虑 flash 的电压，所以 ESP32 模组的建议工作电压会更高一些。更多信息可对比查看模组和芯片的[技术规格书](https://www.espressif.com/zh-hans/support/documents/technical-documents)。
