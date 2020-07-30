@@ -72,6 +72,12 @@ body {counter-reset: h2}
 
 ---
 
+## 使用 ESP32-S2 芯片，用了 DVP camera 接口后还能接入语音吗？
+
+ESP32-S2 的 LCD 接口、DVP camera 接口和 I2S 接口共用一套硬件资源，只能支持其中一个。
+
+---
+
 ## 使用 ESP32 模块，是否用 GPIO0、GPIO4 作为 I2C 信号接口 ？
 
 GPIO0 做 I2C 信号接口需要加上拉，烧写的时候只要保证上电时 GPIO0 能拉低，之后就可以释放了，GPIO0 不需要一直拉低，只有下载的时候需要拉低。
