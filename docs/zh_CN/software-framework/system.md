@@ -87,6 +87,14 @@ body {counter-reset: h2}
 
 ---
 
+## 使用 ESP-IDF 测试程序，如何设置可在单核模组上下载程序？
+
+程序编译时，使用 make menuconfig 指令进入配置界面，进行如下配置，可在单核模组上下载程序；在配置界面中，按键 Y 为启动，N 为关闭。
+
+  Component config  -->  FreeRTOS  -->  Run FreeRTOS only on first core（启动此选项）
+  
+---
+
 ## 使用 esp-idf ,如何使能 ESP32 的双核模式？
 
 esp-idf 一般情况下默认配置的是双核模式，您可以在 menuconfig 中进行单双核的修改。
