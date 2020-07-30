@@ -63,6 +63,15 @@ ESP8266 云端升级参考⽂档为[《ESP8266 云端升级指南》](https://ww
 
 ---
 
+## ESP8266 通过 AT 进行 SSL 连接时是否支持 PSK 认证？
+
+ESP8266_Nonos_SDK 版本的 AT 是不支持的，但 IDF 版本 的 AT 是支持的。
+  - AT [固件下载地址](https://www.espressif.com/zh-hans/support/download/at)
+  - ESP8266_Nonos_SDK 版本的 [AT 指令集](https://www.espressif.com/sites/default/files/documentation/4a-esp8266_at_instruction_set_cn.pdf)
+  - IDF 版本 的 [AT 指令集](https://github.com/espressif/esp-at/blob/master/docs/en/get-started/ESP_AT_Commands_Set.md)
+
+---
+
 ## AT 命令中串口波特率是否可以修改？（默认：115200）
 
 AT 命令串口的波特率是可以修改的。
