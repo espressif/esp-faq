@@ -18,6 +18,13 @@ body {counter-reset: h2}
 
 ---
 
+## 使用 ESP32 模组，如何查看模组的 PSRAM 的大小？
+
+- 需要先在 make menuconfig 中配置开启 PSRAM 功能。
+- PSRAM 的大小可通过 bootloader 的 log 信息或调用 esp_spiram_get_size() 来查看。
+
+---
+
 ## ESP32 外接 PSRAM 后，如何更改 PSRAM 的 clock 来源？
 
 在 menuconfig 中修改。具体位置：menuconfig -> Component config -> ESP32-specific -> SPI RAM config 
