@@ -72,6 +72,12 @@ body {counter-reset: h2}
 
 ---
 
+## ESP32 的外接 Flash 占用了 GPIO6~11 ，这 6 个 IO 是否还能作为 SPI 来使用？
+
+ESP32 的 外接 Flash 占用了 GPIO6~11 ，这 6 个 IO 就不能再作为 SPI 来使用了。
+
+---
+
 ## ESP8285 作为 Wi-Fi 模块时，是否需要连接外部晶振？
 
 ESP8285 作为 Wi-Fi 模块时，需要连接外部晶振，芯片内部无晶振。
