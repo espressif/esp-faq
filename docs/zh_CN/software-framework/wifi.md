@@ -159,6 +159,12 @@ esp_netif_set_dns_info(eth_netif,ESP_NETIF_DNS_MAIN,&dns);
 
 ---
 
+## ESP8266 和 ESP32 作为 softap 模式如何隐藏 SSID ？
+
+[wifi_ap_config_t](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv416wifi_ap_config_t) 结构体中有一个变量 [ssid_hidden](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=hidden#_CPPv4N18wifi_scan_config_t11show_hiddenE) , 可以设置为隐藏功能。
+
+---
+
 ## [esp_wifi_802.11_tx](https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/wifi/esp_wifi.html?highlight=esp_wifi_802.11_tx#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib) 接口中的 buffer 参数中包括 FCS 吗？
 
 - 不包括， FCS 帧是硬件自动生成的。
