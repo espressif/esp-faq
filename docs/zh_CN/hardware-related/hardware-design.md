@@ -72,6 +72,12 @@ body {counter-reset: h2}
 
 ---
 
+## 使用 ESP32 模块，是否用 GPIO0、GPIO4 作为 I2C 信号接口 ？
+
+GPIO0 做 I2C 信号接口需要加上拉，烧写的时候只要保证上电时 GPIO0 能拉低，之后就可以释放了，GPIO0 不需要一直拉低，只有下载的时候需要拉低。
+
+---
+
 ## ESP32 的外接 Flash 占用了 GPIO6~11 ，这 6 个 IO 是否还能作为 SPI 来使用？
 
 ESP32 的 外接 Flash 占用了 GPIO6~11 ，这 6 个 IO 就不能再作为 SPI 来使用了。
