@@ -36,3 +36,14 @@ body {counter-reset: h2}
 不建议这么使用。
   - 虽然硬件上是可以连接的（通过 spi 与 TF 卡通信），但是因为 ESP8266 的资源有限，根据不同的应用场景，很可能会出现内存不足等情况。所以不建议 ESP8266 搭配 TF 卡使用。
   - 如果您只需要单 Wi-Fi 模组，并且要连接 TF 卡，建议使用[ESP32-S2](https://www.espressif.com/sites/default/files/documentation/esp32-s2_datasheet_cn.pdf)芯片。
+
+---
+## 若每分钟保存或者更新数据到 flash 中，ESP32 设备的 NVS 能否满足该需求？
+
+- 根据 [NVS  说明](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/storage/nvs_flash.html)， NVS 库在其操作中主要使用两个实体：页面和条目。逻辑页面对应 flash 的一个物理扇区，假设 flash 扇区大小为 4096 字节，每个页面可容纳 126 个条目(每个条目大小为 32 字节)，页面的其余部分用于页头部（32字节）和条目状态位图（32字节）。
+- 每个扇区的典型 flash 寿命为 100k 个擦除周期。
+- 假设期待设备的运行时间为 10 年，每分钟写入 flash 的数据大小为 4 字节，并且不使用 flash 加密：
+  - 计算 flash 写操作的次数 60×24×365×10=5256000，在 NVS 中，会导致不超过 42k 个擦除周期(5256000/126)， 42k < 100k，因此，即使在没有多扇区影响的情况下也可以支持。
+  - 在实际使用中，分配给 NVS 的大小一般为多个扇区，NVS 会在多扇区之间分配擦除周期，那么每个扇区的擦除周期的次数必然小于 42k。
+  
+因此，NVS 可以满足该擦写需求。
