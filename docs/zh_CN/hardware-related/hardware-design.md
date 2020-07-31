@@ -72,6 +72,12 @@ body {counter-reset: h2}
 
 ---
 
+## ESP32系列芯片 footprint 提供？
+
+可以参考 [模组设计](https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=%E6%A8%A1%E7%BB%84%E5%8F%82%E8%80%83)，下载芯片对应的模组参考设计，里面有管脚封装设计。
+
+---
+
 ## 使用 ESP32-S2 芯片，用了 DVP camera 接口后还能接入语音吗？
 
 ESP32-S2 的 LCD 接口、DVP camera 接口和 I2S 接口共用一套硬件资源，只能支持其中一个。
