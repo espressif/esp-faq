@@ -130,3 +130,9 @@ AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/
 1. 设备端需要按照 BLE server 透传模式去设置，具体 BLE 透传模式流程参考[《ESP32 AT 指令集与使用示例》](https://www.espressif.com/sites/default/files/documentation/esp32_at_instruction_set_and_examples_cn.pdf)。
 
 2. 手机端需要下载 BLE 调试助手，例如 nRF Connect APP（安卓）和 lightblue（IOS），然后打开 SCAN 去寻找设备端的 MAC 地址，最后就可以发送命令了。
+
+---
+
+## ESP8266 使用 ESP-AT 编译后的固件，需要 OTA 功能，芯片 Flash 要求多大？
+
+新版本 ESP-AT 固件，如果需要 OTA 功能，至少需要 2MB（16M bit）的 Flash，如果不需要 OTA 功能，至少需要 1MB（8M bit） 的 Flash 。
