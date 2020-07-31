@@ -39,3 +39,12 @@ body {counter-reset: h2}
 - 模组使能 flash encrypted 后，模组开启加密功能后将不支持明文固件烧录。
 - 可以通过 espefuse.py 脚本将加密关闭后再次烧录，或者已知密钥烧录密文。
 - 注意: flash encrypted 加密开关存在次数，仅可重复 3 次。
+
+---
+
+ESP32 打开 flash 加密和 secure boot 后，如何关闭？
+
+- 如果您使用的是 one-time flash（Release） 模式，那么 flash 加密和 secure boot 都是不能关闭的。
+- 如果您使用的是 reflashable （Development(NOT SECURE)）模式，那么
+  - [flash 加密是可以关闭的](https://docs.espressif.com/projects/esp-idf/en/release-v4.1/security/flash-encryption.html#disabling-flash-encryption);
+  - secure boot 不能关闭。
