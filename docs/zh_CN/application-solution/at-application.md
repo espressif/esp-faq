@@ -63,6 +63,13 @@ ESP8266 云端升级参考⽂档为[《ESP8266 云端升级指南》](https://ww
 
 ---
 
+## ESP32 模组默认 AT 固件是否支持 BT 功能？
+
+- ESP32-WROOM 系列模组 AT 固件默认不带 classic BT AT 指令，如需要 BT 指令，需要自行基于 [esp-at](https://github.com/espressif/esp-at/) 工程编译 AT 固件，可通过 menuconfig 菜单设置，Component config -> AT -> [*] AT bt command support
+- ESP32-WROVER 系列模组 AT 固件默认带 classic BT AT 指令。
+
+---
+
 ## ESP8266 通过 AT 进行 SSL 连接时是否支持 PSK 认证？
 
 ESP8266_Nonos_SDK 版本的 AT 是不支持的，但 IDF 版本 的 AT 是支持的。
