@@ -69,6 +69,12 @@ body {counter-reset: h2}
 
 ---
 
+## ESP32-S2 是否可以使用 JTAG 进行下载调试？
+
+可以。详情请参考 [ESP32-S2 JATG 调试](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/jtag-debugging/)
+
+---
+
 ## 如何在不更改 menuconfig 输出级别的情况下改变 log 级别？
 
 &emsp;&emsp;无需使用 menuconfig，可以通过 API `esp_log_level_set()` 修改 log 的输出级别。
