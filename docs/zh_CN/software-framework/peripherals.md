@@ -76,3 +76,15 @@ ESP32 支持 A2DP 发送音频，可参考例程 [esp-idf/examples/bluetooth/blu
 ## ESP8266 I2C 是软件模拟的吗？
 
 - ESP8266 I2C 是使用 gpio 软件模拟。
+
+---
+
+## 使用 ESP8266-NONOS-V3.0 版本的 SDK，报错如下：
+  ``` shell
+  E:M 536 
+  E:M 1528 
+  ```
+  
+- 是什么原因？
+
+导致 E:M 开头的 LOG  是内存不足的原因。
