@@ -159,3 +159,13 @@ menuconfig ---> Component config ---> Bluetooth ---> Bluetooth controller ---> M
 ## ESP32 经典蓝牙 SPP 的传输速率能达到多少？
 
 在开放环境下，双向同时收发，实测可达到 1400+ ～ 1590 kbit/s（此数据仅作为参考，实际情况建议客户根据应用环境实测）。
+
+---
+
+## ESP32 是否有修复 [Sweyntooth BLE vulnerability](https://asset-group.github.io/disclosures/sweyntooth/) 呢？
+
+ESP32 已修复。
+- 对于 "Invalid Channel Map"问题，请参考提交：
+https://github.com/espressif/esp-idf/commit/49d69bb235b7a5e558d24a101f77533e97992377
+- 对于 "HCI Desync" 问题，它仅影响 NimBLE 主机，不影响 Bluedroid 主机，请参考提交：
+https://github.com/espressif/esp-idf/commit/4cd6f094278e81b436a3f71fc11b80ebed25cf98
