@@ -39,3 +39,12 @@ body {counter-reset: h2}
 ## ESP32 如何对接天猫精灵，是否有相应的资料？
 
 ESP32 对接天猫精灵可以使用 esp-aliyun SDK，相关文档可以[参阅](https://github.com/espressif/esp-aliyun)。
+
+---
+
+## esp-aliyun 与 esp-ali-smartliving 的区别 ？
+
+- esp-aliyun 对接的是 "物联网平台"
+- esp-ali-smartliving 对接 "生活物联网平台"
+- 阿里以将两个平台在云端互通，所使用上功能相似度较高,并可相互替代。
+- 两者区别可以参见 [生活物联网平台与物联网平台的区别](https://help.aliyun.com/document_detail/124922.html?spm=5176.10695662.1996646101.searchclickresult.6a782cfeLpWe7Z)
