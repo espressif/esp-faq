@@ -88,3 +88,10 @@ ESP32 支持 A2DP 发送音频，可参考例程 [esp-idf/examples/bluetooth/blu
 - 是什么原因？
 
 导致 E:M 开头的 LOG  是内存不足的原因。
+
+---
+
+## ESP32 GPIO 管脚输出 PWM 存在限制吗？
+
+- ESP32 PWM 可通过 IO Matrix 切换至任意 GPIO 输出。
+- 但是由于 GPIO34 ~ GPIO39 仅为输入模式，故不支持做 PWM 输出。
