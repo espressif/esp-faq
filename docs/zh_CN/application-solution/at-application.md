@@ -146,6 +146,13 @@ AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/
 
 ---
 
+## 如何获取模组或开发板中默认的固件版本信息？
+
+- 不同型号的模组或者开发板出厂固件不同，可以与采购对接商务咨询。
+- 如果模组出厂确认为 AT 固件，可以使用指令 AT+GMR 查看版本信息。
+
+---
+
 ## AT 命令连接阿里云以及腾讯云示例？
 - 下载 [AT 固件](https://docs.espressif.com/projects/esp-at/en/latest/AT_Binary_Lists/index.html) 并完成烧录。
 - [阿里云应用参考示例](https://blog.csdn.net/espressif/article/details/107367189)
