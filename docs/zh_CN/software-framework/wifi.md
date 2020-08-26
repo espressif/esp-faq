@@ -183,6 +183,13 @@ ESP32 RF 功率为 20 dB，即模组最大值。
 
 ---
 
+## 使用 ESP8266 连接 AP ,若测试环境下有多个相同 SSID 的 AP，SDK 会连接哪个 AP ？
+
+- 如果启用了快速连接功能，会连接先获取到的 AP。如果没有启用快速连接功能，那么会连接 RSSI 最好的那个 AP 。
+- 可根据 wifi_scan_method_t 查看是否启用快速连接功能。
+
+---
+
 ## ESP32 进行 Wi-Fi 连接时，如何通过错误码判断失败原因是密码错误？
 
 - esp-idf V4.0 及以上版本可参考如下代码获取 Wi-Fi 连接失败的原因：
@@ -196,5 +203,3 @@ ESP32 RF 功率为 20 dB，即模组最大值。
   ```
 - 当回调函数接收到 `WIFI_EVENT_STA_DISCONNECTED` 事件时，可以通过结构体 [wifi_event_sta_disconnected_t](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429wifi_event_sta_disconnected_t) 的变量 `reason` 获取到失败原因。
 - 当 `reason` 的值为 `WIFI_REASON_4WAY_HANDSHAKE_TIMEOUT(15)` 时，可以认为失败原因为密码错误。
-
-
