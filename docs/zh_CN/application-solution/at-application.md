@@ -146,6 +146,13 @@ AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/
 
 ---
 
+## ESP32 如何在 AT 中开启 blufi 功能？
+
+- 默认的 AT 固件不支持 blufi 功能，如果要使用 blufi 功能，需要编译 [esp-at](https://github.com/espressif/esp-at) 代码生成固件。
+- 编译时需要在 menuconfig 中开启 blufi 的功能：make menuconfig--->Component config--->AT--->[*]AT blufi command support。
+
+---
+
 ## 如何获取模组或开发板中默认的固件版本信息？
 
 - 不同型号的模组或者开发板出厂固件不同，可以与采购对接商务咨询。
