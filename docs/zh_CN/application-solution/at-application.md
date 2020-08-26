@@ -143,3 +143,10 @@ AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/
 ## ESP8266 使用 ESP-AT 编译后的固件，需要 OTA 功能，芯片 Flash 要求多大？
 
 新版本 ESP-AT 固件，如果需要 OTA 功能，至少需要 2MB（16M bit）的 Flash，如果不需要 OTA 功能，至少需要 1MB（8M bit） 的 Flash 。
+
+---
+
+## AT 命令连接阿里云以及腾讯云示例？
+- 下载 [AT 固件](https://docs.espressif.com/projects/esp-at/en/latest/AT_Binary_Lists/index.html) 并完成烧录。
+- [阿里云应用参考示例](https://blog.csdn.net/espressif/article/details/107367189)
+- [腾讯云应用参考示例](https://blog.csdn.net/espressif/article/details/104714464)
