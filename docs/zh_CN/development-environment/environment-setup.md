@@ -30,3 +30,14 @@ body {counter-reset: h2}
 ## Windows 下 使用 ESP-IDF Tools 2.3 工具安装 master 版本的 esp-idf 出现错误：Installation has failed with exit code 2 是什么原因？
 
 此报错跟网络环境有关，该网路环境下无法流畅的下载 github 仓库，导致电脑 SDK 下载失败 。
+
+---
+
+## windows 下使用 [esp-idf-tools-setup-2.3.exe ](link:https://dl.espressif.com/dl/esp-idf-tools-setup-2.3.exe) 搭建环境，make menuconfig 出现如下错误： 
+
+``` shell
+-- Warning: Did not find file Compiler/-ASM Configure
+-- Configuring incomplete , erros occurred !
+```
+
+- 出现此错误的原因是没有因为未找到编译工程，可以切换目录到 esp-idf/get-started/hello_world 示例中进行测试验证。
