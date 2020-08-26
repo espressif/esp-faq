@@ -162,6 +162,13 @@ menuconfig ---> Component config ---> Bluetooth ---> Bluetooth controller ---> M
 
 ---
 
+## ESP32 支持多少蓝牙客户端连接？
+
+- BLE Server 最大支持 9 个客户端连接，应用中需查看配置参数 ble_max_conn。
+- 测试稳定连接为 3 个客户端。
+
+---
+
 ## ESP32 如何获取 蓝牙设备的 MAC 地址？
 
 - 可调用 [esp_bt_dev_get_address(void);](https://github.com/espressif/esp-idf/blob/f1b8723996d299f40d28a34c458cf55a374384e1/components/bt/host/bluedroid/api/include/api/esp_bt_device.h#L33) API 来获取蓝牙配置的 MAC 地址。
