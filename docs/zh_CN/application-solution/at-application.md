@@ -146,6 +146,13 @@ AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/
 
 ---
 
+## AT 固件中 TCP 发送窗口大小是否可以修改？
+
+- TCP 发送窗口当前无法通过命令修改，需要编译 [esp-at](https://github.com/espressif/esp-at) 代码生成固件。
+- 可以重新配置 menuconfig 参数，Component config -> LWIP / TCP -> Default send buffer size。
+
+---
+
 ## MCU 发送 AT+CIPSEND 后，收到 busy p.. 响应，MCU 需要重新发送数据吗？
 
   - busy p.. 代表上一条命令正在执行, 当前输入无效。
