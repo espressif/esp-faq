@@ -47,3 +47,10 @@ body {counter-reset: h2}
   - 在实际使用中，分配给 NVS 的大小一般为多个扇区，NVS 会在多扇区之间分配擦除周期，那么每个扇区的擦除周期的次数必然小于 42k。
   
 因此，NVS 可以满足该擦写需求。
+
+---
+
+## ESP32 是否可以使用 LittleFs 文件系统？
+
+- 目前 esp-idf 未包含 LittleFs，存在第三方移植组件 [esp_littlefs](https://github.com/joltwallet/esp_littlefs)，可直接在 esp-idf 中使用。
+- 匹配 littlefs 文件系统镜像的工具 [mklittlefs](https://github.com/earlephilhower/mklittlefs)
