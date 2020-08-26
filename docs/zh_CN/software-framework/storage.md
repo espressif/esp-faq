@@ -38,6 +38,7 @@ body {counter-reset: h2}
   - 如果您只需要单 Wi-Fi 模组，并且要连接 TF 卡，建议使用[ESP32-S2](https://www.espressif.com/sites/default/files/documentation/esp32-s2_datasheet_cn.pdf)芯片。
 
 ---
+
 ## 若每分钟保存或者更新数据到 flash 中，ESP32 设备的 NVS 能否满足该需求？
 
 - 根据 [NVS  说明](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/storage/nvs_flash.html)， NVS 库在其操作中主要使用两个实体：页面和条目。逻辑页面对应 flash 的一个物理扇区，假设 flash 扇区大小为 4096 字节，每个页面可容纳 126 个条目(每个条目大小为 32 字节)，页面的其余部分用于页头部（32字节）和条目状态位图（32字节）。
@@ -47,6 +48,13 @@ body {counter-reset: h2}
   - 在实际使用中，分配给 NVS 的大小一般为多个扇区，NVS 会在多扇区之间分配擦除周期，那么每个扇区的擦除周期的次数必然小于 42k。
   
 因此，NVS 可以满足该擦写需求。
+
+---
+
+##  ESP8266 的模组，有哪些扇区可以自主使用？
+
+- SDK rel3.0 之前的版本，除 bootloader 与 app bin 外还会在设置的 flash 大小的尾部会保留扇区如下：1个存放系统信息，1个存储 ota 信息，1个存放 RF 校准信息。
+- SDK rel3.0 及其以后的版本使用 partition_table 来管理flash，除改文件自身与 bootloader 外，其余 bin 文件均在 partition_table 标注。
 
 ---
 
