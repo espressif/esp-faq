@@ -146,6 +146,14 @@ AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/
 
 ---
 
+## esp-at 固件是否支持 MQTT？
+
+- ESP8266 芯片在 v2.1.0.0-rc1 版本后支持 MQTT。
+- ESP32 系列芯片在 v2.0.0.0 版本后支持 MQTT。
+- 详情可参考[release notes](https://github.com/espressif/esp-at/releases)
+
+---
+
 ## AT 固件中 TCP 发送窗口大小是否可以修改？
 
 - TCP 发送窗口当前无法通过命令修改，需要编译 [esp-at](https://github.com/espressif/esp-at) 代码生成固件。
