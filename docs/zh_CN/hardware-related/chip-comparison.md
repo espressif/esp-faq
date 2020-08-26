@@ -30,3 +30,10 @@ body {counter-reset: h2}
 ## ESP32 的 GPIO34 ~ GPIO39 管脚是否只能设置为输入模式？
 
 &emsp;ESP32 的 GPIO34 ~ GPIO39 只能设置为输入模式，没有软件上拉或下拉功能，不能设置为输出模式，参见[说明](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/gpio.html?highlight=gpio34#gpio-rtc-gpio)。
+
+---
+
+## ESP32 的 VDD3P3_RTC 是否支持系统掉电时使用电池供电 ？
+
+- ESP32 内部 RTC 域不可以独立工作，需要主 CPU 参与配置，当单独使用纽扣电池供电，依然无法抵御突然掉电的情况。
+- 如果需要系统掉电时时钟信息保存，可以添加外部 RTC 时钟芯片。
