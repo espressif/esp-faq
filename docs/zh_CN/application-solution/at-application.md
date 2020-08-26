@@ -146,6 +146,21 @@ AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/
 
 ---
 
+## 如何使用 AT 命令启用 MDNS 功能？
+
+- 可以使用 `AT+MDNS` 指令来开启 MDNS 功能。
+  ``` shell
+    AT+CWMODE=1                              //将设备端设为 station 模式
+
+    AT+CWJAP="ssid","password"               //设备要连接的 AP 账户 、密码
+
+    AT+MDNS=1,"esp","_pos._tcp.",3030        //启用 MDNS 
+
+    AT+MDNS=0   //关闭 MDNS 
+  ```
+
+---
+
 ## esp-at 固件是否支持 MQTT？
 
 - ESP8266 芯片在 v2.1.0.0-rc1 版本后支持 MQTT。
