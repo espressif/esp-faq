@@ -180,3 +180,21 @@ esp_netif_set_dns_info(eth_netif,ESP_NETIF_DNS_MAIN,&dns);
 ## ESP32 Wi-Fi RF 功率最高值是多少？
 
 ESP32 RF 功率为 20 dB，即模组最大值。
+
+---
+
+## ESP32 进行 Wi-Fi 连接时，如何通过错误码判断失败原因是密码错误？
+
+- esp-idf V4.0 及以上版本可参考如下代码获取 Wi-Fi 连接失败的原因：
+  ```c
+  if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {
+        wifi_event_sta_disconnected_t *sta_disconnect_evt = (wifi_event_sta_disconnected_t*)event_data;
+        ESP_LOGI(TAG, "wifi disconnect reason:%d", sta_disconnect_evt->reason);
+        esp_wifi_connect();
+        xEventGroupClearBits(s_wifi_event_group, CONNECTED_BIT);
+    }
+  ```
+- 当回调函数接收到 `WIFI_EVENT_STA_DISCONNECTED` 事件时，可以通过结构体 [wifi_event_sta_disconnected_t](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429wifi_event_sta_disconnected_t) 的变量 `reason` 获取到失败原因。
+- 当 `reason` 的值为 `WIFI_REASON_4WAY_HANDSHAKE_TIMEOUT(15)` 时，可以认为失败原因为密码错误。
+
+
