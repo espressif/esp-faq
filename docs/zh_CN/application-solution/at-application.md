@@ -146,6 +146,13 @@ AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/
 
 ---
 
+## MCU 发送 AT+CIPSEND 后，收到 busy p.. 响应，MCU 需要重新发送数据吗？
+
+  - busy p.. 代表上一条命令正在执行, 当前输入无效。
+  - 建议等 AT 上一条命令响应后， MCU 再重新发送新命令。
+
+---
+
 ## Wi-Fi-Mesh 是否支持 AT 指令？
 
 - Wi-Fi-Mesh 当前不支持 AT 指令。
