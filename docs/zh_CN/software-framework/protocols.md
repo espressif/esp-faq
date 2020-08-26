@@ -70,3 +70,14 @@ body {counter-reset: h2}
 1. 目前 ULP CPU 指令列表以及说明[参见](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ulp_instruction_set.html#add-add-to-register)。
 
 2. 返回指令通常使用一个通用寄存器备份 PC 地址，用于后续跳回，由于目前 ULP 只有 4 个通用寄存器，所以需要合理使用。
+
+---
+
+## ESP8266 RTOS SDK rel3.2 sntp 校准后误差会逐渐变大，如何解决？
+
+- 原因是 8266 系统定时器有误差，采用软件定时器，自身存在误差较大。
+- 可通过以下几种方法改善：
+  - releaseV3.2 分支可以通过创建 task 定时重新从服务器同步时间（推荐 300s）。
+  - releaseV3.3 与 master 分支的系统时钟代码有进行重构，目前测试误差较小，并且也可以定时同步服务器时间。
+  - master 分支继承了 releaseV3.3 上的代码重构，除此之外，可通过 menuconfig 配置 sntp 同步间隔，路径如下：Component config > LWIP > SNTP -> Request interval to update time (ms)。
+ 
