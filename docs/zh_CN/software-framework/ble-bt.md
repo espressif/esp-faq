@@ -162,6 +162,13 @@ menuconfig ---> Component config ---> Bluetooth ---> Bluetooth controller ---> M
 
 ---
 
+## ESP32 如何获取 蓝牙设备的 MAC 地址？
+
+- 可调用 [esp_bt_dev_get_address(void);](https://github.com/espressif/esp-idf/blob/f1b8723996d299f40d28a34c458cf55a374384e1/components/bt/host/bluedroid/api/include/api/esp_bt_device.h#L33) API 来获取蓝牙配置的 MAC 地址。
+- 也可以调用 [esp_err_t esp_read_mac(uint8_t* mac, esp_mac_type_t type);](https://github.com/espressif/esp-idf/blob/6c17e3a64c02eff3a4f726ce4b7248ce11810833/components/esp_system/include/esp_system.h#L233) API 获取系统预设的分类 MAC 地址。
+
+---
+
 ## ESP32 是否有修复 [Sweyntooth BLE vulnerability](https://asset-group.github.io/disclosures/sweyntooth/) 呢？
 
 ESP32 已修复。
