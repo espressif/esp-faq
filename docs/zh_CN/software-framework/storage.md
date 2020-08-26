@@ -50,6 +50,13 @@ body {counter-reset: h2}
 
 ---
 
+## 意外的断电导致 FATFS 文件系统损坏如何改善？
+
+- 因为 FATFS 设计不支持 write transactions，因此在擦写时意外断电会导致分区错误，并且无法通过简单修改 FATFS 来修复这个问题。
+- 目前建议：可以通过创建两个相同的 FATFS 分区进行双备份来从应用层避免该问题，也可以选择使用具有更高安全性的文件系统，如：[LittleFS](https://github.com/joltwallet/esp_littlefs) , [SafeFAT](https://www.hcc-embedded.com/safefat)(收费)
+
+---
+
 ## 如何制作并烧录一个 FATFS 文件系统的镜像？
 
 - esp-idf 中未提供相关工具，需要借助第三方工具，完整示例过程如下：
