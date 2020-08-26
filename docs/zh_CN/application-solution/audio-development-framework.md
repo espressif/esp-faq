@@ -15,3 +15,11 @@ body {counter-reset: h2}
 - 从软件层面来讲， AEC (Acoustic Echo Cancelation) 对系统性能要求较高，而当前芯片性能无法满足，不支持通过软件实时 AEC。因此 VOIP 目前没有 AEC 的软件解决方案。
 
 - 建议使用支持 AEC 的 DSP 芯片来消除回音。
+
+---
+
+## 乐鑫官网给出的网络电话例程是否支持 RTP？
+
+- 支持。
+  - 现在我们用的网络电话协议是 [VoIP](https://www.espressif.com/zh-hans/news/ESP32_VoIP)，媒体协议是RTP。
+  - 可使用 [Espressif 官方例程](https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/voip)
