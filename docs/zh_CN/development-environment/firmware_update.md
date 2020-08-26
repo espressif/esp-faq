@@ -26,3 +26,9 @@ body {counter-reset: h2}
 | 串口工具 | 3V3  | GND  | RXD  | TXD  | DTR  | RTS  |
 
 &emsp;注：ESP8266 模组需要额外将 IO15 接地。
+
+---
+
+## ESP32 是否支持使用 JTAG 管脚直接烧写程序？
+
+- ESP32 支持使用 JTAG 管脚直接烧写程序，参考文档 [JATG 调试](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug)。
