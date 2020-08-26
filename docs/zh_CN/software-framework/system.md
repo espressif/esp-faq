@@ -136,6 +136,13 @@ CPU 系统时间是由 esp_timer 内部的 64 位硬件定时器 CONFIG_ESP_TIME
 
 ---
 
+## esp-idf 是否可以配置 time_t 为 64 bit ? （现在是 32 bit）
+
+- 当前暂时不支持，预计在 release/v4.2 或更高版本种支持。
+- 如果配置支持 time_t 64 bit 自定义工具链，可以使能 make menuconfig 中 SDK tool configuration -> SDK_TOOLCHAIN_SUPPORTS_TIME_WIDE_64_BITS 。
+
+---
+
 ## 固件如何区分主芯片是 ESP8285 还是 ESP8266？
 
 - 通常使用外部工具 [esptool](https://github.com/espressif/esptool) 来读取芯片类型。
