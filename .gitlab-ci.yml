@@ -4,7 +4,7 @@ stages:
 
 build_docs:
     stage: build
-    image: $CI_SPHINX_DOCKER:latest
+    image: $CI_SPHINX_DOCKER
     tags:
         - build_docs
     artifacts:
@@ -36,7 +36,7 @@ push_master_to_github:
     - master
     - /^release\/v/
 #  when: on_success
-  image: $CI_DOCKER_REGISTRY/esp32-ci-env
+  image: $CI_DEPLOY_DOCKER
   variables:
     GIT_STRATEGY: clone
     GITHUB_PUSH_REFS: refs/remotes/origin/release refs/remotes/origin/master
