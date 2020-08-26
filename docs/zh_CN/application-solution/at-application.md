@@ -146,6 +146,12 @@ AT 指令唤醒 light-sleep [参见](https://docs.espressif.com/projects/esp-at/
 
 ---
 
+## Wi-Fi-Mesh 是否支持 AT 指令？
+
+- Wi-Fi-Mesh 当前不支持 AT 指令。
+
+---
+
 ## ESP32 如何在 AT 中开启 blufi 功能？
 
 - 默认的 AT 固件不支持 blufi 功能，如果要使用 blufi 功能，需要编译 [esp-at](https://github.com/espressif/esp-at) 代码生成固件。
