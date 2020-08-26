@@ -133,3 +133,9 @@ CPU 系统时间是由 esp_timer 内部的 64 位硬件定时器 CONFIG_ESP_TIME
 ## 使用 ESP32-SOLO-1 模组，esp-idf 如何设置可在单核模组上运行？
 
 使用 menuconfig 指令进入配置界面，Component config  -->  FreeRTOS  -->  Run FreeRTOS only on first core（启动此选项）可在单核模组上运行下载。
+
+---
+
+## ESP32 能否以动态库的方式加载库文件运行?
+
+ESP32 不支持动态库的方式加载库文件，只支持靜态库。
