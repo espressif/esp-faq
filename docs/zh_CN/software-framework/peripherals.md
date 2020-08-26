@@ -91,6 +91,13 @@ ESP32 支持 A2DP 发送音频，可参考例程 [esp-idf/examples/bluetooth/blu
 
 ---
 
+## ESP8266 PWM 频率范围是多少呢？ 
+
+- ESP8266 PWM 是软件模拟的，受定时器限制 CLK 最大为 1M。
+- 推荐频率为 1K，也可以通过降低占空比分辨率的方式提高频率。
+
+---
+
 ## ESP32 GPIO 管脚输出 PWM 存在限制吗？
 
 - ESP32 PWM 可通过 IO Matrix 切换至任意 GPIO 输出。
