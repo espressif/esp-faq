@@ -183,6 +183,33 @@ ESP32 RF 功率为 20 dB，即模组最大值。
 
 ---
 
+## WIFi 模组如何通过 RSSI 数值划分信号强度等级 ？
+
+- 我们没有对 RSSI 信号强度进行等级划分。
+- 如果您需要标准进行划分，可以参考安卓系统的计算方法。
+  ``` java
+    @UnsupportedAppUsage
+        private static final int MIN_RSSI = -100;
+    
+        /** Anything better than or equal to this will show the max bars. */
+        @UnsupportedAppUsage
+        private static final int MAX_RSSI = -55;
+    
+    public static int calculateSignalLevel(int rssi, int numLevels) {
+            if (rssi <= MIN_RSSI) {
+                return 0;
+            } else if (rssi >= MAX_RSSI) {
+                return numLevels - 1;
+            } else {
+                float inputRange = (MAX_RSSI - MIN_RSSI);
+                float outputRange = (numLevels - 1);
+                return (int)((float)(rssi - MIN_RSSI) * outputRange / inputRange);
+            }
+        }
+  ```
+
+---
+
 ## 使用 ESP8266 连接 AP ,若测试环境下有多个相同 SSID 的 AP，SDK 会连接哪个 AP ？
 
 - 如果启用了快速连接功能，会连接先获取到的 AP。如果没有启用快速连接功能，那么会连接 RSSI 最好的那个 AP 。
