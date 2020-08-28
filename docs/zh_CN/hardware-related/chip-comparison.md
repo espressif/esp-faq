@@ -33,6 +33,13 @@ body {counter-reset: h2}
 
 ---
 
+## ESP32 有适配 Linux 平台驱动吗？
+
+- 有适配，请参考 [esp-hosted](https://github.com/espressif/esp-hosted) 示例。
+- 注意： 示例适配 802.3 协议，并不是 802.11 协议。
+
+---
+
 ## 模组上的二维码如何解读 ？
 
 - 例如：0920118CAAB5D2B7B4
