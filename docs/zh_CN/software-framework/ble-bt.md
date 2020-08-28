@@ -162,6 +162,12 @@ menuconfig ---> Component config ---> Bluetooth ---> Bluetooth controller ---> M
 
 ---
 
+## ESP32 的蓝牙是否兼容 Bluetooth ver2.1 + EDR 协议？
+
+- 兼容。ESP32 的蓝牙是向下兼容的，您可以使用官方的 [蓝牙示例](https://github.com/espressif/esp-idf/tree/master/examples/bluetooth) 进行测试。
+
+---
+
 ## ESP32 支持多少蓝牙客户端连接？
 
 - BLE Server 最大支持 9 个客户端连接，应用中需查看配置参数 ble_max_conn。
