@@ -236,3 +236,10 @@ ESP32 AP 模式，最多可配置为支持 10 个设备连接，默认配置为�
   ```
 - 当回调函数接收到 `WIFI_EVENT_STA_DISCONNECTED` 事件时，可以通过结构体 [wifi_event_sta_disconnected_t](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429wifi_event_sta_disconnected_t) 的变量 `reason` 获取到失败原因。
 - 当 `reason` 的值为 `WIFI_REASON_4WAY_HANDSHAKE_TIMEOUT(15)` 时，可以认为失败原因为密码错误。
+
+---
+
+## ESP32 系列芯片每次连接服务器都会执行域名解析吗?
+
+- 在协议栈内，域名会通过 DNS 进行解析，解析后的数据会在时效内进行缓存。
+- 缓存时间基于从 DNS 服务器获取的 TTL 数据，该数据是配置域名时填入的参数，通常为 10 分钟。
