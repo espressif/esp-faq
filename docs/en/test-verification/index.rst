@@ -6,4 +6,4 @@ Test verification
 
    Power consumption verification <power-consumption-verification>
 
-| Espressif 常见问题.
+| Espressif Q & A.
