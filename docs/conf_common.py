@@ -14,9 +14,10 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os
+import sys
+import os
 import re
-from subprocess import Popen, PIPE
+import subprocess
 import shlex
 import recommonmark
 from recommonmark.transform import AutoStructify
@@ -27,10 +28,12 @@ from recommonmark.transform import AutoStructify
 
 from local_util import run_cmd_get_output, copy_if_modified
 
-builddir = '_build'
-builddir = builddir
-if 'BUILDDIR' in os.environ:
+sys.setrecursionlimit(3500)
+
+try:
     builddir = os.environ['BUILDDIR']
+except KeyError:
+    builddir = '_build'
 
 # Call Doxygen to get XML files from the header files
 #print("Calling Doxygen to generate latest XML files")
@@ -79,6 +82,11 @@ extensions = ['link-roles',
               'sphinx_markdown_tables',
               'recommonmark'
              ]
+
+# Enabling this fixes cropping of blockdiag edge labels
+seqdiag_antialias = True
+
+# Breathe extension variables
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -140,7 +148,7 @@ exclude_patterns = ['_build','README.md']
 #show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'vim'
+pygments_style = 'sphinx'
 
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
@@ -182,7 +190,7 @@ html_logo = "../_static/espressif-logo.svg"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['../_static', '_static']
+html_static_path = ['../_static','_static']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -247,6 +255,11 @@ latex_elements = {
 #'preamble': '',
 }
 
+latex_documents = [
+    ('index', 'ReadtheDocsTemplate.tex', u'Read the Docs Template Documentation',
+     u'Read the Docs', 'manual'),
+]
+
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
 #latex_use_parts = False
@@ -300,26 +313,7 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
 
-# -- Use sphinx_rtd_theme for local builds --------------------------------
-# ref. https://github.com/snide/sphinx_rtd_theme#using-this-theme-locally-then-building-on-read-the-docs
-#
-# on_rtd is whether we are on readthedocs.org
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
-
-if not on_rtd:  # only import and set the theme if we're building docs locally
-    import sphinx_rtd_theme
-    html_theme = 'sphinx_rtd_theme'
-    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-
-# otherwise, readthedocs.org uses their theme by default, so no need to specify it
-
 # Override RTD CSS theme to introduce the theme corrections
 # https://github.com/rtfd/sphinx_rtd_theme/pull/432
 def setup(app):
-    app.add_config_value('recommonmark_config', {
-            'enable_math': True,
-            'enable_eval_rst': True,
-            'auto_code_block': True,
-            }, True)
-    app.add_transform(AutoStructify)
-    app.add_css_file('theme_overrides.css')
+    app.add_stylesheet('theme_overrides.css')

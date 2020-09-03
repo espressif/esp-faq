@@ -56,18 +56,3 @@ windows 下使用 `esp-idf-tools-setup-2.3.exe <link:https://dl.espressif.com/dl
 
 -  出现此错误的原因是没有因为未找到编译工程，可以切换目录到
    esp-idf/get-started/hello\_world 示例中进行测试验证。
-
-- CentOS 7::
-
-    sudo yum install git wget flex bison gperf python cmake ninja-build ccache
-
-- Ubuntu and Debian::
-
-    sudo apt-get install git wget flex bison gperf python python-pip python-setuptools cmake ninja-build ccache libffi-dev libssl-dev
-
-- Arch::
-
-    sudo pacman -S --needed gcc git make flex bison gperf python-pip cmake ninja ccache
-
-.. note::
-    CMake version 3.5 or newer is required for use with ESP-IDF. Older Linux distributions may require updating, enabling of a "backports" repository, or installing of a "cmake3" package rather than "cmake".
