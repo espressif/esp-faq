@@ -1,6 +1,8 @@
 工艺与防护
 ==========
 
+:link_to_translation:`en:[English]`
+
 .. raw:: html
 
    <style>
@@ -10,6 +12,8 @@
      h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
+
+--------------
 
 ··· 待完善
 ----------

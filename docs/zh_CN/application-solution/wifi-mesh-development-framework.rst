@@ -1,6 +1,8 @@
 Wi-Fi Mesh 应用框架
 ===================
 
+:link_to_translation:`en:[English]`
+
 .. raw:: html
 
    <style>

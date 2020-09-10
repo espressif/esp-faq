@@ -1,6 +1,8 @@
 摄像头应用方案
 ==============
 
+:link_to_translation:`en:[English]`
+
 .. raw:: html
 
    <style>

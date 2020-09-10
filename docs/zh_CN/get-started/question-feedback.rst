@@ -1,6 +1,8 @@
 问题反馈
 ========
 
+:link_to_translation:`en:[English]`
+
 如您发现 FAQ 存在如下问题，欢迎在 `esp-faq
 issue <https://github.com/espressif/esp-faq/issues>`__ 提出问题及建议。
 

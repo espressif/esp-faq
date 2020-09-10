@@ -1,6 +1,8 @@
 Camera application
 ==================
 
+:link_to_translation:`zh_CN:[中文]`
+
 .. raw:: html
 
    <style>

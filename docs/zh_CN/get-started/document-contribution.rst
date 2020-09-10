@@ -1,6 +1,8 @@
 贡献指南
 ========
 
+:link_to_translation:`en:[English]`
+
 我们欢迎对 esp-faq 项目做出贡献-修复错误，添加文档。我们通过 `Github
 Pull
 Requests <https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests>`__

@@ -1,6 +1,8 @@
 社区软件平台
 ============
 
+:link_to_translation:`en:[English]`
+
 .. raw:: html
 
    <style>
