@@ -1,6 +1,8 @@
 调试分析
 ========
 
+:link_to_translation:`en:[English]`
+
 .. raw:: html
 
    <style>

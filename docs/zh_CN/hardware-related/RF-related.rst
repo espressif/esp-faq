@@ -1,6 +1,8 @@
 射频相关
 ========
 
+:link_to_translation:`en:[English]`
+
 .. raw:: html
 
    <style>
@@ -16,6 +18,4 @@
 ESP32 模组在 2.8 V 电源下运行，射频性能会有下降吗？
 ---------------------------------------------------
 
-射频会不稳定。建议按照\ `相应模组
-datasheet <https://www.espressif.com/zh-hans/support/documents/technical-documents>`__
-中说明的建议工作电压范围提供电压。
+射频会不稳定。建议按照相应 `模组技术规格书 <https://www.espressif.com/zh-hans/support/documents/technical-documents>`_ 中说明的建议工作电压范围提供电压。

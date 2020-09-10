@@ -1,6 +1,8 @@
 System
 ======
 
+:link_to_translation:`zh_CN:[中文]`
+
 .. raw:: html
 
    <style>
@@ -10,3 +12,10 @@ System
      h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
+
+--------------
+
+Is it possible to compile the binaries in application layer and bottom layer separately?
+--------------------------------------------------------------------------------------------
+
+  No, they cannot be compiled separately.

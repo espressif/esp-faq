@@ -1,6 +1,8 @@
 AI 应用
 =======
 
+:link_to_translation:`en:[English]`
+
 .. raw:: html
 
    <style>
