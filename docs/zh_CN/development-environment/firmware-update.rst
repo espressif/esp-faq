@@ -18,10 +18,8 @@
 Host MCU 如何通过串口对 ESP32 进行烧录升级？
 --------------------------------------------
 
- 相关协议说明请参考：`ESP32
-串口协议 <https://github.com/espressif/esptool/wiki/Serial-Protocol>`__
- 示例实现代码参考:
-`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`__
+ - 相关协议说明请参考：`ESP32 串口协议 <https://github.com/espressif/esptool/wiki/Serial-Protocol>`__
+ - 示例实现代码参考：`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`__
 
 --------------
 
@@ -43,16 +41,13 @@ Host MCU 如何通过串口对 ESP32 进行烧录升级？
 MacOS 与 Linux 如何烧录固件？
 -----------------------------
 
--  苹果系统（Mac OS）可以通过 brew 安装或 git 下载
-   `esptool <https://github.com/espressif/esptool>`__ 工具烧录固件。
--  Linux系统（如 ubuntu）可以通过 apt-get 安装或 git 下载
-   `esptool <https://github.com/espressif/esptool>`__ 工具烧录固件。
+  - 苹果系统（Mac OS）可以通过 brew 安装或 git 下载 `esptool <https://github.com/espressif/esptool>`__ 工具烧录固件。
+  - Linux系统（如 ubuntu）可以通过 apt-get 安装或 git 下载 `esptool <https://github.com/espressif/esptool>`__ 工具烧录固件。
 
 --------------
 
 ESP32 是否支持使用 JTAG 管脚直接烧写程序？
 ------------------------------------------
 
--  ESP32 支持使用 JTAG 管脚直接烧写程序，参考文档 `JATG
-   调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`__\ 。
+  - ESP32 支持使用 JTAG 管脚直接烧写程序，参考文档 `JATG调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_。
 
