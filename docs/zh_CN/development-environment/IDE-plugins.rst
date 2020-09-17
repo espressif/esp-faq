@@ -18,7 +18,6 @@ IDE 插件
 Arduino IDE 如何添加 ESP32 开发板？
 -----------------------------------
 
--  arduino-esp32 使用引导链接
-   https://github.com/espressif/arduino-esp32/blob/master/docs/arduino-ide/boards\_manager.md
--  Arduino IDE 添加开发板引导链接 https://www.arduino.cc/en/Guide/Cores
+  - arduino-esp32 使用引导链接 https://github.com/espressif/arduino-esp32/blob/master/docs/arduino-ide/boards\_manager.md
+  - Arduino IDE 添加开发板引导链接 https://www.arduino.cc/en/Guide/Cores
 

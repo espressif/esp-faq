@@ -26,3 +26,23 @@ Does ESP8285 support CCS (Cisco Compatible eXtensions)?
 ----------------------------------------------------------
 
   No, it doesn't.
+
+--------------
+
+Does ESP8266 support HTTP hosting?
+-------------------------------------
+
+  Yes, it does. ESP8266 can run as a server in both SoftAP and Station modes.
+
+  - When running as a server in SoftAP mode, clients can directly access the ESP8266 host or server at 192.168.4.1 (default) IP address.
+  - When the server is accessed via a router, the IP address should be the one allocated to the ESP8266 by the router.
+  - When using SDK to write native code, please refer to relevant examples.
+  - When using AT commands, start a server using AT+CIPSERVER command.
+
+--------------
+
+How soon can the associated resources be released after the TCP connection is closed?
+---------------------------------------------------------------------------------------
+
+  The associated resources can be released in 20 seconds or can be specified by the sent linger/send_timeout parameter.
+
