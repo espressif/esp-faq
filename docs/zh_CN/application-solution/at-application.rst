@@ -211,3 +211,11 @@ AT 命令连接阿里云以及腾讯云示例？
   - `阿里云应用参考示例 <https://blog.csdn.net/espressif/article/details/107367189>`_；
   - `腾讯云应用参考示例 <https://blog.csdn.net/espressif/article/details/104714464>`_。
 
+--------------
+
+AT 固件支持 SSL 证书认证吗？
+---------------------------------
+
+- 支持，具体请参考 `SSL 认证指令 <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/TCP-IP_AT_Commands.html#cmd-SSLCCONF>`__。
+- SSL 证书获取，可以参考 `esp-at/tools/README.md <https://github.com/espressif/esp-at/tree/release/v2.1.0.0_esp8266/tools>`__ 生成证书 bin 。
+- SSL 证书的烧录地址是根据 at_customize.csv 决定的 。
