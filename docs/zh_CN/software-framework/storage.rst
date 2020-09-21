@@ -99,27 +99,34 @@ ESP32 是否可以在外挂的 SPIFLASH 中挂载文件系统分区?
 
   esp-idf 中未提供相关工具，需要借助第三方工具，完整示例过程如下：
 
-  - step1：使用 **`mkfatfs <https://github.com/jkearins/ESP32_mkfatfs>`__** 工具从一个指定文件夹创建镜像，从 file\_image 文件夹创建大小为 1048576 Byte ，名为 fat\_img.bin 的镜像：``shell   ./mkfatfs -c file_image -s 1048576 ./fat_img.bin``；
+  - step1：使用 **`mkfatfs <https://github.com/jkearins/ESP32_mkfatfs>`__** 工具从一个指定文件夹创建镜像，从 file\_image 文件夹创建大小为 1048576 Byte ，名为 fat\_img.bin 的镜像：
+  
+  .. code-block:: text
 
-  - step2：烧录镜像到 0x110000 地址：``shell   esptool.py -p /dev/ttyUSB1 -b 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_size detect --flash_freq 80m 0x110000 ~/Desktop/fat_img.bin``；
+    ./mkfatfs -c file_image -s 1048576 ./fat_img.bin
+
+  - step2：烧录镜像到 0x110000 地址：
+
+  .. code-block:: text
+
+    esptool.py -p /dev/ttyUSB1 -b 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_size detect --flash_freq 80m 0x110000 ~/Desktop/fat_img.bin``；
 
   - step3：在程序中挂载：
 
-\`\`\`c static void initialize\_filesystem() { static wl\_handle\_t
-wl\_handle = WL\_INVALID\_HANDLE; const esp\_vfs\_fat\_mount\_config\_t
-mount\_config = { .max\_files = 10, }; ESP\_LOGI(TAG, "Mounting FAT
-filesystem"); esp\_err\_t err =
-esp\_vfs\_fat\_spiflash\_mount("/spiflash", "storage", &mount\_config,
-&wl\_handle);
+  .. code-block:: c
 
-::
-
+    static void initialize_filesystem() { 
+      static wl_handle_t
+      wl_handle = WL_INVALID_HANDLE;
+      const esp_vfs_fat_mount_config_t
+      mount_config = { .max_files = 10, };
+      ESP_LOGI(TAG, "Mounting FATfilesystem");
+      esp_err_t err = esp_vfs_fat_spiflash_mount("/spiflash", "storage", &mount_config, &wl_handle);
       if (err != ESP_OK) {
           ESP_LOGE(TAG, "Failed to mount FATFS (%s)", esp_err_to_name(err));
           return;
       }
-
-} \`\`\`
+    } 
 
   说明：这里烧录的地址一定要是分区表里 fatfs 挂载时对应分区的地址。创建的镜像需要与分区表中设置的大小一致。menuconfig 中的 ``Component config -> Wear Levelling -> Wear Levelling library sector size`` 需要设置为 512，否则挂载失败。
 

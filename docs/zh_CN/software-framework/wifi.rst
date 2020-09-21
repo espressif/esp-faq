@@ -196,21 +196,26 @@ ESP32 Wi-Fi RF 功率最高值是多少？
 
   我们没有对 RSSI 信号强度进行等级划分。如果您需要标准进行划分，可以参考安卓系统的计算方法。 
 
-  \`\`\` java
-   @UnsupportedAppUsage private static final int MIN\_RSSI = -100;
+  .. code-block:: java
 
-   ::
+    @UnsupportedAppUsage
+    private static final int MIN_RSSI = -100;
 
-       /** Anything better than or equal to this will show the max bars. */
-       @UnsupportedAppUsage
-       private static final int MAX_RSSI = -55;
+    /** Anything better than or equal to this will show the max bars. */
+    @UnsupportedAppUsage
+    private static final int MAX_RSSI = -55;
 
-   public static int calculateSignalLevel(int rssi, int numLevels) { if
-   (rssi <= MIN\_RSSI) { return 0; } else if (rssi >= MAX\_RSSI) {
-   return numLevels - 1; } else { float inputRange = (MAX\_RSSI -
-   MIN\_RSSI); float outputRange = (numLevels - 1); return
-   (int)((float)(rssi - MIN\_RSSI) \* outputRange / inputRange); } }
-   \`\`\`
+    public static int calculateSignalLevel(int rssi, int numLevels) { 
+      if(rssi <= MIN_RSSI) { 
+        return 0; 
+      } else if (rssi >= MAX_RSSI) {
+        return numLevels - 1; 
+      } else { 
+        float inputRange = (MAX_RSSI -MIN_RSSI); 
+        float outputRange = (numLevels - 1); 
+        return (int)((float)(rssi - MIN_RSSI) * outputRange / inputRange); 
+      }
+    }
 
 --------------
 
@@ -219,7 +224,14 @@ ESP32 Wi-Fi RF 功率最高值是多少？
 
   - esp-idf V4.0 及以上版本可参考如下代码获取 Wi-Fi 连接失败的原因：
 
-  ``c   if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) { wifi_event_sta_disconnected_t *sta_disconnect_evt = (wifi_event_sta_disconnected_t*)event_data;         ESP_LOGI(TAG, "wifi disconnect reason:%d", sta_disconnect_evt->reason);         esp_wifi_connect();         xEventGroupClearBits(s_wifi_event_group, CONNECTED_BIT);     }``
+  .. code-block:: c
+
+    if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) { 
+      wifi_event_sta_disconnected_t *sta_disconnect_evt = (wifi_event_sta_disconnected_t*)event_data;
+      ESP_LOGI(TAG, "wifi disconnect reason:%d", sta_disconnect_evt->reason);
+      esp_wifi_connect();
+      xEventGroupClearBits(s_wifi_event_group, CONNECTED_BIT);
+    }
 
   - 当回调函数接收到 ``WIFI_EVENT_STA_DISCONNECTED`` 事件时，可以通过结构体 `wifi\_event\_sta\_disconnected\_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429wifi_event_sta_disconnected_t>`_ 的变量 ``reason`` 获取到失败原因。
 

@@ -189,7 +189,7 @@ Provisioner 如何通过获取的 Composition Data 进一步配置节点？
 
   - 此示例展示了节点如何为自己的模型添加新的组地址。
 
-::
+.. code:: c
 
    esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_addr)
    {
