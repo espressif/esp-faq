@@ -34,3 +34,10 @@ Wi-Fi 和 ESP-BLE-MESH 共存时，为什么 Wi-Fi 吞吐量很低？
   - ``Bluetooth --> Bluedriod Enable --> Use dynamic memory allocation in BT/BLE stack.``
   - ``Bluetooth --> Blutooth controller --> BLE full scan feature supported.``
   - ``Wi-Fi --> Software controls Wi-Fi/Bluetooth coexistence --> Wi-Fi``
+
+--------------
+
+ESP32 支持 16MB 的 External Flash 和 8MB 的 External PSRAM 共存吗？
+----------------------------------------------------------------------------------
+
+  - ESP32 可以支持 16MB 的 External Flash 和 8MB 的 External PSRAM 共存使用。
