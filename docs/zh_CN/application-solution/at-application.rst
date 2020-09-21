@@ -219,3 +219,11 @@ AT 固件支持 SSL 证书认证吗？
 - 支持，具体请参考 `SSL 认证指令 <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/TCP-IP_AT_Commands.html#cmd-SSLCCONF>`__。
 - SSL 证书获取，可以参考 `esp-at/tools/README.md <https://github.com/espressif/esp-at/tree/release/v2.1.0.0_esp8266/tools>`__ 生成证书 bin 。
 - SSL 证书的烧录地址是根据 at_customize.csv 决定的 。
+
+--------------
+
+AT 是否支持 websocket 指令？
+---------------------------------
+
+  - 默认指令不支持。
+  - 可通过自定义指令实现，代码参考 [websocket](https://github.com/espressif/esp-idf/tree/master/examples/protocols/websocket)。
