@@ -227,3 +227,10 @@ AT 是否支持 websocket 指令？
 
   - 默认指令不支持。
   - 可通过自定义指令实现，代码参考 [websocket](https://github.com/espressif/esp-idf/tree/master/examples/protocols/websocket)。
+
+--------------
+
+模组出厂 AT 固件是否支持流控？
+-------------------------------------
+
+  - 支持该模组支持硬件流控，但是不支持软件流控。
