@@ -93,10 +93,12 @@ ESP8266 如何通过 AT 指令建立 SSL 链接？
 
   ESP8266 建立 SLL 连接服务器示例，请使用如下指令：
 
-``shell   AT+CWMODE=1                        // 设置 wifi 模式  为 station
-AT+CWJAP="espressif_2.4G","espressif"        // 连接 AP ，账号、密码   
-AT+CIPMUX=0                                  // 设置 单连接    
-AT+CIPSTART="SSL","www.baidu.com",443        // 建立 SSL 连接``
+.. code-block:: text
+
+  AT+CWMODE=1                        // 设置 wifi 模式  为 station
+  AT+CWJAP="espressif_2.4G","espressif"        // 连接 AP ，账号、密码   
+  AT+CIPMUX=0                                  // 设置 单连接    
+  AT+CIPSTART="SSL","www.baidu.com",443        // 建立 SSL 连接``
 
 --------------
 
@@ -152,10 +154,12 @@ ESP8266 使用 ESP-AT 编译后的固件，需要 OTA 功能，芯片 Flash 要�
 
   可以使用 ``AT+MDNS`` 指令来开启 MDNS 功能。
 
-- shell AT+CWMODE=1             //将设备端设为 station 模式
-- AT+CWJAP="ssid","password"    //设备要连接的 AP 账户 、密码
-- AT+MDNS=1,"esp","\ *pos.*\ tcp.",3030  //启用 MDNS
-- AT+MDNS=0                     //关闭 MDNS  
+.. code-block:: text
+
+  AT+CWMODE=1                            //将设备端设为 station 模式
+  AT+CWJAP="ssid","password"             //设备要连接的 AP 账户 、密码
+  AT+MDNS=1,"esp","\ *pos.*\ tcp.",3030  //启用 MDNS
+  AT+MDNS=0                              //关闭 MDNS  
 
 --------------
 
