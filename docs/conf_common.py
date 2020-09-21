@@ -316,4 +316,4 @@ texinfo_documents = [
 # Override RTD CSS theme to introduce the theme corrections
 # https://github.com/rtfd/sphinx_rtd_theme/pull/432
 def setup(app):
-    app.add_stylesheet('theme_overrides.css')
+    app.add_css_file('theme_overrides.css')
