@@ -234,3 +234,16 @@ AT 是否支持 websocket 指令？
 -------------------------------------
 
   - 支持该模组支持硬件流控，但是不支持软件流控。
+
+--------------
+
+AT 如何修改 TCP 连接数？
+-------------------------------
+
+- ESP32 AT 最大支持 16 个 TCP 连接，可以在 menuconfig 中进行配置， 配置方法如下：
+  - make menuconfig---> Component config---> AT--->  (16)AT socket maximum connection number
+  - make menuconfig---> LWIP---> (16)Max number of open sockets
+
+- ESP8266 AT 最大支持 5 个 TCP 连接，可以在 menuconfig 中进行配置， 配置方法如下：
+  - make menuconfig---> Component config---> AT--->  (5)AT socket maximum connection number
+  - make menuconfig---> LWIP---> (10)Max number of open sockets
