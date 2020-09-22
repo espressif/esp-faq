@@ -197,3 +197,12 @@ ESP8266-NONOS-V3.0 版本的 SDK，报错如下，是什么原因？
     E:M 1528 
 
   - 导致出现 E:M 开头的 LOG 是由于剩余内存不足。
+
+--------------
+  
+ESP32 是否可以完整使用 8MB PSRAM 内存？
+-----------------------------------------------------------------
+
+  - ESP32 可完整使用 8MB PSRAM 内存。
+  - 由于 cache 最大映射空间为 4MB，所以仅支持 4MB psram 映射使用，剩余空间可以使用 API 操作使用。
+  - 参考示例 [himem](https://github.com/espressif/esp-idf/tree/master/examples/system/himem)。
