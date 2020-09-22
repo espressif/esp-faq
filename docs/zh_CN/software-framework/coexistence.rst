@@ -41,3 +41,10 @@ ESP32 支持 16MB 的 External Flash 和 8MB 的 External PSRAM 共存吗？
 ----------------------------------------------------------------------------------
 
   - ESP32 可以支持 16MB 的 External Flash 和 8MB 的 External PSRAM 共存使用。
+
+--------------
+
+ESP32 Wi-Fi Mesh 和 BLE Mesh 可以同时支持吗？
+------------------------------------------------------------
+
+  - 不支持，补充一点：ESP32 Wi-Fi Mesh 和 BLE 可以同时支持，或者 ESP32 Wi-Fi STA 模式和 BLE Mesh 可以同时支持。
