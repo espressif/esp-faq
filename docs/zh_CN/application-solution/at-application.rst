@@ -264,3 +264,24 @@ AT 固件如果 OTA 升级指？
   AT+CWMODE=1
   AT+CWJAP_DEF="ssid","passwrod"
   AT+CIUPDATE
+
+--------------
+
+ESP32模组如何使用 AT 指令实现蓝牙加密配对？
+----------------------------------------------
+
+  - 蓝牙 AT 加密指令参考示例：
+
+  .. code-block:: text
+
+    AT+RST                          // 重启模块
+    AT+GMR                          // 查询模组版本信息
+    AT+BLEINIT=2                    // 将模组初始化为 server
+    AT+BLEGATTSSRVCRE               // GATTS 创建服务
+    AT+BLEGATTSSRVSTART             // GATTS 开启服务
+    AT+BLEADDR?                     // 查询 BLE 设备的public address。
+    AT+BLEADVPARAM=50,50,0,0,4      // 设置⼴播参数
+    AT+BLEADVDATA="020120"          // 设置 BLE ⼴播数据
+    AT+BLESECPARAM=4,1,8,3,3        // 设置加密参数         
+    AT+BLEADVSTART                  // 开始 BLE 广播
+    AT+BLEENC=0,3                   //无秘钥连接后，进行这一步，即可产生加密连接请求，并产生加密密钥。
