@@ -292,11 +292,11 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗?
 
   注: esp_wifi_set_inactive_time 新增的 API.
 
-  master commit: 63b566eb27da187c13f9b6ef707ab3315da24c9d
-  4.2 commit: d0dae5426380f771b0e192d8ccb051ce5308485e
-  4.1 commit: 445635fe45b7205497ad81289c5a808156a43539
-  4.0 commit: MR 未合, 待定
-  3.3 commit: 908938bc3cd917edec2ed37a709a153182d511da
+  - master commit: 63b566eb27da187c13f9b6ef707ab3315da24c9d
+  - 4.2 commit: d0dae5426380f771b0e192d8ccb051ce5308485e
+  - 4.1 commit: 445635fe45b7205497ad81289c5a808156a43539
+  - 4.0 commit: MR 未合, 待定
+  - 3.3 commit: 908938bc3cd917edec2ed37a709a153182d511da
 
 --------------
 
