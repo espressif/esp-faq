@@ -212,3 +212,14 @@ ESP32 是否有修复 `Sweyntooth Bluetooth® LE vulnerability <https://asset-gr
   - 对于 "Invalid Channel Map"问题，请参考提交：https://github.com/espressif/esp-idf/commit/49d69bb235b7a5e558d24a101f77533e97992377；
 
   - 对于 "HCI Desync" 问题，它仅影响 NimBLE 主机，不影响 Bluedroid 主机，请参考提交：https://github.com/espressif/esp-idf/commit/4cd6f094278e81b436a3f71fc11b80ebed25cf98。
+
+--------------
+
+ESP32 如何获取蓝牙 MAC 地址？
+------------------------------------
+
+  - 可以通过下面示例 API 读取芯片默认的 MAC 地址。
+
+  .. code-block:: text
+
+    esp_err_t esp_read_mac(uint8_t* mac, esp_mac_type_t type);
