@@ -285,3 +285,17 @@ ESP32模组如何使用 AT 指令实现蓝牙加密配对？
     AT+BLESECPARAM=4,1,8,3,3        // 设置加密参数         
     AT+BLEADVSTART                  // 开始 BLE 广播
     AT+BLEENC=0,3                   //无秘钥连接后，进行这一步，即可产生加密连接请求，并产生加密密钥。
+
+---------------
+
+ESP32 模组下载 ESP-AT 固件，默认 AP 的 Wi-Fi 名称是什么？
+---------------------------------------------------------------
+
+  - 可使用 AT+CWJAP? 指令查询默认的 Wi-Fi 名称，默认会拼接设备 MAC 地址。
+  - AT 支持自定义 Wi-Fi 名称，可通过如下 AT 命令进行设置：
+
+  .. code-block:: text
+
+     AT+CWMODE=1                            //设置当前设备为SoftAP 模式
+     AT+CWSAP="SSID","PASSWORD",1,0,4,0     //设置 SoftAP 参数
+     AT+CWSAP？                             // 查询设置后的 SoftAP 信息
