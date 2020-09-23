@@ -48,3 +48,11 @@ ESP32 Wi-Fi Mesh 和 BLE Mesh 可以同时支持吗？
 ------------------------------------------------------------
 
   - 不支持，补充一点：ESP32 Wi-Fi Mesh 和 BLE 可以同时支持，或者 ESP32 Wi-Fi STA 模式和 BLE Mesh 可以同时支持。
+
+--------------
+
+ESP32 蓝牙和 WI-FI 能否同时使用？
+----------------------------------------
+
+  - ESP32 的 Wi-Fi 和蓝牙可共存，但需要分时控制，可在 menuconfig 中使能 Wi-Fi 和蓝牙共存设置。如下：
+  - ``menuconfig -> Component config -> Wi-Fi -> Software controls WiFi/Bluetooth coexistence （Enable）``
