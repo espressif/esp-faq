@@ -299,3 +299,9 @@ ESP32 模组下载 ESP-AT 固件，默认 AP 的 Wi-Fi 名称是什么？
      AT+CWMODE=1                            //设置当前设备为SoftAP 模式
      AT+CWSAP="SSID","PASSWORD",1,0,4,0     //设置 SoftAP 参数
      AT+CWSAP？                             // 查询设置后的 SoftAP 信息
+
+---------------
+
+ESP32 是否有 AT 指令通过 SPI 传输参考例程？
+
+  - STM32 作为主机通过 SPI 发送 AT 指令与 ESP32 从设备通信，可参考  `例程 <https://github.com/espressif/esp-at/tree/master/examples/at_sdspi_host>`__。
