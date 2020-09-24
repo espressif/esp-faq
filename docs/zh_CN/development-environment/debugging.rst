@@ -133,4 +133,20 @@ ESP-WROVER-KIT 开发板openocd 错误 Error: Can't find board/esp32-wrover-kit-
 
   - openocd 版本为 20190313 和 20190708，请使用 openocd -f board/esp32-wrover.cfg 指令打开。
   - openocd 版本为 20191114 和 20200420（2020 以上版本）， 请使用 openocd -f board/esp32-wrover-kit-3.3v.cfg 指令打开。
-  
+
+--------------
+
+ESP32 如何获取与解析 coredump？
+-----------------------------------
+
+  - 从完整的固件中提取出 64 K 大小的 coredump，需要先从分区表中确认 coredump 的偏移量，当前假设为 0x3F0000。
+
+  .. code-block:: text
+
+    python esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyUSB* read_flash 0x3f0000 0x10000  coredump.bin
+
+  - 使用 coredump 读取脚本将二进制的 coredump 文件转变成可读的信息。假设第一步获得的 coredump 文件为 coredump.bin，与固件对于的 elf 文件 hello_world.elf。
+
+  .. code-block:: text
+
+    python esp-idf/components/espcoredump/espcoredump.py info_corefile -t raw -c coredump.bin hello_world.elf
