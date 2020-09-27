@@ -54,3 +54,12 @@ ESP32 打开 flash 加密和 secure boot 后，如何关闭？
   - 如果您使用的是 one-time flash（Release） 模式，那么 flash 加密和 secure boot 都是不能关闭的。
   - 如果您使用的是 reflashable （Development(NOT SECURE)）模式，那么 `flash 加密 <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/security/flash-encryption.html#disabling-flash-encryption>`_ 可以关闭，secure boot 不能关闭。
 
+--------------
+
+ESP32 保护固件安全的方式有那些?
+---------------------------------
+
+  ESP32 支持 flash encryption 与 secure boot.
+  - `flash encryption <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html>`_。
+  - `secure boot <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html>`_。
+  - `ECO3 Chip secure boot V2 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html>`_。
