@@ -424,3 +424,10 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗?
   https://osxdaily.com/2015/04/23/sniff-packet-capture-packet-trace-mac-os-x-wireless-diagnostics/
   或者，可以使用 Espressif 官方网站上的教程，使用 Wireshark 捕获数据包
   https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html
+
+--------------
+
+[Connect] NONOS_SDK `2.1.0` 升级到 `2.2.2` 后，连接时间变长?
+---------------------------------------------------------------
+
+  请升级到 NONOS_SDK `master` 版本，该版本中解决了 CCMP 加密与某些 AP 不兼容的问题。
