@@ -94,3 +94,9 @@ ESP8266 RTOS SDK rel3.2 sntp 校准后误差会逐渐变大，如何解决？
   - releaseV3.3 与 master 分支的系统时钟代码有进行重构，目前测试误差较小，并且也可以定时同步服务器时间。
   - master 分支继承了 releaseV3.3 上的代码重构，除此之外，可通过 menuconfig 配置 sntp 同步间隔，路径如下：Component config > LWIP > SNTP -> Request interval to update time (ms)。
 
+--------------
+
+TCP/IP 默认配置的数据包长度是多少？
+-----------------------------------
+
+  在默认配置中，单包数据，TCP 1460 字节，UDP 1472 字节。
