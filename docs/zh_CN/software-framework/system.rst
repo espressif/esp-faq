@@ -223,3 +223,10 @@ IDF 版本更新后，更新说明在哪里？
 ----------------------------------------------------------------------------------------
 
   可以在 Github release note 查看相关说明。链接为: https://github.com/espressif/esp-idf/releases
+
+--------------
+
+ESP8266 是否有详细的寄存器⼿册？
+---------------------------------------
+
+  请参考 《8266 TRM appendix》部分，链接：https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_cn.pdf
