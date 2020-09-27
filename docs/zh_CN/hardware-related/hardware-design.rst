@@ -152,3 +152,10 @@ ESP8266 为何上电瞬间会电流较大？
   - 模拟部分电路路最⼤的极限电路可能达到 500mA, 数字电路部分最⼤电流达到 200mA。
   - 常规应用时，平均电流约 100mA 。
   - 综上，ESP8266 电源设计需要满足 500mA 电流。
+
+--------------
+
+ESP32 以太网 RMII 时钟选择有哪些？
+
+  - 设计上建议使用外接晶振与 GPIO0 输入的方式，设计时需要注意 GPIO0 上电状态。
+  - 详细数据可以参考文档 `配置 MAC 与 PHY <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`_。 
