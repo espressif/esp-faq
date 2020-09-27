@@ -186,6 +186,14 @@ ESP32 能否以动态库的方式加载库文件运行?
 
   ESP32 不支持动态库的方式加载库文件，只支持靜态库。
 
+------------------
+
+ESP32 有几种系统复位方式？
+--------------------------------
+
+  - 有“芯片上电复位”、“RWDT 系统复位”、“欠压复位” 3 种系统复位方式。
+  - 具体说明参见 `《ESP32 技术规格书》<https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_cn.pdf>`__ 4.1.2 复位源章节。
+
 --------------
 
 ESP8266-NONOS-V3.0 版本的 SDK，报错如下，是什么原因？
