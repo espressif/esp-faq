@@ -254,6 +254,15 @@ AT 如何修改 TCP 连接数？
 
 --------------
 
+AT 固件如何查看 error log ？
+-------------------------------
+
+  - ESP32 在 download port 查看 error log, 默认 UART0 为 GPIO1 GPIO3。
+  - ESP8266 在 GPIO2 查看 error log , GPIO2 是 UART1 TX。 
+  - 详情可以参阅 `AT 文档 <https://docs.espressif.com/projects/esp-at/en/latest/Get_Started/Hardware_connection.html>`__。
+
+--------------
+
 AT 固件如果 OTA 升级指？
 ---------------------------------
 
