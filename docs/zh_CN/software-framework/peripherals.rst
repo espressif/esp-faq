@@ -173,7 +173,7 @@ ESP32 SD 卡支持的最大容量是多少？
 
 --------------
 
-SP32 是否支持 USB 功能？
+ESP32 是否支持 USB 功能？
 --------------------------------------
 
   - ESP32 不支持 USB 功能。
@@ -215,3 +215,11 @@ ESP8266 RTOS_2.1 以及之前版本 SDK，如何将 LOG 配置到 UART1 ？
   .. code-block:: c
 
     UART_SetPrintPort(UART1);
+
+--------------
+
+ESP32 IDF 中如何使能 UART 流控？
+----------------------------------------------
+
+  - `硬件流控使能 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#multiple-steps>`__。
+  - `软件流控使能 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#software-flow-control>`__。
