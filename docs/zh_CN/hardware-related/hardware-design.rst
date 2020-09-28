@@ -176,3 +176,10 @@ ESP32-LyraT 开发板扬声器接口规格？
   - ESP32-WROOM 系列模组，IO6 - IO11 为 Flash 引脚，作为 Flash 通信使⽤，⽆法⽤于 GPIO。
   - ESP32-WROVER 系列模组，GPIO16 和 GPIO17 也会被模组 Psram 占⽤，⽆法⽤于 GPIO。
   - 此外，ESP32 有 5 个 strapping 引脚，在使⽤时需要额外注意，具体细节请参考 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
+
+--------------
+
+ESP32 如何使用管脚复位芯片？
+------------------------------
+
+  - CHIP_PU 即复位管脚，可通过拉低该管脚来复位芯片。
