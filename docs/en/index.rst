@@ -45,6 +45,7 @@ ESP-FAQ
    Software framework <software-framework/index>
    Hardware related <hardware-related/index>
    Test verification <test-verification/index>
+   Commercial FAQ <commercial-faq/index>
 
 * :ref:`genindex`
 
