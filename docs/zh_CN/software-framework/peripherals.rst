@@ -204,3 +204,14 @@ ESP32 是否有 I2S 驱动 LCD 的参考代码？
 ----------------------------------------------
 
   - I2S LCD driver：`esp-iot-solution i2s_devices <https://github.com/espressif/esp-iot-solution/tree/master/components/i2s_devices>`__。
+
+--------------
+
+ESP8266 RTOS_2.1 以及之前版本 SDK，如何将 LOG 配置到 UART1 ？
+---------------------------------------------------------------------
+
+  - 在配置 UART1 初始化后，可以通过 API 切换 LOG 输出到 UART1。
+
+  .. code-block:: c
+
+    UART_SetPrintPort(UART1);
