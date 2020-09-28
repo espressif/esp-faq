@@ -192,7 +192,7 @@ ESP32 有几种系统复位方式？
 --------------------------------
 
   - 有“芯片上电复位”、“RWDT 系统复位”、“欠压复位” 3 种系统复位方式。
-  - 具体说明参见 `《ESP32 技术规格书》<https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_cn.pdf>`__ 4.1.2 复位源章节。
+  - 具体说明参见 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_cn.pdf>`__ 4.1.2 复位源章节。
 
 --------------
 
