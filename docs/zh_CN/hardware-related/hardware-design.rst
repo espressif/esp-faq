@@ -156,6 +156,7 @@ ESP8266 为何上电瞬间会电流较大？
 --------------
 
 ESP32 以太网 RMII 时钟选择有哪些？
+-------------------------------------
 
   - 设计上建议使用外接晶振与 GPIO0 输入的方式，设计时需要注意 GPIO0 上电状态。
   - 详细数据可以参考文档 `配置 MAC 与 PHY <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`_。 
@@ -163,5 +164,15 @@ ESP32 以太网 RMII 时钟选择有哪些？
 --------------
 
 ESP32-LyraT 开发板扬声器接口规格？
+-------------------------------------
 
   - 接口使用 PH-2A 规格连接器。
+
+--------------
+
+基于 ESP32 设计的模组，哪些引脚无法被用户使用？
+-----------------------------------------------
+
+  - ESP32-WROOM 系列模组，IO6 - IO11 为 Flash 引脚，作为 Flash 通信使⽤，⽆法⽤于 GPIO。
+  - ESP32-WROVER 系列模组，GPIO16 和 GPIO17 也会被模组 Psram 占⽤，⽆法⽤于 GPIO。
+  - 此外，ESP32 有 5 个 strapping 引脚，在使⽤时需要额外注意，具体细节请参考 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
