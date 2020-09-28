@@ -87,7 +87,7 @@ Wi-Fi 信道是什么？可以自行选择信道吗？
 
   由于 V4.2 以及以上版本会摒弃掉 tcp/ip 的接口，推荐使用 ethif 的接口.参考示例代码如下：
 
-.. code-block:: c
+  .. code-block:: c
 
     char ip_str[15];
     char ip[15] = "192.168.5.241";
@@ -439,3 +439,16 @@ ESP8266 是否支持 802.11k/v/r 协议?
 
   请升级到 NONOS_SDK `master` 版本，该版本中解决了 CCMP 加密与某些 AP 不兼容的问题。
 
+--------------
+
+ESP32 如何收发 wifi 802.11 数据包？
+----------------------------------------
+
+  - 可以通过如下 API 进行 802.11 数据包收发
+
+  .. code-block:: c
+
+    esp_err_t esp_wifi_80211_tx(wifi_interface_t ifx, const void *buffer, int len, bool en_sys_seq);
+    esp_wifi_set_promiscuous_rx_cb(wifi_sniffer_cb);
+
+  - 上述 API 在 MDF 项目中有用到，可以参考：`mconfig_chain <https://github.com/espressif/esp-mdf/blob/master/components/mconfig/mconfig_chain.c>`__。 
