@@ -178,3 +178,14 @@ SP32 是否支持 USB 功能？
 
   - ESP32 不支持 USB 功能。
   - ESP32-S2 支持 USB1.1 。
+
+--------------
+
+ESP8266 使⽤ hw timer 中断有哪些注意事项？
+------------------------------------------
+
+  - 可以参考相关 API 文档  `ESP8266 技术参考手册 <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_cn.pdf>`__。
+  - 如果使用 NONOS SDK 可以阅读  `ESP8266 Non-OS SDK API 参考 <https://www.espressif.com/sites/default/files/documentation/2c-esp8266_non_os_sdk_api_reference_cn.pdf>`__。
+  - 通常情况下，硬件中断需要尽快执行结束，并且将回调函数放入 IRAM 中，避免 Cache 影响。
+    - RTOS SDK 需要函数去添加 IRAM_ATTR
+    - NonOS SDK 不能在函数前添加 ICACHE_FLASH_ATTR
