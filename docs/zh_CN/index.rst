@@ -46,5 +46,6 @@ ESP-FAQ
    软件平台 <software-framework/index>
    硬件相关 <hardware-related/index>
    测试校验 <test-verification/index>
+   商务问题 <commercial-faq/index>
 
 * :ref:`genindex`
