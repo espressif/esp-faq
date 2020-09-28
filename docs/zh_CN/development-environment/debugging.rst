@@ -150,3 +150,11 @@ ESP32 如何获取与解析 coredump？
   .. code-block:: text
 
     python esp-idf/components/espcoredump/espcoredump.py info_corefile -t raw -c coredump.bin hello_world.elf
+
+--------------
+
+ESP32&ESP8266&ESP32S2 如何做射频性能测试？
+-----------------------------------------------
+
+  - 参见: `ESP32&ESP8266&ESP32S2 射频性能测试指南 <https://www.espressif.com/sites/default/files/tools/ESP32%26ESP8266_RF_Performance_Test_CN_0.zip>`_。
+  
