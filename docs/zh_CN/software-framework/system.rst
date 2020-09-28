@@ -268,3 +268,13 @@ ESP8266 的看⻔狗是什么作⽤？
   - 默认 2 个看⻔狗都是打开的，HW WDT 始终在运行，并且如果未重置 HW WDT 计时器，则会在大约 6 秒钟后重置 MCU。
   - SW WDT 大约在 1.5 秒左右将 MCU 复位。您可以启用/禁用 SW WDT，但不能启用/禁用 HW WDT。因为必须重置 SW WDT 后才能同时重置 HW WDT。
   - 可通过修改 `make menuconfig` -> `Component config` -> `Common ESP-related` 里的 `Invoke panic handler on Task Watchdog timeout` 等来配置看门狗。 
+
+--------------
+
+ESP8266 user_init 内有那些注意事项？
+----------------------------------------
+
+  - wifi_set_ip_info、wifi_set_macaddr 仅在 user_init 中调⽤⽣效，其他地⽅调⽤不⽣效。
+  - system_timer_reinit 建议在 user_init 中调⽤，否则调⽤后，需要重新 arm 所有 timer。
+  - wifi_station_set_config 如果在 user_init 中调⽤，底层会⾃动连接对应路由，不需要再调⽤ wifi_station_connect 来进⾏连接。否则，需要调⽤ wifi_station_connect进⾏连接。
+  - wifi_station_set_auto_connect 设置上电启动时是否⾃动连接已记录的路由；例如，关闭⾃动连接功能，如果在 user_init 中调⽤，则当前这次上电就不会⾃动连接路由，如果在其他位置调⽤，则下次上电启动不会⾃动连接路由。
