@@ -159,3 +159,9 @@ ESP32 以太网 RMII 时钟选择有哪些？
 
   - 设计上建议使用外接晶振与 GPIO0 输入的方式，设计时需要注意 GPIO0 上电状态。
   - 详细数据可以参考文档 `配置 MAC 与 PHY <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`_。 
+
+--------------
+
+ESP32-LyraT 开发板扬声器接口规格？
+
+  - 接口使用 PH-2A 规格连接器。
