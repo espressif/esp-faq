@@ -197,3 +197,10 @@ ESP32 脉冲宽度调制（PWM）信号是否可以分配任意一个 I/O 上？
 
   - 除了只有输⼊功能的 I/O（例如：GPIO34-GPIO39） 之外，理论上 PWM 可以输出到任何管脚。
   - 实际使用中仍会受到模组与芯片限制，模组未引出管脚或 Flash 占用等情况影响。
+
+--------------
+
+ESP32 是否有 I2S 驱动 LCD 的参考代码？
+----------------------------------------------
+
+  - I2S LCD driver：`esp-iot-solution i2s_devices <https://github.com/espressif/esp-iot-solution/tree/master/components/i2s_devices>`__。
