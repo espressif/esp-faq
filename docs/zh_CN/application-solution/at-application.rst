@@ -314,3 +314,10 @@ ESP32 模组下载 ESP-AT 固件，默认 AP 的 Wi-Fi 名称是什么？
 ESP32 是否有 AT 指令通过 SPI 传输参考例程？
 
   - STM32 作为主机通过 SPI 发送 AT 指令与 ESP32 从设备通信，可参考  `例程 <https://github.com/espressif/esp-at/tree/master/examples/at_sdspi_host>`__。
+
+--------------
+
+ESP8266 旧版本（SDK v1.5.4）的 AT 固件 AT+CWLAP 是主动扫描还是被动扫描？
+-------------------------------------------------------------------------
+
+  - 基于 ESP8266_NonOS_SDK v2.2.0 的 AT 固件，对应 AT 版本为 1.6.2 ，支持主动扫描 + 被动扫描，默认为主动扫描，之前的 AT 版本仅支持主动扫描。
