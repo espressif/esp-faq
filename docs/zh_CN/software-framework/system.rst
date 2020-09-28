@@ -258,3 +258,13 @@ ESP8266 有哪些定时器可用？
   - 软件定时器：
     - NONOS 中 API os_timer 是 DSR 处理，不能产⽣中断，但是可以产⽣任务，任务会按照普通等级排队。
     - RTOS 中可以使用 freertos 中的软件定时器，使用方式更加灵活。
+
+--------------
+
+ESP8266 的看⻔狗是什么作⽤？
+-----------------------------
+
+  - 为了提供系统稳定性，以应对多冲突的操作环境，ESP8266 集成了 2 级看⻔狗机制，包括软件看⻔狗和硬件看⻔狗。
+  - 默认 2 个看⻔狗都是打开的，HW WDT 始终在运行，并且如果未重置 HW WDT 计时器，则会在大约 6 秒钟后重置 MCU。
+  - SW WDT 大约在 1.5 秒左右将 MCU 复位。您可以启用/禁用 SW WDT，但不能启用/禁用 HW WDT。因为必须重置 SW WDT 后才能同时重置 HW WDT。
+  - 可通过修改 `make menuconfig` -> `Component config` -> `Common ESP-related` 里的 `Invoke panic handler on Task Watchdog timeout` 等来配置看门狗。 
