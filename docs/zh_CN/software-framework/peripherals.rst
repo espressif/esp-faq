@@ -223,3 +223,11 @@ ESP32 IDF 中如何使能 UART 流控？
 
   - `硬件流控使能 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#multiple-steps>`__。
   - `软件流控使能 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#software-flow-control>`__。
+
+--------------
+
+ESP8266 NonOS SDK PWM 的变化缓慢，又哪些原因？
+------------------------------------------------
+
+  - 如果使用 SDK example/IOT_demo 中的渐变 API，如 light_set_aim 或 light_set_aim_r 这些 API，需要渐变的过程。
+  - 若需要 PWM Duty 设置后⽴即⽣效，则可以调⽤接⼝ pwm_set_duty，需要注意调⽤ pwm_set_duty 后要调⽤ pwm_start 此次设置才能⽣效。
