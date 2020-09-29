@@ -462,3 +462,12 @@ ESP32 如何收发 wifi 802.11 数据包？
   - 不建议使用中文 SSID，可能存在不同中文编码带来的异常。
   - 需要注意 bssid_set 的设置，如果不需要指定路由的 MAC 地址，那么需配置 stationConf.bssid_set = 0。
   - wifi_config_t wifi_config 建议使用静态变量 `static` 来定义。
+
+--------------
+
+[Connect] ESP8266 有那些配网方式？
+---------------------------------------------------------------
+
+  - smartconfig 模式：⼀键配置⽅式，设备在 sniffer 模式扫描特征包的⽅式。
+  - SoftAP 模式：设备开启 SoftAP， ⼿机连接 SoftAP 后建⽴稳定的 TCP/UDP 连接后，发送 SSID 和密码。
+  - WPS 模式：此⽅式需要设备中增加按键；或连接到设备的 SoftAP 后使⽤⼿机软件控制开启 WPS。
