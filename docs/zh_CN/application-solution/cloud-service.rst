@@ -67,3 +67,10 @@ esp-aliyun 与 esp-ali-smartliving 的区别 ？
 - 如果您使用的乐鑫云平台是 rainmaker ，建议您直接将问题在 Github 上反馈，会有专业人员尽快为您解答。
 - 如果是其他云平台，您可以将使用的云平台信息，以及您的问题汇总起来，发送到 sales@espressif.com 。
 
+--------------
+
+ESPESP8266 可以连接 Alex 或者 Google home 吗 ?
+----------------------------------------------------
+
+  - Alex 可以参考 [aws_iot](https://github.com/espressif/ESP8266_RTOS_SDK/tree/release/v3.3/examples/protocols/aws_iot) , 做一些 Alex 配置即可。
+  - Google home 当前没有示例，可以参考 ESP32 参考示例 [esp-google-iot](https://github.com/espressif/esp-google-iot) 。
