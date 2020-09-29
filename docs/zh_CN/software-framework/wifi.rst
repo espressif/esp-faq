@@ -452,3 +452,13 @@ ESP32 如何收发 wifi 802.11 数据包？
     esp_wifi_set_promiscuous_rx_cb(wifi_sniffer_cb);
 
   - 上述 API 在 MDF 项目中有用到，可以参考：`mconfig_chain <https://github.com/espressif/esp-mdf/blob/master/components/mconfig/mconfig_chain.c>`__。 
+
+--------------
+
+[Connect] ESP32 系列 & ESP8266 路由器连接失败有哪些可能原因？
+---------------------------------------------------------------
+
+  - 检查配置中的 SSID 与 Password 是否正确。
+  - 不建议使用中文 SSID，可能存在不同中文编码带来的异常。
+  - 需要注意 bssid_set 的设置，如果不需要指定路由的 MAC 地址，那么需配置 stationConf.bssid_set = 0。
+  - wifi_config_t wifi_config 建议使用静态变量 `static` 来定义。
