@@ -53,6 +53,40 @@ ESP32 是否支持使用 JTAG 管脚直接烧写程序？
 
 --------------
 
+ESP32S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of packet (0x50)” 如何解决？
+--------------------------------------------------------------------------------------------------
+  **问题背景：**
+
+  基于 ESP-IDF v4.1 编译固件烧录到 ESP32-S2 设备的过程中遇到如下错误：
+
+  .. code-block:: shell
+
+    esptool.py v2.9-dev
+    Serial port /dev/ttyUSB0
+    Connecting....
+    Chip is ESP32S2 Beta
+    Features: Engineering Sample
+    Crystal is 40MHz
+    MAC: 7c:df:a1:01:b7:64
+    Uploading stub...
+    Running stub...
+
+    A fatal error occurred: Invalid head of packet (0x50)
+    esptool.py failed with exit code 2
+
+  **解决方法：**
+
+  如果当前使用的是 ESP32-S2 芯片而不是 ESP32-S2 Beta 芯片，需要将 ESP-IDF 升级到 v4.2 或 以上。
+
+  **补充说明:**
+
+  - ESP-IDF v4.1 只支持 ESP32-S2 Beta，该芯片和 ESP32-S2 是不同的芯片，无法兼容。
+    ESP-IDF v4.1 自带的 esptool 的版本是 v2.9-dev，也只支持 ESP32-S2 Beta。
+
+  - ESP-IDF v4.2 支持 ESP32-S2 芯片，该版本自带的 esptool 的版本是 v3.0-dev，支持 ESP32S2。
+
+--------------
+
 如何使用 flash_download_tool 下载基于 esp-idf 编译的固件？
 -----------------------------------------------------------
 
