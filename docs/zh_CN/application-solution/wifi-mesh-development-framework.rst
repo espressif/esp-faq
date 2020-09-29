@@ -85,3 +85,11 @@ Wi-Fi Mesh 可以批量 OTA 吗？
   - Wi-Fi mesh 设备可以批量 OTA 的。
   - OTA 的方式是根节点下载固件，然后再发至其他节点。
   - 具体示例请参考 https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mupgrade
+
+--------------
+
+ESP-MESH APP 端源码如何查询？
+-------------------------------
+
+  - iOS 端源码链接: https://github.com/EspressifApp/EspMeshForiOS
+  - 安卓端源码链接: https://github.com/EspressifApp/EspMeshForAndroid
