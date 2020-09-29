@@ -51,3 +51,18 @@ ESP32 是否支持使用 JTAG 管脚直接烧写程序？
 
   - ESP32 支持使用 JTAG 管脚直接烧写程序，参考文档 `JATG调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_。
 
+--------------
+
+如何使用 flash_download_tool 下载基于 esp-idf 编译的固件？
+-----------------------------------------------------------
+
+  - 以 hello-world 例程为例，初次编译 esp-idf 工程请参考 `get-started-guide <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/index.html>`_。
+  - 执行 idf.py build(esp-idf v4.0 及以后版本，v4.0 之前请使用 make) 编译工程后，会生成如下的指令提示：
+
+    .. code-block:: 
+
+      Project build complete. To flash, run this command:
+      ../../../components/esptool_py/esptool/esptool.py -p (PORT) -b 921600 write_flash --flash_mode dio --flash_size detect --flash_freq 40m 0x10000 build/hello-world.bin  build 0x1000 build/bootloader/bootloader.bin 0x8000 build/partition_table/partition-table.bin
+      or run 'idf.py -p PORT flash'
+
+    可以按照该指令提示的 bin 文件及烧录地址使用 flash_download_tool 进行烧录。
