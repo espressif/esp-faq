@@ -471,3 +471,10 @@ ESP32 如何收发 wifi 802.11 数据包？
   - smartconfig 模式：⼀键配置⽅式，设备在 sniffer 模式扫描特征包的⽅式。
   - SoftAP 模式：设备开启 SoftAP， ⼿机连接 SoftAP 后建⽴稳定的 TCP/UDP 连接后，发送 SSID 和密码。
   - WPS 模式：此⽅式需要设备中增加按键；或连接到设备的 SoftAP 后使⽤⼿机软件控制开启 WPS。
+
+--------------
+
+[Connect] Smartconfig 配⽹ WiFi 参数信息有哪些要求？
+---------------------------------------------------------------
+
+  - 根据 `wifi spec` 要求，SSID 不超过 32 byte, Password 不超过 64 bytes。
