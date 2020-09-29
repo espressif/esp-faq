@@ -481,6 +481,14 @@ ESP32 如何收发 wifi 802.11 数据包？
 
 --------------
 
+[Connect] ESP8266 Wi-Fi 是否支持 WAP2 企业级加密？
+---------------------------------------------------------------
+
+  - 支持。请参考示例 `wpa2_enterprise <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/wifi/wpa2_enterprise>`__。
+  - 关于 RADIUS 服务器配置，请参考 `RADIUS\ 服务器之\ hostapd 配置说明 <https://blog.csdn.net/espressif/article/details/80933222>`_。
+
+--------------
+
 [Connect] ESP32 保持 Wi-Fi 连接的低功耗模式有哪些？
 ---------------------------------------------------------------
 
