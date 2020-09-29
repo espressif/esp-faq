@@ -267,3 +267,11 @@ ESP32 的 BLE 蓝牙配网兼容性如何？是否开源？
 
   - ESP32 的蓝牙配网，简称 Blu-Fi 配网，兼容性与 BLE 兼容性一致，测试过苹果、华为、小米、OPPO、魅族、 一加、中兴等主流品手机，兼容性良好。
   - 目前 Blu-Fi 协议及手机应用部分的代码不开源。
+
+--------------
+
+ESP32 BLE/BT Secure Simple Pairing (SSP) 与 legacy pairing 安全性对比 ？
+----------------------------------------------------------------------------
+
+  - Secure Simple Pairing (SSP) 比 legacy pairing 更加安全。
+  - legacy pairing 使用对称加密算法， Secure Simple Pairing (SSP) 使用的是非对称加密算法。
