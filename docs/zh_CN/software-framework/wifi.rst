@@ -503,3 +503,12 @@ ESP32 如何收发 wifi 802.11 数据包？
 
   - ESP32 系列： esp-idf 从 release/v4.1 版本开始支持 WPA3 ，默认使能，可在 menuconfig > Component config > Wi-Fi 中配置。
   - ESP8266：ESP8266_RTOS_SDK 的 master 分支开始支持 WPA3 ，默认使能，可在 menuconfig > Component config > Wi-Fi 中配置。
+
+--------------
+
+[Connect] 当环境内存在多个相同 SSID 时，设备如何连接 ？
+-----------------------------------------------------------
+
+  - 设备会连接优先扫描到的 AP 设备。
+  - 如果想要根据信号质量等排序，可以使用 Scan 方法自主筛选。
+  - 如果想要连接指定 AP, 可以在连接参数中填入 BSSID 信息。
