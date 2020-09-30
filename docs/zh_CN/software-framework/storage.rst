@@ -137,3 +137,11 @@ ESP32 是否可以使用 LittleFs 文件系统？
 
   目前 esp-idf 未包含 LittleFs，存在第三方移植组件 `esp\_littlefs <https://github.com/joltwallet/esp_littlefs>`_，可直接在 esp-idf 中使用。匹配 littlefs 文件系统镜像的工具 `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_。
 
+
+----------------
+
+ESP32 如何查看芯片内存（例如：DRAM、IRAM、rodata）使用情况？
+------------------------------------------------------------------------------------------------------------------
+
+  - 可以在工程终端目录下输入 `size-components` 指令来查看相关内存使用情况。
+  - 如 `make size-components` 或 `idf.py size-components`。
