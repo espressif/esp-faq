@@ -60,6 +60,13 @@ ESP8266 连接手机热点，出现如下报错，有哪些原因？
 
 --------------
 
+是否有支持 POE 供电的以太网开发板？
+---------------------------------------------------------------------------------------
+
+- `ESP32-Ethernet-Kit <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/hw-reference/esp32/get-started-ethernet-kit.html>`_ 是支持 POE 供电的以太网开发板。
+
+--------------
+
 ESP32S2-Kaluga 中为什么 Audio 和 Camera 不能共用？
 -----------------------------------------------------
 
