@@ -18,15 +18,15 @@
 Host MCU 如何通过串口对 ESP32 进行烧录升级？
 --------------------------------------------
 
- - 相关协议说明请参考：`ESP32 串口协议 <https://github.com/espressif/esptool/wiki/Serial-Protocol>`__
- - 示例实现代码参考：`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`__
+  - 相关协议说明请参考：`ESP32 串口协议 <https://github.com/espressif/esptool/wiki/Serial-Protocol>`__
+  - 示例实现代码参考：`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`__
 
 --------------
 
 如何使用 USB 转串口工具对乐鑫模组进行自动烧录？
 -----------------------------------------------
 
- USB 转串口对乐鑫模组进行自动烧录接线方式如下：
+  USB 转串口对乐鑫模组进行自动烧录接线方式如下：
 
 +------------+-------+-------+-------+-------+-------+-------+
 | 乐鑫模组   | 3V3   | GND   | TXD   | RXD   | IO0   | EN    |
@@ -34,7 +34,7 @@ Host MCU 如何通过串口对 ESP32 进行烧录升级？
 | 串口工具   | 3V3   | GND   | RXD   | TXD   | DTR   | RTS   |
 +------------+-------+-------+-------+-------+-------+-------+
 
- 注：ESP8266 模组需要额外将 IO15 接地。
+  注：ESP8266 模组需要额外将 IO15 接地。
 
 --------------
 
@@ -50,6 +50,14 @@ ESP32 是否支持使用 JTAG 管脚直接烧写程序？
 ------------------------------------------
 
   - ESP32 支持使用 JTAG 管脚直接烧写程序，参考文档 `JATG调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_。
+
+--------------
+
+ESP_Flash_Downloader_Tool 是否可以自定义编程控制？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  ESP_Flash_Downloader_Tool GUI 工具不开源，且不支持嵌入执行脚本。
+  ESP_Flash_Downloader_Tool 底层组件 ESPtool 工具开源，可以完成烧录加密等等所有功能，建议基于该组件二次开发。
 
 ---------------
 
