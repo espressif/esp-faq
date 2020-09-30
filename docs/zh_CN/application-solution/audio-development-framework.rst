@@ -38,4 +38,11 @@
   支持。
 
   - 现在我们用的网络电话协议是 `VoIP <https://www.espressif.com/zh-hans/news/ESP32_VoIP>`__\ ，媒体协议是RTP。
-  - 可使用 `Espressif 官方例程 <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/voip>`__。
+  - 可使用 `Espressif 官方例程 <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/voip>`__。--------------
+
+--------------
+
+ESP-ADF 中 RTP 协议是否开源？
+----------------------------------------
+
+  - 目前 RTP 协议未开源，是以 lib 形式供外部调用。
