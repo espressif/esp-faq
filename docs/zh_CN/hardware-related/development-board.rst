@@ -156,6 +156,14 @@ ESP32S2-Kaluga-V1.2 PCB上有很多没有焊接元件的地方是否是运送过
 
 --------------
 
+ESP32-S2-Kaluga-V1.2 开发板配有摄像头，是否有摄像头的例程可以提供？
+---------------------------------------------------------------------
+
+  ESP32-S2-Kaluga-V1.2 开发板示例代码：https://github.com/espressif/esp-dev-kits/tree/master/esp32-s2-kaluga-1
+  ESP32-S2-Kaluga-V1.2开发板摄像头示例：https://github.com/espressif/esp-dev-kits/tree/master/esp32-s2-kaluga-1/examples/camera
+
+--------------
+
 是否可以单独购买 ESP32S2-Kaluga 的子板？
 ------------------------------------------
 
