@@ -168,16 +168,16 @@ esp-idf 是否可以配置 time\_t 为 64 bit ? （现在是 32 bit）
 
   通常使用外部工具 `esptool <https://github.com/espressif/esptool>`_ 来读取芯片类型。可以在固件中根据 python 代码示例，读取芯片对应寄存器位，并进计算判断得出。
 
-.. code-block:: python
+  .. code-block:: python
 
-  def get_efuses(self): 
-  # Return the 128 bits of ESP8266 efuse as a single Python integer 
-  return (self.read_reg(0x3ff0005c) << 96 | self.read_reg(0x3ff00058) << 64 | self.read_reg(0x3ff00054) << 32 | self.read_reg(0x3ff00050))
+    def get_efuses(self): 
+    # Return the 128 bits of ESP8266 efuse as a single Python integer 
+    return (self.read_reg(0x3ff0005c) << 96 | self.read_reg(0x3ff00058) << 64 | self.read_reg(0x3ff00054) << 32 | self.read_reg(0x3ff00050))
 
-  def get_chip_description(self):
-    efuses = self.get_efuses()
-    is_8285 = (efuses & ((1 << 4) | 1 << 80)) != 0  # One or the other efuse bit is set for ESP8285
-    return "ESP8285" if is_8285 else "ESP8266EX"
+    def get_chip_description(self):
+      efuses = self.get_efuses()
+      is_8285 = (efuses & ((1 << 4) | 1 << 80)) != 0  # One or the other efuse bit is set for ESP8285
+      return "ESP8285" if is_8285 else "ESP8266EX"
 
 --------------
 
@@ -185,6 +185,18 @@ ESP32 能否以动态库的方式加载库文件运行?
 ---------------------------------------
 
   ESP32 不支持动态库的方式加载库文件，只支持靜态库。
+
+---------------------
+
+ESP32 deep_sleep例程测试，为何当 const int wakeup_time_sec = 3600时，程序 crash 出现死循环？
+----------------------------------------------------------------------------------------------
+
+  - 程序 crash 原因是 int 类型参数 `wakeup_time_sec` 在 wakeup_time_sec * 1000000 在运算时溢出。
+
+  .. code-block:: c
+
+    const uint64_t wakeup_time_sec = 3600;
+    printf("Enabling timer wakeup, %lld\n",wakeuo_time_sec);
 
 ------------------
 
