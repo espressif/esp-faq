@@ -319,3 +319,11 @@ ESP8266 user_init 内有那些注意事项？
   - system_timer_reinit 建议在 user_init 中调⽤，否则调⽤后，需要重新 arm 所有 timer。
   - wifi_station_set_config 如果在 user_init 中调⽤，底层会⾃动连接对应路由，不需要再调⽤ wifi_station_connect 来进⾏连接。否则，需要调⽤ wifi_station_connect进⾏连接。
   - wifi_station_set_auto_connect 设置上电启动时是否⾃动连接已记录的路由；例如，关闭⾃动连接功能，如果在 user_init 中调⽤，则当前这次上电就不会⾃动连接路由，如果在其他位置调⽤，则下次上电启动不会⾃动连接路由。
+
+-----------------
+
+ESP32 同时开启 "Enable debug tracing of PM using GPIOs" 和 "Allow .bss segment placed in external memory" 后为何会导致系统不停重启？
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+  - "Enable debug tracing of PM using GPIOs" 配置选项是在 GDB 调试时需要打开的，不可与 "Allow .bss segment placed in external memory" 配置选项同时使用。
+  - 因为 “Enable debug tracing of PM using GPIOs" 默认使用的是 GPIO16 与 GPIO17 ，与 PSRAM 接口（默认也是 GPIO16 和 GPIO17） 冲突。
