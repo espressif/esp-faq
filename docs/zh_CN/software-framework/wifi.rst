@@ -495,3 +495,11 @@ ESP32 如何收发 wifi 802.11 数据包？
   - 在保存 Wi-Fi 连接的场景中，芯片会在 Active 和 Modem-sleep 模式之间自动切换，功耗也会在两种模式间变化。
   - ESP32 支持在 light sleep 下 wifi 保活，自动唤醒间隔由 DTIM 参数决定。 
   - 例程参见：ESP-IDF - > examples - > wifi - > power_save。
+
+--------------
+
+乐鑫芯片是否支持 WPA3？
+---------------------------------------------------------------
+
+  - ESP32 系列： esp-idf 从 release/v4.1 版本开始支持 WPA3 ，默认使能，可在 menuconfig > Component config > Wi-Fi 中配置。
+  - ESP8266：ESP8266_RTOS_SDK 的 master 分支开始支持 WPA3 ，默认使能，可在 menuconfig > Component config > Wi-Fi 中配置。
