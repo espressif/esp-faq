@@ -186,6 +186,12 @@ ESP32 能否以动态库的方式加载库文件运行?
 
   ESP32 不支持动态库的方式加载库文件，只支持靜态库。
 
+----------------------
+
+ESP32 芯片低电压复位阈值是多少？
+
+- 欠压复位电压阈值范围在 2.43V ~ 2.80 V 之间，可在 menuconfig -> Component config -> ESP32-specific -> Brownout voltage level 中进行设置。
+
 ----------------
 
 ESP32 light sleep 例程为何会自动唤醒？
