@@ -51,6 +51,18 @@ ESP32 是否支持使用 JTAG 管脚直接烧写程序？
 
   - ESP32 支持使用 JTAG 管脚直接烧写程序，参考文档 `JATG调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_。
 
+---------------
+
+ESP32 能否通过 OTA 开启 Security Boot 功能？
+------------------------------------------------------------------------------------------------
+
+  - 不推荐这样开启，因为这样操作存在风险，并且需要多次 OTA 固件。
+  - 因为 Security Boot 功能存在于 Bootloader 中，所以需要更新 Bootloader 才可以开启该功能。
+    - 首先检测目前设备的分区表是否可以存放开启 Security Boot 后的 Bootloader。
+    - 然后更新一个支持写入 Bootloader 分区的中间固件，默认配置中无法擦写 Bootloader 分区，需要 `make menuconfig` 单独开启。
+    - 再将中间固件签名后 OTA 到目标设备，运行中间固件，中间固件先进行 OTA Bootloader, 再 OTA 被签名的新固件。
+    - 如果在 OTA Bootloader 时出现中途断电或者断网失败重启，设备将无法启动，需要重新烧录。
+
 --------------
 
 ESP32S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of packet (0x50)” 如何解决？
