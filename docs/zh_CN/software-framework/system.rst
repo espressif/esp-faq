@@ -268,6 +268,16 @@ ESP8266 AT 连接 AP 后，系统默认进入 modem-sleep，但电流未明显�
 
 --------------
 
+ESP32 是否可以永久更改 MAC 地址?
+-----------------------------------------
+
+  - 芯片自带的 MAC 地址无法修改。efuse 中支持用户写入自己的 MAC 地址。
+  - 在固件中调用 api 可以获取定制 MAC 地址，并且可以设置到系统中替代默认地址。
+  - 详情请参考：https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/system.html#mac-address
+  - 另外，Espressif 提供在芯片出厂之前，烧录用户提供的 MAC 地址服务。如有需要，可发送邮件至 sales@espressif.com
+
+--------------
+
 ESP8266 进行 ota 升级时如何校验 all.bin 为非法文件？
 ---------------------------------------------------------
 
