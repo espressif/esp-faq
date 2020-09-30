@@ -186,6 +186,20 @@ ESP32 能否以动态库的方式加载库文件运行?
 
   ESP32 不支持动态库的方式加载库文件，只支持靜态库。
 
+----------------
+
+ESP32 light sleep 例程为何会自动唤醒？
+----------------------------------------------------------------------------------------------------
+
+  light sleep 例程下，默认使用了两种唤醒方式，如下：
+  .. code-block:: c
+
+    esp_sleep_enable_timer_wakeup(2000000);     // 2 秒自动唤醒
+    esp_sleep_enable_gpio_wakeup();             // GPIO 唤醒
+
+  GPIO 唤醒默认是 GPIO0 低有效唤醒，GPIO0 拉低则为唤醒状态，GPIO0 释放则自动进入 light sleep 模式。
+  若需要长时间保存 light sleep 模式，可以将 2 秒自动唤醒屏蔽，仅开启 GPIO 唤醒。
+
 ---------------------
 
 ESP32 deep_sleep例程测试，为何当 const int wakeup_time_sec = 3600时，程序 crash 出现死循环？
