@@ -259,6 +259,27 @@ ESP8266 是否有详细的寄存器⼿册？
 
   请参考 《8266 TRM appendix》部分，链接：https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_cn.pdf
 
+---------------
+
+ESP32 开启 Secure Boot 后 无法正常启动 ,出现如下报错，是什么原因？
+-----------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    csum err:0x9a!=0x5f
+    ets_main.c 371
+    ets Jun  8 2016 00:22:57
+    rst:0x10 (RTCWDT_RTC_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+    configsip: 0, SPIWP:0xee
+    clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+    mode:DIO, clock div:2
+    load:0x3fff0030,len:4
+    load:0x3fff0034,len:9372
+    load:0x40078000,len:19636
+
+  可能是因为开启 Secure Boot 后 Bootloader 会变大，烧录固件时 Bin 文件产生了覆盖。
+  可以查询 Secure Boot 后 Bootloader 的大小，比如可以尝试把分区表的偏移量增大为 0xF000 。
+
 --------------
 
 ESP8266 如何在设备软重启的情况下保留数据？
