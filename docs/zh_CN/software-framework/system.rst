@@ -186,6 +186,15 @@ ESP32 能否以动态库的方式加载库文件运行?
 
   ESP32 不支持动态库的方式加载库文件，只支持靜态库。
 
+------------------
+
+ESP32 如何减小系统对 IRAM 内存的占用？
+--------------------------------------------------------------------
+
+  - 请将 mencuofnig -> Component config -> LWIP -> Enable LWIP IRAM optimization (键"N" 禁用) 配置选项禁用。
+  - 请更改 menuconfig -> Compiler option -> Optimization Level -> Optimize for size (-Os) 中的配置选项。
+  - 请将 menuconfig -> Component config -> wifi 中的配置选项中的 WiFi IRAM speed optimization (N) 和 WiFi RX IRAM speed optimization (N) 配置选项禁用。
+
 ----------------------
 
 ESP32 芯片低电压复位阈值是多少？
