@@ -284,3 +284,12 @@ ESP32 Touch 应用有哪些参考资料？
 -------------------------------------------
 
   - ESP32 touch 应用可以参考 `Touch 软硬件设计 <https://github.com/espressif/esp-iot-solution/tree/master/examples/touch_pad_evb>`__ 。
+
+
+--------------
+
+ESP32 SD 卡是否可以与 Flash & Psram 共同使用？
+-------------------------------------------------
+
+  - 可以共同使用。 
+  - ESP32 Flash & PSRAM 与 SD 卡使用的不是同一组 SDIO。
