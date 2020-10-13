@@ -28,11 +28,11 @@ Host MCU 如何通过串口对 ESP32 进行烧录升级？
 
   USB 转串口对乐鑫模组进行自动烧录接线方式如下：
 
-+------------+-------+-------+-------+-------+-------+-------+
-| 乐鑫模组   | 3V3   | GND   | TXD   | RXD   | IO0   | EN    |
-+============+=======+=======+=======+=======+=======+=======+
-| 串口工具   | 3V3   | GND   | RXD   | TXD   | DTR   | RTS   |
-+------------+-------+-------+-------+-------+-------+-------+
+  +------------+-------+-------+-------+-------+-------+-------+
+  | 乐鑫模组   | 3V3   | GND   | TXD   | RXD   | IO0   | EN    |
+  +============+=======+=======+=======+=======+=======+=======+
+  | 串口工具   | 3V3   | GND   | RXD   | TXD   | DTR   | RTS   |
+  +------------+-------+-------+-------+-------+-------+-------+
 
   注：ESP8266 模组需要额外将 IO15 接地。
 
@@ -97,7 +97,7 @@ ESP32S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of p
 
   **解决方法：**
 
-  如果当前使用的是 ESP32-S2 芯片而不是 ESP32-S2 Beta 芯片，需要将 ESP-IDF 升级到 v4.2 或 以上。
+    如果当前使用的是 ESP32-S2 芯片而不是 ESP32-S2 Beta 芯片，需要将 ESP-IDF 升级到 v4.2 或 以上。
 
   **补充说明:**
 
@@ -120,4 +120,4 @@ ESP32S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of p
       ../../../components/esptool_py/esptool/esptool.py -p (PORT) -b 921600 write_flash --flash_mode dio --flash_size detect --flash_freq 40m 0x10000 build/hello-world.bin  build 0x1000 build/bootloader/bootloader.bin 0x8000 build/partition_table/partition-table.bin
       or run 'idf.py -p PORT flash'
 
-    可以按照该指令提示的 bin 文件及烧录地址使用 flash_download_tool 进行烧录。
+  可以按照该指令提示的 bin 文件及烧录地址使用 flash_download_tool 进行烧录。
