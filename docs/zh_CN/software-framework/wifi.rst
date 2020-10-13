@@ -184,6 +184,14 @@ ESP32 Wi-Fi RF 功率最高值是多少？
 
 --------------
 
+ESP32 如何调整 Wi-Fi 的发射功率？
+---------------------------------
+
+  - 可通过 menuconfig 配置 Component config -> PHY -> Max Wi-Fi TX power(dBm) 来调整 Wi-Fi 的发射功率，最大是 20db 。
+  - 或者使用 API `esp_err_t esp_wifi_set_max_tx_power(int8_t power);` 设置调整。
+
+--------------
+
 [Connect] ESP32 AP 模式最多支持多少设备连接？
 ----------------------------------------------
 
