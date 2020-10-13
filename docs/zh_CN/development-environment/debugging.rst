@@ -180,3 +180,13 @@ ESP32 出现 Error:Core 1 paniced(Cache disabled but cache memory region accesse
   - 给在中断中访问的常量加上 DRAM_ATTR 修饰符
   - 不在中断处理程序中使用 double 类型
 
+--------------
+
+如何读取模组 flash 型号信息 ?
+----------------------------------
+
+  - 乐鑫模组或芯片可通过 python 脚本 `esptool <https://github.com/espressif/esptool>`__ 读取。
+
+  .. code-block:: text
+
+    esptool.py --port /dev/ttyUSB* flash_id
