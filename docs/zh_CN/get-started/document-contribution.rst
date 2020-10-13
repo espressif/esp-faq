@@ -64,31 +64,28 @@
 4.1 问题模块示例
 ~~~~~~~~~~~~~~~~
 
-.. code:: text
+  .. code:: text
 
 
-    ---
-
+    --------------
+    
     乐鑫是否已有 AI 图像识别的产品？
-    =============================
-
-    ..
-     已有标准开发板 ESP-EYE，主控芯⽚为 ESP32
+    -------------------------------------
 
     乐鑫已有标准开发板 ESP-EYE，主控芯⽚为 ESP32，可兼容 0v2640，3660，5640 等多款摄像头。
+
 
 4.2 问题图片示例
 ~~~~~~~~~~~~~~~~
 
-.. code:: text
+  .. code:: text
 
 
-    ---
+    --------------
 
     curses.h: No such file or directory?
-    =====================================
+    -------------------------------------------
 
-    ..
      问题截图：support ESP8266 chip, but ESP8266_RT
 
     .. figure:: _static/application-solution/android-application/case_two_kconfig_error.png
