@@ -43,12 +43,24 @@ Windows 下 使用 ESP-IDF Tools 2.3 工具安装 master 版本的 esp-idf 出�
 Windows 下使用 `esp-idf-tools-setup-2.3.exe <link:https://dl.espressif.com/dl/esp-idf-tools-setup-2.3.exe>`__ 搭建环境，make menuconfig 出现如下错误：
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-.. code:: shell
+  .. code:: shell
 
     -- Warning: Did not find file Compiler/-ASM Configure
     -- Configuring incomplete , erros occurred !
 
   出现此错误的原因是没有因为未找到编译工程，可以切换目录到 esp-idf/get-started/hello\_world 示例中进行测试验证。
+
+--------------
+
+Windows 下使用 `esp-idf-tools-setup-2.2.exe <link:https://dl.espressif.com/dl/esp-idf-tools-setup-2.2.exe>`__ 安装过程中，出现 python 工具异常：
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code:: text
+
+    Installation has failed with exit code 1
+
+  - 更新一下工具链：https://dl.espressif.com/dl/esp-idf-tools-setup-2.3.exe
+  - 并且删除 idf_tools.py 中过时的选项 "--no-site-packages"
 
 --------------
 
