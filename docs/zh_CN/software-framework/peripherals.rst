@@ -293,3 +293,19 @@ ESP32 SD 卡是否可以与 Flash & Psram 共同使用？
 
   - 可以共同使用。 
   - ESP32 Flash & PSRAM 与 SD 卡使用的不是同一组 SDIO。
+
+--------------
+
+ESP32 使用 UART0 作为通信串口，有哪些？
+-------------------------------------------------
+
+  - 通常情况下不建议将 UART0 作为普通的通信串口，因为 UART0 为设备默认 LOG 输出串口。
+  - 若 ESP32 的 UART 不够用，或者硬件设计已经不方便更改的情况下，如果您要使用 UART0 作为普通的通信串口，请参考以下建议：
+    
+    软件方面：防止打印影响串口通信，默认程序中 UART0 主要有三处打印设置：
+    - 第一处是上电 ROM 打印，上电时可将 MTDO pin 设为低电平屏蔽上电 ROM 打印。
+    - 第二处是 bootloader log 信息输出，您可以将 menuconfig -> Bootloader config -> Bootloader log verbosity 设置为 No output 来屏蔽 bootloader log 输出。
+    - 第三处是 app log 信息输出，您可以将 menuconfig -> Component config -> Log output -> Default log verbosity 设置为 No output 来屏蔽 log 输出。
+    
+    硬件方面：
+    - 在下载程序的时候，注意防止 UART0 上有其它设备，如果有其它设备可能会影响程序的下载。建议在 ESP32 和其它设备之间预留一个 0 Ω 电阻，如果下载有问题可以断开这个 0 Ω 电阻。
