@@ -56,8 +56,8 @@ ESP32 是否支持使用 JTAG 管脚直接烧写程序？
 ESP_Flash_Downloader_Tool 是否可以自定义编程控制？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  ESP_Flash_Downloader_Tool GUI 工具不开源，且不支持嵌入执行脚本。
-  ESP_Flash_Downloader_Tool 底层组件 ESPtool 工具开源，可以完成烧录加密等等所有功能，建议基于该组件二次开发。
+  - ESP_Flash_Downloader_Tool GUI 工具不开源，且不支持嵌入执行脚本。
+  - ESP_Flash_Downloader_Tool 底层组件 ESPtool 工具开源，可以完成烧录加密等等所有功能，建议基于该组件二次开发。
 
 ---------------
 
@@ -66,6 +66,7 @@ ESP32 能否通过 OTA 开启 Security Boot 功能？
 
   - 不推荐这样开启，因为这样操作存在风险，并且需要多次 OTA 固件。
   - 因为 Security Boot 功能存在于 Bootloader 中，所以需要更新 Bootloader 才可以开启该功能。
+
     - 首先检测目前设备的分区表是否可以存放开启 Security Boot 后的 Bootloader。
     - 然后更新一个支持写入 Bootloader 分区的中间固件，默认配置中无法擦写 Bootloader 分区，需要 `make menuconfig` 单独开启。
     - 再将中间固件签名后 OTA 到目标设备，运行中间固件，中间固件先进行 OTA Bootloader, 再 OTA 被签名的新固件。
