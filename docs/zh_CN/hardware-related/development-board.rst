@@ -178,3 +178,10 @@ ESP32 DevKitc 开发板 LED 灯不亮，设备管理器也无法找到该设备�
   - 是否所有的设备都是这样的现象？检查其他的 ESP32 DevKitc 开发板设备用该 USB 线是否正常。
   - 若上面都不可行的话，可以通过 USB 转 TTL 设备去接线，只需接 ESP32 DevKitc 的引脚 VCC, GND, TXD ，测试一下芯片是否有问题，用串口助手看是否有打印信息出来。
   - 如果可以，请测试串口驱动芯片是否有电压，可以参考 `原理图 <https://www.espressif.com/sites/default/files/documentation/esp32-devkitc-v4_reference_design_0.zip>`__ 。
+
+--------------
+
+文档中有提到 EN 按键，但在购买的开发板上没有找到该按键？
+-----------------------------------------------------------
+
+  建议检查开发板是否有 Reset 按键，由于 EN 常用做复位功能，部分开发板丝印会标记为 Reset 按键。
