@@ -20,9 +20,10 @@
 
   场景描述：电源为 220V 转 5V ，5V 转 3.3V ，220V掉电再上电出现故障。报错 log 如下: 
 
-  brownout detector was triggered.
-  rst:0xc(SW_CPU_RESET),boot:0x13(SPI_FAST_FLASH_BOOT)
-  configsip:0,SPI
+  .. code-block:: text
+
+    brownout detector was triggered.
+    rst:0xc(SW_CPU_RESET),boot:0x13(SPI_FAST_FLASH_BOOT) configsip:0,SPI
 
   1. 打印此 log是因为在快速掉电过程中，电压降到了触发硬件看门狗的电压阈值。
   2. 由于上电时序不对，导致没有进入 bootloader ，可以将 chip_PU 强制拉低解除故障。
@@ -83,48 +84,51 @@ ESP8266 如何修改默认上电校准⽅式？
 ESP32 boot 启动模式不正常如何排查？
 -----------------------------------
 
-  我司模组种使用 1.8V flash 与 psram 的 ESP32-WROVER 默认为 ``0x33`` ,下载模式 ``0x23`` 。其余使用 3.3V flash 与 psram 模组默认为 ``0x13`` , 下载模式 ``0x03`` 。详情请参考 ESP32 系列芯片技术规格书中 Strapping 管脚部分。
-  ESP32 正常启动的 boot 信息应该是 ``0x13``，这⼏个⽣效的管脚如下： 
+  - ESP32-WROVER 模组使用 1.8V flash 与 psram 启动状态默认为 ``0x33`` ,下载模式 ``0x23`` 。
+  - 其余模组使用 3.3V flash 与 psram 模组默认为 ``0x13`` , 下载模式 ``0x03`` 。
+  - 详情请参考 ESP32 系列芯片技术规格书中 Strapping 管脚部分。示例 ``0x13`` 对应如下： 
 
-  - 管脚：GPIO12，GPIO0，GPIO2，GPIO4，GPIO15，GPIO5 
-  - 电平： 0、1、0、1、0、1
+  +--------+--------+-------+-------+-------+--------+-------+
+  | 管脚   | GPIO12 | GPIO0 | GPIO2 | GPIO4 | GPIO15 | GPIO5 |
+  +========+========+=======+=======+=======+========+=======+
+  | 电平   |    0   |   1   |   0   |   1   |    0   |   1   |
+  +--------+--------+-------+-------+-------+--------+-------+
 
 --------------
 
 使用 ESP32 JLINK 调试，发现会报 ERROR：No Symbols For Freertos ，如何解决呢？
 -----------------------------------------------------------------------------
 
-  首先，这个不影响使用，解决措施可以参考`此 ST 论坛链接 <https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd>`__。
+  首先，这个不影响使用，解决措施可以参考 `此论坛链接 <https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd>`__ 。
 
 --------------
 
 如何监测任务栈的剩余空间？
 --------------------------
 
-  API ``vTaskList()`` 可以用于定期打印任务栈的剩余空间。
+  函数 ``vTaskList()`` 可以用于定期打印任务栈的剩余空间。
 
 --------------
 
 ESP32-S2 是否可以使用 JTAG 进行下载调试？
 -----------------------------------------
 
-  可以。详情请参考 `ESP32-S2 JATG 调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/jtag-debugging/>`_。
+  可以，详情请参考 `ESP32-S2 JATG 调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/jtag-debugging/>`_。
 
 --------------
 
-如何在不更改 menuconfig 输出级别的情况下改变 log 级别？
+如何在不更改 menuconfig 输出级别的情况下调整 log 输出？
 -------------------------------------------------------
 
-  无需使用 menuconfig，可以通过 API ``esp_log_level_set()`` 修改 log 的输出级别。
+  可以通过函数 ``esp_log_level_set()`` 修改 log 的输出级别。
 
 --------------
 
 为什么 ESP8266 进⼊启动模式（2，7）并触发看⻔狗复位？
 -----------------------------------------------------
 
-  请确保 ESP8266 启动时，strapping 管脚处于所需的电平。如果外部连接的外设使 strapping 管脚进⼊到错误的电平，ESP8266 可能进⼊错误的操作模式。在⽆有效程序的情况下，看⻔狗计时器将复位芯⽚。
-
-  因此在设计实践中，建议仅将 strapping 管脚⽤于连接⾼阻态外部器件的输⼊，这样便不会在上电时强制 strapping 管脚为⾼/低电平。参考链接：`ESP8266 Boot Mode Selection <https://github.com/espressif/esptool/wiki/ESP8266-Boot-Mode-Selection>`_。
+  - 请确保 ESP8266 启动时，strapping 管脚处于所需的电平。如果外部连接的外设使 strapping 管脚进⼊到错误的电平，ESP8266 可能进⼊错误的操作模式。在⽆有效程序的情况下，看⻔狗计时器将复位芯⽚。
+  - 因此在设计实践中，建议仅将 strapping 管脚⽤于连接⾼阻态外部器件的输⼊，这样便不会在上电时强制 strapping 管脚为⾼/低电平。参考链接：`ESP8266 Boot Mode Selection <https://github.com/espressif/esptool/wiki/ESP8266-Boot-Mode-Selection>`_。
 
 --------------
 
@@ -173,9 +177,12 @@ ESP32 出现 Error:Core 1 paniced(Cache disabled but cache memory region accesse
 ----------------------------------------------------------------------------------------------------
 
   问题原因：
-  - 在 cache 被禁用期间（例如在使用 spi_flash API 读取/写入/擦除/映射 SPI Flash 的时候），发生了中断并且中断程序访问了 Flash 的资源， 通常发生在处理程序调用了在 Flash 中的程序，引用了 Flash 中的常量。值得注意的是，当在中断程序里面使用 double 类型变量时，由于 double 型变量操作的实现是软件实现的， 该部分实现也是被链接在了 Flash 中（例如强制类型转换操作）。
+
+  - 在 cache 被禁用期间（例如在使用 spi_flash API 读取/写入/擦除/映射 SPI Flash 的时候），发生了中断并且中断程序访问了 Flash 的资源。
+  - 通常发生在处理程序调用了在 Flash 中的程序，引用了 Flash 中的常量。值得注意的是，当在中断程序里面使用 double 类型变量时，由于 double 型变量操作的实现是软件实现的， 该部分实现也是被链接在了 Flash 中（例如强制类型转换操作）。
 
   解决措施：
+  
   - 给在中断中访问的函数加上 IRAM_ATTR 修饰符
   - 给在中断中访问的常量加上 DRAM_ATTR 修饰符
   - 不在中断处理程序中使用 double 类型
