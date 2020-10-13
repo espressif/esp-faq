@@ -311,9 +311,11 @@ ESP32 模组下载 ESP-AT 固件，默认 AP 的 Wi-Fi 名称是什么？
 
 ---------------
 
-ESP32 是否有 AT 指令通过 SPI 传输参考例程？
+如何使用 SPI 接口进行 AT 通信？
+---------------------------------------
 
-  - STM32 作为主机通过 SPI 发送 AT 指令与 ESP32 从设备通信，可参考  `例程 <https://github.com/espressif/esp-at/tree/master/examples/at_sdspi_host>`__。
+  - 乐鑫提供的 AT 固件默认使用 UART 进行通信，用户如果需要使用 SPI 进行通信，可以基于 `esp-at <https://github.com/espressif/esp-at>`__ 配置编译。
+  - 更多 AT 相关文档：`AT README.md <https://github.com/espressif/esp-at/blob/master/README.md>`__ 。
 
 --------------
 
