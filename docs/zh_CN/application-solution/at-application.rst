@@ -329,14 +329,11 @@ AT 指令如何修改 SoftAP 默认的 IP 地址？
 
   - 以 ESP-AT V2.0 版本的以上的固件为例，SoftAP 的 IP 地址修改方式如下：
 
-  .. code-block::shell
+  .. code-block:: text
 
     AT+CWMODE=2    #设置当前设备为 SoftAP 模式
-
     AT+CIFSR       #查询当前设备的 AP 的 IP 地址
-
     AT+CIPAP="192.168.1.1","192.168.1.1","255.255.255.0"  #设置当前 SoftAP 的 IP 地址
-
     AT+CIFSR                                              #查看修改后的 SOftAP 的 IP 地址
 
 --------------
