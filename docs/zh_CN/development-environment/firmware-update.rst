@@ -121,3 +121,11 @@ ESP32S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of p
       or run 'idf.py -p PORT flash'
 
   可以按照该指令提示的 bin 文件及烧录地址使用 flash_download_tool 进行烧录。
+
+--------------
+
+ESP32 如何设置 Flash SPI 为 QIO 模式？
+---------------------------------------------------------------------------------------------
+
+- 可通过 menuconfig -> Serial flasher config -> Flash SPI mode 配置端进行设置，对应 API 为 esp_image_spi_mode_t(); 
+- 也可在 Flash download tool 下载工具界面进行配置。
