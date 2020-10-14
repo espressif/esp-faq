@@ -18,7 +18,7 @@
 ESP32-Korvo V1.1 开发板是否集成 LED driver 芯片？
 ----------------------------------------------------
 
-  我司出厂的 ESP32-Korvo V1.1 开发板未有 LED driver。
+  我司出厂的 ESP32-Korvo V1.1 开发板中含有 LED driver 芯片。
 
 --------------
 
@@ -36,7 +36,7 @@ ESP-EYE 开发板运行发热过高如何改善？
   - 第一种方法："3V3 连接 3V3" + "GND 连接 GND"（如果开发板存在非 3.3V 供电的器件，则该器件将无法使用）
   - 第二种方法："5V 连接 5V" + "GND 连接 GND"
 
-  注意: 供电电流需要满足 500mA。
+  .. note:: 供电电流需要满足 500mA。
 
 ----------
 
@@ -63,7 +63,7 @@ ESP8266 连接手机热点，出现如下报错，有哪些原因？
 是否有支持 POE 供电的以太网开发板？
 ---------------------------------------------------------------------------------------
 
-- `ESP32-Ethernet-Kit <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/hw-reference/esp32/get-started-ethernet-kit.html>`_ 是支持 POE 供电的以太网开发板。
+  - `ESP32-Ethernet-Kit <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/hw-reference/esp32/get-started-ethernet-kit.html>`_ 是支持 POE 供电的以太网开发板。
 
 --------------
 
@@ -101,13 +101,9 @@ ESP32S2-Kaluga 是否有并行 LCD 接口？如果有，硬件上需要如何使
 ESP32S2-Kaluga 是否支持 USB 调试？
 -------------------------------------
 
--  Kaluga 所有版本均内置了 FT2232HL，该芯片自带 USB - JTAG Bridge 以使用
-   JTAG 调试功能。
-
--  您需要切换拨码开关来连接 JTAG 相关引脚，在 idf menuconfig 中打开 JTAG
-   调试功能，确保 efsue 没有禁用 JTAG 调试，并安装 openocd 以支持 JTAG
-   调试。之后，您便可以使用 ``idf.py openocd gdb`` 、
-   ``idf.py openocd gdbgui`` 等命令进行调试。
+  - Kaluga 所有版本均内置了 FT2232HL，该芯片自带 USB - JTAG Bridge 以使用 JTAG 调试功能。
+  - 您需要切换拨码开关来连接 JTAG 相关引脚，在 idf menuconfig 中打开 JTAG 调试功能，并且确保 efsue 没有禁用 JTAG 调试。
+  - 安装 openocd 以支持 JTAG 调试之后，您便可以使用 ``idf.py openocd gdb`` 、 ``idf.py openocd gdbgui`` 等命令进行调试。
 
 --------------
 
@@ -125,7 +121,7 @@ ESP32S2-Kaluga 中为什么需要多加一块数字 mic 芯片，不可以直接
 ESP32S2-Kaluga 中的 speaker 与 Audio\_Out 接口是否支持同时输出？
 ------------------------------------------------------------------
 
-  - 可以。
+  - ESP32S2-Kaluga 中的 speaker 与 Audio\_Out 接口可以同时输出。
   - 如果您使用模拟麦克风，那么您只需要将麦克风的音频 PA 连接至 Codec IC，便可以使用 I2S 与 Codec 进行全双工通讯，同时进行音频采集和播放。
   - 如果您使用数字麦克风，那么您只需要将数字麦克风和 Codec IC 连接至 ESP32S2 的 I2S 相关引脚，便可以使用 I2S 进行全双工通讯。
 
@@ -142,6 +138,7 @@ ESP32S2-Kaluga-V1.2 中的 4.3inch\ *LCD*\ FPC\_CNN 接口是否为并口 LCD �
 -------------------------------------------------------------------------------
 
   - 是的，该 FPC 接口可以用于驱动 并口的屏幕，但是有以下内容需要注意：
+
     - 该 FPC 默认未贴，需要您自行焊接。
     - 由于并口会占用大量的 IO 口，因此，音频板和摄像头的功能都会无法使用，或者需要分时复用。
     - 目前暂未提供基于并口的 Kaluga LCD Demo，您可能需要自行实现其驱动。
@@ -159,8 +156,8 @@ ESP32S2-Kaluga-V1.2 PCB上有很多没有焊接元件的地方是否是运送过
 ESP32-S2-Kaluga-V1.2 开发板配有摄像头，是否有摄像头的例程可以提供？
 ---------------------------------------------------------------------
 
-  ESP32-S2-Kaluga-V1.2 开发板示例代码：https://github.com/espressif/esp-dev-kits/tree/master/esp32-s2-kaluga-1
-  ESP32-S2-Kaluga-V1.2开发板摄像头示例：https://github.com/espressif/esp-dev-kits/tree/master/esp32-s2-kaluga-1/examples/camera
+  - ESP32-S2-Kaluga-V1.2 开发板示例代码：https://github.com/espressif/esp-dev-kits/tree/master/esp32-s2-kaluga-1
+  - ESP32-S2-Kaluga-V1.2开发板摄像头示例：https://github.com/espressif/esp-dev-kits/tree/master/esp32-s2-kaluga-1/examples/camera
 
 --------------
 

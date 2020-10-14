@@ -29,14 +29,16 @@ ESP32 单核与双核的区别？（从编程开发⽅式、性能表现、功�
 ESP32 E03 版本芯⽚在使⽤上和之前芯⽚软件有什么区别呢？
 ------------------------------------------------------------
 
-  软件上使⽤⽆区别，是可以兼容之前的固件的，硬件上修复了⼀些 bug，具体的可以参考⽂档 `ESP32 ECO V3 使用指南 <https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__CN.pdf>`_。
+  - 软件上使⽤⽆区别，是可以兼容之前的固件的，硬件上修复了⼀些 bug。
+  - 具体的可以参考⽂档 `ESP32 ECO V3 使用指南 <https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__CN.pdf>`_。
 
 --------------
 
 ESP32 的 GPIO34 ~ GPIO39 管脚是否只能设置为输入模式？
 -----------------------------------------------------
 
-  ESP32 的 GPIO34 ~ GPIO39 只能设置为输入模式，没有软件上拉或下拉功能，不能设置为输出模式。参见 `说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/gpio.html?highlight=gpio34#gpio-rtc-gpio>`_。
+  - ESP32 的 GPIO34 ~ GPIO39 只能设置为输入模式，没有软件上拉或下拉功能，不能设置为输出模式。
+  - 详情可参见 `外设说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/gpio.html?highlight=gpio34#gpio-rtc-gpio>`_。
 
 --------------
 
@@ -50,15 +52,16 @@ ESP32 有适配 Linux 平台驱动吗？
 模组上的二维码如何解读？
 -------------------------
 
-  例如：0920118CAAB5D2B7B4，09 为工厂代码， 20 为 20\*\* 生产年份（本示例为 2020 年），11 为本年第几周生产，8CAAB5D2B7B4 为设备 mac 地址。
+  - 若二维码扫描后读取数据为 0920118CAAB5D2B7B4
+  - 那么其中 09 为工厂代码， 20 为 20\*\* 生产年份（本示例中为 2020 年），11 为本年第几周生产，8CAAB5D2B7B4 为设备 mac 地址。
 
 --------------
 
-ESP32 的 VDD3P3\_RTC 是否支持系统掉电时使用电池供电？
+ESP32 的 VDD3P3\_RTC 是否支持单独电池供电？
 ------------------------------------------------------
 
-ESP32 内部 RTC 域不可以独立工作，需要主 CPU 参与配置，单独使用纽扣电池供电时依然无法抵御突然掉电的情况。如果需要系统掉电时时钟信息保存，可以添加外部 RTC 时钟芯片。
-
+  - ESP32 内部 RTC 域不可以独立工作，需要主 CPU 参与配置，单独使用纽扣电池供电时依然无法抵御突然掉电的情况。
+  - 如果需要系统掉电时时钟信息保存，可以添加外部 RTC 时钟芯片。
 
 --------------
 
