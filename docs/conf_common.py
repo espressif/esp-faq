@@ -241,6 +241,8 @@ html_static_path = ['../_static','_static']
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'ReadtheDocsTemplatedoc'
 
+# html js file
+html_js_files = ['baidu_analytics.js',]
 
 # -- Options for LaTeX output ---------------------------------------------
 
