@@ -537,3 +537,19 @@ ESP-NOW 是什么？有哪些优势与场景？
   - `ESP-NOW <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_now.html>`__ 是一种由乐鑫公司定义的无连接 Wi-Fi 通信协议。
   - 在 ESP-NOW 中，应用程序数据被封装在各个供应商的动作帧中，然后在无连接的情况下，从一个 Wi-Fi 设备传输到另一个 Wi-Fi 设备。
   - ESP-NOW 广泛应用于智能照明、远程控制、传感器等领域。
+
+--------------
+
+ESP32 数据帧和管理帧的重传次数是多少？是否可以配置？
+-----------------------------------------------------------
+
+  - 重传次数是 31 次，不可以配置。
+
+--------------
+
+ESP32 如何自定义 hostname?
+-----------------------------------------------------------
+
+  - 以 idf v4.2 为例，可以在 menuconfig > Component Config > LWIP > Local netif hostname，然后输入指定的 hostname 即可。
+  - 不同的版本在命名上可能略有区别。
+
