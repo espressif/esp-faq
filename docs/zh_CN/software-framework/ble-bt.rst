@@ -291,3 +291,11 @@ ESP32 BLE/BT Secure Simple Pairing (SSP) 与 legacy pairing 安全性对比 ？
 
   - Secure Simple Pairing (SSP) 比 legacy pairing 更加安全。
   - legacy pairing 使用对称加密算法， Secure Simple Pairing (SSP) 使用的是非对称加密算法。
+
+--------------
+
+ESP32 BLE MTU 大小如何确定？
+-----------------------------------------------------------
+
+  - ESP32 端蓝牙 BLE 默认的 MTU 为 23 字节，最大可以设置为 517 字节。
+  - 手机端的 MTU 由手机端自行定义，最终通信的 MTU 选择两端 MTU 较小的那一个。
