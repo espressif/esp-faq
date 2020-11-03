@@ -378,3 +378,11 @@ ESP32 同时开启 "Enable debug tracing of PM using GPIOs" 和 "Allow .bss segm
 
   - "Enable debug tracing of PM using GPIOs" 配置选项是在 GDB 调试时需要打开的，不可与 "Allow .bss segment placed in external memory" 配置选项同时使用。
   - 因为 “Enable debug tracing of PM using GPIOs" 默认使用的是 GPIO16 与 GPIO17 ，与 PSRAM 接口（默认也是 GPIO16 和 GPIO17） 冲突。
+
+
+ESP32 IDF v3.3 版本 bootloader 运行 v3.1 版本 APP bin , 程序为何会触发 RTCWDT_RTC_RESET ？
+--------------------------------------------------------------------------------------------------------
+
+  - 在 v3.3 的 bootloader 中会开启 WDT 看门狗，且在应用程序(app) 运行时关闭 WDT 看门狗。
+  - 但 v3.1 的 bootloader 没有开启 WDT 看门狗，所以应用程序(app) 没有 WDT 看门狗的机制，进而导致 v3.3 的 bootloader 引导 v3.1 的应用程序(app) 会触发 WDT 看门狗复位。
+  - 可以通过在 menuconfig 中不使能 BOOTLOADER_WDT_ENABLE ，关闭 v3.3 版本 bootloader 中 WDT 看门狗开启。
