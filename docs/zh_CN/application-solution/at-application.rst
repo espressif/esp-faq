@@ -359,3 +359,10 @@ ESP32 如何自定义 AT 指令？
 --------------------------------------------------
 
   - 请参考文档: `How_to_add_user-defined_AT_commands <https://docs.espressif.com/projects/esp-at/en/latest/Compile_and_Develop/How_to_add_user-defined_AT_commands.html>`__ 。
+
+--------------
+
+ESP8266 AT 无法正常使用 MQTT over TLS 来访问 AWS？
+-----------------------------------------------------------------------------------------------
+
+  - ESP8266 AT 可用内存不足以支持 MQTT over TLS，建议使用 ESP32 AT 或直接使用 ESP8266 RTOS SDK。
