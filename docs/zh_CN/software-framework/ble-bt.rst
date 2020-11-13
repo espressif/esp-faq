@@ -308,3 +308,10 @@ ESP32 BLE 模式下广播数据时遇到 "W (17370) BT_BTM: data exceed max adv 
   - 出现该警告的原因是广播的数据长度超出最大广播数据包长度限制.
   - 广播有效载荷数据长度最大为 31 字节。如果超过 31 字节，那么蓝牙协议栈会丢弃一些数据,并且给出警告.
   - 如果需要广播的数据长度超出最大限制,超出的数据可以放在扫描响应数据包(scan response data)中。
+
+--------------
+
+ESP32 BLE 能否同时支持主从模式，作 gatt server 的同时，也可作为 gatt client 接收其他设备的广播数据？
+--------------------------------------------------------------------------------------------------------------------
+
+  - 支持，可参考例程 `gattc_gatts_coex <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/coex/gattc_gatts_coex>`_。
