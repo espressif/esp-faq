@@ -366,3 +366,10 @@ ESP8266 AT 无法正常使用 MQTT over TLS 来访问 AWS？
 -----------------------------------------------------------------------------------------------
 
   - ESP8266 AT 可用内存不足以支持 MQTT over TLS，建议使用 ESP32 AT 或直接使用 ESP8266 RTOS SDK。
+
+----------------
+
+如何查看官网上 ESP32 AT 固件支持哪些功能？
+--------------------------------------------------
+
+  - 对于 ESP32 来说，不同模组 AT 支持的功能有可能不同，具体详情请参考 `不同模组差异介绍 <https://docs.espressif.com/projects/esp-at/en/latest/Compile_and_Develop/How_to_understand_the_differences_of_each_type_of_module.html#how-to-understand-the-differences-of-each-type-of-module/>`_ 。
