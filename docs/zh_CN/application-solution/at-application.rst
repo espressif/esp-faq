@@ -362,14 +362,22 @@ ESP32 如何自定义 AT 指令？
 
 --------------
 
-ESP8266 AT 无法正常使用 MQTT over TLS 来访问 AWS？
------------------------------------------------------------------------------------------------
+at_http_webserver 例程无限重启如何解决？
+-------------------------------------------
 
-  - ESP8266 AT 可用内存不足以支持 MQTT over TLS，建议使用 ESP32 AT 或直接使用 ESP8266 RTOS SDK。
+  master 分支已经修复了 `这个问题 <https://github.com/espressif/esp-at/commit/94f5781033b7dd44b9f5bf5882d4599fc5efea27>`__，请更新到最新的 master 分支，或者在 sdkconfig 配置项中更改为 ``CONFIG_SPI_FLASH_USE_LEGACY_IMPL=y`` 即可解决 crash 的问题
 
-----------------
+--------------
 
-如何查看官网上 ESP32 AT 固件支持哪些功能？
---------------------------------------------------
+可以通过 AT 指令将 esp32-wroom-32 模块设置为 HID 键盘模式吗？
+-------------------------------------------------------------
 
-  - 对于 ESP32 来说，不同模组 AT 支持的功能有可能不同，具体详情请参考 `不同模组差异介绍 <https://docs.espressif.com/projects/esp-at/en/latest/Compile_and_Develop/How_to_understand_the_differences_of_each_type_of_module.html#how-to-understand-the-differences-of-each-type-of-module/>`_ 。
+  可以的，官方指令集文档里面有指令说明，下面这个链接是简单的演示链接：
+  https://pan.baidu.com/s/1TgNE2DpJtVARGqB-jb8UIQ  提取码：f6hu 
+
+--------------
+
+ESP-AT如何进行BQB认证？
+----------------------------
+
+  可参考 `ESP32 更新多项 BQB 蓝牙认证 <https://mp.weixin.qq.com/s?__biz=MzA4Nzc5MjkwNw==&mid=2651783810&idx=1&sn=fb0e132af240606d8178347966721542&chksm=8bcfaee6bcb827f03992aa200a2eb2baef5114712a4001da0c8282502a9183f5379605412cea&mpshare=1&scene=1&srcid=0920VLpOLubCew48DrCRdjCT&sharer_sharetime=1583218643838&sharer_shareid=1a1137fefea7b87a843519e48151f9a4&rd2werd=1#wechat_redirect>`__
