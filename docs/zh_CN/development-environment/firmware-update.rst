@@ -121,3 +121,10 @@ ESP32S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of p
       or run 'idf.py -p PORT flash'
 
   可以按照该指令提示的 bin 文件及烧录地址使用 flash_download_tool 进行烧录。
+
+--------------
+
+如何查找官方AT固件的源码？
+------------------------------
+
+  - 参考 `esp-at <https://github.com/espressif/esp-at>`_。

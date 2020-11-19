@@ -197,3 +197,13 @@ ESP32 出现 Error:Core 1 paniced(Cache disabled but cache memory region accesse
   .. code-block:: text
 
     esptool.py --port /dev/ttyUSB* flash_id
+
+--------------
+
+调试IDF里的 ethernet demo，出现 ``emac: Timed out waiting for PHY register 0x2 to have value 0x0243(mask 0xffff). Current value:``
+--------------------------------------------------------------------------------------------------------------------------------------
+
+  你好，官方开发板还需要如下配置，详见板子原理图:
+
+  - CONFIG_PHY_USE_POWER_PIN=y
+  - CONFIG_PHY_POWER_PIN=5
