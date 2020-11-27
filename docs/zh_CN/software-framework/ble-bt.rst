@@ -315,3 +315,11 @@ ESP32 BLE 能否同时支持主从模式，作 gatt server 的同时，也可作
 --------------------------------------------------------------------------------------------------------------------
 
   - 支持，可参考例程 `gattc_gatts_coex <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/coex/gattc_gatts_coex>`_。
+
+----------------
+
+使用 ESP32 设备作为 Ble 主机，最大支持多少台从机设备进行连接？
+--------------------------------------------------------------------------------------
+
+-  ESP32 的 BLE 最大支持 9 台从机设备进行连接，建议连接数量 3 个设备以内。
+- 可通过 menuconfig -> Component config -> Bluetooth -> Bluetooth controller -> BLE MAX Connections 进行配置。
