@@ -33,7 +33,7 @@ idf.py menuconfig 编译报 "Configuring incomplete , errors occured" 的错误�
 
 --------------
 
-Windows 下 使用 ESP-IDF Tools 2.3 工具安装 master 版本的 esp-idf 出现错误：Installation has failed with exit code 2 是什么原因？
+Windows 下使用 ESP-IDF Tools 2.3 工具安装 master 版本的 esp-idf 出现错误：Installation has failed with exit code 2 是什么原因？
 --------------------------------------------------------------------------------------------------------------------------------
 
   此报错跟网络环境有关，该网路环境下无法流畅的下载 github 仓库，导致电脑 SDK 下载失败。
@@ -69,3 +69,32 @@ Windows 下安装编译环境出现 ``Download failed: 安全频道支持出错`
 
   这是因为 Windows 系统已经默认不开启对 SSl3.0 的支持。
   修改方法：在 `控制面版` 中找到 ``internet 选项``，并在其打开的窗口中选择 ``高级``，最后在 ``设置`` 中勾选 ``使用 SSL 3.0``。
+
+--------------
+
+Windows 下执行export.bat，提示cmake、gdbgui版本错误：
+---------------------------------------------------------
+  .. code:: text
+
+    -- C:\Users\xxxx\.espressif\tools\cmake\3.16.4\bin
+    -- The following Python requirements are not satisfied:
+    -- gdbgui>=0.13.2.0
+
+  这个问题是由于上游的 gdbgui 发生了更新，并且导致与低版本的 python 不兼容，目前的解决方法是：手动修改 esp-idf 根目录下的 ``requirements.txt``，找到 gdbdui 那条，修给成：``gdbgui==0.13.2.0``
+
+--------------
+
+将版本从v3.3更新至最新版本后，使用 idf.menuconfig 及 idf.build 报错：
+-------------------------------------------------------------------------
+
+  - 按照 `快速入门 <link:https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html>`__ 重新搭建一下环境
+  - 把 hello_world 目录下的 build 和 sdkconfig 删除
+
+--------------
+
+如果同时要开发 esp32 和 esp8266 ,该怎样设置 ``PATH`` 和 ``IDF_PATH`` ?
+------------------------------------------------------------------------
+
+  - PATH 是没有影响的，可以放在一起: export PATH="$HOME/esp/xtensa-esp32-elf/bin:$HOME/esp/xtensa-lx106-elf/bin:$PATH"
+  - IDF_PATH 的话，可以在工程的 Makefile 里强制指定：
+    在基于 esp32 的工程项目里使用： ``IDF_PATH = $(HOME)/esp/esp-idf`` ； 在基于 esp8266 的工程项目里使用： ``IDF_PATH = $(HOME)/esp/ESP8266_RTOS_SDK``
