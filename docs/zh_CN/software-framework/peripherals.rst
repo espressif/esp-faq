@@ -216,6 +216,13 @@ ESP8266 RTOS_2.1 以及之前版本 SDK，如何将 LOG 配置到 UART1 ？
 
     UART_SetPrintPort(UART1);
 
+-----------------
+
+使用 ESP8266 RTOS rel 3.0 以及之后的 SDK，如何将 LOG 配置到 UART1 ？
+------------------------------------------------------------------------------------
+
+  - 可通过  menuconfig -> Component config -> ESP8266-specific -> UART for console output -> custom -> UART peripheral to use for console output -> UART0 修改为 UART1 接口。
+
 --------------
 
 ESP32 IDF 中如何使能 UART 流控？
