@@ -387,6 +387,7 @@ ESP-AT如何进行BQB认证？
 ESP-AT 是否可以设置 BLE 发射功率？
 --------------------------------------------------
 
+
   - 可以。ESP32 的 Wi-Fi 和 BLE 共用一根天线，设置指令<https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Basic_AT_Commands.html#cmd-rfpower>`_。
 
 ----------------
@@ -412,3 +413,9 @@ ESP8266 从 NONOS AT 切换到 RTOS AT(v2.0.0.0 以及以上版本)， 烧录成
   - 烧录工具： 下载 `Flashdownload tool 工具 <https://www.espressif.com/sites/default/files/tools/flash_download_tool_v3.8.5_1.zip/>`_。
   - 烧录地址请参考 `AT 下载指南 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/Get_Started/Downloading_guide.html/>`_。 
 
+----------------
+
+如何整合 esp-at 编译出来的所有 bin 文件？
+--------------------------------------------------
+
+  - 可以使用 flash downloat tool<https://www.espressif.com/sites/default/files/tools/flash_download_tool_v3.8.5_1.zip/>`_ 的 combine 按钮进行整合，或者使用指令<https://docs.espressif.com/projects/esp-at/en/latest/Compile_and_Develop/How_to_clone_project_and_compile_it.html>`_进行整合。
