@@ -396,7 +396,6 @@ ESP-AT如何进行BQB认证？
 ESP-AT 是否可以设置 BLE 发射功率？
 --------------------------------------------------
 
-
   - 可以。ESP32 的 Wi-Fi 和 BLE 共用一根天线，设置指令<https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Basic_AT_Commands.html#cmd-rfpower>`_。
 
 ----------------
@@ -444,3 +443,18 @@ AT 指令集是否支持 IPv6?
 ------------------------------
 
   - 当前 AT 不支持 IPv6, 只支持 IPv4。 
+
+-----------------
+
+ESP8266 如何使用 AT 指令获取半时区的 SNTP 的时间？
+------------------------------------------------------------------------------------------
+
+    ESP8266  AT-V2.2.0.0 版本的固件及其后续版本支持半时区获取 SNTP 时间。示例如下：
+
+  .. code-block:: text
+
+    AT+GMR
+    AT+CWMODE=1                     //设置当前设备为 Station 模式
+    AT+CWJAP="SSID","password"      //连接 AP ，输入 AP 的账号、密码
+    AT+CIPSNTPCFG=1,530             //设置获取半时区为 5:30 的 SNTP 时间
+    AT+CIPSNTPTIME?                 //查询获取后的半时区时间
