@@ -324,9 +324,19 @@ ESP32-SOLO-1 的 GPIO34-GPIO39 是否可作为 UART 的 RX 及 CAN 的 RX 信号
 
   - ESP-WROOM-S2 的 Flash 使用的是 SPI 的接口，故支持 SDIO 作从机。
 
+---------------
+
+使用 ESP8266 调用 adc_read_fast() API 会导致 WiFi 断连？
+------------------------------------------------------------------------
+
+  - 调用 adc_read_fast() API 前需要将 Wi-Fi 和中断关闭，可参见此 API 的 `使用说明 <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/peripherals/adc.html?highlight=adc_read#_CPPv413adc_read_fastP8uint16_t8uint16_t >`__ 。
+  - 由于adc_read_fast() API 会进行连续采集，ADC 内部与 Wi-Fi RF 存在耦合部分，无法在 Wi-Fi 开启的状态下调用该函数。
+  - 在 Wi-Fi 开启的时候请使用 adc_read() API 进行 ADC 采集，并且将为保证数据稳定，需要使用 esp_wifi_set_ps(WIFI_PS_NONE);  关闭 Wi-Fi 调制解调休眠。
+  - 备注：ADC 采样率：在停⽌ Wi-Fi 的情况下，能达到每秒 100000 次。Wi-Fi 正常⼯作的情况下，能达到每秒 1000 次。
+
 ----------------
 
 使用 ESP32 如何动态修改串口波特率并立即生效？
--------------------------------------------------------------------------------------
+---------------------------------------------------------------
 
   - 请使用 uart_set_baudrate() API 来修改 UART 波特率 。 参见 `此 API 说明 < https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_get_baudrate11uart_port_tP8uint32_t>`__ 。
