@@ -324,6 +324,13 @@ ESP32-SOLO-1 的 GPIO34-GPIO39 是否可作为 UART 的 RX 及 CAN 的 RX 信号
 
   - ESP-WROOM-S2 的 Flash 使用的是 SPI 的接口，故支持 SDIO 作从机。
 
+-----------------
+
+ESP32 是否支持使用晶振作为 I2S 的时钟源？
+-----------------------------------------------------------------------
+
+- ESP32 不支持使用晶振作为 I2S 的时钟源，可阅读 `《ESP32 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_cn.pdf>`__  来了解 I2S 的时钟源配置。
+
 ---------------
 
 使用 ESP8266 调用 adc_read_fast() API 会导致 WiFi 断连？
