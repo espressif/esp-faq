@@ -334,3 +334,11 @@ ESP32 的 BLE 连接数 6 个以上会有哪些风险？
 
 -  ESP32 的 BLE 最大支持 9 台从机设备进行连接，建议连接数量 3 个设备以内。
 - 可通过 menuconfig -> Component config -> Bluetooth -> Bluetooth controller -> BLE MAX Connections 进行配置。
+
+----------------
+
+ESP32 如何通过 Bluetooth BR/EDR 传文件？
+------------------------------------------------------------
+
+- 可参考链接 `classic bt <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt>`__ 下的 ``bt_spp_acceptor`` 或者 ``bt_spp_initiator`` 例程.
+
