@@ -140,3 +140,12 @@ ESP-ADF 支持语音识别关键词自定义开发吗？
 
   - Alexa 你需要使用 https://github.com/espressif/esp-avs-sdk/releases/download/v1.0b1r3/esp-prov-v2.apk 进行配网
   - ADF 已经支持 ESP32-LyraTD-MSC ，先将 ``ADF git submodule update`` ，后可以直接使用 demo 编译
+
+--------------
+
+ESP32 关于语音识别方面,要能本地化,能否推荐相应的开发板?
+----------------------------------------------------------------------------
+
+  - `ESP-Skainet <https://github.com/espressif/esp-skainet>`_ 是乐鑫推出的智能语音助手，目前支持唤醒词识别和命令词识别。
+  - 要运行 ESP-Skainet，您需要有一个集成了音频输入模块的 ESP32 开发板。 在示例中，我们使用 ESP32-LyraT-Mini 或 ESP32-Korvo V1.1。
+
