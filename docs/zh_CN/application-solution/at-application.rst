@@ -428,3 +428,12 @@ ESP8266 从 NONOS AT 切换到 RTOS AT(v2.0.0.0 以及以上版本)， 烧录成
 --------------------------------------------------
 
   - 可以使用 flash downloat tool<https://www.espressif.com/sites/default/files/tools/flash_download_tool_v3.8.5_1.zip/>`_ 的 combine 按钮进行整合，或者使用指令<https://docs.espressif.com/projects/esp-at/en/latest/Compile_and_Develop/How_to_clone_project_and_compile_it.html>`_进行整合。
+
+--------------
+
+ESP32 使用 AT 指令进入透传模式,如果连接的热点断开,ESP32 能否给出相应的提示信息?
+-----------------------------------------------------------------------------------------------
+
+  - 可以通过指令 `AT+SYSMSG <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Basic_AT_Commands.html#at-sysmsg-configure-system-prompt-information>`_ 进行配置,
+    可设置 AT+SYSMSG=4,如果连接的热点断开,串口会上报 "WIFI DISCONNECT\r\n"。
+  - 需要注意的是,该指令在 AT v2.1.0 之后添加,v2.1.0 及之前的版本无法使用该指令.
