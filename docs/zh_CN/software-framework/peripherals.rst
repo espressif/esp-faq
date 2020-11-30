@@ -323,3 +323,10 @@ ESP32-SOLO-1 的 GPIO34-GPIO39 是否可作为 UART 的 RX 及 CAN 的 RX 信号
 -----------------------------------------------------------------------
 
   - ESP-WROOM-S2 的 Flash 使用的是 SPI 的接口，故支持 SDIO 作从机。
+
+----------------
+
+使用 ESP32 如何动态修改串口波特率并立即生效？
+-------------------------------------------------------------------------------------
+
+  - 请使用 uart_set_baudrate() API 来修改 UART 波特率 。 参见 `此 API 说明 < https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_get_baudrate11uart_port_tP8uint32_t>`__ 。
