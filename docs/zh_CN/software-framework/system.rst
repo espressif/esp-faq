@@ -416,3 +416,14 @@ ESP32 是否有系统重新启动的 API ？
 ------------------------------------------------------------------------------
 
   - 系统重新启动的 API 可使用 esp_restart()，相关说明可 `参见 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/ota.html?highlight=esp_restart#id5>`__ 。
+
+--------------
+
+ESP32 异常 log `invalid header: 0xffffffff`
+--------------------------------------------------------
+
+  - ESP32 芯片打印该异常 log 通常有如下几种情况：
+  - 芯片上下电时序不正确，芯片部分区域未完全复位。
+  - Flash 中的固件出现异常，例如未烧录完整固件。
+  - Flash 器件损坏，无法读取正确数据。
+  - 芯片自身 cache 被关闭或者损坏，无法读取固件数据。
