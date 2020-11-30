@@ -149,3 +149,9 @@ ESP32 关于语音识别方面,要能本地化,能否推荐相应的开发板?
   - `ESP-Skainet <https://github.com/espressif/esp-skainet>`_ 是乐鑫推出的智能语音助手，目前支持唤醒词识别和命令词识别。
   - 要运行 ESP-Skainet，您需要有一个集成了音频输入模块的 ESP32 开发板。 在示例中，我们使用 ESP32-LyraT-Mini 或 ESP32-Korvo V1.1。
 
+---------------
+
+ESP32 是否有同时支持 MIC 和 AUX 拾音的开发板？
+------------------------------------------------------------------------------
+
+  - ESP32-lyraT-4.3 开发板支持 MIC 和 AUX 拾音。ESP32-lyraT4.3 开发板说明`参见 <https://docs.espressif.com/projects/esp-adf/zh_CN/latest/get-started/get-started-esp32-lyrat.html#esp32-lyrat-v4-3>`__。
