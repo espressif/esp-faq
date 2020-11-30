@@ -403,3 +403,12 @@ ESP8266 从 NONOS AT 切换到 RTOS AT(v2.0.0.0 以及以上版本)， 烧录成
 
   - ESP8266 RTOS 版本 AT 通信管脚做了修改，更换为 GPIO13 和 GPIO15 管脚了。
   - `硬件接线参考 <https://docs.espressif.com/projects/esp-at/en/latest/Get_Started/Hardware_connection.html#esp8266-series/>`_ 。
+
+--------------
+
+官网上放置的 AT 固件如何下载？
+-----------------------------------------------------------------------------------------------------------
+
+  - 烧录工具： 下载 `Flashdownload tool 工具 <https://www.espressif.com/sites/default/files/tools/flash_download_tool_v3.8.5_1.zip/>`_。
+  - 烧录地址请参考 `AT 下载指南 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/Get_Started/Downloading_guide.html/>`_。 
+
