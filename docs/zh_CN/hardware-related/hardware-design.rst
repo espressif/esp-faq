@@ -218,10 +218,16 @@ ESP8266 使用 TOUT 管脚做 ADC 采样时，超过 0 ~ 1.0V 是否会损坏管
   - 请确保模块不被任何⾦属的外壳包裹，模块 PCB 天线区 域及外扩 15 mm 区域需净空（严禁铺铜、⾛线、摆放元件）。
   - 具体说明：请阅读对应模组的 `硬件设计指南 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=&field_download_document_type_tid%5B%5D=513>`__ 。
 
+---------------
+
+使用 ESP32 GPIO 34～GPIO39 是否可作为 Uart 的 RX ？
+-----------------------------------------------------------
+
+- GPIO 34～GPIO39 作为接收使用，可应用 Uart 的 RX 。
+
 --------------
 
 ESP32 模组外接 32Khz 晶振参考设计？
---------------------------------------------------------------------------------------------------------------
+------------------------------------------
 
   - 请参考 `ESP32 硬件设计指南 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf/>`_ V2.4.2 章节。
-
