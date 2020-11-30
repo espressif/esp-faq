@@ -408,3 +408,11 @@ ESP32 编译生成的 bin 文件大小如何优化？
 
   - 可配置 GCC 编译优化，操作步骤：idf.py menuconfig---->Compiler options---->Optimization level (Optimize for size(-Os))。
   - 可对代码进行优化，提高代码复用率，调整 log 等级，减少不必要的 log 打印。
+
+
+-----------------
+
+ESP32 是否有系统重新启动的 API ？
+------------------------------------------------------------------------------
+
+  - 系统重新启动的 API 可使用 esp_restart()，相关说明可 `参见 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/ota.html?highlight=esp_restart#id5>`__ 。
