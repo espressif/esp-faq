@@ -316,6 +316,17 @@ ESP32 BLE 能否同时支持主从模式，作 gatt server 的同时，也可作
 
   - 支持，可参考例程 `gattc_gatts_coex <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/coex/gattc_gatts_coex>`_。
 
+--------------
+
+ESP32 的 BLE 连接数 6 个以上会有哪些风险？
+------------------------------------------------------
+
+  - 通常要根据具体的应用决定，在常规场景下，ESP32 BLE 连接 3 个设备可以稳定通信。
+  - BLE 的最大连接数未有一个准确的值，在多个 BLE 设备同时连接的的时候，RF 是分时复用的，需要设计者保证每一个设备不会长时间占用导致其他设备超时断开。
+  - 连接参数里面有 connection interval.  connection window, latency, timeout, 可以在 latency 以内的不应答，但是若超过 timeout 的时间，将会导致连接断开。
+  - 假设配置参数中 interval 是 100，window 是 5 , Wi-Fi 关闭时，将会连接较多设备。如果用了 Wi-Fi，或者 interval 设置的太小，将只能连接较少设备。
+  - 当 BLE 支持多的设备并发连接时，RF 的 solt 管理出错概率会增加，所以 BLE 设备连接较多时，需要针对具体场景调试。
+
 ----------------
 
 使用 ESP32 设备作为 Ble 主机，最大支持多少台从机设备进行连接？
