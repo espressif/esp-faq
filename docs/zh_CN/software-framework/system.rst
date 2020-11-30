@@ -387,10 +387,17 @@ ESP32 IDF v3.3 版本 bootloader 运行 v3.1 版本 APP bin , 程序为何会触
   - 但 v3.1 的 bootloader 没有开启 WDT 看门狗，所以应用程序(app) 没有 WDT 看门狗的机制，进而导致 v3.3 的 bootloader 引导 v3.1 的应用程序(app) 会触发 WDT 看门狗复位。
   - 可以通过在 menuconfig 中不使能 BOOTLOADER_WDT_ENABLE ，关闭 v3.3 版本 bootloader 中 WDT 看门狗开启。
 
+--------------
+
+ESP8266 rst curse 如何查看？
+------------------------------------
+
+  - 请参考 `ESP8266 异常重启原因 <https://www.espressif.com/sites/default/files/documentation/esp8266_reset_causes_and_common_fatal_exception_causes_cn.pdf/>`_。
+
 -----------------
 
 ESP32 编译生成的 bin 文件大小如何优化？
---------------------------------------------------------------------------------------------------------
+--------------------------------------------------
 
   - 可配置 GCC 编译优化，操作步骤：idf.py menuconfig---->Compiler options---->Optimization level (Optimize for size(-Os))。
   - 可对代码进行优化，提高代码复用率，调整 log 等级，减少不必要的 log 打印。
