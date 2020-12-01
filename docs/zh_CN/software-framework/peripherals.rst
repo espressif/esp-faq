@@ -354,3 +354,10 @@ ESP32 是否支持使用晶振作为 I2S 的时钟源？
 ---------------------------------------------------------------
 
   - 请使用 uart_set_baudrate() API 来修改 UART 波特率 。 参见 `此 API 说明 < https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_get_baudrate11uart_port_tP8uint32_t>`__ 。
+
+--------------
+
+ESP32-S2 取消了 SDIO 接口，是否还支持外接 TF 卡？
+----------------------------------------------------------------
+
+  - ESP32-S2 有 4 组 SPI 的接口，可使用 SPI2/SPI3 的接口外接 TF 卡，当使用 SPI2/SPI3 的接口外接 TF 卡时，SPI 应设为通用 SPI 模式。
