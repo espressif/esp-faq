@@ -528,3 +528,11 @@ ESP32 如何自定义 hostname?
   - 以 idf v4.2 为例，可以在 menuconfig > Component Config > LWIP > Local netif hostname，然后输入指定的 hostname 即可。
   - 不同的版本在命名上可能略有区别。
 
+--------------
+
+如何获取 802.11 无线数据包?
+
+-----------------------------------
+
+  - 可以参考 IDF 编程文档中的 `Wireshark 使用指南 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html>`__ 。
+
