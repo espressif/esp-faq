@@ -477,3 +477,10 @@ AT 指令中特殊字符如何处理？
 -----------------------------------------------------------------------------------------------
 
   - 可以参考 AT `转义字符语法 <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/index.html#at-command-types/>`_  。
+
+--------------
+
+如何获取 AT 固件源码？
+------------------------------
+
+  - ESP-AT 固件部分开源， 开源仓库参考 `esp-at <https://github.com/espressif/esp-at>`_。
