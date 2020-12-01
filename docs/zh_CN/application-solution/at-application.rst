@@ -470,3 +470,10 @@ ESP8266 如何使用 AT 指令获取半时区的 SNTP 的时间？
     AT+CWJAP="SSID","password"      //连接 AP ，输入 AP 的账号、密码
     AT+CIPSNTPCFG=1,530             //设置获取半时区为 5:30 的 SNTP 时间
     AT+CIPSNTPTIME?                 //查询获取后的半时区时间
+
+--------------
+
+AT 指令中特殊字符如何处理？
+-----------------------------------------------------------------------------------------------
+
+  - 可以参考 AT `转义字符语法 <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/index.html#at-command-types/>`_  。
