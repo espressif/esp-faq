@@ -421,6 +421,18 @@ ESP8266 从 NONOS AT 切换到 RTOS AT(v2.0.0.0 以及以上版本)， 烧录成
   - 烧录工具： 下载 `Flashdownload tool 工具 <https://www.espressif.com/sites/default/files/tools/flash_download_tool_v3.8.5_1.zip/>`_。
   - 烧录地址请参考 `AT 下载指南 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/Get_Started/Downloading_guide.html/>`_。 
 
+--------------
+
+新购买的 ESP32-WROVE-B 模组上电后，串口打印错误 “flash read err,1000" 是什么原因？该模组如何使用 AT 指令？
+------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 WROVER 的模组出厂没有烧录 AT 固件，因此出现 "flash read err" 的错误。
+  - 如果想要使用 ESP32-WROVER-B 模组的 AT 指令功能 ，请参考如下链接获取固件和烧录固件。
+  
+    - `固件获取 <https://docs.espressif.com/projects/esp-at/en/latest/AT_Binary_Lists/ESP32_AT_binaries.html#esp32-wrover-32-series>`_
+    - `硬件连接 <https://docs.espressif.com/projects/esp-at/en/latest/Get_Started/Hardware_connection.html#esp32-wrover-series>`_
+    - `固件烧录 <https://docs.espressif.com/projects/esp-at/en/latest/Get_Started/Downloading_guide.html#downloading-guide>`_
+
 ----------------
 
 如何整合 esp-at 编译出来的所有 bin 文件？
