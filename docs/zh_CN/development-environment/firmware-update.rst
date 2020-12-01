@@ -123,8 +123,10 @@ ESP32S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of p
   可以按照该指令提示的 bin 文件及烧录地址使用 flash_download_tool 进行烧录。
 
 --------------
+  
+ESP 芯片烧录通讯协议是什么？
+---------------------------------
 
-如何查找官方AT固件的源码？
-------------------------------
-
-  - 参考 `esp-at <https://github.com/espressif/esp-at>`_。
+  - `串口协议 <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_
+  - `python 实现 <https://github.com/espressif/esptool>`_
+  - `c 语言实现 <https://github.com/espressif/esp-serial-flasher>`_
