@@ -293,21 +293,6 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗?
 
 --------------
 
-[Connect] ESP32 做 soft-AP 时为什么会把sta踢掉?
------------------------------------------------
-
-  默认情况下连续 5 min 收不到 sta 发过来的数据包就会把 STA 踢掉. 该时间可以通过 `esp\_wifi\_set\_inactive\_time <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv426esp_wifi_set_inactive_time16wifi_interface_t8uint16_t>`__ 进行修改.
-
-  注: esp_wifi_set_inactive_time 新增的 API.
-
-  - master commit: 63b566eb27da187c13f9b6ef707ab3315da24c9d
-  - 4.2 commit: d0dae5426380f771b0e192d8ccb051ce5308485e
-  - 4.1 commit: 445635fe45b7205497ad81289c5a808156a43539
-  - 4.0 commit: MR 未合, 待定
-  - 3.3 commit: 908938bc3cd917edec2ed37a709a153182d511da
-
---------------
-
 [Connect] ESP32作为station时什么时候会把softAP踢掉?
 ----------------------------------------------------
 
@@ -422,16 +407,6 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗?
   除了上述四个原因之外还可能是：
   原因五：应用层代码在不停地运行，CPU 没有机会暂停。
   原因六：应用层使用了 ets timer 或者 esp timer，且 timer 的超时时间间隔较短，CPU 没有机会暂停。
-
---------------
-
-如何获取 802.11 无线数据包?
----------------------------
-
-  推荐的Macbook内置的数据包捕获工具不需要数据包捕获卡. 它可用于捕获 802.11a/b/g/n/ac 数据包:
-  https://osxdaily.com/2015/04/23/sniff-packet-capture-packet-trace-mac-os-x-wireless-diagnostics/
-  或者，可以使用 Espressif 官方网站上的教程，使用 Wireshark 捕获数据包
-  https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html
 
 --------------
 
