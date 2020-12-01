@@ -427,3 +427,10 @@ ESP32 异常 log `invalid header: 0xffffffff`
   - Flash 中的固件出现异常，例如未烧录完整固件。
   - Flash 器件损坏，无法读取正确数据。
   - 芯片自身 cache 被关闭或者损坏，无法读取固件数据。
+
+--------------
+
+ESP8266 deep sleep 定时唤醒机制是什么？
+----------------------------------------
+
+  - 在 Deep-sleep 状态下，将 GPIO16 (XPD_DCDC) 连接至 EXT_RSTB ,计时到达睡眠时间后，GPIO16 输出低电平给 EXT_RSTB 管脚，芯片被复位唤醒。
