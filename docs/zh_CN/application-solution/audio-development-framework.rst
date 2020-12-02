@@ -64,7 +64,7 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？（如 pipeline_a2
 
 --------------
 
-如何输出 32bit 的 i2s 音频数据?
+如何输出 32bit 的 i2s 音频数据？
 ---------------------------------
 
   - 重新写一个 my_i2s_write 函数调用 i2s_write_expand, 然后把 my_i2s_write 用 ``audio_element_set_write_cb`` 修改 i2s_stream element 的 write 函数。
@@ -90,7 +90,7 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？（如 pipeline_a2
 
 --------------
 
-请问用 ESP-ADF 和 idf4.1 编译 example/get-started/play-pm3 的时间总是报错: ``fatal error: audio_type_def.h: No such file or directory``?
+请问用 ESP-ADF 和 idf4.1 编译 example/get-started/play-pm3 的时间总是报错: ``fatal error: audio_type_def.h: No such file or directory``？
 ------------------------------------------------------------------------------------------------------------------------------------------
 
   - 文件 audio_type_def.h 位于 ESP-ADF 的 esp-adf-libs 中。如果在编译过程中找不到该文件，则说明 ESP-ADF v2.0 可能未被正确检测出。特别是子模块可能尚未更新。
@@ -106,7 +106,7 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？（如 pipeline_a2
 
 --------------
 
-请问官方有没有可以支持 IDF v4.1 的 ESP-ADF 版本?
+请问官方有没有可以支持 IDF v4.1 的 ESP-ADF 版本？
 -------------------------------------------------
 
   `ESP-ADF Release v2.0 <https://github.com/espressif/esp-adf/releases/tag/v2.0>`_ 支持 ESP-IDF v3.3.2, v4.0 和 v4.1。
@@ -143,7 +143,7 @@ ESP-ADF 支持语音识别关键词自定义开发吗？
 
 --------------
 
-ESP32 关于语音识别方面,要能本地化,能否推荐相应的开发板?
+ESP32 关于语音识别方面,要能本地化,能否推荐相应的开发板？
 ----------------------------------------------------------------------------
 
   - `ESP-Skainet <https://github.com/espressif/esp-skainet>`_ 是乐鑫推出的智能语音助手，目前支持唤醒词识别和命令词识别。

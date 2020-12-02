@@ -15,16 +15,16 @@
 
 --------------
 
-参考设计中 I2S 信号管脚分布
----------------------------------
+参考设计中 I2S 信号管脚如何分布？
+-----------------------------------
 
-  .. tip::  参考设计中 I2S 信号分布太散，是否可以配置集中⼀些，⽐如配知道 ``GPIO5，GPIO18，GPIO23、GPIO19、GPIO22`` 管脚上；I2C 配置到 ``GPIO25、GPIO26`` 或 ``GPIO32、GPIO33`` 管脚上?
+  .. tip::  参考设计中 I2S 信号分布太散，是否可以配置集中⼀些，⽐如配知道 ``GPIO5，GPIO18，GPIO23、GPIO19、GPIO22`` 管脚上；I2C 配置到 ``GPIO25、GPIO26`` 或 ``GPIO32、GPIO33`` 管脚上？
 
   - 所有 I2S 的 I/O 均可任意分配，需要注意有的 I/O 只能作为输⼊，请参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 最后⼀⻚。
 
 --------------
 
-ESP32 避免 light-sleep 模式下 VDD3P3\_RTC 掉电?
+ESP32 避免 light-sleep 模式下 VDD3P3\_RTC 掉电？
 ----------------------------------------------------
 
   - ESP32 进⼊ light-sleep 后，pads powered by VDD3P3\_RTC 对应的 GPIO 的电平会被拉低，根本原因是进⼊ light sleep 后 RTC 掉电导致的。
@@ -128,7 +128,7 @@ ESP32-D2WD 外接 PSRAM 的参考设计？
 
 --------------
 
-ESP32 是否可以用 PWM 或 DAC 来播放音乐?
+ESP32 是否可以用 PWM 或 DAC 来播放音乐？
 ---------------------------------------------
 
   ESP32 可以用 PWM 或 DAC 来播放音乐，此功能有进行过播放测试，推荐用于提示音播放，示例工程可以通过邮件咨询获取。

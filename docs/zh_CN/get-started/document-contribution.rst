@@ -83,7 +83,7 @@
 
     --------------
 
-    curses.h: No such file or directory?
+    curses.h: No such file or directory？
     -------------------------------------------
 
      问题截图：support ESP8266 chip, but ESP8266_RT

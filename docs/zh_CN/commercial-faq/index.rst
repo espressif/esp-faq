@@ -15,7 +15,7 @@
 
 --------------
 
-你们的产品通过哪些认证?
+你们的产品通过哪些认证？
 ------------------------------
 
   您可以在 `证书 <https://www.espressif.com/zh-hans/support/documents/certificates>`__ 页面查阅并下载证书文件。
@@ -36,42 +36,42 @@
 
 --------------
 
-你们在国内、欧洲、美国或加拿大有代理商吗?
+你们在国内、欧洲、美国或加拿大有代理商吗？
 ------------------------------------------------
   
   请联系 `乐鑫商务支持 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ 获得您所需信息，我们的工作人员会尽快与您取得联系。
 
 --------------
 
-请问如何能成为乐鑫的代理商?
+请问如何能成为乐鑫的代理商？
 ------------------------------------
   
   如果您有意向成为我们的代理商，请将贵司的公司介绍发至此邮箱: dm@espressif.com 
 
 --------------
 
-贵司的产品信息在哪里可以查看? 量产产品有哪些？
+贵司的产品信息在哪里可以查看？ 量产产品有哪些？
 --------------------------------------------------
   
   感谢您对乐鑫的关注。查看所有产品的基本信息请点击 `这里 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=&field_download_document_type_tid%5B%5D=504>`__ 。查看所有产品的技术⽂文档请点击 `这里 <https://www.espressif.com/zh-hans/support/documents/technical-documents>`__ 。
 
 --------------
 
-你们的产品有⻓期供货保证吗?
+你们的产品有⻓期供货保证吗？
 ------------------------------------
   
   乐鑫承诺旗下产品的供货期⾄少为 12 年，具体信息请点击 `这里 <https://www.espressif.com/zh-hans/products/longevity-commitment>`__ 。
 
 --------------
 
-如何查看产品的标准包装量 (SPQ) 和最小起订量 (MOQ) ?
+如何查看产品的标准包装量 (SPQ) 和最小起订量 (MOQ)？
 -----------------------------------------------------------
 
   各个产品的标准包装量 (SPQ) 和最⼩起订量 (MOQ) 请点击 `这里 <https://www.espressif.com/sites/default/files/documentation/espressif_products_ordering_information_cn.pdf>`__ 参阅《乐鑫产品订购信息》。
 
 --------------
 
-如何购买你们的产品?
+如何购买你们的产品？
 -------------------------
 
   若您需要批量采购，请联系 `乐鑫商务支持 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ ，我们的工作人员会尽快与您取得联系。

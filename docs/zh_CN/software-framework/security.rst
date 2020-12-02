@@ -65,8 +65,8 @@ ESP32 打开 flash 加密和 secure boot 后，如何关闭？
 
 --------------
 
-ESP32 保护固件安全的方式有那些?
----------------------------------
+ESP32 保护固件安全的方式有那些？
+-----------------------------------
 
   ESP32 支持 flash encryption 与 secure boot.
   - `flash encryption <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html>`_。

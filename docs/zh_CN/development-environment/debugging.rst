@@ -189,7 +189,7 @@ ESP32 出现 Error:Core 1 paniced(Cache disabled but cache memory region accesse
 
 --------------
 
-如何读取模组 flash 型号信息 ?
+如何读取模组 flash 型号信息？
 ----------------------------------
 
   - 乐鑫模组或芯片可通过 python 脚本 `esptool <https://github.com/espressif/esptool>`__ 读取。
