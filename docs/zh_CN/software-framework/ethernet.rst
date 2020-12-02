@@ -15,7 +15,7 @@
 
 --------------
 
-ESP32 以太网开发板示例出现 ` emac:Reset EMAC Timeout` 有哪些原因？
+ESP32 以太网开发板示例出现 ` emac:Reset EMAC Timeout` 有哪些原因 ？
 ------------------------------------------------------------------------
 
   此 log 为 emac 初始化超时，与 RMII 时钟有关，建议排查硬件问题，查看 PHY 晶振是否虚焊等。
@@ -50,7 +50,7 @@ ESP32 外接 LAN8720，GPIO0 对其提供 CLK ，Ethernet 例程初始化出错�
     func: app_main
     expression: esp_eth_enable()
 
-    ELF file SHA256: 597d55ebf237c1cffa5f47c73148a159b22726d94a7b78100bd941d7d5fc906e
+    ELF file SHA256: ``597d55ebf237c1cffa5f47c73148a159b22726d94a7b78100bd941d7d5fc906e``
 
     Backtrace: 0x40083cdc:0x3ffb5e80 0x40084143:0x3ffb5ea0 0x400d32c1:0x3ffb5ec0 0x400d1742:0x3ffb5f20 0x40085d91:0x3ffb5f40
     0x40083cdc: invoke_abort at /mnt/hgfs/workspace/esp32/IDF/esp-idf-v3.3/components/esp32/panic.c:715
@@ -82,3 +82,39 @@ ESP32 外接 LAN8720，GPIO0 对其提供 CLK ，Ethernet 例程初始化出错�
       c. 检查 PHY 地址是否配置正确（包括软件和硬件）
   - 这里强烈建议，检查一遍控制 PHY 地址的 strap 引脚，不要悬空，**不要默认**！确保这些 strap 引脚已经被外部电阻上拉或者下拉了。
   - 如果还是不够确定 PHY 地址究竟是多少，可以在软件中尝试设置 PHY 地址从 0 开始到 31，然后读取 PHY ID 寄存器，看看是否能够读到正常的数据，如果正确，记录下当前 PHY 地址。
+
+
+--------------
+
+使用 ESP-IDF V4.1,ESP32 ethernet 如何设置静态 IP？
+----------------------------------------------------------------------------------
+
+  由于 esp-idf V4.1 以及以上版本会摒弃掉 tcp/ip 的接口，推荐使用 `ESP-NETIF <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_netif.html>`_ 的接口.
+
+  参考示例代码如下：
+
+  .. code-block:: c
+
+    {
+        ...
+        esp_netif_config_t cfg = ESP_NETIF_DEFAULT_ETH();
+        esp_netif_t *eth_netif = esp_netif_new(&cfg);
+        // Set default handlers to process TCP/IP stuffs
+        ESP_ERROR_CHECK(esp_eth_set_default_handlers(eth_netif));
+        ...
+        char* ip= "192.168.5.241";
+        char* gateway = "192.168.5.1";
+        char* netmask = "255.255.255.0";
+        esp_netif_ip_info_t info_t;
+        memset(&info_t, 0, sizeof(esp_netif_ip_info_t));
+
+        if (eth_netif)
+        {
+            ESP_ERROR_CHECK(esp_netif_dhcpc_stop(eth_netif));
+            info_t.ip.addr = esp_ip4addr_aton((const char *)ip);
+            info_t.netmask.addr = esp_ip4addr_aton((const char *)netmask);
+            info_t.gw.addr = esp_ip4addr_aton((const char *)gateway);
+            esp_netif_set_ip_info(eth_netif, &info_t);
+        }
+        ...
+    }
