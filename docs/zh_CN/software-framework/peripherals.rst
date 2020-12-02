@@ -376,3 +376,12 @@ ESP32 如何连接 MIC？
 
   - 如果连接数字 MIC ，可以连接 I2S 外设。
   - 如果连接模拟 MIC ，可以连接 ADC 外设。
+
+--------------
+
+ESP32 是否支持模拟音频或是数字音频输出？
+-----------------------------------------------
+
+  - ESP32 支持 DAC 模拟音频输出，可以使用它播放提示音等简单音频，但是如果用它播放音乐，音乐效果不是很好。
+  - ESP32 同时支持 I2S 数字音频输出，I2S 可配置引脚可以在 `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 第四章查看。
+  
