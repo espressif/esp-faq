@@ -513,3 +513,22 @@ ESP8266 AT+MQTTPUB 指令是否支持 json 格式数据 ？
     AT+MQTTUSERCFG=0,1,"ESP32","espressif","1234567890",0,0,""          # 设置 MQTT 参数
     AT+MQTTCONN=0,"192.168.10.234",1883,0                               # 连接指定的 MQTT 服务器
     AT+MQTTPUB=0,"topic","\"{\"timestamp\":\"20201121085253\"}\"",0,0   # 向 Topic 主题上 publish 一条 json 数据
+
+----------------
+
+ESP32 AT 如何使用 BLE 向调试 APP 发数据？
+--------------------------------------------------
+
+  - ESP32 使用 BLE 向调试 APP 发数据可通过如下指令实现：
+
+  .. code-block:: text
+
+    AT+RESTORE                          // 初始化设备
+    AT+BLEINIT=2                        // ESP32 设为 SERVER 模式  
+    AT+BLEGATTSSRVCRE                   // GATTS 创建服务
+    AT+BLEGATTSSRVSTART                 // GATTS 开启服务
+    AT+BLEADDR?                         // 查询 BLE  设备 MAC 地址
+    AT+BLEADVSTART                      // 开始 BLE 广播，使用 APP 与设备建立连接
+    AT+BLEGATTSCHAR?                    // 查询允许 Notify 的特征
+    AT+BLEGATTSNTFY=0,1,6,6             // 使⽤ 1 号服务的 6 号特征通知⻓度为 6 的数据
+                                        // 然后 ESP32 设备通过串口助手发送数据给 APP，例如 ：12345
