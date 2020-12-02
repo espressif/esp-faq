@@ -384,4 +384,11 @@ ESP32 是否支持模拟音频或是数字音频输出？
 
   - ESP32 支持 DAC 模拟音频输出，可以使用它播放提示音等简单音频，但是如果用它播放音乐，音乐效果不是很好。
   - ESP32 同时支持 I2S 数字音频输出，I2S 可配置引脚可以在 `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 第四章查看。
-  
+
+---------------
+
+ESP32 中 SPI/HSPI/VSPI 三者有什么区别呢？
+--------------------------------------------------------
+
+  - `并行 QSPI` 接口中 SPI/HSPI/VSPI 是连接外部 Flash 的分组，默认 Flash 挂载在 SPI 分组上。
+  - 驱动中可以任意调用的 HSPI/VSPI 均为通用 SPI，名称中的差异仅用以分组之间的区分。
