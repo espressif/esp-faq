@@ -82,6 +82,38 @@ Wi-Fi 信道是什么？可以自行选择信道吗？
 
 --------------
 
+[LWIP] 使用 ESP-IDF V4.1,ESP32 用作 SoftAP 模式时如何设置 ip 地址?
+----------------------------------------------------------------------------------
+
+  由于 esp-idf V4.1 以及以上版本会摒弃掉 tcp/ip 的接口，推荐使用 `ESP-NETIF <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_netif.html>`_ 的接口.
+
+  参考示例代码如下：
+
+  .. code-block:: c
+
+    {
+        ...
+        esp_netif_t *ap_netif = esp_netif_create_default_wifi_ap();
+        char* ip= "192.168.5.241";
+        char* gateway = "192.168.5.1";
+        char* netmask = "255.255.255.0";
+        esp_netif_ip_info_t info_t;
+        memset(&info_t, 0, sizeof(esp_netif_ip_info_t));
+
+        if (ap_netif)
+        {
+            ESP_ERROR_CHECK(esp_netif_dhcps_stop(ap_netif));
+            info_t.ip.addr = esp_ip4addr_aton((const char *)ip);
+            info_t.netmask.addr = esp_ip4addr_aton((const char *)netmask);
+            info_t.gw.addr = esp_ip4addr_aton((const char *)gateway);
+            esp_netif_set_ip_info(ap_netif, &info_t);
+            ESP_ERROR_CHECK(esp_netif_dhcps_start(ap_netif));
+        }
+        ...
+    }
+
+--------------
+
 [LWIP] ESP32 Station 模式，如何设置静态 ip？
 ------------------------------------------------
 
