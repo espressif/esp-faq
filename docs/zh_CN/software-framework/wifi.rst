@@ -153,6 +153,38 @@ Wi-Fi 信道是什么？可以自行选择信道吗？
     ip4addr_aton((const char *)ip_str, &info_t.netmask.addr);
     esp_netif_set_dns_info(eth_netif,ESP_NETIF_DNS_MAIN,&dns);
 
+
+[LWIP] ESP-IDF 里如何设置 DHCP Server 的 Option 内容？
+-------------------------------------------------------
+
+  由于 V4.1 以及以上版本会摒弃掉 tcp/ip 的接口，推荐使用 ethif 的接口。DHCP Client 设置方法也可以参考本示例。
+  参考示例代码如下：
+
+  .. code-block:: c
+
+    // 创建 softap 的 netif 句柄
+    esp_netif_t *ap_netif = esp_netif_create_default_wifi_ap();
+
+    // ESP_NETIF_IP_ADDRESS_LEASE_TIME, DHCP Option 51, 设置 分发的 IP 地址有效时间
+    uint32_t dhcps_lease_time = 60; // 单位是分钟
+    ESP_ERROR_CHECK(esp_netif_dhcps_option(ap_netif,ESP_NETIF_OP_SET,ESP_NETIF_IP_ADDRESS_LEASE_TIME,&dhcps_lease_time,sizeof(dhcps_lease_time)));
+
+    // ESP_NETIF_DOMAIN_NAME_SERVER , DHCP Option 6, 设置 DNS SERVER
+    // 设置 DNS 之前先要设置本地主 DNS
+    esp_netif_dns_info_t dns_info = {0};
+    dns_info.ip.u_addr.ip4.addr = ESP_IP4TOADDR(8,8,8,8);
+    ESP_ERROR_CHECK(esp_netif_set_dns_info(ap_netif,ESP_NETIF_DNS_MAIN,&dns_info));
+
+    uint8_t dns_offer = 1; // 传入 1 使修改的 DNS 生效，如果是 0,那么用 softap 的 gw ip 作为 DNS server (默认是 0)
+    ESP_ERROR_CHECK(esp_netif_dhcps_option(ap_netif,ESP_NETIF_OP_SET,ESP_NETIF_DOMAIN_NAME_SERVER,&dns_offer,sizeof(dns_offer)));
+
+    // ESP_NETIF_ROUTER_SOLICITATION_ADDRESS, DHCP Option 3 Router, 传入 0 使 DHCP Option 3(Router) 不出现，（默认为 1）
+    uint8_t router_enable = 0;
+    ESP_ERROR_CHECK(esp_netif_dhcps_option(ap_netif,ESP_NETIF_OP_SET,ESP_NETIF_ROUTER_SOLICITATION_ADDRESS,&router_enable, sizeof(router_enable)));
+
+    // ESP_NETIF_SUBNET_MASK, DHCP Option 1, 设置子网掩码
+    // 通过 ESP_NETIF_SUBNET_MASK 设置子网掩码无效， 请通过 esp_netif_set_ip_info 修改
+
 --------------
 
 [Performance] 如何测试 Wi-Fi 模组的通信速率？
