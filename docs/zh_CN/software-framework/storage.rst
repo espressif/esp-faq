@@ -148,7 +148,7 @@ ESP32 如何查看芯片内存（例如：DRAM、IRAM、rodata）使用情况？
 
 -----------------
 
-ESP8266 如何读取 Flash 数据?
+ESP8266 如何读取 Flash 数据？
 -------------------------------------------------------------------------
 
   - 可使用 ESP8266-RTOS-SDK 下的脚本工具读 Flash ，读 Flash 方式如下：
@@ -157,4 +157,11 @@ ESP8266 如何读取 Flash 数据?
     - 进入 ESP8266_RTOS_SDK/components/esptool_py/esptool 路径下
     - 执行 python esptool.py --chip esp8266 --port /dev/ttyUSB0 --baud 115200 read_flash 0x0 0x400000 esp8266.bin
     - 备注：上述命令中 esp8266.bin 为自定义名称，读取到的 Flash 数据将会生成名为 esp8266.bin 的文件，命令中 /dev/ttyUSB0 为 linux 环境中的串口号，其他环境以及系统中会有不同。
-    
+
+----------------
+
+ESP32 模组挂载 8MB PSRAM, 为何实际映射的只有 4MB？
+---------------------------------------------------------------
+
+  - 片外 RAM 最大可映射 4MB(0x3F80_0000-0x3FBF_FFFF) 到数据地址空间,可参考 `ESP32 datahsheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中的 3.1.4 存储器映射的说明.
+  - 可参考例程 `himem <https://github.com/espressif/esp-idf/tree/master/examples/system/himem>`_ 访问其余的 4MB 空间.
