@@ -69,7 +69,7 @@ esp-aliyun 与 esp-ali-smartliving 的区别 ？
 
 --------------
 
-ESPESP8266 可以连接 Alex 或者 Google home 吗 ?
+ESPESP8266 可以连接 Alex 或者 Google home 吗？
 ----------------------------------------------------
 
   - Alex 可以参考 [aws_iot](https://github.com/espressif/ESP8266_RTOS_SDK/tree/release/v3.3/examples/protocols/aws_iot) , 做一些 Alex 配置即可。

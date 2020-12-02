@@ -442,7 +442,7 @@ ESP8266 从 NONOS AT 切换到 RTOS AT(v2.0.0.0 以及以上版本)， 烧录成
 
 --------------
 
-ESP32 使用 AT 指令进入透传模式,如果连接的热点断开,ESP32 能否给出相应的提示信息?
+ESP32 使用 AT 指令进入透传模式,如果连接的热点断开,ESP32 能否给出相应的提示信息？
 -----------------------------------------------------------------------------------------------
 
   - 可以通过指令 `AT+SYSMSG <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Basic_AT_Commands.html#at-sysmsg-configure-system-prompt-information>`_ 进行配置,
@@ -451,7 +451,7 @@ ESP32 使用 AT 指令进入透传模式,如果连接的热点断开,ESP32 能�
 
 ----------------
 
-AT 指令集是否支持 IPv6?
+AT 指令集是否支持 IPv6？
 ------------------------------
 
   - 当前 AT 不支持 IPv6, 只支持 IPv4。 

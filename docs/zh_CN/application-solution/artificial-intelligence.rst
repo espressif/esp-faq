@@ -38,7 +38,7 @@ esp-face组件的api参考？
 
 --------------
 
-请问微信小程序esp-eye有相关资料吗?
+请问微信小程序esp-eye有相关资料吗？
 ------------------------------------
 
   - esp-eye 微信小程序的介绍及示例在这里：`recognition_wechat <https://github.com/espressif/esp-who/tree/master/examples/single_chip/face_recognition_wechat>`_

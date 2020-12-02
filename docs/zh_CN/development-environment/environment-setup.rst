@@ -92,7 +92,7 @@ Windows 下执行export.bat，提示cmake、gdbgui版本错误：
 
 --------------
 
-如果同时要开发 esp32 和 esp8266 ,该怎样设置 ``PATH`` 和 ``IDF_PATH`` ?
+如果同时要开发 esp32 和 esp8266 ,该怎样设置 ``PATH`` 和 ``IDF_PATH`` ？
 ------------------------------------------------------------------------
 
   - PATH 是没有影响的，可以放在一起: export PATH="$HOME/esp/xtensa-esp32-elf/bin:$HOME/esp/xtensa-lx106-elf/bin:$PATH"
