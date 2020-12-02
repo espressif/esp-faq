@@ -647,3 +647,10 @@ app key 是否是厂家可以自己设置？ Unicast address 和 app key 是否�
 
   - 在 NRF 的手机 app 里，右下角 “Setting” 里有个 “Network Key”，修改它就意味着修改了 provisioner 的 Netkey，provisioner 配置其它设备入网时会把这个 netkey 分配给入网的节点
   - 如果 provisioner 拥有多个 Netkey ，provisioner 在配置设备时，可以选择使用哪个 NetKey 分配给设备。provisioner 可以使用不同的 Netkey 和网络中的节点进行通讯。每个节点的Netkey都是 provisioner 分配的。
+
+----------------
+
+设备如何加入 BLE-Mesh 网络？
+--------------------------------------
+
+  - 可以参考 `ESP-BLE-MESH 快速入门 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-index.html#getting-started-with-ble-mesh>`__。
