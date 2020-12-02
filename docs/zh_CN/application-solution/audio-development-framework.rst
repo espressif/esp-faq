@@ -151,7 +151,14 @@ ESP32 关于语音识别方面,要能本地化,能否推荐相应的开发板？
 
 ---------------
 
-ESP32 是否有同时支持 MIC 和 AUX 拾音的开发板？
+ESP32 是否有同时支持 MIC 和 AUX 拾音的开发板？
 ------------------------------------------------------------------------------
 
-  - ESP32-lyraT-4.3 开发板支持 MIC 和 AUX 拾音。ESP32-lyraT4.3 开发板说明`参见 <https://docs.espressif.com/projects/esp-adf/zh_CN/latest/get-started/get-started-esp32-lyrat.html#esp32-lyrat-v4-3>`__。
+  - ESP32-lyraT-4.3 开发板支持 MIC 和 AUX 拾音。开发板说明参见 `esp32-lyrat-v4-3 <https://docs.espressif.com/projects/esp-adf/zh_CN/latest/get-started/get-started-esp32-lyrat.html#esp32-lyrat-v4-3>`__。
+
+---------------
+
+如何利用 ESP32-LyraT 开发板实现通话功能？
+-------------------------------------------------------
+
+  - 可参考语音通话例程 `voip <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/voip>`__。
