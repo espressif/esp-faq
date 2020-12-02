@@ -448,4 +448,10 @@ ESP32 & ESP8266 如何通过局域网的 APP 进行 OTA 升级？
 
   - 局域网内 APP 设备可以配置开启 http 服务，将提供的固件下载链接通过其他方法（udp，coap，mqtt 等）发送至设备。
   - 设备通过传统 URL OTA 方法即可完成 OTA 更新，示例已在 SDK 中提供。
-  
+
+-----------------
+
+ESP32 如何修改 LOG 输出至串口 UART1 ?
+-------------------------------------------------------------------------------------------------
+
+  - 更换 LOG 输出串口为 UART1 可通过配置 menuconfig -> Component Config ->Common ESP-related -> Channel for console output -> Custom UART -> UART peripheral to use for console output(0-1) -> UART1
