@@ -231,3 +231,11 @@ ESP32 模组外接 32Khz 晶振参考设计？
 ------------------------------------------
 
   - 请参考 `ESP32 硬件设计指南 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf/>`_ V2.4.2 章节。
+
+--------------
+
+ESP32 模组 Flash 是否支持 QIO+80MHz？
+--------------------------------------------------
+
+  - ESP32 模组可以同时支持 Flash mode: QIO 和 Flash speed: 80MHz。
+  - 使用 QIO 模式建议使用在二级 bootlaoder 中开启，因为部分 Flash 状态寄存器默认 QE 未使能。 
