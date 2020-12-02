@@ -321,13 +321,29 @@ ESP32 的 BLE 连接数 6 个以上会有哪些风险？
 使用 ESP32 设备作为 Ble 主机，最大支持多少台从机设备进行连接？
 --------------------------------------------------------------------------------------
 
--  ESP32 的 BLE 最大支持 9 台从机设备进行连接，建议连接数量 3 个设备以内。
-- 可通过 menuconfig -> Component config -> Bluetooth -> Bluetooth controller -> BLE MAX Connections 进行配置。
+  -  ESP32 的 BLE 最大支持 9 台从机设备进行连接，建议连接数量 3 个设备以内。
+  - 可通过 menuconfig -> Component config -> Bluetooth -> Bluetooth controller -> BLE MAX Connections 进行配置。
 
 ----------------
 
 ESP32 如何通过 Bluetooth BR/EDR 传文件？
 ------------------------------------------------------------
 
-- 可参考链接 `classic bt <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt>`__ 下的 ``bt_spp_acceptor`` 或者 ``bt_spp_initiator`` 例程.
+  - 可参考链接 `classic bt <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt>`__ 下的 ``bt_spp_acceptor`` 或者 ``bt_spp_initiator`` 例程.
 
+---------------
+
+ESP32 下载 ESP_SPP_SERVER 例程，如何修改蓝牙设备名称？
+-----------------------------------------------------------------
+
+  - 蓝牙设备名称可以通过修改 adv 参数实现：
+
+  .. code-block:: text
+
+    static const uint8_t spp_adv_data[23] = {
+      0x02,0x01,0x06,
+      0x03,0x03,0xF0,0xAB,
+      0x0F,0x09,0x45,0x53,0x50,0x5f,0x53,0x50,0x50,0x5f,0x53,0x45,0x52,0x56,0x45,0x52};
+
+  - 第三列 0x0F 表示后续数据长度为 15，0x09 表示数据类型（固定不变），0x45 开始后续数据代表设备名称对应的 ASCII 码（默认为：BLE_SPP_SERVER)。
+  
