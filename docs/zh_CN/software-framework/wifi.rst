@@ -227,6 +227,21 @@ ESP32 如何调整 Wi-Fi 的发射功率？
 
 --------------
 
+[Connect] ESP32 做 soft-AP 时为什么会把 STA 踢掉？
+--------------------------------------------------------
+
+  - 默认情况下连续 5 min 收不到 STA 发过来的数据包就会把 STA 踢掉. 该时间可以通过 `esp\_wifi\_set\_inactive\_time <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv426esp_wifi_set_inactive_time16wifi_interface_t8uint16_t>`__ 进行修改.
+
+  - 注: esp_wifi_set_inactive_time 新增的 API.
+
+    - master commit: ``63b566eb27da187c13f9b6ef707ab3315da24c9d``
+    - 4.2 commit: ``d0dae5426380f771b0e192d8ccb051ce5308485e``
+    - 4.1 commit: ``445635fe45b7205497ad81289c5a808156a43539``
+    - 4.0 commit: MR 未合, 待定
+    - 3.3 commit: ``908938bc3cd917edec2ed37a709a153182d511da``
+
+--------------
+
 [Connect] ESP32 进行 Wi-Fi 连接时，如何通过错误码判断失败原因？
 ---------------------------------------------------------------
 
