@@ -355,8 +355,10 @@ ESP32 ESP-AT 固件默的蓝牙名称是什么？
 
 --------------
 
-ESP32 如何自定义 AT 指令？
+ESP32-AT 是否支持 websocket 指令？
 --------------------------------------------------
+
+  - 固件目前不支持，但可以参考 `websocket <https://github.com/espressif/esp-idf/tree/master/examples/protocols/websocket>`__  示例自行实现相关指令。
 
   - 请参考文档: `How_to_add_user-defined_AT_commands <https://docs.espressif.com/projects/esp-at/en/latest/Compile_and_Develop/How_to_add_user-defined_AT_commands.html>`__ 。
 
