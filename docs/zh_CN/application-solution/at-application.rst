@@ -532,3 +532,22 @@ ESP32 AT 如何使用 BLE 向调试 APP 发数据？
     AT+BLEGATTSCHAR?                    // 查询允许 Notify 的特征
     AT+BLEGATTSNTFY=0,1,6,6             // 使⽤ 1 号服务的 6 号特征通知⻓度为 6 的数据
                                         // 然后 ESP32 设备通过串口助手发送数据给 APP，例如 ：12345
+
+----------------
+
+ESP32 模组如何使用 AT 指令实现静态秘钥进行蓝牙加密配对？
+----------------------------------------------------------------------
+
+  - 具体实现的 AT 命令如下：
+
+  .. code-block:: text
+
+    AT+RESTORE                          # 格式化模块
+    AT+BLEINIT=2                        # 将模组初始化为 server
+    AT+BLEGATTSSRVCRE                   # GATTS 创建服务
+    AT+BLEGATTSSRVSTART                 # GATTS 开启服务
+    AT+BLEADDR?                         # 查询 BLE 设备地址
+    AT+BLESECPARAM=1,0,16,3,3           # 设置 BLE 加密参数
+    AT+BLESETKEY=123456                 # 设置 BLE 配对静态秘钥
+    AT+BLEADVSTART                      # 开始 BLE 广播，使用 APP 与ESP32 建立连接
+    AT+BLEENC=0,3                       # 连接后，发送此条命令即可产生加密配对请求，输入秘钥
