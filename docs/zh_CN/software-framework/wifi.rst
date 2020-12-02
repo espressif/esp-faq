@@ -551,3 +551,10 @@ ESP32 如何自定义 hostname ？
 
   - 可以参考 IDF 编程文档中的 `Wireshark 使用指南 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html>`__ 。
 
+--------------
+
+ESP32 Wi-Fi 支持 PMF(Protected Management Frames) 和 PFS(Perfect Forward Secrecy) 吗？
+
+-----------------------------------------------------------------------------------------------------
+
+  - WPA2 / WPA3 中均支持 PMF， WPA3 中支持 PFS。
