@@ -551,3 +551,12 @@ ESP32 模组如何使用 AT 指令实现静态秘钥进行蓝牙加密配对？
     AT+BLESETKEY=123456                 # 设置 BLE 配对静态秘钥
     AT+BLEADVSTART                      # 开始 BLE 广播，使用 APP 与ESP32 建立连接
     AT+BLEENC=0,3                       # 连接后，发送此条命令即可产生加密配对请求，输入秘钥
+
+--------------
+
+ESP32 AT 以太网功能如何使用？
+---------------------------------------
+
+  - 硬件上，可以用 ESP32-Ethernet-Kit 测试。
+  - 由于 ESP32-Ethernet-Kit 开发板的 GPIO19 和 GPIO22 已经被占用，需要将默认的 AT 指令改为其他空闲 GPIO，例如 GPIO4 和 GPIO2。
+  - 另外需要在 esp-at 编译中通过make menuconfig 配置使能以太网功能，官网链接中下载的标准版本 AT.bin 固件中未开启以太网支持。
