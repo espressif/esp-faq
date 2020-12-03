@@ -455,3 +455,19 @@ ESP32 如何修改 LOG 输出至串口 UART1 ?
 -------------------------------------------------------------------------------------------------
 
   - 更换 LOG 输出串口为 UART1 可通过配置 menuconfig -> Component Config ->Common ESP-related -> Channel for console output -> Custom UART -> UART peripheral to use for console output(0-1) -> UART1
+
+-----------------
+
+ESP8266 使用 MQTT ssl_mutual_auth 通讯，在 OTA 时出现如下报错：
+----------------------------------------------------------------------------
+
+  .. code::text
+
+    W(50083) _http_event_handler：HTTP_EVENT_DISCONNECTED
+    E(50089)esp_https_ota：Failed to open HTTP connection：28674
+    E(50095)gateway_https_ota：Firmware upgrade failed
+    E(50179)esp-tls-mbedtls: mbedtls_ssl_setup returned -0x7f00
+    E(50181)esp-tls-mbedtls: mbedtls_ssl_handle failed
+    E(50194)esp-tls：Failed to open a new connection
+
+  - 0x7f00 此报错是由于 内存不足 导致，建议使用 http 方式 OTA 。
