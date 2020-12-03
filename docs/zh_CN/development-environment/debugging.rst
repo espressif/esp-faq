@@ -18,14 +18,14 @@
 使用 ESP32 ，在快速掉电再上电后，出现产品起不来的现象，是什么原因？
 -------------------------------------------------------------------
 
-  场景描述：电源为 220V 转 5V ，5V 转 3.3V ，220V掉电再上电出现故障。报错 log 如下: 
+  场景描述：电源为 220 V 转 5 V，5 V 转 3.3 V，220 V 掉电再上电出现故障。报错 log 如下: 
 
   .. code-block:: text
 
     brownout detector was triggered.
     rst:0xc(SW_CPU_RESET),boot:0x13(SPI_FAST_FLASH_BOOT) configsip:0,SPI
 
-  1. 打印此 log是因为在快速掉电过程中，电压降到了触发硬件看门狗的电压阈值。
+  1. 打印此 log 是因为在快速掉电过程中，电压降到了触发硬件看门狗的电压阈值。
   2. 由于上电时序不对，导致没有进入 bootloader ，可以将 chip_PU 强制拉低解除故障。
   3. ESP32 上电、复位时序说明，详见 `《ESP32技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
 
@@ -34,10 +34,10 @@
 Wi-Fi 设备的串口名称？
 ----------------------
 
- - windows 系统中串口设备名称格式是：COM\*
- - windows 10 ⼦统系 linux 中串口设备名称的标准格式是 /dev/ttyS\*
- - linux 系统中串口设备名称格式是：/dev/ttyUSB\*
- - macos 系统中串口设备名称格式是: /dev/cu.usbserial-\*
+ - Windows 系统中串口设备名称格式是：COM\*
+ - Windows 10 ⼦统系 linux 中串口设备名称的标准格式是：/dev/ttyS\*
+ - Linux 系统中串口设备名称格式是：/dev/ttyUSB\*
+ - macOS 系统中串口设备名称格式是: /dev/cu.usbserial-\*
 
 --------------
 
@@ -45,7 +45,7 @@ ESP32 如何关闭默认通过 UART0 发送的调试信息？
 ---------------------------------------------
 
   - 一级 Bootloader log 信息可以通过 GPIO15 接地来使能屏蔽。
-  - 二级 bootloader log 信息可以通过 make menuconfig 中 ``Bootloader config`` 进⾏相关配置。
+  - 二级 Bootloader log 信息可以通过 make menuconfig 中 ``Bootloader config`` 进⾏相关配置。
   - IDF 中 log 信息可以通过 make menuconfig 中 ``Component config/Log output`` 进⾏相关配置。
 
 --------------
@@ -55,26 +55,26 @@ ESP32 如何修改默认上电校准⽅式？
 
   - 上电时 RF 初始化默认采⽤部分校准的⽅案：打开 menuconfig 中 ``CONFIG_ESP32_PHY_CALIBRATION_AND_DATA_STORAGE`` 选项。
   - 不关注上电启动时间，可修改使⽤上电全校准⽅案：关闭 menuconfig 中 ``CONFIG_ESP32_PHY_CALIBRATION_AND_DATA_STORAGE`` 选项。
-  - 建议默认使用**部分校准**的方案，这样既可以保证上电启动的时间，也可以在业务逻辑中增加擦除 NVS 中 RF 校准信息的操作，以触发全校准的操作。
+  - 建议默认使用 **部分校准** 的方案，这样既可以保证上电启动的时间，也可以在业务逻辑中增加擦除 NVS 中 RF 校准信息的操作，以触发全校准的操作。
 
 --------------
 
 ESP8266 如何修改默认上电校准⽅式？
 --------------------------------------
 
-  上电时 RF 初始化默认采⽤部分校准的⽅案： esp\_init\_data\_default.bin 中第 115 字节为 0x01，RF 初始化时间较短。不关注上电启动时间，可修改使⽤上电全校准⽅案。
+  上电时 RF 初始化默认采⽤部分校准的⽅案： esp\_init\_data\_default.bin 中第 115 字节为 ``0x01``，RF 初始化时间较短。不关注上电启动时间，可修改使⽤上电全校准⽅案。
 
   **使⽤ NONOS SDK 及 RTOS SDK 3.0 以前的版本：**
 
   - 在 user\_pre\_init 或 user\_rf\_pre\_init 函数中调⽤ system\_phy\_set\_powerup\_option(3)；
-  - 修改 phy\_init\_data.bin 中第 115 字节为 0x03。 
+  - 修改 phy\_init\_data.bin 中第 115 字节为 ``0x03``。 
 
   **使⽤ RTOS SDK 3.0 及以后版本：**
 
   - 在 menuconfig 中关闭 CONFIG\_ESP\_PHY\_CALIBRATION\_AND\_DATA\_STORAGE；
-  - 如果在 menuconfig 中开启了 CONFIG\_ESP\_PHY\_INIT\_DATA\_IN\_PARTITION，修改 phy\_init\_data.bin 中第 115 字节为 0x03； 如果没有开启 CONFIG\_ESP\_PHY\_INIT\_DATA\_IN\_PARTITION，修改 phy\_init\_data.h 中第 115 字节为 0x03。
+  - 如果在 menuconfig 中开启了 CONFIG\_ESP\_PHY\_INIT\_DATA\_IN\_PARTITION，修改 phy\_init\_data.bin 中第 115 字节为 ``0x03``； 如果没有开启 CONFIG\_ESP\_PHY\_INIT\_DATA\_IN\_PARTITION，修改 phy\_init\_data.h 中第 115 字节为 ``0x03``。
   
-  **继续使⽤上电部分校准⽅案，若需在业务逻辑中增加出发全校准操作的功能：**
+  **继续使⽤上电部分校准⽅案，若需在业务逻辑中增加触发全校准操作的功能：**
 
   - 使⽤ NONOS SDK 及 RTOS SDK 3.0 以前的版本：擦除 RF 参数区中的内容，触发全校准操作。
   - 使⽤ RTOS SDK 3.0 及以后版本：擦除 NVS 分区中的内容，触发全校准操作。
@@ -84,8 +84,8 @@ ESP8266 如何修改默认上电校准⽅式？
 ESP32 boot 启动模式不正常如何排查？
 -----------------------------------
 
-  - ESP32-WROVER 模组使用 1.8V flash 与 psram 启动状态默认为 ``0x33`` ,下载模式 ``0x23`` 。
-  - 其余模组使用 3.3V flash 与 psram 模组默认为 ``0x13`` , 下载模式 ``0x03`` 。
+  - ESP32-WROVER 模组使用 1.8 V flash 与 psram 启动状态默认为 ``0x33`` ,下载模式 ``0x23`` 。
+  - 其余模组使用 3.3 V flash 与 psram 模组默认为 ``0x13`` , 下载模式 ``0x03`` 。
   - 详情请参考 ESP32 系列芯片技术规格书中 Strapping 管脚部分。示例 ``0x13`` 对应如下： 
 
   +--------+--------+-------+-------+-------+--------+-------+
@@ -99,14 +99,14 @@ ESP32 boot 启动模式不正常如何排查？
 使用 ESP32 JLINK 调试，发现会报 ERROR：No Symbols For Freertos ，如何解决呢？
 -----------------------------------------------------------------------------
 
-  首先，这个不影响使用，解决措施可以参考 `此论坛链接 <https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd>`__ 。
+  首先，这个不影响使用，解决措施可以参考 `此论坛 <https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd>`_。
 
 --------------
 
 如何监测任务栈的剩余空间？
 --------------------------
 
-  函数 ``vTaskList()`` 可以用于定期打印任务栈的剩余空间。
+  函数 ``vTaskList()`` 可以用于定期打印任务栈的剩余空间。
 
 --------------
 
@@ -120,7 +120,7 @@ ESP32-S2 是否可以使用 JTAG 进行下载调试？
 如何在不更改 menuconfig 输出级别的情况下调整 log 输出？
 -------------------------------------------------------
 
-  可以通过函数 ``esp_log_level_set()`` 修改 log 的输出级别。
+  可以通过函数 ``esp_log_level_set()`` 修改 log 的输出级别。
 
 --------------
 
@@ -132,7 +132,7 @@ ESP32-S2 是否可以使用 JTAG 进行下载调试？
 
 --------------
 
-ESP-WROVER-KIT 开发板openocd 错误 Error: Can't find board/esp32-wrover-kit-3.3v.cfg？
+ESP-WROVER-KIT 开发板 openocd 错误 Error: Can't find board/esp32-wrover-kit-3.3v.cfg？
 -----------------------------------------------------------------------------------------------------
 
   - openocd 版本为 20190313 和 20190708，请使用 openocd -f board/esp32-wrover.cfg 指令打开。
@@ -143,7 +143,7 @@ ESP-WROVER-KIT 开发板openocd 错误 Error: Can't find board/esp32-wrover-kit-
 ESP32 如何获取与解析 coredump？
 -----------------------------------
 
-  - 从完整的固件中提取出 64 K 大小的 coredump，需要先从分区表中确认 coredump 的偏移量，当前假设为 0x3F0000。
+  - 从完整的固件中提取出 64 K 大小的 coredump，需要先从分区表中确认 coredump 的偏移量，当前假设为 ``0x3F0000``。
 
   .. code-block:: text
 
@@ -168,7 +168,7 @@ Win 10 系统下识别不到设备有哪些原因？
 ----------------------------------------
 
   - 是否是在 Win10 Linux 虚拟子系统下识别设备。
-  - 如果只是在 win 10 下识别不到设备，应该到设备管理器查看是否有对应设备，如 COM x，若没有识别到任何设备，请查看设备接线以及驱动是否正常。
+  - 如果只是在 Win 10 下识别不到设备，应该到设备管理器查看是否有对应设备，如 COM x，若没有识别到任何设备，请查看设备接线以及驱动是否正常。
   - 如果是在 Linux 虚拟子系统下识别不到设备，在完成设备接线以及驱动是否正常的检查后，以 VMWare 为例应该到虚拟机设置窗口里的 “USB 控制器” 里勾选 “显示所有 USB 输入设备”。
 
 --------------
@@ -192,7 +192,7 @@ ESP32 出现 Error:Core 1 paniced(Cache disabled but cache memory region accesse
 如何读取模组 flash 型号信息？
 ----------------------------------
 
-  - 乐鑫模组或芯片可通过 python 脚本 `esptool <https://github.com/espressif/esptool>`__ 读取。
+  - 乐鑫模组或芯片可通过 python 脚本 `esptool <https://github.com/espressif/esptool>`_ 读取。
 
   .. code-block:: text
 
