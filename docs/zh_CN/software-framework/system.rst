@@ -471,3 +471,11 @@ ESP8266 使用 MQTT ssl_mutual_auth 通讯，在 OTA 时出现如下报错：
     E(50194)esp-tls：Failed to open a new connection
 
   - 0x7f00 此报错是由于 内存不足 导致，建议使用 http 方式 OTA 。
+
+-----------------
+
+ESP32 配置 menuconfig --> Component config 中有 NVS 选项，为何配置项目为空？
+-----------------------------------------------------------------------------------------
+
+  - menuconfig --> Component config 中的 NVS 选项是配置 NVS 加密功能的，该功能的前提是开启 Flash 加密。
+  - menuconfig --> security feaures --> enable flash encryption on boot 配置选项后，便可以看到 NVS 的配置选项。
