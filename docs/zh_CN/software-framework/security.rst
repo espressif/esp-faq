@@ -72,3 +72,11 @@ ESP32 保护固件安全的方式有那些？
   - `flash encryption <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html>`_。
   - `secure boot <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html>`_。
   - `ECO3 Chip secure boot V2 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html>`_。
+
+--------------
+
+ESP32 启动 Flash 加密后进行 GDB 调试，为何会不断复位重启？
+---------------------------------------------------------------------------------------------------------
+
+  - ESP32 启动了 Flash 加密或 Secure Boot 默认将会禁用 JTAG 调试，请参见说明`JTAG with Flash Encryption <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-with-flash-encryption-or-secure-boot>`_。
+  - 可以通过 esptool 工具包中的 espefuse.py summary 脚本指令读取当前芯片 JTAG 状态。 
