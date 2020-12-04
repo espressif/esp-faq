@@ -622,3 +622,29 @@ ESP32 Wi-Fi 支持 PMF(Protected Management Frames) 和 PFS(Perfect Forward Secr
 -----------------------------------------------------------------------------------------------------
 
   - WPA2 / WPA3 中均支持 PMF， WPA3 中支持 PFS。
+
+--------------
+
+ESP32 IDF v4.1 Wi-Fi 怎样获取已连接的 AP 的 RSSI？
+--------------------------------------------------------------
+
+  - 可以通过扫描获取 AP 的 RSSI,参考例程 `scan <https://github.com/espressif/esp-idf/tree/master/examples/wifi/scan>`_.
+  - 如果周围环境中有多个同名 SSID，可以在连接到 AP 之后获取 AP 的 bssid,然后通过结构体 wifi_scan_config_t 指定 bssid 调用 esp_wifi_scan_start() 获取 RSSI。
+
+    参考代码:
+
+    .. code-block:: c
+
+      //在回调函数 event_handler() 中通过 WIFI_EVENT_STA_CONNECTED 获取 bssid
+      else if(event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_CONNECTED) {
+
+              wifi_event_sta_connected_t* sta_connected_event = (wifi_event_sta_connected_t*) event_data;
+              ESP_LOGI(TAG, "AP MAC:"MACSTR"", MAC2STR(sta_connected_event->bssid));
+              ...
+              //指定 bssid 进行扫描
+              wifi_scan_config_t wifi_scan_config = {
+                  .bssid = sta_connected_event->bssid,
+              };
+              ESP_ERROR_CHECK(esp_wifi_scan_start(&wifi_scan_config, true));
+              ...
+      }
