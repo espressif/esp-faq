@@ -20,7 +20,7 @@ ESP-FAQ is a summary document for common problems launched by Espressif.
 ``` bash
 docs
 ├── _static
-│   ├── espressif-logo.svg       # Web log
+│   ├── espressif-logo.svg       # Web logo
 │   └── theme_overrides.css      # Web Style Sheet
 ├── zh_CN
 │   ├── _static                  # Inline resources
