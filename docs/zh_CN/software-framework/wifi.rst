@@ -648,3 +648,10 @@ ESP32 IDF v4.1 Wi-Fi 怎样获取已连接的 AP 的 RSSI？
               ESP_ERROR_CHECK(esp_wifi_scan_start(&wifi_scan_config, true));
               ...
       }
+
+--------------
+
+ESP8266 在使用 esptouch v2 出现 AES PN 错误 log？
+------------------------------------------------------------------------------
+
+  -  ESP8266 收到路由器重传了好几次的包会报这个错误，但是不影响使用。
