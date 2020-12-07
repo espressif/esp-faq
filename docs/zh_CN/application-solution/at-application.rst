@@ -562,3 +562,17 @@ ESP32 AT 以太网功能如何使用？
   - 硬件上，可以用 ESP32-Ethernet-Kit 测试。
   - 由于 ESP32-Ethernet-Kit 开发板的 GPIO19 和 GPIO22 已经被占用，需要将默认的 AT 指令改为其他空闲 GPIO，例如 GPIO4 和 GPIO2。
   - 另外需要在 esp-at 编译中通过make menuconfig 配置使能以太网功能，官网链接中下载的标准版本 AT.bin 固件中未开启以太网支持。
+
+ESP32 下载 ESP-AT V2.1.0.0 版本的 AT 固件，发送 AT+BLUFI=1 命令为何返回 ERROR ？
+----------------------------------------------------------------------------------------------------------------------
+
+  - ESP-AT V2.1.0.0 版本的 AT 固件不支持 Blufi  配网功能。如果要使用 Blufi 功能，需要编译最新 master （V2.2.0.0）版本的 esp-at 代码生成固件。
+  - 编译时需要在 menuconfig ->Component config -> AT -> (键 "Y" Enable) AT  blufi command support 命令支持。代码仓库参考 `esp-at <https://github.com/espressif/esp-at>`_。
+
+  .. code-block:: text
+
+    AT+RESTORE            #格式化设备
+    AT+GMR                      #查询固件版本信息
+    AT+BLUFI=1              #开启 Blufi 功能
+    AT+BLEADDR?          #查询设备地址
+    
