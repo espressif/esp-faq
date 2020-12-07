@@ -626,4 +626,12 @@ ESP32 CPU 访问 ``0x3FF0_0000 ~ 0x3FF1_EFFF`` 与 ``0x3FF4_0000 ~ 0x3FF7_FFFF``
 -----------------------------------------------------------------------------------------------------------------------
 
   - 落在这两段地址空间的 CPU 访问均需要在对应的操作前加⼊ “MEMW” 指令。即在 C/C++ 中，软件访问这两段地址内的寄存器时需要加上 “volatile” 属性。
-  - 当 CPU 频率为160 MHz 时，在两次连续读 FIFO 之间添加 6 个 “nop" 指令。CPU 频率为 240 MHz 时，在两次连续读 FIFO 之间添加 7 个 “nop" 指令。
+
+------------------
+
+ESP32 如何关闭程序 LOG 输出？
+--------------------------------------------------------------------
+
+  - 关闭 bootloader 日志：menuconfig -> bootloader config --> bootloader log verbosity 选定为 No output 。
+  - 关闭程序日志：menuconfig -> Component config --> log output --> Default log verbosity 选定为 No output 。
+  - 关闭 UART0 输出日志：menuconfig -> Component Config ->Common ESP-related -> Channel for console output -> None 。
