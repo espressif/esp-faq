@@ -25,19 +25,19 @@
     brownout detector was triggered.
     rst:0xc(SW_CPU_RESET),boot:0x13(SPI_FAST_FLASH_BOOT) configsip:0,SPI
 
-  1. 打印此 log 是因为在快速掉电过程中，电压降到了触发硬件看门狗的电压阈值。
-  2. 由于上电时序不对，导致没有进入 bootloader ，可以将 chip_PU 强制拉低解除故障。
-  3. ESP32 上电、复位时序说明，详见 `《ESP32技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
+  - 打印此 log 是因为在快速掉电过程中，电压降到了触发硬件看门狗的电压阈值。
+  - 由于上电时序不对，导致没有进入 bootloader ，可以将 chip_PU 强制拉低解除故障。
+  - ESP32 上电、复位时序说明，详见 `《ESP32技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
 
 --------------
 
 Wi-Fi 设备的串口名称？
 ----------------------
 
- - Windows 系统中串口设备名称格式是：COM\*
- - Windows 10 ⼦统系 linux 中串口设备名称的标准格式是：/dev/ttyS\*
- - Linux 系统中串口设备名称格式是：/dev/ttyUSB\*
- - macOS 系统中串口设备名称格式是: /dev/cu.usbserial-\*
+  - Windows 系统中串口设备名称格式是：COM*
+  - Windows 10 ⼦统系 linux 中串口设备名称的标准格式是：/dev/ttyS*
+  - Linux 系统中串口设备名称格式是：/dev/ttyUSB*
+  - macOS 系统中串口设备名称格式是: /dev/cu.usbserial-*
 
 --------------
 
@@ -62,17 +62,17 @@ ESP32 如何修改默认上电校准⽅式？
 ESP8266 如何修改默认上电校准⽅式？
 --------------------------------------
 
-  上电时 RF 初始化默认采⽤部分校准的⽅案： esp\_init\_data\_default.bin 中第 115 字节为 ``0x01``，RF 初始化时间较短。不关注上电启动时间，可修改使⽤上电全校准⽅案。
+  上电时 RF 初始化默认采⽤部分校准的⽅案： esp_init_data_default.bin 中第 115 字节为 ``0x01``，RF 初始化时间较短。不关注上电启动时间，可修改使⽤上电全校准⽅案。
 
   **使⽤ NONOS SDK 及 RTOS SDK 3.0 以前的版本：**
 
-  - 在 user\_pre\_init 或 user\_rf\_pre\_init 函数中调⽤ system\_phy\_set\_powerup\_option(3)；
-  - 修改 phy\_init\_data.bin 中第 115 字节为 ``0x03``。 
+  - 在 user_pre_init 或 user_rf_pre_init 函数中调⽤ system_phy_set_powerup_option(3)；
+  - 修改 phy_init_data.bin 中第 115 字节为 ``0x03``。 
 
   **使⽤ RTOS SDK 3.0 及以后版本：**
 
-  - 在 menuconfig 中关闭 CONFIG\_ESP\_PHY\_CALIBRATION\_AND\_DATA\_STORAGE；
-  - 如果在 menuconfig 中开启了 CONFIG\_ESP\_PHY\_INIT\_DATA\_IN\_PARTITION，修改 phy\_init\_data.bin 中第 115 字节为 ``0x03``； 如果没有开启 CONFIG\_ESP\_PHY\_INIT\_DATA\_IN\_PARTITION，修改 phy\_init\_data.h 中第 115 字节为 ``0x03``。
+  - 在 menuconfig 中关闭 CONFIG_ESP_PHY_CALIBRATION_AND_DATA_STORAGE；
+  - 如果在 menuconfig 中开启了 CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION，修改 phy_init_data.bin 中第 115 字节为 ``0x03``； 如果没有开启 CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION，修改 phy_init_data.h 中第 115 字节为 ``0x03``。
   
   **继续使⽤上电部分校准⽅案，若需在业务逻辑中增加触发全校准操作的功能：**
 
@@ -99,14 +99,14 @@ ESP32 boot 启动模式不正常如何排查？
 使用 ESP32 JLINK 调试，发现会报 ERROR：No Symbols For Freertos ，如何解决呢？
 -----------------------------------------------------------------------------
 
-  首先，这个不影响使用，解决措施可以参考 `此论坛 <https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd>`_。
+  该错误 log 不影响调试使用，解决措施可以参考 `此论坛 <https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd>`_。
 
 --------------
 
 如何监测任务栈的剩余空间？
 --------------------------
 
-  函数 ``vTaskList()`` 可以用于定期打印任务栈的剩余空间。
+  调用函数 ``vTaskList()`` 可以用于定期打印任务栈的剩余空间。
 
 --------------
 
@@ -135,8 +135,8 @@ ESP32-S2 是否可以使用 JTAG 进行下载调试？
 ESP-WROVER-KIT 开发板 openocd 错误 Error: Can't find board/esp32-wrover-kit-3.3v.cfg？
 -----------------------------------------------------------------------------------------------------
 
-  - openocd 版本为 20190313 和 20190708，请使用 openocd -f board/esp32-wrover.cfg 指令打开。
-  - openocd 版本为 20191114 和 20200420（2020 以上版本）， 请使用 openocd -f board/esp32-wrover-kit-3.3v.cfg 指令打开。
+  - openocd 版本为 20190313 和 20190708，请使用 ``openocd -f board/esp32-wrover.cfg`` 指令打开。
+  - openocd 版本为 20191114 和 20200420（2020 以上版本）， 请使用 ``openocd -f board/esp32-wrover-kit-3.3v.cfg`` 指令打开。
 
 --------------
 
@@ -160,7 +160,7 @@ ESP32 如何获取与解析 coredump？
 ESP32&ESP8266&ESP32S2 如何做射频性能测试？
 -----------------------------------------------
 
-  - 参见: `ESP32&ESP8266&ESP32S2 射频性能测试指南 <https://www.espressif.com/sites/default/files/tools/ESP32%26ESP8266_RF_Performance_Test_CN_0.zip>`_。
+  - 参见：`ESP32&ESP8266&ESP32S2 射频性能测试指南 <https://www.espressif.com/sites/default/files/tools/ESP32%26ESP8266_RF_Performance_Test_CN_0.zip>`_。
   
 --------------
 
@@ -200,10 +200,14 @@ ESP32 出现 Error:Core 1 paniced(Cache disabled but cache memory region accesse
 
 --------------
 
-调试IDF里的 ethernet demo，出现 ``emac: Timed out waiting for PHY register 0x2 to have value 0x0243(mask 0xffff). Current value:``
---------------------------------------------------------------------------------------------------------------------------------------
+调试IDF里的 ethernet demo，出现 如下异常 log？
+------------------------------------------------------
 
-  你好，官方开发板还需要如下配置，详见板子原理图:
+  .. code-block:: text
 
-  - CONFIG_PHY_USE_POWER_PIN=y
-  - CONFIG_PHY_POWER_PIN=5
+    emac: Timed out waiting for PHY register 0x2 to have value 0x0243(mask 0xffff). Current value:
+
+  可以参考开发板的如下配置，详见板子原理图:
+
+    - CONFIG_PHY_USE_POWER_PIN=y
+    - CONFIG_PHY_POWER_PIN=5

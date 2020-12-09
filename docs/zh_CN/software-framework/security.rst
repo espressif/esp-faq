@@ -34,7 +34,7 @@ ESP8285 是否可以固件加密？
 开启 security boot 后, 编译报错缺少文件 ？
 ------------------------------------------
 
-  错误 log：/d/ESP32/esp-mdf/esp-idf/components/bootloader\_support/Makefile.projbuild:7：/f/ESP32Root/secure\_boot\_signing\_key.pem。
+  错误 log：/d/ESP32/esp-mdf/esp-idf/components/bootloader_support/Makefile.projbuild:7：/f/ESP32Root/secure_boot_signing_key.pem。
 
   - 报错原因 security boot 是固件签名校验的功能，该功能需要生成证书对。相关资料 `参考 <https://blog.csdn.net/espressif/article/details/79362094>`_。
 
@@ -68,15 +68,15 @@ ESP32 打开 flash 加密和 secure boot 后，如何关闭？
 ESP32 保护固件安全的方式有那些？
 -----------------------------------
 
-  ESP32 支持 flash encryption 与 secure boot.
-  - `flash encryption <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html>`_。
-  - `secure boot <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html>`_。
-  - `ECO3 Chip secure boot V2 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html>`_。
+  - ESP32 支持 flash encryption 与 secure boot. 
+  - Flash 加密参考文档：`flash encryption <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html>`_，
+  - 安全引导参考文档： `secure boot <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html>`_，
+  - 安全引导 V2 参考文档：`ECO3 Chip secure boot V2 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html>`_。
 
 --------------
 
 ESP32 启动 Flash 加密后进行 GDB 调试，为何会不断复位重启？
 ---------------------------------------------------------------------------------------------------------
 
-  - ESP32 启动了 Flash 加密或 Secure Boot 默认将会禁用 JTAG 调试，请参见说明`JTAG with Flash Encryption <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-with-flash-encryption-or-secure-boot>`_。
+  - ESP32 启动了 Flash 加密或 Secure Boot 默认将会禁用 JTAG 调试，请参见说明 `JTAG with Flash Encryption <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-with-flash-encryption-or-secure-boot>`_。
   - 可以通过 esptool 工具包中的 espefuse.py summary 脚本指令读取当前芯片 JTAG 状态。 

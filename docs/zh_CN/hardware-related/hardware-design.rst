@@ -18,16 +18,16 @@
 参考设计中 I2S 信号管脚如何分布？
 -----------------------------------
 
-  .. tip::  参考设计中 I2S 信号分布太散，是否可以配置集中⼀些，⽐如配知道 ``GPIO5，GPIO18，GPIO23、GPIO19、GPIO22`` 管脚上；I2C 配置到 ``GPIO25、GPIO26`` 或 ``GPIO32、GPIO33`` 管脚上？
+  参考设计中 I2S 信号分布太散，是否可以配置集中⼀些，例如配置到 ``GPIO5，GPIO18，GPIO23、GPIO19、GPIO22`` 或者 ``GPIO25、GPIO26、GPIO32、GPIO33`` 管脚上？
 
   - 所有 I2S 的 I/O 均可任意分配，需要注意有的 I/O 只能作为输⼊，请参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 最后⼀⻚。
 
 --------------
 
-ESP32 避免 light-sleep 模式下 VDD3P3\_RTC 掉电？
+ESP32 避免 light-sleep 模式下 VDD3P3_RTC 掉电？
 ----------------------------------------------------
 
-  - ESP32 进⼊ light-sleep 后，pads powered by VDD3P3\_RTC 对应的 GPIO 的电平会被拉低，根本原因是进⼊ light sleep 后 RTC 掉电导致的。
+  - ESP32 进⼊ light-sleep 后，pads powered by VDD3P3_RTC 对应的 GPIO 的电平会被拉低，根本原因是进⼊ light sleep 后 RTC 掉电导致的。
   - 使⽤函数 ``esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_ON)`` 维持 RTC 的供电。
 
 --------------
@@ -35,15 +35,14 @@ ESP32 避免 light-sleep 模式下 VDD3P3\_RTC 掉电？
 ESP32 管脚配置需要注意什么事项？
 --------------------------------
 
-  大部分数字外设可以通过 IO\_Matrix 配置到任意管脚。SDIO，SPI 高速，以及模拟类相关功能只能通过 IO\_MUX 切换使用。
+  大部分数字外设可以通过 IO_Matrix 配置到任意管脚。SDIO，SPI 高速，以及模拟类相关功能只能通过 IO_MUX 切换使用。
 
-  注意避免以下问题:
-
-  - Strapping 管脚默认电平，详情参考芯片数据手册；
-  - GPIO34 〜 39（⽤作输⼊ IO，并且无上下拉功能）；
-  - GPIO9 〜 GPIO11 被 Flash 引脚占⽤；
-  - GPIO1 和 GPIO3 是 UART0 的 TX 和 RX 引脚，是⽆法配置的；
-  - 其中带有 psram 的模组， GPIO16 和 GPIO17 会被 psram 占⽤。
+  .. note::
+    - Strapping 管脚默认电平，详情参考芯片数据手册；
+    - GPIO34 〜 39（⽤作输⼊ IO，并且无上下拉功能）；
+    - GPIO9 〜 GPIO11 被 Flash 引脚占⽤；
+    - GPIO1 和 GPIO3 是 UART0 的 TX 和 RX 引脚，是⽆法配置的；
+    - 其中带有 psram 的模组， GPIO16 和 GPIO17 会被 psram 占⽤。
 
 --------------
 
@@ -62,7 +61,7 @@ ESP8266 电压电流需求？
   - 模拟电源峰值 350 mA；
   - 数字电源峰值 200 mA。
 
-  .. note:: 选择的 SPI Flash ⼯作电压也需要与 GPIO 的电压匹配。CHIP\_EN 还是⼯作在 3.0 ~ 3.6 V，使⽤ 1.8 V GPIO 控制时需要注意电平转换。
+  .. note:: 选择的 SPI Flash ⼯作电压也需要与 GPIO 的电压匹配。CHIP_EN 还是⼯作在 3.0 ~ 3.6 V，使⽤ 1.8 V GPIO 控制时需要注意电平转换。
 
 --------------
 
@@ -124,7 +123,7 @@ ESP32-D2WD 外接 PSRAM 的参考设计？
 
   建议参考 ESP32-PICO-D4 外接 PSRAM 的设计 `datasheet V7 章节 <https://www.espressif.com/sites/default/files/documentation/esp32-pico-d4_datasheet_en.pdf>`_。
 
-  .. note:: ESP32-D2WD 是 1.8 V Flash，所以外部 VDD\_SDIO 需要加电阻和电容，并且连接 1.8 V PSRAM。
+  .. note:: ESP32-D2WD 是 1.8 V Flash，所以外部 VDD_SDIO 需要加电阻和电容，并且连接 1.8 V PSRAM。
 
 --------------
 

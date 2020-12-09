@@ -15,11 +15,10 @@
 
 --------------
 
-使用 ESP-ADF 下的 VOIP 功能，通过手机和 ESP32 设备进行通话时，如何消除回音？
-----------------------------------------------------------------------------
+ESP-ADF 使用 VOIP 功能，手机和 ESP32 设备进行通话如何消除回音？
+----------------------------------------------------------------------
 
   - 从软件层面来讲， AEC (Acoustic Echo Cancelation) 对系统性能要求较高，而当前芯片性能无法满足，不支持通过软件实时 AEC。因此 VOIP 目前没有 AEC 的软件解决方案。
-
   - 建议使用支持 AEC 的 DSP 芯片来消除回音。
 
 --------------
@@ -35,10 +34,8 @@
 乐鑫官网给出的网络电话例程是否支持 RTP？
 ----------------------------------------
 
-  支持。
-
-  - 现在我们用的网络电话协议是 `VoIP <https://www.espressif.com/zh-hans/news/ESP32_VoIP>`__\ ，媒体协议是RTP。
-  - 可使用 `Espressif 官方例程 <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/voip>`__。
+  - 当前网络电话协议是 `VoIP <https://www.espressif.com/zh-hans/news/ESP32_VoIP>`_，媒体协议是RTP。
+  - 可使用 `Espressif 官方例程 <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/voip>`_。
 
 --------------
 
@@ -49,8 +46,10 @@ ESP-ADF 中 RTP 协议是否开源？
 
 --------------
 
-ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？（如 pipeline_a2dp_sink_and_hfp，pipeline_a2dp_sink_stream，pipeline_bt_sink）
-------------------------------------------------------------------------------------------------------------------------------
+ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？
+---------------------------------------------------
+
+  如：pipeline_a2dp_sink_and_hfp，pipeline_a2dp_sink_stream，pipeline_bt_sink
 
   - 目前 ADF 还不支持 AVRCP 的调音操作，IDF release/v4.0 及以上已经支持了，您可以用 IDF 中 a2dp_sink 的 demo， 和 a2dp_source 对跑看下。
   - 后续会在 ADF 的 Demo 中直接支持
@@ -69,40 +68,42 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？（如 pipeline_a2
 
   - 重新写一个 my_i2s_write 函数调用 i2s_write_expand, 然后把 my_i2s_write 用 ``audio_element_set_write_cb`` 修改 i2s_stream element 的 write 函数。
 
-.. code:: c
+  .. code:: c
 
-   int my_i2s_write(audio_element_handle_t self, char *buffer, int len, TickType_t ticks_to_wait, void *context)
-  {
-    i2s_stream_t *i2s = (i2s_stream_t *)audio_element_getdata(self);
-    size_t bytes_written = 0;
-    i2s_write_expand(i2s->config.i2s_port, buffer, len, 16, 32, &bytes_written, ticks_to_wait);
-    return bytes_written;
-  }
+    int my_i2s_write(audio_element_handle_t self, char *buffer, int len, TickType_t ticks_to_wait, void *context)
+    {
+      i2s_stream_t *i2s = (i2s_stream_t *)audio_element_getdata(self);
+      size_t bytes_written = 0;
+      i2s_write_expand(i2s->config.i2s_port, buffer, len, 16, 32, &bytes_written, ticks_to_wait);
+      return bytes_written;
+    }
 
-    i2s_stream_cfg_t i2s_writer = I2S_STREAM_CFG_DEFAULT();
-    i2s_writer.type = AUDIO_STREAM_WRITER;
-    i2s_writer.stack_in_ext = true;
-    i2s_writer.i2s_config.sample_rate = 48000;
-    i2s_writer.i2s_config.mode = I2S_MODE_MASTER | I2S_MODE_TX;
-    i2s_writer.i2s_config.bits_per_sample = 32; //for cupid digital loopback
-    audio_element_handle_t my_i2s = i2s_stream_init(&i2s_writer);
-    audio_element_set_write_cb(my_i2s, my_i2s_write, NULL);
+      i2s_stream_cfg_t i2s_writer = I2S_STREAM_CFG_DEFAULT();
+      i2s_writer.type = AUDIO_STREAM_WRITER;
+      i2s_writer.stack_in_ext = true;
+      i2s_writer.i2s_config.sample_rate = 48000;
+      i2s_writer.i2s_config.mode = I2S_MODE_MASTER | I2S_MODE_TX;
+      i2s_writer.i2s_config.bits_per_sample = 32; //for cupid digital loopback
+      audio_element_handle_t my_i2s = i2s_stream_init(&i2s_writer);
+      audio_element_set_write_cb(my_i2s, my_i2s_write, NULL);
 
 --------------
 
-请问用 ESP-ADF 和 idf4.1 编译 example/get-started/play-pm3 的时间总是报错: ``fatal error: audio_type_def.h: No such file or directory``？
-------------------------------------------------------------------------------------------------------------------------------------------
+请问用 ESP-ADF 和 idf4.1 编译 example/get-started/play-pm3 的时总是报错 ？
+------------------------------------------------------------------------------------
+
+  错误 log：``fatal error: audio_type_def.h: No such file or directory``
 
   - 文件 audio_type_def.h 位于 ESP-ADF 的 esp-adf-libs 中。如果在编译过程中找不到该文件，则说明 ESP-ADF v2.0 可能未被正确检测出。特别是子模块可能尚未更新。
   - 要正确检测 ESP-ADF v2.0，请按照所述的步骤进行操作： `更新至一个稳定发布版本 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/versions.html#id7>`_
   - 尝试执行以下命令并重复编译。
 
-.. code:: bash
+  .. code:: shell
 
-  cd $ADF_PATH
-  git fetch
-  git checkout v2.0
-  git submodule update --init --recursive 
+    cd $ADF_PATH
+    git fetch
+    git checkout v2.0
+    git submodule update --init --recursive 
 
 --------------
 
@@ -123,8 +124,7 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？（如 pipeline_a2
 ESP32-LyraT V4.3 不支持 dueros 吗，烧进去 dueros 固件，机器一直重启？
 -----------------------------------------------------------------------
 
-  设置ram为64M或是设置为自动就行了。
-  ``Component config -> ESP32 Specific -> SPI RAM config -> Type of SPIRAM in use->select ESP-PSRAM64``
+  - 设置ram为64M或是自动 ``Component config -> ESP32 Specific -> SPI RAM config -> Type of SPIRAM in use->select ESP-PSRAM64``
 
 --------------
 
@@ -135,11 +135,11 @@ ESP-ADF 支持语音识别关键词自定义开发吗？
 
 --------------
 
-使用 ESP32-LyraTD-MSC V2.1 开发板跑 Alexa 例程，把固件下载到开发板中，重启后板子没有反应，无法配置 Wi-Fi 等后续操作？ ADF 例程是否支持 ESP32-LyraTD-MSC 类型的开发板？
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ESP-ADF 是否支持 ESP32-LyraTD-MSC V2.1 开发板跑 Alexa 例程？
+---------------------------------------------------------------------
 
-  - Alexa 你需要使用 https://github.com/espressif/esp-avs-sdk/releases/download/v1.0b1r3/esp-prov-v2.apk 进行配网
-  - ADF 已经支持 ESP32-LyraTD-MSC ，先将 ``ADF git submodule update`` ，后可以直接使用 demo 编译
+  - Alexa 你需要使用 `esp-prov-v2 <https://github.com/espressif/esp-avs-sdk/releases/download/v1.0b1r3/esp-prov-v2.apk>`_ 进行配网
+  - ESP-ADF 已经支持 ESP32-LyraTD-MSC ，先将 ``ADF git submodule update`` ，后可以直接使用 demo 编译
 
 --------------
 

@@ -75,7 +75,7 @@ ESP32 外接 LAN8720，GPIO0 对其提供 CLK ，Ethernet 例程初始化出错�
 使用 idf中 的 Ethernet 示例时，出现错误代码 `Timed out waiting for PHY register 0x3 to have value 0xc0f0 (mask 0xfff0). Current value 0xffff` 请问该如何解决？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 可以参考以下这个：https://www.esp32.com/viewtopic.php?f=12&t=6322&p=27381#p27381 https://github.com/espressif/esp-idf/pull/1127#issuecomment-340727923
+  - 可以参考以下这个：`BBS issue <https://www.esp32.com/viewtopic.php?f=12&t=6322&p=27381#p27381>`_ 与 `Github issue <https://github.com/espressif/esp-idf/pull/1127#issuecomment-340727923>`_。
   - 读PHY寄存器为 0xFFFF 通常情况可以这样排查：
       a. 检查 MDIO 和 MDC 的接线是否错误
       b. 检查 RMII 需要的 50MHz 时钟是否正常
@@ -126,7 +126,9 @@ ESP32-Ethernet-Kit 开发板模组替换成 ESP32-WROOM-32D 以太网功能是�
 
   - ESP32-Ethernet-Kit 上的 ESP32-WROVER-B 可以更换成 ESP32-WROOM-32D ，且以太网功能不受影响。
   - ESP32-WROOM 和 ESP32-WROVER 系列模组，最大的区别是 ESP32-WROVER 带有 4MB PSRAM，而 ESP32-WROOM 默认没有 PSRAM。
+
      - `ESP32-WROOM-32D datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32d_esp32-wroom-32u_datasheet_cn.pdf>`_。
      - `ESP32-WROVER-B datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-wrover-b_datasheet_cn.pdf>`_。
+
   - ESP32-WROOM 和 ESP32-WROVER 模组都使用的是 ESP32 芯片，ESP32 芯片支持以太网，详情可以参考 `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
   - 您可能还需要 `ESP32-Ethernet-Kit 入门指南 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-ethernet-kit.html>`_。

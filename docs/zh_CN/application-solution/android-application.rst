@@ -56,7 +56,7 @@ APP 发送 http 请求报错是为什么？
   - 1. 安装 adb 工具
   - 2. 在命令终端执行下述命令
 
-.. code:: bash
+  .. code:: bash
 
-  pid=`adb shell ps | grep 包名 | awk '{print $2}'`
-  adb logcat | grep --color=auto $pid
+    pid=`adb shell ps | grep 包名 | awk '{print $2}'`
+    adb logcat | grep --color=auto $pid

@@ -48,7 +48,7 @@ Windows 下使用 `esp-idf-tools-setup-2.3.exe <link:https://dl.espressif.com/dl
     -- Warning: Did not find file Compiler/-ASM Configure
     -- Configuring incomplete , erros occurred !
 
-  出现此错误的原因是没有因为未找到编译工程，可以切换目录到 esp-idf/get-started/hello\_world 示例中进行测试验证。
+  出现此错误的原因是没有因为未找到编译工程，可以切换目录到 esp-idf/examples/get-started/hello_world 示例中进行测试验证。
 
 --------------
 
@@ -76,9 +76,9 @@ Windows 下执行export.bat，提示cmake、gdbgui版本错误：
 ---------------------------------------------------------
   .. code:: text
 
-    -- C:\Users\xxxx\.espressif\tools\cmake\3.16.4\bin
-    -- The following Python requirements are not satisfied:
-    -- gdbgui>=0.13.2.0
+    C:\Users\xxxx\.espressif\tools\cmake\3.16.4\bin
+    The following Python requirements are not satisfied:
+    gdbgui>=0.13.2.0
 
   这个问题是由于上游的 gdbgui 发生了更新，并且导致与低版本的 python 不兼容，目前的解决方法是：手动修改 esp-idf 根目录下的 ``requirements.txt``，找到 gdbdui 那条，修给成：``gdbgui==0.13.2.0``
 

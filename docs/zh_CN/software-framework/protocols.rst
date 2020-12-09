@@ -33,7 +33,7 @@ ESP32 是否⽀持 PCI-E 协议？
 ESP32 如何优化通信延时？
 ------------------------
 
-  - 建议关闭 Wi-Fi 休眠功能，调用 ``API：esp\_wifi\_set\_ps(WIFI\_PS\_NONE)``。
+  - 建议关闭 Wi-Fi 休眠功能，调用 ``API：esp_wifi_set_ps(WIFI_PS_NONE)``。
   - 建议在 menucongfig 关掉 ``AMPDU`` 功能。
 
 --------------
@@ -41,7 +41,7 @@ ESP32 如何优化通信延时？
 ESP8285 是否⽀持 CCS（Cisco Compatible eXtensions）？
 -----------------------------------------------------
 
-  不支持。
+  - ESP8285 不支持 CCS （Cisco Compatible eXtensions。
 
 --------------
 
@@ -67,7 +67,7 @@ ESP32 是否 lora 通信？
 TCP 链接关闭后占用的相关资源何时释放 ？
 ---------------------------------------
 
-  TCP 链接关闭后占用的相关资源会在 20 s 或者发送的 ``linger/send\_timeout`` 超时之后释放。
+  TCP 链接关闭后占用的相关资源会在 20 s 或者发送的 ``linger/send_timeout`` 超时之后释放。
 
 --------------
 

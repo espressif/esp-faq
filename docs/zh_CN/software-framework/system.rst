@@ -18,11 +18,15 @@
 如果我的应⽤不需要看⻔狗，如何关闭看⻔狗？
 ------------------------------------------
 
-  当前 SDK 仅⽀持关闭软件看⻔狗，⽀持同时喂软硬件看⻔狗。可以通过如下⽅式防⽌执⾏时间过⻓的⽤户程序导致看⻔狗复位：
-  - 如果⼀个程序段运⾏时间在触发软件看⻔狗和触发硬件看⻔狗复位之间，则可通过 system\_soft\_wdt\_stop() 的⽅式关闭软件看⻔狗，在程序段执⾏完毕后⽤ system\_soft\_wdt\_restart() 重新打开软件看⻔狗。
-  - 可以通过在程序段中添加 system\_soft\_wdt\_feed() 来进⾏喂软硬件狗操作，防⽌软硬件看⻔狗复位。
-  - 硬件看⻔狗中断时间为 0.8\ *2048 ms，即 1638.4 s，中断后处理时间为 0.8*\ 8192 ms，即 6553.6 ms。其中中断处理后时间为硬件看⻔狗中断发⽣后，需要进⾏喂狗操作的时间，如果超过该时间，即会触发硬件看⻔狗复位。因此，在仅有硬件看⻔狗的情况下，⼀个程序段如果运⾏时间超过 6553.6 ms，即有可能触发硬件看⻔狗复位，若超过 8192 ms 则⼀定会触发复位。
-  - 软件看⻔狗建⽴在 MAC timer 以及系统调度之上，中断时间为 1600 ms，中断后处理时间 1600 ms。因此，在有软件+硬件看⻔狗的情况下，⼀个程序段如果运⾏时间超过 1600 ms，即有可能会触发软件看⻔狗复位，若超过 3200 ms 则⼀定会触发复位。
+  当前 SDK 仅⽀持关闭软件看⻔狗，⽀持同时喂软硬件看⻔狗。可以通过如下⽅式防⽌执⾏时间过⻓的⽤户程序导致看⻔狗复位
+
+  - 如果⼀个程序段运⾏时间在触发软件看⻔狗和触发硬件看⻔狗复位之间，则可通过 system_soft_wdt_stop() 的⽅式关闭软件看⻔狗，在程序段执⾏完毕后⽤ system_soft_wdt_restart() 重新打开软件看⻔狗。
+  - 可以通过在程序段中添加 system_soft_wdt_feed() 来进⾏喂软硬件狗操作，防⽌软硬件看⻔狗复位。
+  - 硬件看⻔狗中断时间为 0.8 *2048 ms，即 1638.4 s，中断后处理时间为 0.8* 8192 ms，即 6553.6 ms。
+  - 其中中断处理后时间为硬件看⻔狗中断发⽣后，需要进⾏喂狗操作的时间，如果超过该时间，即会触发硬件看⻔狗复位。
+  - 因此，在仅有硬件看⻔狗的情况下，⼀个程序段如果运⾏时间超过 6553.6 ms，即有可能触发硬件看⻔狗复位，若超过 8192 ms 则⼀定会触发复位。
+  - 软件看⻔狗建⽴在 MAC timer 以及系统调度之上，中断时间为 1600 ms，中断后处理时间 1600 ms。
+  - 因此，在有软件+硬件看⻔狗的情况下，⼀个程序段如果运⾏时间超过 1600 ms，即有可能会触发软件看⻔狗复位，若超过 3200 ms 则⼀定会触发复位。
 
 --------------
 
@@ -44,14 +48,14 @@ RTOS SDK 和 Non-OS SDK 有何区别？
 
 --------------
 
-ESP8266 启动时 LOG 输出 ets\_main.c 有哪些原因？
+ESP8266 启动时 LOG 输出 ets_main.c 有哪些原因？
 ------------------------------------------------
 
-  ESP8266 启动时打印 ``ets_main.c``\ ，表示没有可运⾏的程序区，⽆法运⾏；遇到这种问题时，请检查烧录时的 bin ⽂件和烧录地址是否正确。
+  ESP8266 启动时打印 ``ets_main.c`` ，表示没有可运⾏的程序区，⽆法运⾏；遇到这种问题时，请检查烧录时的 bin ⽂件和烧录地址是否正确。
 
 --------------
 
-ESP8266 编译 Non-OS SDK 时 IRAM\_ATTR 错误是什么原因？
+ESP8266 编译 Non-OS SDK 时 IRAM_ATTR 错误是什么原因？
 ------------------------------------------------------
 
   如果需要在 IRAM 中执⾏功能，就不需要加 ``ICACHE_FLASH_ATTR`` 的宏，那么该功能就是放在 IRAM 中执⾏。
@@ -61,7 +65,7 @@ ESP8266 编译 Non-OS SDK 时 IRAM\_ATTR 错误是什么原因？
 ESP8266 main 函数在哪里？
 -------------------------
 
-  ESP8266 用户 SDK 部分没有 main 函数。main 函数处于 一级 bootloader 并且固化在芯片 ROM 中， 用于引导二级 bootloader。二级 bootloader 入口函数为 ets\_main，启动后会加载用户应用中的 user\_init，引导至用户程序。
+  ESP8266 用户 SDK 部分没有 main 函数。main 函数处于 一级 bootloader 并且固化在芯片 ROM 中， 用于引导二级 bootloader。二级 bootloader 入口函数为 ets_main，启动后会加载用户应用中的 user_init，引导至用户程序。
 
 --------------
 
@@ -96,7 +100,8 @@ ESP32 系统软件复位 API？
 使用 esp-idf 按汇编操作寄存器，是否涉及到调用不可编辑的库文件？
 ---------------------------------------------------------------
 
-  如果单纯使用读写寄存器指令或者汇编指令，不存在调用库文件的问题。如果调用 esp-idf 预制的函数，则可能会遇到调用 lib 函数的情况。不推荐在 ESP32 中使用汇编操作，如果部分场景想要提高速度，可以读写寄存器来完成部分操作。
+  - 如果单纯使用读写寄存器指令或者汇编指令，不存在调用库文件的问题。如果调用 esp-idf 预制的函数，则可能会遇到调用 lib 函数的情况。
+  - 不推荐在 ESP32 中使用汇编操作，如果部分场景想要提高速度，可以读写寄存器来完成部分操作。
 
 --------------
 
@@ -105,7 +110,7 @@ ESP32 系统软件复位 API？
 
   程序编译时，使用 make menuconfig 指令进入配置界面，进行如下配置，可在单核模组上下载程序；在配置界面中，按键 Y 为启动，N 为关闭。
 
-  Component config --> FreeRTOS --> Run FreeRTOS only on first core（启动此选项）
+  - ``Component config --> FreeRTOS --> Run FreeRTOS only on first core``
 
 --------------
 
@@ -136,7 +141,8 @@ ESP32 进入低功耗模式时， PSRAM 中的数据会丢失吗？
 请问 ESP32 CPU 系统时间是否由系统滴答时钟生成？精度如何？
 ---------------------------------------------------------
 
-  CPU 系统时间是由 esp\_timer 内部的 64 位硬件定时器 CONFIG\_ESP\_TIMER\_IMPL 产生的，是微秒级的时间分辨率。参见 `说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/esp_timer.html?highlight=esp_timer_get_time#high-resolution-timer>`_。
+  CPU 系统时间是由 esp_timer 内部的 64 位硬件定时器 CONFIG_ESP_TIMER_IMPL 产生的，是微秒级的时间分辨率。
+  参见 `说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/esp_timer.html?highlight=esp_timer_get_time#high-resolution-timer>`_。
 
 --------------
 
@@ -156,10 +162,10 @@ ESP32 的 flash 和 psram 的时钟频率如何修改？
 
 --------------
 
-esp-idf 是否可以配置 time\_t 为 64 bit ？ （现在是 32 bit）
+esp-idf 是否可以配置 time_t 为 64 bit ？ （现在是 32 bit）
 --------------------------------------------------------------
 
-  当前暂时不支持，预计在 release/v4.2 或更高版本种支持。如果配置支持 time\_t 64 bit 自定义工具链，可以使能 make menuconfig 中 SDK tool configuration -> SDK\_TOOLCHAIN\_SUPPORTS\_TIME\_WIDE\_64\_BITS 。
+  当前暂时不支持，预计在 release/v4.2 或更高版本种支持。如果配置支持 time_t 64 bit 自定义工具链，可以使能 make menuconfig 中 SDK tool configuration -> SDK_TOOLCHAIN_SUPPORTS_TIME_WIDE_64_BITS 。
 
 --------------
 
@@ -225,7 +231,7 @@ ESP32 deep_sleep例程测试，为何当 const int wakeup_time_sec = 3600时，�
   .. code-block:: c
 
     const uint64_t wakeup_time_sec = 3600;
-    printf("Enabling timer wakeup, %lld\n",wakeuo_time_sec);
+    printf("Enabling timer wakeup, %lldn",wakeuo_time_sec);
 
 ------------------
 
@@ -273,7 +279,7 @@ ESP32 是否可以永久更改 MAC 地址？
 
   - 芯片自带的 MAC 地址无法修改。efuse 中支持用户写入自己的 MAC 地址。
   - 在固件中调用 api 可以获取定制 MAC 地址，并且可以设置到系统中替代默认地址。
-  - 详情请参考：https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/system.html#mac-address
+  - 配置参考：`mac-address <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/system.html#mac-address>`_。
   - 另外，Espressif 提供在芯片出厂之前，烧录用户提供的 MAC 地址服务。如有需要，可发送邮件至 sales@espressif.com
 
 --------------
@@ -286,7 +292,7 @@ ESP8266 进行 ota 升级时如何校验 all.bin 为非法文件？
   - all.bin: 由 bootloader.bin，partition.bin 和 app.bin 合并生成。
   - ota.bin: 用于 ota 升级的目标 bin文件。
   
-  使用 `simple\_ota\_example <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/system/ota/simple_ota_example>`_ 进行 OTA 升级时，误从服务器上下载 all.bin,写入 ota 分区之后，设备会出现反复重启的现象。
+  使用 `simple_ota_example <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/system/ota/simple_ota_example>`_ 进行 OTA 升级时，误从服务器上下载 all.bin,写入 ota 分区之后，设备会出现反复重启的现象。
   
   **原因分析：**
 

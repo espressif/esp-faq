@@ -53,7 +53,7 @@ ESP8266 的 SDIO 是否⽀持 SD 卡？
 ESP8266 是否支持 I2C slave 模式？
 ---------------------------------
 
-  不支持，如果要使用此功能，推荐使用 ESP32-S2 或者 ESP32 芯片。ESP32 参考示例：`i2C\_self\_test <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/i2c/i2c_self_test>`_。
+  不支持，如果要使用此功能，推荐使用 ESP32-S2 或者 ESP32 芯片。ESP32 参考示例：`i2C_self_test <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/i2c/i2c_self_test>`_。
 
 --------------
 
@@ -86,7 +86,7 @@ ESP32 管脚配置需要注意什么？
 ESP32 是否支持 A2DP 发送音频？
 ------------------------------
 
-  ESP32 支持 A2DP 发送音频，可参考例程 `esp-idf/examples/bluetooth/bluedroid/classic\_bt/a2dp\_source <https://github.com/espressif/esp-idf/tree/d85d3d969ff4b42e2616fd40973d637ff337fae6/examples/bluetooth/bluedroid/classic_bt/a2dp_source#esp-idf-a2dp-source-demo>`_。
+  ESP32 支持 A2DP 发送音频，可参考例程 `a2dp_source <https://github.com/espressif/esp-idf/tree/d85d3d969ff4b42e2616fd40973d637ff337fae6/examples/bluetooth/bluedroid/classic_bt/a2dp_source#esp-idf-a2dp-source-demo>`_。
 
 --------------
 
@@ -100,9 +100,9 @@ ESP8266 I2C 是软件模拟的吗？
 使用 ESP8266-NONOS-V3.0 版本的 SDK，如下报错是什么原因？
 ---------------------------------------------------------------
 
-.. code-block:: text
+  .. code-block:: text
 
-  E:M 536    E:M 1528
+    E:M 536    E:M 1528
 
   - 导致 E:M 开头的 LOG  是内存不足的原因。
 
@@ -125,42 +125,42 @@ ESP32 GPIO 管脚输出 PWM 存在限制吗？
 ESP32S2 Touch Sensor 的防水功能是在有水时屏蔽 Touch 还是有水时仍然能识别 Touch 事件？
 ---------------------------------------------------------------------------------------------------------------------------------------
 
--  当水对触摸传感器的影响较小时(水珠)，传感器会主动适应；当水对触摸传感器的影响较大时(水流)，传感器可通过软件配置来选择锁定某些传感器通道的状态来避免水的影响
+  - 当水对触摸传感器的影响较小时(水珠)，传感器会主动适应；当水对触摸传感器的影响较大时(水流)，传感器可通过软件配置来选择锁定某些传感器通道的状态来避免水的影响
 
 --------------
 
 ESP32S2 Touch Sensor 的防水流功能在屏蔽有水流的 Touchpad 时，是否能够保持未沾水的 Pad 仍能使用？
 -----------------------------------------------------------------------------------------------------------------------------------------
 
--  可以，可通过软件选择具体屏蔽的通道
+  - 可以，可通过软件选择具体屏蔽的通道
 
 --------------
 
 是否有推荐的可以用于 Touch Sensor 测试、稳定触发 Touch Sensor 并且参数与人手触摸时参数接近的材料？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
--  对一致性要求较高的实验可使用手机电容笔来替代人手进行测试
+  - 对一致性要求较高的实验可使用手机电容笔来替代人手进行测试
 
 --------------
 
 Touch Sensor 的 Pin 能否重映射？
 ----------------------------------------------------------------
 
--  不能
+  - 不能, 因为 Touch Sensor 属于模拟信号处理。
 
 --------------
 
 在覆盖亚克力板后，Touch Sensor 检测阈值是否需要重新设置？
 -----------------------------------------------------------------------------------------------
 
--  需要重新设置一个阈值
+  - 需要重新设置一个阈值
 
 --------------
 
 Touch Sensor 能否检测是否有亚克力板覆盖，以便在添加或移除亚克力板时，自动切换预设定的检测阈值？
 ------------------------------------------------------------------------------------------------------------------------------
 
--  暂时不能自动适应覆盖层物理参数变化所带来的影响
+  - 暂时不能自动适应覆盖层物理参数变化所带来的影响
 
 --------------
 
@@ -228,8 +228,8 @@ ESP8266 RTOS_2.1 以及之前版本 SDK，如何将 LOG 配置到 UART1 ？
 ESP32 IDF 中如何使能 UART 流控？
 ----------------------------------------------
 
-  - `硬件流控使能 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#multiple-steps>`__。
-  - `软件流控使能 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#software-flow-control>`__。
+  - 硬件流控使能： `uart-flow-control <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#multiple-steps>`__。
+  - 软件流控使能： `software-flow-control <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#software-flow-control>`__。
 
 --------------
 
@@ -280,6 +280,7 @@ ESP32 是否可以关闭线程调度使用一个单独的 CPU 以实现实时 GP
 
   - 目前 SDK 没有相关的配置选择供 CPU1 单独运行，两个核心只支持 SMP，不支持 AMP。
   - 解决输出波形被打断的问题有以下解决方案:
+
     - 使用硬件的信号输出，选择相关数字协议实现 SPI， I2C, I2S 等, 特殊用法 SPI 取信号输出线产生波形。
     - 硬件 RMT 是否可以产生想要的波形， 并达到足够的长度 。
     - 硬件中断中产生相应波形，需要将所有回调放入 IRAM 中。
@@ -308,13 +309,15 @@ ESP32 使用 UART0 作为通信串口，有哪些？
 
   - 通常情况下不建议将 UART0 作为普通的通信串口，因为 UART0 为设备默认 LOG 输出串口。
   - 若 ESP32 的 UART 不够用，或者硬件设计已经不方便更改的情况下，如果您要使用 UART0 作为普通的通信串口，请参考以下建议：
-    
-    软件方面：防止打印影响串口通信，默认程序中 UART0 主要有三处打印设置：
+
+  **软件方面**：防止打印影响串口通信，默认程序中 UART0 主要有三处打印设置
+
     - 第一处是上电 ROM 打印，上电时可将 MTDO pin 设为低电平屏蔽上电 ROM 打印。
     - 第二处是 bootloader log 信息输出，您可以将 menuconfig -> Bootloader config -> Bootloader log verbosity 设置为 No output 来屏蔽 bootloader log 输出。
     - 第三处是 app log 信息输出，您可以将 menuconfig -> Component config -> Log output -> Default log verbosity 设置为 No output 来屏蔽 log 输出。
     
-    硬件方面：
+  **硬件方面**：
+
     - 在下载程序的时候，注意防止 UART0 上有其它设备，如果有其它设备可能会影响程序的下载。建议在 ESP32 和其它设备之间预留一个 0 Ω 电阻，如果下载有问题可以断开这个 0 Ω 电阻。
 
 -----------------
@@ -409,7 +412,7 @@ ESP32 LEDC 递减渐变，duty 值溢出错误，如何解决？
 
     - LEDC 启动递减渐变功能；
     - LEDC 渐变过程中 scale 寄存器设置为 1；
-    - LEDC 递减渐变开始时刻或者过程中的某⼀时刻，duty 值为 2\ :sup:`LEDC_HSTIMERx_DUTY_RES` 或 2\ :sup:`LEDC_LSTIMERx_DUTY_RES`
+    - LEDC 递减渐变开始时刻或者过程中的某⼀时刻，duty 值为 2 :sup:`LEDC_HSTIMERx_DUTY_RES` 或 2 :sup:`LEDC_LSTIMERx_DUTY_RES`
 
 --------------
 

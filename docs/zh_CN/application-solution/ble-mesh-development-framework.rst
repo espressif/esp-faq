@@ -39,9 +39,9 @@ BLE Mesh 应用框架
 配置入网前，未配网设备的广播包可以携带哪些信息？
 ------------------------------------------------
 
--  Device UUID
--  OOB Info
--  URL Hash (可选的)
+  -  Device UUID
+  -  OOB Info
+  -  URL Hash (可选的)
 
 --------------
 
@@ -62,7 +62,8 @@ Device UUID 可以用于设备识别吗？
 如何知道当前 Provisioner 正在配网哪个未配网设备？
 -------------------------------------------------
 
-  ``esp_ble_mesh_prov_t`` 中 ``prov_attention`` 的值由 Provisioner 在配网过程中设置给未配网设备。该值只能在初始化期间设置一次，此后不能修改。未配网设备加入 mesh 网络后可以用特定的方式来显示自己正在配网，比如灯光闪烁，以告知 Provisioner 其正在配网。
+  - ``esp_ble_mesh_prov_t`` 中 ``prov_attention`` 的值由 Provisioner 在配网过程中设置给未配网设备。
+  - 该值只能在初始化期间设置一次，此后不能修改。未配网设备加入 mesh 网络后可以用特定的方式来显示自己正在配网，比如灯光闪烁，以告知 Provisioner 其正在配网。
 
 --------------
 
@@ -71,9 +72,9 @@ Provisioner 如何通过获取的 Composition Data 进一步配置节点？
 
   Provisioner 通过调用 `Configuration Client Model <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-foundation-models>`__ API ``esp_ble_mesh_config_client_set_state()`` 来进行如下配置。
 
--  正确设置参数 ``esp_ble_mesh_cfg_client_set_state_t`` 中的 ``app_key_add``\ ，将应用密钥添加到节点中。
--  正确设置参数 ``esp_ble_mesh_cfg_client_set_state_t`` 中的 ``model_sub_add``\ ，将订阅地址添加到节点的模型中。
--  正确设置参数 ``esp_ble_mesh_cfg_client_set_state_t`` 中的 ``model_pub_set``\ ，将发布地址添加到节点的模型中。
+  -  正确设置参数 ``esp_ble_mesh_cfg_client_set_state_t`` 中的 ``app_key_add``，将应用密钥添加到节点中。
+  -  正确设置参数 ``esp_ble_mesh_cfg_client_set_state_t`` 中的 ``model_sub_add``，将订阅地址添加到节点的模型中。
+  -  正确设置参数 ``esp_ble_mesh_cfg_client_set_state_t`` 中的 ``model_pub_set``，将发布地址添加到节点的模型中。
 
 --------------
 
@@ -84,52 +85,52 @@ Provisioner 如何通过获取的 Composition Data 进一步配置节点？
 
   - 此示例展示了节点如何为自己的模型添加新的组地址。
 
-.. code:: c
+  .. code:: c
 
-   esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_addr)
-   {
-       const esp_ble_mesh_comp_t *comp = NULL;
-       esp_ble_mesh_elem_t *element = NULL;
-       esp_ble_mesh_model_t *model = NULL;
-       int i, j;
+    esp_err_t example_add_fast_prov_group_address(uint16_t model_id, uint16_t group_addr)
+    {
+        const esp_ble_mesh_comp_t *comp = NULL;
+        esp_ble_mesh_elem_t *element = NULL;
+        esp_ble_mesh_model_t *model = NULL;
+        int i, j;
 
-       if (!ESP_BLE_MESH_ADDR_IS_GROUP(group_addr)) {
-           return ESP_ERR_INVALID_ARG;
-       }
+        if (!ESP_BLE_MESH_ADDR_IS_GROUP(group_addr)) {
+            return ESP_ERR_INVALID_ARG;
+        }
 
-       comp = esp_ble_mesh_get_composition_data();
-       if (!comp) {
-           return ESP_FAIL;
-       }
+        comp = esp_ble_mesh_get_composition_data();
+        if (!comp) {
+            return ESP_FAIL;
+        }
 
-       for (i = 0; i < comp->element_count; i++) {
-           element = &comp->elements[i];
-           model = esp_ble_mesh_find_sig_model(element, model_id);
-           if (!model) {
-               continue;
-           }
-           for (j = 0; j < ARRAY_SIZE(model->groups); j++) {
-               if (model->groups[j] == group_addr) {
-                   break;
-               }
-           }
-           if (j != ARRAY_SIZE(model->groups)) {
-               ESP_LOGW(TAG, "%s: Group address already exists, element index: %d", __func__, i);
-               continue;
-           }
-           for (j = 0; j < ARRAY_SIZE(model->groups); j++) {
-               if (model->groups[j] == ESP_BLE_MESH_ADDR_UNASSIGNED) {
-                   model->groups[j] = group_addr;
-                   break;
-               }
-           }
-           if (j == ARRAY_SIZE(model->groups)) {
-               ESP_LOGE(TAG, "%s: Model is full of group addresses, element index: %d", __func__, i);
-           }
-       }
+        for (i = 0; i < comp->element_count; i++) {
+            element = &comp->elements[i];
+            model = esp_ble_mesh_find_sig_model(element, model_id);
+            if (!model) {
+                continue;
+            }
+            for (j = 0; j < ARRAY_SIZE(model->groups); j++) {
+                if (model->groups[j] == group_addr) {
+                    break;
+                }
+            }
+            if (j != ARRAY_SIZE(model->groups)) {
+                ESP_LOGW(TAG, "%s: Group address already exists, element index: %d", __func__, i);
+                continue;
+            }
+            for (j = 0; j < ARRAY_SIZE(model->groups); j++) {
+                if (model->groups[j] == ESP_BLE_MESH_ADDR_UNASSIGNED) {
+                    model->groups[j] = group_addr;
+                    break;
+                }
+            }
+            if (j == ARRAY_SIZE(model->groups)) {
+                ESP_LOGE(TAG, "%s: Model is full of group addresses, element index: %d", __func__, i);
+            }
+        }
 
-       return ESP_OK;
-   }
+        return ESP_OK;
+    }
 
    **注：** 使能了节点的 NVS 存储器后，通过该方式添加的组地址以及绑定的应用密钥在设备掉电的情况下不能保存。这些配置信息只有通过 Configuration Client Model 配置时才会保存。
 
@@ -171,7 +172,7 @@ Provisioner 如何将节点添加至多个子网？
 
 --------------
 
-在 EspBleMesh App 中输入的 \*\* count \*\* 值有什么用途？
+在 EspBleMesh App 中输入的 ``count`` 值有什么用途？
 ---------------------------------------------------------
 
   此 count 值提供给 App 配置的代理节点，以决定何时提前开始 Proxy 广播信息。
@@ -288,8 +289,8 @@ Provisoner 如何控制节点的服务器模型？
 设备通信必须要网关吗？
 ----------------------
 
--  情况 1：节点仅在 mesh 网络内通信。这种情况下，不需要网关。ESP-BLE-MESH 网络是一个泛洪的网络，网络中的消息没有固定的路径，节点与节点之间可以随意通信。
--  情况 2：如果用户想要远程控制网络，比如在到家之前打开某些节点，则需要网关。
+  -  情况 1：节点仅在 mesh 网络内通信。这种情况下，不需要网关。ESP-BLE-MESH 网络是一个泛洪的网络，网络中的消息没有固定的路径，节点与节点之间可以随意通信。
+  -  情况 2：如果用户想要远程控制网络，比如在到家之前打开某些节点，则需要网关。
 
 --------------
 
@@ -307,15 +308,16 @@ Provisioner 删除网络中的节点时，需要进行哪些操作？
 在密钥更新的过程中，Provisioner 如何更新节点的网络密钥？
 --------------------------------------------------------
 
-  - 通过正确设置参数 ``esp_ble_mesh_cfg_client_set_state_t`` 中的 ``net_key_update``\ ，使用 `Configuration Client Model <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-foundation-models>`__ API ``esp_ble_mesh_config_client_set_state()``\ ，Provisioner 更新节点的网络密钥。
-  - 通过正确设置参数 ``esp_ble_mesh_cfg_client_set_state_t`` 中的 ``app_key_update``\ ，使用 `Configuration Client Model <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-foundation-models>`__ API ``esp_ble_mesh_config_client_set_state()``\ ，Provisioner 更新节点的应用密钥。
+  - 通过正确设置参数 ``esp_ble_mesh_cfg_client_set_state_t`` 中的 ``net_key_update``，使用 `Configuration Client Model <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-foundation-models>`_ API ``esp_ble_mesh_config_client_set_state()``，Provisioner 更新节点的网络密钥。
+  - 通过正确设置参数 ``esp_ble_mesh_cfg_client_set_state_t`` 中的 ``app_key_update``，使用 `Configuration Client Model <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-foundation-models>`_ API ``esp_ble_mesh_config_client_set_state()``，Provisioner 更新节点的应用密钥。
 
 --------------
 
 Provisioner 如何管理 mesh 网络中的节点？
 ----------------------------------------
 
-  ESP-BLE-MESH 在示例中实现了一些基本的节点管理功能，比如 ``esp_ble_mesh_store_node_info()``\ 。 ESP-BLE-MESH 还提供可用于设置节点本地名称的 API ``esp_ble_mesh_provisioner_set_node_name()`` 和可用于获取节点本地名称的 API ``esp_ble_mesh_provisioner_get_node_name()``\ 。
+  - ESP-BLE-MESH 在示例中实现了一些基本的节点管理功能，比如 ``esp_ble_mesh_store_node_info()``。 
+  - ESP-BLE-MESH 还提供可用于设置节点本地名称的 API ``esp_ble_mesh_provisioner_set_node_name()`` 和可用于获取节点本地名称的 API ``esp_ble_mesh_provisioner_get_node_name()``。
 
 --------------
 
