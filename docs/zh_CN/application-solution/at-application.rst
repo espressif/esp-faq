@@ -581,3 +581,11 @@ ESP32 下载 ESP-AT V2.1.0.0 版本的 AT 固件，发送 AT+BLUFI=1 命令为�
     AT+BLUFI=1              #开启 Blufi 功能
     AT+BLEADDR?          #查询设备地址
     
+----------------
+
+ESP32 AT 指令是否支持设置模块的 b/g/n 模式?
+----------------------------------------------------------------------
+
+  - 自 ESP32-AT v2.1.0.0 开始支持.
+  - `AT+CWSTAPROTO <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Wi-Fi_AT_Commands.html#at-cwstaproto-set-the-802-11-b-g-n-protocol-standard-of-station-mode>`_ 用于设置和查询 station 模式的 802.11 b/g/n.
+  - `AT+CWAPPROTO <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Wi-Fi_AT_Commands.html#at-cwapproto-set-the-802-11-b-g-n-protocol-standard-of-softap-mode>`_ 用于设置和查询 SoftAP 模式的 802.11 b/g/n.
