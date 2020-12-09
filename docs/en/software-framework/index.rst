@@ -16,5 +16,3 @@ Software framework
    Storage <storage>
    System <system>
    Coexistence <coexistence>
-
-| Espressif Q & A.

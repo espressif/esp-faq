@@ -10,5 +10,3 @@
    调试分析 <debugging>
    环境搭建 <environment-setup>
    固件升级 <firmware-update>
-
-| Espressif 常见问题.

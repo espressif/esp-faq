@@ -16,5 +16,3 @@ application solution
    iOS application  <ios-application>
    Android application  <android-application>
    Camera application　<camera-application>
-
-| Espressif Q & A.
