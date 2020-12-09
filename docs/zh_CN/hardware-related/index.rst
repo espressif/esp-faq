@@ -11,5 +11,3 @@
    射频相关 <RF-related>
    工艺与防护 <process-and-ESD>
    生产测试 <production-test>
-
-| Espressif 常见问题.

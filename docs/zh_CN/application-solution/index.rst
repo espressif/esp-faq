@@ -16,5 +16,3 @@
    苹果应用  <ios-application>
    安卓应用  <android-application>
    摄像头应用　<camera-application>
-     
-| Espressif 常见问题.

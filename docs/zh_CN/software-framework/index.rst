@@ -15,5 +15,3 @@
    储存 <storage>
    系统 <system>
    Wi-Fi <wifi>
-
-| Espressif 常见问题.
