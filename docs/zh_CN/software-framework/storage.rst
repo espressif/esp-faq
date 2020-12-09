@@ -28,7 +28,7 @@ ESP32 Flash 空间与使用要求？
 使用 ESP32 模组，如何查看模组的 PSRAM 的大小？
 ----------------------------------------------
 
-  需要先在 make menuconfig 中配置开启 PSRAM 功能。PSRAM 的大小可通过 bootloader 的 log 信息或调用 esp\_spiram\_get\_size() 来查看。
+  需要先在 make menuconfig 中配置开启 PSRAM 功能。PSRAM 的大小可通过 bootloader 的 log 信息或调用 esp_spiram_get_size() 来查看。
 
 --------------
 
@@ -62,14 +62,14 @@ ESP8266 的模组，有哪些扇区可以自主使用？
 ----------------------------------------
 
   - SDK rel3.0 之前的版本，除 bootloader 与 app bin 外还会在设置的 flash 大小的尾部会保留扇区如下：1 个存放系统信息，1 个存储 ota 信息，1 个存放 RF 校准信息。
-  - SDK rel3.0 及其以后的版本使用 partition\_table 来管理 flash，除改文件自身与 bootloader 外，其余 bin 文件均在 partition\_table 标注。
+  - SDK rel3.0 及其以后的版本使用 partition_table 来管理 flash，除改文件自身与 bootloader 外，其余 bin 文件均在 partition_table 标注。
 
 --------------
 
 NVS 是否具有磨损均衡？
 ------------------------
 
-  nvs 使用的不是 esp-idf 中的 wear\_levelling 组件，而是在其内部实现的一种擦写平衡机制，使用中 flash 磨损是出于均衡状态。
+  nvs 使用的不是 esp-idf 中的 wear_levelling 组件，而是在其内部实现的一种擦写平衡机制，使用中 flash 磨损是出于均衡状态。
 
 --------------
 
@@ -99,7 +99,7 @@ ESP32 是否可以在外挂的 SPIFLASH 中挂载文件系统分区？
 
   esp-idf 中未提供相关工具，需要借助第三方工具，完整示例过程如下：
 
-  - step1：使用 **`mkfatfs <https://github.com/jkearins/ESP32_mkfatfs>`__** 工具从一个指定文件夹创建镜像，从 file\_image 文件夹创建大小为 1048576 Byte ，名为 fat\_img.bin 的镜像：
+  - step1：使用 **`mkfatfs <https://github.com/jkearins/ESP32_mkfatfs>`__** 工具从一个指定文件夹创建镜像，从 file_image 文件夹创建大小为 1048576 Byte ，名为 fat_img.bin 的镜像：
   
   .. code-block:: text
 
@@ -135,7 +135,7 @@ ESP32 是否可以在外挂的 SPIFLASH 中挂载文件系统分区？
 ESP32 是否可以使用 LittleFs 文件系统？
 --------------------------------------
 
-  目前 esp-idf 未包含 LittleFs，存在第三方移植组件 `esp\_littlefs <https://github.com/joltwallet/esp_littlefs>`_，可直接在 esp-idf 中使用。匹配 littlefs 文件系统镜像的工具 `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_。
+  目前 esp-idf 未包含 LittleFs，存在第三方移植组件 `esp_littlefs <https://github.com/joltwallet/esp_littlefs>`_，可直接在 esp-idf 中使用。匹配 littlefs 文件系统镜像的工具 `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_。
 
 
 ----------------

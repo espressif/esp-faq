@@ -34,7 +34,7 @@ Host MCU 如何通过串口对 ESP32 进行烧录升级？
   | 串口工具   | 3V3   | GND   | RXD   | TXD   | DTR   | RTS   |
   +------------+-------+-------+-------+-------+-------+-------+
 
-  注：ESP8266 模组需要额外将 IO15 接地。
+  .. note:: ESP8266 模组需要额外将 IO15 接地。
 
 --------------
 
@@ -49,7 +49,7 @@ MacOS 与 Linux 如何烧录固件？
 ESP32 是否支持使用 JTAG 管脚直接烧写程序？
 ------------------------------------------
 
-  - ESP32 支持使用 JTAG 管脚直接烧写程序，参考文档 `JATG调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_。
+  - ESP32 支持使用 JTAG 管脚直接烧写程序，参考文档：`JTAG调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_。
 
 --------------
 
@@ -76,8 +76,8 @@ ESP32 能否通过 OTA 开启 Security Boot 功能？
 
 ESP32S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of packet (0x50)” 如何解决？
 --------------------------------------------------------------------------------------------------
-  **问题背景：**
 
+  **问题背景：**
   基于 ESP-IDF v4.1 编译固件烧录到 ESP32-S2 设备的过程中遇到如下错误：
 
   .. code-block:: shell
@@ -96,14 +96,11 @@ ESP32S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of p
     esptool.py failed with exit code 2
 
   **解决方法：**
-
     如果当前使用的是 ESP32-S2 芯片而不是 ESP32-S2 Beta 芯片，需要将 ESP-IDF 升级到 v4.2 或 以上。
 
   **补充说明:**
-
   - ESP-IDF v4.1 只支持 ESP32-S2 Beta，该芯片和 ESP32-S2 是不同的芯片，无法兼容。
-    ESP-IDF v4.1 自带的 esptool 的版本是 v2.9-dev，也只支持 ESP32-S2 Beta。
-
+  - ESP-IDF v4.1 自带的 esptool 的版本是 v2.9-dev，也只支持 ESP32-S2 Beta。
   - ESP-IDF v4.2 支持 ESP32-S2 芯片，该版本自带的 esptool 的版本是 v3.0-dev，支持 ESP32S2。
 
 --------------
@@ -112,21 +109,19 @@ ESP32S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of p
 -----------------------------------------------------------
 
   - 以 hello-world 例程为例，初次编译 esp-idf 工程请参考 `get-started-guide <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/index.html>`_。
-  - 执行 idf.py build(esp-idf v4.0 及以后版本，v4.0 之前请使用 make) 编译工程后，会生成如下的指令提示：
+  - 执行 idf.py build(esp-idf v4.0 及以后版本，v4.0 之前请使用 make) 编译工程后，会生成如下的 bin 文件的烧录指令提示：
 
-    .. code-block:: 
+    .. code::shell 
 
-      Project build complete. To flash, run this command:
+      #Project build complete. To flash, run this command:
       ../../../components/esptool_py/esptool/esptool.py -p (PORT) -b 921600 write_flash --flash_mode dio --flash_size detect --flash_freq 40m 0x10000 build/hello-world.bin  build 0x1000 build/bootloader/bootloader.bin 0x8000 build/partition_table/partition-table.bin
       or run 'idf.py -p PORT flash'
-
-  可以按照该指令提示的 bin 文件及烧录地址使用 flash_download_tool 进行烧录。
 
 --------------
   
 ESP 芯片烧录通讯协议是什么？
 ---------------------------------
 
-  - `串口协议 <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_
-  - `python 实现 <https://github.com/espressif/esptool>`_
-  - `c 语言实现 <https://github.com/espressif/esp-serial-flasher>`_
+  - ESP 烧录协议规范：`Serial-Protocol <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_。
+  - 串口协议 python 实现：`esptool <https://github.com/espressif/esptool>`_。
+  - 串口协议 c 语言实现：`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_。

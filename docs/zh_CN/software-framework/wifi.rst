@@ -20,7 +20,7 @@ ESP32 ESP-Now 模式下一对一的通信速率是多少？
 
   测试数据如下：
 
-  - 测试样板：ESP32\_Core\_board\_V2。
+  - 测试样板：ESP32_Core_board_V2。
   - Wi-Fi 模式：station 模式。
   - open 环境下大约是 214 kbps。
   - 屏蔽箱内测试大约是 555 kbps。
@@ -47,7 +47,10 @@ ESP32 和 ESP8266 是否支持中文 SSID？
   - 是快速扫描还是全信道扫描，默认为快速扫描。
   - Station 模式还是 Station-AP 模式，当前是否有连接。
 
-  默认情况下，1~11 信道为主动扫描，12〜13 信道为被动扫描。在 Station 模式没有连接的情况下，全信道扫描总时间为：11\ *120 + 2*\ 360 = 2040 ms；在 Station 模式有连接，或者 Station-AP 模式下，全信道扫描总时间为：11\ *120 + 2*\ 360 + 13\*30 = 2430 ms。
+  - 默认情况下，1~11 信道为主动扫描，12〜13 信道为被动扫描。
+
+    - 在 Station 模式没有连接的情况下，全信道扫描总时间为：11*120 + 2*360 = 2040 ms；
+    - 在 Station 模式有连接，或者 Station-AP 模式下，全信道扫描总时间为：11*120 + 2*360 + 13*30 = 2430 ms。
 
 --------------
 
@@ -199,7 +202,7 @@ Wi-Fi 信道是什么？可以自行选择信道吗？
 
   ESP8266 SoftAP + Station 模式下, 连接的 192.168.4.X ⽹段时，为什么会失败 ？
 
-  - ESP8266 SoftAP 默认使用网段 192.168.4.\*，IP 地址是 192.168.4.1。ESP8266 如果要连接 192.168.4.X 的路由时，不能分辨是要连接⾃⼰本身的 SoftAp 还是外部路由，所以会造成错误。
+  - ESP8266 SoftAP 默认使用网段 192.168.4.*，IP 地址是 192.168.4.1。ESP8266 如果要连接 192.168.4.X 的路由时，不能分辨是要连接⾃⼰本身的 SoftAp 还是外部路由，所以会造成错误。
 
 --------------
 
@@ -215,19 +218,19 @@ ESP8266/ESP32/ESP32-S2 是否支持 web 配网/softAP 配网？
 
   支持。
 
-  - ESP8266 请参考此示例 `ESP8266 softap\_prov <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/provisioning/softap_prov>`_；
-  - ESP32/ESP32-S2 请参考此示例 `ESP32/ESP32-S2 softap\_prov <https://github.com/espressif/esp-idf/tree/master/examples/provisioning/legacy/softap_prov>`_。
+  - ESP8266 请参考此示例 `ESP8266 softap_prov <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/provisioning/softap_prov>`_；
+  - ESP32/ESP32-S2 请参考此示例 `ESP32/ESP32-S2 softap_prov <https://github.com/espressif/esp-idf/tree/master/examples/provisioning/legacy/softap_prov>`_。
 
 --------------
 
 [Connect] ESP8266 和 ESP32 作为 softap 模式如何隐藏 SSID？
 ----------------------------------------------------------------
 
-  `wifi\_ap\_config\_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv416wifi_ap_config_t>`_ 结构体中有一个变量 `ssid\_hidden <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=hidden#_CPPv4N18wifi_scan_config_t11show_hiddenE>`_，可以设置为隐藏功能。
+  `wifi_ap_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv416wifi_ap_config_t>`_ 结构体中有一个变量 `ssid_hidden <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=hidden#_CPPv4N18wifi_scan_config_t11show_hiddenE>`_，可以设置为隐藏功能。
 
 --------------
 
-`esp\_wifi\_802.11\_tx <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/wifi/esp_wifi.html?highlight=esp_wifi_802.11_tx#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib>`__ 接口中的 buffer 参数中包括 FCS 吗？
+`esp_wifi_802.11_tx <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/wifi/esp_wifi.html?highlight=esp_wifi_802.11_tx#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib>`__ 接口中的 buffer 参数中包括 FCS 吗？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   不包括， FCS 帧是硬件自动生成的。
@@ -294,7 +297,7 @@ ESP32 如何调整 Wi-Fi 的发射功率？
 [Connect] ESP32 做 soft-AP 时为什么会把 STA 踢掉？
 --------------------------------------------------------
 
-  - 默认情况下连续 5 min 收不到 STA 发过来的数据包就会把 STA 踢掉. 该时间可以通过 `esp\_wifi\_set\_inactive\_time <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv426esp_wifi_set_inactive_time16wifi_interface_t8uint16_t>`__ 进行修改.
+  - 默认情况下连续 5 min 收不到 STA 发过来的数据包就会把 STA 踢掉. 该时间可以通过 `esp_wifi_set_inactive_time <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv426esp_wifi_set_inactive_time16wifi_interface_t8uint16_t>`__ 进行修改.
 
   - 注: esp_wifi_set_inactive_time 新增的 API.
 
@@ -320,7 +323,7 @@ ESP32 如何调整 Wi-Fi 的发射功率？
       xEventGroupClearBits(s_wifi_event_group, CONNECTED_BIT);
     }
 
-  - 当回调函数接收到 ``WIFI_EVENT_STA_DISCONNECTED`` 事件时，可以通过结构体 `wifi\_event\_sta\_disconnected\_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429wifi_event_sta_disconnected_t>`_ 的变量 ``reason`` 获取到失败原因。
+  - 当回调函数接收到 ``WIFI_EVENT_STA_DISCONNECTED`` 事件时，可以通过结构体 `wifi_event_sta_disconnected_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429wifi_event_sta_disconnected_t>`_ 的变量 ``reason`` 获取到失败原因。
 
   - ``WIFI_REASON_AUTH_EXPIRE`` 在连接的 auth 阶段，STA 发送了 auth，但在规定时间内未收到 AP 的 auth 回复，有较低概率会出现.
 
@@ -345,7 +348,9 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
 [Connect] WiFi Log 中状态机切换后面数字的含义？
 -------------------------------------------------
 
-  eg: run -> init (fc0)              c0 代表收到的帧类型, f 代表 reason. 即 fc0 含义为 STA 收到了deauth 帧, reason 为密码错误.
+  eg: run -> init (fc0),fc0 含义为 STA 收到了deauth 帧, reason 为密码错误.
+    - c0 代表收到的帧类型
+    - f 代表 reason. 
 
   其中后两位表示帧类型, 00 代表超时. 前两位表示 reason.  帧类型: [a0 disassoc]  [b0 auth] [c0 deauth]
 
@@ -354,28 +359,28 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
 [Connect] bcn_timeout,ap_probe_send_start 是什么意思？
 ----------------------------------------------------------
 
-  在规定时间内(ESP32 默认 6s, 即 60 个 Beacon Interval), STA 未收到 Beacon 帧.
-  造成该现象可能有:
-  1. 内存不足. "ESP32_WIFI_MGMT_SBUF_NUM" 不够 (log 中会打出 "esf_buf: t=8, l=beacon_len, ..." 这样的 Error). 内存不够，可在收到 disconnect event 时打出 heap 大小来排查.
-  2. AP 未发出 beacon. 可通过抓包 AP 的 beacon 来排查.
-  3. Rssi 值太低. 在复杂环境下 Rssi 值较低时，可能导致 STA 收不到 beacon. 可通过调用 ``esp_wifi_sta_get_ap_info`` 获取 Rssi 值来排查.
-  4. 硬件原因. 收包性能差.
+  - 在规定时间内(ESP32 默认 6s, 即 60 个 Beacon Interval), STA 未收到 Beacon 帧.
+  - 造成该现象可能有:
+    - 内存不足. "ESP32_WIFI_MGMT_SBUF_NUM" 不够 (log 中会打出 "esf_buf: t=8, l=beacon_len, ..." 这样的 Error). 内存不够，可在收到 disconnect event 时打出 heap 大小来排查.
+    - AP 未发出 beacon. 可通过抓包 AP 的 beacon 来排查.
+    - Rssi 值太低. 在复杂环境下 Rssi 值较低时，可能导致 STA 收不到 beacon. 可通过调用 ``esp_wifi_sta_get_ap_info`` 获取 Rssi 值来排查.
+    - 硬件原因. 收包性能差.
 
-  出现 bcn_timeout 时, STA 会尝试发送 5 次Probe Request, 如果 AP 回 Probe Reponse, 就保持连接, 如果 AP 未回复, STA 发送 Disconnect 事件, 并断开连接.
+  - 出现 bcn_timeout 时, STA 会尝试发送 5 次Probe Request, 如果 AP 回 Probe Reponse, 就保持连接, 如果 AP 未回复, STA 发送 Disconnect 事件, 并断开连接.
 
 --------------
 
 [Connect] WiFi连接断开后如何重连？
 -------------------------------------
 
-  收到 ``WIFI_EVENT_STA_DISCONNECTED`` 之后调用 `esp\_wifi\_connect <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv416esp_wifi_connectv>`__
+  收到 ``WIFI_EVENT_STA_DISCONNECTED`` 之后调用 `esp_wifi_connect <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv416esp_wifi_connectv>`__
 
 --------------
 
 [Connect] ESP32作为station时什么时候会把softAP踢掉？
 --------------------------------------------------------
 
-  默认情况下 6s 未收到 AP 的 beacon 就会把 AP 踢掉. 该时间可以通过 `esp\_wifi\_set\_inactive\_time <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv426esp_wifi_set_inactive_time16wifi_interface_t8uint16_t>`__ 进行修改.
+  默认情况下 6s 未收到 AP 的 beacon 就会把 AP 踢掉. 该时间可以通过 `esp_wifi_set_inactive_time <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv426esp_wifi_set_inactive_time16wifi_interface_t8uint16_t>`__ 进行修改.
 
 --------------
 
@@ -403,8 +408,9 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
 [Scan] wifi_sta_config_t中 scan_method 怎么配置，全信道扫描和快速扫描的区别在哪里？
 -------------------------------------------------------------------------------------
 
-  全信道扫描和快速扫描是用在连接前寻找合适 AP 所需要的，scan_method 设定了fast_scan，可以配合 threshold 来过滤信号或加密方式不强的 AP，选择了 fast_scan 会在扫描到第一个匹配的 AP 的情况下停止扫描，然后进行连接，节省连接的时间。
-  选择了 all_channel_scan 的时候扫描会进行全信道扫描，然后根据 sort_method 中设定的排序方法，存储四个信号最好或者加密方式最安全的 AP，等到扫描结束后选择其中信号最好或者加密方式最安全的AP进行连接。
+  - 全信道扫描和快速扫描是用在连接前寻找合适 AP 所需要的，scan_method 设定了fast_scan，可以配合 threshold 来过滤信号或加密方式不强的 AP.
+  - 选择了 fast_scan 会在扫描到第一个匹配的 AP 的情况下停止扫描，然后进行连接，节省连接的时间。
+  - 选择了 all_channel_scan 的时候扫描会进行全信道扫描，然后根据 sort_method 中设定的排序方法，存储四个信号最好或者加密方式最安全的 AP，等到扫描结束后选择其中信号最好或者加密方式最安全的AP进行连接。
 
 --------------
 
@@ -441,11 +447,11 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
 [Sleep] 有哪几种休眠方式及其区别是什么？
 -------------------------------------------
 
-  Modem sleep, Light sleep 和 Deep sleep
+  - 一共有三种休眠方式: Modem sleep, Light sleep 和 Deep sleep
 
-  Modem sleep: WiFi 协议规定的 station WMM 休眠方式(station 发送 NULL 数据帧通知 AP 休眠或醒来)，station 连接上 AP 之后自动开启，进入休眠状态后关闭射频模块，休眠期间保持和 AP 的连接，station 断开连接后 modem sleep 不工作。ESP32 modem sleep 进入休眠状态后还可以选择降低 CPU 时钟频率，进一步降低电流。
-  Light sleep: 基于 modem sleep 的 station 休眠方式，和 modem sleep 的不同之处在于进入休眠状态后不仅关闭射频模块，还暂停 CPU，退出休眠状态后 CPU 从断点处继续运行。
-  Deep sleep: 非 WiFi 协议规定的休眠方式，进入休眠状态后关闭除 RTC 模块外的所有其他模块，退出休眠状态后整个系统重新运行(类似于系统重启)，休眠期间不能保持和 AP 的连接。
+    - Modem sleep: WiFi 协议规定的 station WMM 休眠方式(station 发送 NULL 数据帧通知 AP 休眠或醒来)，station 连接上 AP 之后自动开启，进入休眠状态后关闭射频模块，休眠期间保持和 AP 的连接，station 断开连接后 modem sleep 不工作。ESP32 modem sleep 进入休眠状态后还可以选择降低 CPU 时钟频率，进一步降低电流。
+    - Light sleep: 基于 modem sleep 的 station 休眠方式，和 modem sleep 的不同之处在于进入休眠状态后不仅关闭射频模块，还暂停 CPU，退出休眠状态后 CPU 从断点处继续运行。
+    - Deep sleep: 非 WiFi 协议规定的休眠方式，进入休眠状态后关闭除 RTC 模块外的所有其他模块，退出休眠状态后整个系统重新运行(类似于系统重启)，休眠期间不能保持和 AP 的连接。
 
 --------------
 
@@ -473,10 +479,10 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
 [Sleep] 为什么测到的 modem sleep 平均电流偏高？
 --------------------------------------------------
 
-  原因一：测试过程中有较多的 WiFi 数据收发。数据收发越多，进入休眠状态的机会越少，平均电流就越高。
-  原因二：测试用的路由器发送 beacon 时间点不准确。Station 需要定时醒来监听 beacon，若 beacon 时间点不准确，station 会等待较长时间，进入休眠状态的时间就越少，平均电流就越高。
-  原因三：测试过程中有外设模块在工作，请关闭外设模块再进行测试。
-  原因四：开启了 station + softap 模式，modem sleep 只在 station only 模式下才会降低电流。
+  - 测试过程中有较多的 WiFi 数据收发。数据收发越多，进入休眠状态的机会越少，平均电流就越高。
+  - 测试用的路由器发送 beacon 时间点不准确。Station 需要定时醒来监听 beacon，若 beacon 时间点不准确，station 会等待较长时间，进入休眠状态的时间就越少，平均电流就越高。
+  - 测试过程中有外设模块在工作，请关闭外设模块再进行测试。
+  - 开启了 station + softap 模式，modem sleep 只在 station only 模式下才会降低电流。
 
 --------------
 
@@ -547,7 +553,7 @@ ESP32 如何收发 wifi 802.11 数据包？
 ---------------------------------------------------------------
 
   - 支持。请参考示例 `wpa2_enterprise <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/wifi/wpa2_enterprise>`__。
-  - 关于 RADIUS 服务器配置，请参考 `RADIUS\ 服务器之\ hostapd 配置说明 <https://blog.csdn.net/espressif/article/details/80933222>`_。
+  - 关于 RADIUS 服务器配置，请参考 `RADIUS 服务器之 hostapd 配置说明 <https://blog.csdn.net/espressif/article/details/80933222>`_。
 
 --------------
 
@@ -610,15 +616,13 @@ ESP32 如何自定义 hostname ？
 --------------
 
 如何获取 802.11 无线数据包？
-
 -----------------------------------
 
-  - 可以参考 IDF 编程文档中的 `Wireshark 使用指南 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html>`__ 。
+  - 可以参考 IDF 编程文档中的 `Wireshark 使用指南 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html>`_ 。
 
 --------------
 
 ESP32 Wi-Fi 支持 PMF(Protected Management Frames) 和 PFS(Perfect Forward Secrecy) 吗？
-
 -----------------------------------------------------------------------------------------------------
 
   - WPA2 / WPA3 中均支持 PMF， WPA3 中支持 PFS。

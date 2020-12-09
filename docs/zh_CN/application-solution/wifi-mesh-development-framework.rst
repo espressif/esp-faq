@@ -151,7 +151,7 @@ esp_mesh_set_parent 函数成功连接后，断开 AP ，该函数会不断发�
 如何暂停/恢复 Mwifi ？
 ------------------------
 
-  使用 ``mwifi_stop/ mwifi_start`` 暂停/开始 mesh. 可以参见: https://github.com/espressif/esp-mdf/blob/master/examples/function_demo/mwifi/console_test/main/mwifi_test.c#L278
+  使用 ``mwifi_stop/mwifi_start`` 暂停/开始 mesh. 
 
 --------------
 
@@ -165,7 +165,7 @@ ESP32-S 无路由 MESH 组网， APP 怎么连接 root 接口的 softAP ？
 MESH 能连到 AP ,但不能 connect 到 AP 上的 TCP SERVER？
 ---------------------------------------------------------
 
-  请参考: `mesh -> "with-router" example doesn't work with espressif IDF softAP #71 <https://github.com/espressif/esp-mdf/issues/71>`__
+  请参考 GitHub issue: `mesh -> "with-router" example doesn't work with espressif IDF softAP #71 <https://github.com/espressif/esp-mdf/issues/71>`__
 
 --------------
 
