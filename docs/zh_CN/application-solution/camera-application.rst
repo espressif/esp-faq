@@ -109,3 +109,13 @@ ESP32 系列芯片支持 USB2.0 接口吗？
 
      -  先检查代码，输出格式是 RGB、YUV 还是 JPEG，是否符合接收端需要的格式。
      -  尝试降低 PCLK 频率。
+
+--------------
+
+ESP32 支持传输视频流吗？
+--------------------------------
+
+  - 视频流的传输操作分：二进制传输 和 视频流编解码。
+
+    - 二进制传输：ESP32 可以做二进制传输，此处只取决于传输的网络带宽，目前我们 ESP32 TCP 带宽 20 MB/s，参考 `WiFI 测试数据 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#esp32-wi-fi-throughput>`_ 。
+    - 视频流编解码：目前视频流主要格式有 H264、H265、MJPEG 等，ESP32 暂无视频流编解码操作的能力。
