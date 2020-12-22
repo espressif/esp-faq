@@ -11,7 +11,7 @@
 搜索问题技巧
 ------------
 
-目前可以归纳出以下 3 种搜索问题的技巧：
+目前可以归纳出以下 2 种搜索问题的技巧：
 
 - 搜索关键词 
 - 排除某个关键词
@@ -21,7 +21,8 @@
 
 将问题中的关键词提取出来并搜索它们，此时搜索结果会得到最匹配的结果。
 
-比如问题为：``ESP32 的 BLE 吞吐量是多少？``
+
+比如问题为：``ESP32 的 Bluetooth LE 吞吐量是多少？``
 
 此时搜索：``ESP32``、``BLE`` 和 ``吞吐量`` 等关键字为宜。
 
@@ -37,55 +38,16 @@
 
 在掌握上述 ``搜索问题技巧`` 后，可以利用 ESP-FAQ 已经做好的分类来提取想搜索问题里的关键词并搜索。以下是此网站的框架： 
 
+
 ESP-FAQ
 
-- 使用说明
+.. toctree::
+   :maxdepth: 1
 
-  - 问题查找
-  - 文档贡献
 
-- 开发环境 
-
-  - IDE插件
-  - 调试分析
-  - 环境搭建
-  - 固件升级 
-
-- 应用方案
-
-  - AI 应用 
-  - AT 命令 
-  - Wi-Fi Mesh 应用框架
-  - BLE Mesh应用框架
-  - 音频应用框架 
-  - 云服务
-  - 社区软件平台
-  - 苹果应用
-  - 安卓应用
-  - 摄像头应用
-
-- 软件平台
-
-  - 蓝牙 
-  - 以太网
-  - 共存 
-  - 外设 
-  - 协议 
-  - 配置 
-  - 安全 
-  - 储存 
-  - 系统 
-  - Wi-Fi 
-
-- 硬件相关
-
-  - 芯片功能对比 
-  - 开发板使用 
-  - 硬件设计 
-  - 射频相关 
-  - 工艺与防护
-  - 生产测试 
-
-- 测试校验 
-
-  - 功耗测试指南
+   Development environment <../development-environment/index>
+   Application solution <../application-solution/index>
+   Software framework <../software-framework/index>
+   Hardware related <../hardware-related/index>
+   Test verification <../test-verification/index>
+   Commercial FAQ <../commercial-faq/index>
