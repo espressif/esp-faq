@@ -45,9 +45,9 @@ ESP-FAQ
    :maxdepth: 1
 
 
-   Development environment <../development-environment/index>
-   Application solution <../application-solution/index>
-   Software framework <../software-framework/index>
-   Hardware related <../hardware-related/index>
-   Test verification <../test-verification/index>
-   Commercial FAQ <../commercial-faq/index>
+   开发环境 <../development-environment/index>
+   应用方案 <../application-solution/index>
+   软件平台 <../software-framework/index>
+   硬件相关 <../hardware-related/index>
+   测试校验 <../test-verification/index>
+   商务问题 <../commercial-faq/index>
