@@ -589,3 +589,10 @@ ESP32 AT 指令是否支持设置模块的 b/g/n 模式?
   - 自 ESP32-AT v2.1.0.0 开始支持.
   - `AT+CWSTAPROTO <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Wi-Fi_AT_Commands.html#at-cwstaproto-set-the-802-11-b-g-n-protocol-standard-of-station-mode>`_ 用于设置和查询 station 模式的 802.11 b/g/n.
   - `AT+CWAPPROTO <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Wi-Fi_AT_Commands.html#at-cwapproto-set-the-802-11-b-g-n-protocol-standard-of-softap-mode>`_ 用于设置和查询 SoftAP 模式的 802.11 b/g/n.
+
+---------------
+
+ESP32 AT UART1 通信管脚与 datasheet 默认管脚不一致？
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 支持 IO 矩阵变换， 在编译 esp-at 的时候，可以在 menuconfig 中通过软件配置修改 UART1 的管脚配置， 所以就会出现和 datasheet 管脚不一致的情况。
