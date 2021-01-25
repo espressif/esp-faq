@@ -84,8 +84,8 @@ ESP8266 如何修改默认上电校准⽅式？
 ESP32 boot 启动模式不正常如何排查？
 -----------------------------------
 
-  - ESP32-WROVER 模组使用 1.8 V flash 与 psram 启动状态默认为 ``0x33`` ,下载模式 ``0x23`` 。
-  - 其余模组使用 3.3 V flash 与 psram 模组默认为 ``0x13`` , 下载模式 ``0x03`` 。
+  - ESP32-WROVER 模组使用 1.8 V flash 与 PSRAM 启动状态默认为 ``0x33`` ,下载模式 ``0x23`` 。
+  - 其余模组使用 3.3 V flash 与 PSRAM 模组默认为 ``0x13`` , 下载模式 ``0x03`` 。
   - 详情请参考 ESP32 系列芯片技术规格书中 Strapping 管脚部分。示例 ``0x13`` 对应如下： 
 
   +--------+--------+-------+-------+-------+--------+-------+
@@ -173,7 +173,7 @@ Win 10 系统下识别不到设备有哪些原因？
 
 --------------
 
-ESP32 出现 Error:Core 1 paniced(Cache disabled but cache memory region accessed) 是什么原因？
+ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region accessed) 是什么原因？
 ----------------------------------------------------------------------------------------------------
 
   问题原因：
@@ -200,7 +200,7 @@ ESP32 出现 Error:Core 1 paniced(Cache disabled but cache memory region accesse
 
 --------------
 
-调试IDF里的 ethernet demo，出现 如下异常 log？
+调试 IDF 里的 Ethernet demo，出现如下异常 log？
 ------------------------------------------------------
 
   .. code-block:: text

@@ -25,9 +25,9 @@ When using ESP32 with my product, what is the reason for it not following up aft
     brownout detector was triggered.
     rst:0xc(SW_CPU_RESET),boot:0x13(SPI_FAST_FLASH_BOOT) configsip:0,SPI
 
-  1. The log conveys a message that the voltage has decreased to the threshold of triggering hardware watchdog during the quick powering-down process.
-  2. The system did not enter bootloader due to the wrong powering-on timing. This can be resolved by force pulling-down chip_PU.
-  3. For more detailed description about the powering-on and reset timing of ESP32, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
+  - The log conveys a message that the voltage has decreased to the threshold of triggering hardware watchdog during the quick powering-down process.
+  - The system did not enter bootloader due to the wrong powering-on timing. This can be resolved by force pulling-down chip_PU.
+  - For more detailed description about the powering-on and reset timing of ESP32, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
 --------------
 
@@ -66,12 +66,12 @@ How to modify the default method of RF calibration in ESP8266?
   
   During RF initialization, the partial calibration solution is used by default. The initialization only takes little time. And for this method, the value of byte 115 in esp_init_data_default.bin is ``0x01``. If the boot time is not critical, the full calibration solution can be used instead.
 
-  **For NONOS SDK and earlier versions of RTOS SDK 3.0:**, do either of the followings:
+  **For NONOS SDK and earlier versions of RTOS SDK 3.0**, do either of the followings:
 
   - Call system_phy_set_powerup_option(3) in function user_pre_init or user_rf_pre_init.
   - In phy_init_data.bin, modify the value of byte 115 to ``0x03``.
 
-  **For RTOS SDK 3.0 and later versions:**
+  **For RTOS SDK 3.0 and later versions**, do either of the followings:
 
   - Go to menuconfig and disable CONFIG_ESP_PHY_CALIBRATION_AND_DATA_STORAGE.
   - If CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION is enabled in menuconfig, please modify the value of byte 115 in phy_init_data.bin to ``0x03``; If CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION is disabled, please modify the value of byte 115 in phy_init_data.h to ``0x03``.
@@ -86,15 +86,8 @@ How to modify the default method of RF calibration in ESP8266?
 How to troubleshoot in ESP32 Boot mode？
 ------------------------------------------
 
-  By default, the boot information of ESP32-WROVER, which uses 1.8 V flash and psram, is ``0x33`` and ``0x23`` in Download mode. Besides, the boot information of other modules, which use 3.3 V flash and psram, is ``0x13`` and ``0x03`` in Download mode by default. for detailed information, please refer to Section Strapping Pins in `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
-
-  Thus, when ESP32 is started normally, its boot information should be ``0x13``, and the enabled pins are as the follows:
-  - Pins: GPIO12，GPIO0，GPIO2，GPIO4，GPIO15，GPIO5
-  - Levels: 0, 1, 0, 1, 0, 1
-
-
-  - The ESP32-WROVER uses 1.8 V flash and ``0x33`` psram in boot status by default, and the psram is ``0x23`` in download mode.
-  - Other modules use 3.3 V flash and ``0x13`` psram by default, and the psram is ``0x03`` in download mode.
+  - The ESP32-WROVER uses 1.8 V flash and PSRAM, which are ``0x33`` by default in boot status and ``0x23`` in download mode.
+  - Other modules use 3.3 V flash and PSRAM, which are ``0x13`` by default and ``0x03`` in download mode.
   - For detailed information, please refer to Section Strapping Pins in `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_. Taken ``0x13`` as an example, the pins are as follows:
 
   +--------+--------+-------+-------+-------+--------+-------+
@@ -176,8 +169,8 @@ How to do RF performance test with ESP32&ESP8266&ESP32S2?
   
 --------------
 
-What could be the reason for PC cannot identify the device under Win 10 system?
------------------------------------------------------------------------------------
+My PC cannot recognize the device connected in Win 10 system. What could be the reasons?
+------------------------------------------------------------------------------------------------
 
   - Check if the device is identified in the Linux virtual subsystem of Win 10.
   - If the device cannot be identified only in Win 10 system, go to Device Manager to see whether such device exists (e.g., COM x). If the answer is still no, please check your cable and driver.
@@ -185,7 +178,7 @@ What could be the reason for PC cannot identify the device under Win 10 system?
 
 --------------
 
-One error occurred with ESP32 as: Core 1 paniced(Cache disabled but cache memory region accessed). What could be the reason?
+One error occurred with ESP32 as: Core 1 paniced (Cache disabled but cache memory region accessed). What could be the reasons?
 ------------------------------------------------------------------------------------------------------------------------------------
 
   Reason:
@@ -210,7 +203,19 @@ How to read flash model information of the modules?
 
     esptool.py --port /dev/ttyUSB* flash_id
 
+--------------
 
+What should I do when the Ethernet demo in debugging IDF has the following log？
+--------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    emac: Timed out waiting for PHY register 0x2 to have value 0x0243(mask 0xffff). Current value:
+
+  You can refer to the following configurations of the development board. Please see the schematics for details:
+
+    - CONFIG_PHY_USE_POWER_PIN=y
+    - CONFIG_PHY_POWER_PIN=5
 
 
 
