@@ -1,4 +1,3 @@
-
 ---
 name: Ask issue
 about: Ask issue, need relevant answer issue
