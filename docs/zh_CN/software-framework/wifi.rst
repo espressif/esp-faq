@@ -124,38 +124,27 @@ Wi-Fi 信道是什么？可以自行选择信道吗？
 
   .. code-block:: c
 
-    char ip_str[15];
-    char ip[15] = "192.168.5.241";
-    char gateway[15] = "192.168.5.1";
-    char netmask[15] = "255.255.255.0";
-    char dns[15] = "8.8.8.8";
+    esp_netif_ip_info_t info_t = {0};
+    esp_netif_dns_info_t dns_info = {0};
 
-    esp_netif_ip_info_t info_t;
-    //esp_netif_t netif;
-    esp_netif_dns_info_t dns_info;
-
-    esp_netif_config_t netif_cfg = ESP_NETIF_DEFAULT_ETH();
-    esp_netif_t *eth_netif = esp_netif_new(&netif_cfg);
-    // set default handlers to do layer 3 (and up) stuffs
-    esp_eth_set_default_handlers(eth_netif);
-
-    memset(&info_t, 0, sizeof(esp_netif_ip_info_t));
-    memset(&dns_info, 0, sizeof(esp_netif_dns_info_t));
+    // Initialize TCP/IP network interface (should be called only once in application)
+    ESP_ERROR_CHECK(esp_netif_init());
+    // Create default event loop that running in background
+    ESP_ERROR_CHECK(esp_event_loop_create_default());
+    esp_netif_config_t cfg = ESP_NETIF_DEFAULT_ETH();
+    esp_netif_t *eth_netif = esp_netif_new(&cfg);
+    // Set default handlers to process TCP/IP stuffs
+    ESP_ERROR_CHECK(esp_eth_set_default_handlers(eth_netif));
 
     esp_netif_dhcpc_stop(eth_netif);
 
-    ip4addr_aton((const char *)ip_str, &info_t.ip.addr);
-    memcpy(&ip_str[0], &gateway[0], 15);
-    ip4addr_aton((const char *)ip_str, &info_t.gw.addr);
+    info_t.ip.addr = ESP_IP4TOADDR(192,168,3,23);
+    info_t.gw.addr = ESP_IP4TOADDR(192,168,3,1);
+    info_t.netmask.addr = ESP_IP4TOADDR(255,255,255,0);
+    esp_netif_set_ip_info(eth_netif,&info_t);
 
-    memcpy(&ip_str[0], &dns[0], 15);
-    ip4addr_aton((const char *)ip_str, &dns_info.ip.u_addr.ip4);
-    ESP_LOGI("Test", "DNS %s\n", ip4addr_ntoa(&dns_info.ip.u_addr.ip4));
-
-    memcpy(&ip_str[0], &netmask[0], 15);
-    ip4addr_aton((const char *)ip_str, &info_t.netmask.addr);
-    esp_netif_set_dns_info(eth_netif,ESP_NETIF_DNS_MAIN,&dns);
-
+    dns_info.ip.u_addr.ip4.addr = ESP_IP4TOADDR(8,8,8,8);
+    esp_netif_set_dns_info(eth_netif,ESP_NETIF_DNS_MAIN,&dns_info);
 
 [LWIP] ESP-IDF 里如何设置 DHCP Server 的 Option 内容？
 --------------------------------------------------------------------
