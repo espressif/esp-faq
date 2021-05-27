@@ -57,7 +57,7 @@ ESP32 AT 相关资源从哪里获得？
 -----------------------------
 
   - ESP32 AT bin 文件：`AT 固件 <https://www.espressif.com/zh-hans/support/download/at>`_。
-  - ESP32 AT 文档：`AT 指令集 <https://github.com/espressif/esp-at/blob/master/docs/ESP_AT_Commands_Set.md>`_。
+  - ESP32 AT 文档：`AT 指令集 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/index.html>`_。
   - 可以基于乐鑫官方的 esp-at 工程开发更多的 AT 指令。
 
 --------------
@@ -85,7 +85,7 @@ ESP8266 通过 AT 进行 SSL 连接时是否支持 PSK 认证？
 
   - AT `AT 固件下载 <https://www.espressif.com/zh-hans/support/download/at>`_。
   - ESP8266_NONOS_SDK 版本的 `NONOS AT 指令集 <https://www.espressif.com/sites/default/files/documentation/4a-esp8266_at_instruction_set_cn.pdf>`_。
-  - IDF 版本 的 `RTOS AT 指令集 <https://github.com/espressif/esp-at/blob/master/docs/en/get-started/ESP_AT_Commands_Set.md>`_。
+  - IDF 版本 的 `RTOS AT 指令集 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/index.html>`_。
 
 --------------
 
@@ -94,7 +94,7 @@ AT 命令中串口波特率是否可以修改？（默认：115200）
 
   AT 命令串口的波特率是可以修改的。 
 
-  - 第一种方法，您可以通过串口命令 ``AT+UART_CUR`` 或者 ``AT+UART_DEF`` 进行修改, 详情请参考 `AT 指令集 <https://github.com/espressif/esp-at/blob/master/docs/en/get-started/ESP_AT_Commands_Set.md>`__。
+  - 第一种方法，您可以通过串口命令 ``AT+UART_CUR`` 或者 ``AT+UART_DEF`` 进行修改, 详情请参考 `AT 指令集 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/index.html>`__。
   - 第二种方法，您可以重新编译 AT 固件，编译介绍：`esp-at 环境搭建 <https://github.com/espressif/esp-at/blob/master/docs/en/get-started/ESP_AT_Get_Started.md>`_ 与 `修改 UART 波特率配置 <https://github.com/espressif/esp-at/blob/master/docs/zh_CN/get-started/How_To_Set_AT_Port_Pin.md>`_。
 
 --------------
@@ -148,7 +148,7 @@ ESP32 AT 如何从 UART0 口通信？
 ESP32-SOLO-1C 如何使用 AT 与手机进行 BLE 透传？
 -----------------------------------------------
 
-  - 设备端需要按照 BLE server 透传模式去设置，具体 BLE 透传模式流程参考 `《ESP32 AT 指令集与使用示例》 <https://www.espressif.com/sites/default/files/documentation/esp32_at_instruction_set_and_examples_cn.pdf>`__。
+  - 设备端需要按照 BLE server 透传模式去设置，具体 BLE 透传模式流程参考 `《ESP32 AT BLE 指令集》 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/BT_AT_Commands.html>`__。
   - 手机端需要下载 BLE 调试助手，例如 nRF Connect APP (Android)和 lightblue (IOS)，然后打开 SCAN 去寻找设备端的 MAC 地址，最后就可以发送命令了。
 
 --------------
