@@ -38,6 +38,6 @@ Where can I get all the resources related to ESP32 AT?
 --------------------------------------------------------
 
   - ESP32 AT bin files: https://www.espressif.com/zh-hans/support/download/at
-  - ESP32 AT document: `ESP32 AT Instruction Set and Examples <https://www.espressif.com/sites/default/files/documentation/esp32_at_instruction_set_and_examples_en.pdf>`_
+  - ESP32 AT document: `ESP32 AT Instruction Set and Examples <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/index.html>`_
 
    You can also develop more AT commands based on the core codes of Espressif AT commands. Please find more information on ESP32 AT demos on GitHub: https://github.com/espressif/esp-at.
