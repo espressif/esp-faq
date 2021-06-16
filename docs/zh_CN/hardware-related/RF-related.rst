@@ -16,7 +16,7 @@
 --------------
 
 ESP32 模组在 2.8 V 电源下运行，射频性能会有下降吗？
----------------------------------------------------
+------------------------------------------------------------
 
   射频会不稳定。建议按照相应 `模组技术规格书 <https://www.espressif.com/zh-hans/support/documents/technical-documents>`_ 中说明的建议工作电压范围提供电压。
 
@@ -26,6 +26,13 @@ ESP32 模组在 2.8 V 电源下运行，射频性能会有下降吗？
 ---------------------------------------------------
 
   - ESP8266 芯片支持的调制方式有：BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK。
-  - ESP32   芯片支持的调制方式有：BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK/GFSK Π/4-DQPSK 8-DPSK 。
+  - ESP32 芯片支持的调制方式有：BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK/GFSK Π/4-DQPSK 8-DPSK。
   - ESP32-S2 芯片支持的调制方式有：BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK。
-  
+
+--------------
+
+如何获取乐鑫产品的 RF 相关的信息（如天线描述、天线辐射图等）用于认证？
+--------------------------------------------------------------------------------------
+
+  请联系 `商务 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`_ 获取相关信息。
+
