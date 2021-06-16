@@ -12,3 +12,25 @@ RF related
      h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
+
+If an ESP32 module is running under a 2.8 V supply, is there any degradation in its RF performance?
+------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, its RF performance may become unstable. It is recommended that the voltage be supplied in accordance with the suggested operating voltage range specified in the `Module's Datasheet <https://www.espressif.com/en/support/documents/technical-documents>`_.
+
+--------------
+
+What are the modulation methods supported by Espressif's chips?
+------------------------------------------------------------------------------
+
+  - ESP8266 supports: BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK.
+  - ESP32 supports: BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK/GFSK Π/4-DQPSK 8-DPSK.
+  - ESP32-S2 supports: BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK.
+
+--------------
+
+How can I get the RF related information (e.g., antenna specification, antenna pattern, etc.) for certification?
+------------------------------------------------------------------------------------------------------------------------------
+
+  For such information, please contact `Sales <https://www.espressif.com/en/contact-us/sales-questions>`_ for help.
+
