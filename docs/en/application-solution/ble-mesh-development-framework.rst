@@ -1,5 +1,5 @@
-Ble mesh development framework
-==============================
+BLE Mesh development framework
+================================
 
 :link_to_translation:`zh_CN:[中文]`
 
