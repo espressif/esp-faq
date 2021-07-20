@@ -190,10 +190,10 @@ After MCU sends AT+CIPSEND, it receives the busy p... response. Does the MCU nee
 
 --------------
 
-Does Wi-Fi Mesh support AT commands?
-------------------------------------
+Does ESP-WIFI-MESH support AT commands?
+---------------------------------------------------
 
-  Currently Wi-Fi-Mesh does not support AT commands.
+  Currently ESP-WIFI-MESH does not support AT commands.
 
 --------------
 

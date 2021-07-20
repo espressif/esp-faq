@@ -44,12 +44,12 @@ Does ESP32 support coexistence between 16 MB External Flash and 8 MB External PS
 
 --------------
 
-Does ESP32 support coexistence between Wi-Fi Mesh and Bluetooth® LE Mesh?
--------------------------------------------------------------------------------------
+Does ESP32 support coexistence between ESP-WIFI-MESH and Bluetooth® LE Mesh?
+---------------------------------------------------------------------------------------
 
   No.
 
-  However, the ESP32 supports coexistence between Wi-Fi Mesh and Bluetooth LE, or Wi-Fi STA and Bluetooth LE Mesh.
+  However, the ESP32 supports coexistence between ESP-WIFI-MESH and Bluetooth LE, or Wi-Fi STA and Bluetooth LE Mesh.
 
 --------------
 

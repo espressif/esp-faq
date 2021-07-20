@@ -44,12 +44,12 @@ ESP32 支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存吗？
 
 --------------
 
-ESP32 Wi-Fi Mesh 和 Bluetooth® LE Mesh 可以同时支持吗？
-------------------------------------------------------------
+ESP32 的 ESP-WIFI-MESH 和 Bluetooth® LE Mesh 可以同时支持吗？
+------------------------------------------------------------------
 
   不支持。
 
-  ESP32 Wi-Fi Mesh 和 BLE 可以同时支持，或者 ESP32 Wi-Fi STA 模式和 BLE Mesh 可以同时支持。
+  ESP32 的 ESP-WIFI-MESH 和 BLE 可以同时支持，或者 ESP32 Wi-Fi STA 模式和 BLE Mesh 可以同时支持。
 
 --------------
 

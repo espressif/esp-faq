@@ -1,5 +1,5 @@
-Wifi mesh development framework
-===============================
+ESP-WIFI-MESH development framework
+=======================================
 
 :link_to_translation:`zh_CN:[中文]`
 
