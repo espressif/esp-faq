@@ -489,3 +489,10 @@ Does ESP8266 support pulse counting?
   - The ESP8266 does not include a hardware pulse counting module, thus only supports counting via the interrupt of GPIO rising edge or falling edge.
   - When Wi-Fi is turned on in ESP8266, it may cause a vacuum in the GPIO sampling due to its high priority, thus interrupting the collected counts and causing data loss.
   - In conclusion, it is recommended to use ESP32 and subsequent chips for scenarios with high counting demands.
+
+---------------
+
+Does the ESP-IDF SDK USB interface support HID and MSC modes?
+-------------------------------------------------- -------------------------------------------------- -------------------------------------------------
+
+   - Our SDK will provide examples of HID and MSC classes in the future. And specific device classes need to be implemented by themselves. 
