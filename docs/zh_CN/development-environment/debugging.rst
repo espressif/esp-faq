@@ -160,7 +160,7 @@ ESP32 如何获取与解析 coredump？
 ESP32&ESP8266&ESP32S2 如何做射频性能测试？
 -----------------------------------------------
 
-  - 参见：`ESP32&ESP8266&ESP32S2 射频性能测试指南 <https://www.espressif.com/sites/default/files/tools/ESP32%26ESP8266_RF_Performance_Test_CN_0.zip>`_。
+  - 参见：`ESP 射频测试指南 <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_CN.zip>`_。
   
 --------------
 
