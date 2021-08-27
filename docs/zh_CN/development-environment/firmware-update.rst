@@ -128,3 +128,13 @@ ESP 芯片烧录通讯协议是什么？
   - ESP 烧录协议规范：`Serial-Protocol <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_。
   - 串口协议 Python 实现：`esptool <https://github.com/espressif/esptool>`_。
   - 串口协议 C 语言实现：`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_。
+
+--------------
+
+如何对 ESP32-C3 进行离线程序烧录？
+---------------------------------------------------------------
+
+  - 可以在官网下载最新的 Flash Download Tools, V3.8.8 之后的版本已经支持 ESP32-C3 系列的烧录。
+
+
+
