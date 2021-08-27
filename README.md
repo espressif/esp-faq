@@ -24,7 +24,8 @@ docs
 │   └── theme_overrides.css      # Web Style Sheet
 ├── zh_CN
 │   ├── _static                  # Inline resources
-│   ├── get-started              # Get started
+│   ├── instruction              # Instruction
+│   ├── commercial-faq           # Commercial faq
 │   ├── development-environment  # Development environment
 │   ├── application-solution     # Application solution
 │   ├── hardware-related         # Hardware related
@@ -35,7 +36,8 @@ docs
 │   └── index.rst                # Home
 └── en
     ├── _static                  # Inline resources
-    ├── get-started              # Get started
+    ├── instruction              # Instruction
+    ├── commercial-faq           # Commercial faq
     ├── development-environment  # Development environment
     ├── application-solution     # Application solution
     ├── hardware-related         # Hardware related
@@ -46,14 +48,10 @@ docs
     └── index.rst                # Home
 ```
 
-### Document Contribution
-
-* Please read the code [Document Contribution](docs/zh_CN/get-started/document-contribution.md)
-
 ## Resources
 
 * The [esp32.com forum](https://esp32.com/) is a place to ask questions and find community resources.
 
 * [Check the Issues section on github](https://github.com/espressif/esp-faq/issues) if you find a bug or have a feature request. Please check existing Issues before opening a new one.
 
-* If you're interested in contributing to ESP-IDF, please check the [Contributions Guide](docs/zh_CN/get-started/document-contribution.md).
+* If you're interested in contributing to ESP-IDF, please check the [Contributions Guide](https://docs.espressif.com/projects/espressif-esp-faq/en/latest/instruction/document-contribution.html).

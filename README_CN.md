@@ -24,7 +24,8 @@ docs
 │   └── theme_overrides.css      # 网页样式表
 ├── zh_CN
 │   ├── _static                  # 内联资源
-│   ├── get-started              # 入门指南
+│   ├── instruction              # 使用说明
+│   ├── commercial-faq           # 商务问题
 │   ├── development-environment  # 开发环境
 │   ├── application-solution     # 应用方案
 │   ├── hardware-related         # 硬件相关
@@ -35,7 +36,8 @@ docs
 │   └── index.rst                # 主目录
 └── en
     ├── _static                  # 内联资源
-    ├── get-started              # 入门指南
+    ├── instruction              # 使用说明
+    ├── commercial-faq           # 商务问题
     ├── development-environment  # 开发环境
     ├── application-solution     # 应用方案
     ├── hardware-related         # 硬件相关
@@ -46,14 +48,10 @@ docs
     └── index.rst                # 主目录
 ```
 
-### 文档贡献
-
-* 请阅读 [贡献指南](docs/zh_CN/get-started/document-contribution.md)。
-
 ## 其它参考资源
 
 * 可以前往 [esp32.com 论坛](https://esp32.com/) 提问，挖掘社区资源。
 
 * 如果你在使用中发现了错误或者需要新的功能，请先[查看 GitHub Issues](https://github.com/espressif/esp-faq/issues)，确保该问题不会被重复提交。
 
-* 如果你有兴趣为 ESP-FAQ 作贡献，请先阅读[贡献指南](docs/zh_CN/get-started/document-contribution.md)。
+* 如果你有兴趣为 ESP-FAQ 作贡献，请先阅读[贡献指南](https://docs.espressif.com/projects/espressif-esp-faq/zh_CN/latest/instruction/document-contribution.html)。
