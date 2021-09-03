@@ -128,3 +128,10 @@ What is the communicationg protocol for flashing ESP chips?
   - ESP Serial Protocol: `Serial-Protocol <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_.
   - Python-based implementation: `esptool <https://github.com/espressif/esptool>`_.
   - C-language based implementation: `esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_.
+
+--------------
+
+How to program ESP32-C3's firmware offline?
+--------------------------------------------------------------------------------
+
+   - Download the latest Flash Download Tools from espressif.com. Versions after v3.8.8 and later versions already support ESP32-C3 series programming.
