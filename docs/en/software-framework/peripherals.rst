@@ -493,6 +493,13 @@ Does ESP8266 support pulse counting?
 ---------------
 
 Does the ESP-IDF SDK USB interface support HID and MSC modes?
--------------------------------------------------- -------------------------------------------------- -------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
    - Our SDK will provide examples of HID and MSC classes in the future. And specific device classes need to be implemented by themselves. 
+
+---------------
+
+When using DAC output for ESP32-S2-Saola-1, the power supply is 3.3 V. But the actual tested voltage is only 3.1 V. Why?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+   - Due to the internal voltage drop, even when using 3.3 V power supply, the actual maximum output is only about 3.2 V.
