@@ -143,3 +143,10 @@ When testing RTOS-SDK mqtt/ssl_mutual_auth with ESP8266, the server connection f
   - Please use the Master version of ESP8266-RTOS-SDK to test this example, since it supports dynamic memory allocation in menuconfig so as to reduce the usage of memory peak. The specific action is:
 
     - menuconfig -> Component config -> mbadTLS -> (type “Y” to enable) Using dynamic TX /RX buffer -> (type “Y” to enable) Free SSL peer certificate after its usage -> (type “Y” to enable) Free certificate, key and DHM data after its usage.
+
+----------------
+
+After calling ``esp_netif_t* wifiAP = esp_netif_create_default_wifi_ap()`` for ESP32-S2 chips, a following call of ``esp_netif_destroy(wifiAP)`` to deinit caused a 12-byte of memory leakage. What is the reason?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - It is necessary to call ``esp_wifi_clear_default_wifi_driver_and_handlers(wifiAP)`` before ``esp_netif_destroy(wifiAP)``. This is the correct deinit process. Following this process, there will be no memory leakage.

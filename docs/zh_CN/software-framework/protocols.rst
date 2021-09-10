@@ -144,3 +144,10 @@ ESP8266 测试 RTOS-SDK mqtt/ssl_mutual_auth 为何连接服务器失败？
   - 请使用 ESP8266-RTOS-SDK Master 版本来测试此例程，Master 版本支持在 menuconfig 配置端动态分配内存，可以减少峰值内存的开销。具体操作：
 
     - 通过 menuconfig -> Component config -> mbadTLS -> (键 “Y” Enable) Using dynamic TX /RX buffer  -> (键 “Y” Enable) Free SSL peer certificate after its usage -> (键 “Y” Enable) Free certificate, key and DHM data after its usage。
+
+----------------
+
+ESP32-S2 在调用 ``esp_netif_t* wifiAP  = esp_netif_create_default_wifi_ap()`` 后通过 ``esp_netif_destroy(wifiAP)`` 注销会产生 12 字节的内存泄露，什么原因？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 需要在 ``esp_netif_destroy(wifiAP)`` 前额外调用 ``esp_wifi_clear_default_wifi_driver_and_handlers(wifiAP)``，这样才是正确的注销流程，此时可发现内存泄露的情况已消失。
