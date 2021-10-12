@@ -655,4 +655,12 @@ How to get the RSSI of the connected AP for ESP32 IDF v4.1 Wi-Fi?
 Why does ESP8266 print out an AES PN error log when using esptouch v2?
 ------------------------------------------------------------------------------
 
-  This occurs when ESP8266 has received retransmitted packets from the router for multiple times. However, this will not affect your usage.
+  - This occurs when ESP8266 has received retransmitted packets from the router for multiple times. However, this will not affect your usage.
+
+----------------------
+
+When using ESP32 to establish a hotspot, can I scan all APs and the occupied channels first, and then select the smallest and cleanest channel to establish my own AP?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can scan all APs and occupied channels before establishing a hotspot. Refer to the example "esp_wifi_scan_get_AP_records".
+  - It cannot be performed automatically. You need to customize the channel selection algorithm to implement such operation.
