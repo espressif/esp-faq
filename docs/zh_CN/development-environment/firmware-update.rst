@@ -128,4 +128,4 @@ ESP32 如何设置 Flash SPI 为 QIO 模式？
 ---------------------------------------------------------------------------------------------
 
   - 可通过 menuconfig -> Serial flasher config -> Flash SPI mode 配置端进行设置，对应 API 为 esp_image_spi_mode_t(); 
-  - 也可在 `Flash 下载工具 <https://www.espressif.com/sites/default/files/tools/flash_download_tool_v3.8.8.zip>`_界面进行配置。
+  - 也可在 `Flash 下载工具 <https://www.espressif.com/sites/default/files/tools/flash_download_tool_v3.8.8.zip>`_ 界面进行配置。
