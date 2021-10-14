@@ -584,5 +584,12 @@ Is it possible to set b/g/n modes for modules using ESP32 AT commands?
 
 The ESP32 AT UART1 communication pins do not match the default pins in the datasheet?
 -----------------------------------------------------------------------------------------
-
+  
   - ESP32 supports the GPIO Matrix. When compiling esp-at, you can modify the UART1 pin configuration through the software in menuconfig, so the pins may not match with those in the datasheet.
+
+----------------------
+
+When the host MCU sends an AT command to the ESP32 device (AT firmware version: V2.1.0.0), there is no response. What is the reason?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - A terminator ("AT\r\n") must be added after an AT command when the host MCU sending AT commands to an ESP32 device. Please see `Check Whether AT Works <https://docs.espressif.com/projects/esp-at/en/latest/Get_Started/Downloading_guide.html#check-whether-at-works>`_.
