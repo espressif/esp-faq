@@ -150,3 +150,10 @@ After calling ``esp_netif_t* wifiAP = esp_netif_create_default_wifi_ap()`` for E
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - It is necessary to call ``esp_wifi_clear_default_wifi_driver_and_handlers(wifiAP)`` before ``esp_netif_destroy(wifiAP)``. This is the correct deinit process. Following this process, there will be no memory leakage.
+
+When ESP32 & ESP8266 are used as TCP Servers, how can the ports be used again immediately after they are released?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - After closing the TCP socket, it often enters the TIME-WAIT state. At this time, the socket with the same source address of the same port as before will fail. The socket option SO_REUSEADDR is needed. Its function is to allow the device binding to be in TIME-WAIT state, the port and source address are the same as the previous TCP socket.
+  - So the TCP server program can set the SO_REUSEADDR socket option before calling bind() and then bind the same port.
+
