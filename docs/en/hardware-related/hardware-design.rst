@@ -40,3 +40,15 @@ What are the general power supply requirements of the ESP8266?
   - Peak digital circuit current: 200 mA
   
   Note: CHIP_EN works at 3.0 V - 3.6 V, please use a level converter to ensure compatibility with digital logic at 1.8 V.
+
+----------------------
+
+How to configure the RMII synchronization clock for Ethernet of the ESP32?
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please download the "esp-idf/examples/ethernet/basic" example for testing.
+  - The IP101 PHY chip will experience network instability when GPIO0 outputs CLK. Therefore, it is recommended to connect a 50MHz crystal oscillator to the PHY and GPIO0 as input.
+  - Due to the special character of GPIO0, it is necessary to configure the IO to control the enable pin of the PHY.
+  - Please read `Configure MAC and PHY <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`_.
+  - You can see `SCH_ESP32-ETHERNET-KIT schematic design <https://dl.espressif.com/dl/schematics/SCH_ESP32-ETHERNET-KIT_A_V1.1_20190711.pdf>`_ for reference.
+  

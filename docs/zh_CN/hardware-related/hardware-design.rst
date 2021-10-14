@@ -238,3 +238,14 @@ ESP32 模组 Flash 是否支持 QIO+80MHz？
 
   - ESP32 模组可以同时支持 Flash mode: QIO 和 Flash speed: 80MHz。
   - 使用 QIO 模式建议使用在二级 bootlaoder 中开启，因为部分 Flash 状态寄存器默认 QE 未使能。 
+
+---------------
+
+如何配置 ESP32 以太网的 RMII 同步时钟？
+----------------------------------------------------------------------------------------------------------------------------------
+
+  - 请下载 esp-idf/examples/ethernet/basic 例程进行测试。
+  - IP101 PHY 芯片在 GPIO0 输出 CLK 时会出现网络不稳定的现象，所以推荐 PHY 外接 50 MHz 晶振， GPIO0 作为输入。
+  - 由于 GPIO0 的特殊性， 所以需要配置 IO 控制 PHY 的使能管脚。 
+  - 请阅读 `配置 MAC 和 PHY <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`_。
+  - 可参考 `SCH_ESP32-ETHERNET-KIT 原理图设计 <https://dl.espressif.com/dl/schematics/SCH_ESP32-ETHERNET-KIT_A_V1.1_20190711.pdf>`_。
