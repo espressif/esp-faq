@@ -143,4 +143,4 @@ ESP 芯片烧录通讯协议是什么？
 ESP32 如何设置 Flash SPI 为 QIO 模式？
 ---------------------------------------------------------------------------------------------
 
-  - 可通过 menuconfig -> Serial flasher config -> Flash SPI mode 配置端进行设置，对应 API 为 esp_image_spi_mode_t(); 
+  - 可通过 menuconfig -> Serial flasher config -> Flash SPI mode 配置端进行设置，对应 API 为 esp_image_spi_mode_t()。
