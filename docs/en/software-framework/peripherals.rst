@@ -503,3 +503,11 @@ When using DAC output for ESP32-S2-Saola-1, the power supply is 3.3 V. But the a
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
    - Due to the internal voltage drop, even when using 3.3 V power supply, the actual maximum output is only about 3.2 V.
+   
+--------------------
+
+If I float the ADC pin and print out VDD3P3 value (65535), then the voltage of VDD3P3 should be 65535/1024 ≈ 63 V. Why this is not the correct voltage value?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ADC pins cannot be left floating, and the value measured by floating ADC pins is not the correct value.
+  
