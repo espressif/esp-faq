@@ -36,7 +36,7 @@ Does the hardware SDIO interface support SD cards?
 
 --------------------
 
-Leave the ADC pin floating and print out the value of VDD3P3 as 65535, then the voltage of VDD3P3 is 65535/1024 ≈ 63V. The voltage value is incorrect. What is the reason?
+If I float the ADC pin and print out VDD3P3 value (65535), then the voltage of VDD3P3 should be 65535/1024 ≈ 63 V. Why this is not the correct voltage value?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ADC pins cannot be left floating, and the value measured by floating ADC pins is not the correct value.
