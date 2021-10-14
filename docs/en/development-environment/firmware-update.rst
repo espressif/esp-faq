@@ -142,4 +142,3 @@ How does ESP32 set Flash SPI to QIO mode?
 ----------------------------------------------------------------------------------------------
 
   - It can be set in configuration terminal through "menuconfig -> Serial flasher config -> Flash SPI mode" , the corresponding API is esp_image_spi_mode_t().
-  
