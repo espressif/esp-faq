@@ -10,5 +10,3 @@ Development environment
    Debugging <debugging>
    Environment setup <environment-setup>
    Firmware update <firmware-update>
-
-| Espressif Q & A.

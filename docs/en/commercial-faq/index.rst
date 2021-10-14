@@ -46,7 +46,7 @@ Do you have distributors in China, Europe, the United States and Canada?
 How can I start a distribution business with Espressif?
 --------------------------------------------------------
   
-  If you are interested in becoming one of our distributors, please send your company information to: dm@espressif.com.
+  If you are interested in becoming one of our distributors, please send your company information to: sales@espressif.com.
 
 --------------
 

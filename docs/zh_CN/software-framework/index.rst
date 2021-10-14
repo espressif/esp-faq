@@ -14,6 +14,4 @@
    安全 <security>
    储存 <storage>
    系统 <system>
-   wifi <wifi>
-
-| Espressif 常见问题.
+   Wi-Fi <wifi>

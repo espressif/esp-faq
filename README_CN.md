@@ -20,7 +20,7 @@ ESP-FAQ 是由乐鑫官方推出的针对常见问题的总结文档。
 ``` bash
 docs
 ├── _static
-│   ├── espressif-logo.svg       # 网页 log
+│   ├── espressif-logo.svg       # 网页徽标
 │   └── theme_overrides.css      # 网页样式表
 ├── zh_CN
 │   ├── _static                  # 内联资源
@@ -30,7 +30,7 @@ docs
 │   ├── hardware-related         # 硬件相关
 │   ├── software-framework       # 软件平台
 │   ├── test-verification        # 测试验证
-│   ├── config.py                # sphinx 配置
+│   ├── config.py                # 配置文件
 │   ├── Makefile                 # 编译文件
 │   └── index.rst                # 主目录
 └── en
@@ -41,7 +41,7 @@ docs
     ├── hardware-related         # 硬件相关
     ├── software-framework       # 软件平台
     ├── test-verification        # 测试验证
-    ├── config.py                # sphinx 配置
+    ├── config.py                # 配置文件
     ├── Makefile                 # 编译文件
     └── index.rst                # 主目录
 ```
