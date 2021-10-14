@@ -18,11 +18,15 @@
 如果我的应⽤不需要看⻔狗，如何关闭看⻔狗？
 ------------------------------------------
 
-  当前 SDK 仅⽀持关闭软件看⻔狗，⽀持同时喂软硬件看⻔狗。可以通过如下⽅式防⽌执⾏时间过⻓的⽤户程序导致看⻔狗复位：
-  - 如果⼀个程序段运⾏时间在触发软件看⻔狗和触发硬件看⻔狗复位之间，则可通过 system\_soft\_wdt\_stop() 的⽅式关闭软件看⻔狗，在程序段执⾏完毕后⽤ system\_soft\_wdt\_restart() 重新打开软件看⻔狗。
-  - 可以通过在程序段中添加 system\_soft\_wdt\_feed() 来进⾏喂软硬件狗操作，防⽌软硬件看⻔狗复位。
-  - 硬件看⻔狗中断时间为 0.8\ *2048 ms，即 1638.4 s，中断后处理时间为 0.8*\ 8192 ms，即 6553.6 ms。其中中断处理后时间为硬件看⻔狗中断发⽣后，需要进⾏喂狗操作的时间，如果超过该时间，即会触发硬件看⻔狗复位。因此，在仅有硬件看⻔狗的情况下，⼀个程序段如果运⾏时间超过 6553.6 ms，即有可能触发硬件看⻔狗复位，若超过 8192 ms 则⼀定会触发复位。
-  - 软件看⻔狗建⽴在 MAC timer 以及系统调度之上，中断时间为 1600 ms，中断后处理时间 1600 ms。因此，在有软件+硬件看⻔狗的情况下，⼀个程序段如果运⾏时间超过 1600 ms，即有可能会触发软件看⻔狗复位，若超过 3200 ms 则⼀定会触发复位。
+  当前 SDK 仅⽀持关闭软件看⻔狗，⽀持同时喂软硬件看⻔狗。可以通过如下⽅式防⽌执⾏时间过⻓的⽤户程序导致看⻔狗复位
+
+  - 如果⼀个程序段运⾏时间在触发软件看⻔狗和触发硬件看⻔狗复位之间，则可通过 system_soft_wdt_stop() 的⽅式关闭软件看⻔狗，在程序段执⾏完毕后⽤ system_soft_wdt_restart() 重新打开软件看⻔狗。
+  - 可以通过在程序段中添加 system_soft_wdt_feed() 来进⾏喂软硬件狗操作，防⽌软硬件看⻔狗复位。
+  - 硬件看⻔狗中断时间为 0.8 *2048 ms，即 1638.4 s，中断后处理时间为 0.8* 8192 ms，即 6553.6 ms。
+  - 其中中断处理后时间为硬件看⻔狗中断发⽣后，需要进⾏喂狗操作的时间，如果超过该时间，即会触发硬件看⻔狗复位。
+  - 因此，在仅有硬件看⻔狗的情况下，⼀个程序段如果运⾏时间超过 6553.6 ms，即有可能触发硬件看⻔狗复位，若超过 8192 ms 则⼀定会触发复位。
+  - 软件看⻔狗建⽴在 MAC timer 以及系统调度之上，中断时间为 1600 ms，中断后处理时间 1600 ms。
+  - 因此，在有软件+硬件看⻔狗的情况下，⼀个程序段如果运⾏时间超过 1600 ms，即有可能会触发软件看⻔狗复位，若超过 3200 ms 则⼀定会触发复位。
 
 --------------
 
@@ -44,14 +48,14 @@ RTOS SDK 和 Non-OS SDK 有何区别？
 
 --------------
 
-ESP8266 启动时 LOG 输出 ets\_main.c 有哪些原因？
+ESP8266 启动时 LOG 输出 ets_main.c 有哪些原因？
 ------------------------------------------------
 
-  ESP8266 启动时打印 ``ets_main.c``\ ，表示没有可运⾏的程序区，⽆法运⾏；遇到这种问题时，请检查烧录时的 bin ⽂件和烧录地址是否正确。
+  ESP8266 启动时打印 ``ets_main.c`` ，表示没有可运⾏的程序区，⽆法运⾏；遇到这种问题时，请检查烧录时的 bin ⽂件和烧录地址是否正确。
 
 --------------
 
-ESP8266 编译 Non-OS SDK 时 IRAM\_ATTR 错误是什么原因？
+ESP8266 编译 Non-OS SDK 时 IRAM_ATTR 错误是什么原因？
 ------------------------------------------------------
 
   如果需要在 IRAM 中执⾏功能，就不需要加 ``ICACHE_FLASH_ATTR`` 的宏，那么该功能就是放在 IRAM 中执⾏。
@@ -61,19 +65,19 @@ ESP8266 编译 Non-OS SDK 时 IRAM\_ATTR 错误是什么原因？
 ESP8266 main 函数在哪里？
 -------------------------
 
-  ESP8266 用户 SDK 部分没有 main 函数。main 函数处于 一级 bootloader 并且固化在芯片 ROM 中， 用于引导二级 bootloader。二级 bootloader 入口函数为 ets\_main，启动后会加载用户应用中的 user\_init，引导至用户程序。
+  ESP8266 用户 SDK 部分没有 main 函数。main 函数处于 一级 bootloader 并且固化在芯片 ROM 中， 用于引导二级 bootloader。二级 bootloader 入口函数为 ets_main，启动后会加载用户应用中的 user_init，引导至用户程序。
 
 --------------
 
 ESP8266 partition-tables 特殊注意点？
--------------------------------------
+------------------------------------------
 
   ESP8266 partition-tables 相对 ESP32 对于 ota 分区有一定的特殊要求，这是由于 ESP8266 cache 特性导致。详情参考 `ESP8266 partition-tables 偏移与空间 <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-guides/partition-tables.html#offset-size>`_。
 
 --------------
 
-应⽤层与底层的 bin ⽂件可以分开编译吗?
---------------------------------------
+应用层与底层的 bin 文件可以分开编译码？
+-----------------------------------------
 
   不⽀持分开编译。
 
@@ -96,7 +100,8 @@ ESP32 系统软件复位 API？
 使用 esp-idf 按汇编操作寄存器，是否涉及到调用不可编辑的库文件？
 ---------------------------------------------------------------
 
-  如果单纯使用读写寄存器指令或者汇编指令，不存在调用库文件的问题。如果调用 esp-idf 预制的函数，则可能会遇到调用 lib 函数的情况。不推荐在 ESP32 中使用汇编操作，如果部分场景想要提高速度，可以读写寄存器来完成部分操作。
+  - 如果单纯使用读写寄存器指令或者汇编指令，不存在调用库文件的问题。如果调用 esp-idf 预制的函数，则可能会遇到调用 lib 函数的情况。
+  - 不推荐在 ESP32 中使用汇编操作，如果部分场景想要提高速度，可以读写寄存器来完成部分操作。
 
 --------------
 
@@ -105,7 +110,7 @@ ESP32 系统软件复位 API？
 
   程序编译时，使用 make menuconfig 指令进入配置界面，进行如下配置，可在单核模组上下载程序；在配置界面中，按键 Y 为启动，N 为关闭。
 
-  Component config --> FreeRTOS --> Run FreeRTOS only on first core（启动此选项）
+  - ``Component config --> FreeRTOS --> Run FreeRTOS only on first core``
 
 --------------
 
@@ -136,7 +141,8 @@ ESP32 进入低功耗模式时， PSRAM 中的数据会丢失吗？
 请问 ESP32 CPU 系统时间是否由系统滴答时钟生成？精度如何？
 ---------------------------------------------------------
 
-  CPU 系统时间是由 esp\_timer 内部的 64 位硬件定时器 CONFIG\_ESP\_TIMER\_IMPL 产生的，是微秒级的时间分辨率。参见 `说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/esp_timer.html?highlight=esp_timer_get_time#high-resolution-timer>`_。
+  CPU 系统时间是由 esp_timer 内部的 64 位硬件定时器 CONFIG_ESP_TIMER_IMPL 产生的，是微秒级的时间分辨率。
+  参见 `说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/esp_timer.html?highlight=esp_timer_get_time#high-resolution-timer>`_。
 
 --------------
 
@@ -156,10 +162,10 @@ ESP32 的 flash 和 psram 的时钟频率如何修改？
 
 --------------
 
-esp-idf 是否可以配置 time\_t 为 64 bit ? （现在是 32 bit）
-----------------------------------------------------------
+esp-idf 是否可以配置 time_t 为 64 bit ？ （现在是 32 bit）
+--------------------------------------------------------------
 
-  当前暂时不支持，预计在 release/v4.2 或更高版本种支持。如果配置支持 time\_t 64 bit 自定义工具链，可以使能 make menuconfig 中 SDK tool configuration -> SDK\_TOOLCHAIN\_SUPPORTS\_TIME\_WIDE\_64\_BITS 。
+  当前暂时不支持，预计在 release/v4.2 或更高版本种支持。如果配置支持 time_t 64 bit 自定义工具链，可以使能 make menuconfig 中 SDK tool configuration -> SDK_TOOLCHAIN_SUPPORTS_TIME_WIDE_64_BITS 。
 
 --------------
 
@@ -181,8 +187,8 @@ esp-idf 是否可以配置 time\_t 为 64 bit ? （现在是 32 bit）
 
 --------------
 
-ESP32 能否以动态库的方式加载库文件运行?
----------------------------------------
+ESP32 能否以动态库的方式加载库文件运行？
+--------------------------------------------
 
   ESP32 不支持动态库的方式加载库文件，只支持靜态库。
 
@@ -225,7 +231,7 @@ ESP32 deep_sleep例程测试，为何当 const int wakeup_time_sec = 3600时，�
   .. code-block:: c
 
     const uint64_t wakeup_time_sec = 3600;
-    printf("Enabling timer wakeup, %lld\n",wakeuo_time_sec);
+    printf("Enabling timer wakeup, %lldn",wakeuo_time_sec);
 
 ------------------
 
@@ -268,12 +274,12 @@ ESP8266 AT 连接 AP 后，系统默认进入 modem-sleep，但电流未明显�
 
 --------------
 
-ESP32 是否可以永久更改 MAC 地址?
+ESP32 是否可以永久更改 MAC 地址？
 -----------------------------------------
 
   - 芯片自带的 MAC 地址无法修改。efuse 中支持用户写入自己的 MAC 地址。
   - 在固件中调用 api 可以获取定制 MAC 地址，并且可以设置到系统中替代默认地址。
-  - 详情请参考：https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/system.html#mac-address
+  - 配置参考：`mac-address <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/system.html#mac-address>`_。
   - 另外，Espressif 提供在芯片出厂之前，烧录用户提供的 MAC 地址服务。如有需要，可发送邮件至 sales@espressif.com
 
 --------------
@@ -286,7 +292,7 @@ ESP8266 进行 ota 升级时如何校验 all.bin 为非法文件？
   - all.bin: 由 bootloader.bin，partition.bin 和 app.bin 合并生成。
   - ota.bin: 用于 ota 升级的目标 bin文件。
   
-  使用 `simple\_ota\_example <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/system/ota/simple_ota_example>`_ 进行 OTA 升级时，误从服务器上下载 all.bin,写入 ota 分区之后，设备会出现反复重启的现象。
+  使用 `simple_ota_example <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/system/ota/simple_ota_example>`_ 进行 OTA 升级时，误从服务器上下载 all.bin,写入 ota 分区之后，设备会出现反复重启的现象。
   
   **原因分析：**
 
@@ -376,5 +382,262 @@ ESP8266 user_init 内有那些注意事项？
 ESP32 同时开启 "Enable debug tracing of PM using GPIOs" 和 "Allow .bss segment placed in external memory" 后为何会导致系统不停重启？
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
-  - "Enable debug tracing of PM using GPIOs" 配置选项是在 GDB 调试时需要打开的，不可与 "Allow .bss segment placed in external memory" 配置选项同时使用。
-  - 因为 “Enable debug tracing of PM using GPIOs" 默认使用的是 GPIO16 与 GPIO17 ，与 PSRAM 接口（默认也是 GPIO16 和 GPIO17） 冲突。
+  - "Enable debug tracing of PM using GPIOs" 配置选项是在 GDB 调试时需要打开的，不可与 "Allow .bss segment placed in external memory" 配置选项同时使用。
+  - 因为 “Enable debug tracing of PM using GPIOs" 默认使用的是 GPIO16 与 GPIO17 ，与 PSRAM 接口（默认也是 GPIO16 和 GPIO17） 冲突。
+
+
+ESP32 IDF v3.3 版本 bootloader 运行 v3.1 版本 APP bin , 程序为何会触发 RTCWDT_RTC_RESET ？
+--------------------------------------------------------------------------------------------------------
+
+  - 在 v3.3 的 bootloader 中会开启 WDT 看门狗，且在应用程序(app) 运行时关闭 WDT 看门狗。
+  - 但 v3.1 的 bootloader 没有开启 WDT 看门狗，所以应用程序(app) 没有 WDT 看门狗的机制，进而导致 v3.3 的 bootloader 引导 v3.1 的应用程序(app) 会触发 WDT 看门狗复位。
+  - 可以通过在 menuconfig 中不使能 BOOTLOADER_WDT_ENABLE ，关闭 v3.3 版本 bootloader 中 WDT 看门狗开启。
+
+-------------------
+
+ESP32 芯片出厂是否有唯一的 chip_id ？
+-------------------------------------------------
+
+  - ESP32 芯片未未烧录唯一 chip_id，但设备默认烧录有全球唯一 MAC 地址，可以读取 MAC 地址替代 chip_id。
+
+--------------
+
+ESP8266 rst curse 如何查看？
+------------------------------------
+
+  - 请参考 `ESP8266 异常重启原因 <https://www.espressif.com/sites/default/files/documentation/esp8266_reset_causes_and_common_fatal_exception_causes_cn.pdf/>`_。
+
+-----------------
+
+ESP32 编译生成的 bin 文件大小如何优化？
+--------------------------------------------------
+
+  - 可配置 GCC 编译优化，操作步骤：idf.py menuconfig---->Compiler options---->Optimization level (Optimize for size(-Os))。
+  - 可对代码进行优化，提高代码复用率，调整 log 等级，减少不必要的 log 打印。
+
+
+-----------------
+
+ESP32 是否有系统重新启动的 API ？
+------------------------------------------------------------------------------
+
+  - 系统重新启动的 API 可使用 esp_restart()，相关说明可 `参见 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/ota.html?highlight=esp_restart#id5>`__ 。
+
+--------------
+
+ESP32 异常 log `invalid header: 0xffffffff`
+--------------------------------------------------------
+
+  - ESP32 芯片打印该异常 log 通常有如下几种情况：
+  - 芯片上下电时序不正确，芯片部分区域未完全复位。
+  - Flash 中的固件出现异常，例如未烧录完整固件。
+  - Flash 器件损坏，无法读取正确数据。
+  - 芯片自身 cache 被关闭或者损坏，无法读取固件数据。
+
+--------------
+
+ESP8266 deep sleep 定时唤醒机制是什么？
+----------------------------------------
+
+  - 在 Deep-sleep 状态下，将 GPIO16 (XPD_DCDC) 连接至 EXT_RSTB ,计时到达睡眠时间后，GPIO16 输出低电平给 EXT_RSTB 管脚，芯片被复位唤醒。
+
+ESP32 使用 heap_caps_get_free_size 获取 RAM 约 300 KB，为何与手册 520K 存在差异？
+------------------------------------------------------------------------------------------------------
+
+  - 是因为内存在系统启动时预分配给各个功能模块使用，系统启动后剩余内存约 300 KB。
+  - 如果剩余内存不足，可以选用带 PSRAM 模组，将内存分配在 PSRAM 中。
+
+--------------
+  
+ESP32 & ESP8266 如何通过局域网的 APP 进行 OTA 升级？
+--------------------------------------------------------------
+
+  - 局域网内 APP 设备可以配置开启 http 服务，将提供的固件下载链接通过其他方法（udp，coap，mqtt 等）发送至设备。
+  - 设备通过传统 URL OTA 方法即可完成 OTA 更新，示例已在 SDK 中提供。
+
+-----------------
+
+ESP32 如何修改 LOG 输出至串口 UART1 ?
+-------------------------------------------------------------------------------------------------
+
+  - 更换 LOG 输出串口为 UART1 可通过配置 menuconfig -> Component Config ->Common ESP-related -> Channel for console output -> Custom UART -> UART peripheral to use for console output(0-1) -> UART1
+
+-----------------
+
+ESP8266 使用 MQTT ssl_mutual_auth 通讯，在 OTA 时出现如下报错：
+----------------------------------------------------------------------------
+
+  .. code::text
+
+    W(50083) _http_event_handler：HTTP_EVENT_DISCONNECTED
+    E(50089)esp_https_ota：Failed to open HTTP connection：28674
+    E(50095)gateway_https_ota：Firmware upgrade failed
+    E(50179)esp-tls-mbedtls: mbedtls_ssl_setup returned -0x7f00
+    E(50181)esp-tls-mbedtls: mbedtls_ssl_handle failed
+    E(50194)esp-tls：Failed to open a new connection
+
+  - 0x7f00 此报错是由于 内存不足 导致，建议使用 http 方式 OTA 。
+
+-----------------
+
+ESP32 配置 menuconfig --> Component config 中有 NVS 选项，为何配置项目为空？
+-----------------------------------------------------------------------------------------
+
+  - menuconfig --> Component config 中的 NVS 选项是配置 NVS 加密功能的，该功能的前提是开启 Flash 加密。
+  - menuconfig --> security feaures --> enable flash encryption on boot 配置选项后，便可以看到 NVS 的配置选项。
+
+--------------
+
+ESP32 上电或 Deep-sleep 醒来后，会随机发⽣⼀次看⻔狗复位?
+---------------------------------------------------------------------
+
+  - 芯⽚上电的看⻔狗复位⽆法使⽤软件绕过，但复位后 ESP32 正常启动。
+  - Deep-sleep 醒来后的看⻔狗复位在 ESP-IDF V1.0 及更⾼版本中⾃动绕过。
+  - Deep-sleep 醒来后，CPU 可以⽴即执⾏ RTC fast memory 中的⼀段程序。RTC fast memory 中的这段程序通过清除 cache MMU 的⾮法访问标志从⽽绕过 Deep-sleep 醒来后的看⻔狗复位，具体为：
+
+    - 将 DPORT_PRO_CACHE_CTRL1_REG 寄存器的 PRO_CACHE_MMU_IA_CLR ⽐特置 1。
+    - 将该⽐特清零。
+
+--------------
+
+ESP32 CPU 使⽤ cache 访问外部 SRAM 时，如果这些操作需要 CPU 同时处理，可能会发⽣读写错误?
+----------------------------------------------------------------------------------------------------
+
+  - 这个问题⽆法使⽤软件⾃动绕过。
+  - 对于版本 0 ESP32，CPU 使⽤ cache 访问外部 SRAM 时，只能够进⾏单向操作，即只能够单纯的进⾏写 SRAM 操作，或者单纯的进⾏读 SRAM 操作，不能交替操作。
+  - 使⽤ MEMW 指令：在读操作之后，加上 ``__asm__("MEMW")`` 指令，然后在 CPU 流⽔线被清空前再发起写操作。
+
+--------------
+
+ESP32 CPU 访问外设时，如果连续不间断地通过 DPORT 写同⼀个地址，为何会出现数据丢失的现象？
+----------------------------------------------------------------------------------------------------
+
+  - 此问题在 ESP-IDF V1.0 及更⾼版本中⾃动绕过。
+  - 当连续写同⼀个地址（即类似 FIFO 的地址）时，使⽤ AHB 地址⽽不是 DPORT 地址。（对于其他类型的寄存器写⼊，使⽤ DPORT 地址可能写性能更好。）
+
+  +-----------------------+------------+-----------------+
+  | 寄存器名称            | DPORT 地址 | AHB（安全）地址 |
+  +=======================+============+=================+
+  | UART_FIFO_REG         | 0x3FF40000 | 0x60000000      |
+  +-----------------------+------------+-----------------+
+  | UART1_FIFO_REG        | 0x3FF50000 | 0x60010000      |
+  +-----------------------+------------+-----------------+
+  | UART2_FIFO_REG        | 0x3FF6E000 | 0x6002E000      |
+  +-----------------------+------------+-----------------+
+  | I2S0_FIFO_RD_REG      | 0x3FF4F004 | 0x6000F004      |
+  +-----------------------+------------+-----------------+
+  | I2S1_FIFO_RD_REG      | 0x3FF6D004 | 0x6002D004      |
+  +-----------------------+------------+-----------------+
+  | GPIO_OUT_REG          | 0x3FF44004 | 0x60004004      |
+  +-----------------------+------------+-----------------+
+  | GPIO_OUT_W1TC_REG     | 0x3FF4400c | 0x6000400c      |
+  +-----------------------+------------+-----------------+
+  | GPIO_OUT1_REG         | 0x3FF44010 | 0x60004010      |
+  +-----------------------+------------+-----------------+
+  | GPIO_OUT1_W1TS_REG    | 0x3FF44014 | 0x60004014      |
+  +-----------------------+------------+-----------------+
+  | GPIO_OUT1_W1TC_REG    | 0x3FF44018 | 0x60004018      |
+  +-----------------------+------------+-----------------+
+  | GPIO_ENABLE_REG       | 0x3FF44020 | 0x60004020      |
+  +-----------------------+------------+-----------------+
+  | GPIO_ENABLE_W1TS_REG  | 0x3FF44024 | 0x60004024      |
+  +-----------------------+------------+-----------------+
+  | GPIO_ENABLE_W1TC_REG  | 0x3FF44028 | 0x60004028      |
+  +-----------------------+------------+-----------------+
+  | GPIO_ENABLE1_REG      | 0x3FF4402c | 0x6000402c      |
+  +-----------------------+------------+-----------------+
+  | GPIO_ENABLE1_W1TS_REG | 0x3FF44030 | 0x60004030      |
+  +-----------------------+------------+-----------------+
+
+--------------
+
+ESP32 CPU 频率从 240 MHz 直接切换到 80/160 MHz 会卡死，如何解决？
+-----------------------------------------------------------------------------
+
+  - 建议使⽤以下两种模式：
+
+    (1) 2 MHz <-> 40 MHz <-> 80 MHz <-> 160 MHz
+    (2) 2 MHz <->40 MHz <->240 MHz 
+  - 此问题已在芯⽚版本 1 中修复。
+
+--------------
+
+ESP32 同时有 GPIO 和 RTC_GPIO 功能的 pad 的上拉下拉电阻只能由 RTC_GPIO 的上拉下拉寄存器控制，如何解决？
+------------------------------------------------------------------------------------------------------------------------
+
+  - ESP-IDF V2.1 及更⾼版本的 GPIO 驱动⾃动绕过此问题。
+  - GPIO 和 RTC_GPIO 都使⽤ RTC_GPIO 寄存器。
+
+--------------
+
+ESP32 由于 flash 启动的速度慢于芯⽚读取 flash 的速度，芯⽚上电或 Deep-sleep 醒来后，会随机发⽣⼀次看⻔狗复位，如何解决？
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 更换更快的 flash，要求 flash 上电到可读的时间⼩于 800 μs。这种⽅法可以绕过芯⽚上电和 Deep-sleep 醒来时的看⻔狗复位。
+  - Deep-sleep 醒来后的看⻔狗复位问题在 ESP-IDF V2.0 及更⾼版本中⾃动绕过（延迟时间可以根据需要配置）。具体⽅式是从 Deep-sleep 醒来后⾸先读取 RTC fast memory 中的指令，等待⼀段时间，然后再读取 flash。
+
+--------------
+
+ESP32 CPU 在访问外部 SRAM 时会⼩概率发⽣读写错误, 如何解决？
+-------------------------------------------------------------------------
+
+  .. code::text
+
+    store.x at0, as0, n
+    load.y at1, as1, m
+    其中 store.x 表示 x 位写操作，load.y 表示 y 位读操作，且 as0+n 和 as1+m 访问的外部 SRAM 的地址相同。
+
+  - x>=y 时，在 store.x 和 load.y 之间插⼊ 4 个 nop 指令。
+  - x<y 时，在 store.x 和 load.y 之间插⼊ memw 指令。
+
+--------------
+
+ESP32 双核情况下，⼀个 CPU 的总线在读 A 地址空间，⽽另⼀个 CPU 的总线在读 B 地址空间，读 B 地址空间的 CPU可能会发⽣错误如何解决？
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ⼀个 CPU 在读 A 地址空间时，通过加锁和中断的⽅式来避免另⼀个 CPU 发起对 B 地址空间的读操作。
+  - ⼀个 CPU 在读 A 地址空间之前，加⼀个此 CPU 读 B 地址空间（⾮ FIFO 地址空间，如 0x3FF40078）操作，并且要保证读 B 地址空间操作和读 A 地址空间操作是原⼦的。
+
+--------------
+
+ESP32 CPU 通过读取 INTERRUPT_REG 寄存器来复位 CAN 控制器的中断信号。如果在同⼀个 APB 时钟周期内 CAN 控制器刚好产⽣发送中断信号，则发送中断信号丢失，如何解决？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  数据等待发送完成期间（即发送请求已发起），每⼀次读取 INTERRUPT_REG 后，⽤户都应检查 ``STATUS_TRANSMIT_BUFFER`` 位。如果 ``STATUS_TRANSMIT_BUFFER`` 置位⽽
+  ``CAN_TRANSMIT_INT_ST`` 没有置位，则说明发送中断信号丢失。
+
+--------------
+
+ESP32 ECO V3 芯⽚，当程序同时满⾜下列条件时，会出现 live lock（活锁）现象，导致 CPU ⼀直处于访存状态，不能继续执⾏指令，请问如何解决？
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code::text
+
+    1. 双核系统；
+    2. 四条访问外存的指令/数据总线 (IBUS/DBUS) 中，有 3 条总线同时发起对同⼀个 cache 组的访问请求，并且三个
+       cache 请求均缺失。
+
+  发⽣ live lock 时，软件主动或被动识别并解锁 cache line 竞争，之后两个核按队列节拍分时完成各⾃的 cache 操作，解锁 live lock。详细过程如下：
+
+    - 当两个核执⾏的指令均不在代码临界区中时出现 live lock，系统各类型中断会主动解除 cache line 竞争，解锁 live lock；
+    - 当两个核执⾏的指令位于代码临界区中时出现 live lock，在临界区中，系统会屏蔽 3 级及以下中断。因此软件预先为两个核各设置⼀个⾼优先级（4 级或 5 级）中断，将它们绑定到同⼀个定时器，并选择合适的定时器超时⻔限。由于 live lock 产⽣的定时器超时中断会迫使两个核均进⼊⾼优先级中断处理程序，从⽽释放两个核的 IBUS 以达到解锁 live lock ⽬的。解锁过程通过 3 个阶段完成：
+
+      a. 第 1 阶段两个核均进⾏等待以清空 CPU write buffer；
+      b. 第 2 阶段⼀个核 (Core 0) 等待，另⼀个核 (Core 1) 执⾏；
+      c. 第 3 阶段 Core 1 等待，Core 0 执⾏。
+
+--------------
+
+ESP32 CPU 访问 ``0x3FF0_0000 ~ 0x3FF1_EFFF`` 与 ``0x3FF4_0000 ~ 0x3FF7_FFFF`` 两段地址空间存在限制，如何解决？
+-----------------------------------------------------------------------------------------------------------------------
+
+  - 落在这两段地址空间的 CPU 访问均需要在对应的操作前加⼊ “MEMW” 指令。即在 C/C++ 中，软件访问这两段地址内的寄存器时需要加上 “volatile” 属性。
+
+------------------
+
+ESP32 如何关闭程序 LOG 输出？
+--------------------------------------------------------------------
+
+  - 关闭 bootloader 日志：menuconfig -> bootloader config --> bootloader log verbosity 选定为 No output 。
+  - 关闭程序日志：menuconfig -> Component config --> log output --> Default log verbosity 选定为 No output 。
+  - 关闭 UART0 输出日志：menuconfig -> Component Config ->Common ESP-related -> Channel for console output -> None 。

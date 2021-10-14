@@ -34,7 +34,7 @@ ESP32 deep sleep 唤醒为何需要重启？
 
 --------------
 
-ESP32 deep sleep 可以通过任意 RTC\_GPIO 唤醒吗？
+ESP32 deep sleep 可以通过任意 RTC_GPIO 唤醒吗？
 ------------------------------------------------
 
-  是的，RTC\_GPIO 管脚配置可以参考 `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ V2.2 章节。
+  是的，RTC_GPIO 管脚配置可以参考 `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ V2.2 章节。

@@ -6,15 +6,13 @@ Software framework
 .. toctree::
    :maxdepth: 1
 
-   Wifi <wifi>
-   BLE & BT <ble-bt>
+   Bluetooth LE & Bluetooth <ble-bt>
    Ethernet <ethernet>
+   Coexistence <coexistence>
    Peripherals <peripherals>
    Protocols <protocols>
    Provisioning <provisioning>
    Security <security>
    Storage <storage>
    System <system>
-   Coexistence <coexistence>
-
-| Espressif Q & A.
+   Wi-Fi <wifi>

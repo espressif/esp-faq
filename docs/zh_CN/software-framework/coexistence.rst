@@ -37,22 +37,40 @@ Wi-Fi 和 ESP-BLE-MESH 共存时，为什么 Wi-Fi 吞吐量很低？
 
 --------------
 
-ESP32 支持 16MB 的 External Flash 和 8MB 的 External PSRAM 共存吗？
+ESP32 支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存吗？
 ----------------------------------------------------------------------------------
 
-  - ESP32 可以支持 16MB 的 External Flash 和 8MB 的 External PSRAM 共存使用。
+  ESP32 可以支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存使用。
 
 --------------
 
-ESP32 Wi-Fi Mesh 和 BLE Mesh 可以同时支持吗？
-------------------------------------------------------------
+ESP32 的 ESP-WIFI-MESH 和 Bluetooth® LE Mesh 可以同时支持吗？
+------------------------------------------------------------------
 
-  - 不支持，补充一点：ESP32 Wi-Fi Mesh 和 BLE 可以同时支持，或者 ESP32 Wi-Fi STA 模式和 BLE Mesh 可以同时支持。
+  不支持。
+
+  ESP32 的 ESP-WIFI-MESH 和 BLE 可以同时支持，或者 ESP32 Wi-Fi STA 模式和 BLE Mesh 可以同时支持。
 
 --------------
 
-ESP32 蓝牙和 WI-FI 能否同时使用？
+ESP32 蓝牙和 Wi-Fi 能否同时使用？
 ----------------------------------------
 
-  - ESP32 的 Wi-Fi 和蓝牙可共存，但需要分时控制，可在 menuconfig 中使能 Wi-Fi 和蓝牙共存设置。如下：
-  - ``menuconfig -> Component config -> Wi-Fi -> Software controls WiFi/Bluetooth coexistence （Enable）``
+  ESP32 的 Wi-Fi 和蓝牙可共存，但需要分时控制，可在 menuconfig 中使能 Wi-Fi 和蓝牙共存设置。如下：
+  
+  ``menuconfig -> Component config -> Wi-Fi -> Software controls WiFi/Bluetooth coexistence (Enable)``
+
+--------------
+
+Bluetooth® LE 和 A2DP 共存，进入 Bluetooth LE 扫描的时候音频数据接收会丢失、卡顿。怎么解决？
+------------------------------------------------------------------------------------------------
+
+  - 降低 Bluetooth LE 扫描的占空比
+  - 使用 RingBuf 缓存音频数据
+
+--------------
+
+ESP32 的网口 (LAN8720) 与 Wi-Fi (Wifi-AP) 能否共存？
+---------------------------------------------------------
+
+  可以共存的。将两个连接的检测事件写成一个就可以实现共存。
