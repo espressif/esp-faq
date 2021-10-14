@@ -120,6 +120,8 @@ ESP32-S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of 
     ../../../components/esptool_py/esptool/esptool.py -p (PORT) -b 921600 write_flash --flash_mode dio --flash_size detect --flash_freq 40m 0x10000 build/hello-world.bin  build 0x1000 build/bootloader/bootloader.bin 0x8000 build/partition_table/partition-table.bin
     or run 'idf.py -p PORT flash'
 
+  可以按照该指令提示的 bin 文件及烧录地址使用 flash_download_tool 进行烧录。
+
 --------------
   
 ESP 芯片烧录通讯协议是什么？
@@ -136,5 +138,9 @@ ESP 芯片烧录通讯协议是什么？
 
   - 可以在官网下载最新的 Flash Download Tools, v3.8.8 之后的版本已经支持 ESP32-C3 系列的烧录。
 
+--------------
 
+ESP32 如何设置 Flash SPI 为 QIO 模式？
+---------------------------------------------------------------------------------------------
 
+  - 可通过 menuconfig -> Serial flasher config -> Flash SPI mode 配置端进行设置，对应 API 为 esp_image_spi_mode_t()。
