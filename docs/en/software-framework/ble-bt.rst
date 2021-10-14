@@ -340,4 +340,11 @@ When downloading example ESP_SPP_SERVER for ESP32, how to modify the name of the
       0x0F,0x09,0x45,0x53,0x50,0x5f,0x53,0x50,0x50,0x5f,0x53,0x45,0x52,0x56,0x45,0x52};
 
   - The "0x0F" on the third line means the length of the following data is 15, "0x09" stands for data type (fixed) and data from "0x45" indicates the corresponding ASCII code of the device names (BLE_SPP_SERVER by default).
-  
+
+----------------------
+
+When using the "Blufi" example to configure network for ESP32, the Wi-Fi cannot be connected during the distribution process via the EspBluFi application since a wrong Wi-Fi has been configured. Then the device is restarted after sending a SCAN command from the application. What is the reason?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The "Blufi" example stipulates that Wi-Fi "SCAN" commands cannot be sent when Wi-Fi is connected.
+  - To solve this issue, you can add ``ESP_ERROR_CHECK(esp_wifi_disconnect());`` to the first line of the ``ESP_BLUFI_EVENT_GET_WIFI_LIST:{};`` function under the ``blufi_example_main.c`` file.
