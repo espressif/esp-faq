@@ -517,3 +517,20 @@ When using ESP8266 to generate PWM by directly writing to the register of the ha
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - FRC2 cannot be used as it is occupied by the system. Wi-Fi uses NMI interrupt, which have a higher priority than other ordinary interrupts. It is recommended to use the PWM library of ESP8266_RTOS_SDK. Please refer to `ESP8266_RTOS_SDK/examples/peripherals/pwm <https://github.com/espressif/ESP8266_RTOS_SDK/tree/release/v3.4/examples/peripherals/pwm>`_ example.
+
+-------------------------
+
+I'm using v3.3.3 version of ESP-IDF to test the ledc example on ESP32. The LED PWM outputs when Auto Light Sleep mode is disabled, but does not output when this mode is enabled. According the description of  `LED PWM <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/ledc.html?highlight=pwm#id1>`_  in ESP-IDF programming guide, LED PWM should work in sleep modes. What is the reason?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - v3.3.3 does not support LED PWM working in sleep modes. Please use the ledc example under the new versions of ESP-IDF (v4.0 and later versions) to test, e.g., ESP-IDF release/v4.2 version of the SDK. Plus, it is also necessary to change the LED PWM clock source to the internal RTC_8M clock source. Please see below:
+
+  .. code-block:: c
+
+      ledc_timer_config_t ledc_timer = {
+            .duty_resolution = LEDC_TIMER_13_BIT,
+            .freq_hz = 5000,
+            .speed_mode = LEDC_LOW_SPEED_MODE,
+            .timer_num = LEDC_TIMER_0,
+            .clk_cfg = LEDC_USE_RTC8M_CLK,
+        };
