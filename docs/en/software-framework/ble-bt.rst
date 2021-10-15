@@ -363,3 +363,17 @@ When setting name for the bluetooth of an ESP32 device using Chinese characters,
 ----------------------------------------------------------------------------------------------------------------------------------------
 
   - This is because the Chinese encoding format of the editor is not UTF-8 at this time, and the encoding format of the editor needs to be changed to UTF-8.
+
+----------------
+
+Using ESP32, when uploading sub-packages on the Bluetooth channel, the maximum transmission data length of a packet is 253 (MTU is set to 263), which results in slower transmission when a large number of data packets are transmitted for multi-packet reading. Is there a Blufi extension protocol that can support the transmission of a larger length of data in one packet, or are there other solutions to increase the transmission rate?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - When transmitting a large number of data packets on the Bluetooth channel for multi-packet reading, the transmission is slow, and the transmission speed can be improved by adjusting the Bluetooth connection parameters.
+  - The BLE packet length setting depends on the ``ESP_GATT_MAX_MTU_SIZE`` setting, please refer to the `Description <https://github.com/espressif/esp-idf/blob/cf056a7d0b90261923b8207f21dc270313b67456/examples/bluetooth/bluedroid/ble/gatt_client/tutorial/Gatt_Client_Example_Walkthrough.md>`_.
+  - The configured MTU size will affect the data transmission rate. The effective MTU length needs to be changed by MTU exchange to change the default MTU size. The MTU size used in the final MTU exchange is used as the MTU size for the communication between the two devices. You can check the value of the MTU after exchange, such as the follows:
+
+  .. code-block:: text
+
+    case ESP_GATTS_MTU_EVT:
+    ESP_LOGI(GATTS_TAG, "ESP_GATTS_MTU_EVT, MTU%d", param->mtu.mtu);
