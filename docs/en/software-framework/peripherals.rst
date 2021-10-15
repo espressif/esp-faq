@@ -534,3 +534,10 @@ I'm using v3.3.3 version of ESP-IDF to test the ledc example on ESP32. The LED P
             .timer_num = LEDC_TIMER_0,
             .clk_cfg = LEDC_USE_RTC8M_CLK,
         };
+        
+---------------
+
+What is the input resistance of ESP32 ADC?
+-----------------------------------------------------------------------------------------------------------------------------
+
+  - ADC is capacitive and can be considered as a large resistance.
