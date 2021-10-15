@@ -143,7 +143,7 @@ ESP8266 测试 RTOS-SDK mqtt/ssl_mutual_auth 为何连接服务器失败？
   - 出现 SSL 无法连接可能是由于 ESP8266 内存不足导致。
   - 请使用 ESP8266-RTOS-SDK Master 版本来测试此例程，Master 版本支持在 menuconfig 配置端动态分配内存，可以减少峰值内存的开销。
   - 通过 menuconfig -> Component  config -> mbadTLS -> (键 “Y” Enable)Using  dynamic TX /RX buffer  -> (键 “Y” Enable) Free SSL peer certificate after its usage -> (键 “Y” Enable) Free certificate, key and DHM data after its usage 。
- 
+
 ----------------
 
 ESP32-S2 在调用 ``esp_netif_t* wifiAP  = esp_netif_create_default_wifi_ap()`` 后通过 ``esp_netif_destroy(wifiAP)`` 注销会产生 12 字节的内存泄露，什么原因？
@@ -180,3 +180,22 @@ ESP32 & ESP8266 做 TCP Server 时端口释放后如何立即被再次使用？
     I (19361) MQTT_CLIENT: Sending MQTT CONNECT message, type: 1, id: 0000
 
   - 当出现如上报错，一般由于连接的服务器不可用，请更换可用的服务器进行测试。
+
+----------------
+
+使用 ESP-IDF release/v3.3 版本的 SDK ，请问以太网有设置静态 IP 的例程吗？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可通过 tcpip_adapter_set_ip_info() API 来设置，请参见 `API 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/tcpip_adapter.html?highlight=tcpip_adapter_set_ip_info#_CPPv425tcpip_adapter_set_ip_info18tcpip_adapter_if_tPK23tcpip_adapter_ip_info_t>`_。
+  - 例程参考如下：
+
+  .. code-block:: text
+
+      /* Stop dhcp client */
+      tcpip_adapter_dhcpc_stop(TCPIP_ADAPTER_IF_STA);
+      /* static ip settings */
+      tcpip_adapter_ip_info_t sta_ip;
+      sta_ip.ip.addr = ipaddr_addr("192.168.1.102");
+      sta_ip.gw.addr = ipaddr_addr("192.168.1.1");
+      sta_ip.netmask.addr = ipaddr_addr("255.255.255.0");
+      tcpip_adapter_set_ip_info(TCPIP_ADAPTER_IF_STA, &sta_ip);
