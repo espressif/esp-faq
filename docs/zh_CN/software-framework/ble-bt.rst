@@ -355,3 +355,11 @@ ESP32 下载 Blufi 例程进行配网，若使用 EspBluFi APP 在配网过程�
 
   - ESP32 的 BLE 连接/发送目前仅支持指定在 core 1 上运行。可通过 menuconfig -> Component config -> FreeRTOS -> Run FreeRTOS only on first core（启动此选项） 进行设置。
   - 根据此应用需求，可使用 xTaskCreatePinnedToCore() 或 xTaskCreateStaticPinnedToCore() API 来创建任务核分配。具体说明参见  `core assignment <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/freertos-smp.html?highlight=run%20freertos%20only%20first%20core#overview>`_。
+
+---------------
+
+ESP32 设置中文蓝牙设备名称会异常显示乱码，原因是什么？
+-------------------------------------------------------------------------------------------------------
+
+  - 这是因为此时编辑器的中文编码格式不是 UTF-8， 需要把编辑器的编码格式改成 UTF-8。
+  
