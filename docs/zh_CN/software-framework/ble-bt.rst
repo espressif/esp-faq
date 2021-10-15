@@ -348,3 +348,10 @@ ESP32 下载 Blufi 例程进行配网，若使用 EspBluFi APP 在配网过程�
   - Blufi 例程规定在 Wi-Fi 连接时不可以发送 Wi-Fi 扫描命令。
   - 但可在 blufi_example_main.c 文件下的  case ESP_BLUFI_EVENT_GET_WIFI_LIST:{}; 函数的首行增加 ESP_ERROR_CHECK(esp_wifi_disconnect());  函数来解决此问题。
  
+----------------
+
+使用 ESP32，如何指定 BLE 连接/发送在 core 0 上运行？
+------------------------------------------------------------------------------
+
+  - ESP32 的 BLE 连接/发送目前仅支持指定在 core 1 上运行。可通过 menuconfig -> Component config -> FreeRTOS -> Run FreeRTOS only on first core（启动此选项） 进行设置。
+  - 根据此应用需求，可使用 xTaskCreatePinnedToCore() 或 xTaskCreateStaticPinnedToCore() API 来创建任务核分配。具体说明参见  `core assignment <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/freertos-smp.html?highlight=run%20freertos%20only%20first%20core#overview>`_。

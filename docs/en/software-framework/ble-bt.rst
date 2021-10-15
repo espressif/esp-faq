@@ -348,3 +348,11 @@ When using the "Blufi" example to configure network for ESP32, the Wi-Fi cannot 
 
   - The "Blufi" example stipulates that Wi-Fi "SCAN" commands cannot be sent when Wi-Fi is connected.
   - To solve this issue, you can add ``ESP_ERROR_CHECK(esp_wifi_disconnect());`` to the first line of the ``ESP_BLUFI_EVENT_GET_WIFI_LIST:{};`` function under the ``blufi_example_main.c`` file.
+
+-------------------
+
+Using ESP32, how to specify a BLE connection/transmit operation to run on core 0?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Currently, ESP32's BLE connection/transmit operation only can be run on core 1. You can enable this via "menuconfig -> Component config -> FreeRTOS -> Run FreeRTOS only on first core (enable this option)".
+  - According to this application requirement, you can distribute tasks to a certain core using the "xTaskCreatePinnedToCore()" or "xTaskCreateStaticPinnedToCore()" API. For specific instructions, please see `core assignment <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/freertos-smp.html?highlight=run%20freertos%20only%20first%20core #overview>`_.
