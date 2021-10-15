@@ -178,4 +178,23 @@ I'm using ESP8266 release/v3.3 version of SDK to test the example/protocols/esp-
     I (19361) MQTT_CLIENT: Sending MQTT CONNECT message, type: 1, id: 0000
 
   - When such error occurs, it is usually because the connected server is unavailable. Please use another available server for testing.
-  
+
+-----------------
+
+Using esp-idf release/v3.3 version of the SDK, is there an example for setting static IP for Ethernet?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - It can be set through the "tcpip_adapter_set_ip_info()" API , please refer to `API description <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/tcpip_adapter.html?highlight=tcpip_adapter_set_ip_info#_CPPv425tcpip_adapter_set_ip_info18tcpip_adapter_if_tPK23tcpip_adapter_ip_info_t>`_.
+  - Please refer to the example as follows:
+
+    .. code-block:: text
+
+      /* Stop dhcp client */
+      tcpip_adapter_dhcpc_stop(TCPIP_ADAPTER_IF_STA);
+      /* static ip settings */
+      tcpip_adapter_ip_info_t sta_ip;
+      sta_ip.ip.addr = ipaddr_addr("192.168.1.102");
+      sta_ip.gw.addr = ipaddr_addr("192.168.1.1");
+      sta_ip.netmask.addr = ipaddr_addr("255.255.255.0");
+      tcpip_adapter_set_ip_info(TCPIP_ADAPTER_IF_STA, &sta_ip);
+        
