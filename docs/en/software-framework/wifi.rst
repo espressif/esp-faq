@@ -678,4 +678,11 @@ I'm using the master version of ESP8266-RTOS-SDK to open the WiFi Qos applicatio
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - It can be determined by setting ``IPH_TOS_SET(iphdr, tos)``.
+
+-----------------
+
+Using ESP-IDF release/v4.2 version of SDK, how to enable mDNS function in AP mode?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please enable "Component config -> LWIP -> Enable mDNS queries in resolving host name" in menuconfig.
   
