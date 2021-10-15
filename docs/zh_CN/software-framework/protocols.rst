@@ -141,10 +141,9 @@ ESP8266 测试 RTOS-SDK mqtt/ssl_mutual_auth 为何连接服务器失败？
 -------------------------------------------------------------------------------------
 
   - 出现 SSL 无法连接可能是由于 ESP8266 内存不足导致。
-  - 请使用 ESP8266-RTOS-SDK Master 版本来测试此例程，Master 版本支持在 menuconfig 配置端动态分配内存，可以减少峰值内存的开销。具体操作：
-
-    - 通过 menuconfig -> Component config -> mbadTLS -> (键 “Y” Enable) Using dynamic TX /RX buffer  -> (键 “Y” Enable) Free SSL peer certificate after its usage -> (键 “Y” Enable) Free certificate, key and DHM data after its usage。
-
+  - 请使用 ESP8266-RTOS-SDK Master 版本来测试此例程，Master 版本支持在 menuconfig 配置端动态分配内存，可以减少峰值内存的开销。
+  - 通过 menuconfig -> Component  config -> mbadTLS -> (键 “Y” Enable)Using  dynamic TX /RX buffer  -> (键 “Y” Enable) Free SSL peer certificate after its usage -> (键 “Y” Enable) Free certificate, key and DHM data after its usage 。
+ 
 ----------------
 
 ESP32-S2 在调用 ``esp_netif_t* wifiAP  = esp_netif_create_default_wifi_ap()`` 后通过 ``esp_netif_destroy(wifiAP)`` 注销会产生 12 字节的内存泄露，什么原因？
@@ -166,3 +165,18 @@ ESP32 & ESP8266 做 TCP Server 时端口释放后如何立即被再次使用？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 - Wi-Fi 默认开启 Power Save 模式，关闭 Power Save 可降低由于 Power Save 引起的 Ping 高延时，在 esp_wifi_start() 之后调用 esp_wifi_set_ps(WIFI_PS_NONE) 来关闭 Power Save 模式。
+
+--------------
+
+使用 ESP8266 release/v3.3 版本的 SDK 测试 examples/protocols/esp-mqtt/tcp 例程，配置 Wi-Fi 账号、密码，连接默认配置的服务器，出现连接失败，log 如下，是什么原因？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    W (4211) MQTT_CLIENT: Connection refused, not authorized
+    I (4217) MQTT_CLIENT: Error MQTT Connected
+    I (4222) MQTT_CLIENT: Reconnect after 10000 ms
+    I (4228) MQTT_EXAMPLE: MQTT_EVENT_DISCONNECTED
+    I (19361) MQTT_CLIENT: Sending MQTT CONNECT message, type: 1, id: 0000
+
+  - 当出现如上报错，一般由于连接的服务器不可用，请更换可用的服务器进行测试。

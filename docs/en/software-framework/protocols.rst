@@ -163,3 +163,19 @@ After downloading the tcp_client example for an ESP32 module, I connected the mo
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - When Wi-Fi is connected, Power Save mode will be turned on by default, which may cause high Ping delay. To solve this issue, you can turn off Power Save mode to reduce the delay by calling ``esp_wifi_set_ps (WIFI_PS_NONE)`` after ``esp_wifi_start()``.
+
+----------------------
+
+I'm using ESP8266 release/v3.3 version of SDK to test the example/protocols/esp-mqtt/tcp example. Then during Wi-Fi configuration, the connection fails after configuring SSID, password and connecting to the default server. The log is as follows, what is the reason?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    W (4211) MQTT_CLIENT: Connection refused, not authorized
+    I (4217) MQTT_CLIENT: Error MQTT Connected
+    I (4222) MQTT_CLIENT: Reconnect after 10000 ms
+    I (4228) MQTT_EXAMPLE: MQTT_EVENT_DISCONNECTED
+    I (19361) MQTT_CLIENT: Sending MQTT CONNECT message, type: 1, id: 0000
+
+  - When such error occurs, it is usually because the connected server is unavailable. Please use another available server for testing.
+  
