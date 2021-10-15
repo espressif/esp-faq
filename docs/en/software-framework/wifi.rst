@@ -671,3 +671,11 @@ I'm scanning Wi-Fi on an ESP32 device using release/v3.3 version of ESP-IDF. Whe
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - No, same SSID names cannot be filtered out since identical SSID names may not mean identical servers. Their BSSID may not be the same.
+
+-----------------------
+
+I'm using the master version of ESP8266-RTOS-SDK to open the WiFi Qos application to get EDCF support. How does ESP8266 decide which data packet should be allocated to the EDCF AC category?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - It can be determined by setting ``IPH_TOS_SET(iphdr, tos)``.
+  
