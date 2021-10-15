@@ -198,3 +198,9 @@ Using esp-idf release/v3.3 version of the SDK, is there an example for setting s
       sta_ip.netmask.addr = ipaddr_addr("255.255.255.0");
       tcpip_adapter_set_ip_info(TCPIP_ADAPTER_IF_STA, &sta_ip);
         
+--------------
+
+Does ESP32 have an LTE connection demo?
+---------------------------------------------------------------------------------------
+
+  - Yes, please refer to the example/protocols/pppos_client demo in ESP-IDF v4.2 and later versions.

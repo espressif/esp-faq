@@ -199,3 +199,10 @@ ESP32 & ESP8266 做 TCP Server 时端口释放后如何立即被再次使用？
       sta_ip.gw.addr = ipaddr_addr("192.168.1.1");
       sta_ip.netmask.addr = ipaddr_addr("255.255.255.0");
       tcpip_adapter_set_ip_info(TCPIP_ADAPTER_IF_STA, &sta_ip);
+
+----------------
+
+ESP32 有没有 LTE 连接 demo？
+-----------------------------------------------------------------------------
+
+  - 可以参考 ESP-IDF v4.2 及以上版本里的 examples/protocols/pppos_client demo。
