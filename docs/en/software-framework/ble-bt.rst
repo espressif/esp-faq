@@ -356,3 +356,10 @@ Using ESP32, how to specify a BLE connection/transmit operation to run on core 0
 
   - Currently, ESP32's BLE connection/transmit operation only can be run on core 1. You can enable this via "menuconfig -> Component config -> FreeRTOS -> Run FreeRTOS only on first core (enable this option)".
   - According to this application requirement, you can distribute tasks to a certain core using the "xTaskCreatePinnedToCore()" or "xTaskCreateStaticPinnedToCore()" API. For specific instructions, please see `core assignment <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/freertos-smp.html?highlight=run%20freertos%20only%20first%20core #overview>`_.
+
+--------------
+
+When setting name for the bluetooth of an ESP32 device using Chinese characters, messy code shows instead. What is the reason？
+----------------------------------------------------------------------------------------------------------------------------------------
+
+  - This is because the Chinese encoding format of the editor is not UTF-8 at this time, and the encoding format of the editor needs to be changed to UTF-8.
