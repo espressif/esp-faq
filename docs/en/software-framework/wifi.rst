@@ -664,3 +664,10 @@ When using ESP32 to establish a hotspot, can I scan all APs and the occupied cha
 
   - You can scan all APs and occupied channels before establishing a hotspot. Refer to the example "esp_wifi_scan_get_AP_records".
   - It cannot be performed automatically. You need to customize the channel selection algorithm to implement such operation.
+
+---------------------
+
+I'm scanning Wi-Fi on an ESP32 device using release/v3.3 version of ESP-IDF. When there are some identical SSIDs, same SSID names will show in the Wi-Fi list repeatedly. Is there an API to filter such repeated names?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - No, same SSID names cannot be filtered out since identical SSID names may not mean identical servers. Their BSSID may not be the same.
