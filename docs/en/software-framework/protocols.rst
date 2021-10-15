@@ -157,3 +157,9 @@ When ESP32 & ESP8266 are used as TCP Servers, how can the ports be used again im
   - After closing the TCP socket, it often enters the TIME-WAIT state. At this time, the socket with the same source address of the same port as before will fail. The socket option SO_REUSEADDR is needed. Its function is to allow the device binding to be in TIME-WAIT state, the port and source address are the same as the previous TCP socket.
   - So the TCP server program can set the SO_REUSEADDR socket option before calling bind() and then bind the same port.
 
+------------------
+
+After downloading the tcp_client example for an ESP32 module, I connected the module to the router via Wi-Fi and performed a Ping test on the computer. Then the it shows high latency sometimes, what is the reason?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - When Wi-Fi is connected, Power Save mode will be turned on by default, which may cause high Ping delay. To solve this issue, you can turn off Power Save mode to reduce the delay by calling ``esp_wifi_set_ps (WIFI_PS_NONE)`` after ``esp_wifi_start()``.
