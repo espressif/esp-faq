@@ -541,3 +541,20 @@ What is the input resistance of ESP32 ADC?
 -----------------------------------------------------------------------------------------------------------------------------
 
   - ADC is capacitive and can be considered as a large resistance.
+
+-------------------------
+
+When using ESP32's ADC to detect the power supply voltage, is it necessary to divide the voltage?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, it is necessary if you are using ADC for ESP32 devices to detect voltage. The ADC default reference voltage of ESP32 is 1100 mV. However, the ADC reading width can be expanded by calling the ADC attenuation function ``adc_atten_t()``. Please refer to the ADC attenuation configuration instructions as follows:
+
+  .. code-block:: c
+
+      typedef enum {
+          ADC_ATTEN_DB_0   = 0,  /*!<No input attenumation, ADC can measure up to approx. 800 mV. */
+          ADC_ATTEN_DB_2_5 = 1,  /*!<The input voltage of ADC will be attenuated, extending the range of measurement to up to approx. 1100 mV. */
+          ADC_ATTEN_DB_6   = 2,  /*!<The input voltage of ADC will be attenuated, extending the range of measurement to up to  approx. 1350 mV. */
+          ADC_ATTEN_DB_11  = 3,  /*!<The input voltage of ADC will be attenuated, extending the range of measurement to up to  approx. 2600 mV. */
+          ADC_ATTEN_MAX,
+      } adc_atten_t;

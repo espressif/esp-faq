@@ -535,3 +535,20 @@ ESP32 ADC 的输入电阻是多少？
 ---------------------------------------------------------
 
   - ADC 是电容性的，可以认为电阻很大。
+
+----------------
+
+使用 ESP32 的 ADC 来检测电源电压，是否需要进行分压？
+-------------------------------------------------------------------------------------
+
+  - ESP32 若采用 ADC 来检测电压，需要进行分压。ESP32 的 ADC 默认参考电压为 1100mV，但可通过调用 ADC 衰减函数 adc_atten_t() 来拓展 ADC 读数宽度，可参考下述 ADC 衰减配置说明：
+
+  .. code-block:: c
+
+      typedef enum {
+          ADC_ATTEN_DB_0   = 0,  /*!<No input attenumation, ADC can measure up to approx. 800 mV. */
+          ADC_ATTEN_DB_2_5 = 1,  /*!<The input voltage of ADC will be attenuated, extending the range of measurement to up to approx. 1100 mV. */
+          ADC_ATTEN_DB_6   = 2,  /*!<The input voltage of ADC will be attenuated, extending the range of measurement to up to  approx. 1350 mV. */
+          ADC_ATTEN_DB_11  = 3,  /*!<The input voltage of ADC will be attenuated, extending the range of measurement to up to  approx. 2600 mV. */
+          ADC_ATTEN_MAX,
+      } adc_atten_t;
