@@ -685,4 +685,10 @@ Using ESP-IDF release/v4.2 version of SDK, how to enable mDNS function in AP mod
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Please enable "Component config -> LWIP -> Enable mDNS queries in resolving host name" in menuconfig.
-  
+
+-----------------
+
+Can Wi-Fi be used with ESP-NOW at the same time?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, but it should be noted that the channel of ESP-NOW must be the same as that of the connected AP.
