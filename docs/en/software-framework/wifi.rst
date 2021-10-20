@@ -692,3 +692,10 @@ Can Wi-Fi be used with ESP-NOW at the same time?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes, but it should be noted that the channel of ESP-NOW must be the same as that of the connected AP.
+
+--------------------
+
+Using ESP32, how to configure the maximum Wi-Fi transmission speed and stability without considering memory and power consumption?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - To configure the maximum Wi-Fi transmission speed and stability, please refer to `How to improve Wi-Fi performance <https://docs.espressif.com/projects/esp-idf/en/release-v4.3/esp32/api-guides/wifi.html#how-to-improve-wi-fi-performance>`_ in ESP-IDF programming guide and set the relevant configuration parameters in ``menuconfig``. The option path can be found by searching "/" in the ``menuconfig`` interface. The optimal configuration parameters need to be tested according to the actual environment.
