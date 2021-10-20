@@ -204,3 +204,11 @@ Does ESP32 have an LTE connection demo?
 ---------------------------------------------------------------------------------------
 
   - Yes, please refer to the example/protocols/pppos_client demo in ESP-IDF v4.2 and later versions.
+
+--------------
+
+Will memory leak occur when ESP32 TCP repeatedly closes and rebuilds socket (IDF 3.3)?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In ESP-IDF v3.3, every time a socket is created, a lock will be assigned, given that this internal socket array has not been assigned any lock before. This lock will not be reclaimed after the socket is released. Thus, next time the same socket array is allocated, the previous lock will be used again. That is to say, every time a new socket array is allocated and released, there will be one lock memory used. After all socket arrays being allocated, there will be no memory leak any more.
+  
