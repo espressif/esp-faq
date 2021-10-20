@@ -552,3 +552,10 @@ ESP32 ADC 的输入电阻是多少？
           ADC_ATTEN_DB_11  = 3,  /*!<The input voltage of ADC will be attenuated, extending the range of measurement to up to  approx. 2600 mV. */
           ADC_ATTEN_MAX,
       } adc_atten_t;
+
+----------------
+
+ESP32 使用 SPI DMA 时最大的数据传输量是 4092 bytes，是因为硬件限制吗？
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 是的，这属于硬件限制。单个节点只能存 4092 bytes，但 DMA 可以通过链表来发送更多的数据。

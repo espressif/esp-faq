@@ -558,3 +558,10 @@ When using ESP32's ADC to detect the power supply voltage, is it necessary to di
           ADC_ATTEN_DB_11  = 3,  /*!<The input voltage of ADC will be attenuated, extending the range of measurement to up to  approx. 2600 mV. */
           ADC_ATTEN_MAX,
       } adc_atten_t;
+
+-------------------------
+
+The maximum data transmission of ESP32 SPI DMA is 4092 bytes. Is it because of hardware limitation?
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes. A single node can only store 4092 bytes of data, but the DMA can send more data through link lists.
