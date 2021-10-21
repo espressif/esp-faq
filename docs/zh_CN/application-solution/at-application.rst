@@ -593,3 +593,10 @@ ESP32 AT UART1 通信管脚与 datasheet 默认管脚不一致？
 -------------------------------------------------------------------------------------------------------------------------------------
 
   - 当主 MCU 给 ESP32 设备发送 AT 指令后需要添加结束符号，在程序中的写法为：“AT\r\n”。可参见 `Check Whether AT Works <https://docs.espressif.com/projects/esp-at/en/latest/Get_Started/Downloading_guide.html#check-whether-at-works>`__。
+
+--------------
+
+ESP8266 v2.1.0.0 版本 AT 固件，如何关闭默认的 power save 模式？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 使用 `AT+SLEEP=0 <https://docs.espressif.com/projects/esp-at/en/release-v2.1.0.0_esp8266/AT_Command_Set/Basic_AT_Commands.html?highlight=sleep#at-sleepsets-the-sleep-mode>`_ 指令即可关闭 AT 固件默认的 power save 模式。

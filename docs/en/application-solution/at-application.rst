@@ -593,3 +593,10 @@ When the host MCU sends an AT command to the ESP32 device (AT firmware version: 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - A terminator ("AT\r\n") must be added after an AT command when the host MCU sending AT commands to an ESP32 device. Please see `Check Whether AT Works <https://docs.espressif.com/projects/esp-at/en/latest/Get_Started/Downloading_guide.html#check-whether-at-works>`_.
+
+----------------------
+
+Using ESP8266 v2.1.0.0 version AT firmware, how to disable the default power save mode?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The default power save mode can be disable via the `AT+SLEEP=0 <https://docs.espressif.com/projects/esp-at/en/release-v2.1.0.0_esp8266/AT_Command_Set/Basic_AT_Commands.html?highlight=sleep#at-sleepsets-the -sleep-mode>`_.
