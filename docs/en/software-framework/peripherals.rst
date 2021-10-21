@@ -565,3 +565,10 @@ The maximum data transmission of ESP32 SPI DMA is 4092 bytes. Is it because of h
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes. A single node can only store 4092 bytes of data, but the DMA can send more data through link lists.
+
+-------------------------
+
+What is the stable current output for ESP32-S2's USB interface? 
+-------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-S2 supports USB 1.1 Full-Speed mode, under which the output of data line （D+ and D-) is voltage signal. Thus, there is no need to consider current driving capability here. As for the driving capability for VBUS line, it has nothing to do with ESP32-S2 as it is decided by the power-supply chip.
