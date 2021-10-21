@@ -699,3 +699,10 @@ Using ESP32, how to configure the maximum Wi-Fi transmission speed and stability
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - To configure the maximum Wi-Fi transmission speed and stability, please refer to `How to improve Wi-Fi performance <https://docs.espressif.com/projects/esp-idf/en/release-v4.3/esp32/api-guides/wifi.html#how-to-improve-wi-fi-performance>`_ in ESP-IDF programming guide and set the relevant configuration parameters in ``menuconfig``. The option path can be found by searching "/" in the ``menuconfig`` interface. The optimal configuration parameters need to be tested according to the actual environment.
+
+------------------------
+
+In Wi-Fi SoftAP mode, how many Station devices can ESP8266 be connected at most?
+-------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP8266 supports up to 8 Station device connections.
