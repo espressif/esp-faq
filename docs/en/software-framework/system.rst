@@ -66,3 +66,11 @@ Where is main function in ESP8266?
   - ESP8266 SDK does not provide main function.
   - Main function is stored in first-stage bootloader in ROM, which is used to load second-stage bootloader.
   - The entry function of the second-stage bootloader is ets_main. After startup, the user_init in the user application will be loaded to lead the user to the program.
+
+---------------------
+
+When ESP8266 is in Deep sleep mode, can the data stored in RTC Memory work?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - When ESP8266 is in Deep sleep mode, only the RTC timer continues to work. The data saved in the RTC Memory will not run, but can still be saved here. However, the data saved in RTC memory will lose after ESP8266 is powered off.
+  
