@@ -641,3 +641,10 @@ ESP32 如何关闭程序 LOG 输出？
   - 关闭 bootloader 日志：menuconfig -> bootloader config --> bootloader log verbosity 选定为 No output 。
   - 关闭程序日志：menuconfig -> Component config --> log output --> Default log verbosity 选定为 No output 。
   - 关闭 UART0 输出日志：menuconfig -> Component Config ->Common ESP-related -> Channel for console output -> None 。
+
+------------------
+
+ESP8266 在 Deep sleep 模式下，保存在 RTC Memory 里的数据是否可运行？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP8266 在 Deep sleep 模式下只有 RTC 定时器继续工作，保存在 RTC Memory 里的数据在 Deep sleep 模式下不会运行，只能保持数据不会丢失。但是，当 ESP8266 掉电后，保存在 RTC memory 里的数据无法保存。
