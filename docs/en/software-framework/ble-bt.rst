@@ -377,3 +377,10 @@ Using ESP32, when uploading sub-packages on the Bluetooth channel, the maximum t
 
     case ESP_GATTS_MTU_EVT:
     ESP_LOGI(GATTS_TAG, "ESP_GATTS_MTU_EVT, MTU%d", param->mtu.mtu);
+
+----------------
+
+What profile does ESP32's classic Bluetooth® support?
+-------------------------------------------------------
+
+  - It supports A2DP, AVRCP, SPP, HFP currently, while HID is under development.
