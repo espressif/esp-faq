@@ -579,3 +579,11 @@ Does ESP32-S3's USB peripheral supports USB Host?
 ------------------------------------------------------
 
   - Yes, regarding this function, ESP32-S3 is the same as ESP32-S2.
+
+-------------------------
+
+Does ESP32-C3 USB support USB serial port function and USB JTAG function? 
+---------------------------------------------------------------------------------------------------------------------
+
+  - Yes.
+  
