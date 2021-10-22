@@ -656,3 +656,10 @@ app key 是否是厂家可以自己设置？ Unicast address 和 app key 是否�
 --------------------------------------
 
   - 可以参考 `ESP-BLE-MESH 快速入门 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-index.html#getting-started-with-ble-mesh>`__。
+
+----------------
+
+Bluetooth® LE (BLE) Mesh 数据传送最大的包是多少 Bytes？
+--------------------------------------------------------------------------------
+
+  - 应用层单包最大 384 bytes，底层不分包最大 11 bytes。
