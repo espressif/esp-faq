@@ -710,3 +710,10 @@ ESP8266 作为 Wi-Fi SoftAP 模式，最多支持多少个 Station 设备连接�
 
   - ESP8266 最多支持 8 个 Station 设备连接。
   
+------------------------
+
+使用 ESP32 设备作为 Station 模式，如何获取 CSI 数据?
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 通过调用 "esp_wifi_set_csi_rx_cb()" 可获取 CSI 数据。参见 `API <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_csi_rx_cb13wifi_csi_cb_tPv>`_ 说明。
+  - 参见 `Wi-Fi CSI <https://github.com/espressif/esp-idf/blob/master/docs/zh_CN/api-guides/wifi.rst#wi-fi-channel-state-information-configure>`_ 配置步骤。
