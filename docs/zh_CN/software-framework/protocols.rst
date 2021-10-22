@@ -221,3 +221,10 @@ ESP32 使用 mbedtls 时如何优化内存？
 
   - 可以在 menuconfig 里开启动态 Buffer， 具体操作为 ``menuconfig -> Component config -> mbedTLS -> Using dynamic TX/RX buffer（键 "Y" 使能）``。
   - 同时可以使能上一步的 ``Using dynamic TX/RX buffer`` 里的子选项 ``Free SSL peer certificate after its usage`` 和 ``Free certificate, key and DHM data after its usage``。
+
+--------------
+
+ESP-IDF 中　MQTT 组件　Keep Alive 的默认值是多少？
+----------------------------------------------------
+
+  - 默认值为 120 s，在 ``mqtt_config.h`` 中通过 ``MQTT_KEEPALIVE_TICK`` 定义。

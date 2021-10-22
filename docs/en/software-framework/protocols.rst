@@ -219,3 +219,11 @@ How to optimize memory when ESP32 uses mbedtls?
 
   - You can enable dynamic buffer in menuconfig, the specific operation is ``menuconfig -> Component config -> mbedTLS -> Using dynamic TX/RX buffer (key "Y" to enable)``.
   - At the same time, you can enable the sub-options ``Free SSL peer certificate after its usage`` and ``Free certificate, key and DHM data after its usage`` in the ``Using dynamic TX/RX buffer`` in the previous step.
+
+--------------
+
+What is the default keep-alive value of the MQTT component in ESP-IDF?
+---------------------------------------------------------------------------------------
+
+  The default value is 120 s, which is defined by ``MQTT_KEEPALIVE_TICK`` in file ``mqtt_config.h``.
+  
