@@ -175,3 +175,9 @@ I'm using an ESP32 development board with the official PSRAM chip PSRAM64H embed
   - If you cannot find the corresponding type options of the new PSRAM chip you are about to use, please add the chip driver manually.
   - It is recommended to use Espressif's official ESP-PSRAM chip for ESP32 series.
   
+---------------------
+
+What is the available size of RTC RAM in ESP8266 for users?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The available RTC RAM in ESP8266 for users is '0x200'. Please see descriptions in `esp8266.ld <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/ld/esp8266.ld>`_.
