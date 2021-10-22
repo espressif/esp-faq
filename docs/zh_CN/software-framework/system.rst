@@ -648,3 +648,11 @@ ESP8266 在 Deep sleep 模式下，保存在 RTC Memory 里的数据是否可运
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP8266 在 Deep sleep 模式下只有 RTC 定时器继续工作，保存在 RTC Memory 里的数据在 Deep sleep 模式下不会运行，只能保持数据不会丢失。但是，当 ESP8266 掉电后，保存在 RTC memory 里的数据无法保存。
+
+------------------
+
+ESP32 的 NVS 的 Key 的最大长度为多大？
+----------------------------------------------------------------------------------------------
+
+  - ESP32 的 NVS 的 Key 最大长度为 15 个字符，且无法更改 Key 的最大长度。可参见 `键值对 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.3/esp32/api-reference/storage/nvs_flash.html#id4>`_ 说明。
+  - 可使用 `nvs_set_str() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.3/esp32/api-reference/storage/nvs_flash.html#_CPPv411nvs_set_str12nvs_handle_tPKcPKc>`_ 的 value 来存数据。
