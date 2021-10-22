@@ -600,3 +600,17 @@ ESP8266 v2.1.0.0 版本 AT 固件，如何关闭默认的 power save 模式？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 使用 `AT+SLEEP=0 <https://docs.espressif.com/projects/esp-at/en/release-v2.1.0.0_esp8266/AT_Command_Set/Basic_AT_Commands.html?highlight=sleep#at-sleepsets-the-sleep-mode>`_ 指令即可关闭 AT 固件默认的 power save 模式。
+  
+----------------
+
+发送 AT 命令，返回如下日志，是什么原因？
+--------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    busy p...
+    OK
+
+  - 检查发送的 AT 命令是否存在多余的字节，例如多了换行和回车（CR 和 LF），更进一步，您也可以抓下通信线上的数据。
+
+  - 更多消息请参考：`ESP-AT 消息报告 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/index.html#id5>`_。
