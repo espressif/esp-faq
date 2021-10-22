@@ -12,3 +12,11 @@ BLE Mesh development framework
      h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
+
+
+----------------
+
+What is the maximum data transmission load for Bluetooth® LE (BLE) mesh?
+--------------------------------------------------------------------------------
+
+  - Up to 384 bytes for the single packet in application layer, up to 11 bytes in the bottom layer with no sub-packages.
