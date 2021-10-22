@@ -600,3 +600,16 @@ Using ESP8266 v2.1.0.0 version AT firmware, how to disable the default power sav
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The default power save mode can be disable via the `AT+SLEEP=0 <https://docs.espressif.com/projects/esp-at/en/release-v2.1.0.0_esp8266/AT_Command_Set/Basic_AT_Commands.html?highlight=sleep#at-sleepsets-the -sleep-mode>`_.
+
+--------------------
+
+Received the following log after sending an AT command. What is the reason?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    busy p...
+    OK
+
+  - Please check whether there are redundant spaces or line breaks in your AT commands, e.g., extra CR and LF. You can also take data from the communication line to see what could be wrong.
+  - For more information, please refer to `AT Command Types <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/index.html#id5>`_.
