@@ -706,3 +706,11 @@ In Wi-Fi SoftAP mode, how many Station devices can ESP8266 be connected at most?
 -------------------------------------------------------------------------------------------------------------------------------
 
   - ESP8266 supports up to 8 Station device connections.
+
+---------------------
+
+How to get CSI data when using ESP32 device in Station mode?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - CSI data can be obtained by calling 'esp_wifi_set_csi_rx_cb()'. See description in `API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_csi_rx_cb13wifi_csi_cb_tPv>`_.
+  - See configuration steps in `Wi-Fi CSI <https://github.com/espressif/esp-idf/blob/master/docs/en/api-guides/wifi.rst#wi-fi-channel-state-information-configure>`_.
