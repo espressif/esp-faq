@@ -213,4 +213,11 @@ ESP32 TCP 反复关闭并重建 socket 时会出现内存泄漏的情况 (ESP-ID
 -----------------------------------------------------------------------------------------------------------------------------------------
 
   -  IDF v3.3 版本，每次创建 socket 时，如果内部该 socket 数组没有分配过锁，就会给该 socket 分配锁，并且该锁在 socket 释放后并不会回收，下次分配该 socket 数组时就使用之前分配的。所以每次分配新的 socket 数组后释放，就会多一个锁的内存消耗。当每个 socket 数组都分配一遍后，就不会存在内存泄漏。
-  
+
+----------------
+
+ESP32 使用 mbedtls 时如何优化内存？
+-----------------------------------------------------------------------------
+
+  - 可以在 menuconfig 里开启动态 Buffer， 具体操作为 ``menuconfig -> Component config -> mbedTLS -> Using dynamic TX/RX buffer（键 "Y" 使能）``。
+  - 同时可以使能上一步的 ``Using dynamic TX/RX buffer`` 里的子选项 ``Free SSL peer certificate after its usage`` 和 ``Free certificate, key and DHM data after its usage``。

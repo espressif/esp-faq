@@ -66,7 +66,7 @@ Does ESP32 support LoRa (Long Range Radio) communication?
 How soon can the associated resources be released after the TCP connection is closed?
 ----------------------------------------------------------------------------------------------------------------
 
-  The associated resources can be released in 20 seconds or can be specified by the sent linger/send_timeout parameter.
+ - The associated resources can be released in 20 seconds or can be specified by the sent linger/send_timeout parameter.
 
 --------------
 
@@ -212,3 +212,10 @@ Will memory leak occur when ESP32 TCP repeatedly closes and rebuilds socket (IDF
 
   - In ESP-IDF v3.3, every time a socket is created, a lock will be assigned, given that this internal socket array has not been assigned any lock before. This lock will not be reclaimed after the socket is released. Thus, next time the same socket array is allocated, the previous lock will be used again. That is to say, every time a new socket array is allocated and released, there will be one lock memory used. After all socket arrays being allocated, there will be no memory leak any more.
   
+----------------
+
+How to optimize memory when ESP32 uses mbedtls?
+------------------------------------------------------------------------------------------------
+
+  - You can enable dynamic buffer in menuconfig, the specific operation is ``menuconfig -> Component config -> mbedTLS -> Using dynamic TX/RX buffer (key "Y" to enable)``.
+  - At the same time, you can enable the sub-options ``Free SSL peer certificate after its usage`` and ``Free certificate, key and DHM data after its usage`` in the ``Using dynamic TX/RX buffer`` in the previous step.
