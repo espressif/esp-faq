@@ -73,4 +73,11 @@ When ESP8266 is in Deep sleep mode, can the data stored in RTC Memory work?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - When ESP8266 is in Deep sleep mode, only the RTC timer continues to work. The data saved in the RTC Memory will not run, but can still be saved here. However, the data saved in RTC memory will lose after ESP8266 is powered off.
-  
+
+---------------------
+
+What is the maximum length of the NVS Key for ESP32?
+-------------------------------------------------------------------------------------------------------------------------
+
+  - The maximum length of the NVS key for ESP32 is 15 characters, which cannot be changed. Please see the description of `key-value pair <https://docs.espressif.com/projects/esp-idf/en/release-v4.3/esp32/api-reference/storage/nvs_flash.html#id4>`_.
+  - But you can use the value of `nvs_set_str() <https://docs.espressif.com/projects/esp-idf/en/release-v4.3/esp32/api-reference/storage/nvs_flash.html#_CPPv411nvs_set_str12nvs_handle_tPKcPKc>`_ to store data.
