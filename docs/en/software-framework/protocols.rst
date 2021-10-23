@@ -151,6 +151,8 @@ After calling ``esp_netif_t* wifiAP = esp_netif_create_default_wifi_ap()`` for E
 
   - It is necessary to call ``esp_wifi_clear_default_wifi_driver_and_handlers(wifiAP)`` before ``esp_netif_destroy(wifiAP)``. This is the correct deinit process. Following this process, there will be no memory leakage.
 
+----------------
+
 When ESP32 & ESP8266 are used as TCP Servers, how can the ports be used again immediately after they are released?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -225,5 +227,11 @@ How to optimize memory when ESP32 uses mbedtls?
 What is the default keep-alive value of the MQTT component in ESP-IDF?
 ---------------------------------------------------------------------------------------
 
-  The default value is 120 s, which is defined by ``MQTT_KEEPALIVE_TICK`` in file ``mqtt_config.h``.
+  - The default value is 120 s, which is defined by ``MQTT_KEEPALIVE_TICK`` in file ``mqtt_config.h``.
   
+----------------
+
+Are there any limits on the maximum number of TCP client connection after the ESP32 additionally opens the TCP server?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes. The number of simultaneously connected socket fd number for ESP32 is limited by LWIP_MAX_SOCKETS, which is 10 by default.
