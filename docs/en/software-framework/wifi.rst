@@ -721,3 +721,12 @@ In AP + STA mode, after an ESP32 is connected to Wi-Fi, will the Wi-Fi connectio
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - After an ESP32 is connected to Wi-Fi in AP + STA dual mode, AP mode can be enabled or disabled at will without affecting Wi-Fi connection.
+
+-------------------
+
+I'm using ESP-IDF release/v3.3 for ESP32 development, but only bluetooth function is needed, how to disable Wi-Fi function through software?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please call ``esp_wifi_stop()`` to disable the Wi-Fi function. For API description, please see `esp_err_tesp_wifi_stop(void) <https://docs.espressif.com/projects/esp-idf/en/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_stop#_CPPv413esp_wifi_stopv>`_.
+  - If you need to reclaim the resources occupied by Wi-Fi, call ``esp_wifi_deinit()``. For API description, please see `esp_err_tesp_wifi_deinit(void) <https://docs.espressif.com/projects/esp-idf/en/release-v3.3/api-reference/ network/esp_wifi.html?highlight=wifi_deinit#_CPPv415esp_wifi_deinitv>`_.
+  
