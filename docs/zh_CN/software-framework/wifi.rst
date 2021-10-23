@@ -746,3 +746,10 @@ ESP32 使用 release/v3.3 版本的 ESP-IDF 进行开发，只需要蓝牙功能
     esp_wifi_set_promiscuous(true)
 
   - 另一个开源项目中有用到该方法，可参考 `esp-mdf <https://github.com/espressif/esp-mdf/blob/master/components/mconfig/mconfig_chain.c>`__。
+
+---------------
+
+ESP32 是否支持在同样 SSID 的不同 AP 之间无缝漫游？
+------------------------------------------------------------------------------------------------------
+
+  - 目前不支持。

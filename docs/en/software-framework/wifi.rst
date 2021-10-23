@@ -743,3 +743,10 @@ In ESP-IDF, the ``esp_wifi_80211_tx()`` interface can only be used to send data 
     esp_wifi_set_promiscuous(true)
     
   - The above data receive method is also used in another open-sourced project, please see `esp-mdf <https://github.com/espressif/esp-mdf/blob/master/components/mconfig/mconfig_chain.c>`_.
+
+---------------
+
+Does ESP32 support seamless roaming between different APs with the same SSID?
+------------------------------------------------------------------------------------------------------------
+
+  - Currently not supported.
