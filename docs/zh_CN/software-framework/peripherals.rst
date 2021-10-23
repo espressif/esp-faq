@@ -580,3 +580,11 @@ ESP32-C3 USB 支持 USB 串口功能和 USB JTAG 功能吗？
 ---------------------------------------------------------------------------------------------------------------------
 
   - 支持。
+
+----------------
+
+ESP32 触摸屏有哪些参考驱动？
+--------------------------------------------------------------
+
+  - 代码请参考 `touch_panel_code <https://github.com/espressif/esp-iot-solution/tree/master/components/display/touch_panel>`_。
+  - 文档请参考 `touch_panel_doc <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/input_device/touch_panel.html>`_。
