@@ -656,3 +656,10 @@ ESP32 的 NVS 的 Key 的最大长度为多大？
 
   - ESP32 的 NVS 的 Key 最大长度为 15 个字符，且无法更改 Key 的最大长度。可参见 `键值对 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.3/esp32/api-reference/storage/nvs_flash.html#id4>`_ 说明。
   - 可使用 `nvs_set_str() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.3/esp32/api-reference/storage/nvs_flash.html#_CPPv411nvs_set_str12nvs_handle_tPKcPKc>`_ 的 value 来存数据。
+
+------------------
+
+ESP-IDF release/v4.2 里的 cJSON 支持 uint64_t 的数据解析吗？
+-------------------------------------------------------------------------------------
+
+  - 不支持。cJSON 库解析长整形有限制，最长只有 Double 类型。
