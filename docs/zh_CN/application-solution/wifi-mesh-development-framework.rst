@@ -218,3 +218,10 @@ ESP-WIFI-MESH App 源码是否开放？
 
   - 我们已经将 ESP-WIFI-MESH App 源码开放到了 GitHub 上，如下链接：https://github.com/EspressifApp/EspMeshForAndroid。
   - 如果在使用中有任何疑问或 Bug，都可以在 GitHub 或者这里进行留言提问，我们都会第一时间处理。
+
+--------------
+
+Wi-Fi Mesh 数据传送最大的包为多少 Bytes？
+------------------------------------------------------------------------------------------
+
+  - 最大为 1456 bytes。
