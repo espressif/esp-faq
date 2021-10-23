@@ -714,3 +714,10 @@ How to get CSI data when using ESP32 device in Station mode?
 
   - CSI data can be obtained by calling 'esp_wifi_set_csi_rx_cb()'. See description in `API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_csi_rx_cb13wifi_csi_cb_tPv>`_.
   - See configuration steps in `Wi-Fi CSI <https://github.com/espressif/esp-idf/blob/master/docs/en/api-guides/wifi.rst#wi-fi-channel-state-information-configure>`_.
+
+-------------------
+
+In AP + STA mode, after an ESP32 is connected to Wi-Fi, will the Wi-Fi connection be affected if I enable or disable its AP mode?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - After an ESP32 is connected to Wi-Fi in AP + STA dual mode, AP mode can be enabled or disabled at will without affecting Wi-Fi connection.
