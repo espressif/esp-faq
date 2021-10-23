@@ -12,3 +12,10 @@ ESP-WIFI-MESH development framework
      h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
+
+--------------
+
+What is the maximum data transmission load for Wi-Fi mesh?
+--------------------------------------------------------------------------------------------------
+
+  - Up to 1456 bytes.
