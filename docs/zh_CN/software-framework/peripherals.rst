@@ -588,3 +588,12 @@ ESP32 触摸屏有哪些参考驱动？
 
   - 代码请参考 `touch_panel_code <https://github.com/espressif/esp-iot-solution/tree/master/components/display/touch_panel>`_。
   - 文档请参考 `touch_panel_doc <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/input_device/touch_panel.html>`_。
+
+-----------------
+
+ESP32-S2 的 SPI 同时访问三个 SPI Slave 设备，是否需要做信号量同步才能访问？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 同一个 SPI 外设作为 Master，一次只能与一个 Slave 进行通信，由 CS 决定与哪个 Slave 进行通信。如果是给 SPI 驱动挂 3 个 Slave 设备，并与它们分别通信的话是可以的，推荐这种用法。
+  - 可使用 ``spi_device_transmit()`` 接口， 这个接口是一个 blocking 接口，在一次传输完成后返回。多个任务逐次调用这个接口，用不同的 handle 进行通信即可。
+  

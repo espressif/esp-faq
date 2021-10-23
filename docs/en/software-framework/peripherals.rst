@@ -503,7 +503,7 @@ When using DAC output for ESP32-S2-Saola-1, the power supply is 3.3 V. But the a
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
    - Due to the internal voltage drop, even when using 3.3 V power supply, the actual maximum output is only about 3.2 V.
-   
+
 --------------------
 
 If I float the ADC pin and print out VDD3P3 value (65535), then the voltage of VDD3P3 should be 65535/1024 ≈ 63 V. Why this is not the correct voltage value?
@@ -594,3 +594,11 @@ What reference drivers does ESP32 touch screen have?
 
   - Code: please refer to `touch_panel_code <https://github.com/espressif/esp-iot-solution/tree/master/components/display/touch_panel>`_.
   - Documentation: please refer to `touch_panel_doc <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/input_device/touch_panel.html>`_.
+
+--------------------
+
+The SPI of ESP32-S2 accesses three SPI Slave devices at the same time, do I need to synchronize the semaphore to access it?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The same SPI peripheral, as the master, can only communicate with one slave at a time, and CS decides which slave to communicate with. If you connect 3 slave devices to the SPI driver and communicate with them separately, it is okay and recommended.
+  - You can use the ``spi_device_transmit()`` API, which is a blocking interface and returns after a transmission is completed. If there are multiple tasks, you can call this function one by one and use different handles to communicate.
