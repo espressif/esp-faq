@@ -81,3 +81,10 @@ What is the maximum length of the NVS Key for ESP32?
 
   - The maximum length of the NVS key for ESP32 is 15 characters, which cannot be changed. Please see the description of `key-value pair <https://docs.espressif.com/projects/esp-idf/en/release-v4.3/esp32/api-reference/storage/nvs_flash.html#id4>`_.
   - But you can use the value of `nvs_set_str() <https://docs.espressif.com/projects/esp-idf/en/release-v4.3/esp32/api-reference/storage/nvs_flash.html#_CPPv411nvs_set_str12nvs_handle_tPKcPKc>`_ to store data.
+
+---------------------
+
+Does the cJSON in ESP-IDF release/v4.2 support uint64_t data analysis?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - No. The cJSON library has restrictions on parsing long integers, and the longest type is Double.
