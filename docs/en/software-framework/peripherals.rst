@@ -587,3 +587,10 @@ Does ESP32-C3 USB support USB serial port function and USB JTAG function?
 
   - Yes.
   
+---------------
+
+What reference drivers does ESP32 touch screen have?
+------------------------------------------------------------------------------------------
+
+  - Code: please refer to `touch_panel_code <https://github.com/espressif/esp-iot-solution/tree/master/components/display/touch_panel>`_.
+  - Documentation: please refer to `touch_panel_doc <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/input_device/touch_panel.html>`_.
