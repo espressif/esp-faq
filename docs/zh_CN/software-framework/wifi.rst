@@ -725,3 +725,10 @@ ESP32 在 AP + STA 模式连接 Wi-Fi 后，任意开启关闭 AP 模式是否�
 
   - ESP32 在 ＡP + STA 双模式下进行 Wi-Fi 连接后，可以任意开启关闭 AP 模式，不影响 Wi-Fi 连接。
   
+-----------------
+
+ESP32 使用 release/v3.3 版本的 ESP-IDF 进行开发，只需要蓝牙功能，如何通过软件关闭 Wi-Fi 功能？
+-----------------------------------------------------------------------------------------------------------------
+
+  - 调用 esp_wifi_stop() 可关闭 Wi-Fi 功能。API 说明参见 `esp_err_tesp_wifi_stop(void) <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_stop#_CPPv413esp_wifi_stopv>`_。
+  - 若需要回收 Wi-Fi 占用的资源，则还需要调用 esp_wifi_deinit()，API 说明请参见 `esp_err_tesp_wifi_deinit(void) <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_deinit#_CPPv415esp_wifi_deinitv>`_。
