@@ -602,3 +602,15 @@ The SPI of ESP32-S2 accesses three SPI Slave devices at the same time, do I need
 
   - The same SPI peripheral, as the master, can only communicate with one slave at a time, and CS decides which slave to communicate with. If you connect 3 slave devices to the SPI driver and communicate with them separately, it is okay and recommended.
   - You can use the ``spi_device_transmit()`` API, which is a blocking interface and returns after a transmission is completed. If there are multiple tasks, you can call this function one by one and use different handles to communicate.
+
+---------------------------
+
+When using an ESP32 board for development and testing based on ESP-IDF release/v4.3, I received the following error log during compilation. What is the reason?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    spi_flash:Detected size(8192K) smaller than the size in the binary image header(16384K).Probe failed. 
+
+  - The reason is that the configured "Flash Size" is larger than the actual "Flash Size". In order to avoid misuse of a larger address space, the actual "Flash Size" is checked.
+  
