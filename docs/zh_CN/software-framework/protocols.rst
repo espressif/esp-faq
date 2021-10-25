@@ -235,3 +235,12 @@ ESP32 额外开启 TCP server 后对 TCP client 的最大连接数是否有限�
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 有限制，ESP32 同时存在的 socket fd 数量受限于 LWIP_MAX_SOCKETS，默认为 10。
+
+--------------
+
+MQTT 支持自动重连吗？
+----------------------------------------
+
+  - MQTT 的自动重连由 `esp_mqtt_client_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/protocols/mqtt.html?highlight=esp_mqtt_client_config_t#_CPPv424esp_mqtt_client_config_t>`_ 中的成员变量　``disable_auto_reconnect`` 控制，该变量值默认为 ``false``，表示使能自动重连。
+  - 可以使用 ``reconnect_timeout_ms`` 设置重连超时时间。
+  
