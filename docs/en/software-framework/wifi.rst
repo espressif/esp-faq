@@ -750,3 +750,15 @@ Does ESP32 support seamless roaming between different APs with the same SSID?
 ------------------------------------------------------------------------------------------------------------
 
   - Currently not supported.
+
+
+---------------
+
+What are the reasons for the high failure rate of esptouch networking?
+------------------------------------------------------------------------------------------
+
+:CHIP\: ESP32, ESP32S2, ESP32S3, ESP32C3, ESP8266:
+  - The same hotspot is connected too many people.
+  - The signal quality of the hotspot connected by cell phone is poor.
+  - The router does not forward multicast data.
+  - The router has enabled dual-band integration, and the phone is connected to the 5G frequency band.
