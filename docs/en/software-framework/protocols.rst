@@ -235,3 +235,11 @@ Are there any limits on the maximum number of TCP client connection after the ES
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes. The number of simultaneously connected socket fd number for ESP32 is limited by LWIP_MAX_SOCKETS, which is 10 by default.
+
+--------------
+
+Does MQTT support automatic reconnection?
+------------------------------------------------
+
+  - The automatic reconnection of MQTT is controlled by the ``disable_auto_reconnect`` variable of struct `esp_mqtt_client_config_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/mqtt.html#_CPPv424esp_mqtt_client_config_t>`_. The default value of ``disable_auto_reconnect`` is ``false``, which means that automatic reconnection is enabled.
+  - The reconnection timeout value can be set using ``reconnect_timeout_ms``.
