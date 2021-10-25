@@ -607,3 +607,11 @@ ESP32-S2 的 SPI 同时访问三个 SPI Slave 设备，是否需要做信号量�
     spi_flash:Detected size(8192K) smaller than the size in the binary image header(16384K).Probe failed. 
 
   - 原因是配置的 Flash Size 比实际使用的 Flash Size 要大，为避免误用更大的地址空间而对实际使用的 Flash Size 进行检测。
+
+--------------
+
+ESP32 芯片 ADC DMA 模式最高支持多大的采样频率？
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 理论最高支持 2 MHz 的采样频率。
+  

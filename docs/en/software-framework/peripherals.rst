@@ -495,14 +495,14 @@ Does ESP8266 support pulse counting?
 Does the ESP-IDF SDK USB interface support HID and MSC modes?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-   - Our SDK will provide examples of HID and MSC classes in the future. And specific device classes need to be implemented by themselves. 
+  - Our SDK will provide examples of HID and MSC classes in the future. And specific device classes need to be implemented by themselves. 
 
 ---------------
 
 When using DAC output for ESP32-S2-Saola-1, the power supply is 3.3 V. But the actual tested voltage is only 3.1 V. Why?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-   - Due to the internal voltage drop, even when using 3.3 V power supply, the actual maximum output is only about 3.2 V.
+  - Due to the internal voltage drop, even when using 3.3 V power supply, the actual maximum output is only about 3.2 V.
 
 --------------------
 
@@ -613,4 +613,11 @@ When using an ESP32 board for development and testing based on ESP-IDF release/v
     spi_flash:Detected size(8192K) smaller than the size in the binary image header(16384K).Probe failed. 
 
   - The reason is that the configured "Flash Size" is larger than the actual "Flash Size". In order to avoid misuse of a larger address space, the actual "Flash Size" is checked.
+  
+-----------------
+
+What is ESP32's highest sampling rate in ADC DMA mode?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 supports up to 2 MHz of sampling rate theoretically.
   
