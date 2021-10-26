@@ -762,3 +762,12 @@ What are the reasons for the high failure rate of esptouch networking?
   - The signal quality of the hotspot connected by cell phone is poor.
   - The router does not forward multicast data.
   - The router has enabled dual-band integration, and the phone is connected to the 5G frequency band.
+
+
+----------------
+
+How to optimize the IRAM when ESP32 uses Wi-Fi?
+-----------------------------------------------------------------------------------
+
+  - You can disable ``WIFI_IRAM_OPT``, ``WIFI_RX_IRAM_OPT`` and ``LWIP_IRAM_OPTIMIZATION`` in menuconfig to optimize IRAM space, but this will degrade Wi-Fi performance.
+  
