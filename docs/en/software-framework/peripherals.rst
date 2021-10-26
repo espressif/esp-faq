@@ -643,3 +643,10 @@ Using ESP-WROOM-02D module, can GPIO0, GPIO15, GPIO1 and GPIO3 be used as normal
   - Strapping pins (GPIO0 and GPIO15) and download pins (GPIO1 and GPIO3) can be used as normal GPIOs.
   - When using the strapping pin as a normal GPIO, you need to pay attention to the level of the strapping pin in the Flash download mode.
   
+---------------
+
+What are the USB features of ESP32-S2 and ESP32-S3? 
+--------------------------------------------------------------------------------------------------------------------------------
+
+ - ESP32-S3 and ESP32-S2 support USB 1.1 OTG, and both support Host and Device functions. On top of that, ESP32-S3 also supports USB-Serial-JTAG peripheral, which can be used to download and debug firmware.
+ 
