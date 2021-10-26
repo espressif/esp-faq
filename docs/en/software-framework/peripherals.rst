@@ -627,3 +627,11 @@ When an ESP32 calling "adc2_get_raw()" between "esp_wifi_start()" and "esp_wifi_
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Because ADC2 is shared with the Wi-Fi module. The Wi-Fi driver uses ADC2 and has higher priority. Therefore, the application can only use ADC2 when the Wi-Fi driver is not activated.
+
+---------------
+
+What is the maximum resolution supported by ESP32 LCD? What is the corresponding frame rate?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32's LCD can support up to 800 × 480 of resolution, and the corresponding frame rate is about 30 frames. Please see `Screen <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/display/screen.html>`_.
+  

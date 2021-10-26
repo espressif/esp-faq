@@ -244,3 +244,9 @@ MQTT 支持自动重连吗？
   - MQTT 的自动重连由 `esp_mqtt_client_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/protocols/mqtt.html?highlight=esp_mqtt_client_config_t#_CPPv424esp_mqtt_client_config_t>`_ 中的成员变量　``disable_auto_reconnect`` 控制，该变量值默认为 ``false``，表示使能自动重连。
   - 可以使用 ``reconnect_timeout_ms`` 设置重连超时时间。
   
+---------------
+
+使用 ESP32，LWIP 的 MTU 默认是多大？
+-----------------------------------------------------------------------------------
+
+  - LWIP 的 MTU 默认是 1500（固定值），不建议自行修改。
