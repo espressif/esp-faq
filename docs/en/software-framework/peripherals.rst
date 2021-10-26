@@ -635,3 +635,11 @@ What is the maximum resolution supported by ESP32 LCD? What is the corresponding
 
   - ESP32's LCD can support up to 800 × 480 of resolution, and the corresponding frame rate is about 30 frames. Please see `Screen <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/display/screen.html>`_.
   
+-----------------------
+
+Using ESP-WROOM-02D module, can GPIO0, GPIO15, GPIO1 and GPIO3 be used as normal GPIOs?
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Strapping pins (GPIO0 and GPIO15) and download pins (GPIO1 and GPIO3) can be used as normal GPIOs.
+  - When using the strapping pin as a normal GPIO, you need to pay attention to the level of the strapping pin in the Flash download mode.
+  
