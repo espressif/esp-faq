@@ -621,3 +621,9 @@ What is ESP32's highest sampling rate in ADC DMA mode?
 
   - ESP32 supports up to 2 MHz of sampling rate theoretically.
   
+-----------------
+
+When an ESP32 calling "adc2_get_raw()" between "esp_wifi_start()" and "esp_wifi_stop()", the read operation fails. What is the reason?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Because ADC2 is shared with the Wi-Fi module. The Wi-Fi driver uses ADC2 and has higher priority. Therefore, the application can only use ADC2 when the Wi-Fi driver is not activated.
