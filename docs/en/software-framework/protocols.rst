@@ -243,3 +243,11 @@ Does MQTT support automatic reconnection?
 
   - The automatic reconnection of MQTT is controlled by the ``disable_auto_reconnect`` variable of struct `esp_mqtt_client_config_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/mqtt.html#_CPPv424esp_mqtt_client_config_t>`_. The default value of ``disable_auto_reconnect`` is ``false``, which means that automatic reconnection is enabled.
   - The reconnection timeout value can be set using ``reconnect_timeout_ms``.
+
+-----------------
+
+What is the default MTU of LWIP for an ESP32?
+----------------------------------------------------------------------------------------------
+
+  - The default MTU of LWIP is 1500. This is a fixed value and it is not recommended to change it.
+  
