@@ -770,4 +770,10 @@ How to optimize the IRAM when ESP32 uses Wi-Fi?
 -----------------------------------------------------------------------------------
 
   - You can disable ``WIFI_IRAM_OPT``, ``WIFI_RX_IRAM_OPT`` and ``LWIP_IRAM_OPTIMIZATION`` in menuconfig to optimize IRAM space, but this will degrade Wi-Fi performance.
-  
+
+--------------
+
+How to test ESP32's Wi-Fi transmission distance?
+-----------------------------------------------------------------------------------------------
+
+  -You can use the `iperf example <https://github.com/espressif/esp-idf/tree/master/examples/wifi/iperf>`_ and configure the ESP32 device to iperf UDP mode. Then, you can distance the device continuously to see at which point the Wi-Fi data transmission rate will drop to 0.
