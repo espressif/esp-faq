@@ -784,3 +784,23 @@ What is the maximum length of Wi-Fi MTU for an ESP32?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The maximum Wi-Fi MTU length for ESP32 is 1500.
+
+
+---------------
+
+During the on-hook test for an ESP32 device, the following log shows. What does it mean?
+--------------------------------------------------------------------------------------------
+
+  log：
+
+  .. code-block:: text
+
+    [21-01-27_14:53:56]I (81447377) wifi:new:<7,0>, old:<7,2>, ap:<255,255>, sta:<7,0>, prof:1
+    [21-01-27_14:53:57]I (81448397) wifi:new:<7,2>, old:<7,0>, ap:<255,255>, sta:<7,2>, prof:1
+    [21-01-27_14:53:58]I (81449417) wifi:new:<7,0>, old:<7,2>, ap:<255,255>, sta:<7,0>, prof:1
+    [21-01-27_14:53:59]I (81450337) wifi:new:<7,2>, old:<7,0>, ap:<255,255>, sta:<7,2>, prof:1
+
+  - The value after ``new`` represents the current primary and secondary channel; the value after ``old`` represents the last primary and secondary channel; and the value after ``ap`` represents the primary and secondary channel of the current ESP32 AP, which will be 255 if softAP is not enabled; the value after ``sta`` represents primary and secondary channel of the current ESP32 sta; and ``prof`` is the channel of ESP32's softAP stored in NVS.
+  - For the meaning of secondary channel values, please refer to `wifi_second_chan_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_second_chan_t#_CPPv418wifi_second_chan_t>`_.
+  - The above log indicates that router is switching between HT20 and HT40 minus. You can check the Wi-Fi bandwidth setting of the router.
+  
