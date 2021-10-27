@@ -664,3 +664,9 @@ The USB protocol supported by ESP32-S2 is OTG 1.1, with the maximum speed of 12 
 
   - Most USB 2.0 devices can backward compatible with USB 1.1, so they can communicate with USB 1.1 (in full speed mode).
   
+---------------
+
+Does ESP32-S2 support USB camera?
+------------------------------------------------------------------------
+
+  - Yes, but currently ESP32S2 only supports USB 1.1. So please choose the camera which is compatible with USB 1.1. For demo code, please refer to example `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_.
