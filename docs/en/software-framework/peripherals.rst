@@ -670,3 +670,11 @@ Does ESP32-S2 support USB camera?
 ------------------------------------------------------------------------
 
   - Yes, but currently ESP32S2 only supports USB 1.1. So please choose the camera which is compatible with USB 1.1. For demo code, please refer to example `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_.
+
+---------------
+
+Is there any reference for the example of using ESP32S2 as a USB flash drive (MSC DEVICE)?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please refer to `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_msc_wireless_disk>`_. The average read and write speed currently tested is: read 540 KB/s, write 350 KB/s.
+  
