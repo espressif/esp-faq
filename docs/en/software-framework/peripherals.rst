@@ -678,3 +678,10 @@ Is there any reference for the example of using ESP32S2 as a USB flash drive (MS
 
   - Please refer to `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_msc_wireless_disk>`_. The average read and write speed currently tested is: read 540 KB/s, write 350 KB/s.
   
+---------------
+
+As ESP32-C3 already has USB function, can I download firmware directly via USB without using the cp2102 chip?
+-------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, ESP32-C3 can download firmware via USB, The USB serial port number should be displayed as COMx on Windows devices and ttyACMx on Linux devices.
+  
