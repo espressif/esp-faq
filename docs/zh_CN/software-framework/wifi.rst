@@ -804,3 +804,11 @@ ESP32 模组挂机测试有时会打印类似如下 log，代表什么含义？
   - 有关次信道代表的数值，请参考 `wifi_second_chan_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_second_chan_t#_CPPv418wifi_second_chan_t>`_。
   - 上述 log 信息表示路由器在 HT20 和 HT40 minus 之间切换，可以检查下路由器的 Wi-Fi 频宽设置。
   
+---------------
+
+ESP32 在 AP + STA 模式下，如何关闭 AP 模式?
+---------------------------------------------------------------------------------------------------------------
+
+  - 关闭 AP 模式通过 esp_wifi_set_mode(wifi_mode_t mode); 函数来设置。
+  - 调用 esp_wifi_set_mode(WIFI_MODE_STA); 即可。
+  

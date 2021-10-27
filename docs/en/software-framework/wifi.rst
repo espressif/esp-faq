@@ -804,3 +804,11 @@ During the on-hook test for an ESP32 device, the following log shows. What does 
   - For the meaning of secondary channel values, please refer to `wifi_second_chan_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_second_chan_t#_CPPv418wifi_second_chan_t>`_.
   - The above log indicates that router is switching between HT20 and HT40 minus. You can check the Wi-Fi bandwidth setting of the router.
   
+-----------------
+
+How to disable AP mode when ESP32 is in AP + STA mode?
+-------------------------------------------------------------------------------------------------------------------------------------
+
+  - This can be done through the configuration of ``esp_wifi_set_mode(wifi_mode_t mode);`` function.
+  - Just call ``esp_wifi_set_mode(WIFI_MODE_STA);``.
+  
