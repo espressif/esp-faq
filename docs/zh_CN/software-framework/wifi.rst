@@ -812,3 +812,10 @@ ESP32 在 AP + STA 模式下，如何关闭 AP 模式?
   - 关闭 AP 模式通过 esp_wifi_set_mode(wifi_mode_t mode); 函数来设置。
   - 调用 esp_wifi_set_mode(WIFI_MODE_STA); 即可。
   
+-------------
+
+ESP32 使用 Wi-Fi 的功能后，是否 ADC2 的所有通道都不能使用了？
+-------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 在使用 Wi-Fi 的情况下，没有被 Wi-Fi 占用的 ADC2 的引脚可以做普通 GPIO 使用。可参考官方 `ADC 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/adc.html?highlight=adc#analog-to-digital-converter>`_。
+  
