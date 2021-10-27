@@ -812,3 +812,10 @@ How to disable AP mode when ESP32 is in AP + STA mode?
   - This can be done through the configuration of ``esp_wifi_set_mode(wifi_mode_t mode);`` function.
   - Just call ``esp_wifi_set_mode(WIFI_MODE_STA);``.
   
+----------------
+
+After ESP32 used the Wi-Fi function, are all ADC2 channels unavailable?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - When an ESP32 device is using Wi-Fi function, the ADC2 pins that are not occupied by Wi-Fi can be used as normal GPIOs. You can refer to the official `ADC Description <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html?highlight=adc#analog-to-digital-converter>`_.
+  
