@@ -656,3 +656,11 @@ Are there any references to the library and demo of ESP32-S2 USB Host?
 --------------------------------------------------------------------------------------------------------------------------
 
   - This part is already under internal development and is expected to be released with SDK release/v4.4. If you want to do some functional verification first, please refer to the `USB example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`_ in esp-iot-solution.
+
+---------------
+
+The USB protocol supported by ESP32-S2 is OTG 1.1, with the maximum speed of 12 Mbps. Can it communicate with USB 2.0 devices?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Most USB 2.0 devices can backward compatible with USB 1.1, so they can communicate with USB 1.1 (in full speed mode).
+  
