@@ -672,3 +672,9 @@ ESP32-S2 支持 USB 摄像头吗？
 
   - 支持，但是目前 ESP32-S2 仅支持到 USB 1.1。所以需要购买兼容 USB 1.1 的摄像头。示例代码请参考 `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_。
   
+---------------
+
+是否有 ESP32-S2 做 U 盘 (MSC DEVICE) 的参考示例？
+----------------------------------------------------------------------------------------------------------------
+
+  - 请参考 `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_msc_wireless_disk>`_。目前测试的平均读写速度为：读 540 KB/s，写 350 KB/s。
