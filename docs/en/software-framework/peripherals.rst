@@ -650,3 +650,9 @@ What are the USB features of ESP32-S2 and ESP32-S3?
 
  - ESP32-S3 and ESP32-S2 support USB 1.1 OTG, and both support Host and Device functions. On top of that, ESP32-S3 also supports USB-Serial-JTAG peripheral, which can be used to download and debug firmware.
  
+---------------
+
+Are there any references to the library and demo of ESP32-S2 USB Host? 
+--------------------------------------------------------------------------------------------------------------------------
+
+  - This part is already under internal development and is expected to be released with SDK release/v4.4. If you want to do some functional verification first, please refer to the `USB example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`_ in esp-iot-solution.
