@@ -181,3 +181,10 @@ What is the available size of RTC RAM in ESP8266 for users?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The available RTC RAM in ESP8266 for users is '0x200'. Please see descriptions in `esp8266.ld <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/ld/esp8266.ld>`_.
+
+----------------
+
+How to deal with the file with long filename when using the FAT filesystem？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can change the configuration in ``menuconfig -> Component config -> FAT Filesystem support -> Long filename support`` by selecting the `Long filename buffer in heap` or `Long filename buffer on stack` option. Then you can modify the maximum length for a file name in ``Component config -> FAT Filesystem support -> Max long filename length``.

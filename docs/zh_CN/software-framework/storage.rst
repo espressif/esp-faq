@@ -180,3 +180,10 @@ ESP8266 用户可用的 RTC RAM 是多大？
 ----------------------------------------------------------------------------------------------
 
   - ESP8266 用户可用的 RTC RAM 为 0x200。可参见 `esp8266.ld <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/ld/esp8266.ld>`_ 文件说明。
+
+----------------
+
+使用 FAT 文件系统时文件名稍微长一点的文件无法打开，该如何处理？
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以在 menuconfig -> Component config -> FAT Filesystem support -> Long filename support 中进行修改，选择 `Long filename buffer in heap` 或 `Long filename buffer on stack` 配置项。然后可以在 ` Component config -> FAT Filesystem support -> Max long filename length` 中修改最大的文件名长度。
