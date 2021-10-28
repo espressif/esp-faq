@@ -1,5 +1,7 @@
 # ESP-FAQ Framework
 
+[![Documentation Status](https://readthedocs.com/projects/espressif-esp-faq/badge/?version=latest)](https://docs.espressif.com/projects/espressif-esp-faq/en/latest/?badge=latest)
+
 * [中文版](./README_CN.md)
 
 ESP-FAQ is a summary document for common problems launched by Espressif.

@@ -1,5 +1,7 @@
 # Espressif FAQ 文档
 
+[![Documentation Status](https://readthedocs.com/projects/espressif-esp-faq-zh-cn/badge/?version=latest)](https://docs.espressif.com/projects/espressif-esp-faq/zh_CN/latest/?badge=latest)
+
 * [English Version](./README.md)
   
 ESP-FAQ 是由乐鑫官方推出的针对常见问题的总结文档。
