@@ -187,3 +187,12 @@ ESP8266 用户可用的 RTC RAM 是多大？
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 可以在 menuconfig -> Component config -> FAT Filesystem support -> Long filename support 中进行修改，选择 `Long filename buffer in heap` 或 `Long filename buffer on stack` 配置项。然后可以在 ` Component config -> FAT Filesystem support -> Max long filename length` 中修改最大的文件名长度。
+
+---------------
+
+如何使能 exFAT ?
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - 需要在代码中将 #define FF_FS_EXFAT  0 修改为 #define FF_FS_EXFAT  1 , 具体的请参考 `ffconf.h <https://github.com/espressif/esp-idf/blob/178b122c145c19e94ac896197a3a4a9d379cd618/components/fatfs/src/ffconf.h#L255 />`_。
