@@ -188,3 +188,12 @@ How to deal with the file with long filename when using the FAT filesystem？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - You can change the configuration in ``menuconfig -> Component config -> FAT Filesystem support -> Long filename support`` by selecting the `Long filename buffer in heap` or `Long filename buffer on stack` option. Then you can modify the maximum length for a file name in ``Component config -> FAT Filesystem support -> Max long filename length``.
+
+---------------
+
+How to enable exFAT?
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - please modify #define FF_FS_EXFAT  0 as #define FF_FS_EXFAT  1 , please reffer to `ffconf.h <https://github.com/espressif/esp-idf/blob/178b122c145c19e94ac896197a3a4a9d379cd618/components/fatfs/src/ffconf.h#L255 />`_ for details.
