@@ -685,3 +685,9 @@ As ESP32-C3 already has USB function, can I download firmware directly via USB w
 
   - Yes, ESP32-C3 can download firmware via USB, The USB serial port number should be displayed as COMx on Windows devices and ttyACMx on Linux devices.
   
+---------------
+
+Does ESP32-C3 support USB Host?
+------------------------------------------------------
+
+ - No, it only supports USB-Serial-JTAG function.
