@@ -614,3 +614,13 @@ ESP8266 v2.1.0.0 版本 AT 固件，如何关闭默认的 power save 模式？
   - 检查发送的 AT 命令是否存在多余的字节，例如多了换行和回车（CR 和 LF），更进一步，您也可以抓下通信线上的数据。
 
   - 更多消息请参考：`ESP-AT 消息报告 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/index.html#id5>`_。
+
+---------------
+
+AT+BLEGATTSNTFY 和 AT+BLEGATTSIND 的 length 最大可以支持到多少？
+----------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - length 的最大值为 MTU - 3，MTU 最大可以支持到 517 字节，因此 length 的最大值为 514 字节。
+  
