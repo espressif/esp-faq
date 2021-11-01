@@ -613,3 +613,12 @@ Received the following log after sending an AT command. What is the reason?
 
   - Please check whether there are redundant spaces or line breaks in your AT commands, e.g., extra CR and LF. You can also take data from the communication line to see what could be wrong.
   - For more information, please refer to `AT Command Types <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/index.html#id5>`_.
+
+---------------
+
+What is the maximum value of the parameter `length` of AT+BLEGATTSNTFY and AT+BLEGATTSIND?
+----------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - The maximum value of `length` is MTU - 3, and the MTU can support up to 517 bytes, so the maximum value of `length` is 514 bytes.
