@@ -54,12 +54,43 @@ Branch naming conventions
 
 - Modify contents: ``mod/artificial-intelligence_q&a``, ``q&a`` is the brief English name of the file. For example, if you expect to modify the contents about ``artificial intelligence camera model``, then the branch name should be: ``mod/artificial-intelligence_camera_model``.
 
-Q&A template
------------------
+Q&A Guidelines
+--------------------
 
-Please do updates according to the template formats as follows.
+Please add new Q&A items and do updates according to the guidelines as follows:
 
-Q&A code example
+**General guideline:**
+
+- If you are going to add a new Q&A item, always remember to add a separate line after the previous one as "-------------------".
+
+**For questions:**
+
+- Illustrate questions clearly, for example:
+
+  - When flashing firmware to ESP32-S2, an error occurred as “A fatal error occurred: Invalid head of packet (0x50)”? **(NOT Clear)**
+  - When flashing firmware to ESP32-S2, an error occurred as “A fatal error occurred: Invalid head of packet (0x50)”. How to resolve such issue? **(Preferable)**
+
+- Do not make the question too long. If this is the case, extract the main question as the title and describe the background and details below.
+
+**For answers:**
+
+- If there will be code in the text, use code box to separate it with the main text.
+- If an answer only includes one sentence, there is no need to write a list, just use a regular paragraph.
+- Use lists to separate items or to enumerate sequential items:
+
+  - Use numbered lists for items that are in a required order (such as step-by-step instructions) or for items that are referred to by item number.
+  - Use bulleted lists for items that are in no required order.
+
+- Provide introductory phrase before a list to indicate the meaning or purpose of the list, and place a colon ":" at the end of it.
+- If two items are alternatives, use a bullet list (not numbered list) and indicate their relationship in the introductory phrase.
+- Always add two spaces before an listed item or paragraph in the answer.
+- When a separate notice or explanatory paragraph follows a item, indent that separate material to the text of the parent list item.
+- Follow list punctuation rules described in `Espressif Manual of Style <https://espressifsystems.sharepoint.com/sites/Documentation/Lists/Internal%20Document/DispForm.aspx?ID=1&e=eApbSw>`_, Section Punctuation in Lists.
+
+For additional guidance regarding list please refer to `Bulleted and Numbered Lists <https://www.prismnet.com/~hcexres/textbook/lists.html>`_. Please see the example template for text and figures below.
+
+
+Q&A example
 ~~~~~~~~~~~~~~~~~~~~~~~
 
   .. code:: text
@@ -70,7 +101,7 @@ Q&A code example
     Does Espressif have any AI image recognition products?
     --------------------------------------------------------
 
-    Yes, we already have the ESP-EYE development board. With ESP32 as its main control chip, ESP-EYE supports various types of cameras, such as 0v2640, 3660, 5640 and etc.
+      Yes, we already have the ESP-EYE development board. With ESP32 as its main control chip, ESP-EYE supports various types of cameras, such as 0v2640, 3660, 5640 and etc.
 
 
 Q&A figure example
