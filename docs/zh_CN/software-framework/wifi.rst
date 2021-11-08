@@ -827,4 +827,28 @@ Wi-Fi 模块如何设置国家码？
   :CHIP\: ESP8266 | ESP32 | ESP32 | ESP32-C3:
 
  - 可以通过调用 `esp_wifi_set_country <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=esp_wifi_set_country#_CPPv420esp_wifi_set_countryPK14wifi_country_t />`_  接口设置国家码。
- 
+
+---------------
+
+当 ESP32 用作 SoftAP 连接苹果手机时，手机提示”低安全性　WPA/WPA2(TKIP) 并不安全。如果这是您的无线局域网，请配置路由器以使用 WPA2(AES) 或 WPA3 安全类型“，该如何解决？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  
+  :IDF\: release/v4.0 及以上:
+
+  - 可以参考下面的代码进行设置：
+
+    .. code-block:: c
+
+      wifi_config_t wifi_config = {
+          .ap = {
+              .ssid = EXAMPLE_ESP_WIFI_SSID,
+              .ssid_len = strlen(EXAMPLE_ESP_WIFI_SSID),
+              .channel = EXAMPLE_ESP_WIFI_CHANNEL,
+              .password = EXAMPLE_ESP_WIFI_PASS,
+              .max_connection = EXAMPLE_MAX_STA_CONN,
+              .authmode = WIFI_AUTH_WPA2_PSK,
+              .pairwise_cipher = WIFI_CIPHER_TYPE_CCMP
+          },
+      };
+
+  - WIFI_AUTH_WPA2_PSK 是 AES，也叫 CCMP。 WIFI_AUTH_WPA_PSK 是 TKIP。WIFI_AUTH_WPA_WPA2_PSK 是 TKIP+CCMP。
