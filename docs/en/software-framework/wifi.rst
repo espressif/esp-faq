@@ -819,3 +819,11 @@ After ESP32 used the Wi-Fi function, are all ADC2 channels unavailable?
 
   - When an ESP32 device is using Wi-Fi function, the ADC2 pins that are not occupied by Wi-Fi can be used as normal GPIOs. You can refer to the official `ADC Description <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html?highlight=adc#analog-to-digital-converter>`_.
   
+-----------------------------------------------------------------------------------------------------
+
+How do I set the country code for a Wi-Fi module ?
+-----------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP8266 | ESP32 | ESP32 | ESP32-C3:
+
+  - Please call `esp_wifi_set_country <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html? highlight=esp_wifi_set_country#_CPPv420esp_wifi_set_countryPK14wifi_country_t />`_ to set the country code.
