@@ -827,3 +827,28 @@ How do I set the country code for a Wi-Fi module ?
   :CHIP\: ESP8266 | ESP32 | ESP32 | ESP32-C3:
 
   - Please call `esp_wifi_set_country <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html? highlight=esp_wifi_set_country#_CPPv420esp_wifi_set_countryPK14wifi_country_t />`_ to set the country code.
+
+---------------
+
+When using ESP32 as a SoftAP and have it connected to an Iphone, a warning prompts as "low security WPA/WPA2(TKIP) is not secure. If this is your wireless LAN, please configure the router to use WPA2(AES) or WPA3 security type", how to solve it?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  
+  :IDF\: release/v4.0 and above:
+
+  - You can refer to the following code snippet:
+
+    .. code-block:: c
+
+      wifi_config_t wifi_config = {
+          .ap = {
+              .ssid = EXAMPLE_ESP_WIFI_SSID,
+              .ssid_len = strlen(EXAMPLE_ESP_WIFI_SSID),
+              .channel = EXAMPLE_ESP_WIFI_CHANNEL,
+              .password = EXAMPLE_ESP_WIFI_PASS,
+              .max_connection = EXAMPLE_MAX_STA_CONN,
+              .authmode = WIFI_AUTH_WPA2_PSK,
+              .pairwise_cipher = WIFI_CIPHER_TYPE_CCMP
+          },
+      };
+
+  - WIFI_AUTH_WPA2_PSK is AES, also called CCMP. WIFI_AUTH_WPA_PSK is TKIP. WIFI_AUTH_WPA_WPA2_PSK is TKIP+CCMP.
