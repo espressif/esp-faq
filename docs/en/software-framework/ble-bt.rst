@@ -384,3 +384,10 @@ What profile does ESP32's classic Bluetooth® support?
 -------------------------------------------------------
 
   - It supports A2DP, AVRCP, SPP, HFP currently, while HID is under development.
+
+----------------
+
+How many stable connections can be reached for ESP32-C3's Bluetooth® LE (BLE)? 
+------------------------------------------------------------------------------------------------
+
+ - Eight.
