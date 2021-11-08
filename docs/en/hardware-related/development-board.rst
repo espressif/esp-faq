@@ -20,3 +20,10 @@ How long does it take for the ESP-WROOM-02D module to restart after the reset si
 
   - It will restart when the input level is lower than 0.6 V for more than 200 μs.
   
+---------------------
+
+According to the schematic of ESP32-LyraT-Mini, the analog output of the ES8311 codec chip is connected to the input of the ES7243 ADC chip. What is the purpose of this?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - To use the ES7243 ADC chip to obtain the necessary input reference signal for AEC.
+  
