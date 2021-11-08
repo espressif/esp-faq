@@ -82,3 +82,12 @@ ESP32 启动 flash 加密后进行 GDB 调试，为何会不断复位重启？
 
   - ESP32 启动了 flash 加密或 secure Boot 后，默认将会禁用 JTAG 调试，请参见说明 `注意事项和补充内容 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-with-flash-encryption-or-secure-boot>`_。
   - 可以通过 esptool 工具包中的 ``espefuse.py summary`` 脚本指令读取当前芯片 JTAG 状态。 
+
+---------------
+
+ESP32 芯片如何开启 Flash 加密？
+-------------------------------------------------------------------------------------------------------------------
+
+  - 在 ESP-IDF 编译配置中修改，通过 `make menuconfig` 或 `idf.py menuconfig --> Security features --> Enable flash encryption on boot (READ DOCS FIRST)`。
+  - 请参见 `Flash 加密说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html#flash>`_。
+  

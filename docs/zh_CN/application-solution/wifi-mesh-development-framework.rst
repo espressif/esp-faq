@@ -225,3 +225,10 @@ Wi-Fi Mesh 数据传送最大的包为多少 Bytes？
 ------------------------------------------------------------------------------------------
 
   - 最大为 1456 bytes。
+
+--------
+
+ESP32 的 Wi-Fi Mesh 支持 No Router 自组网吗？
+--------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 的 Wi-Fi Mesh 支持 No Router 自组网，可参见例程 `esp-mdf/examples/function_demo/mwifi/no_router <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/no_router>`_。

@@ -82,3 +82,12 @@ When ESP32 debugging GDB after enabling flash encryption, why does it always con
 
   - After ESP32 enabling flash encryption or secure boot, it will restrict JTAG debugging by default, please refer to `Tips and Quirks <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-with-flash-encryption-or-secure-boot>`_.
   - You can read the current JTAG status of your chip using the ``espefuse.py summary`` command from esptool.
+
+------------------
+
+How to enable flash encryption for ESP32?
+----------------------------------------------------------------------------------------------------------------------------------------
+
+  - It can be enabled via `make menuconfig` or `idf.py menuconfig --> Security features --> Enable flash encryption on boot (READ DOCS FIRST)` configurations.
+  - Please refer to `Flash encryption instructions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html#flash>`_.
+  
