@@ -819,3 +819,12 @@ ESP32 使用 Wi-Fi 的功能后，是否 ADC2 的所有通道都不能使用了�
 
   - ESP32 在使用 Wi-Fi 的情况下，没有被 Wi-Fi 占用的 ADC2 的引脚可以做普通 GPIO 使用。可参考官方 `ADC 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/adc.html?highlight=adc#analog-to-digital-converter>`_。
   
+-----------------------------------------------------------------------------------------------------
+
+Wi-Fi 模块如何设置国家码？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP8266 | ESP32 | ESP32 | ESP32-C3:
+
+ - 可以通过调用 `esp_wifi_set_country <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=esp_wifi_set_country#_CPPv420esp_wifi_set_countryPK14wifi_country_t />`_  接口设置国家码。
+ 
