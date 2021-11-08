@@ -19,3 +19,11 @@ What is the maximum data transmission load for Wi-Fi mesh?
 --------------------------------------------------------------------------------------------------
 
   - Up to 1456 bytes.
+
+-------------------
+
+Does ESP32's Wi-Fi Mesh supports No Router self-networking?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, please refer to example `esp-mdf/examples/function_demo/mwifi/no_router <https://github.com/espressif/esp-mdf/tree/master/examples/ function_demo/mwifi/no_router>`_.
+  
