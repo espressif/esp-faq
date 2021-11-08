@@ -13,9 +13,19 @@ Cloud service
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
 
+--------------
+
 
 Are there any demo references for OTA upgrading?
 ---------------------------------------------------
 
   - For ESP8266, please refer to `ESP8266 OTA <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/system/ota>`_.
   - For ESP32 and ESP32-S2, please refer to `ESP32 and ESP32-S2 OTA <https://github.com/espressif/esp-idf/tree/master/examples/system/ota>`_.
+
+--------------
+
+Does ESP Azure library support Azure IoT Central? Is there a demo?
+------------------------------------------------------------------------------------------------------
+
+  - ESP Azure already supports Azure IoT Central. But there is no relevant example on the master.
+  - The PnP example on the ESP Azure's preview/pnp_example branch will report some actual data  from sensors, you can refer to the operation of Azure IoT Central for the data management.

@@ -74,3 +74,11 @@ ESPESP8266 可以连接 Alex 或者 Google home 吗？
 
   - Alex 可以参考 `aws_iot <https://github.com/espressif/ESP8266_RTOS_SDK/tree/release/v3.3/examples/protocols/aws_iot>`_, 做一些 Alex 配置即可。
   - Google home 当前没有示例，可以参考 ESP32 参考示例 `esp-google-iot <https://github.com/espressif/esp-google-iot>`_。
+
+-----------------------
+
+ESP Azure 库支持 Azure IoT Central 吗？有没有 Demo？
+-------------------------------------------------------------------------------------------------------------
+
+  - ESP Azure 已经支持 Azure IoT Central。但是 master 上还没有相关示例。
+  - ESP Azure preview/pnp_example 分支上的 PnP 示例会上报些真实的传感器数据，可以参考其中 Azure IoT Central 对这些数据的管理。
