@@ -95,3 +95,11 @@ Given that the GDB debugging function is working before the flash encryption is 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The JTAG debugging function will be disabled by default when flash encryption or secure boot is enabled. For more information, please refer to `JTAG with Flash Encryption or Secure Boot <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-with-flash-encryption-or-secure-boot>`_.
+
+---------------------
+
+While using mobile's hotpot for an ESP32 to download the OTA firmware, after a few seconds when turning of the hotspot and restarts ESP32, the program sticks in the OTA operation (the same situation for plugging and unplugging the wan port network cable when using a router), why?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - This is a normal situation based on the protocol. When using the `esp_https_ota` component to run OTA, you can set the network timeout value (via `http_config->timeout_ms`) to 10 ~ 30 s (not too low) and enable `http_config->keep_alive_enable` to see if there are any errors in the link layer.
+  - If you are using an self-implemented OTA module, please set a timeout value via the `select` configuration or enable the TCP keep-alive mechanism to detect the link layer.
