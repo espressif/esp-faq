@@ -88,3 +88,10 @@ Does the cJSON in ESP-IDF release/v4.2 support uint64_t data analysis?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - No. The cJSON library has restrictions on parsing long integers, and the longest type is Double.
+
+---------------------
+
+Given that the GDB debugging function is working before the flash encryption is disabled, then why does the device keeps restarting during the GDB debugging after the flash encryption is enabled?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The JTAG debugging function will be disabled by default when flash encryption or secure boot is enabled. For more information, please refer to `JTAG with Flash Encryption or Secure Boot <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-with-flash-encryption-or-secure-boot>`_.
