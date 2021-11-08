@@ -12,3 +12,11 @@ Development board
      h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
+
+--------------------
+
+How long does it take for the ESP-WROOM-02D module to restart after the reset signal?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - It will restart when the input level is lower than 0.6 V for more than 200 μs.
+  
