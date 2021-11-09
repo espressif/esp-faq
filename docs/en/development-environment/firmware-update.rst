@@ -142,3 +142,16 @@ How does ESP32 set Flash SPI to QIO mode?
 ----------------------------------------------------------------------------------------------
 
   - It can be set in configuration terminal through "menuconfig -> Serial flasher config -> Flash SPI mode" , the corresponding API is esp_image_spi_mode_t().
+
+-------------------
+
+After downloaded program and powered on EPS8266, the serial port prints the following log. What is the reason?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    ets Jan  8 2013,rst cause:1, boot mode:(7,7)
+    waiting for host
+
+  - `waiting for host` means the Boot is in SDIO mode, indicating that GPIO15 (MTDO) is pulled up (HIGH), please refer to `ESP8266 Boot Mode Description <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process#esp -boot-modes>`_.
+  
