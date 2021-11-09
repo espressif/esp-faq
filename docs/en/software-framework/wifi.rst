@@ -859,3 +859,23 @@ Since ESP32's Wi-Fi module only supports 2.4 GHz of bandwidth, can Wi-Fi network
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Please set your router to multi-frequency mode (can support 2.4 GHz and 5 GHz for one Wi-Fi account), and the ESP32 device can connect to Wi-Fi normally.
+
+---------------
+
+How to obtain the RSSI of the station connected when ESP32 is used in AP mode?
+-------------------------------------------------------------------------------------
+
+  - You can call API `esp_wifi_ap_get_sta_list <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=esp_wifi_ap_get_sta_list#_CPPv424esp_wifi_ap_get_sta_listP15wifi_sta_list_t>`_, please refer to the following code snippet:
+
+    .. code-block:: c
+
+      {
+          wifi_sta_list_t wifi_sta_list;
+          esp_wifi_ap_get_sta_list(&wifi_sta_list);
+          for (int i = 0; i < wifi_sta_list.num; i++) {
+              printf("mac address: %02x:%02x:%02x:%02x:%02x:%02x\t rssi:%d\n",wifi_sta_list.sta[i].mac[0], wifi_sta_list.sta[i].mac[1],wifi_sta_list.sta[i].mac[2],
+                        wifi_sta_list.sta[i].mac[3],wifi_sta_list.sta[i].mac[4],wifi_sta_list.sta[i].mac[5],wifi_sta_list.sta[i].rssi);
+          }
+      }
+      
+  - The RSSI obtained by ``esp_wifi_ap_get_sta_list`` is the average value over a period of time, not real-time RSSI. The previous RSSI has a weight of 13, and the new RSSI has a weight of 3. The RSSI is updated when it is or larger than 100ms, the old rssi_arg is used when updating as: ``rssi_avg = rssi_avg*13/16 + new_rssi * 3/16``.

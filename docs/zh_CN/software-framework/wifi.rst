@@ -859,4 +859,23 @@ ESP32 的 Wi-Fi 模块仅支持 2.4 GHz 频率的带宽，如果在进行连网�
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 路由器设置为多频合一的模式（一个 Wi-Fi 账号同时支持 2.4 GHz 和 5 GHz），ESP32 设备可以正常连接 Wi-Fi。
-  
+
+---------------
+
+ESP32 用作 AP 模式时如何获取连接进来的 station 的 RSSI？
+---------------------------------------------------------------
+
+  - 可以调用接口 `esp_wifi_ap_get_sta_list <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=esp_wifi_ap_get_sta_list#_CPPv424esp_wifi_ap_get_sta_listP15wifi_sta_list_t>`_，参考如下代码：
+
+    .. code-block:: c
+
+      {
+          wifi_sta_list_t wifi_sta_list;
+          esp_wifi_ap_get_sta_list(&wifi_sta_list);
+          for (int i = 0; i < wifi_sta_list.num; i++) {
+              printf("mac address: %02x:%02x:%02x:%02x:%02x:%02x\t rssi:%d\n",wifi_sta_list.sta[i].mac[0], wifi_sta_list.sta[i].mac[1],wifi_sta_list.sta[i].mac[2],
+                        wifi_sta_list.sta[i].mac[3],wifi_sta_list.sta[i].mac[4],wifi_sta_list.sta[i].mac[5],wifi_sta_list.sta[i].rssi);
+          }
+      }
+      
+  - ``esp_wifi_ap_get_sta_list`` API 获取到的 RSSI 为一段时间内的平均值，不是实时的 RSSI。之前的 RSSI 权重为 13，新的 RSSI 的权重为 3。在 >= 100ms 时更新 RSSI，更新时需要使用旧的 rssi_avg：``rssi_avg = rssi_avg*13/16 + new_rssi * 3/16``。  
