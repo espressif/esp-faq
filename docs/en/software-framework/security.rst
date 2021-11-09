@@ -91,3 +91,11 @@ How to enable flash encryption for ESP32?
   - It can be enabled via `make menuconfig` or `idf.py menuconfig --> Security features --> Enable flash encryption on boot (READ DOCS FIRST)` configurations.
   - Please refer to `Flash encryption instructions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html#flash>`_.
   
+------------------
+
+After GPIO0 is pulled down, the ESP32 cannot enter download mode and prints "download mode is disable". What is the reason?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - It means the chip's UART Download mode has been disabled, you can check this via the ``UART_DOWNLOAD_DIS`` bit in `efuse <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/efuse.html?highlight=download%20mode>`_.
+  - Please note that after the Production mode of flash encryption is enabled, the UART Download mode will be disabled by default. For more information, please refer to `UART ROM download mode <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig.html#config-secure-uart-rom-dl-mode>`_.
+  
