@@ -90,4 +90,12 @@ ESP32 芯片如何开启 Flash 加密？
 
   - 在 ESP-IDF 编译配置中修改，通过 `make menuconfig` 或 `idf.py menuconfig --> Security features --> Enable flash encryption on boot (READ DOCS FIRST)`。
   - 请参见 `Flash 加密说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html#flash>`_。
+
+-------------
+
+ESP32 的 GPIO0 拉低后无法进入下载模式，日志打印 "download mode is disable" 是什么原因？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 芯片上电打印 "download mode is disable" 日志，说明该芯片的 UART 下载模式 (UART download mode) 已被禁用，您可以通过检查该芯片的 `efuse <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/efuse.html?highlight=download%20mode>`_ 中的 ``UART_DOWNLOAD_DIS`` 位检查该模式是否被禁用。
+  - 注意，当启用 flash 加密的量产模式后，UART 下载模式将默认被禁用，更多信息请参考 `UART ROM download mode <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/kconfig.html#config-secure-uart-rom-dl-mode>`_。
   
