@@ -13,6 +13,8 @@ RF related
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
 
+--------------
+
 If an ESP32 module is running under a 2.8 V supply, is there any degradation in its RF performance?
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -34,3 +36,9 @@ How can I get the RF related information (e.g., antenna specification, antenna p
 
   For such information, please contact `Sales <https://www.espressif.com/en/contact-us/sales-questions>`_ for help.
 
+--------------
+
+Why does ESP32 automatically reduce the transmit power when running at a high temperature of 80 °C when using the RF Test Tool?
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The temperature compensation function on testing firmware with a fixed frequency is disabled by default. Therefore, when the temperature is high, the power will be lower. If you need to enable the temperature compensation, please send ``txpwr_track_en 1 1 0`` to ESP32 through the default log serial port.
