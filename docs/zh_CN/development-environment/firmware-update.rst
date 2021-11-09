@@ -144,3 +144,14 @@ ESP32 如何设置 Flash SPI 为 QIO 模式？
 ---------------------------------------------------------------------------------------------
 
   - 可通过 menuconfig -> Serial flasher config -> Flash SPI mode 配置端进行设置，对应 API 为 esp_image_spi_mode_t()。
+
+----------------------
+
+使用 ESP8266 开发板，下载程序后，上电启动串口打印如下 log，是什么原因？
+--------------------------------------------------------------------------
+  .. code-block:: text
+
+    ets Jan  8 2013,rst cause:1, boot mode:(7,7)
+    waiting for host
+
+  - 打印 `waiting for host` 说明 Boot 模式是 SDIO 模式，表明 GPIO15（MTDO）被拉高，请参见 `ESP8266 Boot 模式说明 <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process#esp-boot-modes>`_。
