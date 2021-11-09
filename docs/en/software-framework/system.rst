@@ -103,3 +103,11 @@ While using mobile's hotpot for an ESP32 to download the OTA firmware, after a f
 
   - This is a normal situation based on the protocol. When using the `esp_https_ota` component to run OTA, you can set the network timeout value (via `http_config->timeout_ms`) to 10 ~ 30 s (not too low) and enable `http_config->keep_alive_enable` to see if there are any errors in the link layer.
   - If you are using an self-implemented OTA module, please set a timeout value via the `select` configuration or enable the TCP keep-alive mechanism to detect the link layer.
+
+-----------------
+
+Why do different ESP32 modules have different flash erase time?
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  - This is caused by different type of flash models. Some module of flash don't have a mechanism for passing empty blocks when erasing, so it takes longer time.
+  
