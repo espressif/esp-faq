@@ -631,3 +631,12 @@ How to enable full calibration mode for ESP8266 NONOS AT firmware?
   - The NONOS AT firmware uses partial calibration by default, and full calibration can be enabled in the following way:
   
     modify file ``esp_init_data_default_v08.bin``, byte[114] = 3 (for partial calibration, byte[114] = 1, while for full calibration, byte[114] = 3).
+
+---------------
+
+What is the maximum rate of ESP32 AT BLE UART transparent transmission? 
+-------------------------------------------------------------------------
+
+  - In an open office environment, when the serial port baud rate is 2000000: the average transmission rate of ESPAT BT is 0.56 Mb, and the average transmission rate of ESPAT BLE is 0.101 Mb.
+  - In shielding box environment, the data will also be provided after the test finished in the future.
+  
