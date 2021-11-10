@@ -879,3 +879,13 @@ ESP32 用作 AP 模式时如何获取连接进来的 station 的 RSSI？
       }
       
   - ``esp_wifi_ap_get_sta_list`` API 获取到的 RSSI 为一段时间内的平均值，不是实时的 RSSI。之前的 RSSI 权重为 13，新的 RSSI 的权重为 3。在 >= 100ms 时更新 RSSI，更新时需要使用旧的 rssi_avg：``rssi_avg = rssi_avg*13/16 + new_rssi * 3/16``。  
+
+---------------
+
+ESP32 支持 FTM(Fine Timing Measurement) 吗？
+-------------------------------------------------------------------------------
+
+  - 不支持，FTM 需要硬件支持，ESP32 没有对应的硬件。
+  - 当前 ESP32-S2 和 ESP32-C3 在硬件上支持 FTM。
+  - ESP-IDF v4.3-beta1 开始支持 FTM。
+  - 关于 FTM 的更多内容以及例程，请参考 `FTM <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#fine-timing-measurement-ftm>`_。
