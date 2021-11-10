@@ -155,3 +155,12 @@ ESP32 如何设置 Flash SPI 为 QIO 模式？
     waiting for host
 
   - 打印 `waiting for host` 说明 Boot 模式是 SDIO 模式，表明 GPIO15（MTDO）被拉高，请参见 `ESP8266 Boot 模式说明 <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process#esp-boot-modes>`_。
+
+----------------
+
+ESP32 使用 UART 升级固件，如何设置两个 `app_main` 的空间？
+------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 通过 UART 升级固件，不支持设置两个 `app_main` 的空间。
+  - UART 升级固件的机制与 Flash download tool 下载工具的是一样的。升级后的固件直接替换当前的固件，不支持保留旧的固件。
+  
