@@ -622,3 +622,12 @@ What is the maximum value of the parameter `length` of AT+BLEGATTSNTFY and AT+BL
   :CHIP\: ESP32:
 
   - The maximum value of `length` is MTU - 3, and the MTU can support up to 517 bytes, so the maximum value of `length` is 514 bytes.
+
+----------------
+
+How to enable full calibration mode for ESP8266 NONOS AT firmware?
+---------------------------------------------------------------------------------------------------------------------------------
+
+  - The NONOS AT firmware uses partial calibration by default, and full calibration can be enabled in the following way:
+  
+    modify file ``esp_init_data_default_v08.bin``, byte[114] = 3 (for partial calibration, byte[114] = 1, while for full calibration, byte[114] = 3).
