@@ -879,3 +879,14 @@ How to obtain the RSSI of the station connected when ESP32 is used in AP mode?
       }
       
   - The RSSI obtained by ``esp_wifi_ap_get_sta_list`` is the average value over a period of time, not real-time RSSI. The previous RSSI has a weight of 13, and the new RSSI has a weight of 3. The RSSI is updated when it is or larger than 100ms, the old rssi_arg is used when updating as: ``rssi_avg = rssi_avg*13/16 + new_rssi * 3/16``.
+
+---------------
+
+Does ESP32 support FTM(Fine Timing Measurement)?
+-------------------------------------------------------------------------------
+
+  - No, it doesn't. FTM needs hardware support, but ESP32 doesn't have it.
+  - ESP32-S2 and ESP32-C3 can support FTM in hardware.
+  - ESP-IDF can support FTM from v4.3-beta1.
+  - For more information and examples of FTM, please refer to `FTM <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#fine-timing-measurement-ftm>`_.
+  
