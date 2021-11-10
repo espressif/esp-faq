@@ -155,3 +155,11 @@ After downloaded program and powered on EPS8266, the serial port prints the foll
 
   - `waiting for host` means the Boot is in SDIO mode, indicating that GPIO15 (MTDO) is pulled up (HIGH), please refer to `ESP8266 Boot Mode Description <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process#esp -boot-modes>`_.
   
+--------------------------
+
+When using UART to upgrade firmware for ESP32, how to set two `app_main` spaces?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Sorry, ESP32 chips do not support setting two `app_main` spaces when upgrading firmware via UART.
+  - The mechanism of UART upgrading firmware is the same as that of flash download tool. The upgraded firmware will directly replace the old one, and it is not supported to keep the old firmware.
+  
