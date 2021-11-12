@@ -912,3 +912,22 @@ When ESP32 is in STA+AP mode, how to specify whether using STA or AP interface t
   - The tcp connection between ESP32 and PC can be established when an ESP32 is bound to the STA interface, while the connection cannot be established when it is bound to the AP interface.
   - By default, the tcp connection between ESP32 and mobile phone can be established(the mobile phone as a station is connected to ESP32).
 
+---------------------------------------------------------------------------------------
+
+ESP8266 `wpa2_enterprise <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/wifi/wpa2_enterprise>`_ How to enable Wi-Fi debugging function?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Open menuconfig via ``idf.py menuconfig`` and configure the following parameters:
+
+    .. code-block:: c
+
+      menuconfig==>Component config ==>Wi-Fi ==>
+      [*]Enable WiFi debug log ==>The DEBUG level is enabled (Verbose)
+      [*]WiFi debug log submodule
+      [*] scan
+      [*] NET80211
+      [*] wpa
+      [*] wpa2_enterprise
+      
+      menuconfig==>Component config ==>Supplicant ==>[*] Print debug messages from WPA Supplicant
+    

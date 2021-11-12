@@ -911,3 +911,24 @@ ESP32 支持 FTM(Fine Timing Measurement) 吗？
 
   - 绑定 STA 接口可以建立 ESP32 和 PC 的 tcp 连接，绑定 AP 接口无法建立 ESP32 和 PC 的 tcp 连接；
   - 默认情况下可以建立 ESP32 到手机的 tcp 连接(手机作为 STA 接入 ESP32)。
+
+
+---------------------------------------------------------------------------------------
+
+ESP8266 `wpa2_enterprise <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/wifi/wpa2_enterprise>`_  如何开启 Wi-Fi 调试功能?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 使用 idf.py menuconfig 开启 menuconfig 配置，然后配置以下参数：
+
+    .. code-block:: c
+
+      menuconfig==>Component config ==>Wi-Fi ==>
+      [*]Enable WiFi debug log ==>The DEBUG level is enabled (Verbose)
+      [*]WiFi debug log submodule
+      [*] scan
+      [*] NET80211
+      [*] wpa
+      [*] wpa2_enterprise
+      
+      menuconfig==>Component config ==>Supplicant ==>[*] Print debug messages from WPA Supplicant
+  
