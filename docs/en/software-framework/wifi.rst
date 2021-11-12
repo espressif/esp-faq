@@ -890,3 +890,25 @@ Does ESP32 support FTM(Fine Timing Measurement)?
   - ESP-IDF can support FTM from v4.3-beta1.
   - For more information and examples of FTM, please refer to `FTM <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#fine-timing-measurement-ftm>`_.
   
+---------------
+
+When ESP32 is in STA+AP mode, how to specify whether using STA or AP interface to send data?
+------------------------------------------------------------------------------------------------------
+
+  **Background:**
+
+  The default network segment of ESP32 as AP is 192.168.4.x, and the network segment of the router to which ESP32 as STA is connected is also 192.168.4.x. The PC connects to the same router and creates a tcp server. In this case, the tcp connection between ESP32 as tcp client and PC as tcp server cannot be established successfully.
+
+  **Solutions:**
+
+  - It is possible for ESP32 to specify whether to use STA or AP interface for data transmission. Please see example `tcp_client_multi_net <https://github.com/espressif/esp-idf/tree/master/examples/protocols/sockets/tcp_client_multi_net>`_, in which both ethernet and station interface are used and each can be specified for data transmission.
+  - There are two ways to bind socket to an interface:
+
+    - use netif name (use socket option SO_BINDTODEVICE)
+    - use netif local IP address (get IP address of an interface via esp_netif_get_ip_info(), then call bind())
+
+.. note::
+
+  - The tcp connection between ESP32 and PC can be established when an ESP32 is bound to the STA interface, while the connection cannot be established when it is bound to the AP interface.
+  - By default, the tcp connection between ESP32 and mobile phone can be established(the mobile phone as a station is connected to ESP32).
+

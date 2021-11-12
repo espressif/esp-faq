@@ -889,3 +889,25 @@ ESP32 支持 FTM(Fine Timing Measurement) 吗？
   - 当前 ESP32-S2 和 ESP32-C3 在硬件上支持 FTM。
   - ESP-IDF v4.3-beta1 开始支持 FTM。
   - 关于 FTM 的更多内容以及例程，请参考 `FTM <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#fine-timing-measurement-ftm>`_。
+
+---------------
+
+当 ESP32 设置为 STA+AP 共存时，能否指定通过 STA 或者 AP 接口发送数据？
+-------------------------------------------------------------------------------------------------------------------
+
+  **问题背景：**
+
+  ESP32 作为 AP 默认的网段是 192.168.4.x，作为 STA 连接的路由器网段也在 192.168.4.x，PC 连接到该路由器并创建 tcp server，此时 ESP32 作 tcp client 无法建立到 PC 的 tcp 连接。
+  
+  **解决方案：**
+
+  - ESP32 可以指定通过 STA 或者 AP 接口发送数据，可参考例程 `tcp_client_multi_net <https://github.com/espressif/esp-idf/tree/master/examples/protocols/sockets/tcp_client_multi_net/>`_。该例程中同时使用了 Ethernet 接口和 STA 接口，可以指定接口发送数据。   
+  - 有两种方式将 socket 绑定到某个接口：
+
+    - 使用 netif name (使用 socket 选项 SO_BINDTODEVICE)
+    - 使用 netif local IP address (通过 esp_netif_get_ip_info() 获取接口 IP，调用 bind() 绑定)
+
+.. note::
+
+  - 绑定 STA 接口可以建立 ESP32 和 PC 的 tcp 连接，绑定 AP 接口无法建立 ESP32 和 PC 的 tcp 连接；
+  - 默认情况下可以建立 ESP32 到手机的 tcp 连接(手机作为 STA 接入 ESP32)。
