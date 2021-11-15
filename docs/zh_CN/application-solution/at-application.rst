@@ -640,3 +640,11 @@ ESP32 AT BLE UART 透传的最大传输率是？
 
   - 办公室开放环境下，串口波特率为 2000000 时：ESPAT BT 平均传输速率为 0.56 Mb，ESPAT BLE 平均传输速率为 0.101 Mb。
   - 屏蔽箱数据后续会继续补充测试。
+
+---------------
+
+如何获取到模组 ESP32-MINI-1(内置芯片 ESP32-U4WDH) 的 AT 固件？
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - 请参考 `如何从 GitHub 下载最新临时版本 AT 固件 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/Compile_and_Develop/How_to_download_the_latest_temporary_version_of_AT_from_github.html>`_。
+  
