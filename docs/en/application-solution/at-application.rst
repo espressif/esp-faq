@@ -635,8 +635,14 @@ How to enable full calibration mode for ESP8266 NONOS AT firmware?
 ---------------
 
 What is the maximum rate of ESP32 AT BLE UART transparent transmission? 
--------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
   - In an open office environment, when the serial port baud rate is 2000000: the average transmission rate of ESPAT BT is 0.56 Mb, and the average transmission rate of ESPAT BLE is 0.101 Mb.
   - In shielding box environment, the data will also be provided after the test finished in the future.
   
+---------------
+
+How to get the AT firmware of the ESP32-MINI-1(ESP32-U4WDH inside) module?
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - Please refer to `How_to_download_the_latest_temporary_version_of_AT_from_github <https://docs.espressif.com/projects/esp-at/en/latest/Compile_and_Develop/How_to_download_the_latest_temporary_version_of_AT_from_github.html>`_.
