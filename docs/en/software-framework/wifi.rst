@@ -931,3 +931,12 @@ ESP8266 `wpa2_enterprise <https://github.com/espressif/ESP8266_RTOS_SDK/tree/mas
       
       menuconfig==>Component config ==>Supplicant ==>[*] Print debug messages from WPA Supplicant
     
+-----------------------------------------------------------------------------------------------------
+
+Is there a standard for the number of Wi-Fi signal frames?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP8266 | ESP32 | ESP32 | ESP32-C3:
+
+ - There is no such standard for now. You can do the calculation by yourself based on the received RSSI. For example, if the received RSSI range is [0,-96], and the required signal strength is 5, then [0~-20] is the full signal, and so on.
+ 
