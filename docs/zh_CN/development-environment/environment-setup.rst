@@ -100,3 +100,23 @@ Windows 下执行 export.bat，提示 CMake、gdbgui 版本错误：
   - 对于 ``IDF_PATH``，可以在工程的 Makefile 里强制指定：
     
     在基于 ESP32 的工程项目里使用：``IDF_PATH = $(HOME)/esp/esp-idf``；在基于 ESP8266 的工程项目里使用：``IDF_PATH = $(HOME)/esp/ESP8266_RTOS_SDK``。
+
+---------------
+
+每一次切换项目时都需要重新调用 ``idf.py set-target`` 指令吗？
+--------------------------------------------------------------------
+
+  使用 ``idf.py build`` 编译项目时，target 的选择取决于：
+
+  1. 如果编译目录已经生成，系统将使用上一次编译时使用的 target。该参数存储于编译目录中的 CMakeCache.txt 文件内。
+  2. 如果还未生成编译目录，系统将检查 ``sdkconfig`` 文件，并使用其中定义的 target。
+  3. 如果同时存在有编译目录和 ``sdkconfig`` 文件，且其中分别定义了不同的 target，系统将报错。但该情况一般不会发生，除非在未删除编译目录的情况下手动更改了 ``sdkconfig`` 文件。
+  4. 如果 ``sdkconfig`` 文件或编译目录都不存在，可使用 ``IDF_TARGET`` 设置 target，作为 CMake 变量或环境变量。同样的，如果该变量设置的 target 和 ``sdkconfig`` 文件或编译目录中定义的 target 不一致时，系统也会报错。
+  5. 最后，如果上述三种途径都未定义 target，系统将使用默认值。可在 ``sdkconfig.defaults`` 中设置默认的 target 值。
+  6. 若未设定任何默认值，系统将使用 esp32 进行编译。
+
+  关于是否需要多次调用 ``idf.py set-target``：
+
+  - 一旦某个项目配置完成并使用 target 编译过一次后，则无需再次调用 ``idf.py set-target`` 指令重设，直接切换到另一项目中即可。``idf.py set-target`` 指令会将配置的 target 值存储于项目下的编译目录和 ``sdkconfig`` 文件中，并非存储于终端环境。因此，如果你切换并编译了另一项目，再次切回上一项目时，其 target 不会改变，仍为上一次为这个项目配置的值。
+  - 若想使项目自动编译某一默认的 target 值，请将默认值添加至项目的 ``sdkconfig.defaults`` 文件（如 ``CONFIG_IDF_TARGET="esp32s2"``）。此后，如果项目中未存在 ``sdkconfig`` 文件和编译目录，``idf.py build`` 将使用 ``sdkconfig.defaults`` 中定义的默认值进行编译。
+  - ``idf.py set-target`` 指令定义的 target 值可覆盖 ``sdkconfig.defaults`` 中配置的值。
