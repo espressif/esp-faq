@@ -391,3 +391,12 @@ How many stable connections can be reached for ESP32-C3's Bluetooth® LE (BLE)?
 ------------------------------------------------------------------------------------------------
 
  - Eight.
+ 
+----------------
+
+How to adjust the BLE advertising interval?
+------------------------------------------------------------------------------------------
+
+  - The advertising interval is decided by ``adv_int_min`` and ``adv_int_max`` parameters in BLE advertising struct, which configures the minimum and maximum advertising interval respectively.
+  - The range of advertising interval value is 0x0020 to 0x4000 and the default value is 0x0800. The interval time is the value * 0.625 ms, i.e., 20 ms to 10.24 sec.
+  - If the values of ``adv_int_min`` and ``adv_int_max`` are different, the advertising interval is within the range of the two values. If the values are the same, the interval will be this fixed value.
