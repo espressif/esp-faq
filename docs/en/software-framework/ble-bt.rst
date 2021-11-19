@@ -96,7 +96,7 @@ How to get ESP32 Bluetooth® Compatibility Test Report?
 What is the transmit power of ESP32 Bluetooth®?
 ---------------------------------------------------------
   
-  The ESP32 Bluetooth has 9 transmit power levels, corresponding to -12 ~ 12 dBm of transmit power, with a 3 dBm interval. The controller software limits the transmit power and selects the power level according to the corresponding power level declared by the product. 
+  The ESP32 Bluetooth has 8 transmit power levels, corresponding to -12 ~ 9 dBm of transmit power, with a 3 dBm interval. The controller software limits the transmit power and selects the power level according to the corresponding power level declared by the product. 
 
 --------------
 
