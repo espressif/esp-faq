@@ -648,3 +648,12 @@ ESP32 AT BLE UART 透传的最大传输率是？
 
   - 请参考 `如何从 GitHub 下载最新临时版本 AT 固件 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/Compile_and_Develop/How_to_download_the_latest_temporary_version_of_AT_from_github.html>`_。
   
+-----------------------------------------------------------------------------------------------------
+
+ADV 广播参数超过 32 字节之后应该如何设置?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 :
+
+   - `AT+BLEADVDATA <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-bleadvdata-set-bluetooth-le-advertising-data>`_  指令支持 adv 广播参数最大为 32 字节，如果需要设置更长的广播参数，请调用 `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>`_  指令来设置。
+   
