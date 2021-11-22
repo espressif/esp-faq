@@ -940,3 +940,11 @@ Is there a standard for the number of Wi-Fi signal frames?
 
  - There is no such standard for now. You can do the calculation by yourself based on the received RSSI. For example, if the received RSSI range is [0,-96], and the required signal strength is 5, then [0~-20] is the full signal, and so on.
  
+--------------
+
+What is the current progress of WFA bugs fixing?
+--------------------------------------------------------------------------------------------
+  :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 |  ESP8266:
+
+  - Please refer to <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability.pdf/>`_ for more details.
+  
