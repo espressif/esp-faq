@@ -26,7 +26,7 @@ ESP32-S2 搭建环境时使用 ``idf.py set-target esp32-s2`` 指令时，显示
 idf.py menuconfig 编译报 "Configuring incomplete, errors occured" 的错误信息如何解决呢？
 -----------------------------------------------------------------------------------------
 
-  查看 CMake 版本，使用 ``camke --version`` 进行查看， 如果低于 3.10.0 版本，我们认为是低版本， 建议更新 cmake 版本：
+  查看 CMake 版本，使用 ``cmake --version`` 进行查看， 如果低于 3.10.0 版本，我们认为是低版本， 建议更新 cmake 版本：
 
   - 下载 CMake：https://cmake.org/download/
   - 操作参考链接：http://www.mamicode.com/info-detail-2594302.html

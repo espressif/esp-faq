@@ -26,7 +26,7 @@ When setting up ESP32-S2 environment using command ``idf.py set-target esp32-s2`
 When using idf.py menuconfig to build, how to deal with errors as "Configuring incomplete, errors occured"?
 --------------------------------------------------------------------------------------------------------------------------
 
-  Please check your CMake version first using ``camke --version``. If it is lower than version 3.10.0, please update your CMake version:
+  Please check your CMake version first using ``cmake --version``. If it is lower than version 3.10.0, please update your CMake version:
 
   - Download CMake: https://CMake.org/download/.
   - For details, please refer to http://www.mamicode.com/info-detail-2594302.html.
