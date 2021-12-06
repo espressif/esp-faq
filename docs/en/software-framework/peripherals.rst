@@ -691,3 +691,11 @@ Does ESP32-C3 support USB Host?
 ------------------------------------------------------
 
  - No, it only supports USB-Serial-JTAG function.
+
+---------------
+
+Does ESP32-S2 have USB UVC demo?
+--------------------------------------------------------------------
+
+  - Please refer to `uvc_stream demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_.
+
