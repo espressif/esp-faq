@@ -111,3 +111,9 @@ Why do different ESP32 modules have different flash erase time?
 
   - This is caused by different type of flash models. Some module of flash don't have a mechanism for passing empty blocks when erasing, so it takes longer time.
   
+---------------------
+
+Which GPIOs can be used to wake up ESP32-C3 from Deep-Sleep mode?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Only GPIO0 ~ GPIO5 in VDD3P3_RTC domain can be used to wake up ESP32-C3 from Deep-sleep mode. Please read Chapter 5.9.1 Power Supplies of GPIO Pins in `ESP32-C3 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp32-c3_technical_reference_manual_en.pdf>`_.
