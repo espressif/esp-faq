@@ -976,3 +976,11 @@ When using ESP32's Release/v3.3 of SDK to download the Station example, the devi
           .threshold.authmode = 0,
 
   - For AP mode selection instructions, please refer to `esp_wifi_types <https://github.com/espressif/esp-idf/blob/release/v3.3/components/esp32/include/esp_wifi_types.h>`_.
+
+------------------
+
+What is the maximum speed of Wi-Fi communication of ESP32-S2 chip?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The theoretical maximum speed of ESP32-S2 Wi-Fi communication is 150 Mbps.
+  

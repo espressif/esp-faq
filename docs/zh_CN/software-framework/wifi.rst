@@ -978,3 +978,11 @@ Wi-Fi 连接失败时产生的错误码代表什么?
       .threshold.authmode = 0,  
 
   - AP 模式选择说明可参见 `esp_wifi_types <https://github.com/espressif/esp-idf/blob/release/v3.3/components/esp32/include/esp_wifi_types.h>`_。
+
+-------------
+
+ESP32-S2 芯片，Wi-Fi 通信的最大速度是多少？
+------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-S2 Wi-Fi 通信的理论最大速度 为 150 Mbps。
+  
