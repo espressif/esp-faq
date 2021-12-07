@@ -958,3 +958,21 @@ When Wi-Fi connection failed, what does the error code mean?
   - Any error occurred during the Wi-Fi connection will cause it coming to init status, and there will be a hexadecimal number in the log, e.g., ``wifi:state, auth-> init(200)``. The first two digits indicate error reasons while the last two digits indicate the type code of the received or transmitted management frame. Common frame type codes are 00 (received nothing, timeout), A0 (disassoc), B0 (auth) and C0 (deauth).     
   - Error reasons indicated by the first two digits can be found in `Wi-Fi Reason Code <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#wi-fi-reason-code>`_. The last two digits can be checked in frame management code directly.
   
+---------------------
+
+When using ESP32's Release/v3.3 of SDK to download the Station example, the device cannot be connected to an unencrypted Wi-Fi. What is the reason?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In the example, it is by default to connect to an encrypted AP as:
+
+      .. code-block:: c
+
+        .threshold.authmode = WIFI_AUTH_WPA2_PSK,
+
+  - If you need connect to an unencrypted AP, please set the following parameter to 0:
+
+        .. code-block:: c
+
+          .threshold.authmode = 0,
+
+  - For AP mode selection instructions, please refer to `esp_wifi_types <https://github.com/espressif/esp-idf/blob/release/v3.3/components/esp32/include/esp_wifi_types.h>`_.

@@ -960,3 +960,21 @@ Wi-Fi 连接失败时产生的错误码代表什么?
   - Wi-Fi 连接过程中出错都会让状态转移到 init，并且 log 里会有 16 进制数表示，例如 wifi:state, auth-> init(200)。前两位表示原因，后两位表示收到或者发送的管理帧的类型代码。常见的帧类型代码有 00 (什么都没收到，表示超时)、A0（disassoc）、B0（auth）和 C0（deauth）。
   - 前两位表示的原因可以从  `WiFi Reason Code <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#id35>`_ 里查看。后两位可以直接从管理帧代码里查看。
   
+--------------
+
+使用 ESP32 Release/v3.3 版本的 SDK 下载 Station 例程，无法连接不加密的 Wi-Fi ，是什么原因？
+------------------------------------------------------------------------------------------------------------------------------------
+ 
+  - 例程下默认是连接加密模式的 AP ，如下设置：
+
+    .. code-block:: c
+
+      .threshold.authmode = WIFI_AUTH_WPA2_PSK,
+
+  - 若连接不加密的 AP ，需将以下参数改为 0 ，
+
+    .. code-block:: c
+
+      .threshold.authmode = 0,  
+
+  - AP 模式选择说明可参见 `esp_wifi_types <https://github.com/espressif/esp-idf/blob/release/v3.3/components/esp32/include/esp_wifi_types.h>`_。
