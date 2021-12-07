@@ -18,7 +18,7 @@
 Host MCU 如何通过串口对 ESP32 进行烧录升级？
 --------------------------------------------
 
-  - 相关协议说明请参考：`ESP32 串口协议 <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_。
+  - 相关协议应用请参考：`ESP32 串口协议 <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_；对应文档说明参见 `串口协议 <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html#serial-protocol>`_。
   - 示例实现代码参考：`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_。
 
 --------------

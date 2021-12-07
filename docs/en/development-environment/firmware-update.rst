@@ -18,7 +18,7 @@ Firmware update
 How does the host MCU flash ESP32 via serial interfaces?
 ----------------------------------------------------------------
 
-  - For the related protocol, please refer to `ESP32 Serial Protocol <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_.
+  - For the related protocol, please refer to `ESP32 Serial Protocol <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_；For the corresponding documentation, please refer to `Serial Protocol <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html#serial-protocol>`_.
   - For code examples, please refer to `esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_.
 
 --------------
