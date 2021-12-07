@@ -400,3 +400,13 @@ How to adjust the BLE advertising interval?
   - The advertising interval is decided by ``adv_int_min`` and ``adv_int_max`` parameters in BLE advertising struct, which configures the minimum and maximum advertising interval respectively.
   - The range of advertising interval value is 0x0020 to 0x4000 and the default value is 0x0800. The interval time is the value * 0.625 ms, i.e., 20 ms to 10.24 sec.
   - If the values of ``adv_int_min`` and ``adv_int_max`` are different, the advertising interval is within the range of the two values. If the values are the same, the interval will be this fixed value.
+
+----------------
+
+How to input the PIN code via mobile phone during ESP32's Classic Bluetooth Pairing mode?
+-----------------------------------------------------------------------------------------------------------------------------
+
+  You can disable ``Secure Simple Pairing`` to support only ``Legacy Pairing``.
+
+  - From esp-idf v3.3 to v4.0 (not include v4.0): ``Component config > Bluetooth > Bluedroid Enable > [*] Classic Bluetooth > [ ]Secure Simple Pairing``
+  - esp-idf v4.0 and above: ``Component config → Bluetooth → Bluedroid Options → [ ] Secure Simple Pairing``

@@ -400,3 +400,12 @@ BLE 中如何修改广播的时间间隔？
   - 广播时间间隔参数的取值范围为 0x0020 to 0x4000，默认值为 0x0800。对应的广播时间为参数值 * 0.625 ms，即广播时间间隔为 20 ms 到 10.24 s。
   - 当 ``adv_int_min`` 和 ``adv_int_max`` 不同时，广播的时间间隔在两者区间内产生，当最小值和最大值设置成同一个值时，时间间隔固定为该值。
   
+----------------
+
+ESP32 经典蓝牙配对时如何使手机端输入 PIN 码？
+--------------------------------------------------------------------------------------
+
+  可以通过禁用 ``Secure Simple Pairing``，从而仅支持 ``Legacy Pairing``。
+
+  - v3.3 到 v4.0（不包含 v4.0）：``Component config > Bluetooth > Bluedroid Enable > [*] Classic Bluetooth > [ ]Secure Simple Pairing``
+  - v4.0 及以上：``Component config → Bluetooth → Bluedroid Options → [ ] Secure Simple Pairing``
