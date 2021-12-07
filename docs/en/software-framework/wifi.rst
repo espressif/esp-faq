@@ -948,3 +948,13 @@ What is the current progress of WFA bugs fixing?
 
   - Please refer to <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability.pdf/>`_ for more details.
   
+-----------------------------------------------------------------------------------------------------
+
+When Wi-Fi connection failed, what does the error code mean?
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - Any error occurred during the Wi-Fi connection will cause it coming to init status, and there will be a hexadecimal number in the log, e.g., ``wifi:state, auth-> init(200)``. The first two digits indicate error reasons while the last two digits indicate the type code of the received or transmitted management frame. Common frame type codes are 00 (received nothing, timeout), A0 (disassoc), B0 (auth) and C0 (deauth).     
+  - Error reasons indicated by the first two digits can be found in `Wi-Fi Reason Code <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#wi-fi-reason-code>`_. The last two digits can be checked in frame management code directly.
+  
