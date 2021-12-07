@@ -655,3 +655,11 @@ How to set ADV broadcast parameters after it exceeds 32 bytes?
   :CHIP\: ESP32 :
 
   - The AT+BLEADVDATA <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-bleadvdata-set-bluetooth-le-advertising-data>_ command supports up to 32 bytes of ADV broadcast parameters. If you need to set a bigger parameter, please use command AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>.
+
+--------------------------------------------------------------------------
+
+Does AT support Wi-Fi roaming function?
+---------------------------------------------------------------------------------------------
+  :CHIP\: ESP32|ESP32-S2|ESP32-C3:
+
+  - Not supported.
