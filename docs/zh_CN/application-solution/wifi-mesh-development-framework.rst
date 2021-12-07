@@ -66,7 +66,7 @@ ESP32 的 ESP-WIFI-MESH 是否可自动修复网络？
 --------------
 
 使用 ESP32 进行 ESP-WIFI-MESH 应用，在组网自动选举根节点时，是否可以指定局部模块进行选举？
----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
   ESP32 的 ESP-WIFI-MESH 可以指定设备为子节点，它将不参与根节点的选举，可实现局部模块进行选举。
 
@@ -232,3 +232,11 @@ ESP32 的 Wi-Fi Mesh 支持 No Router 自组网吗？
 --------------------------------------------------------------------------------------------------------------------------
 
   - ESP32 的 Wi-Fi Mesh 支持 No Router 自组网，可参见例程 `esp-mdf/examples/function_demo/mwifi/no_router <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/no_router>`_。
+
+-----------------
+
+ESP32 使用 Wi-Fi Mesh 时允许的最大节点层数是多少？
+--------------------------------------------------------------------------------------------
+
+  - 在 WiFi Mesh 网络中，可以通过 `esp_mesh_set_max_layer() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_mesh.html#_CPPv422esp_mesh_set_max_layeri>`_ 函数设置网络最大层数。
+  - 对于树形拓扑结构，最大值为 25；对于链式拓扑结构，最大值为 1000。

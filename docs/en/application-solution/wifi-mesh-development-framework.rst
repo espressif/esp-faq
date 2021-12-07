@@ -26,4 +26,12 @@ Does ESP32's Wi-Fi Mesh supports No Router self-networking?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes, please refer to example `esp-mdf/examples/function_demo/mwifi/no_router <https://github.com/espressif/esp-mdf/tree/master/examples/ function_demo/mwifi/no_router>`_.
+
+-----------------
+
+What is the maximum number of node layers allowed when ESP32 uses Wi-Fi Mesh?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In the Wi-Fi Mesh network, you can set the maximum number of layers via `esp_mesh_set_max_layer() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_mesh.html#_CPPv422esp_mesh_set_max_layeri>`_.
+  - For tree topology structure, the maximum number is 25; while for chain topology structure, the maximum number is 1000.
   
