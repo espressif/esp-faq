@@ -117,3 +117,10 @@ Which GPIOs can be used to wake up ESP32-C3 from Deep-Sleep mode?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Only GPIO0 ~ GPIO5 in VDD3P3_RTC domain can be used to wake up ESP32-C3 from Deep-sleep mode. Please read Chapter 5.9.1 Power Supplies of GPIO Pins in `ESP32-C3 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp32-c3_technical_reference_manual_en.pdf>`_.
+
+------------------
+
+When using the ESP-WROOM-02D module with a battery for power supply, are there any risks in frequently formatted reading and writing flash as the battery is low (the module barely starts up)?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In low power conditions, if the flash is frequently operated, it may accept error commands and then erase the flash at the wrong address. It is recommended to not to operate the flash when the power is off, and please ensure a stable power supply.
