@@ -657,3 +657,10 @@ ADV 广播参数超过 32 字节之后应该如何设置?
 
    - `AT+BLEADVDATA <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-bleadvdata-set-bluetooth-le-advertising-data>`_  指令支持 adv 广播参数最大为 32 字节，如果需要设置更长的广播参数，请调用 `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>`_  指令来设置。
    
+--------------------------------------------------------------------------
+
+AT 支持 Wi-Fi 漫游功能吗?
+--------------------------------------------------------------------------------------------
+  :CHIP\: ESP32|ESP32-S2|ESP32-C3:
+
+  - 不支持。
