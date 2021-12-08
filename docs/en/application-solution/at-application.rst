@@ -662,4 +662,15 @@ Does AT support Wi-Fi roaming function?
 ---------------------------------------------------------------------------------------------
   :CHIP\: ESP32|ESP32-S2|ESP32-C3:
 
-  - Not supported.
+----------------
+
+How to download redirected resources via ESP8266 AT firmware?
+----------------------------------------------------------------------
+
+- ESP8266 AT HTTP command does not support redirection. After getting the status code 301 (permanent redirection) or 302 (temporary redirection) returned by the server, it will not automatically redirect to the new URL address.
+- You can use wireshark or postman to get the actual URL, and then access it through HTTP commands.
+
+  - Please note that ESP8266-IDF-AT_V2.1.0.0 cannot support HTTP command by default, you need to compile AT firmware based on esp-at, please refer to `ESP8266 platform <https://docs.espressif.com/projects/esp-at/en/latest/Compile_and_Develop/How_to_clone_project_and_compile_it.html#esp8266-platform>`_. HTTP needs to be enabled in menuconfig: ``menuconfig`` -> ``Component config`` -> ``AT`` -> ``[*] AT http command support``. 
+
+  - The maximum length of the parameter ``URL`` in ``AT+HTTPCLIENT`` is 256. When the length of the actual URL obtained exceeds 256, it will return ``ERROR``. You can use TCP related commands to send the a constructed HTTP request message to obtain the resource.
+

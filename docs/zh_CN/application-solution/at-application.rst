@@ -580,6 +580,18 @@ ESP32 AT 指令是否支持设置模块的 b/g/n 模式?
   - `AT+CWSTAPROTO <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/Wi-Fi_AT_Commands.html#cmd-staproto>`_ 用于设置和查询 station 模式的 802.11 b/g/n。
   - `AT+CWAPPROTO <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/Wi-Fi_AT_Commands.html#cmd-staproto>`_ 用于设置和查询 softAP 模式的 802.11 b/g/n。
 
+----------------
+
+如何使用 ESP8266 AT 固件下载重定向的资源？
+-----------------------------------------------------
+
+  - ESP8266 AT HTTP 指令不支持重定向，在获取到服务器返回的状态码 301（永久性重定向）或者 302（临时性重定向）后不会自动跳转到新的 URL 地址。
+  - 可以使用 wireshark 或者 postman 获取到实际访问的 URL，然后通过 HTTP 指令访问。
+
+  - 需要注意的是，当前 ESP8266-IDF-AT_V2.1.0.0 默认不支持 HTTP 指令，若想要使用 HTTP 的指令，需要基于 esp-at 编译，参考 `ESP8266 platform <https://docs.espressif.com/projects/esp-at/en/latest/Compile_and_Develop/How_to_clone_project_and_compile_it.html#esp8266-platform>`_。编译时需要在 menuconfig 中使能 HTTP：``menuconfig`` -> ``Component config`` -> ``AT`` -> ``[*] AT http command support``。
+
+  - ``AT+HTTPCLIENT`` 的参数 ``URL`` 的最大长度为 256，当获取到的实际访问的 URL 长度超过 256 时，会返回 ``ERROR``，可以使用 TCP 的相关指令发送构造的 HTTP 请求报文获取该资源。
+
 ---------------
 
 ESP32 AT UART1 通信管脚与 datasheet 默认管脚不一致？
