@@ -662,6 +662,8 @@ Does AT support Wi-Fi roaming function?
 ---------------------------------------------------------------------------------------------
   :CHIP\: ESP32|ESP32-S2|ESP32-C3:
 
+  - Not supported.
+
 ----------------
 
 How to download redirected resources via ESP8266 AT firmware?
