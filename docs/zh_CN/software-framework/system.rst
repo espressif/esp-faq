@@ -693,4 +693,9 @@ ESP32-C3 在 Deep-Sleep 模式下可以通过哪些 GPIO 进行唤醒？
 
   - 在低电情况下频繁操作 flash，flash 可能会接受错误的指令，然后把错误地址的 flash 擦除。建议在掉电的时候不要操作 flash，且要保证电源的稳定性。
   
-  
+---------------------
+
+ESP32 如何查看线程使用过的最大栈大小？
+-----------------------------------------------------------------------------------------------------------
+
+  - 可以调用 `UBaseType_t uxTaskGetStackHighWaterMark( TaskHandle_t xTask ) <https://www.freertos.org/uxTaskGetStackHighWaterMark.html>`_ 函数来查看。该函数可以返回任务启动后的最⼩剩余堆栈空间。
