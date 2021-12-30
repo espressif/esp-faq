@@ -38,3 +38,11 @@ ESP32 deep sleep 可以通过任意 RTC_GPIO 唤醒吗？
 ------------------------------------------------
 
   是的，RTC_GPIO 管脚配置可以参考 `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ V2.2 章节。
+
+--------------
+
+ESP8266 的 CHIP_PU 引脚为低电平时，芯片的功耗是多少？
+---------------------------------------------------------------------------
+
+  - CHIP_PU 引脚即模组 EN 引脚，引脚设为低电平时，芯片的功耗约为 0.5 uA。
+  - 在 `《ESP8266 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_cn.pdf>`_ 表 3-4 中，功耗模式为关闭，即代表的是 CHIP_PU 引脚拉低，芯片处于关闭状态。
