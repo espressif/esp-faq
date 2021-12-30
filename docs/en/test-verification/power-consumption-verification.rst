@@ -13,6 +13,7 @@ Power consumption verification
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
 
+--------------
 
 What sleep modes does ESP32 have? What is the difference between them?
 --------------------------------------------------------------------------
@@ -40,3 +41,10 @@ What sleep modes does ESP32 have? What is the difference between them?
      - After ESP32 exits the Deep-sleep mode, the entire system reruns, which is similar to the system reboot;
      - During the deep sleep, no connection to the AP is maintained.
 
+--------------
+
+What is the power consumption of ESP8266 when the CHIP_PU pin is low?
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+   - CHIP_PU pin is the module EN pin. When the pin is set to low level, the power consumption of the chip is about 0.5 uA.
+   - In `ESP8266 datasheet <https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_cn.pdf>`_ Table 3-4, the power consumption mode is off, which means the CHIP_PU is pulled down and the chip is disabled.
