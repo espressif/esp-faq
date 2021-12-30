@@ -59,3 +59,16 @@ How to hardware reset ESP8266? Is the hardware reset signal low level or high le
 
   - The Pin32 EXT_RSTB of ESP8266 is the reset pin. This pin has an internal pull-up resistor, active in low level. To prevent the restart caused by external interference, it is recommended that the EXT_RSTB cabling be as short as possible and that an RC circuit be added to the EXT_RSTB pin.
   - ESP8266's CHIP_EN pin can also be used as a hardware reset pin. When using the CHIP_EN pin as a reset pin, the reset signal is low level effective. The reset condition is: when the input level is lower than 0.6 V and lasts more than 200 μs, then the ESP8266 will be reset and restart. It is recommended to use the CHIP_EN pin for chip reset. Please refer to Section "1.4.2.2 Reset" in `ESP8266 Hardware Design Guide <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_en.pdf>`_ for more information.
+
+--------------
+
+What does the term ``NC`` mean in Espressif schematics?
+-----------------------------------------------------------------------------------
+
+  - NC is the acronym of No Component. If you see a pull-up resistor is marked NC as shown in the figure below, it indicates that the component is not installed.
+  
+  .. figure:: ../../_static/no-component.png
+    :align: center
+    :scale: 100%
+    :alt: no-component
+    :figclass: align-center
