@@ -409,3 +409,28 @@ ESP32 经典蓝牙配对时如何使手机端输入 PIN 码？
 
   - v3.3 到 v4.0（不包含 v4.0）：``Component config > Bluetooth > Bluedroid Enable > [*] Classic Bluetooth > [ ]Secure Simple Pairing``
   - v4.0 及以上：``Component config → Bluetooth → Bluedroid Options → [ ] Secure Simple Pairing``
+
+----------------
+
+ESP32 蓝牙占用多少内存？
+-------------------------------------
+
+  - 控制器：
+
+    - BLE 单模：40 KB
+    - BR/EDR 单模：65 KB
+    - 双模：120 KB
+
+  - 主设备：
+
+    - BLE GATT Client（Gatt Client 演示）：24 KB (.bss+.data) + 23 KB (heap) = 47 KB
+    - BLE GATT Server（GATT Server 演示）：23 KB (.bss+.data) + 23 KB (heap) = 46 KB
+    - BLE GATT Client & GATT Server: 24 KB (.bss+.data) + 24 KB (heap) = 48 KB
+    - SMP: 5 KB
+    - 经典蓝牙（经典蓝牙 A2DP_SINK 演示，包含 SMP/SDP/A2DP/AVRCP）：48 KB (.bss+.data) + 24 KB (heap) = 72 KB（示例运行时额外增加 13 KB） 
+  
+  .. note:: 以上堆 (Heap) 均包含任务栈 (Task Stack)，因为任务栈是从堆里分配出来的，算为堆。
+
+  - 优化 PSRAM 版本：
+
+  在 ESP-IDF V3.0 及以后，打开 menuconfig 里蓝牙菜单的 PSRAM 相关选项，将 Bluedroid(Host) 的部分 .bss/.data 段及堆放入 PSRAM，可额外省出近 50 KB。
