@@ -52,3 +52,10 @@ How to configure the RMII synchronization clock for Ethernet of the ESP32?
   - Please read `Configure MAC and PHY <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`_.
   - You can see `SCH_ESP32-ETHERNET-KIT schematic design <https://dl.espressif.com/dl/schematics/SCH_ESP32-ETHERNET-KIT_A_V1.1_20190711.pdf>`_ for reference.
   
+---------------
+
+How to hardware reset ESP8266? Is the hardware reset signal low level or high level active? What are the conditions for the reset?
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The Pin32 EXT_RSTB of ESP8266 is the reset pin. This pin has an internal pull-up resistor, active in low level. To prevent the restart caused by external interference, it is recommended that the EXT_RSTB cabling be as short as possible and that an RC circuit be added to the EXT_RSTB pin.
+  - ESP8266's CHIP_EN pin can also be used as a hardware reset pin. When using the CHIP_EN pin as a reset pin, the reset signal is low level effective. The reset condition is: when the input level is lower than 0.6 V and lasts more than 200 μs, then the ESP8266 will be reset and restart. It is recommended to use the CHIP_EN pin for chip reset. Please refer to Section "1.4.2.2 Reset" in `ESP8266 Hardware Design Guide <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_en.pdf>`_ for more information.

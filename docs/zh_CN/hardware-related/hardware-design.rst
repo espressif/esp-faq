@@ -249,3 +249,11 @@ ESP32 模组 Flash 是否支持 QIO+80MHz？
   - 由于 GPIO0 的特殊性， 所以需要配置 IO 控制 PHY 的使能管脚。 
   - 请阅读 `配置 MAC 和 PHY <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`_。
   - 可参考 `SCH_ESP32-ETHERNET-KIT 原理图设计 <https://dl.espressif.com/dl/schematics/SCH_ESP32-ETHERNET-KIT_A_V1.1_20190711.pdf>`_。
+
+---------------
+
+使用 ESP8266 芯片如何进行硬件复位？硬件复位信号是低电平有效还是高电平有效？复位的条件是什么？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP8266 的 Pin32 EXT_RSTB 为复位管脚。此管脚内部有上拉电阻，低电平有效。为防⽌外界⼲扰引起的重启，建议 EXT_RSTB 的⾛线尽量短，并在 EXT_RSTB 管脚处增加⼀个 RC 电路。
+  - ESP8266 的 CHIP_EN 管脚也可作为硬件复位管脚，当使用 CHIP_EN 管脚作为复位管脚时，复位信号是低电平有效。复位条件为当输入电平低于 0.6 V 并持续 200 μs 以上时，ESP8266 会复位重启。我们推荐使用 CHIP_EN 管脚进行芯片复位。可参考 `《ESP8266 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_cn.pdf>`_ 中的“1.4.2.2 复位”章节的说明。
