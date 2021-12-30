@@ -410,3 +410,28 @@ How to input the PIN code via mobile phone during ESP32's Classic Bluetooth Pair
 
   - From esp-idf v3.3 to v4.0 (not include v4.0): ``Component config > Bluetooth > Bluedroid Enable > [*] Classic Bluetooth > [ ]Secure Simple Pairing``
   - esp-idf v4.0 and above: ``Component config → Bluetooth → Bluedroid Options → [ ] Secure Simple Pairing``
+
+----------------
+
+How much memory does ESP32 Bluetooth occupy?
+----------------------------------------------------------------------------------------
+
+  - Controller:
+
+    - BLE single mode: 40 KB
+    - BR/EDR single mode: 65 KB
+    - Dual mode: 120 KB
+
+  - Main equipment:
+
+    - BLE GATT Client (Gatt Client demo): 24 KB (.bss+.data) + 23 KB (heap) = 47 KB
+    - BLE GATT Server (GATT Server demo): 23 KB (.bss+.data) + 23 KB (heap) = 46 KB
+    - BLE GATT Client & GATT Server: 24 KB (.bss+.data) + 24 KB (heap) = 48 KB
+    - SMP: 5 KB
+    - Classic Bluetooth (Classic Bluetooth A2DP_SINK demo, including SMP/SDP/A2DP/AVRCP): 48 KB (.bss+.data) + 24 KB (heap) = 72 KB (an additional 13 KB is added when the example is running)
+  
+  .. note:: The above heap (Heap) all include the task stack (Task Stack), because the task stack is allocated from the heap and counted as a heap.
+
+  - Optimize PSRAM version:
+
+   In ESP-IDF v3.0 and later versions, if you open the PSRAM related options of the Bluetooth menu in menuconfig, and put part of the .bss/.data section and heap of Bluedroid (Host) into PSRAM, this can save additional 50 KB of memory spaces.
