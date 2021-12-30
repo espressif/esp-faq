@@ -251,3 +251,9 @@ What is the default MTU of LWIP for an ESP32?
 
   - The default MTU of LWIP is 1500. This is a fixed value and it is not recommended to change it.
   
+---------------
+
+How to increase the DNS request time for ESP32?
+------------------------------------------------------------------------------------
+
+   - You can manually modify the ``#define DNS_MAX_RETRIES 4`` in esp-idf/components/lwip/lwip/src/include/lwip/opt.h. For example, you can change the value of ``#define DNS_MAX_RETRIES`` to 10. In this way, the maximum time that DNS waits for a response from the server is 46 s (1+1+2+3+4+5+6+7+8+9).
