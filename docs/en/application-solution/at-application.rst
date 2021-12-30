@@ -676,3 +676,14 @@ How to download redirected resources via ESP8266 AT firmware?
 
   - The maximum length of the parameter ``URL`` in ``AT+HTTPCLIENT`` is 256. When the length of the actual URL obtained exceeds 256, it will return ``ERROR``. You can use TCP related commands to send the a constructed HTTP request message to obtain the resource.
 
+----------------
+
+When using ESP-AT to send TCP data, sometimes the data is messy/partially lost. What should I do?
+--------------------------------------------------------------------------------------------------------------------
+
+  - It is recommended to add hardware flow control or software flow control:
+
+    - `Hardware flow control <https://docs.espressif.com/projects/esp-at/en/latest/Get_Started/Hardware_connection.html#id1>`_: CTS and RTS signals
+    - `Software flow control <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/peripherals/uart.html>`_
+
+  - If necessary, you can add some logic to handle errors in the code. For example, when your device accidentally entered the transparent transmission mode, or there is error transmission in the transparent transmission mode, send +++ in time to exit the transparent transmission, and resend the AT+CIPSEND command.

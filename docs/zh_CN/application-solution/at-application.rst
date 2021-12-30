@@ -676,3 +676,15 @@ AT 支持 Wi-Fi 漫游功能吗?
   :CHIP\: ESP32|ESP32-S2|ESP32-C3:
 
   - 不支持。
+
+--------------------------------------------------------------------------
+
+使用 ESP-AT 发送 TCP 数据时，有时数据会混乱/部分丢失，应该如何处理？
+--------------------------------------------------------------------------------------------------------------
+
+  - 建议添加硬件流控或软件流控：
+
+    - `硬件流控 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/Get_Started/Hardware_connection.html#id1>`_：CTS 和 RTS 信号
+    - `软件流控 <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/peripherals/uart.html>`_
+
+  - 必要时可以在代码中添加一些处理错误的逻辑，例如不小心进入透传模式，或透传模式数据传输错误时，及时发送 +++ 退出透传，重新发送 AT+CIPSEND 指令等。
