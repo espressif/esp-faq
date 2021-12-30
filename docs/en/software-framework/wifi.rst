@@ -984,3 +984,11 @@ What is the maximum speed of Wi-Fi communication of ESP32-S2 chip?
 
   - The theoretical maximum speed of ESP32-S2 Wi-Fi communication is 150 Mbps.
   
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+What does such log mean: ``I (81447377) wifi:new:<7,0>, old:<7,2>, ap:<255,255>, sta:<7,0>, prof:1``?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 :
+
+  - ``new`` represents the current primary and secondary channel; ``old`` represents the last primary and secondary channel; ``ap`` represents the current primary and secondary channel of ESP32 AP; ``<255,255>`` means SoftAP is disabled; ``sta`` represents the current primary and secondary channel of ESP32 STA; ``prof`` represents the channel of SP32 SoftAP stored in NVS.
