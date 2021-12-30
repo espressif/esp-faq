@@ -124,3 +124,10 @@ When using the ESP-WROOM-02D module with a battery for power supply, are there a
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - In low power conditions, if the flash is frequently operated, it may accept error commands and then erase the flash at the wrong address. It is recommended to not to operate the flash when the power is off, and please ensure a stable power supply.
+
+---------------------
+
+How to check the maximum stack size used by a thread for ESP32?
+------------------------------------------------------------------------------------------------------------------
+
+  - You can call the `UBaseType_t uxTaskGetStackHighWaterMark(TaskHandle_t xTask) <https://www.freertos.org/uxTaskGetStackHighWaterMark.html>`_ function. This function will return the minimum remaining stack space after the task is started.
