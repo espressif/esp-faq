@@ -163,3 +163,10 @@ When using UART to upgrade firmware for ESP32, how to set two `app_main` spaces?
   - Sorry, ESP32 chips do not support setting two `app_main` spaces when upgrading firmware via UART.
   - The mechanism of UART upgrading firmware is the same as that of flash download tool. The upgraded firmware will directly replace the old one, and it is not supported to keep the old firmware.
   
+----------------
+
+What are the Espressif module programming tools?
+-------------------------------------------------- ---------
+
+  - For Espressif programming software, you can go to this webpage and download it: `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_. Only `Windows` environment can support no GUI tool embedded.
+  - Espressif programming tool `esptool <https://github.com/espressif/esptool>`_ is written based on `python` and open source code, supports secondary development.

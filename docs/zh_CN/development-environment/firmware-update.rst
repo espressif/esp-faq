@@ -164,3 +164,11 @@ ESP32 使用 UART 升级固件，如何设置两个 `app_main` 的空间？
   - 通过 UART 升级固件，不支持设置两个 `app_main` 的空间。
   - UART 升级固件的机制与 Flash download tool 下载工具的是一样的。升级后的固件直接替换当前的固件，不支持保留旧的固件。
   
+
+----------------
+
+乐鑫模组烧录工具有那些？
+-----------------------------------------------------------
+
+  - 乐鑫烧录软件可以点到此网页并进行下载： `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_, 免安装 GUI 工具，仅适用于 `windows` 环境。
+  - 乐鑫烧录工具 `esptool <https://github.com/espressif/esptool>`_，基于 `python` 编写，开放源代码，并且支持用户二次开发。
