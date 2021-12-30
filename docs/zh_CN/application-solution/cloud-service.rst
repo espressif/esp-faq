@@ -82,3 +82,10 @@ ESP Azure 库支持 Azure IoT Central 吗？有没有 Demo？
 
   - ESP Azure 已经支持 Azure IoT Central。但是 master 上还没有相关示例。
   - ESP Azure preview/pnp_example 分支上的 PnP 示例会上报些真实的传感器数据，可以参考其中 Azure IoT Central 对这些数据的管理。
+
+-----------------------
+
+ESP32 + 以太网 + MQTT 方式接入阿里云，应该怎么做？
+-------------------------------------------------------------------------------------------------------------
+  
+  - 使用 `esp-aliyun <https://github.com/espressif/esp-aliyun>`_，将 Wi-Fi 初始化代码替换为 Ethernet 初始化即可。可以参考 `ESP_IDF 下的 Ethernet 示例 <https://github.com/espressif/esp-idf/tree/master/examples/ethernet>`_。
