@@ -660,7 +660,7 @@ How to set ADV broadcast parameters after it exceeds 32 bytes?
 
 Does AT support Wi-Fi roaming function?
 ---------------------------------------------------------------------------------------------
-  :CHIP\: ESP32|ESP32-S2|ESP32-C3:
+  :CHIP\: ESP32|ESP32-S2|ESP32-C3 
 
   - Not supported.
 
@@ -687,3 +687,17 @@ When using ESP-AT to send TCP data, sometimes the data is messy/partially lost. 
     - `Software flow control <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/peripherals/uart.html>`_
 
   - If necessary, you can add some logic to handle errors in the code. For example, when your device accidentally entered the transparent transmission mode, or there is error transmission in the transparent transmission mode, send +++ in time to exit the transparent transmission, and resend the AT+CIPSEND command.
+
+---------------------------
+
+When ESP32 performs BLE OTA, it connects to phone via BLE and connects to MCU via UART, then performs OTA to MCU. But the data transmission between ESP32 and MCU is low even after increasing MCU via phone. Where should I check for such issue?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The reason may be that ESP32 and the mobile phone did not set the MTU successfully, or the UART limitation of ESP32 and MCU communication. Therefore, it is recommended to check/improve from the following points:
+
+    - Connection between ESP32 and mobile phone
+
+      1. Only the BLE client supports setting the GATT MTU length, and the BLE connection needs to be established before the MTU length is set. The final actual MTU length needs to be negotiated. If it returns OK, it only means the negotiation process is triggered. Therefore, the length you set before may not be valid. It is recommended to use the query command AT+BLECFGMTU? to check the actual MTU length after setting.
+      2. Use BLE SPP, the BLE transparent transmission mode, to increase the transmission rate.
+      
+    - Connection between ESP32 and MCU: increase the baud rate of UART appropriately to increase the transmission rate.
