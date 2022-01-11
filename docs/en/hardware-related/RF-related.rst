@@ -42,3 +42,16 @@ Why does ESP32 automatically reduce the transmit power when running at a high te
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The temperature compensation function on testing firmware with a fixed frequency is disabled by default. Therefore, when the temperature is high, the power will be lower. If you need to enable the temperature compensation, please send ``txpwr_track_en 1 1 0`` to ESP32 through the default log serial port.
+
+--------------
+
+How to improve the distance and strength of Wi-Fi signals for ESP32-WROVER-E? (Application scenario: Wi-Fi probe)
+-----------------------------------------------------------------------------------------------------------------------
+
+  - In terms of software, you can either set the maximum transmit power by API `esp_wifi_set_max_tx_power() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`_, or set that via menuconfig: ``Component config -> PHY -> Max Wi-Fi TX power(dBm)`` (the default transmit power is 20 dBm).
+  - If the transmit power has been set to the maximum, you can improve the effeciency the antenna and receiving device.
+  
+    - You can consider adjusting the placement direction of the module so that the stronger radiation direction of the antenna points to the receiving device to make the farthest radiation distance.
+    - Make sure there is no metal or blocking object near the antenna of the module, no PCB on the back of the antenna, and the Wi-Fi signal is not interfered by other signals of the whole machine.
+    - If the PCB antenna is not effective, you can use the IE series module with an external IPEX antenna with higher directional gain.
+    - The receiving device can also increase the antenna radiation efficiency.
