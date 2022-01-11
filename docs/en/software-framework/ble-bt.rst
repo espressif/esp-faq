@@ -442,3 +442,13 @@ When using the "gattc_gatts_coex.c" example on ESP32 to test BLE multi-connectio
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Please set the "BT/BLE MAX ACL CONNECTIONS" in "menuconfig" to 5.
+
+----------------
+
+Does ESP32-C3 BLE support master and slave mode at the same time? What is the number of connections in master mode and slave mode?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :IDF\: release/v4.3, master:
+
+  - ESP32-C3 supports master and slave mode at the same time, sharing 8 connections. For example, if ESP32-C3 connects to 4 slave devices, it can be connected by 8 - 4 = 4 master devices.
+  - In addition, when ESP32-C3 is used as a slave, it can be connected by 8 master devices; when used as a master, it can connect to 8 slave devices.
