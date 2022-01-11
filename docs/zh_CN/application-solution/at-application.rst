@@ -702,3 +702,14 @@ ESP32 进行 BLE OTA 时，使用 BLE 连接手机、UART 连接 MCU ，对 MCU 
       2. 使用 BLE SPP，即 BLE 透传模式，可增大传输速率。
       
     - ESP32 与 MCU 端的连接：适当调大 UART 的波特率，可增大传输速率。
+
+-------------------------
+
+使用 ESP32-C3 作为 Server 且 AT 固件版本为 v2.2.0.0 时，AT+CIPSERVERMAXCONN 指令允许建立的最大连接数是多少？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - `AT+CIPSERVERMAXCONN <https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp32c3/AT_Command_Set/TCP-IP_AT_Commands.html?highlight=CIPSERVERMAXCONN#at-cipservermaxconn-query-set-the-maximum-connections-allowed-by-a-server>`_ 指令默认设置的允许建立的最大连接数是 5 。
+  - 可增大 “menuconfig -> Component config -> AT -> Socket Maximum Connection” 参数设置，以支持更大的连接数。
+  - 若需要支持 10 个以上的连接数，还需要增大 “menuconfig -> Component config -> LWIP -> Max number of open sockets”（默认是 10）配置。
+  - 但实际运行时允许的最大连接数取决于芯片的剩余可用内存。当无法建立更多连接时建议使用 `AT+SYSRAM <https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp32c3/AT_Command_Set/Basic_AT_Commands.html?highlight=sysram#at-sysram-query-current-remaining-heap-size-and-minimum-heap-size>`_ 命令来查询当前剩余可用内存。
+  
