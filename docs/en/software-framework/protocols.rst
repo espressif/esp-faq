@@ -306,3 +306,12 @@ How to use ``esp_http_client`` to send chunked data?
         esp_http_client_close(client);
         esp_http_client_cleanup(client);
       }
+
+-----------------------------------------------------------------------------------------------------
+
+How to implement the certificate auto-download function?
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - Please refer to `aws certificate automatic download function <https://docs.aws.amazon.com/en/iot/latest/developerguide/auto-register-device-cert.html>`_ .
