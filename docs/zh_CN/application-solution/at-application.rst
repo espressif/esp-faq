@@ -667,7 +667,7 @@ ADV 广播参数超过 32 字节之后应该如何设置?
 
   :CHIP\: ESP32 :
 
-   - `AT+BLEADVDATA <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-bleadvdata-set-bluetooth-le-advertising-data>`_  指令支持 adv 广播参数最大为 32 字节，如果需要设置更长的广播参数，请调用 `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>`_  指令来设置。
+   - `AT+BLEADVDATA <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-bleadvdata-set-bluetooth-le-advertising-data>`_  指令支持 adv 广播参数最大为 32 字节，如果需要设置更长的广播参数，请调用 `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>`_  指令来设置。
    
 --------------------------------------------------------------------------
 
@@ -719,3 +719,12 @@ ESP32 进行 BLE OTA 时，使用 BLE 连接手机、UART 连接 MCU ，对 MCU 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP32 最多支持保存 15 个 BLE 设备的绑定配对信息。
+
+-----------------------------------------------------------------------------------------------------
+
+AT+BLEADVDATA 广播数据支持的最大长度为 32，如何支持更大的数据长度?
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+ - 可以将数据放到 BLE scan response 中，指令为 `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>`_。
