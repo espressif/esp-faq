@@ -719,3 +719,11 @@ When using the release/v2.1.0.0 version of the AT firmware, what is the maximum 
 
   - Up to 15 BLE devices.
   
+-----------------------------------------------------------------------------------------------------
+
+The maximum length of AT+BLEADVDATA broadcast data is 32. How to realize a bigger data length support?
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+ - You can put the data in BLE scan response by using the `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>_` command.
