@@ -452,3 +452,10 @@ Does ESP32-C3 BLE support master and slave mode at the same time? What is the nu
 
   - ESP32-C3 supports master and slave mode at the same time, sharing 8 connections. For example, if ESP32-C3 connects to 4 slave devices, it can be connected by 8 - 4 = 4 master devices.
   - In addition, when ESP32-C3 is used as a slave, it can be connected by 8 master devices; when used as a master, it can connect to 8 slave devices.
+
+-------------------
+
+What is the maximum MTU Size of ESP32 Classic Bluetooth?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 Classic Bluetooth has two protocols, namely A2DP and SPP. The maximum MTU Size setting of BT A2DP (default) is 1008 bytes, of which the header occupies 12 bytes and the actual amount of data transmitted by the application layer is 1008 - 12 = 996 (bytes); the maximum MTU Size of BT SPP (default) Set to 990 bytes.
