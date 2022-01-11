@@ -711,4 +711,11 @@ When using ESP32-C3 as a Server with AT firmware version v2.2.0.0, what is the m
   - You can configure the "menuconfig -> Component config -> AT -> Socket Maximum Connection" parameter to allow more connections.
   - If you need to support more than 10 connections, you also need to increase the "menuconfig -> Component config -> LWIP -> Max number of open sockets" (default is 10) configuration.
   - However, the maximum number of connections allowed during actual operation depends on the remaining available memory of the chip. When no more connections can be established, it is recommended to use the `AT+SYSRAM <https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp32c3/AT_Command_Set/Basic_AT_Commands.html?highlight=sysram#at-sysram-query-current-remaining-heap-size-and-minimum-heap-size>`_ command to query the current remaining available memory.
+
+------------------
+
+When using the release/v2.1.0.0 version of the AT firmware, what is the maximum number of BLE devices that ESP32 supports to save binding and paring information for?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Up to 15 BLE devices.
   

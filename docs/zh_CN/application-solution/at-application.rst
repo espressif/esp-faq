@@ -713,3 +713,9 @@ ESP32 进行 BLE OTA 时，使用 BLE 连接手机、UART 连接 MCU ，对 MCU 
   - 若需要支持 10 个以上的连接数，还需要增大 “menuconfig -> Component config -> LWIP -> Max number of open sockets”（默认是 10）配置。
   - 但实际运行时允许的最大连接数取决于芯片的剩余可用内存。当无法建立更多连接时建议使用 `AT+SYSRAM <https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp32c3/AT_Command_Set/Basic_AT_Commands.html?highlight=sysram#at-sysram-query-current-remaining-heap-size-and-minimum-heap-size>`_ 命令来查询当前剩余可用内存。
   
+--------------------
+
+使用 release/v2.1.0.0 版本的 AT 固件，ESP32 最多支持保存多少个 BLE 设备的绑定配对信息？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 最多支持保存 15 个 BLE 设备的绑定配对信息。
