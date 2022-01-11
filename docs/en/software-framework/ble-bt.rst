@@ -435,3 +435,10 @@ How much memory does ESP32 Bluetooth occupy?
   - Optimize PSRAM version:
 
    In ESP-IDF v3.0 and later versions, if you open the PSRAM related options of the Bluetooth menu in menuconfig, and put part of the .bss/.data section and heap of Bluedroid (Host) into PSRAM, this can save additional 50 KB of memory spaces.
+
+----------------------
+
+When using the "gattc_gatts_coex.c" example on ESP32 to test BLE multi-connection, it can only connect to 4 devices even after I set the "BLE Max connections" in "menuconfig" to 5. What is the reason?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please set the "BT/BLE MAX ACL CONNECTIONS" in "menuconfig" to 5.
