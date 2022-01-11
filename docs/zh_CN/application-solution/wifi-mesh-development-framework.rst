@@ -240,3 +240,11 @@ ESP32 使用 Wi-Fi Mesh 时允许的最大节点层数是多少？
 
   - 在 WiFi Mesh 网络中，可以通过 `esp_mesh_set_max_layer() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_mesh.html#_CPPv422esp_mesh_set_max_layeri>`_ 函数设置网络最大层数。
   - 对于树形拓扑结构，最大值为 25；对于链式拓扑结构，最大值为 1000。
+  
+---------------------
+
+使用 ESP32 开发板测试 `esp-mdf/examples/function_demo/mwifi/router <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/router>`_ 例程，ESP32 连接路由器后，在路由器连接端显示的设备名称为“espressif”，如何修改此名称？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 修改 menuconfig → Component config → LWIP ——> (espressif) Local netif hostname 设置即可。
+  
