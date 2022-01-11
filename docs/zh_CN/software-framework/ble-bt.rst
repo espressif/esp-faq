@@ -442,3 +442,12 @@ ESP32 使用 gattc_gatts_coex.c 例程测试 BLE 多连接，在 "menuconfig" �
 
   - 请在 "menuconfig" 中将 “BT/BLE MAX ACL CONNECTIONS” 配置选项设置为 “5”。 
   
+----------------
+
+ESP32-C3 BLE 同时支持主从模式吗？主、从模式连接数分别是多少？
+--------------------------------------------------------------------------------------
+
+   :IDF\: release/v4.3, master:
+
+  - ESP32-C3 同时支持主从模式，共用 8 个连接。例如，ESP32-C3 连接了 4 个 slave 设备，那么可被 8 - 4 = 4 个 master 设备连接。
+  - 另外，ESP32-C3 用作 slave 时，可被 8 个 master 设备连接；用作 master 时，可连接 8 个 slave 设备。
