@@ -35,3 +35,9 @@ What is the maximum number of node layers allowed when ESP32 uses Wi-Fi Mesh?
   - In the Wi-Fi Mesh network, you can set the maximum number of layers via `esp_mesh_set_max_layer() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_mesh.html#_CPPv422esp_mesh_set_max_layeri>`_.
   - For tree topology structure, the maximum number is 25; while for chain topology structure, the maximum number is 1000.
   
+-----------------------
+
+When using an ESP32 development board to test the `esp-mdf/examples/function_demo/mwifi/router <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/router>`_ example, After ESP32 is connected to the router, the device name in connection is "espressif". How to modify this name?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please modify the "menuconfig → Component config → LWIP  → (espressif) Local netif hostname" setting.
