@@ -257,3 +257,54 @@ ESP32 如何增大 DNS 请求时间？
 -----------------------------------------------------------------------------------
 
   - 可以手动修改位于 esp-idf/components/lwip/lwip/src/include/lwip/opt.h 里的 ``#define DNS_MAX_RETRIES 4``，例如将 ``#define DNS_MAX_RETRIES`` 的值改成 10，这样 DNS 在一个服务器上会尝试 10 次域名请求，每次请求的超时时间(s)是 1，1，2，3，4，5，6，7，8，9，总时间是 46 s。
+
+---------------
+
+如何使用 ``esp_http_client`` 发送块 (chunked) 数据？
+-----------------------------------------------------------------------------------
+
+  - 可以通过 `HTTP Stream <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_http_client.html#http-stream>`_ 的方式，将 ``esp_http_client_open()`` 的 ``write_len``　参数设置为　-1，代码中会自动将 ``Transfer-Encoding`` 设置为 ``chunked``，参考　`esp_http_client.c <https://github.com/espressif/esp-idf/blob/master/components/esp_http_client/esp_http_client.c>`_ 中的 ``http_client_prepare_first_line()``。
+  - 可使用如下代码：
+
+    .. code-block:: c
+
+      static void http_post_chunked_data()
+      {
+          esp_http_client_config_t config = {
+          .url = "http://httpbin.org/post",
+          .method = HTTP_METHOD_POST, // This is NOT required. write_len < 0 will force POST anyway
+        };
+        char buffer[MAX_HTTP_OUTPUT_BUFFER] = {0};
+        esp_http_client_handle_t client = esp_http_client_init(&config);
+
+        esp_err_t err = esp_http_client_open(client, -1); // write_len=-1 sets header "Transfer-Encoding: chunked" and method to POST
+        if (err != ESP_OK) {
+          ESP_LOGE(TAG, "Failed to open HTTP connection: %s", esp_err_to_name(err));
+          return;
+        }
+
+        // Post some data
+        esp_http_client_write(client, "5", 1); // length
+        esp_http_client_write(client, "\r\n", 2);
+        esp_http_client_write(client, "Hello", 5); // data
+        esp_http_client_write(client, "\r\n", 2);
+        esp_http_client_write(client, "7", 1); // length
+        esp_http_client_write(client, "\r\n", 2);
+        esp_http_client_write(client, " World!", 7);  // data
+        esp_http_client_write(client, "\r\n", 2);
+        esp_http_client_write(client, "0", 1);  // end
+        esp_http_client_write(client, "\r\n", 2);
+        esp_http_client_write(client, "\r\n", 2);
+
+
+        // After the POST is complete, you can examine the response as required using:
+        int content_length = esp_http_client_fetch_headers(client);
+        ESP_LOGI(TAG, "content_length: %d, status_code: %d", content_length, esp_http_client_get_status_code(client));
+
+        int read_len = esp_http_client_read(client, buffer, 1024);
+        ESP_LOGI(TAG, "receive %d data from server: %s", read_len, buffer);
+        esp_http_client_close(client);
+        esp_http_client_cleanup(client);
+      }
+
+
