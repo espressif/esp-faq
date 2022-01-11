@@ -215,9 +215,17 @@ ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region access
 ---------------
 
 使用 ESP32 时出现 "Brownout detector was triggered" 报错，如何解决？
------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 
   - ESP32 内置有掉电探测器，当其探测到芯片电压低于一定的预设阈值时，将重置芯片防止出现意外情况。
   - 该报错信息可能会在不同场景内出现，但根本原因都在于芯片的供电电压暂时或永久性地低于掉电阈值。可通过替换电源、USB 电缆，或在模组内增加电容来解决。
   - 除此之外，也可以通过配置重置掉电阈值，或禁用掉电探测功能。详细信息请参考 `config-esp32-brownout-det <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/kconfig.html#config-esp32-brownout-det>`_。
+
+---------------
   
+导入头文件 protocol_examples_common.h 后，为什么编译时提示找不到该文件?
+--------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - 在工程下的 CMakeLists.txt 中添加 “set(EXTRA_COMPONENT_DIRS $ENV{IDF_PATH}/examples/common_components/protocol_examples_common)” 这一行语句即可。

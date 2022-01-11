@@ -220,8 +220,17 @@ What should I do when the Ethernet demo in debugging IDF has the following logï¼
 ---------------
 
 I found "Brownout detector was triggered" failure on my ESP32. How to resolve such issue?
---------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The ESP32 has a built-in brownout detector which can detect if the voltage is lower than a specific value. If this happens, it will reset the chip in order to prevent unintended behaviour.
   - This message may be reported in various scenarios, while the root cause is that the chip with a power supply has momentarily or permanently dropped below the brownout threshold. Please try replacing power supply, USB cable, or installing capacitor on power supply terminals of your module.
   - You can do configuration to reset the threshold value or disable the brownout detector. Please refer to `config-esp32-brownout-det <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig.html#config-esp32-brownout-det>`_ for details.
+
+---------------
+
+After imported the protocol_examples_common.h header file, how come it cannot be found while compling?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - Please add "set(EXTRA_COMPONENT_DIRS $ENV{IDF_PATH}/examples/common_components/protocol_examples_common)" in CMakeLists.txt under the project.
