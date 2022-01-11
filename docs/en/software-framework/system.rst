@@ -131,3 +131,10 @@ How to check the maximum stack size used by a thread for ESP32?
 ------------------------------------------------------------------------------------------------------------------
 
   - You can call the `UBaseType_t uxTaskGetStackHighWaterMark(TaskHandle_t xTask) <https://www.freertos.org/uxTaskGetStackHighWaterMark.html>`_ function. This function will return the minimum remaining stack space after the task is started.
+
+----------------
+
+What is the meaning of the " SW_CPU_RESET" log when using ESP32? 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - "SW_CPU_RESET" is the software reset log. For example, calling the "esp_restart()" API will print this log.
