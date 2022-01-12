@@ -699,3 +699,10 @@ ESP32S2 有 USB UVC 方案 demo 吗？
 -------------------------------------------------------------------
 
   - USB 摄像头功能请参考 esp-iot-solution 中的 `uvc_stream 组件和示例程序 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_。
+
+------------------------------------------------------------
+
+ESP32 是否支持 ADC2 与 蓝牙同时使用？
+---------------------------------------------------------
+
+  - 支持。
