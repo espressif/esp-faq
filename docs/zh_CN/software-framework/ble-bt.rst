@@ -490,3 +490,11 @@ BLE 如何抓包？
 
   - 当出现此报错，请在 ``components/bt/host/bluedroid/btc/profile/esp/blufi/blufi_prf.c`` 文件下，把 ``esp_ble_get_cur_sendable_packets_num(blufi_env.conn_id)`` 换成  ``esp_ble_get_sendable_packets_num()``。
   - 此问题已经在所有分支上面进行修复，可以更新 ESP-IDF 为最新 Release 版本。
+
+--------------
+
+使用 ESP32，请问蓝牙能否使用 light-sleep 模式，并在 light-sleep 模式下保持蓝牙连接？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 使用 light-sleep 模式，需要 ESP-IDF release/4.0 以上版本的 SDK 外加 32.768 kHz 晶振。
+  - light-sleep 模式下，蓝牙可以保持连接。请参考 `Bluetooth modem sleep with external 32.768 kHz xtal under light sleep <https://github.com/espressif/esp-idf/issues/947#issuecomment-500312453>`_ 指南。
