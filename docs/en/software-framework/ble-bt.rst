@@ -478,3 +478,16 @@ How does BLE capture packets?
 
     - TI Packet sniffer
     - NRF Packet sniffer
+
+---------------------
+
+When using an ESP32 development board to test several versions of bluefi example under ESP-IDF for networking, the following error kept printing. What is the reason?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    E (117198) BT_L2CAP: l2ble_update_att_acl_pkt_num not found p_tcb
+    W (117198) BT_BTC: btc_blufi_send_encap wait to send blufi custom data
+
+  - When this error occurs, please modify the ``esp_ble_get_cur_sendable_packets_num(blufi_env.conn_id)`` to ``esp_ble_get_sendable_packets_num()`` in the ``components/bt/host/bluedroid/btc/profile/esp/blufi/blufi_prf.c`` file.
+  - This bug has been fixed in all branches, you can update ESP-IDF to the latest release version.
