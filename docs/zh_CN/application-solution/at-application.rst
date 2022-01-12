@@ -728,3 +728,12 @@ AT+BLEADVDATA 广播数据支持的最大长度为 32，如何支持更大的数
   :CHIP\: ESP32:
 
  - 可以将数据放到 BLE scan response 中，指令为 `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>`_。
+
+-----------------------------------------------------------------------------------------------------
+
+WPA2 Enteprise 支持哪些认证方式呢 ?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP8266 | ESP32 | ESP32-C3:
+
+  - 仅支持 EAP-TLS/EAP-PEAP/EAP-TTLS 三种，详情参考 `AT+CWJEAP <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Wi-Fi_AT_Commands.html#esp32-only-at-cwjeap-connect-to-a-wpa2-enterprise-ap>`_ 指令介绍。
