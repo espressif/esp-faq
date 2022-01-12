@@ -705,3 +705,15 @@ Does ESP32 support using ADC2 and Bluetooth simultaneously?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes.
+
+----------------------
+
+Can ESP32 read SD card whose file format is exFAT?
+-----------------------------------------------------------------
+
+  - Is is not supported by default. exFAT is not free and needs license payment to Microsoft (or some other IP provider).
+
+  - There are 2 options if the user wants to use exFAT:
+  
+    - keep using Fatfs, which is already included in IDF, and pay royalties to Microsoft for the license. The easiest way to do this is through a reseller, for example, `exfat-royalties <http://embedded-access.com/exfat-royalties/>`_. In IDF, the user needs to modify ``ffconf.h`` to enable ``FF_FS_EXFAT`` option.
+    - use a commercial third-party FAT implementation, which will include exFAT royalties into its price. Options include `hcc-embedded <https://www.hcc-embedded.com/exfat/>`_ and `embedded-access <http://embedded-access.com/exfat-file-system/>`_. Some porting to ESP-IDF may be required, but most likely it won't be very difficult.

@@ -706,3 +706,16 @@ ESP32 是否支持 ADC2 与 蓝牙同时使用？
 ---------------------------------------------------------
 
   - 支持。
+
+---------------------------------------------------------
+
+ESP32 可以读取文件格式为 exFAT 的 SD 卡吗？
+------------------------------------------------------
+
+  - 默认是无法读取的。exFAT 是收费的，需要向 Microsoft（或其他 IP 服务提供商）支付许可费用。
+
+  - 如果用户需要使用　exFAT，可使用下面两种方法：
+  
+    - 使用 IDF 中已包含的 Fatfs，并向 Microsoft 支付许可使用费。最简单的方法是通过经销商。如: `exfat-royalties <http://embedded-access.com/exfat-royalties/>`_。在 IDF 下，需要修改 ``ffconf.h`` 使能 ``FF_FS_EXFAT`` 选项。
+    - 使用商业第三方 FAT 实现，在价格中会包含 exFAT 版税。可使用 `hcc-embedded <https://www.hcc-embedded.com/exfat/>`_ 和 `embedded-access <http://embedded-access.com/exfat-file-system/>`_。可能需要移植到 esp-idf，难度不大。
+    
