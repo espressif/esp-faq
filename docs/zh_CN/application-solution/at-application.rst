@@ -788,3 +788,25 @@ AT+HTTPCPOST 有哪些使用示例?
       AT+CIPRECVDATA=1080
       +CIPRECVDATA:16,http://en.usr.cn
       OK
+
+-----------------------------
+
+使用 ESP32 的 AT 固件，发送 BLE 扫描命令，没有收到扫描应答包，是什么原因？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 使用的 AT 指令如下：
+
+.. code:: text
+
+    AT+BLEINIT=1
+    AT+BLESCANPARAM=0,0,0,100,50
+    AT+BLESCAN=1
+  
+  有广播包，但没有扫描应答包; 命令回复的日志如图所示：
+  
+  .. figure:: ../_static/application-solution/at-application/AT_BLESCAN_Return_LOG.png
+    :align: center
+
+  - 若想要获得扫描应答包，那么需要设置的扫描方式是 "active scan"，即 "AT+BLESCANPARAM=1,0,0,100,50"
+  - 且对端设备需要设置 "scan rsp data" ，才能获得扫描应答包；
+  - 可参考`《ESP32 AT 指令集与使用示例》 <https://www.espressif.com/sites/default/files/documentation/esp32_at_instruction_set_and_examples_cn.pdf>`_ 。
