@@ -763,3 +763,28 @@ AT+HTTPCPOST 有哪些使用示例?
       AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       AAAAAAAAAAAAAAAAAAAAA
       SEND OK 
+
+---------------
+
+是否有 AT+CIPRECVDATA 接收服务器端缓存数据示例?
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP8266:
+    .. code:: text
+
+      AT+CWMODE=1     //设置为 station 模式
+      OK
+      AT+CWJAP="iot","123456789"
+      WIFI CONNECTED
+      WIFI GOT IP
+      AT+CIPSTART="TCP","192.168.3.129",8080
+      CONNECT
+      OK
+      AT+CIPRECVMODE=1
+      OK
+      //服务器端发送数据给客户端 16字节
+      AT+CIPRECVLEN?    //查询服务器端缓存数据
+      +CIPRECVLEN:16    //确保查询长度不为 0，否则获取数据会返回 ERROR
+      AT+CIPRECVDATA=1080
+      +CIPRECVDATA:16,http://en.usr.cn
+      OK

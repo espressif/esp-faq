@@ -761,3 +761,29 @@ Are there any AT+HTTPCPOST usage examples?
       AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       AAAAAAAAAAAAAAAAAAAAA
       SEND OK 
+
+---------------
+
+Are there any examples of using AT+CIPRECVDATA to receive cache data from the server?
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP8266:
+
+    .. code:: text
+
+      AT+CWMODE=1     //set as station mode
+      OK
+      AT+CWJAP="iot","123456789"
+      WIFI CONNECTED
+      WIFI GOT IP
+      AT+CIPSTART="TCP","192.168.3.129",8080
+      CONNECT
+      OK
+      AT+CIPRECVMODE=1
+      OK
+      //The server send 16bytes data to client
+      AT+CIPRECVLEN?    //Inquire server cached data
+      +CIPRECVLEN:16    //Ensure the quire length isn't zero, otherwise the data received will return ERROR.
+      AT+CIPRECVDATA=1080
+      +CIPRECVDATA:16,http://en.usr.cn
+      OK
