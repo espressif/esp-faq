@@ -992,3 +992,10 @@ What does such log mean: ``I (81447377) wifi:new:<7,0>, old:<7,2>, ap:<255,255>,
   :CHIP\: ESP32 :
 
   - ``new`` represents the current primary and secondary channel; ``old`` represents the last primary and secondary channel; ``ap`` represents the current primary and secondary channel of ESP32 AP; ``<255,255>`` means SoftAP is disabled; ``sta`` represents the current primary and secondary channel of ESP32 STA; ``prof`` represents the channel of SP32 SoftAP stored in NVS.
+
+------------------------------------------------------------------------
+
+Does ESP32 Wi-Fi support roam function between different APs with the same SSID?
+----------------------------------------------------------------------------------------------------------
+
+  - No.
