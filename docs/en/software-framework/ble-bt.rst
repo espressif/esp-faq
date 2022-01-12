@@ -459,3 +459,12 @@ What is the maximum MTU Size of ESP32 Classic Bluetooth?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP32 Classic Bluetooth has two protocols, namely A2DP and SPP. The maximum MTU Size setting of BT A2DP (default) is 1008 bytes, of which the header occupies 12 bytes and the actual amount of data transmitted by the application layer is 1008 - 12 = 996 (bytes); the maximum MTU Size of BT SPP (default) Set to 990 bytes.
+
+---------------
+
+How to resolve the frequently occurred ELxXX error (such as ELx200) when Wi-Fi and Ble co-exit？
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - It has been fixed in commit 386a8e37f19fecc9ef62e72441e6e1272fa985b9. Please switch to the corresponding commit to test.
