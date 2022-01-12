@@ -736,3 +736,28 @@ What authentication methods does WPA2 Enteprise support?
   :CHIP\: ESP8266 | ESP32 | ESP32-C3:
 
   - Only EAP-TLS/EAP-PEAP/EAP-TTLS are supported. For details, please refer to the `AT+CWJEAP <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Wi-Fi_AT_Commands.html#esp32-only-at-cwjeap-connect-to-a-wpa2-enterprise-ap>_` command introduction.
+
+---------------
+
+Are there any AT+HTTPCPOST usage examples?
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP8266:
+
+  - While compiling firmware manually under the master version of ESP-AT, it is required to change the "at process task stack size" to over 4096 in menuconfig, the specific operation steps are as follows:
+  
+    - ./build.py menuconfig----->AT----->(5120). The stack size of the AT process task in AT library, which will be used to process AT command.
+  - [*] AT http command support:
+    .. code:: text
+ 
+      AT+CWMODE=1     //set as station mode
+      OK
+      AT+CWJAP="iot","123456789"
+      WIFI CONNECTED
+      WIFI GOT IP
+      AT+HTTPCPOST="http://61.172.47.198:8082/hello/test",172
+      OK
+      >AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      AAAAAAAAAAAAAAAAAAAAA
+      SEND OK 

@@ -737,3 +737,29 @@ WPA2 Enteprise 支持哪些认证方式呢 ?
   :CHIP\: ESP8266 | ESP32 | ESP32-C3:
 
   - 仅支持 EAP-TLS/EAP-PEAP/EAP-TTLS 三种，详情参考 `AT+CWJEAP <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Wi-Fi_AT_Commands.html#esp32-only-at-cwjeap-connect-to-a-wpa2-enterprise-ap>`_ 指令介绍。
+
+---------------
+
+AT+HTTPCPOST 有哪些使用示例?
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP8266:
+
+  - 在 ESP-AT master 版本下面手动编译固件，需要将 at process task stack size 大小改到 4096 以上， 具体的操作步骤如下：
+ 
+    - ./build.py menuconfig----->AT----->(5120)。表示 AT 仓库中任务运行的栈大小，将用于运行 AT 指令。
+    - [*] AT http 指令支持：
+
+    .. code:: text
+ 
+      AT+CWMODE=1     //设置为 station 模式
+      OK
+      AT+CWJAP="iot","123456789"
+      WIFI CONNECTED
+      WIFI GOT IP
+      AT+HTTPCPOST="http://61.172.47.198:8082/hello/test",172
+      OK
+      >AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      AAAAAAAAAAAAAAAAAAAAA
+      SEND OK 
