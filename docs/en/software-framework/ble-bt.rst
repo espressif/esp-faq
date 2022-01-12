@@ -491,3 +491,11 @@ When using an ESP32 development board to test several versions of bluefi example
 
   - When this error occurs, please modify the ``esp_ble_get_cur_sendable_packets_num(blufi_env.conn_id)`` to ``esp_ble_get_sendable_packets_num()`` in the ``components/bt/host/bluedroid/btc/profile/esp/blufi/blufi_prf.c`` file.
   - This bug has been fixed in all branches, you can update ESP-IDF to the latest release version.
+
+--------------------
+
+When using ESP32, can light-sleep mode be enabled for Bluetooth and can Bluetooth be kept connected in light-sleep mode?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - To use light-sleep mode for ESP32, release/4.0 or above versions of ESP-IDF and a 32.768 kHz crystal oscillator are needed.
+  - Bluetooth can be kept connected in light-sleep mode. Please refer to `Bluetooth modem sleep with external 32.768 kHz xtal under light sleep <https://github.com/espressif/esp-idf/issues/947#issuecomment-500312453>`_.
