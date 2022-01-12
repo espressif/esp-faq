@@ -120,3 +120,12 @@ Windows 下执行 export.bat，提示 CMake、gdbgui 版本错误：
   - 一旦某个项目配置完成并使用 target 编译过一次后，则无需再次调用 ``idf.py set-target`` 指令重设，直接切换到另一项目中即可。``idf.py set-target`` 指令会将配置的 target 值存储于项目下的编译目录和 ``sdkconfig`` 文件中，并非存储于终端环境。因此，如果你切换并编译了另一项目，再次切回上一项目时，其 target 不会改变，仍为上一次为这个项目配置的值。
   - 若想使项目自动编译某一默认的 target 值，请将默认值添加至项目的 ``sdkconfig.defaults`` 文件（如 ``CONFIG_IDF_TARGET="esp32s2"``）。此后，如果项目中未存在 ``sdkconfig`` 文件和编译目录，``idf.py build`` 将使用 ``sdkconfig.defaults`` 中定义的默认值进行编译。
   - ``idf.py set-target`` 指令定义的 target 值可覆盖 ``sdkconfig.defaults`` 中配置的值。
+
+--------------
+
+如何查看当前 ESP-IDF 的版本号，是否存在记录版本号的文件？
+------------------------------------------------------------------------------------------------------------------------------
+
+  - 官方有个变量 ``IDF_VER``，可以通过调用函数 ``esp_get_idf_version`` 进行查看。
+  - 具体信息还可以查看 "components/esp_common/include/esp_idf_version.h"。
+  
