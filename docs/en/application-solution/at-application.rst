@@ -727,3 +727,12 @@ The maximum length of AT+BLEADVDATA broadcast data is 32. How to realize a bigge
   :CHIP\: ESP32:
 
  - You can put the data in BLE scan response by using the `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>_` command.
+
+-----------------------------------------------------------------------------------------------------
+
+What authentication methods does WPA2 Enteprise support?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP8266 | ESP32 | ESP32-C3:
+
+  - Only EAP-TLS/EAP-PEAP/EAP-TTLS are supported. For details, please refer to the `AT+CWJEAP <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Wi-Fi_AT_Commands.html#esp32-only-at-cwjeap-connect-to-a-wpa2-enterprise-ap>_` command introduction.
