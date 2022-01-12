@@ -477,3 +477,16 @@ BLE 如何抓包？
 
     - TI Packet sniffer
     - NRF Packet sniffer
+
+------------
+
+使用 ESP32 开发板，测试好几个版本的 ESP-IDF 下的 blufi 例程进行配网，点击配网之后都会打印如下报错，是什么原因？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    E (117198) BT_L2CAP: l2ble_update_att_acl_pkt_num not found p_tcb
+    W (117198) BT_BTC: btc_blufi_send_encap wait to send blufi custom data
+
+  - 当出现此报错，请在 ``components/bt/host/bluedroid/btc/profile/esp/blufi/blufi_prf.c`` 文件下，把 ``esp_ble_get_cur_sendable_packets_num(blufi_env.conn_id)`` 换成  ``esp_ble_get_sendable_packets_num()``。
+  - 此问题已经在所有分支上面进行修复，可以更新 ESP-IDF 为最新 Release 版本。
