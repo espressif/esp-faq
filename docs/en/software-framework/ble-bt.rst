@@ -468,3 +468,13 @@ How to resolve the frequently occurred ELxXX error (such as ELx200) when Wi-Fi a
   :CHIP\: ESP32:
 
   - It has been fixed in commit 386a8e37f19fecc9ef62e72441e6e1272fa985b9. Please switch to the corresponding commit to test.
+
+---------------
+
+How does BLE capture packets?
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - There are many tools available in the market, such as:
+
+    - TI Packet sniffer
+    - NRF Packet sniffer
