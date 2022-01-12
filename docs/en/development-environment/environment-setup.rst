@@ -120,3 +120,11 @@ Do I need to use command ``idf.py set-target`` every time I switch to another pr
   - Once the project is configured and built once for a certain target, it's not necessary to run ``idf.py set-target`` again other than to switch to a different target. ``idf.py set-target`` stores the selected target in the project's build directory and ``sdkconfig`` file, not in the terminal environment. So if you switch to a different directory and build another project, then come back, the target will not change, and will be the same as previously set for this project.
   - If you want to make the project built for certain target by default, add ``CONFIG_IDF_TARGET="esp32s2"`` to the ``sdkconfig.defaults`` file of the project. After this, if ``sdkconfig`` file doesn't exist and build directory doesn't exist, idf.py build command will build for that target specified in ``sdkconfig.defaults``.
   - ``idf.py set-target`` command can still be used to override the default target set in ``sdkconfig.defaults``.
+
+--------------
+
+How to know the version of ESP-IDF, is it recorded in a certain document? 
+----------------------------------------------------------------------------------------------------------------------------
+
+  - There is a variable ``IDF_VER``, you can call the function ``esp_get_idf_version`` to check.
+  - Please refer to "components/esp_common/include/esp_idf_version.h" to see more details.
