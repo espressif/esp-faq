@@ -699,3 +699,9 @@ Does ESP32-S2 have USB UVC demo?
 
   - Please refer to `uvc_stream demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_.
 
+----------------------
+
+Does ESP32 support using ADC2 and Bluetooth simultaneously?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes.
