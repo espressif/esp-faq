@@ -176,3 +176,29 @@ Alexa solution 对环境噪声是否有一定的要求？
 ------------------------------------------------------------------------
 
   - 当前乐鑫的语音方案可以满足信噪比 5dB 以内的环境要求，对于一些固定的噪音场景还可以做到 0dB 以内（需要针对实际产品进行优化）
+
+---------------------
+
+ESP32 的 AI 开发板上有 AUX 输入，MIC 就无法拾音了吗？
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP-ADF 开发框架可以选择多种方式拾音，有 MIC 输入和  Line-in 。
+  - 拾音方式选择如下：
+
+  .. code-block:: text
+
+    typedef enum {
+      AUDIO_HAL_CODEC_MODE_ENCODE = 1, /*! <select adc */      // MIC pickup
+      AUDIO_HAL_CODEC_MODE_DECODE, /*! <select dac*/
+      AUDIO_HAL_CODEC_MODE_BOTH, /*! <select both adc and dac */   //  MIC + speaker
+      AUDIO_HAL_CODEC_MODE_LINE_IN, /*! <set adc channel */,             // microphone pickup
+    } Audio_hal_codec_mode_t;
+
+  - 拾音方式配置如下：
+
+  .. code-block:: text
+
+    audio_board_handle_t board_handle = audio_board_init();
+    audio_hal_ctrl_codec(board_handle->audio_hal, AUDIO_HAL_CODEC_MODE_DECODE, AUDIO_HAL_CTRL_START);     //若要 MIC 拾音 ，修改这个配置选项。
+      
+  
