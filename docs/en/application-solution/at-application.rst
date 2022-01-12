@@ -787,3 +787,27 @@ Are there any examples of using AT+CIPRECVDATA to receive cache data from the se
       AT+CIPRECVDATA=1080
       +CIPRECVDATA:16,http://en.usr.cn
       OK
+
+---------------
+
+I use ESP32 AT firmware to send BLE scan command, but the scan response packet is not received. What is the reason?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The AT commands used are as follows:
+
+  .. code:: text
+
+    AT+BLEINIT=1
+    AT+BLESCANPARAM=0,0,0,100,50
+    AT+BLESCAN=1
+
+  There is a broadcast packet, but there is no scan response packet; the log of the command reply is shown in the figure:
+
+  .. figure:: ../_static/application-solution/at-application/AT_BLESCAN_Return_LOG.png
+    :align: center
+  
+
+  - If you want to get the scan response packet, then the scan mode that needs to be set is "active scan", that command is "AT+BLESCANPARAM=1,0,0,100,50" .
+  - And the peer device needs to set "scan rsp data" to get the scan response packet.
+  - Please refer to `《ESP32 AT Instruction Set and Usage Examples》 <https://www.espressif.com/sites/default/files/documentation/esp32_at_instruction_set_and_examples_cn.pdf>`_.
+  
