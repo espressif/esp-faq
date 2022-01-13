@@ -721,7 +721,7 @@ When using the release/v2.1.0.0 version of the AT firmware, what is the maximum 
   
 -----------------------------------------------------------------------------------------------------
 
-The maximum length of AT+BLEADVDATA broadcast data is 32. How to realize a bigger data length support?
+The maximum length of AT+BLEADVDATA broadcast data is 31. How to realize a bigger data length support?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32:
