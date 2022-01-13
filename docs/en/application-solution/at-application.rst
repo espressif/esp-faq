@@ -806,8 +806,10 @@ I use ESP32 AT firmware to send BLE scan command, but the scan response packet i
   .. figure:: ../_static/application-solution/at-application/AT_BLESCAN_Return_LOG.png
     :align: center
   
+---------------
 
-  - If you want to get the scan response packet, then the scan mode that needs to be set is "active scan", that command is "AT+BLESCANPARAM=1,0,0,100,50" .
-  - And the peer device needs to set "scan rsp data" to get the scan response packet.
-  - Please refer to `《ESP32 AT Instruction Set and Usage Examples》 <https://www.espressif.com/sites/default/files/documentation/esp32_at_instruction_set_and_examples_cn.pdf>`_.
+Is there a limit to the maximum length of the broadcast packet sent by the "AT+BLEADVDATA" command?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The maximum length of broadcast packet by "AT+BLEADVDATA" is 31 bytes.
   

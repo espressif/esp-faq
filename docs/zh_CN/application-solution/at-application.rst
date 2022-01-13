@@ -810,3 +810,11 @@ AT+HTTPCPOST 有哪些使用示例?
   - 若想要获得扫描应答包，那么需要设置的扫描方式是 "active scan"，即 "AT+BLESCANPARAM=1,0,0,100,50"
   - 且对端设备需要设置 "scan rsp data" ，才能获得扫描应答包；
   - 可参考`《ESP32 AT 指令集与使用示例》 <https://www.espressif.com/sites/default/files/documentation/esp32_at_instruction_set_and_examples_cn.pdf>`_ 。
+
+------------------
+
+使用 AT+BLEADVDATA 指令发广播包最大长度有限制吗？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - AT+BLEADVDATA 广播包最大长度为 31 字节。
+  
