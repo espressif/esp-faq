@@ -499,3 +499,34 @@ When using ESP32, can light-sleep mode be enabled for Bluetooth and can Bluetoot
 
   - To use light-sleep mode for ESP32, release/4.0 or above versions of ESP-IDF and a 32.768 kHz crystal oscillator are needed.
   - Bluetooth can be kept connected in light-sleep mode. Please refer to `Bluetooth modem sleep with external 32.768 kHz xtal under light sleep <https://github.com/espressif/esp-idf/issues/947#issuecomment-500312453>`_.
+
+--------------
+
+How to modify the Bluetooth broadcast name of ESP32?
+---------------------------------------------------------------------------------------
+
+  - The structure to be modified is as follows:
+
+   .. code-block:: text
+
+     static uint8_t raw_adv_data[] = {
+
+     /* flags*/
+
+     0x02, 0x01, 0x06,
+
+     Tx power*/
+
+     0x02, 0x0a, 0xeb,
+
+     /* service uuid*/
+
+     0x03, 0x03, 0xFF, 0x00,
+
+     /* device name*/
+
+     0x0f, 0x09,'E','S','P','_','G','A','T','T','S','_','D','E ','M','O'
+
+     };
+
+  - The above ``/* device name*/`` is the modified item. Among them, 0x0f is the total length of the field type plus specific content, and 0x09 indicates that this type refers to the device name. Subsequent'E','S','P','_','G','A','T','T','S','_','D','E', 'M','O' are the ASCII code expressions of the broadcast device name.

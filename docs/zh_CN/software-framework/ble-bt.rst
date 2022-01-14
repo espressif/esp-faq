@@ -498,3 +498,32 @@ BLE 如何抓包？
 
   - ESP32 使用 light-sleep 模式，需要 ESP-IDF release/4.0 以上版本的 SDK 外加 32.768 kHz 晶振。
   - light-sleep 模式下，蓝牙可以保持连接。请参考 `Bluetooth modem sleep with external 32.768 kHz xtal under light sleep <https://github.com/espressif/esp-idf/issues/947#issuecomment-500312453>`_ 指南。
+
+如何修改 ESP32 的蓝牙广播名称？
+----------------------------------------------------------------------------
+
+  - 要修改的结构体如下：
+
+  .. code-block:: text
+
+    static uint8_t raw_adv_data[] = {
+
+            /* flags*/
+
+            0x02, 0x01, 0x06,
+
+            /* tx power*/
+
+            0x02, 0x0a, 0xeb,
+
+            /* service uuid*/
+
+            0x03, 0x03, 0xFF, 0x00,
+
+            /* device name*/
+
+            0x0f, 0x09, 'E', 'S', 'P', '_', 'G', 'A', 'T', 'T', 'S', '_', 'D','E', 'M', 'O'
+
+    };
+
+  - 上述 ``/* device name*/`` 为修改项。其中 0x0f 为此字段类型加具体内容的总长度，0x09 表示此类型代指设备名。后续的 'E', 'S', 'P', '_', 'G', 'A', 'T', 'T', 'S', '_', 'D','E', 'M', 'O' 为广播设备名的 ASCII 码表达。
