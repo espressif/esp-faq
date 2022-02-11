@@ -134,3 +134,16 @@ ESP32-Ethernet-Kit 开发板模组替换成 ESP32-WROOM-32D 以太网功能是�
 
   - ESP32-WROOM 和 ESP32-WROVER 模组都使用的是 ESP32 芯片，ESP32 芯片支持以太网，详情可以参考 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
   - 相关文档：`ESP32-Ethernet-Kit 入门指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/hw-reference/esp32/get-started-ethernet-kit.html>`_。
+
+------------------
+
+使用 ESP32 设计自行开发以太网的板子，下载官方 esp-idf/examples/ethernet 例程，报错如下，是什么原因？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    E (5556) emac: Timed out waiting for PHY rdgister 0x2 to have value 0x0022 (mask 0xffff). Current value 0xffff
+    E (6556) emac: Timed out waiting for PHY register 0x3 to have value 0x1430 (mask 0xfff0). Current value 0xffff 
+
+  - 此报错说明硬件电路有问题，RMII 时钟没有正常供给 PHY，遇到读 PHY 寄存器失败。关于 RMII 时钟部分，可参见 `说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html>`_。
+  
