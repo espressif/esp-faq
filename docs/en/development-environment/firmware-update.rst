@@ -170,3 +170,11 @@ What are the Espressif module programming tools?
 
   - For Espressif programming software, you can go to this webpage and download it: `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_. Only `Windows` environment can support no GUI tool embedded.
   - Espressif programming tool `esptool <https://github.com/espressif/esptool>`_ is written based on `python` and open source code, supports secondary development.
+
+-----------------------------------------------------------------------------------------------------
+
+What is the difference between the Factory and Developer modes of the flash download tool?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Factory mode supports multi-channel downloads, while Developer mode only supports single channel.
+  - The path of bin files under Factory mode is relative, while under Developer is absolute.
