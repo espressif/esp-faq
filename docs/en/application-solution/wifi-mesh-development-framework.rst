@@ -41,3 +41,10 @@ When using an ESP32 development board to test the `esp-mdf/examples/function_dem
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Please modify the "menuconfig → Component config → LWIP  → (espressif) Local netif hostname" setting.
+
+-----------------------
+
+Can Wi-Fi Mesh send messages to specific nodes via TCP Server?
+-------------------------------------------------------------------------------------------------------------------------------
+
+  - Wi-Fi Mesh network can send data to the specified node or group in the TCP server, please refer to the `demo <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/router>`_.
