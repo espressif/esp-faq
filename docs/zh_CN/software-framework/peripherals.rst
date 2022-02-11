@@ -748,3 +748,17 @@ SPI slave 支持最大速度是多少？
   - ESP32-S3R2 芯片集成了 4 线的 2 MB PSRAM，请在 menuconfig 中将 PSRAM 模式设置为 **Quad** 模式。如下：
 
     ``menuconfig → Component config → ESP32S3 Specific → Support for external, SPI connected RAM → SPI RAM config → Mode (QUAD/OCT) of SPI RAM chip in use (Quad Mode PSRAM)`` 
+
+-------------------------
+
+使用 ESP32-S3-WROOM-2 (ESP32-S3R8V) 模组基于 ESP-IDF v4.4 版本的 hello-world 例程开启 PSRAM 的设置后，打印如下报错，是什么原因？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    .. code-block:: text
+
+      E (453) psrm: psrm ID read error: 0x00ffff
+      E (454) cpu start: Failed to init external RAM!
+
+  - ESP32-S3R8V 芯片集成了 8 线的 8 MB PSRAM，请在 menuconfig 中将 PSRAM 模式设置为 **Octal** 模式。如下：
+
+    ``menuconfig → Component config → ESP32S3 Specific → Support for external, SPI connected RAM → SPI RAM config → Mode (QUAD/OCT) of SPI RAM chip in use (Octal Mode PSRAM)`` 
