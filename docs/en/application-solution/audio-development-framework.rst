@@ -51,4 +51,11 @@ There is an AUX input on the ESP32 AI development board, can MIC be used to pick
     audio_board_handle_t board_handle = audio_board_init();
     audio_hal_ctrl_codec(board_handle->audio_hal, AUDIO_HAL_CODEC_MODE_DECODE, AUDIO_HAL_CTRL_START);   //To MIC pickup, please modify this configuration option.
       
+---------------------
 
+When using ESP32-WROVER-B module + ES8311 to design audio development board, which pins can be selected for MCLK clock?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - On the hardware side, MCLK can only use GPIO0, GPIO1, and GPIO3 pins. Other pins cannot be used. You can read `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ about CLK_OUT* pins in IO_MUX table. GPIO0 is used by default.
+  - Please refer to the `schamatic of ESP32-LyraT-Mini  <https://dl.espressif.com/dl/schematics/SCH_ESP32-LYRAT-MINI_V1.2_20190605.pdf>`_.
+  - For allocation of pins, please refer to `ESP32-LyraT-Mini V1.2 Hardware Reference <https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/board-esp32-lyrat-mini-v1.2.html#esp32-lyrat-mini-v1-2-hardware-reference>`_.
