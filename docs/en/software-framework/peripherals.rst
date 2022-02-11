@@ -734,3 +734,16 @@ When using ESP32 as an SPI Master device, how many bytes of data can be transfer
   - Up to 64 Bytes of data can be transferred at one time in such condition.
   - But when the transmitted data exceeds 32 bits, you need to set the buffer for SPI data transmission, please refer to the description in `SPI Master Driver <https://docs.espressif.com/projects/esp-idf/en/release-v4.4 /esp32/api-reference/peripherals/spi_master.html?highlight=spi#spi-master-driver>`_.
   - When using ESP32 as an SPI Master device to transmit more than 32 bits of SPI data in non-DMA mode, please refer to the example `lcd <https://github.com/espressif/esp- idf/tree/release/v4.4/examples/peripherals/spi_master/lcd>`_.
+
+--------------------------------
+
+When using the ESP32-S3-WROOM-1 (ESP32-S3R2) module to enable its PSRAM configuration based on the "hello-world" example in ESP-IDF v4.4, the following error is printed. What is the reason?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    .. code-block:: text
+
+      E (232) spiram: Virtual address not enough for PSRAM!
+
+  - ESP32-S3R2 chip integrates a 4-wire 2 MB PSRAM, please set PSRAM Mode to **Quad** mode in menuconfig before your action as follows:
+
+    ``menuconfig → Component config → ESP32S3 Specific → Support for external, SPI connected RAM → SPI RAM config → Mode (QUAD/OCT) of SPI RAM chip in use (Ouad Mode PSRAM)``

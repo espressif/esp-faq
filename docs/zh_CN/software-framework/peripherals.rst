@@ -736,3 +736,15 @@ SPI slave 支持最大速度是多少？
   - 但当传输超过 32 bits 时，需要设置 SPI 发送数据的缓冲区，可参考 `SPI Master Driver <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/peripherals/spi_master.html?highlight=spi#spi-master-driver>`_ 说明。
   - 使用 ESP32 作为 SPI Master 设备在非 DMA 模式下传输超过 32 bits 的 SPI 数据，可参考例程 `esp-idf/examples/peripherals/spi_slave/sender <https://github.com/espressif/esp-idf/tree/release/v4.4/examples/peripherals/spi_master/lcd>`_。
   
+---------------------------
+
+使用 ESP32-S3-WROOM-1 (ESP32-S3R2) 模组基于 ESP-IDF v4.4 版本的 hello-world 例程开启 PSRAM 的设置后，打印如下报错，是什么原因？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    .. code-block:: text
+
+      E (232) spiram: Virtual address not enough for PSRAM!
+
+  - ESP32-S3R2 芯片集成了 4 线的 2 MB PSRAM，请在 menuconfig 中将 PSRAM 模式设置为 **Quad** 模式。如下：
+
+    ``menuconfig → Component config → ESP32S3 Specific → Support for external, SPI connected RAM → SPI RAM config → Mode (QUAD/OCT) of SPI RAM chip in use (Quad Mode PSRAM)`` 
