@@ -813,3 +813,10 @@ Is there a limit to the maximum length of the broadcast packet sent by the "AT+B
 
   - The maximum length of broadcast packet by "AT+BLEADVDATA" is 31 bytes.
   
+--------------------------------
+
+What is the maximum value of the ``length`` parameter in the AT+BLEGATTCWR command?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    - The maximum value of ``length`` in the `AT+BLEGATTCWR <https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp32/AT_Command_Set/BLE_AT_Commands.html?highlight=BLEGATTCWR#esp32-only-at-blegattcwr-gattc-writes-characteristics>`_ command is corresponds to the ``val_max_len`` parameter setting under the `example.csv <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/components/customized_partitions/raw_data/ble_data/example.csv>`_ file, and it is recommended not to exceed 512. Please refer to the description in `README <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/tools/README.md>`_.
+    
