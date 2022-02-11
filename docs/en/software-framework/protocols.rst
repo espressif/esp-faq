@@ -315,3 +315,19 @@ How to implement the certificate auto-download function?
   :CHIP\: ESP32:
 
   - Please refer to `aws certificate automatic download function <https://docs.aws.amazon.com/en/iot/latest/developerguide/auto-register-device-cert.html>`_ .
+
+-----------------------------
+
+After creating and closing TCP SOCKET several times, an error is reported as "Unable to create TCP socket: errno 23". How to resolve such issue?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  :CHIP\: ESP8266 | ESP32 | ESP32-S2 | ESP32-C3 | ESP32-S3 :
+
+  - Reason: "errno 23 " means open many open files in system. Closing a socket takes 2 MSL of time, which means sockets will not be closed immediately after calling the close interface. Due to this reason, open sockets are accumulated and exceeds the maximum connection number (the default is 10 in menuconfig, the maximum connection is 16) thus triggering this error. 
+  - Solution: Set SO_LINGER via the setsockopt interface to adjust the TCP close time.
+
+::
+
+    linger link ;
+    link.on_off = 1 ;
+    link.linger = 0 ;
+    setsockopt(m_sockConnect, SOL_SOCKET, SO_LINGER, (const char*)&link, sizeof(linger));
