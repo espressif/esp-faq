@@ -727,4 +727,12 @@ SPI slave 支持最大速度是多少？
 
   - ESP32 作为 SPI slave 时钟最高只支持到 10 M。
 
-    
+-------------------------
+
+使用 ESP32 作为 SPI Master 设备，在非 DMA 模式下最大可一次性传输多少字节的数据？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 使用 ESP32 作为 SPI Ｍaster 设备，在非 DMA 模式下最大可一次性传输 64 Bytes 的数据。
+  - 但当传输超过 32 bits 时，需要设置 SPI 发送数据的缓冲区，可参考 `SPI Master Driver <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/peripherals/spi_master.html?highlight=spi#spi-master-driver>`_ 说明。
+  - 使用 ESP32 作为 SPI Master 设备在非 DMA 模式下传输超过 32 bits 的 SPI 数据，可参考例程 `esp-idf/examples/peripherals/spi_slave/sender <https://github.com/espressif/esp-idf/tree/release/v4.4/examples/peripherals/spi_master/lcd>`_。
+  

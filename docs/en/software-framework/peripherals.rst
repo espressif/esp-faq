@@ -725,3 +725,12 @@ What is the maximum transmission speed supported by SPI slave?
   :CHIP\: ESP32 :
 
   - ESP32 can support up to 10 M of transmission speed when serves as an SPI slave.
+
+------------------------------
+
+When using ESP32 as an SPI Master device, how many bytes of data can be transfered at one time in non-DMA mode?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Up to 64 Bytes of data can be transferred at one time in such condition.
+  - But when the transmitted data exceeds 32 bits, you need to set the buffer for SPI data transmission, please refer to the description in `SPI Master Driver <https://docs.espressif.com/projects/esp-idf/en/release-v4.4 /esp32/api-reference/peripherals/spi_master.html?highlight=spi#spi-master-driver>`_.
+  - When using ESP32 as an SPI Master device to transmit more than 32 bits of SPI data in non-DMA mode, please refer to the example `lcd <https://github.com/espressif/esp- idf/tree/release/v4.4/examples/peripherals/spi_master/lcd>`_.
