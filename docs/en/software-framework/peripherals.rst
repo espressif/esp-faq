@@ -717,3 +717,11 @@ Can ESP32 read SD card whose file format is exFAT?
   
     - keep using Fatfs, which is already included in IDF, and pay royalties to Microsoft for the license. The easiest way to do this is through a reseller, for example, `exfat-royalties <http://embedded-access.com/exfat-royalties/>`_. In IDF, the user needs to modify ``ffconf.h`` to enable ``FF_FS_EXFAT`` option.
     - use a commercial third-party FAT implementation, which will include exFAT royalties into its price. Options include `hcc-embedded <https://www.hcc-embedded.com/exfat/>`_ and `embedded-access <http://embedded-access.com/exfat-file-system/>`_. Some porting to ESP-IDF may be required, but most likely it won't be very difficult.
+
+----------------
+
+What is the maximum transmission speed supported by SPI slave?
+-------------------------------------------------------------------------------
+  :CHIP\: ESP32 :
+
+  - ESP32 can support up to 10 M of transmission speed when serves as an SPI slave.
