@@ -1009,3 +1009,11 @@ ESP 模块是否支持 EAP-FAST?
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 :
 
   - 支持，请参考 `wifi_eap_fast <https://github.com/espressif/esp-idf/tree/master/examples/wifi/wifi_eap_fast>`_ demo。
+
+---------------
+
+ESP 模块支持 WiFi NAN (Neighbor Awareness Networking) 协议吗？
+------------------------------------------------------------------------------------------------
+  :CHIP\: ESP8266 | ESP32 | ESP32-C3 | ESP32-S2 | ESP32-S3:
+
+  - 不支持。

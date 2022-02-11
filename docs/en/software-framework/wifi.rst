@@ -1007,3 +1007,11 @@ Does ESP modules support EAP-FAST?
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 :
 
   - Yes, please refer to `wifi_eap_fast <https://github.com/espressif/esp-idf/tree/master/examples/wifi/wifi_eap_fast>`_ demo.
+
+---------------
+
+Does ESP modules support the WiFi NAN (Neighbor Awareness Networking) protocol?
+---------------------------------------------------------------------------------------------
+  :CHIP\: ESP8266 | ESP32 | ESP32-C3 | ESP32-S2 | ESP32-S3:
+
+  - No.
