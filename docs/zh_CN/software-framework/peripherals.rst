@@ -718,4 +718,13 @@ ESP32 可以读取文件格式为 exFAT 的 SD 卡吗？
   
     - 使用 IDF 中已包含的 Fatfs，并向 Microsoft 支付许可使用费。最简单的方法是通过经销商。如: `exfat-royalties <http://embedded-access.com/exfat-royalties/>`_。在 IDF 下，需要修改 ``ffconf.h`` 使能 ``FF_FS_EXFAT`` 选项。
     - 使用商业第三方 FAT 实现，在价格中会包含 exFAT 版税。可使用 `hcc-embedded <https://www.hcc-embedded.com/exfat/>`_ 和 `embedded-access <http://embedded-access.com/exfat-file-system/>`_。可能需要移植到 esp-idf，难度不大。
+
+----------------
+
+SPI slave 支持最大速度是多少？
+-------------------------------------------------------------------------------
+  :CHIP\: ESP32 :
+
+  - ESP32 作为 SPI slave 时钟最高只支持到 10 M。
+
     
