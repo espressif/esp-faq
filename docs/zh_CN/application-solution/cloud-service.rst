@@ -89,3 +89,10 @@ ESP32 + 以太网 + MQTT 方式接入阿里云，应该怎么做？
 -------------------------------------------------------------------------------------------------------------
   
   - 使用 `esp-aliyun <https://github.com/espressif/esp-aliyun>`_，将 Wi-Fi 初始化代码替换为 Ethernet 初始化即可。可以参考 `ESP_IDF 下的 Ethernet 示例 <https://github.com/espressif/esp-idf/tree/master/examples/ethernet>`_。
+
+----------------------------
+
+Alexa 的 LED 状态对应的是什么？
+-----------------------------------------------------------------------------------------------------------------------------------
+
+  - 请参考 `Alexa LEDs <https://developer.amazon.com/en-US/docs/alexa/alexa-voice-service/ux-design-attention.html#LEDs>`_。
