@@ -315,3 +315,19 @@ ESP32 如何增大 DNS 请求时间？
   :CHIP\: ESP32:
 
   - 具体操作详情参考 `aws 下面证书自动下载功能 <https://docs.aws.amazon.com/zh_cn/iot/latest/developerguide/auto-register-device-cert.html>`_ 。
+
+-----------------------------
+
+连续多次创建并关闭 TCP SOCKET 后出现报错 "Unable to create TCP socket: errno 23"，怎么解决？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  :CHIP\: ESP8266 | ESP32 | ESP32-S2 | ESP32-C3 | ESP32-S3 :
+
+  - 原因："errno 23" 代表的是 open many open files in system，由于关闭 socket 需要 2 MSL 的时间，所以调用 close 接口并不会立即关闭，导致 socket 持续累加，超过了 socket 最大支持连接数（menuconfig 中默认是 10 个，最大支持 16 个）报错。
+  - 解决措施：通过 setsockopt 接口设置 SO_LINGER 来调整 TCP 关闭时间，代码实现参考：
+
+::
+
+    linger link ;
+    link.on_off = 1 ;
+    link.linger = 0 ;
+    setsockopt(m_sockConnect, SOL_SOCKET, SO_LINGER, (const char*)&link, sizeof(linger));
