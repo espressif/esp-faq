@@ -36,3 +36,10 @@ What should I do to connect ESP32 to Alibaba Cloud via ESP32 + Ethernet + MQTT?
 --------------------------------------------------------------------------------------------------------------------------------
   
   - Use `esp-aliyun <https://github.com/espressif/esp-aliyun>`_ but replace the Wi-Fi initialization code with Ethernet initialization. You can refer to the Ethernet example under `ESP_IDF <https://github.com/espressif/esp-idf/tree/master/examples/ethernet>`_.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+what do Alexa LED states indicate?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can refer to `Alexa LEDs <https://developer.amazon.com/en-US/docs/alexa/alexa-voice-service/ux-design-attention.html#LEDs>`_.
