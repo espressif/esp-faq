@@ -999,3 +999,11 @@ Does ESP32 Wi-Fi support roam function between different APs with the same SSID?
 ----------------------------------------------------------------------------------------------------------
 
   - No.
+
+-----------------------------
+
+Does ESP modules support EAP-FAST?
+-------------------------------------------------------------------------------------------------------------------------------------
+  :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 :
+
+  - Yes, please refer to `wifi_eap_fast <https://github.com/espressif/esp-idf/tree/master/examples/wifi/wifi_eap_fast>`_ demo.
