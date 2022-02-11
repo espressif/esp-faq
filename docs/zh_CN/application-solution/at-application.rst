@@ -818,3 +818,10 @@ AT+HTTPCPOST 有哪些使用示例?
 
   - AT+BLEADVDATA 广播包最大长度为 31 字节。
   
+--------------------
+
+使用 ESP32 的 v2.2.0.0 版本的 AT 固件，AT+BLEGATTCWR 指令的 "length" 参数最大可以设置多大？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - `AT+BLEGATTCWR <https://docs.espressif.com/projects/esp-at/zh_CN/release-v2.2.0.0_esp32/AT_Command_Set/BLE_AT_Commands.html?highlight=BLEGATTCWR#esp32-only-at-blegattcwr-gattc-writes-characteristics>`_ 指令的 "length" 参数的最大设置对应 `example <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/components/customized_partitions/raw_data/ble_data/example.csv>`_ 文件的下的 "val_max_len" 参数设置，建议不要超过 512。请参见 `README <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/tools/README.md>`_ 下的 "val_max_len" 参数说明。
+
