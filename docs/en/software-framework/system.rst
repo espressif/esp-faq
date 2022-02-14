@@ -145,3 +145,12 @@ For ESP32 products, when testing NVS separately, I found it occupies a lot of me
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Please check the partition table settings. It is recommended to set a smaller NVS data partition in the partition table to test. The larger the NVS data partition setting, the more memory it will occupy.
+
+-----------------------------------------------------------------------------------------------------
+
+How do I change the system time of a module ?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 | ESP32 | ESP32-C3:
+
+ - You can use the c language ``time()`` interface to set the system time.
