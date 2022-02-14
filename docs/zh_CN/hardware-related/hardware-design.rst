@@ -271,3 +271,11 @@ ESP32 模组 Flash 是否支持 QIO+80MHz？
       :alt: no-component
       :figclass: align-center
   
+--------------
+
+如何在 ESP32-S2 中使用多天线？
+--------------------------------------------------
+
+  - ESP32-S2 的多天线使用和 ESP32 类似，可以参考 `ESP32-WROOM-DA <https://www.espressif.com/sites/default/files/documentation/esp32-wroom-da_datasheet_cn.pdf>`_ 中的多天线使用。
+  - `ESP-IDF 编程指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/wifi.html#id55>`_ 中提供了详细的操作说明。
+  - 使用时添加一个 RF switch，通过 switch 选择具体工作的天线。

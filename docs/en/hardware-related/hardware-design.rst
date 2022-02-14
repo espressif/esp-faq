@@ -63,7 +63,7 @@ How to hardware reset ESP8266? Is the hardware reset signal low level or high le
 --------------
 
 What does the term ``NC`` mean in Espressif schematics?
------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 
   - NC is the acronym of No Component. If you see a pull-up resistor is marked NC as shown in the figure below, it indicates that the component is not installed.
   
@@ -72,3 +72,13 @@ What does the term ``NC`` mean in Espressif schematics?
     :scale: 100%
     :alt: no-component
     :figclass: align-center
+
+--------------
+
+How to use multiple antennas in ESP32-S2?
+--------------------------------------------------------------------------
+
+  - It is similar to ESP32, you can refer to `ESP32-WROOM-DA <https://www.espressif.com/sites/default/files/documentation/esp32-wroom-da_datasheet_en.pdf>`_.
+  - For detailed operation instructions, please refer to `ESP-IDF Programming Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/api-guides/wifi.html#wi-fi-multiple-antennas>`_.
+  - You can add an RF switch to select a working antenna.
+  
