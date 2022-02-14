@@ -762,3 +762,11 @@ When using the ESP32-S3-WROOM-2 (ESP32-S3R8V) module to enable the PSRAM configu
   - ESP32-S3R8V chip integrates a 8-wire 8 MB PSRAM, please set PSRAM mode to **Octal** mode in menuconfig before your action as follows:
 
     ``menuconfig → Component config → ESP32S3 Specific → Support for external, SPI connected RAM → SPI RAM config → Mode (QUAD/OCT) of SPI RAM chip in use (Octal Mode PSRAM)``
+
+-------------------
+
+When using ESP32-C3 to drive the LCD display through the SPI interface, can I use RTC_CLK as the SPI clock to make the LCD screen display static pictures in Deep-sleep mode normally ?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Deep-sleep mode: The CPU and most peripherals will be powered down, and only the RTC memory is working. For more information, please refer to the Low Power Management section in `ESP32-C3 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf>`_.
+  - The SPI of ESP32-C3 only supports two clock sources : APB_CLK and XTAL_CLK. RTC_CLK is not supported. Therefore, in the Deep-sleep mode, the LCD screen cannot display static pictures. For more information, please refer to the Peripheral Clock section in `ESP32-C3 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp32-c3_technical_reference_manual_en.pdf>`_.
