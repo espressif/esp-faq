@@ -771,3 +771,9 @@ SPI slave 支持最大速度是多少？
   - Deep-sleep 模式：CPU 和大部分外设都会掉电，只有 RTC 存储器处于工作状态。请阅读`《ESP32-C3 Datasheet》 <https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_cn.pdf>`_ 关于“低功耗管理”的说明。
   - ESP32-C3 的 SPI 只支持 APB_CLK 和 XTAL_CLK 两种时钟源，不支持使用 RTC_CLK。因此在 Deep-sleep 模式下，LCD 液晶屏无法显示静态图片。请阅读 `《ESP32-C3 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp32-c3_technical_reference_manual_cn.pdf>`_  关于“外设时钟”说明。
   
+------------------
+
+ESP32-S2 芯片 ADC DMA 模式支持的频率范围是多大？
+-----------------------------------------------------------------------------------------------------------------
+
+  - 频率限制： 611 Hz ~ 83333 Hz
