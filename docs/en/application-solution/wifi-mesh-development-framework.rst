@@ -48,3 +48,10 @@ Can Wi-Fi Mesh send messages to specific nodes via TCP Server?
 -------------------------------------------------------------------------------------------------------------------------------
 
   - Wi-Fi Mesh network can send data to the specified node or group in the TCP server, please refer to the `demo <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/router>`_.
+
+------------------------
+
+During the operation of the ESP32 Wi-Fi Mesh network, if the Root node is lost, what events will the system report back?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - If the Root node is lost, all nodes will trigger 'MDF_EVENT_MWIFI_PARENT_DISCONNECTED (MESH_EVENT_PARENT_DISCONNECTED)', and then start rescanning and re-election until a new Root node is elected.
