@@ -59,3 +59,11 @@ When using ESP32-WROVER-B module + ES8311 to design audio development board, whi
   - On the hardware side, MCLK can only use GPIO0, GPIO1, and GPIO3 pins. Other pins cannot be used. You can read `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ about CLK_OUT* pins in IO_MUX table. GPIO0 is used by default.
   - Please refer to the `schamatic of ESP32-LyraT-Mini  <https://dl.espressif.com/dl/schematics/SCH_ESP32-LYRAT-MINI_V1.2_20190605.pdf>`_.
   - For allocation of pins, please refer to `ESP32-LyraT-Mini V1.2 Hardware Reference <https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/board-esp32-lyrat-mini-v1.2.html#esp32-lyrat-mini-v1-2-hardware-reference>`_.
+
+------------------------
+
+Can ESP32-WROVER-E module use one I2S line to realize simultaneous broadcasting and recording?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, you can refer to `ESP32-LyraT Development Board <https://docs.espressif.com/projects/esp-adf/en/latest/get-started/get-started-esp32-lyrat.html#esp32-lyrat-v4-3>`_.
+  
