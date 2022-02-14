@@ -209,3 +209,11 @@ ESP32 的 AI 开发板上有 AUX 输入，MIC 就无法拾音了吗？
   - 硬件上 MCLK 只能使用 GPIO0、GPIO1、GPIO3 管脚，不可使用其他管脚，可阅读 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`__ 的 IO_MUX 表内的 CLK_OUT*，默认使用 GPIO0。
   - 可参考 `ESP32-LyraT-Mini 开发板的硬件原理图 <https://dl.espressif.com/dl/schematics/SCH_ESP32-LYRAT-MINI_V1.2_20190605.pdf>`_ 设计。
   - 管脚分配可参见 `ESP32-LyraT-Mini V1.2 Hardware Reference <https://docs.espressif.com/projects/esp-adf/zh_CN/latest/design-guide/board-esp32-lyrat-mini-v1.2.html>`_。
+
+----------------
+
+ESP32-WROVER-E 模组使用一路 I2S 是否可实现同时播音和录音？
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 使用一路 I2S 可以实现同时播音和录音。可以参考 `ESP32-LyraT 开发板 <https://docs.espressif.com/projects/esp-adf/zh_CN/latest/get-started/get-started-esp32-lyrat.html#esp32-lyrat-v4-3>`_。
+  
