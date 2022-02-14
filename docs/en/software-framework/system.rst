@@ -138,3 +138,10 @@ What is the meaning of the " SW_CPU_RESET" log when using ESP32?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - "SW_CPU_RESET" is the software reset log. For example, calling the "esp_restart()" API will print this log.
+
+----------------
+
+For ESP32 products, when testing NVS separately, I found it occupies a lot of memory. What is the reason?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please check the partition table settings. It is recommended to set a smaller NVS data partition in the partition table to test. The larger the NVS data partition setting, the more memory it will occupy.
