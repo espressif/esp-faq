@@ -770,3 +770,11 @@ When using ESP32-C3 to drive the LCD display through the SPI interface, can I us
 
   - Deep-sleep mode: The CPU and most peripherals will be powered down, and only the RTC memory is working. For more information, please refer to the Low Power Management section in `ESP32-C3 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf>`_.
   - The SPI of ESP32-C3 only supports two clock sources : APB_CLK and XTAL_CLK. RTC_CLK is not supported. Therefore, in the Deep-sleep mode, the LCD screen cannot display static pictures. For more information, please refer to the Peripheral Clock section in `ESP32-C3 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp32-c3_technical_reference_manual_en.pdf>`_.
+
+-----------------
+
+What is the frequency range supported by the ADC DMA mode of the ESP32-S2 chip?
+--------------------------------------------------------------------------------------------------------------------------
+
+  - Frequency limit : 611 Hz ~ 83333 Hz
+  
