@@ -820,3 +820,10 @@ What is the maximum value of the ``length`` parameter in the AT+BLEGATTCWR comma
 
     - The maximum value of ``length`` in the `AT+BLEGATTCWR <https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp32/AT_Command_Set/BLE_AT_Commands.html?highlight=BLEGATTCWR#esp32-only-at-blegattcwr-gattc-writes-characteristics>`_ command is corresponds to the ``val_max_len`` parameter setting under the `example.csv <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/components/customized_partitions/raw_data/ble_data/example.csv>`_ file, and it is recommended not to exceed 512. Please refer to the description in `README <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/tools/README.md>`_.
     
+--------------------
+
+When using the v2.2.0.0 version of AT firmware to connect ESP32 to AP, it will automatically connect to the AP again after being reset and powered on. How to cancel this setting?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - This can be realized by using the AT+SYSSTORE=0 command. After calling this command, the related configuration information of affected commands will not be saved to flash. That is to say, before connecting AP using the AT+CWJAP command, you can call `AT+SYSSTORE=0 <https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp32/AT_Command_Set/Basic_AT_Commands.html#at-sysstore-query-set-parameter-store-mode>`_ first to make old AP information not be stored to flash.
+  
