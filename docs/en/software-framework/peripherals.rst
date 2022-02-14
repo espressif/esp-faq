@@ -778,3 +778,9 @@ What is the frequency range supported by the ADC DMA mode of the ESP32-S2 chip?
 
   - Frequency limit : 611 Hz ~ 83333 Hz
   
+---------------
+  
+The ESP32-C3 chip can use USB to download firmware, but it is not supported under ESP-IDF v4.3. How to use USB to download firmware?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+   - You need to compile under ESP-IDF v4.4 or later versions. After pulling the latest branch and `updating the IDF tool <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_, you can compile normally and download it using USB. Please refer to `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_ for the usage.

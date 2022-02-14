@@ -180,3 +180,10 @@ flash 下载工具的工厂模式和开发者模式有什么区别？
 
   - 工厂模式支持多通道下载，开发者模式仅支持单通道。
   - 工厂模式下 bin 文件的路径是相对路径，开发者模式下的路径是绝对路径。
+
+-----------------------------------------------------------------------------------------------------
+
+ESP32-C3 芯片可以使用 USB 进行固件的下载，但在 ESP-IDF v4.3 下使用并不支持，如何使用 USB 进行固件下载？
+-------------------------------------------------------------------------------------------------------------------
+
+  - 需要在 ESP-IDF v4.4 以上版本下进行编译，拉取最新分支并 `更新 IDF 工具 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_ 后可以正常编译并使用 USB 进行下载。使用过程请参考 `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_。
