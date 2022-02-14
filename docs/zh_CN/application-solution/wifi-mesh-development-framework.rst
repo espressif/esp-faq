@@ -255,3 +255,9 @@ Wi-Fi Mesh 可以通过 TCP Server 给特定节点发送消息吗？
 
   - Wi-Fi Mesh 网络可在 TCP 服务器中发送数据到指定节点或组地址，可参看 `demo <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/router>`_。
   
+--------------------
+
+在 ESP32 Wi-Fi Mesh 网络运行过程中，若根（Root）节点丢失，系统会反馈什么事件？
+--------------------------------------------------------------------------------------------
+
+  - 若根（Root）节点丢失，所有节点将会触发 MDF_EVENT_MWIFI_PARENT_DISCONNECTED (MESH_EVENT_PARENT_DISCONNECTED)，然后开始重新扫描（Scan），进行重新选举，直到选举出新的根（Root）节点。
