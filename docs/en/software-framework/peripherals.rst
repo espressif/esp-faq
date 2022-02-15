@@ -790,4 +790,11 @@ Does the ADC of ESP32 support simultaneous sampling of multiple channels?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - No, If you are using ADC to do multi-channel sampling, please implement it via ADC polling scheme.
+
+-------------------------
+
+Does the ESP32 chip support USRAT (Universal Synchronous Asynchronous Receiver Transmitter)?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - It's not support. ESP32 only supports UART and cannot provide the synchronous clock.
   
