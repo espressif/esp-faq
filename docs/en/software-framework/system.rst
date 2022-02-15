@@ -175,4 +175,11 @@ How does ESP8266-RTOS-SDK store data to RTC memory?
     #define RTC_DATA_ATTR _SECTION_ATTR_IMPL(".rtc.data", __COUNTER__)
 
   - Please refer to the description in `esp_attr.h <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/include/esp_attr.h>`_.
-  
+
+-------------------------
+
+After waking up from Deep-sleep mode, where does ESP8266 start boot?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - After ESP8266 wakes up from Deep-sleep mode, the device will boots up from ``user_init``. Please refer to the description in `esp_deep_sleep() <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/system/sleep_modes.html?highlight=deep#_CPPv414esp_deep_sleep8uint64_t>`__.
+
