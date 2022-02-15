@@ -81,4 +81,12 @@ How to use multiple antennas in ESP32-S2?
   - It is similar to ESP32, you can refer to `ESP32-WROOM-DA <https://www.espressif.com/sites/default/files/documentation/esp32-wroom-da_datasheet_en.pdf>`_.
   - For detailed operation instructions, please refer to `ESP-IDF Programming Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/api-guides/wifi.html#wi-fi-multiple-antennas>`_.
   - You can add an RF switch to select a working antenna.
-  
+
+--------------
+ 
+Does ESP32-C3F SPI CS0 pin need an external 10 K pull-up resistor?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32-C3F:
+
+  - No.
