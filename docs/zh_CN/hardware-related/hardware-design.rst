@@ -288,3 +288,11 @@ ESP32-C3F SPI CS0 是否需要外接 10 K 上拉电阻？
   :CHIP\: ESP32-C3F:
 
   - 不需要。
+
+--------------
+
+ESP-Skainet 有语音识别硬件设计参考吗？
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - 请参考 ` ESP32-Korvo V1.1 硬件参考设计 <https://github.com/espressif/esp-skainet/blob/master/docs/zh_CN/hw-reference/esp32/user-guide-esp32-korvo-v1.1.md#2-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83>`_。
+  

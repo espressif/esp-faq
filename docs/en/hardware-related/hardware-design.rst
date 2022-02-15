@@ -90,3 +90,11 @@ Does ESP32-C3F SPI CS0 pin need an external 10 K pull-up resistor?
   :CHIP\: ESP32-C3F:
 
   - No.
+
+--------------
+
+Is there any hardware design reference for ESP-Skainet Speech recognition?
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - Please refer to ` ESP32-Korvo V1.1 Hardware Reference Design <https://github.com/espressif/esp-skainet/blob/master/docs/en/hw-reference/esp32/user-guide-esp32-korvo-v1.1.md#2%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83>`_.
+  
