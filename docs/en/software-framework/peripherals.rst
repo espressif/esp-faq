@@ -783,3 +783,11 @@ The ESP32-C3 chip can use USB to download firmware, but it is not supported unde
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
    - You need to compile under ESP-IDF v4.4 or later versions. After pulling the latest branch and `updating the IDF tool <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_, you can compile normally and download it using USB. Please refer to `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_ for the usage.
+
+----------------------
+
+Does the ADC of ESP32 support simultaneous sampling of multiple channels?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - No, If you are using ADC to do multi-channel sampling, please implement it via ADC polling scheme.
+  
