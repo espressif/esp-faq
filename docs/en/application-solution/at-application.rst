@@ -827,3 +827,9 @@ When using the v2.2.0.0 version of AT firmware to connect ESP32 to AP, it will a
 
   - This can be realized by using the AT+SYSSTORE=0 command. After calling this command, the related configuration information of affected commands will not be saved to flash. That is to say, before connecting AP using the AT+CWJAP command, you can call `AT+SYSSTORE=0 <https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp32/AT_Command_Set/Basic_AT_Commands.html#at-sysstore-query-set-parameter-store-mode>`_ first to make old AP information not be stored to flash.
   
+----------------
+
+Does ESP32-AT supports PPP?
+----------------------------------------------------------------------
+
+  - Not supported, please reffer `pppos_client <https://github.com/espressif/esp-idf/tree/master/examples/protocols/pppos_client/>`_ demos for your own implementation.
