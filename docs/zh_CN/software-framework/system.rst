@@ -730,3 +730,16 @@ OTA 升级过程中 esp_ota_end 返回 ESP_ERR_OTA_VALIDATE_FAILED 报错，如�
   :CHIP\: ESP32:
 
   - 一般是由于下载的固件内容有误导致的，可以通过 `esptool <https://github.com/espressif/esptool>`_  中的  `read_flash <https://github.com/espressif/esptool#read-flash-contents-read_flash>`_  指令 dump 出模组中的内容，然后再用 Beyond Compare 工具对这 2 个 bin 文件进行 16 进制对比，看 bin 文件哪里下载有误。
+
+-------------
+
+ESP8266-RTOS-SDK 如何将数据存储在 RTC memory 中？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 将数据存储在 RTC memory 中的定义方式如下：
+
+  .. code::text
+
+    #define RTC_DATA_ATTR _SECTION_ATTR_IMPL(".rtc.data", __COUNTER__) 
+
+  - 可参见 `esp_attr.h <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/include/esp_attr.h>`__ 文件说明。
