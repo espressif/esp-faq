@@ -67,3 +67,11 @@ Can ESP32-WROVER-E module use one I2S line to realize simultaneous broadcasting 
 
   - Yes, you can refer to `ESP32-LyraT Development Board <https://docs.espressif.com/projects/esp-adf/en/latest/get-started/get-started-esp32-lyrat.html#esp32-lyrat-v4-3>`_.
   
+---------------
+
+Do Espressif modules support Spotify Connect?
+---------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 | ESP32-S2 | ESP32-S3 :
+
+  - Not supported yet. It is suggested to try dlna, which has similar functions.
