@@ -207,3 +207,10 @@ Will the configured Wi-Fi SSID and PASSWORD disappear after the ESP series devel
 
      - If you want to save the Wi-Fi SSID and PSAAWORD when powered off, you can store the Wi-Fi information in flash by calling ``esp_wifi_set_storage(WIFI_STORAGE_FLASH)``.
      - If you want to achieve the operation of not saving the Wi-Fi SSID and PASSWORD when powered off, you can call ``esp_wifi_set_storage(WIFI_STORAGE_RAM)`` to store the Wi-Fi information in RAM.
+
+--------------
+
+Is there a limit to the number of partitions in the partition table of ESP32?
+---------------------------------------------------------------------------------------
+
+  - The length of partition table is 0xC00 bytes (can store up to 95 partition table entries). Please refer to the description in `partition table <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/partition-tables.html>`_.
