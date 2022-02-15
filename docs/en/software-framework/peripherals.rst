@@ -791,9 +791,3 @@ Does the ADC of ESP32 support simultaneous sampling of multiple channels?
 
   - No, If you are using ADC to do multi-channel sampling, please implement it via ADC polling scheme.
   
-----------------------------
-
-Does the serial port verification of the ESP32 chip support MARK and SPACE verification?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  - ESP32 chip does not support.
