@@ -213,3 +213,10 @@ ESP8266 用户可用的 RTC RAM 是多大？
 
     - 如果想要实现掉电保存 Wi-Fi SSID 和 PSAAWORD，可通过调用 `esp_wifi_set_storage(WIFI_STORAGE_FLASH)` 将 Wi-Fi 信息存储在 flash 内。
     - 如果想要实现掉电不保存 Wi-Fi SSID 和 PASSWORD 的操作，可通过调用 `esp_wifi_set_storage(WIFI_STORAGE_RAM)` 讲  Wi-Fi 信息存储在 RAM 内。
+
+--------------
+
+ESP32 分区表中的分区数量有限制吗？
+-----------------------------------------------
+
+  - 分区表的长度为 0xC00 字节（最多可以保存 95 条分区表条目）。参考链接 `分区表 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/partition-tables.html>`_ 的说明。
