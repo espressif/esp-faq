@@ -154,3 +154,12 @@ How do I change the system time of a module ?
   :CHIP\: ESP32 | ESP32 | ESP32-C3:
 
  - You can use the c language ``time()`` interface to set the system time.
+
+---------------------------------------
+
+During the OTA upgrade process, an ESP_ERR_OTA_VALIDATE_FAILED error occurred after calling esp_ota_end, how to troubleshoot such issue?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  :CHIP\: ESP32:
+
+  - Generally it is caused by the error content in the downloaded firmware. You can dump out such content via `read_flash <https://github.com/espressif/esptool#read-flash-contents-read_flash>`_ in `esptool <https://github.com/espressif/esptool>`_ from your module. Then use the Beyond Compare tool to compare the two bin files in hexadecimal to see which part of the bin file is downloaded incorrectly.
+  
