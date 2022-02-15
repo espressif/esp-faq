@@ -178,3 +178,12 @@ What is the difference between the Factory and Developer modes of the flash down
 
   - Factory mode supports multi-channel downloads, while Developer mode only supports single channel.
   - The path of bin files under Factory mode is relative, while under Developer is absolute.
+
+---------------
+
+Why does the programming failed for the jig with a 4-port hub in factory mode ?
+---------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 | ESP8266  :
+
+ - It is because Espressif products complete the calibration operation through transmitting some packets when starting up. This operation requires 3.3 V voltage and a guaranteed peak current of 500 mA. Therefore, when it comes to more than one ports, there will be situations where the computer cannot program or the programming is interrupted due to the insufficient power supply of the computer's USB when programming via connecting to a computer's USB. It is recommended to use the hub for programming and supply power to the hub in the meantime.

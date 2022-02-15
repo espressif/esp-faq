@@ -187,3 +187,13 @@ ESP32-C3 芯片可以使用 USB 进行固件的下载，但在 ESP-IDF v4.3 下�
 -------------------------------------------------------------------------------------------------------------------
 
   - 需要在 ESP-IDF v4.4 以上版本下进行编译，拉取最新分支并 `更新 IDF 工具 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_ 后可以正常编译并使用 USB 进行下载。使用过程请参考 `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_。
+
+---------------
+
+一拖四治具工厂模式烧写失败原因？
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 | ESP8266  :
+
+  - 因为乐鑫产品启动时通过一些发包来完成校准操作，此操作需要 3.3 V 电压并保证有 500 mA 的峰值电流。所以，在一拖多的情况下，通过连接电脑 USB 的方式来烧录时，会出现由于电脑 USB 供电不足引起无法烧录或者烧录中断的情况，建议使用 hub 进行烧录并给 hub 供电。
+  
