@@ -55,3 +55,12 @@ During the operation of the ESP32 Wi-Fi Mesh network, if the Root node is lost, 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - If the Root node is lost, all nodes will trigger 'MDF_EVENT_MWIFI_PARENT_DISCONNECTED (MESH_EVENT_PARENT_DISCONNECTED)', and then start rescanning and re-election until a new Root node is elected.
+
+------------------
+
+I'm using ESP32 for Wi-Fi Mesh application with the ``esp_mesh_send()`` function, but the server did not receive any data. How to transfer data from leaf nodes to external servers?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ``esp_mesh_send()`` can only be used for data communication within the Wi-Fi Mesh network.
+  - If leaf nodes want to send data to an external server, the data needs to be forwarded through the root node.
+  - The correct approach is: the leaf node first sends the data to the root node, and the root node then sends the data to the external server.
