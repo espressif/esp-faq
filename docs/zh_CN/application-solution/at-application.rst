@@ -838,3 +838,12 @@ ESP32-AT 支持 PPP 吗?
 ----------------------------------------------------------------------
 
   - 不支持，可参考 `pppos_client <https://github.com/espressif/esp-idf/tree/master/examples/protocols/pppos_client/>`_ 示例自行实现。
+
+----------------
+
+AT 如何使能 Wi-Fi Debug ?
+----------------------------------------------------------------------
+  :CHIP\: ESP8266 | ESP32 | ESP32-C3 | ESP32-S2:
+
+  - 使能 log 等级：``./build.py menuconfig -> Component Config -> Log output -> Default log verbosity`` 设置到 Verbose。
+  - 使能 Wi-Fi debug：``./build.py menuconfig-> Component config -> Wi-Fi -> Enable WiFi debug log -> Wi-Fi debug log level(Wi-Fi Debug log Verbose)``。
