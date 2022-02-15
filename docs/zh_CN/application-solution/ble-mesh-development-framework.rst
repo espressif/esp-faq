@@ -672,3 +672,10 @@ Bluetooth® LE (BLE) Mesh 数据传送最大的包是多少 Bytes？
   - 可以使用例程 `onoff_server <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/esp_ble_mesh/ble_mesh_node/onoff_server>`_，手机 APP 可以使用 nRF Mesh。
   - 配网过程可参考 `ESP-BLE-MESH 快速入门 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-index.html#getting-started-with-esp-ble-mesh>`__。
   
+----------------
+
+在 BLE-MESH 中，未配网设备默认的名称是 ESP-BLE-MESH，这个名称在哪里可以修改？
+---------------------------------------------------------------------------------------------------------------------
+
+  - 可以使用接口 `esp_ble_mesh_set_unprovisioned_device_name() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_set_unprovisioned_device_name#_CPPv442esp_ble_mesh_set_unprovisioned_device_namePKc>`_, 建议在 `esp_ble_mesh_init() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_init#_CPPv417esp_ble_mesh_initP19esp_ble_mesh_prov_tP19esp_ble_mesh_comp_t>`_ 后进行调用，否则还会是默认的 ESP-BLE-MESH。
+

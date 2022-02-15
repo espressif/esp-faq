@@ -28,3 +28,9 @@ Could you provide an example of networking through ESP32 BLE-Mesh? What APP can 
   - Please use example `onoff_server <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/esp_ble_mesh/ble_mesh_node/onoff_server>`_，and use nRF Mesh APP for mobile phones.
   - For the network configuration process, please refer to `Getting Started with ESP-BLE-MESH <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-index.html#getting-started-with-esp-ble-mesh>`__.
   
+----------------
+
+For unprovisioned device in BLE-MESH, the default name is ESP-BLE-MESH, how to modify this name?
+------------------------------------------------------------------------------------------------
+
+  - You can use API `esp_ble_mesh_set_unprovisioned_device_name() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_set_unprovisioned_device_name#_CPPv442esp_ble_mesh_set_unprovisioned_device_namePKc>`_, it is suggested to call it after `esp_ble_mesh_init() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_init#_CPPv417esp_ble_mesh_initP19esp_ble_mesh_prov_tP19esp_ble_mesh_comp_t>`_, otherwise the device name is still ESP-BLE-MESH.
