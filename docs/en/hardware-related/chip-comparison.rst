@@ -30,3 +30,11 @@ What's the difference between ESP32 E03 and the previous version in software use
 ------------------------------------------------------------------------------------
 
   Not much differences in software use, and this version is  compatible to old firmwares and some bugs in hardware have been solved. For more information, please refer to `ESP32 ECO V3 User Guide <https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__EN.pdf>`_.
+
+---------------
+
+Do ESP modules support Thread?
+--------------------------------------------------------------------------------------------------------------------------------
+  :CHIP\: ESP32 | ESP32-C3 | ESP32-S3:
+
+  - No. Currently, only ESP32-H2 supports Thread.
