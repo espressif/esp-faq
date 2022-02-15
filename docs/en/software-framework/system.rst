@@ -162,4 +162,17 @@ During the OTA upgrade process, an ESP_ERR_OTA_VALIDATE_FAILED error occurred af
   :CHIP\: ESP32:
 
   - Generally it is caused by the error content in the downloaded firmware. You can dump out such content via `read_flash <https://github.com/espressif/esptool#read-flash-contents-read_flash>`_ in `esptool <https://github.com/espressif/esptool>`_ from your module. Then use the Beyond Compare tool to compare the two bin files in hexadecimal to see which part of the bin file is downloaded incorrectly.
+
+-------------------------
+
+How does ESP8266-RTOS-SDK store data to RTC memory?
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The definition method of storing data in RTC memory is as follows:
+
+ .. code::text
+
+    #define RTC_DATA_ATTR _SECTION_ATTR_IMPL(".rtc.data", __COUNTER__)
+
+  - Please refer to the description in `esp_attr.h <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/include/esp_attr.h>`_.
   
