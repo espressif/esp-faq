@@ -75,3 +75,11 @@ Do Espressif modules support Spotify Connect?
   :CHIP\: ESP32 | ESP32-S2 | ESP32-S3 :
 
   - Not supported yet. It is suggested to try dlna, which has similar functions.
+
+---------------
+
+When running the `korvo_du1906 <https://github.com/espressif/esp-adf/tree/master/examples/korvo_du1906>`_ example on an ESP32-Korvo-DU1906 board, a reboot caused the following error message: `Guru Meditation Error: Core 0 panic'ed (IllegalInstruction). Exception was unhandled`. How to resolve such issue?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please check the power supply. 
+  - it is recommended that the system be connected to an at least 5 V/2 A power adapter for sufficient current supply.
