@@ -842,3 +842,13 @@ How to enable Wi-Fi Debug for AT?
 
   - Enable log level: ``. /build.py menuconfig -> Component Config -> Log output -> Default log verbosity`` set to Verbose.
   - Enable Wi-Fi debug: ``. /build.py menuconfig-> Component config -> Wi-Fi -> Enable WiFi debug log -> Wi-Fi debug log level (Wi-Fi Debug log Verbose)``.
+
+---------------
+
+Where should I pay attention to when updating certificates using the AT+SYSFLASH command?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The certificate length must be 4-byte aligned.
+  - The certificate bin needs to be generated via tools/AtPKI.py, please refer to the example in `esp-at/tools/READ.md <https://github.com/espressif/esp-at/blob/master/tools/README.md>`__. For instance:
+  
+    python AtPKI.py generate_bin -b mqtt_cert_v2.bin cert mqtt_client.crt
