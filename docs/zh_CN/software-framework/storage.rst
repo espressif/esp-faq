@@ -220,3 +220,13 @@ ESP32 分区表中的分区数量有限制吗？
 -----------------------------------------------
 
   - 分区表的长度为 0xC00 字节（最多可以保存 95 条分区表条目）。参考链接 `分区表 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/partition-tables.html>`_ 的说明。
+
+----------------
+
+SPIFFS 支持磁盘加密吗？
+---------------------------------------------------------------
+
+  :CHIP\: ESP32, ESP32S2, ESP32S3, ESP32C3:
+
+  - SPIFFS 分区无法加密。但 SPIFFS 建立在 flash 上，可以使用 flash 加密对该部分的数据进行加密。
+  
