@@ -852,3 +852,12 @@ Where should I pay attention to when updating certificates using the AT+SYSFLASH
   - The certificate bin needs to be generated via tools/AtPKI.py, please refer to the example in `esp-at/tools/READ.md <https://github.com/espressif/esp-at/blob/master/tools/README.md>`__. For instance:
   
     python AtPKI.py generate_bin -b mqtt_cert_v2.bin cert mqtt_client.crt
+
+---------------
+
+What's the default type of content-type in AT+HTTPCPOST command ?
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP8266 | ESP32 | ESP32-S2 | ESP32-C3:
+
+  - The default type is application/x-www-form-urlencoded.

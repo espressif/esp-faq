@@ -857,3 +857,12 @@ AT 如何使能 Wi-Fi Debug ?
   - 证书 bin 需要通过 tools/AtPKI.py 生成，参考 `esp-at/tools/README.md <https://github.com/espressif/esp-at/blob/master/tools/README.md>`__ 中生成方法。例如：
   
     python AtPKI.py generate_bin -b mqtt_cert_v2.bin cert mqtt_client.crt
+
+---------------
+
+AT+HTTPCPOST 指令中 content-type 默认类型是什么？
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP8266 | ESP32 | ESP32-S2 | ESP32-C3:
+
+  - 默认类型是 application/x-www-form-urlencoded。
