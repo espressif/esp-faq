@@ -128,4 +128,13 @@ Windows 下执行 export.bat，提示 CMake、gdbgui 版本错误：
 
   - 官方有个变量 ``IDF_VER``，可以通过调用函数 ``esp_get_idf_version`` 进行查看。
   - 具体信息还可以查看 "components/esp_common/include/esp_idf_version.h"。
+
+--------------
+
+windows 环境下 ESP-IDF 编译比较慢如何优化？
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - 请将 ESP-IDF 源码目录以及编译器目录 .espressif 添加到杀毒软件的排除项。
   
