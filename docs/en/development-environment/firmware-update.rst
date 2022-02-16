@@ -203,3 +203,12 @@ I'm using an ESP32-WROVER-B module to download the AT firmware via the flash dow
     ets_main.c 371
     ets Jun 8 2016 00:22:57
 
+---------------
+
+The encrypted device cannot be re-flashed via the flash download tool, what is the reason?
+---------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 | ESP32-S2:
+
+  - Currently, an encrypted device cannot be flashed again using the flash download tool. It only supports one-time encryption of plaintext.
+
