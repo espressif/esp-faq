@@ -128,3 +128,12 @@ How to know the version of ESP-IDF, is it recorded in a certain document?
 
   - There is a variable ``IDF_VER``, you can call the function ``esp_get_idf_version`` to check.
   - Please refer to "components/esp_common/include/esp_idf_version.h" to see more details.
+
+---------------
+
+How to optimize ESP-IDF compilation in windows environment?
+---------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - Please add the directories of ESP-IDF source code and compiler ``.espressif`` to the exclusions of anti-virus program.
