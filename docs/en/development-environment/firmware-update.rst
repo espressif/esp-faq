@@ -187,3 +187,19 @@ Why does the programming failed for the jig with a 4-port hub in factory mode ?
   :CHIP\: ESP32 | ESP8266  :
 
  - It is because Espressif products complete the calibration operation through transmitting some packets when starting up. This operation requires 3.3 V voltage and a guaranteed peak current of 500 mA. Therefore, when it comes to more than one ports, there will be situations where the computer cannot program or the programming is interrupted due to the insufficient power supply of the computer's USB when programming via connecting to a computer's USB. It is recommended to use the hub for programming and supply power to the hub in the meantime.
+
+-------------------
+
+I'm using an ESP32-WROVER-B module to download the AT firmware via the flash download tool. However, an error occurred after writing to flash. But the same operation succeeded when replacing the module with ESP32-WEOVER-E, what is the reason?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The ESP32-WROVER-B module leads out the SPI Flash pin, but the ESP32-WROVER-E module does not. Please check whether the SPI Flash pin of the ESP32-WROVER-B module is re-used by other external application circuits.
+  - Connecting the CMD pin of the SPI Flash in ESP32-WROVER-B to GND will cause the flash failing to start. And the following error log will be printed:
+
+  .. code:: shell
+
+    rst:0x10 (RTCWDT_RTC_RESET),boot:0x1b (SPI_FAST_FLASH_BOOT)
+    flash read err, 1000
+    ets_main.c 371
+    ets Jun 8 2016 00:22:57
+
