@@ -866,3 +866,10 @@ AT+HTTPCPOST 指令中 content-type 默认类型是什么？
   :CHIP\: ESP8266 | ESP32 | ESP32-S2 | ESP32-C3:
 
   - 默认类型是 application/x-www-form-urlencoded。
+
+---------------
+
+AT+HTTPCLIENT 发送数据到服务器有长度限制吗？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 有限制，AT 命令总长度不能超过 256 字节。数据是在指令参数中，导致 HTTP POST 请求数据长度会有限制，如果发送的数据比较长，建议通过 `AT+HTTPCPOST <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/HTTP_AT_Commands.html#at-httpcpost-post-http>`_ 指令去设置，或者用 TCP 指令模拟 HTTP 发送数据。
