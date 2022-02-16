@@ -847,3 +847,13 @@ AT 如何使能 Wi-Fi Debug ?
 
   - 使能 log 等级：``./build.py menuconfig -> Component Config -> Log output -> Default log verbosity`` 设置到 Verbose。
   - 使能 Wi-Fi debug：``./build.py menuconfig-> Component config -> Wi-Fi -> Enable WiFi debug log -> Wi-Fi debug log level(Wi-Fi Debug log Verbose)``。
+
+---------------
+
+使用 AT+SYSFLASH 指令更新证书应注意什么？
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - 证书长度必须 4 字节对齐。
+  - 证书 bin 需要通过 tools/AtPKI.py 生成，参考 `esp-at/tools/README.md <https://github.com/espressif/esp-at/blob/master/tools/README.md>`__ 中生成方法。例如：
+  
+    python AtPKI.py generate_bin -b mqtt_cert_v2.bin cert mqtt_client.crt
