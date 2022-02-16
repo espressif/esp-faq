@@ -794,7 +794,14 @@ Does the ADC of ESP32 support simultaneous sampling of multiple channels?
 -------------------------
 
 Does the ESP32 chip support USRAT (Universal Synchronous Asynchronous Receiver Transmitter)?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - It's not support. ESP32 only supports UART and cannot provide the synchronous clock.
   
+--------------------
+
+When using the ESP32-WROVER-B module with release/v4.2 version of ESP-IDF, I set the GPIO as an ADC interface, and then set GPIO to other IO mode while with IO mode not effective without any hardware reset, this GPIO does not respond. How do I release the corresponding GPIO mode?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please do not set the ADC interface as input-only GPIO.
+  - When disabling the ADC interface mode, please use ``adc_digi_stop()`` to disable the ADC.
