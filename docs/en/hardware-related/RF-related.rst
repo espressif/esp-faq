@@ -55,3 +55,12 @@ How to improve the distance and strength of Wi-Fi signals for ESP32-WROVER-E? (A
     - Make sure there is no metal or blocking object near the antenna of the module, no PCB on the back of the antenna, and the Wi-Fi signal is not interfered by other signals of the whole machine.
     - If the PCB antenna is not effective, you can use the IE series module with an external IPEX antenna with higher directional gain.
     - The receiving device can also increase the antenna radiation efficiency.
+
+---------------
+
+How to write phy_init data to Flash ?
+---------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 :
+
+ - You can write via the power limit tool. Please download the `ESP_RF_TEST Tool <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_CN.zip>`_, unzip the package and open the EspRFTestTool_v2.6_Manual.exe file, then click ``help ---> Tool help ---> PowerLimitTool help`` for detailed operations.

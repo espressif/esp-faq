@@ -55,3 +55,12 @@ ESP32-WROVER-E 模组如何提高 Wi-Fi 信号的接收距离和强度？(应用
     - 模组的天线附近没有金属或遮挡物，天线背面没有 PCB，Wi-Fi 信号未受整机其它信号干扰。
     - 如果 PCB 天线效果不好，可以考虑更换使用 IE 系列模组，使用定向增益更高的外置 IPEX 天线。
     - 接收设备也可以增加天线辐射效率。
+
+---------------
+
+如何烧写 phy_init 数据到 flash 中？
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 :
+
+  - 可以通过 power limit tool 烧写。下载 `ESP_RF_TEST Tool <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_CN.zip>`_，解压完成后，打开 EspRFTestTool_v2.6_Manual.exe，点击 ``help ---> Tool help ---> PowerLimitTool help`` 查看详细的操作步骤。
