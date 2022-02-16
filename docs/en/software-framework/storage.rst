@@ -214,3 +214,12 @@ Is there a limit to the number of partitions in the partition table of ESP32?
 ---------------------------------------------------------------------------------------
 
   - The length of partition table is 0xC00 bytes (can store up to 95 partition table entries). Please refer to the description in `partition table <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/partition-tables.html>`_.
+
+----------------
+
+Can SPIFFS partition be encrypted?
+---------------------------------------------------------------
+
+  :CHIP\: ESP32, ESP32S2, ESP32S3, ESP32C3:
+
+  - No, there is no encryption scheme for SPIFFS. But, since SPIFFS is built on flash, this part of data can be encrypted via flash encryption.
