@@ -44,3 +44,14 @@ esp-face组件的api参考？
 
   - esp-eye 微信小程序的介绍及示例在这里：`recognition_wechat <https://github.com/espressif/esp-who/tree/master/examples/single_chip/face_recognition_wechat>`_。
   - esp-eye demo 微信小程序的开源资料：`EspEyeForWeChat <https://github.com/EspressifApp/EspEyeForWeChat>`_。
+
+--------------
+
+ESP 模块是否支持 TensorFlow？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 | ESP32-S3:
+
+  - 支持，请参考 Github `tensorflow <https://github.com/espressif/tensorflow/>`_ 示例和 `blog <https://blog.tensorflow.org/2020/08/announcing-tensorflow-lite-micro-esp32.html>`_ 说明。
+
+
