@@ -105,3 +105,10 @@ Is it necessary to connect a 32 KHz RTC crystal?
   :CHIP\: ESP32 | ESP32-C3 | ESP32-S3:
 
   - The external 32KHz crystal is mainly used for BLE light sleep timing, so in applications where BLE light sleep is not used, there is no need to do so.
+
+---------------
+
+Does ESP8266 support 32 MHz crystal frequency?
+---------------------------------------------------------------------------------------------------------------------------------
+
+  - No, ESP8266 supports 26 MHz and 40 MHz crystal frequencies, and 26 MHz is recommended.
