@@ -98,3 +98,10 @@ Is there any hardware design reference for ESP-Skainet Speech recognition?
 
   - Please refer to ` ESP32-Korvo V1.1 Hardware Reference Design <https://github.com/espressif/esp-skainet/blob/master/docs/en/hw-reference/esp32/user-guide-esp32-korvo-v1.1.md#2%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83>`_.
   
+----------------------------------------------------------------------------------------
+
+Is it necessary to connect a 32 KHz RTC crystal?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  :CHIP\: ESP32 | ESP32-C3 | ESP32-S3:
+
+  - The external 32KHz crystal is mainly used for BLE light sleep timing, so in applications where BLE light sleep is not used, there is no need to do so.
