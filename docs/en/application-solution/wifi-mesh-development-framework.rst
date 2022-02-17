@@ -80,3 +80,10 @@ Can you provide ESP-MESH light reference design?
 
   - The overall design of the lamp is done by a third-party factory and we do not have a schematic or PCB layout. But from the module level, we only need to supply power to the chip and the chip outputs PWM to control the color or color temperature change of the lamp, which does not involve complicated design.
   - Please refer to `ESP-MDF <https://github.com/espressif/esp-mdf>`_ for more information on MESH.
+
+---------------
+
+What is the default mode for ESP-MESH nodes without any configuration?
+---------------------------------------------------------------------------------------------------------------------------------
+
+  - The default is IDLE mode.
