@@ -212,3 +212,9 @@ The encrypted device cannot be re-flashed via the flash download tool, what is t
 
   - Currently, an encrypted device cannot be flashed again using the flash download tool. It only supports one-time encryption of plaintext.
 
+-----------------
+
+When updating ESP32 firmware through UART interface based on esptool serial port protocol, can I add a new app partation?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The partitions in flash depend on the data in partition_table.bin. If partition_table.bin can be updated, the storage space of other data, such as bootloader.bin and app.bin, can be redivided to create an app partition.
