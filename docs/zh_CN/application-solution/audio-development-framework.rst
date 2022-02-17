@@ -233,4 +233,10 @@ ESP32-Korvo-DU1906 board 运行 `korvo_du1906 <https://github.com/espressif/esp-
 
   - 建议检查供电。
   - 为整个系统提供电源。建议使用至少 5 V/2 A 电源适配器供电，保证供电稳定。
+  
+----------------
 
+ESP-DSP fft 可以运行 4096、8192 以及更多采样吗？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以，最大支持到 32 K 采样。最大值可以在 menuconfig 中配置，以 `fft demo <https://github.com/espressif/esp-dsp/tree/master/examples/fft>`_ 为例为 ``idf.py menuconfig--->Component config--->DSP Library--->Maximum FFT length--->(*)32768``。

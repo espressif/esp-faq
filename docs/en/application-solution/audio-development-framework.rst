@@ -83,3 +83,10 @@ When running the `korvo_du1906 <https://github.com/espressif/esp-adf/tree/master
 
   - Please check the power supply. 
   - it is recommended that the system be connected to an at least 5 V/2 A power adapter for sufficient current supply.
+
+---------------
+
+Can ESP-DSP fft run 4096, 8192 and more samples?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, up to 32 K samples are supported. The maximum number can be configured in menuconfig, e.g., for `fft demo <https://github.com/espressif/esp-dsp/tree/master/examples/fft>`_, go to ``idf.py menuconfig-->Component config-->DSP Library-->Maximum FFT length-->(*)32768``.
