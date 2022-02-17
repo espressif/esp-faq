@@ -956,7 +956,7 @@ When Wi-Fi connection failed, what does the error code mean?
   :CHIP\: ESP32:
 
   - Any error occurred during the Wi-Fi connection will cause it coming to init status, and there will be a hexadecimal number in the log, e.g., ``wifi:state, auth-> init(200)``. The first two digits indicate error reasons while the last two digits indicate the type code of the received or transmitted management frame. Common frame type codes are 00 (received nothing, timeout), A0 (disassoc), B0 (auth) and C0 (deauth).     
-  - Error reasons indicated by the first two digits can be found in `Wi-Fi Reason Code <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#wi-fi-reason-code>`_. The last two digits can be checked in frame management code directly.
+  - Error reasons indicated by the first two digits can be found in `Wi-Fi Reason Code <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#wi-fi-reason-code>`__. The last two digits can be checked in frame management code directly.
   
 ---------------------
 
@@ -1023,3 +1023,10 @@ Does ESP8266 support EDCF (AC) scheme?
 
   - The master version of ESP8266-RTOS-SDK supports EDCF (AC) applications, but no application examples are provided for now. You can enable WiFi QoS configuration in ``menuconfig -> Component config -> Wi-Fi`` to get support.
 
+---------------------
+
+When using ESP32 with release/v3.3 version of ESP-IDF. When configuring the router, is there an API to directly tell that the entered password is wrong?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - There is no such API. According to the Wi-Fi protocol standard, when the password is wrong, the router will not clearly tell the Station that the 4-way handshake is due to the password error. Under normal circumstances, the password is obtained in 4 packets (1/4 frame, 2/4 frame, 3/4 frame, 4/4 frame). When the password is correct, the AP will send 3/4 frames, but when the password is wrong, the AP will not send 3/4 frame but send 1/4 frame instead. However, when the AP sends 3/4 frame which is lost in the air for some reason, the AP will also re-send 1/4 frame. Therefore, for Station, it is impossible to accurately distinguish between these two situations. In the end, it will report a 204 error or a 14 error. 
+  - Please refer to `Wi-Fi reason code <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#id33>`__.
