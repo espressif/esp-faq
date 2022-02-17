@@ -868,3 +868,11 @@ Is there a length limit on data sent with the AT+HTTPCLIENT command?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - yes, the total length of data set with this command can not exceed 256 bytes. This is due to the data is stored in command parameters. If you are going to send data with bigger length, it is recommended to configure via the `AT+HTTPCPOST <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/HTTP_AT_Commands.html#at-httpcpost-post- http>`_ command, or use the TCP command to emulate Http to send data.
+
+---------------
+
+What TLS versions are supported by AT?
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - TLS 1.0, TLS 1.1, TLS 1.2 are supported, the exact version numbers can be found in ``menuconfig-->Component config-->mbedTLS``.
+
