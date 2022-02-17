@@ -270,3 +270,11 @@ Wi-Fi Mesh 可以通过 TCP Server 给特定节点发送消息吗？
   - esp_mesh_send() 只能用于 Wi-Fi Mesh 网络内部数据通信。
   - 叶节点 (leaf node) 想要往外部服务器发送数据，需要通过根节点 (root node) 转发数据。
   - 正确的做法是：叶节点先将数据发给根节点，根节点再把数据发给外部服务器。
+
+---------------
+
+ESP-MESH 设备组网之后如何做 OTA 升级？
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - ROOT 节点可以连接服务器获取到升级 bin 文件，然后把固件通过 MAC 地址去发送给对应的模组进行 OTA 升级。
+  - 详情请参考 `mupgrade demo <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mupgrade>`_。

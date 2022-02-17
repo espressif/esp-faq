@@ -64,3 +64,11 @@ I'm using ESP32 for Wi-Fi Mesh application with the ``esp_mesh_send()`` function
   - ``esp_mesh_send()`` can only be used for data communication within the Wi-Fi Mesh network.
   - If leaf nodes want to send data to an external server, the data needs to be forwarded through the root node.
   - The correct approach is: the leaf node first sends the data to the root node, and the root node then sends the data to the external server.
+
+---------------
+
+How do I upgrade my ESP-MESH device via OTA after networking?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The ROOT node can connect to the server to get the upgrade bin file and then send the firmware to the corresponding module via MAC address for OTA upgrade.
+  - For more information, please refer to `mupgrade demo <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mupgrade>`_.
