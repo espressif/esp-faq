@@ -94,3 +94,11 @@ ESP-MESH starts with AP+STA mode enabled, can the phone search for APs?
 ---------------------------------------------------------------------------------------------------------------------------------
 
   - No, ESP-MESH is a private protocol of Espressif, please refer to `WIFI-MESH Introduction <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/esp-wifi-mesh.html/>`_ .
+
+---------------
+
+Do I need to rescan for all the newly added devices when the original device has already been networked?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - No, just scan through the current child nodes and find the one with the strongest signal as its parent node.
+  
