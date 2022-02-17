@@ -1015,3 +1015,11 @@ Does ESP modules support the WiFi NAN (Neighbor Awareness Networking) protocol?
   :CHIP\: ESP8266 | ESP32 | ESP32-C3 | ESP32-S2 | ESP32-S3:
 
   - No.
+
+---------------------
+
+Does ESP8266 support EDCF (AC) scheme?
+----------------------------------------------------------------------------------------------------
+
+  - The master version of ESP8266-RTOS-SDK supports EDCF (AC) applications, but no application examples are provided for now. You can enable WiFi QoS configuration in ``menuconfig -> Component config -> Wi-Fi`` to get support.
+
