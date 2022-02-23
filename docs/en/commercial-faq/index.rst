@@ -53,7 +53,7 @@ How can I start a distribution business with Espressif?
 Where can I find your product information? Which of your products are in mass production?
 ------------------------------------------------------------------------------------------
   
-  You can get the basic information on our products by clicking `here <https://www.espressif.com/en/support/documents/technical-documents?keys=&field_download_document_type_tid%5B%5D=504>`__ . If you are looking for the technical documents of our products, please click `here <https://www.espressif.com/en/support/documents/technical-documents>`__ .
+  You can get the basic information on our products by clicking `here <https://products.espressif.com/#/>`__ . If you are looking for the technical documents of our products, please click `here <https://www.espressif.com/en/support/documents/technical-documents>`__ .
 
 --------------
 
@@ -89,7 +89,7 @@ What's the price for bulk purchasing? How can I purchase in bulk?
 Where can I find all the differences between your products (e.g. in terms of series and types)?
 ------------------------------------------------------------------------------------------------
   
-  Please click `here <https://www.espressif.com/en/products/hardware>`__ to find some introductory information on our products. For detailed information, please contact our sales team by clicking `here <https://www.espressif.com/en/contact-us/sales-questions>`__ .
+  Please click `here <https://products.espressif.com/#/>`__ to find some introductory information on our products. For detailed information, please contact our sales team by clicking `here <https://www.espressif.com/en/contact-us/sales-questions>`__ .
 
 --------------
 
