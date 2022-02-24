@@ -151,7 +151,7 @@ How is the ESP32 SPP performance?
 What is the maximum transmission rate for ESP32 Bluetooth® LE?
 --------------------------------------------------------------------------
 
-  The transmission rate of ESP32 Bluetooth LE can reach 800 Kbps tested in a shielded box.
+  The transmission rate of ESP32 Bluetooth LE can reach 700 Kbps tested in a shielded box.
 
 --------------
 
