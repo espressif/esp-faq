@@ -147,3 +147,10 @@ When using ESP32 to design a self-developed Ethernet board, after downloaded the
 
   - This error indicates something is wrong with your hardware circuit. The RMII clock is not working normally with the PHY, causing the PHY failed to read registers. For the more information about RMII clock, please refer to `Instructions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html>`_.
   
+----------------
+
+When Ethernet and Wi-Fi co-exist, is Ethernet prioritized to transfer data?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  :CHIP\: ESP32 :
+
+  - Please call `esp_netif_get_route_prio <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_netif.html #_CPPv424esp_netif_get_route_prioP11esp_netif_t>`_ interface to check the priority of Ethernet and Wi-Fi first. If Wi-Fi has a higher priority than Ethernet, you can modify the priority via route_prio in the structure esp_netif_t.
