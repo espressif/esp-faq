@@ -101,4 +101,11 @@ Do I need to rescan for all the newly added devices when the original device has
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - No, just scan through the current child nodes and find the one with the strongest signal as its parent node.
-  
+
+---------------------
+
+When using an ESP32 as a master device to synchronize time for multiple slave devices, can the time error be less than 2 ms? 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - For this application scenario, it is recommended to develop based on esp-mdf, please refer to `esp-mdf/examples/development_kit/light <https://github.com/espressif/esp-mdf/blob/master/examples/development_kit/light /main/light_example.c>`_ example.
+  - Please use `esp_mesh_get_tsf_time() <https://docs.espressif.com/projects/esp-idf/en/release-v4.2/esp32/api-reference/network/esp_mesh.html?highlight=esp_mesh_get_tsf_time#_CPPv421esp_mesh_get_tsf_time>`_, whose accuracy can meet your demand.
