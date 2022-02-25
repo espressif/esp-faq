@@ -805,3 +805,11 @@ When using the ESP32-WROVER-B module with release/v4.2 version of ESP-IDF, I set
 
   - Please do not set the ADC interface as input-only GPIO.
   - When disabling the ADC interface mode, please use ``adc_digi_stop()`` to disable the ADC.
+
+----------------------------
+
+Does the serial port verification of the ESP32 chip support MARK and SPACE verification?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - No.
+  
