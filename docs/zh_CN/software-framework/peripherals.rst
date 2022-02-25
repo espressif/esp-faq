@@ -814,3 +814,11 @@ ESP8266 串口的硬件 FIFO 是多大？
 ----------------------------------------------------------------------------------------------------------------
 
   - ESP8266 的 UART0 和 UART1 各有⼀个⻓度为 128-byte 的硬件 FIFO 和读写 FIFO，且都在同⼀个地址操作。参见 `《ESP8266 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_cn.pdf>`_ 中“11.2. 硬件资源”章节说明。
+
+--------------------------------------------------------------------------
+
+RMT 中如何将时钟修改为 REF_TICK?
+--------------------------------------------------------------------------------------------
+  :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
+
+  - 可以调用 `rmt_set_source_clk <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/rmt.html?highlight=rmt_set_source_clk#_CPPv418rmt_set_source_clk13rmt_channel_t16rmt_source_clk_t>`_ 接口设置。
