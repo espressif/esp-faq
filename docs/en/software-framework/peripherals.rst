@@ -813,3 +813,9 @@ Does the serial port verification of the ESP32 chip support MARK and SPACE verif
 
   - No.
   
+----------------------------
+
+What is the size of the hardware FIFO in ESP8266's serial port?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Both UART0 and UART1 of ESP8266 have a 128-byte hardware FIFO and a 128-byte RW FIFO, which operate at the same address. Please refer to Section 11.2. Hardware Resources in `ESP8266 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_en.pdf>`_.
