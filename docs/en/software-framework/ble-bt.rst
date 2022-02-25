@@ -530,3 +530,10 @@ How to modify the Bluetooth broadcast name of ESP32?
      };
 
   - The above ``/* device name*/`` is the modified item. Among them, 0x0f is the total length of the field type plus specific content, and 0x09 indicates that this type refers to the device name. Subsequent'E','S','P','_','G','A','T','T','S','_','D','E', 'M','O' are the ASCII code expressions of the broadcast device name.
+
+----------------
+
+After set the BLE 5.0 broadcast to legacy mode, what is the maximum broadcast length supported?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The maximum supported length is 31-byte.
