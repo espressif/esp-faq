@@ -819,3 +819,11 @@ What is the size of the hardware FIFO in ESP8266's serial port?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Both UART0 and UART1 of ESP8266 have a 128-byte hardware FIFO and a 128-byte RW FIFO, which operate at the same address. Please refer to Section 11.2. Hardware Resources in `ESP8266 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_en.pdf>`_.
+
+--------------------------------------------------------------------------
+
+How to change the clock to REF_TICK in RMT?
+---------------------------------------------------------------------------------------------
+  :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
+
+  - By using the `rmt_set_source_clk <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/rmt.html?highlight=rmt_set_source_clk#_CPPv418rmt_set_source_clk13rmt_channel_t16rmt_source_clk_t>`_ interface.
