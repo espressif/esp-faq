@@ -29,4 +29,11 @@ Arduino IDE 如何添加 ESP32 开发板？
   - esp32-arduino 开发框架：https://github.com/espressif/arduino-esp32
   - 使用 WiFi.macAddress() 来获取 ESP32 的 Wi-Fi 的 MAC 地址；
   - Serial.println(WiFi.macAddress());`参考链接 <https://github.com/espressif/arduino-esp32/blob/a59eafbc9dfa3ce818c110f996eebf68d755be24/libraries/WiFi/examples/WiFiClientStaticIP/WiFiClientStaticIP.ino>`_。
-  
+
+-------------------------
+
+如何使用 flash download tool 将基于 Arduino 开发生成的 bin 文件烧录到 ESP32？
+------------------------------------------------------------------------------------------------
+
+  - ``File -> Preferences -> Show verbose output during`` 勾选 ``compilation`` 编译成功后会打印一条 python 烧录命令，包含待烧录的 bin 文件以及对应的烧录地址。
+  - 使用 `flash download tool <https://www.espressif.com/sites/default/files/tools/flash_download_tool_v3.8.5.zip>`_ 烧录时选择 bin 文件，输入对应的烧录地址即可。
