@@ -750,3 +750,8 @@ ESP8266-RTOS-SDK 如何将数据存储在 RTC memory 中？
 ---------------------------------------------------------------------------------
 
   - ESP8266 在 Deepsleep 模式唤醒后，设备将从 user_init 启动。请参见 ` esp_deep_sleep() <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/system/sleep_modes.html?highlight=deep#_CPPv414esp_deep_sleep8uint64_t>`__ 说明。
+
+RTC 时钟什么时候会被重置？
+---------------------------------------------------------------------------------
+
+  - 除上电复位外的任何睡眠或者复位方式都不会重置 RTC 时钟。
