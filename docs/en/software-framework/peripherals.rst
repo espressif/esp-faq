@@ -834,3 +834,12 @@ What is the serial port baud rate range of ESP8266?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   -  300 ~ 115200*40 bps. Please refer to Section 11.3.1. Baud Rate in `ESP8266 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_en.pdf>`_.
+
+-----------------------------------------------------------------------------------------------------
+
+How to set interrupt priority for timers?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
+
+  - esp_timer is implemented based on task, which cannot configure interrupt priority. timer_group can have interrupt priority by modifying the last parameter of the `timer_isr_callback_add <https://docs.espressif.com/projects/esp-idf/en/latest /esp32/api-reference/peripherals/timer.html?highlight=timer_isr_callback_add#_CPPv422timer_isr_callback_add13timer_group_t11timer_ idx_t11timer_isr_tPvi>`_ interface.

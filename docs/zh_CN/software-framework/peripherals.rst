@@ -828,3 +828,12 @@ ESP8266 的串⼝波特率范围是多大？
 ---------------------------------------------------------------------------------------------------------------------------
 
   - ESP8266 的串⼝波特率范围为 300 ~ 115200*40 bps。参见 `《ESP8266 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_cn.pdf>`_ 中的“ 11.3.1. 波特率”章节说明。
+
+-----------------------------------------------------------------------------------------------------
+
+定时器如何设置中断优先级呢？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
+
+  - esp_timer 基于 task 实现，没有中断优先级。timer_group 可以设置中断优先级，通过修改  `timer_isr_callback_add <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/timer.html?highlight=timer_isr_callback_add#_CPPv422timer_isr_callback_add13timer_group_t11timer_idx_t11timer_isr_tPvi>`_ 接口的最后一个参数设置。
