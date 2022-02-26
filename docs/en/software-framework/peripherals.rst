@@ -827,3 +827,10 @@ How to change the clock to REF_TICK in RMT?
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
 
   - By using the `rmt_set_source_clk <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/rmt.html?highlight=rmt_set_source_clk#_CPPv418rmt_set_source_clk13rmt_channel_t16rmt_source_clk_t>`_ interface.
+
+---------------------------
+
+What is the serial port baud rate range of ESP8266?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  -  300 ~ 115200*40 bps. Please refer to Section 11.3.1. Baud Rate in `ESP8266 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_en.pdf>`_.

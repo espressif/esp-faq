@@ -806,7 +806,6 @@ ESP32 芯片的串口校验支持 ＭARK 和 SPACE 校验吗？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP32 芯片不支持。
-  
     
 -----------------------
 
@@ -822,3 +821,10 @@ RMT 中如何将时钟修改为 REF_TICK?
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
 
   - 可以调用 `rmt_set_source_clk <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/rmt.html?highlight=rmt_set_source_clk#_CPPv418rmt_set_source_clk13rmt_channel_t16rmt_source_clk_t>`_ 接口设置。
+
+---------------------------
+
+ESP8266 的串⼝波特率范围是多大？
+---------------------------------------------------------------------------------------------------------------------------
+
+  - ESP8266 的串⼝波特率范围为 300 ~ 115200*40 bps。参见 `《ESP8266 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_cn.pdf>`_ 中的“ 11.3.1. 波特率”章节说明。
