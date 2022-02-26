@@ -45,3 +45,10 @@ Does ESP modules support WAPI (Wireless LAN Authentication and Privacy Infrastru
 ---------------------------------------------------------------------------------------------------------------------------------
 
   - Yes.
+
+---------------
+
+Does ESP32 support zephyr?
+----------------------------------------------------------------------------------------------------------------------------------
+
+  - Please check `zephyr Doc <ttps://docs.zephyrproject.org/latest/boards/riscv/index.html>`_ for supported modules. And this file will be continuously updated to add new products, please look forward.
