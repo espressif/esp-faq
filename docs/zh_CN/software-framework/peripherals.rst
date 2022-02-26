@@ -837,3 +837,12 @@ ESP8266 的串⼝波特率范围是多大？
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
 
   - esp_timer 基于 task 实现，没有中断优先级。timer_group 可以设置中断优先级，通过修改  `timer_isr_callback_add <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/timer.html?highlight=timer_isr_callback_add#_CPPv422timer_isr_callback_add13timer_group_t11timer_idx_t11timer_isr_tPvi>`_ 接口的最后一个参数设置。
+
+---------------
+
+ESP32-C3 系列芯片将 GPIO19 配置成输入下拉时，读取该 IO 口状态依旧显示高电平，但配置 ESP32-C3 的其他管脚或者其他芯片的管脚为输入下拉时，均正常显示为低电平？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-C3 的 GPIO19 为 USB 管脚，USB 管脚的上拉电阻由管脚上拉和 USB 上拉共同控制，当其中一种上拉方式为 1 时，对应的上拉电阻就会使能。
+  - GPOIO19 是默认 USB 上拉使能的，因此配置了管脚为输入下拉后依旧是上拉使能，管脚显示高电平。
+  - 如果需要修改，在 USB_SERIAL_JTAG_DP_PULLUP 寄存器进行配置。

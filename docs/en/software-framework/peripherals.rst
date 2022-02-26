@@ -634,7 +634,7 @@ What is the maximum resolution supported by ESP32 LCD? What is the corresponding
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP32's LCD can support up to 800 × 480 of resolution, and the corresponding frame rate is about 30 frames. Please see `Screen <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/display/screen.html>`_.
-  
+
 -----------------------
 
 Using ESP-WROOM-02D module, can GPIO0, GPIO15, GPIO1 and GPIO3 be used as normal GPIOs?
@@ -843,3 +843,12 @@ How to set interrupt priority for timers?
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
 
   - esp_timer is implemented based on task, which cannot configure interrupt priority. timer_group can have interrupt priority by modifying the last parameter of the `timer_isr_callback_add <https://docs.espressif.com/projects/esp-idf/en/latest /esp32/api-reference/peripherals/timer.html?highlight=timer_isr_callback_add#_CPPv422timer_isr_callback_add13timer_group_t11timer_ idx_t11timer_isr_tPvi>`_ interface.
+
+---------------
+
+After configuring the GPIO19 for ESP32-C3 as pulled-down input, the level of this pin still stays high. However other pins in ESP32-C3 does not have this issue. What is the reason？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In ESP32-C3, GPIO19 is a USB pin, whose pull-up resistor is controlled by the pin's pull-up value together with USB's pull-up value. If any of the two pull-up values is 1, the pin's pull-up resistor will be enabled.
+  - The USB pull-up value of GPIO19 is 1 by default, so when the pin is pulled down, GPIO19 still keeps high level. 
+  - You can configure it via USB_SERIAL_JTAG_DP_PULLUP.
