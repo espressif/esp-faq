@@ -852,3 +852,12 @@ After configuring the GPIO19 for ESP32-C3 as pulled-down input, the level of thi
   - In ESP32-C3, GPIO19 is a USB pin, whose pull-up resistor is controlled by the pin's pull-up value together with USB's pull-up value. If any of the two pull-up values is 1, the pin's pull-up resistor will be enabled.
   - The USB pull-up value of GPIO19 is 1 by default, so when the pin is pulled down, GPIO19 still keeps high level. 
   - You can configure it via USB_SERIAL_JTAG_DP_PULLUP.
+
+-----------------------------------------------------------------------------------------------------
+
+How to modify the output port of UART0?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 | ESP32 | ESP32-C3:
+
+  - This can be set in menuconfig: ``idf.py menuconfig —> Component config —> Common ESP-related -> Channel for console output(custom UART)``.
