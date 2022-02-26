@@ -1030,3 +1030,12 @@ When using ESP32 with release/v3.3 version of ESP-IDF. When configuring the rout
 
   - There is no such API. According to the Wi-Fi protocol standard, when the password is wrong, the router will not clearly tell the Station that the 4-way handshake is due to the password error. Under normal circumstances, the password is obtained in 4 packets (1/4 frame, 2/4 frame, 3/4 frame, 4/4 frame). When the password is correct, the AP will send 3/4 frames, but when the password is wrong, the AP will not send 3/4 frame but send 1/4 frame instead. However, when the AP sends 3/4 frame which is lost in the air for some reason, the AP will also re-send 1/4 frame. Therefore, for Station, it is impossible to accurately distinguish between these two situations. In the end, it will report a 204 error or a 14 error. 
   - Please refer to `Wi-Fi reason code <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#id33>`__.
+
+-----------------------
+
+When testing the Station example of ESP32 base on v4.4 version of ESP-IDF, how to support WPA3 encryption mode?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Open ```menuconfig → Component config → Wi-Fi → Enable WPA3-Personal`` configuration;
+  - Set ``capable = true`` in ``pmf_cfg`` in the application code;
+  - Please refer to `Wi-Fi Security <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-guides/wifi-security.html#wi-fi-security>`_ for more descriptions.
