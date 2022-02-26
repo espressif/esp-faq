@@ -861,3 +861,12 @@ How to modify the output port of UART0?
   :CHIP\: ESP32 | ESP32 | ESP32-C3:
 
   - This can be set in menuconfig: ``idf.py menuconfig —> Component config —> Common ESP-related -> Channel for console output(custom UART)``.
+
+-----------------------------------------------------------------------------------------------------
+
+Can the REF_TICK clock frequency be modified?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
+
+ - No, the REF_TICK clock is fixed.
