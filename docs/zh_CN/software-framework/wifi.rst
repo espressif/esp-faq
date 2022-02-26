@@ -1032,3 +1032,12 @@ ESP8266 是否支持 EDCF (AC) 方案？
 
   - 没有 API 可直接判断密码错误，依据 Ｗi-Fi 协议标准，当密码出错时，路由器并不会明确告诉 Station 四次握手是由于密码出错了。正常情况下获取密码是 4 个包（1/4 帧， 2/4 帧， 3/4 帧，4/4 帧），当密码正确时 AP 会发送 3/4 帧，而当密码错误时 AP 不会发送 3/4 帧而是会重发 1/4 帧。 但是当 ＡP 发送了 3/4 帧，但由于某种原因而在空气中丢掉时，AP 也会重发 1/4 帧。 因此，对于 Station 来说，无法准确区分这两种情况，最终都是上报 204 错误，或者 14 错误。
   - 可参考 `Wi-Fi 原因代码 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#id33>`_。 
+
+--------------------------
+
+基于 ESP-IDF v4.4 版本的 SDK 测试 ESP32 的 Station 例程，如何支持 WPA3 加密模式？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 开启 ``menuconfig → Component config → Wi-Fi → Enable WPA3-Personal`` 的配置；
+  - 在应用程序中设置 ``pmf_cfg`` 里 ``capable = true`` ；
+  - 可参考 `Wi-Fi Security <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-guides/wifi-security.html#wi-fi-security>`_ 说明。
