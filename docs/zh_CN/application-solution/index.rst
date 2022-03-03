@@ -11,7 +11,8 @@
    Wi-Fi Mesh 应用框架 <wifi-mesh-development-framework>
    BLE Mesh 应用框架 <ble-mesh-development-framework>
    音频应用框架 <audio-development-framework>
-   云服务 <cloud-service>
+   第三方云服务 <third-party-cloud-service>
+   ESP RainMaker 云服务 <esp-rainmaker-cloud-service>
    社区软件平台  <community-sw-and-platforms>
    苹果应用  <ios-application>
    安卓应用  <android-application>
