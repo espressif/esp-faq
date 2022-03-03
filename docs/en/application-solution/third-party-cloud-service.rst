@@ -1,5 +1,5 @@
-Cloud service
-=============
+Third party cloud service
+=============================
 
 :link_to_translation:`zh_CN:[中文]`
 

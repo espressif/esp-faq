@@ -11,7 +11,8 @@ application solution
    Wi-Fi Mesh development framework <wifi-mesh-development-framework>
    BLE Mesh development framework <ble-mesh-development-framework>
    Audio development framework <audio-development-framework>
-   Cloud service <cloud-service>
+   Third party cloud service <third-party-cloud-service>
+   ESP RainMaker cloud service <esp-rainmaker-cloud-service>
    Community sw and platforms  <community-sw-and-platforms>
    iOS application  <ios-application>
    Android application  <android-application>
