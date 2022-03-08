@@ -739,8 +739,8 @@ In ESP-IDF, the ``esp_wifi_80211_tx()`` interface can only be used to send data 
 
   .. code-block:: c
 
-    Esp_wifi_set_promiscuous_rx_cb(wifi_sniffer_cb);
-    esp_wifi_set_promiscuous(true)
+    esp_wifi_set_promiscuous_rx_cb(wifi_sniffer_cb);
+    esp_wifi_set_promiscuous(true);
     
   - The above data receive method is also used in another open-sourced project, please see `esp-mdf <https://github.com/espressif/esp-mdf/blob/master/components/mconfig/mconfig_chain.c>`_.
 
@@ -758,6 +758,7 @@ What are the reasons for the high failure rate of esptouch networking?
 ------------------------------------------------------------------------------------------
 
 :CHIP\: ESP32, ESP32S2, ESP32S3, ESP32C3, ESP8266:
+
   - The same hotspot is connected too many people.
   - The signal quality of the hotspot connected by cell phone is poor.
   - The router does not forward multicast data.
