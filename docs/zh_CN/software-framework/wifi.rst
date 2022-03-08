@@ -742,8 +742,8 @@ ESP32 使用 release/v3.3 版本的 ESP-IDF 进行开发，只需要蓝牙功能
 
   .. code-block:: c
 
-    esp_wifi_set_promiscuous_rx_cb(wifi_sniffer_cb)；
-    esp_wifi_set_promiscuous(true)
+    esp_wifi_set_promiscuous_rx_cb(wifi_sniffer_cb);
+    esp_wifi_set_promiscuous(true);
 
   - 另一个开源项目中有用到该方法，可参考 `esp-mdf <https://github.com/espressif/esp-mdf/blob/master/components/mconfig/mconfig_chain.c>`__。
 
@@ -760,6 +760,7 @@ esptouch 配网失败概率较高的原因有哪些？
 ------------------------------------------
 
 :CHIP\: ESP32, ESP32S2, ESP32S3, ESP32C3, ESP8266:
+
   - 手机连接的热点使用人数较多。
   - 手机连接的热点信号质量较差。
   - 路由器不转发组播数据。
