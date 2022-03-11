@@ -534,3 +534,23 @@ BLE 5.0 广播设置为 legacy 模式时支持最大广播长度为多少？
 -------------------------------------------------------------------------------
 
   - 最大支持到 31-byte。
+
+---------------
+
+BLE 广播包如何设置为不可连接包?
+---------------------------------------------------------------------------------------------
+
+  - 可参考 `gatt_server demo <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server>`_， 将广播包类型 adv_type 变量修改为 ADV_TYPE_NONCONN_IND。
+
+    .. code:: text
+
+      static esp_ble_adv_params_t adv_params = {
+        .adv_int_min        = 0x20,
+        .adv_int_max        = 0x40,
+        .adv_type           = ADV_TYPE_NONCONN_IND,
+        .own_addr_type      = BLE_ADDR_TYPE_PUBLIC,
+        //.peer_addr            =
+        //.peer_addr_type       =
+        .channel_map        = ADV_CHNL_ALL,
+        .adv_filter_policy = ADV_FILTER_ALLOW_SCAN_ANY_CON_ANY,
+        }
