@@ -879,3 +879,12 @@ Does ESP32-S2 support eMMC?
   :CHIP\: ESP32-S2:
 
   - No.
+
+------------------
+
+When using the release/v4.2 version of ESP-IDF, how to set a single GPIO as input/output mode simultaneously for ESP32?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can set via the `esp_err_t gpio_set_direction(gpio_num_t gpio_num, gpio_mode_t mode) <https://docs.espressif.com/projects/esp-idf/en/release-v4.2/esp32/api-reference/peripherals/gpio.html# _CPPv418gpio_set_direction10gpio_num_t11gpio_mode_t>`_ API.
+  - Please refer to `gpio_types.h <https://github.com/espressif/esp-idf/blob/release/v4.2/components/soc/include/hal/gpio_types.h>`_.
+  
