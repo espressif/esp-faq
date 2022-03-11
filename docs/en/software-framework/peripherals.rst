@@ -896,3 +896,10 @@ Does RTOS SDK support full duplex for SPI?
   :CHIP\: ESP8266:
 
   - No, it doesn't. Because ESP8266 doesn't support DMA, in order to improve the transmission performance, the entire FIFO is used. So it can only be half duplex. Please refer to `spi readme <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/peripherals/spi#spi-demo-user-guide>`_ for more details.
+
+---------------------
+
+What is the measurement error between the ADCs of the ESP32 chip?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - By default, the measurement error between ESP32 ADCs is ±6%, please refer to `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ for details.
