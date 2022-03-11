@@ -331,3 +331,11 @@ ESP32 如何增大 DNS 请求时间？
     link.on_off = 1 ;
     link.linger = 0 ;
     setsockopt(m_sockConnect, SOL_SOCKET, SO_LINGER, (const char*)&link, sizeof(linger));
+
+----------------
+
+ESP8266 收到 "tcp out of order" 的报文会怎么处理？
+-------------------------------------------------------------------------------------
+
+  - 如果使能 ``CONFIG_LWIP_TCP_QUEUE_OOSEQ(Component config -> LWIP -> TCP -> Queue incoming out-of-order segments)``，会存储 "out of order" 的报文，代价是消耗内存。
+  - 如果该配置是未使能，收到 "out of order" 的报文，会丢弃数据并让对端重传。比如现在有 1、2、3、4 四包数据，ESP8266 先收到 1 然后收到 4。该配置使能时，ESP8266 会把 4 这个数据存下来，等收到 2、3 后，把这四包数据上报应用层；该配置未使能时，ESP8266 会直接丢弃 4，并让对端发送包 2，对端就会从 2 开始发送，即该情况下会增加重传。

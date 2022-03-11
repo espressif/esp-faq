@@ -331,3 +331,11 @@ After creating and closing TCP SOCKET several times, an error is reported as "Un
     link.on_off = 1 ;
     link.linger = 0 ;
     setsockopt(m_sockConnect, SOL_SOCKET, SO_LINGER, (const char*)&link, sizeof(linger));
+
+-----------------------------
+
+What happens when ESP8266 receives a "tcp out of order" message?
+-------------------------------------------------------------------------------------
+
+  - If ``CONFIG_LWIP_TCP_QUEUE_OOSEQ(Component config -> LWIP -> TCP -> Queue incoming out-of-order segments)`` is enabled, the out-of-order messages will be stored at the cost of memory consumption.
+  - If this configuration is disabled, after receiving the "out of order" message, data will be discarded and a retransmission will be requested. For example, there are four data packets namely 1, 2, 3 and 4, ESP8266 receives 1 first, and then receives 4. If this configuration is enabled, ESP8266 will store the data of 4, wait until it receives 2, 3, and then report the four packets to the application layer; if this configuration is disabled, ESP8266 will discard the packet of 4 when it receives it, and let the other side send packet 2, and then the other side will send from 2. Under this condition, the retransmission is increased.
