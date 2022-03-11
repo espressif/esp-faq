@@ -888,3 +888,10 @@ RTOS SDK 是否支持 SPI 全双工？
   :CHIP\: ESP8266:
 
   - 不支持。因为 ESP8266 不支持 DMA，因此为了提高传输性能利用了全部 FIFO，所以只能半双工，具体的详情请参考 `SPI readme <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/peripherals/spi#spi-demo-user-guide>`_。
+
+-------------
+
+ESP32 芯片的 ADC 之间的测量误差是多大？
+----------------------------------------------------------------------------------------------
+
+  - 默认情况下，ESP32 芯片 ADC 之间的测量差异是 ±6%，可参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
