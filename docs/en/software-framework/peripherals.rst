@@ -870,3 +870,12 @@ Can the REF_TICK clock frequency be modified?
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
 
  - No, the REF_TICK clock is fixed.
+
+----------------------
+
+Does ESP32-S2 support eMMC?
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32-S2:
+
+  - No.
