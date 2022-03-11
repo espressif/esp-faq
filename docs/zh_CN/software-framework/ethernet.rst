@@ -147,3 +147,9 @@ ESP32-Ethernet-Kit 开发板模组替换成 ESP32-WROOM-32D 以太网功能是�
 
   - 此报错说明硬件电路有问题，RMII 时钟没有正常供给 PHY，遇到读 PHY 寄存器失败。关于 RMII 时钟部分，可参见 `说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html>`_。
   
+----------------
+
+ESP32 以太网支持 MII 接口吗？
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 硬件支持，软件正在适配中，用户自行实现可参考 `Ethernet doc <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html>`_。 

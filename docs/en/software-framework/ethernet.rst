@@ -154,3 +154,10 @@ When Ethernet and Wi-Fi co-exist, is Ethernet prioritized to transfer data?
   :CHIP\: ESP32 :
 
   - Please call `esp_netif_get_route_prio <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_netif.html #_CPPv424esp_netif_get_route_prioP11esp_netif_t>`_ interface to check the priority of Ethernet and Wi-Fi first. If Wi-Fi has a higher priority than Ethernet, you can modify the priority via route_prio in the structure esp_netif_t.
+
+----------------
+
+Does ESP32 Ethernet support MII interface?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Supported on hardware level, software adaptation is in development. Please refer to `Ethernet doc <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html>`_ for self implementation. 
