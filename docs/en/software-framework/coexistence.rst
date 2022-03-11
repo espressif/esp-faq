@@ -74,3 +74,12 @@ Does ESP32 support coexistence between the network port (LAN8720) and Wi-Fi (Wif
 -------------------------------------------------------------------------------------------------------
 
   Yes, this can be achieved by writing the detection events of both connections as one.
+
+---------------
+
+Can BLE adverting (Connectable) and iBeacon sending (advertising) be coexisted?
+--------------------------------------------------------------------------------------------------
+
+  :release/v4.0 and above| CHIP: ESP32:
+
+  - Not supported yet on hardware level, but can be realized on application layer by polling and sending broadcast packets at regular intervals.

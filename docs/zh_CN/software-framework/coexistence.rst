@@ -82,3 +82,12 @@ ESP32 的网口 (LAN8720) 与 Wi-Fi (Wifi-AP) 能否共存？
   :CHIP\: ESP32 :
 
   - 先调用 `esp_netif_get_route_prio <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_netif.html#_CPPv424esp_netif_get_route_prioP11esp_netif_t>`_ 查看以太网和 Wi-Fi 的优先级，如果 Wi-Fi 的优先级高于以太网， 可以通过修改 esp_netif_t 结构体里的 route_prio 来改变优先级。
+
+---------------
+
+BLE adverting (Connectable) + iBeacon sending(advertising) 可以共存吗？？
+--------------------------------------------------------------------------------------------------
+
+  :IDF\: release/v4.0以及以上版本 | CHIP\: ESP32:
+
+  - 硬件上还未支持，应用层可以通过定时轮询发广播包的方式来完成。
