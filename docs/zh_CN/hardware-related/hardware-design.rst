@@ -270,7 +270,7 @@ ESP32 模组 Flash 是否支持 QIO+80MHz？
       :scale: 100%
       :alt: no-component
       :figclass: align-center
-  
+
 --------------
 
 如何在 ESP32-S2 中使用多天线？
@@ -303,3 +303,12 @@ ESP-Skainet 有语音识别硬件设计参考吗？
   :CHIP\: ESP32 | ESP32-C3 | ESP32-S3:
 
   - 外接 32 KHz 晶振主要是用于 BLE light 睡眠计时，所以应用场景中不使用 BLE light 睡眠时不需要外接。
+
+----------------------
+
+使用 ESP32-MINI-1 模组，是否可提供 Altium Designer 的元件库？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 我们的硬件原理图是在 PADS 中开发设计的，在｀《ESP32-MINI-1 参考设计》 <https://www.espressif.com/sites/default/files/documentation/ESP32-MINI-1_V1.0_Reference_Design.zip>`_ 中有一个 ASC 的文件，可在  Altium Designer 里转换打开。
+  - 更多型号的模组的硬件设计资料可在 ｀技术文档 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=mini>`_ 中获取。
+  
