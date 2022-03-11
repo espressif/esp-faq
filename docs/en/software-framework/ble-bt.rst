@@ -537,3 +537,26 @@ After set the BLE 5.0 broadcast to legacy mode, what is the maximum broadcast le
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The maximum supported length is 31-byte.
+
+---------------
+
+How to set a BLE broadcast package as unconnectable package?
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - please reffer to the `gatt_server demo <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server>`_，and set adv_type as ADV_TYPE_NONCONN_IND.
+
+    .. code:: text
+
+      static esp_ble_adv_params_t adv_params = {
+        .adv_int_min        = 0x20,
+        .adv_int_max        = 0x40,
+        .adv_type           = ADV_TYPE_NONCONN_IND,
+        .own_addr_type      = BLE_ADDR_TYPE_PUBLIC,
+        //.peer_addr            =
+        //.peer_addr_type       =
+        .channel_map        = ADV_CHNL_ALL,
+        .adv_filter_policy = ADV_FILTER_ALLOW_SCAN_ANY_CON_ANY,
+        }
+
