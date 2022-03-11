@@ -112,3 +112,11 @@ Does ESP8266 support 32 MHz crystal frequency?
 ---------------------------------------------------------------------------------------------------------------------------------
 
   - No, ESP8266 supports 26 MHz and 40 MHz crystal frequencies, and 26 MHz is recommended.
+
+--------------------------------
+
+For ESP32-MINI-1 module, is there a component library available for Altium Designer?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Our hardware schematics were developed and designed in PADS. Please go to `ESP32-MINI-1 Reference Design <https://www.espressif.com/sites/default/files/documentation/ESP32-MINI-1_V1.0_Reference_Design.zip>`_ and find the ASC format file, which can be converted and opened in Altium Designer. 
+  - For more hardware reference resigns of other modules, please refer to `Technical Documents <https://www.espressif.com/en/support/documents/technical-documents>`_.
