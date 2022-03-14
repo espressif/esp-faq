@@ -33,3 +33,10 @@ Does ESP modules support TensorFlow?
   :CHIP\: ESP32 | ESP32-S3:
 
   - Yes, please refer to Github `tensorflow <https://github.com/espressif/tensorflow/>`_ examples and `blog <https://blog.tensorflow.org/2020/08/announcing-tensorflow-lite-micro-esp32.html>`_ for instructions.
+
+------------------------------------------------------------------
+
+what languages are supported by the `esp-skainet <https://github.com/espressif/esp-skainet>`_ demo ?
+--------------------------------------------------------------------------------------------------------------------------------------
+
+  - Only Chinese and English currently.
