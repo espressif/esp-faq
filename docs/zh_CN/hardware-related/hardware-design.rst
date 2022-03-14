@@ -325,3 +325,16 @@ ESP8266 的 UART0 的电平是由 VDD 决定的，还是由 VDDPST 决定的？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP8266 的 UART0 的电平是由 VDDPST（硬件电源域）决定的，数字电源电压都是由 VDDPST 决定的。
+
+--------------
+
+ESP32-D2WD 芯片外接 PSRAM 软件配置注意事项是什么？
+------------------------------------------------------------------------
+
+  - 需要在 menuconfig 中使能 ``CPU frequece 240 Mhz`` 和 ``RTC clock 80 Mhz``，具体配置如下：
+  
+    - menuconfig ---> Serial flasher config--->Flash SPI Speed(80 Mhz)
+    - Component config---->CPU frequency(240 Mhz)
+    - Component config---->ESP32 specific---->[*]Support for external , SPI-connected RAM
+    - Component config---->ESP32 specific------->SPI RAM config---->Set RAM clock speed(80 Mhz clock speed) 
+    
