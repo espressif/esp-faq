@@ -239,3 +239,17 @@ Why does my USB driver failed to be recognized by the Windows 7 system?
 --------------------------------------------------------------------------------------------------------------------------------------------
 
   - Please download and install the `USB Serial JTAG driver <https://dl.espressif.com/dl/idf-driver/idf-driver-esp32-usb-jtag-2021-07-15.zip>` manually first.
+
+----------------------------
+
+After using the ESP32-WROVER-E module downloading the program, the following log is printed after powered on,  What is the reason?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: shell
+
+      rst：0x10 （RTCWDT_RTC_RESET），boot:0x37（SPI_FLASH_BOOT）
+    【2020-12-11 15:51:42 049】invalrd header：0xffffffff
+      invalrd header：0xffffffff
+      invalrd header：0xffffffff
+
+  - Generally, it is because the GPIO12 was pulled high. It is recommended to pull it low and see the results. Please see `ESP32 Boot Log Guide <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html?highlight=boot#boot-mode-message>`_.
