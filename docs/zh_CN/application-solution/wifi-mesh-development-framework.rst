@@ -216,7 +216,7 @@ Mwifi 例程怎么修改网络的 AP 连接和最大层数？通信时的最大�
 ESP-WIFI-MESH App 源码是否开放？
 -----------------------------------------------
 
-  - 我们已经将 ESP-WIFI-MESH App 源码开放到了 GitHub 上，如下链接：https://github.com/EspressifApp/EspMeshForAndroid。
+  - 我们已经将 ESP-Mesh App 源码开放到了 GitHub 上，请参考 `EspMeshForAndroid <https://github.com/EspressifApp/EspMeshForAndroid>`_ 和 `EspMeshForiOS <https://github.com/EspressifApp/EspMeshForAndroid>`_。
   - 如果在使用中有任何疑问或 Bug，都可以在 GitHub 或者这里进行留言提问，我们都会第一时间处理。
 
 --------------
