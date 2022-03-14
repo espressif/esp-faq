@@ -223,3 +223,10 @@ Can SPIFFS partition be encrypted?
   :CHIP\: ESP32, ESP32S2, ESP32S3, ESP32C3:
 
   - No, there is no encryption scheme for SPIFFS. But, since SPIFFS is built on flash, this part of data can be encrypted via flash encryption.
+
+-------------------
+
+How to read the remaining memory of the ESP32 chip?
+-------------------------------------------------------------------------------------------------------------------------------
+
+  - The remaining memory of the chip RAM can be read through the ``esp_get_free_heap_size()`` API.
