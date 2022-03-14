@@ -297,3 +297,19 @@ What TLS versions are supported by AT?
 
   - TLS 1.0, TLS 1.1, TLS 1.2 are supported, the exact version numbers can be found in ``menuconfig-->Component config-->mbedTLS``.
 
+---------------
+
+How do I store the BLE name in Flash?
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - The following command can be called.
+
+   ::
+
+    AT+SYSTORE=1            //Enable set to flash 
+    AT+BLEINIT=2            //Set to BLE server mode
+    AT+BLENAME?             //Query the default BLE name?
+    AT+BLENAME="ESP-123"    //set new BLE nmae  
+    AT+RST                  //reboot module    
+    AT+BLEINIT=2            //Set to BLE server mode
+    AT+BLENAME?             //Check if the BLE name is set successfully
