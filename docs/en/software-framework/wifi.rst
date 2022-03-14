@@ -1051,3 +1051,11 @@ How does ESP32 speed up the Wi-Fi connection?
   - Set the CPU frequency to the maximum to speed up the key calculation speed. In addition, you can also set the FLASH parameters to ``QIO, 80MHz``， which will increase power consumption. 
   - Disabling ``CONFIG_IP_DHCP_DOES_ARP_CHECK`` can greatly reduce the time of getting IP. But there will be no checking on whether there is an IP address conflict in the LAN.
   - Fixed scanning channel
+
+---------------------
+
+Does ESP32 WPA2 Enterprise Authentication support Cisco CCKM mode?
+-----------------------------------------------------------------------------------------------------
+
+  - This mode is currently not supported, even though the enumeration in esp_wifi_driver.h has WPA2_AUTH_CCKM.
+  
