@@ -1040,3 +1040,14 @@ When testing the Station example of ESP32 base on v4.4 version of ESP-IDF, how t
   - Open ```menuconfig → Component config → Wi-Fi → Enable WPA3-Personal`` configuration;
   - Set ``capable = true`` in ``pmf_cfg`` in the application code;
   - Please refer to `Wi-Fi Security <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-guides/wifi-security.html#wi-fi-security>`_ for more descriptions.
+
+--------------
+
+How does ESP32 speed up the Wi-Fi connection?
+--------------------------------------------------------------------------------
+
+  You can try the following approaches:
+
+  - Set the CPU frequency to the maximum to speed up the key calculation speed. In addition, you can also set the FLASH parameters to ``QIO, 80MHz``， which will increase power consumption. 
+  - Disabling ``CONFIG_IP_DHCP_DOES_ARP_CHECK`` can greatly reduce the time of getting IP. But there will be no checking on whether there is an IP address conflict in the LAN.
+  - Fixed scanning channel

@@ -1042,3 +1042,15 @@ ESP8266 是否支持 EDCF (AC) 方案？
   - 开启 ``menuconfig → Component config → Wi-Fi → Enable WPA3-Personal`` 的配置；
   - 在应用程序中设置 ``pmf_cfg`` 里 ``capable = true`` ；
   - 可参考 `Wi-Fi Security <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-guides/wifi-security.html#wi-fi-security>`_ 说明。
+
+---------------
+
+ESP32 如何加快 Wi-Fi 的连接速度？
+-------------------------------------------------------------------------------
+
+  如下措施均可以加快 ESP32 的 Wi-Fi 连接速度：
+
+  - 设置 CPU 频率到最大，可以加快密钥计算速度。除此外还可以设置 FLASH 参数为 ``QIO、80 MHz``，代价是增加功耗。
+  - 关闭 ``CONFIG_IP_DHCP_DOES_ARP_CHECK``，可以大幅降低获取 IP 的时间，代价是不检查局域网中是否有 IP 地址冲突。
+  - 固定扫描信道。
+  
