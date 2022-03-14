@@ -183,7 +183,18 @@ After waking up from Deep-sleep mode, where does ESP8266 start boot?
 
   - After ESP8266 wakes up from Deep-sleep mode, the device will boots up from ``user_init``. Please refer to the description in `esp_deep_sleep() <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/system/sleep_modes.html?highlight=deep#_CPPv414esp_deep_sleep8uint64_t>`__.
 
+-------------------------
+
 When will the RTC clock be reset?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Any reset (except the power-up reset) or sleep mode settings will not reset the RTC clock. 
+
+-------------------------
+
+After using the ``AT+GSLP`` command to enter Deep-sleep mode for ESP32, can it be awakened by pulling down the EN pin?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, but it is not recommended.
+  - Deep-sleep wakeup can be awakened by RTC_GPIO. Please refer to `ESP32 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf>`_.
+  
