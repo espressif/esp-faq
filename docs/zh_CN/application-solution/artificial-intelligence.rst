@@ -54,4 +54,10 @@ ESP 模块是否支持 TensorFlow？
 
   - 支持，请参考 Github `tensorflow <https://github.com/espressif/tensorflow/>`_ 示例和 `blog <https://blog.tensorflow.org/2020/08/announcing-tensorflow-lite-micro-esp32.html>`_ 说明。
 
+----------------------
+
+`esp-skainet <https://github.com/espressif/esp-skainet>`_ 示例支持哪些语言呢？
+----------------------------------------------------------------------------------------
+
+  - 目前仅支持中文和英文。
 
