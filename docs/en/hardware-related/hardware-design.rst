@@ -127,3 +127,10 @@ Can the input voltage of UART0 of ESP8266 be changed from 3.3 V to 1.8 V?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes. The power domain for UART0 is VDDPST, which can be 1.8 V theoretically.
+
+------------------
+
+Is the level of UART0 of ESP8266 determined by VDD (VCC_WIFI) or VDDPST (VCC_CODEC_IO)?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The level of UART0 of ESP8266 is determined by VDDPST (hardware power domain), and the digital power voltage is determined by VDDPST.
