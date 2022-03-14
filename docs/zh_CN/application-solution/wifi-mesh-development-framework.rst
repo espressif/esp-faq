@@ -315,3 +315,10 @@ ESP32 作为主设备对多个从设备进行时间同步，是否可以满足�
 
   - 针对此应用场景，建议基于 esp-mdf 来开发， 可参考 `esp-mdf/examples/development_kit/light <https://github.com/espressif/esp-mdf/blob/master/examples/development_kit/light/main/light_example.c>`_ 例程。
   - 使用 `esp_mesh_get_tsf_time() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.2/esp32/api-reference/network/esp_mesh.html?highlight=esp_mesh_get_tsf_time#_CPPv421esp_mesh_get_tsf_time>`_ 来实现，此精度可满足需求。
+
+---------------
+
+ESP-MESH 中如何去获取节点类型？
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以调用 `esp_mesh_get_type <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_mesh.html?highlight=esp_mesh_get_type#_CPPv417esp_mesh_get_typev>`_  接口去获取。
