@@ -313,3 +313,24 @@ How do I store the BLE name in Flash?
     AT+RST                  //reboot module    
     AT+BLEINIT=2            //Set to BLE server mode
     AT+BLENAME?             //Check if the BLE name is set successfully
+
+------------------------
+
+How to enable the notify and indicate functions with BLE client ?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The characteristics of BLE are not only read and write, but also notify and indicate, both of which are ways for the server to send data to the client. However, in order to send data successfully, the client needs to register notification in advance, i.e. write the value of CCCD.
+  - If you want to enable notify, you need to write 0x01; if you want to enable indicate, you need to write 0x02 (write the 0x2902 descriptor); if you want to enable both notify and indicate, you need to write 0X03.
+  - For example, in ESP-AT default service, notify can be enabled via 0xC305 and indicate can be enabled via 0xC306, so we write the 0x2902 descriptor under each characteristics:
+
+   ::
+
+    AT+BLEGATTCWR=0,3,6,1,2>     //Enables setting to flash
+    // write 0x01         
+    OK           
+    // server+WRITE:0,1,6,1,2,<0x01>,<0x00> 
+    AT+BLEGATTCWR=0,3,7,1,2>      
+    // write 0x02
+    OK
+    // server+WRITE:0,1,6,1,2,<0x02>,<0x00>
+    Writing ccc is a prerequisite for the server to be able to send notify and indicate
