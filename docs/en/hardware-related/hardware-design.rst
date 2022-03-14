@@ -120,3 +120,10 @@ For ESP32-MINI-1 module, is there a component library available for Altium Desig
 
   - Our hardware schematics were developed and designed in PADS. Please go to `ESP32-MINI-1 Reference Design <https://www.espressif.com/sites/default/files/documentation/ESP32-MINI-1_V1.0_Reference_Design.zip>`_ and find the ASC format file, which can be converted and opened in Altium Designer. 
   - For more hardware reference resigns of other modules, please refer to `Technical Documents <https://www.espressif.com/en/support/documents/technical-documents>`_.
+
+--------------------
+
+Can the input voltage of UART0 of ESP8266 be changed from 3.3 V to 1.8 V?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes. The power domain for UART0 is VDDPST, which can be 1.8 V theoretically.

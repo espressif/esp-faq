@@ -311,4 +311,10 @@ ESP-Skainet 有语音识别硬件设计参考吗？
 
   - 我们的硬件原理图是在 PADS 中开发设计的，在｀《ESP32-MINI-1 参考设计》 <https://www.espressif.com/sites/default/files/documentation/ESP32-MINI-1_V1.0_Reference_Design.zip>`_ 中有一个 ASC 的文件，可在  Altium Designer 里转换打开。
   - 更多型号的模组的硬件设计资料可在 ｀技术文档 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=mini>`_ 中获取。
+
+----------------------
   
+ESP8266 的 UART0 的输入电压能由 3.3 V 改为 1.8 V 吗？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - UART0 的电源域是 VDDPST，VDDPST 理论上可以到 1.8 V，所以 UART0 理论上可以改成 1.8 V。
