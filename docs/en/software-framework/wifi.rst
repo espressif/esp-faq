@@ -1059,3 +1059,9 @@ Does ESP32 WPA2 Enterprise Authentication support Cisco CCKM mode?
 
   - This mode is currently not supported, even though the enumeration in esp_wifi_driver.h has WPA2_AUTH_CCKM.
   
+--------------------------------------------------------------------------------------------------
+
+Using wpa2_enterprise (EAP-TLS method), what is the maximum length supported for client certificates?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Up to 4 KB.
