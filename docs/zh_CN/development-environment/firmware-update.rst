@@ -241,3 +241,10 @@ ESP32-C3 芯片可以使用 USB 进行固件的下载，但在 ESP-IDF v4.3 下�
 
   - 请先检查硬件接线是否正确。参见 `Boot mode 接线说明 <https://docs.espressif.com/projects/esptool/en/latest/esp8266/advanced-topics/boot-mode-selection.html#boot-mode-selection>`_。
   - 请检查 bootloader.bin 的下载偏移地址是否正确，ESP8266 的 bootloader.bin 下载的偏移地址为 0x0 ，若此偏移地址错误将会导致 flash 无法启动。
+
+----------------
+
+Windows7 系统 USB 驱动无法识别是什么原因？
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Windows7 系统需要手动下载并安装 `USB Serial JTAG 驱动 <https://dl.espressif.com/dl/idf-driver/idf-driver-esp32-usb-jtag-2021-07-15.zip>`_。

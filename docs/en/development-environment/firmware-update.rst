@@ -166,7 +166,7 @@ When using UART to upgrade firmware for ESP32, how to set two `app_main` spaces?
 ----------------
 
 What are the Espressif module programming tools?
--------------------------------------------------- ---------
+---------------------------------------------------------------
 
   - For Espressif programming software, you can go to this webpage and download it: `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_. Only `Windows` environment can support no GUI tool embedded.
   - Espressif programming tool `esptool <https://github.com/espressif/esptool>`_ is written based on `python` and open source code, supports secondary development.
@@ -233,3 +233,9 @@ I am using ESP8266 to download the firmware via Flash download tool. After downl
   - Please check whether the hardware wiring  is correct. See `Boot mode wiring instructions <https://docs.espressif.com/projects/esptool/en/latest/esp8266/advanced-topics/boot-mode-selection.html#boot-mode-selection>`_.
   - Please check whether the download offset address of ``bootloader.bin`` is correct. The offset address downloaded from ``bootloader.bin`` of ESP8266 is "0x0". If the offset address is wrong, the flash cannot be started.
   
+----------------
+
+Why does my USB driver failed to be recognized by the Windows 7 system?
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please download and install the `USB Serial JTAG driver <https://dl.espressif.com/dl/idf-driver/idf-driver-esp32-usb-jtag-2021-07-15.zip>` manually first.
