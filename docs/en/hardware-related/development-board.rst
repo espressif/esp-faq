@@ -27,3 +27,22 @@ According to the schematic of ESP32-LyraT-Mini, the analog output of the ES8311 
 
   - To use the ES7243 ADC chip to obtain the necessary input reference signal for AEC.
   
+-----------------
+
+When using the ESP32-MINI-1 module, the serial port printed the follows log when powered on. What is the reason?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+      rst:0x10 (RTCWDT_RTC_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+      invalid header: 0xffffffff
+      invalid header: 0xffffffff
+      invalid header: 0xffffffff
+      invalid header: 0xffffffff
+      invalid header: 0xffffffff
+      invalid header: 0xffffffff
+      invalid header: 0xffffffff
+      invalid header: 0xffffffff
+      ets Jul 29 2019 12:21:46
+
+  - The reason could be flash is not programmed.
