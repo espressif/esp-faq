@@ -197,4 +197,11 @@ After using the ``AT+GSLP`` command to enter Deep-sleep mode for ESP32, can it b
 
   - Yes, but it is not recommended.
   - Deep-sleep wakeup can be awakened by RTC_GPIO. Please refer to `ESP32 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf>`_.
+
+-------------------
+
+When multiple threads want to use the watchdog of ESP32, should each thread enable the watchdog individually?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, please see `Task watchdog instructions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/wdts.html?highlight=wdt#task-watchdog-timer>`_.
   

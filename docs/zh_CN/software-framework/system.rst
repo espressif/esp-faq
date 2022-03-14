@@ -765,3 +765,10 @@ ESP32 使用 AT+GSLP 指令进入 Deep-sleep 模式后，是否可通过拉低 E
 
   - 使用 AT+GSLP 指令进入 Deep-sleep 模式后，可以通过拉低 EN 唤醒，但不推荐此做法。
   - Deep-sleep 模式可通过 RTC_GPIO 来唤醒。请参见 `《ESP32 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_cn.pdf>`__。
+
+----------------
+
+当多个线程要使用 ESP32 的看门狗时，是否每个线程都要开启看门狗？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 当多个线程要使用看门狗时，每个线程都要开启看门狗。可参见 `任务看门狗说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/wdts.html?highlight=wdt#task-watchdog-timer>`_。
