@@ -218,3 +218,18 @@ When updating ESP32 firmware through UART interface based on esptool serial port
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The partitions in flash depend on the data in partition_table.bin. If partition_table.bin can be updated, the storage space of other data, such as bootloader.bin and app.bin, can be redivided to create an app partition.
+
+---------------------------
+
+I am using ESP8266 to download the firmware via Flash download tool. After downloading the firmware, there is no programming output log, and the serial port printed the following messages. What is the reason?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: shell
+
+    ets Jan  8
+    2013,rst cause:1, boot mode:(3,7)
+    ets_main.c
+
+  - Please check whether the hardware wiring  is correct. See `Boot mode wiring instructions <https://docs.espressif.com/projects/esptool/en/latest/esp8266/advanced-topics/boot-mode-selection.html#boot-mode-selection>`_.
+  - Please check whether the download offset address of ``bootloader.bin`` is correct. The offset address downloaded from ``bootloader.bin`` of ESP8266 is "0x0". If the offset address is wrong, the flash cannot be started.
+  
