@@ -248,3 +248,17 @@ Windows7 系统 USB 驱动无法识别是什么原因？
 --------------------------------------------------------------------------------------------------------------------------------------------
 
   - Windows7 系统需要手动下载并安装 `USB Serial JTAG 驱动 <https://dl.espressif.com/dl/idf-driver/idf-driver-esp32-usb-jtag-2021-07-15.zip>`_。
+
+----------------
+
+使用 ESP32-WROVER-E 模组下载程序后，上电打印 log 如下，是什么原因？
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: shell
+
+      rst：0x10 （RTCWDT_RTC_RESET），boot:0x37（SPI_FLASH_BOOT）
+    【2020-12-11 15:51:42 049】invalrd header：0xffffffff
+      invalrd header：0xffffffff
+      invalrd header：0xffffffff
+
+  - 出现如上报错 log 一般情况为 GPIO12 拉高导致，ESP32-WROVER-E 模组 GPIO12 不能拉高，建议将 GPIO12 拉低测试一下。可参见 `ESP32 boot log 指南 <https://docs.espressif.com/projects/esptool/zh_CN/latest/esp32/advanced-topics/boot-mode-selection.html?highlight=boot#boot-mode-message>`_。
