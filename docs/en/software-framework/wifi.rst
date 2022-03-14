@@ -1065,3 +1065,10 @@ Using wpa2_enterprise (EAP-TLS method), what is the maximum length supported for
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Up to 4 KB.
+
+------------------------
+
+Does ESP8089 support Wi-Fi Direct mode?
+------------------------------------------------------------------------------------------------------------
+
+  - Yes, but ESP8089 can only use the default fixed firmware and cannot be used for secondary development.
