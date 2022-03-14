@@ -134,3 +134,15 @@ Is the level of UART0 of ESP8266 determined by VDD (VCC_WIFI) or VDDPST (VCC_COD
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The level of UART0 of ESP8266 is determined by VDDPST (hardware power domain), and the digital power voltage is determined by VDDPST.
+
+--------------
+
+On software level, where should I configure when externally connecting a PSRAM to ESP32-D2WD?
+-------------------------------------------------------------------------------------------------------------------
+
+  - Please enable ``CPU frequece 240 Mhz`` and ``RTC clock 80 Mhz`` as follows:
+
+    - menuconfig ---> Serial flasher config--->Flash SPI Speed(80 Mhz)
+    - Component config---->CPU frequency(240 Mhz)
+    - Component config---->ESP32 specific---->[*]Support for external , SPI-connected RAM
+    - Component config---->ESP32 specific------->SPI RAM config---->Set RAM clock speed(80 Mhz clock speed) 
