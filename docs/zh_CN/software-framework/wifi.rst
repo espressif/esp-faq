@@ -1074,3 +1074,10 @@ ESP8089 是否支持 Wi-Fi Direct 模式？
 --------------------------------------------------------------------------------------------------------------
 
   - ESP8089 支持 Wi-Fi Direct 模式，但 ESP8089 只能使用默认的固定的程序，无法进行二次开发。
+
+--------------
+
+环境中有很多 AP，ESP32 如何连接 RSSI 不低于配置阈值的 AP?
+-----------------------------------------------------------------------------------
+
+  - 在 ESP32 staion 模式下，有一个 `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv417wifi_sta_config_t/>`_ 的结构体，下面有 2 个变量，分别是 `sort_method <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11scan_methodE/>`_ 和 `threshold <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE/>`_ 变量，通过给这两个变量赋值来设置 RSSI 阈值。
