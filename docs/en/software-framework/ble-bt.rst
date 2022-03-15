@@ -560,3 +560,10 @@ How to set a BLE broadcast package as unconnectable package?
         .adv_filter_policy = ADV_FILTER_ALLOW_SCAN_ANY_CON_ANY,
         }
 
+---------------
+
+How to send Bluetooth HCI commands directly to ESP32-WROOM-32D module through the serial port?
+--------------------------------------------------------------------------------------------------------
+
+  - Please refer to `controller_hci_uart_esp32 <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/hci/controller_hci_uart_esp32>`_.
+  - When ESP32 is used as a controller, and the other device serves as a host, HCI commands can be sent to ESP32 via UART.
