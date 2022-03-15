@@ -204,4 +204,14 @@ When multiple threads want to use the watchdog of ESP32, should each thread enab
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes, please see `Task watchdog instructions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/wdts.html?highlight=wdt#task-watchdog-timer>`_.
+
+-------------------------
+
+When using the release/v3.3 version of ESP8266-RTOS-SDK, how to enter Light-sleep mode?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - First set the wake-up mode of Light-sleep mode, please refer to `ESP8266_RTOS_SDK/components/esp8266/include/esp_sleep.h <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.3/components/esp8266/include/esp_sleep.h>`_.
+  - Then use the `esp_light_sleep_start() <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/system/sleep_modes.html?highlight=esp_light_sleep_start%28%29#_CPPv421esp_light_sleep_startv>`_ API to enter Light-sleep mode.
+  - You can refer to the `esp-idf/examples/system/light_sleep/main/light_sleep_example_main.c <https://github.com/espressif/esp-idf/blob/release/v4.2/examples/system/light_sleep/main/light_sleep_example_main.c>`_ example for implementation logic.
+  - Please read `API Reference <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/release-v3.3/api-reference/system/sleep_modes.html#sleep-modes>`_ for API descriptions about sleep modes in ESP8266-RTOS-SDK.
   
