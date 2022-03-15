@@ -153,3 +153,10 @@ ESP32 以太网支持 MII 接口吗？
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 硬件支持，软件正在适配中，用户自行实现可参考 `Ethernet doc <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html>`_。 
+
+--------------------------------
+
+ESP32-S2 是否可以外接以太网？ 
+------------------------------------------------------------------------
+
+  - 可以，目前 ESP-IDF 已经提供了 DM9051 模块的驱动，该模块内部集成以太网的 MAC 和 PHY 功能，可以和 MCU 之间通过 SPI 接口进行通讯。DM9051 上集成了 MAC+PHY 的模块，请参考 `参考示例 <https://github.com/espressif/esp-idf/tree/master/examples/ethernet/>`_ 以及 `使用说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-reference/network/index.html#id1>`_。
