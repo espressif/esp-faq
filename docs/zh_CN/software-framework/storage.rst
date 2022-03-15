@@ -236,3 +236,10 @@ ESP32 如何读取芯片剩余内存？
 --------------------------------------------------------------------------------------------------
 
   - 可通过 ``esp_get_free_heap_size()`` 来读取芯片 RAM 剩余内存。
+
+---------------
+
+如何将 ESP32 设备的 key 和 certs 存储到 spiffs 中呢？
+---------------------------------------------------------
+
+ - 请参考 `spiffsgen.py  <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_。

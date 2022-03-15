@@ -230,3 +230,10 @@ How to read the remaining memory of the ESP32 chip?
 -------------------------------------------------------------------------------------------------------------------------------
 
   - The remaining memory of the chip RAM can be read through the ``esp_get_free_heap_size()`` API.
+
+---------------
+
+How do I store the keys and certs of ESP32 devices in spiffs?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ - Please refer to `spiffsgen.py <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_.
