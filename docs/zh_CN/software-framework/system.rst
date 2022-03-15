@@ -772,3 +772,16 @@ ESP32 使用 AT+GSLP 指令进入 Deep-sleep 模式后，是否可通过拉低 E
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 当多个线程要使用看门狗时，每个线程都要开启看门狗。可参见 `任务看门狗说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/wdts.html?highlight=wdt#task-watchdog-timer>`_。
+
+-----------------------------
+
+使用 ESP8266-RTOS-SDK release/v3.3，如何进入 Light-sleep 模式？
+------------------------------------------------------------------------------------------------------------------------------------
+
+  - 先设置 Light-sleep 模式的唤醒模式，可参考 `ESP8266_RTOS_SDK/components/esp8266/include/esp_sleep.h <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.3/components/esp8266/include/esp_sleep.h>`_。
+
+  - 然后使用 `esp_light_sleep_start() <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/system/sleep_modes.html?highlight=esp_light_sleep_start%28%29#_CPPv421esp_light_sleep_startv>`_ API 进入 Light-sleep 模式。
+
+  - 程序实现逻辑可以参考 `esp-idf/examples/system/light_sleep/main/light_sleep_example_main.c <https://github.com/espressif/esp-idf/blob/release/v4.2/examples/system/light_sleep/main/light_sleep_example_main.c>`_ 例程。
+
+  - ESP8266-RTOS-SDK 关于 Sleep 模式的 API 说明请阅读 `Sleep modes API Reference <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/release-v3.3/api-reference/system/sleep_modes.html#sleep-modes>`_。
