@@ -919,3 +919,10 @@ Does the ESP32-S2 support USB HID?
 -----------------------------------------------------------------------
 
   - Supported.
+
+----------------------
+
+Does ESP32-S2 support SDIO as a slave?
+-------------------------------------------------------------------------------------------
+
+  - ESP32-S2 has no SDIO interface and does not support SDIO as a slave.
