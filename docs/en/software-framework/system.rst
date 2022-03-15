@@ -242,3 +242,15 @@ How to flash a customized mac address?
 
   - Option 1: directly flash it into efuse blk3.
   - Option 2: Store in flash. It is not recommended to store the MAC address in the default NVS partition. It is recommended to create a customized NVS partition for storing customized Mac addresses. For more information on the use of customized MAC addresses, please refer to `base_mac_address <https://github.com/espressif/esp-idf/tree/master/examples/ system/base_mac_address/>`_. 
+
+----------------------
+
+When using flash encryption for ESP32, the following error appears after setting secure boot in menuconfig. What is the reason?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    make: *** [/d/esp-idf/components/bootloader_support/Makefile.projbuild:7：/f/ESP32Root/secure_boot_signing_key.pem] ERROR 1  .
+
+  - The ``enable flash encryption on boot`` setting is enabled. And the error is reported because secure boot is enabled, which is the function of firmware signature verification and requires a certificate pair.
+
