@@ -338,3 +338,13 @@ ESP32-D2WD 芯片外接 PSRAM 软件配置注意事项是什么？
     - Component config---->ESP32 specific---->[*]Support for external , SPI-connected RAM
     - Component config---->ESP32 specific------->SPI RAM config---->Set RAM clock speed(80 Mhz clock speed) 
     
+----------------
+
+ESP32 芯片当 VDD 供电从 0 V 慢慢升到 3.3 V 时，芯片为何无法正常启动？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 出现此问题是由于芯片上电时序不满足要求，时序要求当 VDD 达到 2.3 V 时，EN 电压不应超过 0.6 V。
+  - 但 VDD 上电时间过慢时，芯片 EN 端的 RC 电路将 EN 延时的功能就丧失了。
+  - 可以调整 RC 电路，增加电容，调整电阻，或是使用 Reset 芯片管控 EN 状态。
+  - 建议检测到供给 ESP32 的电压低于 2.3 V 时将 ESP32 的 EN 脚拉低。
+  - ESP32 上电时序说明参见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。

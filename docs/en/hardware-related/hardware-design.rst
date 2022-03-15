@@ -146,3 +146,15 @@ On software level, where should I configure when externally connecting a PSRAM t
     - Component config---->CPU frequency(240 Mhz)
     - Component config---->ESP32 specific---->[*]Support for external , SPI-connected RAM
     - Component config---->ESP32 specific------->SPI RAM config---->Set RAM clock speed(80 Mhz clock speed) 
+
+---------------------
+
+When the VDD power supply of the ESP32 chip slowly rises from 0 V to 3.3 V, why the chip cannot start normally?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - This problem occurs because the chip power-on sequence does not meet the requirements. The sequence requires that when VDD reaches 2.3 V, the EN voltage should not exceed 0.6 V.
+  - When the VDD power-on time is too slow, the RC circuit on the EN side of the chip will lose the function of delaying EN.
+  - You can adjust the RC circuit, increase the capacitance, adjust the resistance, or use the Reset chip to control the EN state.
+  - It is recommended to pull the EN pin of ESP32 low when it is detected that the voltage supplied to ESP32 is lower than 2.3 V.
+  - For ESP32 power-on sequence description, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
+  
