@@ -221,3 +221,14 @@ How to wake up ESP8266 in Deep sleep mode?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The ESP8266 can only be awakened from Deep sleep mode via RTC Timer, the timing duration is set by user via esp_deep_sleep, and GPIO16(XPD_DCDC) should be connected to EXT_RSTB through a 0 Ω resistor to support such function. Please refer to `related API descriptions <https://docs.espressif.com/ projects/esp8266-rtos-sdk/en/latest/api-reference/system/sleep_modes.html?highlight=deep#_CPPv414esp_deep_sleep8uint64_t>`_.
+
+---------------------
+
+When using the ESP32-WROVER module, there is a problem of battery jitter or abnormal power-off and power-on, causing the system to crash and fail to wake up. What is the reason?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Application scenario: The current is about 12 uA during sleep. When the battery is unplugged or the product is shaken, it will cause power failure, but there is still electricity in the capacitor. During the process of discharging ESP32 from 3.3 V to 0 V, ESP32 will fail to wake up when powered on again with 3.3 V.
+
+  - Please check whether the chip VCC and EN meet the power-on sequence requirements.
+  - Consider adding a reset chip to ensure normal timing.
+  - For ESP32 power-on and reset timing description, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
