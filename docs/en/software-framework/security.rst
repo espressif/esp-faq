@@ -99,3 +99,9 @@ After GPIO0 is pulled down, the ESP32 cannot enter download mode and prints "dow
   - It means the chip's UART Download mode has been disabled, you can check this via the ``UART_DOWNLOAD_DIS`` bit in `efuse <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/efuse.html?highlight=download%20mode>`_.
   - Please note that after the Production mode of flash encryption is enabled, the UART Download mode will be disabled by default. For more information, please refer to `UART ROM download mode <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig.html#config-secure-uart-rom-dl-mode>`_.
   
+-----------------------
+
+Can the secure boot function be enabled for ESP32 in Arduino development environment?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - No. If you want to use arduino for development, the only way to use such functionality is to use Arduino as IDF component.
