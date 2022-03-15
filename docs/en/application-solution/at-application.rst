@@ -345,3 +345,10 @@ When an ESP32 serves as a slave, how to define MQTT data in json format on MCU s
     .. code:: text
 
       sendData(TX_TASK_TAG, "AT+MQTTPUB=0,\"topic\",\"{\\\\"timestamp\\\":\\\\"20201121085253\\\\\"}\",1,0\r")     //MCU side definition
+
+-------------------
+
+For ESP8266-NONOS version of AT firmware, which AT serial port is used by default?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - For ESP8266-NONOS (V2.0 previous versions), the AT serial port used by default is UART0.
