@@ -926,3 +926,10 @@ Does ESP32-S2 support SDIO as a slave?
 -------------------------------------------------------------------------------------------
 
   - ESP32-S2 has no SDIO interface and does not support SDIO as a slave.
+
+--------------------
+
+Does ESP32 support using the MCPWM Timer to trigger AD sampling?
+-------------------------------------------------------------------------------------
+
+  - ESP32 does not support using MCPWM Timer to trigger AD sampling.
