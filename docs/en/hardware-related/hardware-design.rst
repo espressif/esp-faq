@@ -173,3 +173,10 @@ When connecting flash externally for the ESP32-WROOM-32D module, is it possible 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP32 has 3 sets of SPI (SPI, HSPI and VSPI) interfaces, which can access external flash through the SPI0/1(HSPI/VSPI) bus. But the external flash connected to other pins (other than GPIO6 ~ GPIO11) cannot run programs and can only receive data for storage. The flash that needs to run the program can only be connected to the GPIO6 ~ GPIO11 pins. 
+
+--------------
+
+Do I need to add a shield to the PCB board on ESP32 modules?
+--------------------------------------------------------------------------------------------------------
+
+  - If there is no signal interference other than the module, e.g., 2g, 3g, 4g, or Wi-Fi, BT, Zigbee, then there is no need to add a shielding cover.
