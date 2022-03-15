@@ -562,3 +562,10 @@ BLE 广播包如何设置为不可连接包?
 
   - 请参考例程 `controller_hci_uart_esp32 <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/hci/controller_hci_uart_esp32>`_。
   - ESP32 用作 controller，其他设备作为 host，可通过 UART 给 ESP32 发送 HCI 指令。
+
+--------------------------------------------------------
+
+ESP32 如何手动重置 BLE mesh 设备（不通过 mobile provisioning app 或 provisioning device）？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以调用 `esp_ble_mesh_node_local_reset <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`__ 接口去重置 BLE Mesh Node，擦除所有的配网信息，还需要等到重置事件到达，确认重置成功，调用后，设备需要重新配网。
