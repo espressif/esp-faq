@@ -1072,3 +1072,10 @@ Does ESP8089 support Wi-Fi Direct mode?
 ------------------------------------------------------------------------------------------------------------
 
   - Yes, but ESP8089 can only use the default fixed firmware and cannot be used for secondary development.
+
+--------------
+
+How does ESP32 connect to an AP whose RSSI does not fall below the configured threshold when there are multiple APs in the environment?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In ESP32 staion mode, there is a `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv417wifi_sta_config_t/>`_ structure with 2 variables underneath, i.e., `sort_method <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11sort_methodE/>`_ and `threshold <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE/>`_. The RSSI threshold is configured by assigning values to these two variables.
