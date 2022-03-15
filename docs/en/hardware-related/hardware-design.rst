@@ -165,3 +165,11 @@ When using the ESP32-WROOM-32D module, can I use GPIO12 for other functions?
 
   - GPIO12 is a Strapping pin that controls the startup voltage of the SPI flash. The SPI Flash startup voltage of the ESP32-WROOM-32D module is 3.3V, so the GPIO12 needs to be pulled up during powering on.
   - If you need to use GPIO12 for other functions, please use the  `espefuse.py set_flash_voltage 3.3v <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html?highlight=vdd_sdio#fixed-3-3v-vdd-sdio>`_ command in the esptool to set VDD_SDIO as 3.3 V, so that GPIO12 can be used for other functions.
+
+
+--------------------
+
+When connecting flash externally for the ESP32-WROOM-32D module, is it possible to not use the GPIO6 ~ GPIO11 pins?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 has 3 sets of SPI (SPI, HSPI and VSPI) interfaces, which can access external flash through the SPI0/1(HSPI/VSPI) bus. But the external flash connected to other pins (other than GPIO6 ~ GPIO11) cannot run programs and can only receive data for storage. The flash that needs to run the program can only be connected to the GPIO6 ~ GPIO11 pins. 
