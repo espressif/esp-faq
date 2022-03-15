@@ -912,3 +912,10 @@ When using ESP8266, I want to use UART0 exclusively for downloading, and then us
   - Since the RXD of UART1 is occupied, UART1 cannot be used to communicate with other chips, but the TXD pin of UART1 can be used to output logs.
   - ESP8266 can only communicate with other chips by swapping CTS and RTS pins of UART0. It will be invalid to configure GPIO4 and GPIO5.
   - ESP8266 can communicate with other chips by calling "uart_enable_swap()" to swap the CTS and RTS pins of UART0 to MTCK (IO13) and MTDO (IO15). After this, ESP8266 can communicate with other chips via GPIO13 (TXD) and GPIO15 (RXD).
+
+---------------
+
+Does the ESP32-S2 support USB HID?
+-----------------------------------------------------------------------
+
+  - Supported.
