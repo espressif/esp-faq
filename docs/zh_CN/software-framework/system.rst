@@ -814,3 +814,14 @@ ESP8266 在 Deep sleep 模式下如何唤醒？
 
     - 方案 1：直接烧到 efuse blk3 中，可以保证不被修改；
     - 方案 2：存储到 flash 中。不推荐将 mac 地址存放在默认 nvs 分区中，建议创建一块自定义的 nvs 分区用来存储自定义的 Mac 地址。关于自定义 mac 地址的使用，可以参考 `base_mac_address <https://github.com/espressif/esp-idf/tree/master/examples/system/base_mac_address/>`_。 
+
+---------------
+
+ESP32 在使用 flash 加密时，在 menuconfig 中设置完 secure boot 后，出现如下报错，是什么原因？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    make: *** [/d/esp-idf/components/bootloader_support/Makefile.projbuild:7：/f/ESP32Root/secure_boot_signing_key.pem] 错误 1  .
+
+  - flash 加密是打开了 ``Enable flash encryption on boot``，产生报错是因为开启了 secure boot，secure boot 是固件签名校验的功能，该功能需要生成证书对。
