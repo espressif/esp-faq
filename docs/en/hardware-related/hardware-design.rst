@@ -158,3 +158,10 @@ When the VDD power supply of the ESP32 chip slowly rises from 0 V to 3.3 V, why 
   - It is recommended to pull the EN pin of ESP32 low when it is detected that the voltage supplied to ESP32 is lower than 2.3 V.
   - For ESP32 power-on sequence description, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
   
+------------------
+
+When using the ESP32-WROOM-32D module, can I use GPIO12 for other functions?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - GPIO12 is a Strapping pin that controls the startup voltage of the SPI flash. The SPI Flash startup voltage of the ESP32-WROOM-32D module is 3.3V, so the GPIO12 needs to be pulled up during powering on.
+  - If you need to use GPIO12 for other functions, please use the  `espefuse.py set_flash_voltage 3.3v <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html?highlight=vdd_sdio#fixed-3-3v-vdd-sdio>`_ command in the esptool to set VDD_SDIO as 3.3 V, so that GPIO12 can be used for other functions.

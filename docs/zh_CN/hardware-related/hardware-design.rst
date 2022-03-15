@@ -348,3 +348,11 @@ ESP32 芯片当 VDD 供电从 0 V 慢慢升到 3.3 V 时，芯片为何无法正
   - 可以调整 RC 电路，增加电容，调整电阻，或是使用 Reset 芯片管控 EN 状态。
   - 建议检测到供给 ESP32 的电压低于 2.3 V 时将 ESP32 的 EN 脚拉低。
   - ESP32 上电时序说明参见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
+
+--------------
+
+使用 ESP32-WROOM-32D 模组，是否可以使用 GPIO12 用作其他功能？
+--------------------------------------------------------------------------------------------------------------------------------------
+
+  - GPIO12 为 Strapping 管脚，控制 SPI Flash 的启动电压。ESP32-WROOM-32D 模组的 SPI Flash 启动电压为 3.3 V，因此在上电启动时 GPIO12 需要拉高。
+  - 若需要使用 GPIO12 用作其他功能，请使用 esptool 工具通过 `espefuse.py set_flash_voltage 3.3V <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html?highlight=vdd_sdio#fixed-3-3v-vdd-sdio>`_ 命令将 VDD_SDIO 固定为 3.3 V，那么 GPIO12 将可以用作其他功能。
