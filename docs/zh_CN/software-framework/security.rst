@@ -99,3 +99,9 @@ ESP32 的 GPIO0 拉低后无法进入下载模式，日志打印 "download mode 
   - ESP32 芯片上电打印 "download mode is disable" 日志，说明该芯片的 UART 下载模式 (UART download mode) 已被禁用，您可以通过检查该芯片的 `efuse <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/efuse.html?highlight=download%20mode>`_ 中的 ``UART_DOWNLOAD_DIS`` 位检查该模式是否被禁用。
   - 注意，当启用 flash 加密的量产模式后，UART 下载模式将默认被禁用，更多信息请参考 `UART ROM download mode <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/kconfig.html#config-secure-uart-rom-dl-mode>`_。
   
+----------------
+
+在 Arduino 开发环境中使用 ESP32 能开启 secure boot 功能吗？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 不能，如果要使用 arduino 进行开发，开启这种功能的唯一方法是使用 Arduino 作为 IDF 组件。
