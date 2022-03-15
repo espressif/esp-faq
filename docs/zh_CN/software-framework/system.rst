@@ -385,6 +385,7 @@ ESP32 同时开启 "Enable debug tracing of PM using GPIOs" 和 "Allow .bss segm
   - "Enable debug tracing of PM using GPIOs" 配置选项是在 GDB 调试时需要打开的，不可与 "Allow .bss segment placed in external memory" 配置选项同时使用。
   - 因为 “Enable debug tracing of PM using GPIOs" 默认使用的是 GPIO16 与 GPIO17 ，与 PSRAM 接口（默认也是 GPIO16 和 GPIO17） 冲突。
 
+-----------------------
 
 ESP32 IDF v3.3 版本 bootloader 运行 v3.1 版本 APP bin , 程序为何会触发 RTCWDT_RTC_RESET ？
 --------------------------------------------------------------------------------------------------------
@@ -785,3 +786,10 @@ ESP32 使用 AT+GSLP 指令进入 Deep-sleep 模式后，是否可通过拉低 E
   - 程序实现逻辑可以参考 `esp-idf/examples/system/light_sleep/main/light_sleep_example_main.c <https://github.com/espressif/esp-idf/blob/release/v4.2/examples/system/light_sleep/main/light_sleep_example_main.c>`_ 例程。
 
   - ESP8266-RTOS-SDK 关于 Sleep 模式的 API 说明请阅读 `Sleep modes API Reference <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/release-v3.3/api-reference/system/sleep_modes.html#sleep-modes>`_。
+
+-----------------------------
+
+ESP8266 在 Deep sleep 模式下如何唤醒？
+-------------------------------------------------------------------------------------------------------------------------
+
+  - ESP8266 在 Deep sleep 模式下只能通过 RTC Timer 进行唤醒，定时时长为用户通过函数 esp_deep_sleep 设置的时间，且硬件上需要把 GPIO16 (XPD_DCDC) 通过 0 欧姆电阻连接到 EXT_RSTB，以支持 Deep Sleep 模式唤醒。请参见 `相应 API 唤醒说明 <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/system/sleep_modes.html?highlight=deep#_CPPv414esp_deep_sleep8uint64_t>`_。
