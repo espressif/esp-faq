@@ -554,3 +554,11 @@ BLE 广播包如何设置为不可连接包?
         .channel_map        = ADV_CHNL_ALL,
         .adv_filter_policy = ADV_FILTER_ALLOW_SCAN_ANY_CON_ANY,
         }
+
+---------------
+
+怎样通过串口给 ESP32-WROOM-32D 模块直接发送蓝牙 HCI 命令?
+-----------------------------------------------------------------
+
+  - 请参考例程 `controller_hci_uart_esp32 <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/hci/controller_hci_uart_esp32>`_。
+  - ESP32 用作 controller，其他设备作为 host，可通过 UART 给 ESP32 发送 HCI 指令。
