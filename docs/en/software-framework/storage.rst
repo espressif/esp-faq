@@ -237,3 +237,10 @@ How do I store the keys and certs of ESP32 devices in spiffs?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
  - Please refer to `spiffsgen.py <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_.
+
+----------------------
+
+What should I pay attention to when using ``xTaskCreateStatic()`` in ESP-IDF?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please refer to `xTaskCreateStatic() introduction <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos.html#_CPPv417xTaskCreateStatic14TaskFunction_tPCKcK8uint32_tPCv11UBaseType_tPC11StackType_tPC12StaticTask_t>`_.
