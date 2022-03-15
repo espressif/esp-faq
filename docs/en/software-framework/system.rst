@@ -215,3 +215,9 @@ When using the release/v3.3 version of ESP8266-RTOS-SDK, how to enter Light-slee
   - You can refer to the `esp-idf/examples/system/light_sleep/main/light_sleep_example_main.c <https://github.com/espressif/esp-idf/blob/release/v4.2/examples/system/light_sleep/main/light_sleep_example_main.c>`_ example for implementation logic.
   - Please read `API Reference <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/release-v3.3/api-reference/system/sleep_modes.html#sleep-modes>`_ for API descriptions about sleep modes in ESP8266-RTOS-SDK.
   
+-------------------------
+
+How to wake up ESP8266 in Deep sleep mode?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The ESP8266 can only be awakened from Deep sleep mode via RTC Timer, the timing duration is set by user via esp_deep_sleep, and GPIO16(XPD_DCDC) should be connected to EXT_RSTB through a 0 Ω resistor to support such function. Please refer to `related API descriptions <https://docs.espressif.com/ projects/esp8266-rtos-sdk/en/latest/api-reference/system/sleep_modes.html?highlight=deep#_CPPv414esp_deep_sleep8uint64_t>`_.
