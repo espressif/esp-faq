@@ -116,3 +116,10 @@ How do I get the type of the node in ESP-MESH?
 --------------------------------------------------------------------------------------------------------------------------------
 
   - You can call `esp_mesh_get_type <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_mesh.html? highlight=esp_mesh_get_type#_CPPv417esp_mesh_get_typev>`_ interface to get it.
+
+---------------
+
+Is there any demo of ESP-Mesh root node sending messages to a service via ethernet?
+------------------------------------------------------------------------------------------------------
+
+  - Please see `root_on_ethnernet <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/root_on_ethernet/>`_ demo.

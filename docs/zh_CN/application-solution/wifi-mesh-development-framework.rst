@@ -322,3 +322,10 @@ ESP-MESH 中如何去获取节点类型？
 --------------------------------------------------------------------------------------------------------------------------------
 
   - 可以调用 `esp_mesh_get_type <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_mesh.html?highlight=esp_mesh_get_type#_CPPv417esp_mesh_get_typev>`_  接口去获取。
+
+---------------
+ 
+ESP-Mesh 根节点通过 ethernet 向服务发消息示例？
+---------------------------------------------------------------------------------
+
+  - 请参考 `root_on_ethnernet <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/root_on_ethernet/>`_ 示例
