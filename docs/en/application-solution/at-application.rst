@@ -334,3 +334,14 @@ How to enable the notify and indicate functions with BLE client ?
     OK
     // server+WRITE:0,1,6,1,2,<0x02>,<0x00>
     Writing ccc is a prerequisite for the server to be able to send notify and indicate
+
+--------------
+
+When an ESP32 serves as a slave, how to define MQTT data in json format on MCU side, e.g., and how to escape the strings?
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The original command: AT+MQTTPUB=0, "topic","{\"timestamp\":\"20201121085253\"}",1,0. When the MCU side sends the command, some characters need to be escaped, especially the "\" character, for example:
+
+    .. code:: text
+
+      sendData(TX_TASK_TAG, "AT+MQTTPUB=0,\"topic\",\"{\\\\"timestamp\\\":\\\\"20201121085253\\\\\"}\",1,0\r")     //MCU side definition
