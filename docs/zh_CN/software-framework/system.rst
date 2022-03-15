@@ -804,3 +804,13 @@ ESP8266 在 Deep sleep 模式下如何唤醒？
   - 请检查芯片 VCC 与 EN 是否满足上电时序要求。 
   - 可以考虑添加复位芯片保证时序正常。
   - ESP32 上电、复位时序说明，详见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
+
+--------------
+
+如何烧录自定义 mac 地址？
+---------------------------------------------
+
+  - 可以先了解 ESP 模块 mac 的机制，请参考 `Mac 地址介绍 <https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/system/system.html?highlight=MAC%20address/>`_。目前烧录自定义 mac 地址有 2 种方案：
+
+    - 方案 1：直接烧到 efuse blk3 中，可以保证不被修改；
+    - 方案 2：存储到 flash 中。不推荐将 mac 地址存放在默认 nvs 分区中，建议创建一块自定义的 nvs 分区用来存储自定义的 Mac 地址。关于自定义 mac 地址的使用，可以参考 `base_mac_address <https://github.com/espressif/esp-idf/tree/master/examples/system/base_mac_address/>`_。 

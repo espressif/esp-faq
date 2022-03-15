@@ -232,3 +232,13 @@ When using the ESP32-WROVER module, there is a problem of battery jitter or abno
   - Please check whether the chip VCC and EN meet the power-on sequence requirements.
   - Consider adding a reset chip to ensure normal timing.
   - For ESP32 power-on and reset timing description, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
+
+--------------
+
+How to flash a customized mac address?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can start by understanding the MAC mechanics of ESP modules, please refer to `Introduction to Mac Addresses <https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/system/system.html?highlight=MAC% 20address/>`_. There are currently 2 options for burning customized MAC addresses:
+
+  - Option 1: directly flash it into efuse blk3.
+  - Option 2: Store in flash. It is not recommended to store the MAC address in the default NVS partition. It is recommended to create a customized NVS partition for storing customized Mac addresses. For more information on the use of customized MAC addresses, please refer to `base_mac_address <https://github.com/espressif/esp-idf/tree/master/examples/ system/base_mac_address/>`_. 
