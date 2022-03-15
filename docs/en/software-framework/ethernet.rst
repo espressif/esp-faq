@@ -161,3 +161,10 @@ Does ESP32 Ethernet support MII interface?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Supported on hardware level, software adaptation is in development. Please refer to `Ethernet doc <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html>`_ for self implementation. 
+
+--------------------------------
+
+Is it possible to connect ESP32-S2 to Ethernet externally? 
+------------------------------------------------------------------------
+
+  - Yes, ESP-IDF currently provides drivers for the DM9051 module, which has integrated Ethernet MAC and PHY functionality and can communicate with the MCU via the SPI interface. The DM9051 has an integrated MAC+PHY module, please refer to `example reference <https://github.com/espressif/esp- idf/tree/master/examples/ethernet/> `_ and `API reference <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-reference/network/index.html#id1>`_.
