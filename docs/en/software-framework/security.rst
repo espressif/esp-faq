@@ -31,31 +31,45 @@ Is it possible to encrypt firmware for ESP8285?
 
 --------------
 
+What is the difference between secure boot v1 and v2?
+------------------------------------------------------
+
+  Currently, `secure boot v1 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html>`_ is reommended for earlier versions than ESP32 ECO3，and `secure boot v2 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html>`_ is recommended for ESP32 ECO3 and later versions, ESP32-C3, ESP32-S2, and ESP32-S3。
+  
+  Compared with secure boot v1, secure boot v2 has the following improvements:
+  - The bootloader and app use the same signature format.
+  - The bootloader and app use the same signing key.
+
+--------------
+
 After enabling secure boot, there is a build error indicating missing files. What could be the reasons？
 -------------------------------------------------------------------------------------------------------------------------------
 
   Error log: /d/ESP32/esp-mdf/esp-idf/components/bootloader_support/Makefile.projbuild:7/f/ESP32Root/secure_boot_signing_key.pem。
 
-  Reason: security boot is a function for firmware signature verification, which requires generating a pair of certificates. For detailed information, please refer to `Secure Boot <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html>`_.
+  Reason: security boot is a function for firmware signature verification, which requires generating key pairs.
+  - For the method of generating a key pair when secure boot v1 is enabled, please refer to `secure boot v1 key generation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html#generating-secure-boot-signing-key>`_.
+  - For the method of generating a key pair when secure boot v2 is enabled, please refer to `secure boot v2 key generation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html#generating-secure-boot-signing-key>`_.
 
 --------------
 
 After enabling secure boot, is it possible for modules to be flashed again?
 -------------------------------------------------------------------------------------------------
 
-  - If the secure boot is configured as one-time, then it can only be flashed once and the bootloader firmware cannot be reflashed.
-  - If the secure boot is configured as reflashable, then the bootloader firmware can be flashed again.
+  - If the secure boot v1 is configured as one-time, then it can only be flashed once and the bootloader firmware cannot be reflashed.
+  - If the secure boot v1 is configured as reflashable, then the bootloader firmware can be flashed again.
+  - The secure boot v2 allows reflashing the bootloader and app firmware.
 
 --------------
 
 With flash encrypted enabled, a module has an error as ``flash read error`` after reflashed. How to resolve such issue?
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
-  With flash encrypted enabled, the module will not support plaintext firmware flash. You can reflash it after disabling the encryption function via espefuse.py, or used the encryption key to flash ciphertext.
+  With flash encrypted enabled, the module will not support plaintext firmware flash. For common failures, please refer to `Possible Failures <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html#id9>`_. You can use the `espefuse <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html>`_ script to disable the encryption and then reflash the plaintext firmware, or directly flash the encrypted firmware to devices referring to the `example <https://github.com/espressif/esp-idf/tree/master/examples/security/flash_encryption>`_.
   
   .. note::
       
-      Please note there is a time limit for flash encrypted function: it can only be enabled and disabled for 3 times.
+      Please note there is a time limit for flash encrypted function.
 
 --------------
 
@@ -105,3 +119,27 @@ Can the secure boot function be enabled for ESP32 in Arduino development enviro
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - No. If you want to use arduino for development, the only way to use such functionality is to use Arduino as IDF component.
+
+------------
+
+What are the use scenarios for secure boot and flash encryption?
+--------------------------------------------------------------------
+
+  - When secure boot is enabled, the device will only load and run firmware that is signed by the specified key. Therefore, it can prevent the device from loading illegal firmware and prevent unauthorized firmware from being flashed to the device.
+  - When flash encryption is enabled, the partitions on the flash where firmware is stored and the data in the partitions marked as "encrypeted" will be encrypted. Therefore, it can prevent the data from being illegally viewed, and firmware data copied from flash cannot be applied to other devices.
+
+------------
+
+What data is stored in eFuse involved in secure boot and flash encryption?
+----------------------------------------------------------------------------
+
+  - For the data stored in eFuse used in secure boot v1, please refer to `secure boot v1 efuses <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html#background>`_。
+  - For the data stored in eFuse used in secure boot v2, please refer to `secure boot v2 efuses <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html#efuse-usage>`_。
+  - For the data stored in eFuse used in flash encryption, please refer to `flash encryption efuses <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html#relevant-efuses>`_。
+
+------------
+
+Enabling secure boot failed with the log "Checksum failure". How to fix it?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - After enabling secure boot, the size of bootloader.bin will increase, please check whether the size of the bootloader partition is enough to store the compiled bootloader.bin. For more information, please refer to `Bootloader Size <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/bootloader.html#bootloader-size>`_。

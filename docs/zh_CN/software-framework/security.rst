@@ -31,31 +31,45 @@ ESP8285 是否可以固件加密？
 
 --------------
 
+secure boot v1 和 secure boot v2 的区别？
+------------------------------------------------------
+
+当前，仅 ESP32 ECO3 以下版本推荐使用 `secure boot v1 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html>`_，ESP32 ECO3 及以上、ESP32-C3、ESP32-S2 和 ESP32-S3 推荐使用 `secure boot v2 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html>`_。
+  
+  secure boot v2 相较于 secure boot v1 主要做了以下方面的改进：
+  - bootloader 和 app 使用相同的签名格式。
+  - bootloader 和 app 使用统一的签名密钥。
+
+--------------
+
 开启 secure boot 后，编译报错缺少文件？
 -----------------------------------------------------
 
   错误 log：/d/ESP32/esp-mdf/esp-idf/components/bootloader_support/Makefile.projbuild:7：/f/ESP32Root/secure_boot_signing_key.pem。
 
-  报错原因：security boot 是固件签名校验的功能，该功能需要生成证书对。相关资料请参考 `这里 <https://blog.csdn.net/espressif/article/details/79362094>`_。
+  报错原因：security boot 是固件签名校验的功能，该功能需要生成密钥对。
+  - 启用 secure boot v1 时生成密钥对的方法请参考 `secure boot v1 生成密钥 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html#generating-secure-boot-signing-key>`_。
+  - 启用 secure boot v2 时生成密钥对的方法请参考 `secure boot v2 生成密钥 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html#generating-secure-boot-signing-key>`_。
 
 --------------
 
 模组使能 secure boot 后是否可以再次烧录？
 -------------------------------------------------------
 
-  - secure boot 配置为 one-time，那么就只能烧录一次，不可以再重新烧录 bootloader 固件。
-  - secure boot 配置为 reflashable，则可以重新烧录 bootloader 固件。
+  - secure boot v1 配置为 one-time，那么就只能烧录一次，不可以再重新烧录 bootloader 固件。
+  - secure boot v1 配置为 reflashable，则可以重新烧录 bootloader 固件。
+  - secure boot v2 允许重新烧录 bootloader 和 app 固件。
 
 --------------
 
 模组使能 flash encrypted，重新烧录后出现 ``flash read error`` 错误。如何解决？
 -----------------------------------------------------------------------------------------------
 
-  模组使能 flash encrypted 后，模组开启加密功能后将不支持明文固件烧录。可以通过 espefuse.py 脚本将加密关闭后再次烧录，或者已知密钥烧录密文。
+  模组开启加密功能后将不支持明文固件烧录，常见的错误请参考 `重新烧录可能出现的错误 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html#id9>`_。可以通过 `espefuse <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html>`_ 脚本将加密关闭后再次烧录明文数据，或者参考`示例 <https://github.com/espressif/esp-idf/tree/master/examples/security/flash_encryption>`_将加密后的固件数据烧录到设备上。
   
   .. note::
       
-      flash encrypted 加密开关存在次数限制，仅可重复 3 次。
+      flash encrypted 加密开关存在次数限制。
 
 --------------
 
@@ -105,3 +119,27 @@ ESP32 的 GPIO0 拉低后无法进入下载模式，日志打印 "download mode 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 不能，如果要使用 arduino 进行开发，开启这种功能的唯一方法是使用 Arduino 作为 IDF 组件。
+
+-------------
+
+secure boot 和 flash 加密的使用场景？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 启用 secure boot 后，设备将仅加载运行指定密钥签名后的固件。因此，启用 secure boot 可以避免设备加载非法的固件、防止对设备刷写未经授权的固件。
+  - 启用 flash 加密后，flash 上存储固件的分区以及被标识为 “encrypeted" 的分区中的数据将被加密。因此，启用 flash 加密可以避免 flash 上的数据被非法查看，并且从 flash 上拷贝的固件数据无法应用到其他设备上。
+
+------------
+
+secure boot 和 flash 加密中涉及的存储在 eFuse 数据有哪些？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - secure boot v1 中使用的存储在 eFuse 数据请参考 `secure boot v1 efuses <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html#background>`_。
+  - secure boot v2 中使用的存储在 eFuse 数据请参考 `secure boot v2 efuses <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html#efuse-usage>`_。
+  - flash 加密中使用的存储在 eFuse 数据请参考 `flash 加密 efuses <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html#efuses>`_。
+
+------------
+
+启用 secure boot 失败，提示 “Checksum failure”，怎么解决？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 启用 secure boot 后，bootloader.bin 的大小将增大，请检查引导加载程序分区的大小是否足够存放编译得到的 bootloader.bin。更多说明请参考 `引导加载程序大小 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/bootloader.html#bootloader-size>`_。
