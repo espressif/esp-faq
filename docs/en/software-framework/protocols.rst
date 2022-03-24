@@ -95,19 +95,20 @@ After the SNTP calibration for ESP8266 RTOS SDK v3.2, errors gradually increase.
 
 -----------------
 
-Does ESP8266 support loop-back for device-end UDP broadcasts?
+Does ESP8266 support loop-back for the device end?
 -----------------------------------------------------------------------------------------------------
 
   - Yes, it does.
-  - Please enable the LOOPBACK option from LWIP in menuconfig: ``menuconfig -> Component config -> Enable per-interface loopback (type "Y" to enable)``.
+  - Please enable the LOOPBACK option from LWIP in menuconfig: ``menuconfig`` > ``Component config`` > ``LWIP`` > ``Enable per-interface loopback`` (type "Y" to enable).
+  - The device end sends data to the loopback address 127.0.0.1, and can read it from the address.
 
 --------------
 
 What is the default packet length for TCP/IP?
 -----------------------------------------------------------------
 
-  In default configurations, the single packet TCP is 1460 bytes and UDP is 1472 bytes.
-
+  Please go to ``menuconfig`` > ``Component config`` > ``LWIP`` > ``TCP`` > ``Maximum Segment Size (MSS)`` for the length.
+  
 --------------
 
 When using UTC and GMT methods in SNTP protocol, why can't I get the time of the target time zone？
@@ -150,6 +151,7 @@ After calling ``esp_netif_t* wifiAP = esp_netif_create_default_wifi_ap()`` for E
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - It is necessary to call ``esp_wifi_clear_default_wifi_driver_and_handlers(wifiAP)`` before ``esp_netif_destroy(wifiAP)``. This is the correct deinit process. Following this process, there will be no memory leakage.
+  - Alternatively, call ``esp_netif_destroy_default_wifi(wifiAP)``, which is supported by ESP-IDF v4.4 and later versions.
 
 ----------------
 
@@ -179,7 +181,7 @@ I'm using ESP8266 release/v3.3 version of SDK to test the example/protocols/esp-
     I (4228) MQTT_EXAMPLE: MQTT_EVENT_DISCONNECTED
     I (19361) MQTT_CLIENT: Sending MQTT CONNECT message, type: 1, id: 0000
 
-  - When such error occurs, it is usually because the connected server is unavailable. Please use another available server for testing.
+  - When such error occurs,  it indicates that the server rejected the connection because the client's wrong MQTT username and password caused the server-side authentication to fail. Please check if you are using the correct MQTT username and password.
 
 -----------------
 

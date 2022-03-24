@@ -96,18 +96,19 @@ ESP8266 RTOS SDK v3.2 SNTP 校准后误差会逐渐变大，如何解决？
 
 -----------------
 
-ESP8266 是否支持设备端 UDP 广播自发自收？
+ESP8266 是否支持设备端自发自收？
 ---------------------------------------------------------------------------------
 
-  - ESP8266 设备端支持 UDP 广播自发自收。
-  - 需要在 menuconfig 配置选项中把 LWIP 的 LOOPBACK 选项打开：``menuconfig -> Component config -> Enable per-interface loopback (键 "Y" 使能)``。
+  - ESP8266 设备端支持自发自收。
+  - 需要在 menuconfig 配置选项中把 LWIP 的 LOOPBACK 选项打开：``menuconfig`` > ``Component config`` > ``LWIP`` > ``Enable per-interface loopback`` (键 "Y" 使能)。
+  - 设备端往环回地址 127.0.0.1 发送数据，设备端可以在环回地址读取到自己发送的数据。
 
 --------------
 
 TCP/IP 默认配置的数据包长度是多少？
 -------------------------------------------------
 
-  在默认配置中，单包数据 TCP 1460 字节，UDP 1472 字节。
+  请参考 ``menuconfig`` > ``Component config`` > ``LWIP`` > ``TCP`` > ``Maximum Segment Size (MSS)`` 配置的值。
 
 --------------
 
@@ -150,6 +151,7 @@ ESP32-S2 在调用 ``esp_netif_t* wifiAP  = esp_netif_create_default_wifi_ap()`
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 需要在 ``esp_netif_destroy(wifiAP)`` 前额外调用 ``esp_wifi_clear_default_wifi_driver_and_handlers(wifiAP)``，这样才是正确的注销流程，此时可发现内存泄露的情况已消失。
+  - 也可以直接调用 ``esp_netif_destroy_default_wifi(wifiAP)``，该接口在 ESP-IDF v4.4 版本以上支持。
 
 --------------
 
@@ -179,7 +181,7 @@ ESP32 & ESP8266 做 TCP Server 时端口释放后如何立即被再次使用？
     I (4228) MQTT_EXAMPLE: MQTT_EVENT_DISCONNECTED
     I (19361) MQTT_CLIENT: Sending MQTT CONNECT message, type: 1, id: 0000
 
-  - 当出现如上报错，一般由于连接的服务器不可用，请更换可用的服务器进行测试。
+  - 当出现如上报错，表示服务器拒绝了连接，原因是客户端错误的 MQTT 用户名和密码导致服务端认证没有通过。建议您确认是否使用了正确的 MQTT 用户名和密码。
 
 ----------------
 
