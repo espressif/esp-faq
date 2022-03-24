@@ -245,12 +245,8 @@ How to flash a customized mac address?
 
 ----------------------
 
-When using flash encryption for ESP32, the following error appears after setting secure boot in menuconfig. What is the reason?
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+When ESP32 uses esp_timer, network communication or Bluetooth communication is abnormal. What is the reason?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  .. code-block:: text
-
-    make: *** [/d/esp-idf/components/bootloader_support/Makefile.projbuild:7：/f/ESP32Root/secure_boot_signing_key.pem] ERROR 1  .
-
-  - The ``enable flash encryption on boot`` setting is enabled. And the error is reported because secure boot is enabled, which is the function of firmware signature verification and requires a certificate pair.
-
+  - esp_timer is a high-precision hardware timer component, and some background components also use it to complete some system tasks. When using esp_timer, please do not call delay and blocking APIs in the callback function of the timer, and try to ensure that the function is executed as quickly as possible, so as not to affect the performance of other system components.
+  - If you do not need very high time precision, please use the timer component `xTimer <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos.html#timer-api>`_ in FreeRTOS.

@@ -817,11 +817,8 @@ ESP8266 在 Deep sleep 模式下如何唤醒？
 
 ---------------
 
-ESP32 在使用 flash 加密时，在 menuconfig 中设置完 secure boot 后，出现如下报错，是什么原因？
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ESP32 在使用 esp_timer 时，出现网络通信或者蓝牙通信异常，是什么原因？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  .. code-block:: text
-
-    make: *** [/d/esp-idf/components/bootloader_support/Makefile.projbuild:7：/f/ESP32Root/secure_boot_signing_key.pem] 错误 1  .
-
-  - flash 加密是打开了 ``Enable flash encryption on boot``，产生报错是因为开启了 secure boot，secure boot 是固件签名校验的功能，该功能需要生成证书对。
+  - esp_timer 是高精度的硬件定时器组件，后台一些组件也使用 esp_timer 完成一些系统任务。在使用 esp_timer 时，请不要在该定时器的回调函数中使用延时、阻塞类的 API，应尽可能地保证回调函数能够快速地被执行结束，以免影响系统其他组件的功能。
+  - 如您需要的定时精度不是太高，请使用 FreeRTOS 中的定时器组件 `xTimer <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/freertos.html#timer-api>`_。
