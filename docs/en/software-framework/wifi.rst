@@ -209,7 +209,7 @@ Do ESP8266/ESP32/ESP32-S2 support web/SoftAP provisioning?
   Yes.
 
   - For ESP8266, please refer to example `ESP8266 softap_prov <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/provisioning/legacy/softap_prov>`_.
-  - For ESP32/ESP32-S2, please refer to example `ESP32/ESP32-S2 softap_prov <https://github.com/espressif/esp-idf/tree/master/examples/provisioning/legacy/softap_prov>`_.
+  - For ESP32/ESP32-S2, please refer to example `ESP32/ESP32-S2 wifi_prov_mgr <https://github.com/espressif/esp-idf/tree/master/examples/provisioning/wifi_prov_mgr>`_.
 
 --------------
 
@@ -294,7 +294,7 @@ How does ESP32 adjust Wi-Fi TX power?
     - master commit: ``63b566eb27da187c13f9b6ef707ab3315da24c9d``
     - 4.2 commit: ``d0dae5426380f771b0e192d8ccb051ce5308485e``
     - 4.1 commit: ``445635fe45b7205497ad81289c5a808156a43539``
-    - 4.0 commit: Pending, the MR is not merged yet
+    - 4.0 commit: ``0a8abf6ffececa37538f7293063dc0b50c72082a``
     - 3.3 commit: ``908938bc3cd917edec2ed37a709a153182d511da``
 
 --------------
@@ -495,7 +495,14 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 Does ESP8266 support 802.11k/v/r protocol?
 ---------------------------------------------------
 
-  For now, the ESP8266 only supports 802.11k and 802.11v, please refer to example `roaming <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/wifi/roaming>`_.
+  For now, the ESP8266 only supports 802.11k and 802.11v, please refer to example `roaming <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/wifi/roaming>`__.
+
+--------------
+
+Does ESP32 Wi-Fi support roaming between different APs with the same SSID?
+---------------------------------------------------------------------------
+
+  Yes, currently it supports 802.11k and 802.11v protocols. Please refer to the example `roaming <https://github.com/espressif/esp-idf/tree/master/examples/wifi/roaming>`__.
 
 --------------
 
@@ -546,7 +553,7 @@ How does ESP32 receive and transmit Wi-Fi 802.11 packets?
 
 --------------
 
-[Connect] Does ESP8266 Wi-Fi support WAP2 enterprise-level encryption？
+[Connect] Does ESP8266 Wi-Fi support WPA2 enterprise-level encryption？
 ------------------------------------------------------------------------------
 
   - Yes. Please refer to example `wpa2_enterprise <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/wifi/wpa2_enterprise>`_.
@@ -567,7 +574,7 @@ Do Espressif's chips support WPA3?
 -----------------------------------------
 
   - ESP32 series: WPA3 is supported from esp-idf release/v4.1 and enabled by default. Go to menuconfig > Component config > Wi-Fi for configuration.
-  - ESP8266: WPA3 is supported from the master branch of ESP8266_RTOS_SDK and enabled by default. Go to menuconfig > Component config > Wi-Fi for configuration.
+  - ESP8266: WPA3 is supported from the release/v3.4 branch of ESP8266_RTOS_SDK and enabled by default. Go to menuconfig > Component config > Wi-Fi for configuration.
 
 --------------
 
@@ -626,29 +633,17 @@ Does ESP32 Wi-Fi support PMF (Protected Management Frames) and PFS (Perfect Forw
 
 --------------
 
+How to get the RSSI of the AP for ESP32 IDF v4.1 Wi-Fi?
+--------------------------------------------------------------------------
+
+  It can be obtained via scanning, please refer to example `scan <https://github.com/espressif/esp-idf/tree/master/examples/wifi/scan>`_.
+
+--------------
+
 How to get the RSSI of the connected AP for ESP32 IDF v4.1 Wi-Fi?
 --------------------------------------------------------------------------
 
-  - It can be obtained via scanning, please refer to example `scan <https://github.com/espressif/esp-idf/tree/master/examples/wifi/scan>`_.
-  - If there are multiple identical SSIDs in the current environment, you can get the AP's bssid first after it connects to an AP and specify the bssid via wifi_scan_config_t, then get the RSSI by calling esp_wifi_scan_start().
-
-    Code:
-
-    .. code-block:: c
-
-      //Obtain bssid via WIFI_EVENT_STA_CONNECTED in the callback function event_handler()
-      else if(event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_CONNECTED) {
-
-              wifi_event_sta_connected_t* sta_connected_event = (wifi_event_sta_connected_t*) event_data;
-              ESP_LOGI(TAG, "AP MAC:"MACSTR"", MAC2STR(sta_connected_event->bssid));
-              ...
-              //specify a bssid to perform scanning
-              wifi_scan_config_t wifi_scan_config = {
-                  .bssid = sta_connected_event->bssid,
-              };
-              ESP_ERROR_CHECK(esp_wifi_scan_start(&wifi_scan_config, true));
-              ...
-      }
+  You could call esp_wifi_sta_get_ap_info() to get it. For the API description, please refer to `esp_err_t esp_wifi_sta_get_ap_info(wifi_ap_record_t *ap_info) <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv424esp_wifi_sta_get_ap_infoP16wifi_ap_record_t>`_.
 
 --------------
 
@@ -662,7 +657,7 @@ Why does ESP8266 print out an AES PN error log when using esptouch v2?
 When using ESP32 to establish a hotspot, can I scan all APs and the occupied channels first, and then select the smallest and cleanest channel to establish my own AP?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - You can scan all APs and occupied channels before establishing a hotspot. Refer to the example "esp_wifi_scan_get_AP_records".
+  - You can scan all APs and occupied channels before establishing a hotspot. Refer to the API esp_wifi_scan_get_ap_records.
   - It cannot be performed automatically. You need to customize the channel selection algorithm to implement such operation.
 
 ---------------------
@@ -673,6 +668,13 @@ I'm scanning Wi-Fi on an ESP32 device using release/v3.3 version of ESP-IDF. Whe
   - No, same SSID names cannot be filtered out since identical SSID names may not mean identical servers. Their BSSID may not be the same.
 
 -----------------------
+
+Does ESP8266 support EDCF (AC) scheme?
+----------------------------------------------------------------------------------------------------
+
+  The master version of ESP8266-RTOS-SDK supports EDCF (AC) applications, but no application examples are provided for now. You can enable Wi-Fi QoS configuration in ``menuconfig -> Component config -> Wi-Fi`` to get support.
+
+---------------------
 
 I'm using the master version of ESP8266-RTOS-SDK to open the WiFi Qos application to get EDCF support. How does ESP8266 decide which data packet should be allocated to the EDCF AC category?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -727,8 +729,8 @@ In AP + STA mode, after an ESP32 is connected to Wi-Fi, will the Wi-Fi connectio
 I'm using ESP-IDF release/v3.3 for ESP32 development, but only bluetooth function is needed, how to disable Wi-Fi function through software?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Please call ``esp_wifi_stop()`` to disable the Wi-Fi function. For API description, please see `esp_err_tesp_wifi_stop(void) <https://docs.espressif.com/projects/esp-idf/en/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_stop#_CPPv413esp_wifi_stopv>`_.
-  - If you need to reclaim the resources occupied by Wi-Fi, call ``esp_wifi_deinit()``. For API description, please see `esp_err_tesp_wifi_deinit(void) <https://docs.espressif.com/projects/esp-idf/en/release-v3.3/api-reference/ network/esp_wifi.html?highlight=wifi_deinit#_CPPv415esp_wifi_deinitv>`_.
+  - Please call ``esp_wifi_stop()`` to disable the Wi-Fi function. For API description, please see `esp_err_t esp_wifi_stop(void) <https://docs.espressif.com/projects/esp-idf/en/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_stop#_CPPv413esp_wifi_stopv>`_.
+  - If you need to reclaim the resources occupied by Wi-Fi, call ``esp_wifi_deinit()``. For API description, please see `esp_err_t esp_wifi_deinit(void) <https://docs.espressif.com/projects/esp-idf/en/release-v3.3/api-reference/ network/esp_wifi.html?highlight=wifi_deinit#_CPPv415esp_wifi_deinitv>`_.
   
 ----------------------
 
@@ -743,14 +745,6 @@ In ESP-IDF, the ``esp_wifi_80211_tx()`` interface can only be used to send data 
     esp_wifi_set_promiscuous(true);
     
   - The above data receive method is also used in another open-sourced project, please see `esp-mdf <https://github.com/espressif/esp-mdf/blob/master/components/mconfig/mconfig_chain.c>`_.
-
----------------
-
-Does ESP32 support seamless roaming between different APs with the same SSID?
-------------------------------------------------------------------------------------------------------------
-
-  - Currently not supported.
-
 
 ---------------
 
@@ -827,7 +821,7 @@ How do I set the country code for a Wi-Fi module ?
 
   :CHIP\: ESP8266 | ESP32 | ESP32 | ESP32-C3:
 
-  - Please call `esp_wifi_set_country <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html? highlight=esp_wifi_set_country#_CPPv420esp_wifi_set_countryPK14wifi_country_t />`_ to set the country code.
+  - Please call `esp_wifi_set_country <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html? highlight=esp_wifi_set_country#_CPPv420esp_wifi_set_countryPK14wifi_country_t>`_ to set the country code.
 
 ---------------
 
@@ -889,7 +883,7 @@ Does ESP32 support FTM(Fine Timing Measurement)?
   - No, it doesn't. FTM needs hardware support, but ESP32 doesn't have it.
   - ESP32-S2 and ESP32-C3 can support FTM in hardware.
   - ESP-IDF can support FTM from v4.3-beta1.
-  - For more information and examples of FTM, please refer to `FTM <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#fine-timing-measurement-ftm>`_.
+  - For more information and examples of FTM, please refer to `FTM <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/wifi.html#fine-timing-measurement-ftm>`_.
   
 ---------------
 
@@ -930,7 +924,8 @@ ESP8266 `wpa2_enterprise <https://github.com/espressif/ESP8266_RTOS_SDK/tree/mas
       [*] wpa
       [*] wpa2_enterprise
       
-      menuconfig==>Component config ==>Supplicant ==>[*] Print debug messages from WPA Supplicant
+      menuconfig==>Component config ==>Supplicant ==>
+      [*] Print debug messages from WPA Supplicant
     
 -----------------------------------------------------------------------------------------------------
 
@@ -947,7 +942,7 @@ What is the current progress of WFA bugs fixing?
 --------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 |  ESP8266:
 
-  - Please refer to <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability.pdf/>`_ for more details.
+  - Please refer to <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability.pdf>`_ for more details.
   
 -----------------------------------------------------------------------------------------------------
 
@@ -996,13 +991,6 @@ What does such log mean: ``I (81447377) wifi:new:<7,0>, old:<7,2>, ap:<255,255>,
 
 ------------------------------------------------------------------------
 
-Does ESP32 Wi-Fi support roam function between different APs with the same SSID?
-----------------------------------------------------------------------------------------------------------
-
-  - No.
-
------------------------------
-
 Does ESP modules support EAP-FAST?
 -------------------------------------------------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 :
@@ -1019,18 +1007,11 @@ Does ESP modules support the WiFi NAN (Neighbor Awareness Networking) protocol?
 
 ---------------------
 
-Does ESP8266 support EDCF (AC) scheme?
-----------------------------------------------------------------------------------------------------
-
-  - The master version of ESP8266-RTOS-SDK supports EDCF (AC) applications, but no application examples are provided for now. You can enable WiFi QoS configuration in ``menuconfig -> Component config -> Wi-Fi`` to get support.
-
----------------------
-
 When using ESP32 with release/v3.3 version of ESP-IDF. When configuring the router, is there an API to directly tell that the entered password is wrong?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - There is no such API. According to the Wi-Fi protocol standard, when the password is wrong, the router will not clearly tell the Station that the 4-way handshake is due to the password error. Under normal circumstances, the password is obtained in 4 packets (1/4 frame, 2/4 frame, 3/4 frame, 4/4 frame). When the password is correct, the AP will send 3/4 frames, but when the password is wrong, the AP will not send 3/4 frame but send 1/4 frame instead. However, when the AP sends 3/4 frame which is lost in the air for some reason, the AP will also re-send 1/4 frame. Therefore, for Station, it is impossible to accurately distinguish between these two situations. In the end, it will report a 204 error or a 14 error. 
-  - Please refer to `Wi-Fi reason code <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#id33>`__.
+  - Please refer to `Wi-Fi reason code <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#wi-fi-reason-code>`__.
 
 -----------------------
 
@@ -1048,9 +1029,10 @@ How does ESP32 speed up the Wi-Fi connection?
 
   You can try the following approaches:
 
-  - Set the CPU frequency to the maximum to speed up the key calculation speed. In addition, you can also set the FLASH parameters to ``QIO, 80MHz``， which will increase power consumption. 
-  - Disabling ``CONFIG_IP_DHCP_DOES_ARP_CHECK`` can greatly reduce the time of getting IP. But there will be no checking on whether there is an IP address conflict in the LAN.
-  - Fixed scanning channel
+  - Set the CPU frequency to the maximum to speed up the key calculation speed. In addition, you can also set the flash parameters to ``QIO, 80MHz``, which will increase power consumption. 
+  - Disable ``CONFIG_LWIP_DHCP_DOES_ARP_CHECK`` to greatly reduce the time of getting IP. But there will be no checking on whether there is an IP address conflict in the LAN.
+  - Open ``CONFIG_LWIP_DHCP_RESTORE_LAST_IP``, and save the IP address obtained last time. When DHCP starts, send DHCP requests directly without performing DHCP discover.
+  - Use fixed scanning channel.
 
 ---------------------
 

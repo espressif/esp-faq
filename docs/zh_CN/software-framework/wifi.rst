@@ -64,24 +64,24 @@ ESP32 和 ESP8266 是否支持中文 SSID？
 客户⾃研产品如何优化⼆次谐波等杂散？
 ------------------------------------
 
-  ⼆次谐波主要来源于射频链路路辐射和 PA 电源辐射，同时易易受到客户底板（板⼦尺⼨）及产品整机影响。因此有如下建议：
+  ⼆次谐波主要来源于射频链路辐射和 PA 电源辐射，同时易受到客户底板（板⼦尺⼨）及产品整机影响。因此有如下建议：
 
   - 在射频匹配中使⽤ ⼀个接近 2.4 pF ⼤⼩的对地电容，可较好地优化射频链路路上的杂散辐射；
-  - 在 PA 电源 (芯⽚ 3、4 管脚) ⼊⼝增加⼀个串串联电感可较好减少 PA 电源的杂散辐射。
+  - 在 PA 电源 (芯⽚ 3、4 管脚) ⼊⼝增加⼀个串联电感可较好减少 PA 电源的杂散辐射。
 
 --------------
 
 Wi-Fi 信道是什么？可以自行选择信道吗？
 --------------------------------------
 
-  信道指的是 Wi-Fi 使用的指定频段中特定频率的波段。不同国家地区使用的信道数是不是同的。⽤户可以参考 `ESP8266 Wi-Fi 信道选择指南 <https://www.espressif.com/sites/default/files/documentation/esp8266_wi-fi_channel_selection_guidelines_cn_1.pdf>`_。
+  信道指的是 Wi-Fi 使用的指定频段中特定频率的波段。不同国家地区使用的信道数是不同的。⽤户可以参考 `ESP8266 Wi-Fi 信道选择指南 <https://www.espressif.com/sites/default/files/documentation/esp8266_wi-fi_channel_selection_guidelines_cn_1.pdf>`_。
 
 --------------
 
 80 MHz 倍频杂散较差该如何解决？
 -------------------------------
 
-  若 80 MHz 倍频杂散超标，如 160 MHz、240 MHz、320 MHz 等均⽐较⾼，可在发送数据 (TXD) 串⼝线路路中串联⼀个阻值约为 470 Ω 的电阻，即可有效抑制 80 MHz 倍频杂散。
+  若 80 MHz 倍频杂散超标，如 160 MHz、240 MHz、320 MHz 等均⽐较⾼，可在发送数据 (TXD) 串⼝线路中串联⼀个阻值约为 470 Ω 的电阻，即可有效抑制 80 MHz 倍频杂散。
 
 --------------
 
@@ -208,7 +208,7 @@ ESP8266/ESP32/ESP32-S2 是否支持 web/softAP 配网？
   支持。
 
   - ESP8266 请参考此示例 `ESP8266 softap_prov <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/provisioning/legacy/softap_prov>`_；
-  - ESP32/ESP32-S2 请参考此示例 `ESP32/ESP32-S2 softap_prov <https://github.com/espressif/esp-idf/tree/master/examples/provisioning/legacy/softap_prov>`_。
+  - ESP32/ESP32-S2 请参考此示例 `ESP32/ESP32-S2 wifi_prov_mgr <https://github.com/espressif/esp-idf/tree/master/examples/provisioning/wifi_prov_mgr>`_。
 
 --------------
 
@@ -293,7 +293,7 @@ ESP32 如何调整 Wi-Fi 的发射功率？
     - master commit: ``63b566eb27da187c13f9b6ef707ab3315da24c9d``
     - 4.2 commit: ``d0dae5426380f771b0e192d8ccb051ce5308485e``
     - 4.1 commit: ``445635fe45b7205497ad81289c5a808156a43539``
-    - 4.0 commit: MR 未合, 待定
+    - 4.0 commit: ``0a8abf6ffececa37538f7293063dc0b50c72082a``
     - 3.3 commit: ``908938bc3cd917edec2ed37a709a153182d511da``
 
 --------------
@@ -491,9 +491,16 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
 ESP8266 是否支持 802.11k/v/r 协议？
 -----------------------------------------
 
-  当前只支持 802.11k 和 802.11v，可参考示例 `roaming <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/wifi/roaming>`_。
+  当前只支持 802.11k 和 802.11v，可参考示例 `roaming <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/wifi/roaming>`__。
 
 --------------
+
+ESP32 Wi-Fi 支持相同的 SSID 不同的 AP 之间漫游吗？
+-------------------------------------------------------------------------------------------
+
+  支持，当前支持 802.11k 和 802.11v 协议，请参考示例 `roaming <https://github.com/espressif/esp-idf/tree/master/examples/wifi/roaming>`__。
+
+-----------------------------
 
 [Connect] NONOS_SDK `2.1.0` 升级到 `2.2.2` 后，连接时间变长？
 ----------------------------------------------------------------
@@ -542,7 +549,7 @@ ESP32 如何收发 Wi-Fi 802.11 数据包？
 
 --------------
 
-[Connect] ESP8266 Wi-Fi 是否支持 WAP2 企业级加密？
+[Connect] ESP8266 Wi-Fi 是否支持 WPA2 企业级加密？
 ---------------------------------------------------------------
 
   - 支持。请参考示例 `wpa2_enterprise <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/wifi/wpa2_enterprise>`_。
@@ -563,7 +570,7 @@ ESP32 如何收发 Wi-Fi 802.11 数据包？
 ----------------------------------
 
   - ESP32 系列：esp-idf 从 release/v4.1 版本开始支持 WPA3 ，默认使能，可在 menuconfig > Component config > Wi-Fi 中配置。
-  - ESP8266：ESP8266_RTOS_SDK 的 master 分支开始支持 WPA3 ，默认使能，可在 menuconfig > Component config > Wi-Fi 中配置。
+  - ESP8266：ESP8266_RTOS_SDK 的 release/v3.4 分支开始支持 WPA3 ，默认使能，可在 menuconfig > Component config > Wi-Fi 中配置。
 
 --------------
 
@@ -622,29 +629,17 @@ ESP32 Wi-Fi 支持 PMF(Protected Management Frames) 和 PFS(Perfect Forward Secr
 
 --------------
 
+ESP32 IDF v4.1 Wi-Fi 怎样获取 AP 的 RSSI？
+--------------------------------------------------------------
+
+  可以通过扫描获取 AP 的 RSSI，参考例程 `scan <https://github.com/espressif/esp-idf/tree/master/examples/wifi/scan>`_.
+
+--------------
+
 ESP32 IDF v4.1 Wi-Fi 怎样获取已连接的 AP 的 RSSI？
 --------------------------------------------------------------
 
-  - 可以通过扫描获取 AP 的 RSSI，参考例程 `scan <https://github.com/espressif/esp-idf/tree/master/examples/wifi/scan>`_.
-  - 如果周围环境中有多个同名 SSID，可以在连接到 AP 之后获取 AP 的 bssid，然后通过结构体 wifi_scan_config_t 指定 bssid 调用 esp_wifi_scan_start() 获取 RSSI。
-
-    参考代码:
-
-    .. code-block:: c
-
-      //在回调函数 event_handler() 中通过 WIFI_EVENT_STA_CONNECTED 获取 bssid
-      else if(event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_CONNECTED) {
-
-              wifi_event_sta_connected_t* sta_connected_event = (wifi_event_sta_connected_t*) event_data;
-              ESP_LOGI(TAG, "AP MAC:"MACSTR"", MAC2STR(sta_connected_event->bssid));
-              ...
-              //指定 bssid 进行扫描
-              wifi_scan_config_t wifi_scan_config = {
-                  .bssid = sta_connected_event->bssid,
-              };
-              ESP_ERROR_CHECK(esp_wifi_scan_start(&wifi_scan_config, true));
-              ...
-      }
+  可以通过 esp_wifi_sta_get_ap_info() 获取已连接的 AP 的 RSSI。API 说明参见 `esp_err_t esp_wifi_sta_get_ap_info(wifi_ap_record_t *ap_info) <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv424esp_wifi_sta_get_ap_infoP16wifi_ap_record_t>`_。
 
 --------------
 
@@ -665,7 +660,7 @@ ESP32 WFA 认证支持 Multicast 吗？
 使用 ESP32，是否可以在建立热点之前，先扫描所有的 AP 以及所占用的信道，从中选择一个占用最小最干净的信道来建立自己的 AP 呢？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 可以在建立热点之前，先扫描所有的 AP 以及所占用的信道，参考例程 esp_wifi_scan_get_AP_records。
+  - 可以在建立热点之前，先扫描所有的 AP 以及所占用的信道，参考 API esp_wifi_scan_get_ap_records。
   - 不能自动选择最干净的信道来建立自己的 AP，需要自定义信道选择算法。
 
 ---------------
@@ -676,6 +671,13 @@ ESP32 WFA 认证支持 Multicast 吗？
   - 不能对重复 ssid 进行过滤。因为 ssid 重复不代表是同一个路由器，扫描到的 ssid 相同的路由器的 bssid 是不同的。
 
 --------------
+
+ESP8266 是否支持 EDCF (AC) 方案？
+----------------------------------------------------------------------------
+
+  当前最新 master 版本的 ESP8266-RTOS-SDK 支持 EDCF (AC) 应用，但没有应用实例。您可以在 ``menuconfig`` > ``Component config`` -> ``Wi-Fi`` 配置中开启 Wi-Fi QoS 配置，以获得支持。
+
+---------------
 
 使用 master 版本的  ESP8266-RTOS-SDK，开启 Wi-Fi Qos 应用获得 EDCF 的支持，请问 ESP8266 是如何决定哪个数据包应该分配到 EDCF AC 类别的?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -716,22 +718,22 @@ ESP8266 作为 Wi-Fi SoftAP 模式，最多支持多少个 Station 设备连接�
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 通过调用 "esp_wifi_set_csi_rx_cb()" 可获取 CSI 数据。参见 `API <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_csi_rx_cb13wifi_csi_cb_tPv>`_ 说明。
-  - 参见 `Wi-Fi CSI <https://github.com/espressif/esp-idf/blob/master/docs/zh_CN/api-guides/wifi.rst#wi-fi-channel-state-information-configure>`_ 配置步骤。
+  - 参见 `Wi-Fi CSI <https://github.com/espressif/esp-idf/blob/master/docs/zh_CN/api-guides/wifi.rst#wi-fi-%E4%BF%A1%E9%81%93%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF%E9%85%8D%E7%BD%AE>`_ 配置步骤。
 
 ---------------
 
 ESP32 在 AP + STA 模式连接 Wi-Fi 后，任意开启关闭 AP 模式是否会影响 Wi-Fi 连接？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 在 ＡP + STA 双模式下进行 Wi-Fi 连接后，可以任意开启关闭 AP 模式，不影响 Wi-Fi 连接。
+  - ESP32 在 AP + STA 双模式下进行 Wi-Fi 连接后，可以任意开启关闭 AP 模式，不影响 Wi-Fi 连接。
   
 -----------------
 
 ESP32 使用 release/v3.3 版本的 ESP-IDF 进行开发，只需要蓝牙功能，如何通过软件关闭 Wi-Fi 功能？
 -----------------------------------------------------------------------------------------------------------------
 
-  - 调用 esp_wifi_stop() 可关闭 Wi-Fi 功能。API 说明参见 `esp_err_tesp_wifi_stop(void) <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_stop#_CPPv413esp_wifi_stopv>`_。
-  - 若需要回收 Wi-Fi 占用的资源，则还需要调用 esp_wifi_deinit()，API 说明请参见 `esp_err_tesp_wifi_deinit(void) <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_deinit#_CPPv415esp_wifi_deinitv>`_。
+  - 调用 esp_wifi_stop() 可关闭 Wi-Fi 功能。API 说明参见 `esp_err_t esp_wifi_stop(void) <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_stop#_CPPv413esp_wifi_stopv>`_。
+  - 若需要回收 Wi-Fi 占用的资源，则还需要调用 esp_wifi_deinit()，API 说明请参见 `esp_err_t esp_wifi_deinit(void) <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_deinit#_CPPv415esp_wifi_deinitv>`_。
 
 ----------------
 
@@ -746,13 +748,6 @@ ESP32 使用 release/v3.3 版本的 ESP-IDF 进行开发，只需要蓝牙功能
     esp_wifi_set_promiscuous(true);
 
   - 另一个开源项目中有用到该方法，可参考 `esp-mdf <https://github.com/espressif/esp-mdf/blob/master/components/mconfig/mconfig_chain.c>`__。
-
----------------
-
-ESP32 是否支持在同样 SSID 的不同 AP 之间无缝漫游？
-------------------------------------------------------------------------------------------------------
-
-  - 目前不支持。
 
 ---------------
 
@@ -827,7 +822,7 @@ Wi-Fi 模块如何设置国家码？
 
   :CHIP\: ESP8266 | ESP32 | ESP32 | ESP32-C3:
 
- - 可以通过调用 `esp_wifi_set_country <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=esp_wifi_set_country#_CPPv420esp_wifi_set_countryPK14wifi_country_t />`_  接口设置国家码。
+ - 可以通过调用 `esp_wifi_set_country <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=esp_wifi_set_country#_CPPv420esp_wifi_set_countryPK14wifi_country_t>`_  接口设置国家码。
 
 ---------------
 
@@ -889,7 +884,7 @@ ESP32 支持 FTM(Fine Timing Measurement) 吗？
   - 不支持，FTM 需要硬件支持，ESP32 没有对应的硬件。
   - 当前 ESP32-S2 和 ESP32-C3 在硬件上支持 FTM。
   - ESP-IDF v4.3-beta1 开始支持 FTM。
-  - 关于 FTM 的更多内容以及例程，请参考 `FTM <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#fine-timing-measurement-ftm>`_。
+  - 关于 FTM 的更多内容以及例程，请参考 `FTM <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/wifi.html#fine-timing-measurement-ftm>`_。
 
 ---------------
 
@@ -931,7 +926,8 @@ ESP8266 `wpa2_enterprise <https://github.com/espressif/ESP8266_RTOS_SDK/tree/mas
       [*] wpa
       [*] wpa2_enterprise
       
-      menuconfig==>Component config ==>Supplicant ==>[*] Print debug messages from WPA Supplicant
+      menuconfig==>Component config ==>Supplicant ==>
+      [*] Print debug messages from WPA Supplicant
 
 ----------------------------------------------------------------------------------
 
@@ -948,7 +944,7 @@ WFA 漏洞修复最新情况？
 --------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 |  ESP8266:
 
-  - 详情请参考乐鑫官网上  `Wi-Fi 安全公告 <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability.pdf />`_  。
+  - 详情请参考乐鑫官网上  `Wi-Fi 安全公告 <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability.pdf>`_。
   
 
 -----------------------------------------------------------------------------------------------------
@@ -998,13 +994,6 @@ log 信息中打印如下 ``I (81447377) wifi:new:<7,0>, old:<7,2>, ap:<255,255>
 
 ---------------
 
-ESP32 Wi-Fi 支持相同的 SSID 不同的 AP 之间漫游吗？
--------------------------------------------------------------------------------------------
-
-  - 不支持。
-
------------------------------
-
 ESP 模块是否支持 EAP-FAST?
 -------------------------------------------------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 :
@@ -1021,18 +1010,11 @@ ESP 模块支持 WiFi NAN (Neighbor Awareness Networking) 协议吗？
 
 ---------------
 
-ESP8266 是否支持 EDCF (AC) 方案？
-----------------------------------------------------------------------------
-
-  - 当前最新 master 版本的 ESP8266-RTOS-SDK 支持 EDCF（AC） 应用，但没有应用实例。您可以在 ``menuconfig -> Component config -> Wi-Fi`` 配置中开启 WiFi QoS 配置，以获得支持。
-
----------------
-
 使用 ESP32，ESP-IDF 版本为 release/v3.3， 配置路由器时，是否有 API 可以直接判断输入的密码不正确？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 没有 API 可直接判断密码错误，依据 Ｗi-Fi 协议标准，当密码出错时，路由器并不会明确告诉 Station 四次握手是由于密码出错了。正常情况下获取密码是 4 个包（1/4 帧， 2/4 帧， 3/4 帧，4/4 帧），当密码正确时 AP 会发送 3/4 帧，而当密码错误时 AP 不会发送 3/4 帧而是会重发 1/4 帧。 但是当 ＡP 发送了 3/4 帧，但由于某种原因而在空气中丢掉时，AP 也会重发 1/4 帧。 因此，对于 Station 来说，无法准确区分这两种情况，最终都是上报 204 错误，或者 14 错误。
-  - 可参考 `Wi-Fi 原因代码 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#id33>`_。 
+  - 没有 API 可直接判断密码错误，依据 Wi-Fi 协议标准，当密码出错时，路由器并不会明确告诉 station 四次握手是由于密码出错了。正常情况下获取密码是 4 个包（1/4 帧、2/4 帧、3/4 帧、4/4 帧），当密码正确时 AP 会发送 3/4 帧，而当密码错误时 AP 不会发送 3/4 帧而是会重发 1/4 帧。 但是当 AP 发送了 3/4 帧，但由于某种原因而在空气中丢掉时，AP 也会重发 1/4 帧。 因此，对于 station 来说，无法准确区分这两种情况，最终都是上报 204 错误，或者 14 错误。
+  - 可参考 `Wi-Fi 原因代码 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#id35>`_。 
 
 --------------------------
 
@@ -1051,7 +1033,8 @@ ESP32 如何加快 Wi-Fi 的连接速度？
   如下措施均可以加快 ESP32 的 Wi-Fi 连接速度：
 
   - 设置 CPU 频率到最大，可以加快密钥计算速度。除此外还可以设置 FLASH 参数为 ``QIO、80 MHz``，代价是增加功耗。
-  - 关闭 ``CONFIG_IP_DHCP_DOES_ARP_CHECK``，可以大幅降低获取 IP 的时间，代价是不检查局域网中是否有 IP 地址冲突。
+  - 关闭 ``CONFIG_LWIP_DHCP_DOES_ARP_CHECK``，可以大幅降低获取 IP 的时间，代价是不检查局域网中是否有 IP 地址冲突。
+  - 打开 ``CONFIG_LWIP_DHCP_RESTORE_LAST_IP``，保存上次获得的 IP 地址，dhcp start 时直接发送 dhcp request，省去 dhcp discover 过程。
   - 固定扫描信道。
   
 ---------------
