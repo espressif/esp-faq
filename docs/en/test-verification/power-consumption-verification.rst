@@ -18,28 +18,11 @@ Power consumption verification
 What sleep modes does ESP32 have? What is the difference between them?
 --------------------------------------------------------------------------
 
-  ESP32 has three sleep modes: Modem-sleep, Light-sleep, and Deep-sleep.
+  ESP32 has three sleep modes: modem sleep, light sleep, and deep sleep.
 
-  - Modem-sleep:
-
-     - The Station Legacy Fast sleep mode specified in the Wi-Fi specification, in which the Station sends a NULL frame to notify the AP to sleep or wake up.
-     - After the station is connected to the AP, the station is automatically turned on. After the station enters the Modem-sleep mode, the RF module is shut down. During the modem sleep, the connection to the AP is maintained. After the AP disconnects from the station, Modem-sleep does not work.
-     - After ESP32 enters Modem-sleep mode, the CPU clock frequency can be lowered to further reduce the current.
-
-  - Light-sleep:
-
-     - A Station sleep mode based on Modem-sleep;
-     - The differences between Light-sleep and Modem-sleep are:
-
-         - After ESP32 enters the Light-sleep mode, not only the RF module but also the CPU and part of the system clock are suspended.
-         - After ESP32 exits the Light-sleep mode, the CPU resumes working. 
-
-  - Deep-sleep:
-
-     - A sleep mode that is not specified in the Wi-Fi specification;
-     - After ESP32 enters the Deep-sleep mode, all modules are closed except for RTC modules;
-     - After ESP32 exits the Deep-sleep mode, the entire system reruns, which is similar to the system reboot;
-     - During the deep sleep, no connection to the AP is maintained.
+  - Modem sleep: CPU works normally and the clock is configurable. After the station (ESP32) is connected to the AP, it is automatically turned on. After the station enters the modem sleep mode, the RF module is shut down. During the sleep, the connection to the AP is maintained. After the AP disconnects from the station, modem sleep does not work. When ESP32 is in the modem sleep mode, the CPU clock frequency can be lowered to further reduce the current.
+  - Light sleep: CPU is suspended and the digital core clock is limited. It differs from the modem sleep in that besides the RF module, the CPU and part of the system clock are suspended during the sleep. After ESP32 exits the light sleep mode, the CPU resumes working. 
+  - Deep sleep: The digital core is powered off and the CPU content is lost. After ESP32 enters the deep sleep mode, all modules are closed except for RTC modules; After ESP32 exits the deep sleep mode, the entire system restarts, which is similar to the system reboot; During the deep sleep, no connection to the AP is maintained.
 
 --------------
 
