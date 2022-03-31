@@ -18,7 +18,7 @@ ESP-WIFI-MESH 应用框架
 ESP-WIFI-MESH 占用多大内存？是否需要外部 PSRAM ？
 -----------------------------------------------------
 
-  ESP-WIFI-MESH 内存占用约 60 KB，是否需要外部 PSRAM 取决于应用场景的复杂情况，一般性应用无需外部 PSRAM。
+  ESP-WIFI-MESH 内存占用约 60 KB。是否需要外部 PSRAM 取决于应用场景的复杂情况，一般性应用无需外部 PSRAM。
 
 --------------
 
@@ -32,7 +32,7 @@ ESP-WIFI-MESH 能否批量 OTA？
 ESP32 支持多少设备进行 ESP-WIFI-MESH 组网？
 --------------------------------------------------------
 
-  ESP32 支持 1000 个设备进行 ESP-WIFI-MESH 组网。若要稳定连接大量设备，建议在每个 ESP-WIFI-MESH 网络下，组网设备不超过 512 台设备。
+  ESP32 支持 1000 个设备进行 ESP-WIFI-MESH 组网。若要稳定连接大量设备，建议在每个 ESP-WIFI-MESH 网络下，组网设备不超过 512 台。
 
 --------------
 
@@ -40,14 +40,14 @@ ESP32 的 ESP-WIFI-MESH Router 模式与 No Router 模式有什么区别？
 -----------------------------------------------------------------------------
 
   - ESP-WIFI-MESH 网络的 Router 模式是根据路由器进行组网，根节点连路由器。
-  - No Router 模式是无路由器的场景下进行自组网，此模式下不可与外部数据交互。
+  - No Router 模式是在无路由器的场景下进行自组网，此模式下不可与外部数据交互。
 
 --------------
 
 ESP32 的 ESP-WIFI-MESH 能否在子设备搜索不到路由器信号时完成组网？
 ---------------------------------------------------------------------
 
-  ESP32 的 ESP-WIFI-MESH 能实现：在拥有配置相同 Wi-Fi 的 SSID ，子设备没有搜索到 Wi-Fi 时，子设备也可以连接到根节点。
+  ESP32 的 ESP-WIFI-MESH 能实现：若拥有配置相同 Wi-Fi 的 SSID ，在子设备没有搜索到 Wi-Fi 时，子设备也可以连接到根节点。
 
 --------------
 
@@ -68,27 +68,27 @@ ESP32 的 ESP-WIFI-MESH 是否可自动修复网络？
 使用 ESP32 进行 ESP-WIFI-MESH 应用，在组网自动选举根节点时，是否可以指定局部模块进行选举？
 ----------------------------------------------------------------------------------------------------
 
-  ESP32 的 ESP-WIFI-MESH 可以指定设备为子节点，它将不参与根节点的选举，可实现局部模块进行选举。
+  ESP32 的 ESP-WIFI-MESH 可以指定设备为子节点，它将不参与根节点的选举，可实现局部 mesh 网络进行选举。
 
 --------------
 
-使用 ESP32 进行 ESP-WIFI-MESH 应用，无路由场景下，多个根节点之间能互发消息吗？
+使用 ESP32 进行 ESP-WIFI-MESH 应用，在无路由场景下，多个根节点之间能互发消息吗？
 -------------------------------------------------------------------------------------------------
 
-  无路由的场景下，多个根节点之间不能互发消息。
+  无路由场景下，多个根节点之间不能互发消息。
 
 --------------
 
 ESP-WIFI-MESH 可以批量 OTA 吗？
 -----------------------------------------
 
-  - ESP-WIFI-MESH 设备可以批量 OTA 的。
+  - ESP-WIFI-MESH 设备可以批量 OTA。
   - OTA 的方式是根节点下载固件，然后再发至其他节点。
   - 具体示例请参考 https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mupgrade。
 
 --------------
 
-ESP-WIFI-MESH APP 端源码如何查询？
+如何查询 ESP-WIFI-MESH APP 端源码？
 ---------------------------------------
 
   - iOS 端源码链接: https://github.com/EspressifApp/EspMeshForiOS
@@ -99,7 +99,7 @@ ESP-WIFI-MESH APP 端源码如何查询？
 ESP-WIFI-MESH 是否有无路由方案完成自组网？
 -----------------------------------------------------
 
-  Demo 中有 `no-router <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/no_router>`__, 以及 `get-started <https://github.com/espressif/esp-mdf/tree/master/examples/get-started>`__ 两个是无路由方案，可以参考。
+  Demo 中有 `no-router <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/no_router>`__, 以及 `get-started <https://github.com/espressif/esp-mdf/tree/master/examples/get-started>`__ 两个无路由方案，可以参考。
 
 --------------
 
@@ -107,36 +107,35 @@ ESP-WIFI-MESH 是否有无路由方案完成自组网？
 ------------------------------------------------------------------------------------------
 
   - 可以通过 ``mwifi_get_parent_rssi()`` 获取其父节点的信号强度
-  - 可以参与 https://github.com/espressif/esp-mdf/blob/master/examples/wireless_debug/main/debug_cmd.c#L345 获取其他结点的信号强度
+  - 可以通过例程 https://github.com/espressif/esp-mdf/blob/master/examples/wireless_debug 参与获取其他结点的信号强度
 
 --------------
 
-在 esp-mdf 的 MESH 网络内部，节点之间的通信是什么协议的？
+在 esp-mdf 的 MESH 网络内部，节点之间的通信是基于什么协议？
 -------------------------------------------------------------------
 
-  Mesh 网络内部，是基于数据链路层的自定义协议，即我们核心之一。有 ack 机制，但是没有超时/重传机制，如有需求自行可以在应用层添加。
+  Mesh 网络内部，是基于数据链路层的自定义协议，即我们核心之一。有 ack 机制，但是没有超时/重传机制，如有需求可以自行在应用层添加。
 
 --------------
 
 ESP-WIFI-MESH 可以将所有的节点都连接至路由上吗？
 ----------------------------------------------------------
 
-  - 数据的延时与设备所处层级、网络环境有关系，我们实验室测试一层的延时大约在 10 ～ 30 ms，和普通 Wi-Fi 设备的延时差别并不是很大。
-  - 如果需要连接路由，建议使用有路由版本的组网方案。固定根节点的方案，如果根节点瘫痪，网络是会出现问题，因此建议可以采用多个根节点进行备份。
+  - 只有 root 节点才可以连接上路由器，下面的子节点将会直接或者间接地连接上 root 节点，然后通过 root 节点和路由通讯。
 
 --------------
 
 ESP-WIFI-MESH 的 root 节点能否通过 4G 拨号实现联网？
 ------------------------------------------------------
 
-  功能可以实现，目前没有专门针对该场景的应用，可参考 ESP-MDF 中 ``no-router demo``，该 demo 根节点直接通过串口和电脑通讯，可修改成将数据通过 4G 模块进行传输。
+  功能可以实现，但目前没有专门针对该场景的应用，可参考 ESP-MDF 中 `no-router <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/no_router>`__，该 Demo 根节点直接通过串口和电脑通讯，可修改成将数据通过 4G 模块进行传输。
 
 --------------
 
 esp_mesh_set_parent 函数成功连接后，断开 AP，该函数会不断发起重新连接，如何设置重新连接次数？
 -----------------------------------------------------------------------------------------------
 
-  - 如果你使用自组网方案，ESP-WIFI-MESH 默认不会重连，当断开时你需要调用 ``esp_wifi_scan_start``，获取可以连接的设备重新设置父节点。参见: `Mesh Manual Networking Example <https://github.com/espressif/esp-idf/tree/4a9f339447cd5b3143f90c2422d8e1e1da9da0a4/examples/mesh/manual_networking>`__。
+  - 如果您使用自组网方案，ESP-WIFI-MESH 默认不会重连。当断开时，您需要调用 ``esp_wifi_scan_start``，获取可以连接的设备，以重新设置父节点。参见: `Mesh Manual Networking Example <https://github.com/espressif/esp-idf/tree/4a9f339447cd5b3143f90c2422d8e1e1da9da0a4/examples/mesh/manual_networking>`__。
   - 推荐您使用自组网的方案进行开发。
 
 --------------
@@ -155,10 +154,10 @@ esp_mesh_set_parent 函数成功连接后，断开 AP，该函数会不断发起
 
 --------------
 
-ESP32-S 无路由 MESH 组网， APP 怎么连接 root 接口的 softAP？
+ESP32-S 无路由 MESH 组网，APP 怎么连接 root 接口的 softAP？
 -------------------------------------------------------------
 
-  MESH 的 AP 不支持 非 mesh 设备接入，你可以使用一个 ESP32 作用 softAP。
+  MESH 的 AP 不支持非 mesh 设备接入，您可以使用一个 ESP32 作用 softAP。
 
 --------------
 
@@ -172,27 +171,17 @@ ESP-WIFI-MESH 能连到 AP，但不能连到 AP 上的 TCP SERVER？
 Mwifi 例程怎么修改网络的 AP 连接和最大层数？通信时的最大带宽和延时是多少？
 ----------------------------------------------------------------------------------
 
-  .. code-block:: c
-
-    mwifi_init_config_t cfg   = MWIFI_INIT_CONFIG_DEFAULT();
-    mwifi_config_t config     = {
-        .router_ssid     = CONFIG_ROUTER_SSID,
-        .router_password = CONFIG_ROUTER_PASSWORD,
-        .mesh_id         = CONFIG_MESH_ID,
-        .mesh_password   = CONFIG_MESH_PASSWORD,
-    };
-
-  - 连接的 AP 和最大层数在这两个配置变量中可以修改，详细信息可参考 `文档 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/mesh.html>`_。
-  - 通信性能可参考： `performance <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/mesh.html#performance>`__。
+  - 可以通过 menuconfig 里面的配置进行修改，位于：Component config -> MDF Mwifi -> Capacity config。
+  - 通信性能可参考：`performance <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/mesh.html#performance>`__。
 
 --------------
 
 如何获得实时的传感器返回值？
 -------------------------------------
 
-  我们设备端是一个 HTTP server 所以只能由 APP 发起请求，你可以采用如下两种方式获取实时数据：
+  由于设备端是一个 HTTP server，所以只能由 APP 发起请求，您可以采用如下两种方式获取实时数据：
 
-  - 当传感器数据变化时，通过 UDP 通知手机来主动请求数据。如果使用我们本地通信的协议，发送如下命令 APP 将主动请求设备数据：
+  - 当传感器数据变化时，通过 UDP 通知手机来主动请求数据。如果使用我们本地通信的协议，发送如下命令使 APP 主动请求设备数据：
 
   .. code-block:: c  
 
@@ -200,16 +189,16 @@ Mwifi 例程怎么修改网络的 AP 连接和最大层数？通信时的最大�
     ret = mwifi_write(NULL, &data_type, "status", strlen("status"), true);
     MDF_ERROR_CONTINUE(ret != MDF_OK, "<%s> mlink_handle", mdf_err_to_name(ret));
 
-  - 搭建一个服务器 (TCP/MQTT/HTTP server)，与服务器建立 TCP 长连接，传感器数据变化主动上报。
+  - 搭建一个服务器 (TCP/MQTT/HTTP server)，与服务器建立 TCP 长连接，传感器数据变化将主动上报。
 
 --------------
 
 新节点可能已经安装在设备中，且该设备已经安装在距离 ROOT 节点较远的位置，请问该节点如何加入 ESP-WIFI-MESH 网络？
 ----------------------------------------------------------------------------------------------------------------------
 
-  - 您使用的应该是 get-started Demo。为了方便用户测试，该 Demo 是无路由的一种方案，即指定了根节点，所以会出现当 root crash 后，其余设备无法恢复。
-  - 可参考 development_kit 中 light Demo，该 Demo 可配合 ESP-Mesh App 进行使用（Android 版可在 `官网 <https://www.espressif.com/zh-hans/support/download/apps>`_ 下载，iOS 版可在 App Store 搜索 ESP-Mesh 下载测试）。
-  - 该 Demo 示例不指定根节点，由设备自行选举产生，需要配合路由器使用，此种方案下如果 root 出现故障，剩余设备会自动重新完成组网并连上路由，不需要用户干预。
+  - 您使用的应该是 get-started Demo。为了方便用户测试，该 Demo 是无路由的一种方案，即指定了根节点，所以在 root crash 后，其余设备将无法恢复。
+  - 可参考 development_kit 中的 light Demo。该 Demo 可配合 ESP-Mesh App 进行使用（Android 版可在 `官网 <https://www.espressif.com/zh-hans/support/download/apps>`_ 下载，iOS 版可在 App Store 搜索 ESP-Mesh 下载测试）。
+  - 该 Demo 示例不指定根节点，由设备自行选举产生，需要配合路由器使用。此种方案下，如果 root 出现故障，剩余设备会自动重新完成组网并连上路由，不需要用户干预。
 
 --------------
 
@@ -217,14 +206,14 @@ ESP-WIFI-MESH App 源码是否开放？
 -----------------------------------------------
 
   - 我们已经将 ESP-Mesh App 源码开放到了 GitHub 上，请参考 `EspMeshForAndroid <https://github.com/EspressifApp/EspMeshForAndroid>`_ 和 `EspMeshForiOS <https://github.com/EspressifApp/EspMeshForAndroid>`_。
-  - 如果在使用中有任何疑问或 Bug，都可以在 GitHub 或者这里进行留言提问，我们都会第一时间处理。
+  - 如果在使用中有任何疑问或 Bug，都可以在 GitHub 或者这里进行留言提问，我们会在第一时间进行处理。
 
 --------------
 
 Wi-Fi Mesh 数据传送最大的包为多少 Bytes？
 ------------------------------------------------------------------------------------------
 
-  - 最大为 1456 bytes。
+  - 最大为 1456 Bytes。
 
 --------
 
@@ -243,24 +232,24 @@ ESP32 使用 Wi-Fi Mesh 时允许的最大节点层数是多少？
   
 ---------------------
 
-使用 ESP32 开发板测试 `esp-mdf/examples/function_demo/mwifi/router <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/router>`_ 例程，ESP32 连接路由器后，在路由器连接端显示的设备名称为“espressif”，如何修改此名称？
+使用 ESP32 开发板测试 `esp-mdf/examples/function_demo/mwifi/router <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/router>`_ 例程，ESP32 连接路由器后，在路由器连接端显示的设备名称为 “espressif”，如何修改此名称？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 修改 menuconfig → Component config → LWIP ——> (espressif) Local netif hostname 设置即可。
+  - 在 menuconfig → Component config → LWIP ——> (espressif) Local netif hostname 中修改设置即可。
 
 ---------------------
 
 Wi-Fi Mesh 可以通过 TCP Server 给特定节点发送消息吗？
 ------------------------------------------------------------------------------------------------------------------------------
 
-  - Wi-Fi Mesh 网络可在 TCP 服务器中发送数据到指定节点或组地址，可参看 `demo <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/router>`_。
+  - Wi-Fi Mesh 网络可在 TCP 服务器中发送数据到指定节点或组地址，可参考 `demo <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/router>`_。
   
 --------------------
 
-在 ESP32 Wi-Fi Mesh 网络运行过程中，若根（Root）节点丢失，系统会反馈什么事件？
+在 ESP32 Wi-Fi Mesh 网络运行过程中，若根 (Root) 节点丢失，系统会反馈什么事件？
 --------------------------------------------------------------------------------------------
 
-  - 若根（Root）节点丢失，所有节点将会触发 MDF_EVENT_MWIFI_PARENT_DISCONNECTED (MESH_EVENT_PARENT_DISCONNECTED)，然后开始重新扫描（Scan），进行重新选举，直到选举出新的根（Root）节点。
+  - 若根 (Root) 节点丢失，所有节点将会触发 MDF_EVENT_MWIFI_PARENT_DISCONNECTED (MESH_EVENT_PARENT_DISCONNECTED)，然后开始重新扫描 (Scan)，进行重新选举，直到选举出新的根 (Root) 节点。
 
 ----------------
 
@@ -268,7 +257,7 @@ Wi-Fi Mesh 可以通过 TCP Server 给特定节点发送消息吗？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - esp_mesh_send() 只能用于 Wi-Fi Mesh 网络内部数据通信。
-  - 叶节点 (leaf node) 想要往外部服务器发送数据，需要通过根节点 (root node) 转发数据。
+  - 叶节点 (leaf node) 往外部服务器发送数据，需要通过根节点 (root node) 转发数据。
   - 正确的做法是：叶节点先将数据发给根节点，根节点再把数据发给外部服务器。
 
 ---------------
@@ -284,8 +273,8 @@ ESP-MESH 设备组网之后如何做 OTA 升级？
 是否有 ESP-MESH 灯参考设计？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - 关于灯的整体设计，是第三方工厂完成整体设计的，我们并没有相关原理图或者 PCB 布局。但是单从模块角度，我们只需要给芯片供电，芯片输出 PWM 控制灯的颜色或色温变化即可，并没有太复杂的设计。
-  - 可以参考  `ESP-MDF <https://github.com/espressif/esp-mdf>`_  获取更多关于 MESH 的信息。
+  - 灯的整体设计是由第三方工厂完成的，我们并没有相关原理图或者 PCB 布局。但是单从模块角度，我们只需要给芯片供电，芯片输出 PWM 控制灯的颜色或色温变化即可，并没有太复杂的设计。
+  - 可以参考 `ESP-MDF <https://github.com/espressif/esp-mdf>`_ 获取更多关于 MESH 的信息。
 
 ---------------
 
@@ -299,7 +288,7 @@ ESP-MESH 节点不做任何配置，默认是什么模式？
 ESP-MESH 启动时开启 AP+STA 模式，手机可以搜索到 AP 吗？
 -----------------------------------------------------------------------------------------------------------------------------------
 
-  - 不可以，ESP-MESH 是乐鑫私有协议, 详情请参考 `WIFI-MESH 介绍  <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-wifi-mesh.html>`_。
+  - 不可以，ESP-MESH 是乐鑫私有协议, 详情请参考 `WIFI-MESH 介绍 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-wifi-mesh.html>`_。
 
 ---------------
 
@@ -318,14 +307,14 @@ ESP32 作为主设备对多个从设备进行时间同步，是否可以满足�
 
 ---------------
 
-ESP-MESH 中如何去获取节点类型？
+ESP-MESH 中如何获取节点类型？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - 可以调用 `esp_mesh_get_type <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_mesh.html?highlight=esp_mesh_get_type#_CPPv417esp_mesh_get_typev>`_  接口去获取。
+  - 可以调用 `esp_mesh_get_type <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_mesh.html?highlight=esp_mesh_get_type#_CPPv417esp_mesh_get_typev>`_ 接口获取。
 
 ---------------
  
 ESP-Mesh 根节点通过 ethernet 向服务发消息示例？
 ---------------------------------------------------------------------------------
 
-  - 请参考 `root_on_ethnernet <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/root_on_ethernet/>`_ 示例
+  - 请参考 `root_on_ethnernet <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/root_on_ethernet/>`_ 示例。
