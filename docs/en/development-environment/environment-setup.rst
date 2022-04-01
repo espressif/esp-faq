@@ -36,7 +36,7 @@ When using idf.py menuconfig to build, how to deal with errors as "Configuring i
 When installing esp-idf version master using ESP-IDF Tools 2.3 in Windows system, an error occurred as: Installation has failed with exit code 2. What could be the reason?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  This is related to the bad network environment. The github repository cannot be downloaded smoothly under such network environment, causing the SDK failed downloading on your PC.
+  This is related to the bad network environment. The Github repository cannot be downloaded smoothly under such network environment, causing SDK download failure on your PC. If you encounter Github access problems, it is recommended to use the latest `Offline Version Installer <https://dl.espressif.com/dl/esp-idf/>`_.
 
 --------------
 
@@ -69,7 +69,7 @@ What should I do if I get ``Download failed: security channel support error`` wh
 
   This is due to the Windows system has disabled the SSl3.0 support by default.
   
-  Solution: Go to `Control Panel` and find ``Internet option``, select ``Advanced`` and check the ``use SSL 3.0`` option.
+  Solution: Go to `Control Panel` and find ``Internet option``, select ``Advanced``, and check the ``use SSL 3.0`` option.
 
 --------------
 
@@ -103,17 +103,17 @@ How to configure ``PATH`` and ``IDF_PATH`` when developing ESP32 and ESP8266 sim
 
 ----------------
 
-Do I need to use command ``idf.py set-target`` every time I switch to another project?
+Do I need to use command ``idf.py set-target`` every time when switching to another project?
 ---------------------------------------------------------------------------------------------
 
   When building the project with ``idf.py build``, the target is determined as follows:
 
-  1. If the build directory already exists, we will use the target the project was previously built for. It is stored in CMakeCache.txt file in the build directory.
-  2. Alternatively, if the build directory doesn't exist, we will check if the ``sdkconfig`` file exists, and use the target specified there.
-  3. If both the build directory and ``sdkconfig`` file exists, and specify different targets, we will report an error. This shouldn't happen normally, unless ``sdkconfig`` was changed manually without deleting the build directory.
-  4. If neither ``sdkconfig`` file nor build directory exists, we will consider ``IDF_TARGET`` variable, which can be set either as CMake variable or as an environment variable. If this variable is set and is different from the target specified in ``sdkconfig`` or in the build directory, we will also report an error.
-  5. Finally, if ``sdkconfig`` doesn't exist, build directory doesn't exist, and the target is not set via ``IDF_TARGET``, then we will use the default value. The default value can be set in ``sdkconfig.defaults``.
-  6. If it isn't set using any of the above methods, then we will build for esp32 target.
+  1. If the build directory already exists, the system will use the target the project was previously built for. It is stored in CMakeCache.txt file in the build directory.
+  2. Alternatively, if the build directory doesn't exist, the system will check if the ``sdkconfig`` file exists, and use the target specified there.
+  3. If both the build directory and ``sdkconfig`` file exist with different targets specified, the system will report an error. This shouldn't happen normally, unless ``sdkconfig`` was changed manually without deleting the build directory.
+  4. If neither ``sdkconfig`` file nor build directory exists, it can be considered to use ``IDF_TARGET`` to set the target as a CMake variable or environment variable. If this variable is set and is different from the target specified in ``sdkconfig`` or in the build directory, the system will also report an error.
+  5. Finally, if ``sdkconfig`` doesn't exist, build directory doesn't exist, and the target is not set via ``IDF_TARGET``, then the system will use the default value. The default value can be set in ``sdkconfig.defaults``.
+  6. If the target isn't set using any of the above methods, then the system will build for esp32 target.
 
   To answer your question:
 
@@ -126,14 +126,15 @@ Do I need to use command ``idf.py set-target`` every time I switch to another pr
 How to know the version of ESP-IDF, is it recorded in a certain document? 
 ----------------------------------------------------------------------------------------------------------------------------
 
-  - There is a variable ``IDF_VER``, you can call the function ``esp_get_idf_version`` to check.
+  - There is an official variable ``IDF_VER``, you can call the function ``esp_get_idf_version`` to check.
   - Please refer to "components/esp_common/include/esp_idf_version.h" to see more details.
 
 ---------------
 
-How to optimize ESP-IDF compilation in windows environment?
+How to optimize ESP-IDF compilation in Windows environment?
 ---------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32:
 
   - Please add the directories of ESP-IDF source code and compiler ``.espressif`` to the exclusions of anti-virus program.
+
