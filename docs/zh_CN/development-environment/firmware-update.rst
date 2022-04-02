@@ -16,17 +16,17 @@
 --------------
 
 Host MCU 如何通过串口对 ESP32 进行烧录升级？
---------------------------------------------
+---------------------------------------------------------------------
 
-  - 相关协议应用请参考：`ESP32 串口协议 <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_；对应文档说明参见 `串口协议 <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html#serial-protocol>`_。
+  - 相关协议应用请参考：`ESP32 串口协议 <https://github.com/espressif/esptool>`_；对应文档说明参见 `串口协议 <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html#serial-protocol>`_。
   - 示例实现代码参考：`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_。
 
 --------------
 
-如何使用 USB 转串口工具对乐鑫模组进行自动烧录？
------------------------------------------------
+如何使用 USB 转串口工具对 ESP32 系列的模组下载固件？
+--------------------------------------------------------------------------------
 
-  USB 转串口对乐鑫模组进行自动烧录接线方式如下：
+  USB 转串口对 ESP32 系列的模组下载固件的接线方式如下：
 
   +------------+-------+-------+-------+-------+-------+-------+
   | 乐鑫模组   | 3V3   | GND   | TXD   | RXD   | IO0   | EN    |
@@ -39,7 +39,7 @@ Host MCU 如何通过串口对 ESP32 进行烧录升级？
 --------------
 
 macOS 与 Linux 如何烧录固件？
------------------------------
+-----------------------------------------------------------------
 
   - 苹果系统 (macOS) 可以通过 brew 安装或 git 下载 `esptool <https://github.com/espressif/esptool>`_ 工具烧录固件。
   - Linux 系统（如 ubuntu）可以通过 apt-get 安装或 git 下载 `esptool <https://github.com/espressif/esptool>`_ 工具烧录固件。
@@ -47,9 +47,9 @@ macOS 与 Linux 如何烧录固件？
 --------------
 
 ESP32 是否支持使用 JTAG 管脚直接烧写程序？
-------------------------------------------
+-------------------------------------------------------------------------
 
-  ESP32 支持使用 JTAG 管脚直接烧写程序，参考文档：`JTAG 调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_。
+  ESP32 支持使用 `JTAG 管脚 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html#id1>`_ 直接烧写程序，参考文档：`上传待调试的应用程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_。
 
 --------------
 
@@ -57,7 +57,7 @@ ESP_Flash_Downloader_Tool 是否可以自定义编程控制？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP_Flash_Downloader_Tool GUI 工具不开源，且不支持嵌入执行脚本。
-  - ESP_Flash_Downloader_Tool 底层组件 ESPtool 工具开源，可以完成烧录加密等等所有功能，建议基于该组件二次开发。
+  - ESP_Flash_Downloader_Tool 底层组件 `esptool <https://github.com/espressif/esptool>`_ 开源，可以完成烧录加密等所有功能，建议基于该组件二次开发。
 
 ---------------
 
@@ -65,21 +65,17 @@ ESP32 能否通过 OTA 开启 Security Boot 功能？
 ------------------------------------------------------------------------------------------------
 
   - 不推荐这样开启，因为这样操作存在风险，并且需要多次 OTA 固件。
-  - 因为 Security Boot 功能存在于 Bootloader 中，所以需要更新 Bootloader 才可以开启该功能。
+  - Security Boot 功能存在于 Bootloader 中，需要首先更新 Bootloader 才可以开启该功能。
 
-    1. 首先检测目前设备的分区表是否可以存放开启 Security Boot 后的 Bootloader。
-    2. 然后更新一个支持写入 Bootloader 分区的中间固件。默认配置中无法擦写 Bootloader 分区，需要 `make menuconfig` 单独开启。
-    3. 再将中间固件签名后 OTA 到目标设备，运行中间固件，中间固件先进行 OTA Bootloader, 再 OTA 被签名的新固件。
+    1. 首先，检测目前设备的分区表是否可以存放开启 Security Boot 后的 Bootloader。
+    2. 然后，更新一个支持写入 Bootloader 分区的中间固件。默认配置中无法擦写 Bootloader 分区，需要 `make menuconfig` 单独开启。
+    3. 随后，将中间固件签名后 OTA 到目标设备，运行中间固件，中间固件先进行 OTA Bootloader, 再 OTA 被签名的新固件。
     4. 如果在 OTA Bootloader 时出现中途断电或者断网失败重启，设备将无法启动，需要重新烧录。
 
 --------------
 
-ESP32-S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of packet (0x50)” 如何解决？
---------------------------------------------------------------------------------------------------
-
-  **问题背景：**
-
-  基于 ESP-IDF v4.1 编译固件烧录到 ESP32-S2 设备的过程中遇到如下错误：
+基于 ESP-IDF v4.1 编译固件烧录到 ESP32-S2 设备的过程中遇到如下错误，该如何解决？
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: shell
 
@@ -96,9 +92,10 @@ ESP32-S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of 
     A fatal error occurred: Invalid head of packet (0x50)
     esptool.py failed with exit code 2
 
+
   **解决方法：**
 
-  如果当前使用的是 ESP32-S2 芯片而不是 ESP32-S2 Beta 芯片，需要将 ESP-IDF 升级到 v4.2 或 以上。
+  如果当前使用的是 ESP32-S2 芯片而不是 ESP32-S2 Beta 芯片，需要将 ESP-IDF 升级到 v4.2 或以上。
 
   **补充说明:**
 
@@ -109,7 +106,7 @@ ESP32-S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of 
 --------------
 
 如何使用 flash_download_tool 下载基于 esp-idf 编译的固件？
------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 以 hello-world 例程为例，初次编译 esp-idf 工程请参考 `get-started-guide <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/index.html>`_。
   - 执行 ``idf.py build``（esp-idf v4.0 及以后版本，v4.0 之前请使用 ``make``）。编译工程后，会生成如下的 bin 文件的烧录指令提示：
@@ -125,7 +122,7 @@ ESP32-S2 固件烧录时出现错误 “A fatal error occurred: Invalid head of 
 --------------
   
 ESP 芯片烧录通讯协议是什么？
----------------------------------
+------------------------------------------------------------------------------
 
   - ESP 烧录协议规范：`Serial-Protocol <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_。
   - 串口协议 Python 实现：`esptool <https://github.com/espressif/esptool>`_。
@@ -134,7 +131,7 @@ ESP 芯片烧录通讯协议是什么？
 --------------
 
 如何对 ESP32-C3 进行离线程序烧录？
----------------------------------------------------------------
+------------------------------------------------------------------------------------------
 
   - 可以在官网下载最新的 Flash Download Tools, v3.8.8 之后的版本已经支持 ESP32-C3 系列的烧录。
 
@@ -143,55 +140,47 @@ ESP 芯片烧录通讯协议是什么？
 ESP32 如何设置 Flash SPI 为 QIO 模式？
 ---------------------------------------------------------------------------------------------
 
-  - 可通过 menuconfig -> Serial flasher config -> Flash SPI mode 配置端进行设置，对应 API 为 esp_image_spi_mode_t()。
+  - 可通过 menuconfig -> Serial flasher config -> Flash SPI mode 配置端进行设置，对应 API 为 `esp_image_spi_mode_t() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/system/app_image_format.html?highlight=esp_image_spi_mode_t#_CPPv420esp_image_spi_mode_t>`_。
 
 ----------------------
 
-使用 ESP8266 开发板，下载程序后，上电启动串口打印如下 log，是什么原因？
---------------------------------------------------------------------------
+使用 ESP8266 开发板，下载程序后，上电启动串口打印如下日志，是什么原因？
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
   .. code-block:: text
 
     ets Jan  8 2013,rst cause:1, boot mode:(7,7)
     waiting for host
 
-  - 打印 `waiting for host` 说明 Boot 模式是 SDIO 模式，表明 GPIO15（MTDO）被拉高，请参见 `ESP8266 Boot 模式说明 <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process#esp-boot-modes>`_。
-
-----------------
-
-ESP32 使用 UART 升级固件，如何设置两个 `app_main` 的空间？
-------------------------------------------------------------------------------------------------------------------------------------------
-
-  - 通过 UART 升级固件，不支持设置两个 `app_main` 的空间。
-  - UART 升级固件的机制与 Flash download tool 下载工具的是一样的。升级后的固件直接替换当前的固件，不支持保留旧的固件。
-  
+  - 打印 `waiting for host` 说明 Boot 模式是 SDIO 模式，表明 GPIO15 (MTDO) 被拉高，请参见 `ESP8266 Boot 模式说明 <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process#esp-boot-modes>`_。
 
 ----------------
 
 乐鑫模组烧录工具有那些？
 -----------------------------------------------------------
 
-  - 乐鑫烧录软件可以点到此网页并进行下载： `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_, 免安装 GUI 工具，仅适用于 `windows` 环境。
+  - 乐鑫烧录软件可以点击此网页并进行下载： `flash download tool <https://www.espressif.com/zh-hans/support/download/other-tools>`_, 免安装 GUI 工具，仅适用于 `Windows` 环境。
   - 乐鑫烧录工具 `esptool <https://github.com/espressif/esptool>`_，基于 `python` 编写，开放源代码，并且支持用户二次开发。
 
------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------
 
-flash 下载工具的工厂模式和开发者模式有什么区别？
+`Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 的工厂模式和开发者模式有什么区别？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 工厂模式支持多通道下载，开发者模式仅支持单通道。
   - 工厂模式下 bin 文件的路径是相对路径，开发者模式下的路径是绝对路径。
 
------------------------------------------------------------------------------------------------------
+----------------------
 
 ESP32-C3 芯片可以使用 USB 进行固件的下载，但在 ESP-IDF v4.3 下使用并不支持，如何使用 USB 进行固件下载？
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 需要在 ESP-IDF v4.4 以上版本下进行编译，拉取最新分支并 `更新 IDF 工具 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_ 后可以正常编译并使用 USB 进行下载。使用过程请参考 `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_。
 
 ---------------
 
 一拖四治具工厂模式烧写失败原因？
---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32 | ESP8266  :
 
@@ -199,11 +188,11 @@ ESP32-C3 芯片可以使用 USB 进行固件的下载，但在 ESP-IDF v4.3 下�
   
 ------------
 
-使用 ESP32-WROVER-B 模组通过 flash download tool 工具下载 AT 固件，当完成写 flash 后，结果显示 ERROR。但使用 ESP32-WEOVER-E 的模组下载相同的 AT 固件结果却显示正常，是什么原因？
+使用 ESP32-WROVER-B 模组通过 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 下载 AT 固件，当完成写 Flash 后，结果显示 ERROR。但使用 ESP32-WEOVER-E 的模组下载相同的 AT 固件结果却显示正常，是什么原因？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP32-WROVER-B 模组引出了 FLASH SPI 的管脚，但 ESP32-WROVER-E 模组没有引出 FLASH SPI 的管脚，请先检查 ESP32-WROVER-B 模组的 FLASH SPI 引脚是否被外部其他应用电路复用。
-  - ESP32-WROVER-B 的 FLASH SPI 的 CMD 引脚接 GND 会导致 flash 无法启动，报错将打印如下日志：
+  - ESP32-WROVER-B 的 FLASH SPI 的 CMD 引脚接 GND 会导致 Flash 无法启动，报错将打印如下日志：
 
   .. code:: shell 
 
@@ -214,23 +203,23 @@ ESP32-C3 芯片可以使用 USB 进行固件的下载，但在 ESP-IDF v4.3 下�
 
 ---------------
 
-为什么使用 flash download tool 无法重新烧录已加密设备？
---------------------------------------------------------------------------------------------------
+为什么使用 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 无法重新烧录已加密设备？
+---------------------------------------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32 | ESP32-S2:
 
-  - 当前 flash download tool 不支持对已加密的设备重复加密，仅支持明文一次性加密操作。
+  - 当前 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 不支持对已加密的设备重复加密，仅支持明文一次性加密操作。
 
 --------------
 
-基于 esptool 串口协议通过 UART 接口对 ESP32 进行刷新固件，是否可以新增一个 app 分区？
+基于 `esptool 串口协议 <https://github.com/espressif/esptool>`_ 通过 UART 接口对 ESP32 进行刷新固件，是否可以新增一个 app 分区？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - flash 实际的分区情况主要取决于 partition_table.bin 的数据。若可以更新 partition_table.bin，则可以重新划分 bootloader.bin、app.bin 等其他数据的存储空间，从而新增一个 app 分区。
+  - Flash 实际的分区情况主要取决于 partition_table.bin 的数据。若可以更新 partition_table.bin，则可以重新划分 bootloader.bin、app.bin 等其他数据的存储空间，从而新增一个 app 分区。
 
 -------------
 
-使用 ESP8266 通过 Flash download tool 下载工具，下载程序固件后无程序 log 输出，串口打印如下，是什么原因？
+使用 ESP8266 通过 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ ，下载程序固件后无程序运行日志输出，串口打印如下，是什么原因？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: shell
@@ -240,7 +229,7 @@ ESP32-C3 芯片可以使用 USB 进行固件的下载，但在 ESP-IDF v4.3 下�
     ets_main.c
 
   - 请先检查硬件接线是否正确。参见 `Boot mode 接线说明 <https://docs.espressif.com/projects/esptool/en/latest/esp8266/advanced-topics/boot-mode-selection.html#boot-mode-selection>`_。
-  - 请检查 bootloader.bin 的下载偏移地址是否正确，ESP8266 的 bootloader.bin 下载的偏移地址为 0x0 ，若此偏移地址错误将会导致 flash 无法启动。
+  - 请检查 bootloader.bin 的下载偏移地址是否正确，ESP8266 的 bootloader.bin 下载的偏移地址为 0x0 ，若此偏移地址错误将会导致 Flash 无法启动。
 
 ----------------
 
@@ -251,7 +240,7 @@ Windows7 系统 USB 驱动无法识别是什么原因？
 
 ----------------
 
-使用 ESP32-WROVER-E 模组下载程序后，上电打印 log 如下，是什么原因？
+使用 ESP32-WROVER-E 模组下载程序后，上电打印日志如下，是什么原因？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: shell
@@ -261,4 +250,4 @@ Windows7 系统 USB 驱动无法识别是什么原因？
       invalrd header：0xffffffff
       invalrd header：0xffffffff
 
-  - 出现如上报错 log 一般情况为 GPIO12 拉高导致，ESP32-WROVER-E 模组 GPIO12 不能拉高，建议将 GPIO12 拉低测试一下。可参见 `ESP32 boot log 指南 <https://docs.espressif.com/projects/esptool/zh_CN/latest/esp32/advanced-topics/boot-mode-selection.html?highlight=boot#boot-mode-message>`_。
+  - 出现如上报错日志一般情况为 GPIO12 拉高导致，ESP32-WROVER-E 模组 GPIO12 不能拉高，建议将 GPIO12 拉低测试一下。可参见 `ESP32 boot log 指南 <https://docs.espressif.com/projects/esptool/zh_CN/latest/esp32/advanced-topics/boot-mode-selection.html?highlight=boot#boot-mode-message>`_。
