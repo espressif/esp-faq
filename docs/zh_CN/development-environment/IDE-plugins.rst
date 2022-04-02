@@ -18,7 +18,7 @@ IDE 插件
 Arduino IDE 如何添加 ESP32 开发板？
 -----------------------------------
 
-  - arduino-esp32 使用引导链接  `arduino-ide <https://github.com/espressif/arduino-esp32/blob/master/docs/arduino-ide/boards_manager.md>`_。
+  - 关于 arduino-esp32 的安装指南，请参考  `arduino-ide 入门指南 <https://docs.espressif.com/projects/arduino-esp32/en/latest/getting_started.html>`_。
   - Arduino IDE 添加开发板引导链接 `arduino Cores <https://www.arduino.cc/en/Guide/Cores>`_。
 
 -------------------------
@@ -36,4 +36,4 @@ Arduino IDE 如何添加 ESP32 开发板？
 ------------------------------------------------------------------------------------------------
 
   - ``File -> Preferences -> Show verbose output during`` 勾选 ``compilation`` 编译成功后会打印一条 python 烧录命令，包含待烧录的 bin 文件以及对应的烧录地址。
-  - 使用 `flash download tool <https://www.espressif.com/sites/default/files/tools/flash_download_tool_v3.8.5.zip>`_ 烧录时选择 bin 文件，输入对应的烧录地址即可。
+  - 在乐鑫官网的 `工具页面 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 下载 flash download tool，使用 flash download tool 烧录时选择 bin 文件，输入对应的烧录地址即可。
