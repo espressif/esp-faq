@@ -15,10 +15,10 @@ coexistence
 
 --------------
 
-When Wi-Fi coexists with ESP-BLE-MESH, what mode does it support?
+When Wi-Fi coexists with Bluetooth, what mode does it support?
 ------------------------------------------------------------------------
 
-  For now, only Wi-Fi STA mode supports coexistence.
+  For supported coexistence scenarios, please refer to `coexistence documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/coexist.html>`_.
  
 --------------
 
@@ -62,11 +62,11 @@ Does ESP32 support coexistence between Bluetooth® and Wi-Fi?
 
 --------------
 
-When Bluetooth® LE and A2DP coexist, audio data reception is lost and lagged while entering Bluetooth LE scanning. How to resolve such issue?
+When Wi-Fi, Bluetooth® LE, and A2DP sink coexist, audio data reception is lost and lagged while entering Bluetooth LE scanning. How to resolve such issue?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Reduce the duty cycle of Bluetooth LE scanning
   - Use RingBuf to cache audio data
+  - Pause music and add a tone, such as "scanning for devices".
 
 --------------
 
@@ -77,9 +77,13 @@ Does ESP32 support coexistence between the network port (LAN8720) and Wi-Fi (Wif
 
 ---------------
 
-Can BLE adverting (Connectable) and iBeacon sending (advertising) be coexisted?
+Can BLE adverting (Connectable) and iBeacon sending (advertising) coexist?
 --------------------------------------------------------------------------------------------------
 
-  :release/v4.0 and above| CHIP: ESP32:
+  :IDF\: release/v4.0 and later versions | CHIP: ESP32:
 
   - Not supported yet on hardware level, but can be realized on application layer by polling and sending broadcast packets at regular intervals.
+
+  :IDF\: release/v4.3 and later versions | CHIP\: ESP32-C3|ESP32-S3:
+
+  - Yes.
