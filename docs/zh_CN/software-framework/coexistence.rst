@@ -15,10 +15,10 @@
 
 --------------
 
-Wi-Fi 和 ESP-BLE-MESH 共存时，支持哪些模式？
+Wi-Fi 和蓝牙共存时，支持哪些共存场景？
 --------------------------------------------
 
-  目前，只有 Wi-Fi STA 模式支持共存。
+  支持的共存场景请参考 `共存文档 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/coexist.html>`_。
 
 --------------
 
@@ -57,16 +57,16 @@ ESP32 蓝牙和 Wi-Fi 能否同时使用？
 ----------------------------------------
 
   ESP32 的 Wi-Fi 和蓝牙可共存，但需要分时控制，可在 menuconfig 中使能 Wi-Fi 和蓝牙共存设置。如下：
-  
+
   ``menuconfig -> Component config -> Wi-Fi -> Software controls WiFi/Bluetooth coexistence (Enable)``
 
 --------------
 
-Bluetooth® LE 和 A2DP 共存，进入 Bluetooth LE 扫描的时候音频数据接收会丢失、卡顿。怎么解决？
-------------------------------------------------------------------------------------------------
+Wi-Fi、Bluetooth® LE 和 A2DP Sink 共存，进入 Bluetooth LE 扫描的时候音频数据接收会丢失、卡顿。怎么解决？
+--------------------------------------------------------------------------------------------------------
 
-  - 降低 Bluetooth LE 扫描的占空比
   - 使用 RingBuf 缓存音频数据
+  - 暂停播放音乐，并增加提示音，例如：正在扫描设备。
 
 --------------
 
@@ -91,3 +91,7 @@ BLE adverting (Connectable) + iBeacon sending(advertising) 可以共存吗？？
   :IDF\: release/v4.0以及以上版本 | CHIP\: ESP32:
 
   - 硬件上还未支持，应用层可以通过定时轮询发广播包的方式来完成。
+
+  :IDF\: release/v4.3 以及以上版本 | CHIP\: ESP32-C3|ESP32-S3:
+
+  - 可以。
