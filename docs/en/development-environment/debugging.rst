@@ -15,22 +15,6 @@ Debugging
 
 --------------
 
-When using ESP32 with my product, what is the reason for it not following up after a quick powered-down and then powered-on?
--------------------------------------------------------------------------------------------------------------------------------------------
-
-  Scenario: 220 V to 5 V, and 5 V to 3.3 V power supply. The product failed when powered down and then powered on in 220 V voltage. The error log is as follows:
-
-  .. code-block:: text
-
-    brownout detector was triggered.
-    rst:0xc(SW_CPU_RESET),boot:0x13(SPI_FAST_FLASH_BOOT) configsip:0,SPI
-
-  - The log conveys a message that the voltage has decreased to the threshold of triggering hardware watchdog during the quick powering-down process.
-  - The system did not enter bootloader due to the wrong powering-on timing. This can be resolved by force pulling-down chip_PU.
-  - For more detailed description about the powering-on and reset timing of ESP32, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
-
---------------
-
 What is the serial port name of Wi-Fi devices？
 --------------------------------------------------
 
@@ -205,7 +189,7 @@ How to read flash model information of the modules?
 
 --------------
 
-What should I do when the Ethernet demo in debugging IDF has the following log？
+What should I do when the Ethernet demo in debugging ESP-IDF has the following log？
 --------------------------------------------------------------------------------------------
 
   .. code-block:: text
@@ -224,7 +208,8 @@ I found "Brownout detector was triggered" failure on my ESP32. How to resolve su
 
   - The ESP32 has a built-in brownout detector which can detect if the voltage is lower than a specific value. If this happens, it will reset the chip in order to prevent unintended behaviour.
   - This message may be reported in various scenarios, while the root cause is that the chip with a power supply has momentarily or permanently dropped below the brownout threshold. Please try replacing power supply, USB cable, or installing capacitor on power supply terminals of your module.
-  - You can do configuration to reset the threshold value or disable the brownout detector. Please refer to `config-esp32-brownout-det <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig.html#config-esp32-brownout-det>`_ for details.
+  - You can do configuration to reset the threshold value or disable the brownout detector. Please refer to `config-esp32-brownout-det <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig.html#brownout-detector>`_ for details.
+  - For ESP32 power-up and reset timing descriptions, see `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
 ---------------
 
@@ -240,5 +225,5 @@ After imported the protocol_examples_common.h header file, how come it cannot be
 The RTC_watch_dog keeps resetting during ESP32 SPI boot, what is the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Reason: The flash has a requirement for time interval between VDD_SDIO power-up and the first access. For example, GD's 1.8V flash requires 5 ms of time interval, while the time interval of ESP32 is about 1 ms (XTAL frequency is 40 MHz). Under such condition, the flash access will fail and either timer watchdog reset or RTC watchdog reset is triggered, depending on which one is triggered first. The threshold for RTC watchdog reset is 128 K cycle, while the threshold for timer watchdog reset is 26 M cycle. Taking a 40 MHz XTAL clock as an example, when the frequency of RTC slow clock is greater than 192 KHz, RTC watchdog reset will be triggered first, otherwise timer watchdog reset will be triggered. VDD_SDIO will be continuously powered when timer watchdog is reset, so there will be no problem in accessing flash and the chip will work normally. When RTC watchdog is reset, the VDD_SDIO power supply will be disabled and the access to flash will fail, thus the RTC_watch_dog resets continuously.
+  - Reason: The flash has a requirement for time interval between VDD_SDIO power-up and the first access. For example, GD's 1.8V flash requires 5 ms of time interval, while the time interval of ESP32 is about 1 ms (XTAL frequency is 40 MHz). Under such condition, the flash access will fail and either timer watchdog reset or RTC watchdog reset is triggered, depending on which one is triggered first. The threshold for RTC watchdog reset is 128 KB cycle, while the threshold for timer watchdog reset is 26 MB cycle. Taking a 40 MHz XTAL clock as an example, when the frequency of RTC slow clock is greater than 192 KHz, RTC watchdog reset will be triggered first, otherwise timer watchdog reset will be triggered. VDD_SDIO will be continuously powered when timer watchdog is reset, so there will be no problem in accessing flash and the chip will work normally. When RTC watchdog is reset, the VDD_SDIO power supply will be disabled and the access to flash will fail, thus the RTC_watch_dog resets continuously.
   - Solution: When an RTC watchdog reset occurs, the power supply to VDD_SDIO is disabled. You can add a capacitor to VDD_SDIO to ensure that the voltage of VDD_SDIO does not drop below the voltage that the flash can tolerate during this period.
