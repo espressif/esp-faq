@@ -25,9 +25,11 @@ If an ESP32 module is running under a 2.8 V supply, is there any degradation in 
 What are the modulation methods supported by Espressif's chips?
 ------------------------------------------------------------------------------
 
-  - ESP8266 supports: BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK.
-  - ESP32 supports: BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK/GFSK Π/4-DQPSK 8-DPSK.
-  - ESP32-S2 supports: BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK.
+  - ESP8266 supports BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK.
+  - ESP32 supports BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK/GFSK Π/4-DQPSK 8-DPSK.
+  - ESP32-S2 supports BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK.
+  - ESP32-C3 supports BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK/GFSK Π/4-DQPSK 8-DPSK.
+  - ESP32-S3 supports BPSK/QPSK/16QAM/64QAM/DBPSK/DQPSK/CCK/GFSK Π/4-DQPSK 8-DPSK.
 
 --------------
 
