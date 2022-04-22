@@ -144,7 +144,7 @@ ESP32 是否可以使用 LittleFS 文件系统？
 ESP32 如何查看芯片内存（例如：DRAM、IRAM、rodata）使用情况？
 ------------------------------------------------------------------------------------------------------------------
 
-  可以在工程终端目录下输入 `size-components` 指令来查看相关内存使用情况，如 `make size-components` 或 `idf.py size-components`。
+  可以在工程终端目录下输入 ``idf.py size-components`` 指令来查看相关内存使用情况。
 
 -----------------
 
@@ -186,11 +186,11 @@ ESP8266 用户可用的 RTC RAM 是多大？
 使用 FAT 文件系统时文件名稍微长一点的文件无法打开，该如何处理？
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 可以在 menuconfig -> Component config -> FAT Filesystem support -> Long filename support 中进行修改，选择 `Long filename buffer in heap` 或 `Long filename buffer on stack` 配置项。然后可以在 ` Component config -> FAT Filesystem support -> Max long filename length` 中修改最大的文件名长度。
+  - 可以在 ``menuconfig`` -> ``Component config`` -> ``FAT Filesystem support`` -> ``Long filename support 中进行修改，选择 ``Long filename buffer in heap`` 或 ``Long filename buffer on stack`` 配置项。然后可以在 ``Component config`` -> ``FAT Filesystem support`` -> ``Max long filename length`` 中修改最大的文件名长度。
 
 ---------------
 
-如何使能 exFAT ?
+如何使能 exFAT？ 
 --------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32:
@@ -209,10 +209,10 @@ ESP8266 用户可用的 RTC RAM 是多大？
 配置好的 Wi-Fi SSID 和 PASSWORD 在 ESP 系列开发板上重新上电后是否会消失，需要重新输入吗？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 默认会存在 NVS 里，不会因为掉电而消失，您也可以通过 `esp_wifi_set_storage()` 设置，此时分为两种情况：
+  - 默认会存在 NVS 里，不会因为掉电而消失，您也可以通过 ``esp_wifi_set_storage()`` 设置，此时分为两种情况：
 
-    - 如果想要实现掉电保存 Wi-Fi SSID 和 PSAAWORD，可通过调用 `esp_wifi_set_storage(WIFI_STORAGE_FLASH)` 将 Wi-Fi 信息存储在 flash 内。
-    - 如果想要实现掉电不保存 Wi-Fi SSID 和 PASSWORD 的操作，可通过调用 `esp_wifi_set_storage(WIFI_STORAGE_RAM)` 讲  Wi-Fi 信息存储在 RAM 内。
+    - 如果想要实现掉电保存 Wi-Fi SSID 和 PSAAWORD，可通过调用 ``esp_wifi_set_storage(WIFI_STORAGE_FLASH)`` 将 Wi-Fi 信息存储在 flash 内。
+    - 如果想要实现掉电不保存 Wi-Fi SSID 和 PASSWORD 的操作，可通过调用 ``esp_wifi_set_storage(WIFI_STORAGE_RAM)`` 讲  Wi-Fi 信息存储在 RAM 内。
 
 --------------
 
@@ -242,7 +242,7 @@ ESP32 如何读取芯片剩余内存？
 如何将 ESP32 设备的 key 和 certs 存储到 spiffs 中呢？
 ---------------------------------------------------------
 
- - 请参考 `spiffsgen.py  <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_。
+ 可将文件生成 SPIFFS 镜像后烧录到对应分区，可参考 `SPIFFS 文件系统 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_。
 
 ----------------
 
