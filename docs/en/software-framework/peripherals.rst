@@ -25,7 +25,7 @@ What is the maximum speed supported by the SDIO interface?
 When using ESP32 to develop Touch Sensor applications, where can I find references?
 -----------------------------------------------------------------------------------------------------------
 
-  Please refer to `Software and Hardware Designs <https://github.com/espressif/esp-iot-solution/tree/master/examples/touch_pad_evb>`_.
+  Please refer to `Software and Hardware Designs <https://github.com/espressif/esp-iot-solution/tree/release/v1.1/examples/touch_pad_evb>`_.
 
 --------------
 
@@ -126,7 +126,7 @@ Are there any limits on outputting PWM via ESP32 GPIO pins?
 When there is water on ESP32-S2 Touch Sensor, does it block or recognize the Touch event with its waterproof function?
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  When the impact of water on the Touch Sensor is small (with droplets), the sensor will adapt to it actively; when the impact of water on the Touch Sensor is large (with large water flow), the sensor can avoid certain extent of the impact by configuring software to lock some sensor channels.
+  When there is a small amount of water droplets, the waterproof function of the ESP32-S2 Touch Sensor can work normally. In the event of a large area of standing water (i.e. the Touch contact area is completely covered), the Touch will temporarily lock and will not resume operation until the water is cleared.
 
 
 --------------
@@ -206,7 +206,7 @@ Can I distribute the ESP32 PWM to any I/O?
 Is there any example code for I2S driving LCD with ESP32?
 -------------------------------------------------------------------------------------
 
-  Please refer to I2S LCD Driver：`esp-iot-solution i2s_devices <https://github.com/espressif/esp-iot-solution/tree/master/components/i2s_devices>`_.
+  Please refer to I2S LCD driver: `esp-iot-solution i2s_devices <https://github.com/espressif/esp-iot-solution/blob/master/components/bus/i2s_lcd_esp32_driver.c>`__.
 
 --------------
 
@@ -278,7 +278,7 @@ How many channels does ESP32 ADC have? What is the sampling rate and significant
 
 --------------
 
-Can I disable the thread scheduling and use a single CPU for ESP32 to realize real-time GPIO?
+Can I disable the thread scheduling and use a single CPU for ESP32 to realize real-time control of GPIO?
 -------------------------------------------------------------------------------------------------------------------------
 
   - For now, we do not have any related configurations for SDK to support the single operation of CPU1. Both cores of ESP32 support SMP only, but not AMP.
@@ -288,13 +288,6 @@ Can I disable the thread scheduling and use a single CPU for ESP32 to realize re
     - See if the hardware RMT can generate the desired waveform with enough length.
     - When the hardware interrupt generated corresponding waveform, all callbacks need to be put in IRAM.
     - Use the co-processor in the chip as a single chip without an operation system. But it only supports assembly language for now.
-
---------------
-
-Is there any reference for ESP32 Touch application?
---------------------------------------------------------------------------
-
-  For ESP32 Touch application, please refer to `Touch Software and Hardware Designs <https://github.com/espressif/esp-iot-solution/tree/master/examples/touch_pad_evb>`_.
 
 
 --------------
@@ -337,7 +330,7 @@ Is it possible to use GPIO34 ～ GPIO39 from ESP32-SOLO-1 as the RX signal pin f
 Does ESP-WROOM-S2 module support using SDIO as a slave？
 ---------------------------------------------------------------------------------------
 
-  Yes, because ESP-WROOM-S2 flash uses SPI interfaces.
+  Yes, it does.
 
 -----------------
 
@@ -371,7 +364,7 @@ How to dynamically change the serial baud rate and make it take effect immediate
 Since ESP32-S2 has removed the SDIO interface, does it still support external TF card?
 --------------------------------------------------------------------------------------------------------------------------------
 
-  The ESP32-S2 has four groups of SPI interfaces, and you can use the interface of SPI2/SPI3 to connect an external TF card. When doing so, the SPI should be set to general SPI mode.
+  You can use the interface of SPI2/SPI3 to connect an external TF card. When doing so, please use the SPI mode of the TF card.
 
 ----------------
 
@@ -393,16 +386,18 @@ How to connect MIC with ESP32?
 Does ESP32 support analog audio output or digital audio output?
 -------------------------------------------------------------------------------------------
 
-  - The ESP32 supports DAC analog audio output for simple outputs such as warning tones. But if you use it for music playing, the effect will not be so desirable. 
-  - The ESP32 also supports I2S digital audio output. For I2S configurable pins, please see Section four in `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
+  - ESP32 supports DAC analog audio output for simple outputs such as tones. But if you use it for music playing, the effect will not be so desirable.
+  - ESP32 supports PWM analog audio output, which has slightly better effect than DAC. The demo code is at ` esp-iot-solution  <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`_.
+  - ESP32 also supports I2S digital audio output. For I2S configurable pins, please see `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ > Chapter Peripherals and Sensors.
 
 ---------------
 
-What is the difference of SPI, HSPI and VSPI in ESP32?
+What is the difference among SPI, HSPI and VSPI in ESP32?
 -------------------------------------------------------------------------------------
 
-  - The SPI/HSPI/VSPI in the `parallel QSPI` interface are groups to connect the external flash, which is mounted on the SPI group.
-  - Any usable HSPI/VSPI in the driver are general-purpose SPIs. The difference in their names are only used to distinguish between groups.
+  - ESP32 has four SPIs. SPI0 and SPI1 are occupied by default to connect to flash that stores programs. SPI2 and SPI3 are general-purpose SPIs that are available for customers to use.
+  - HSPI represents the above-mentioned SPI2, and VSPI represents the SPI3. The two sets of SPIs are general-purpose SPIs. 
+
 
 --------------
 
@@ -495,21 +490,21 @@ Does ESP8266 support pulse counting?
 Does the ESP-IDF SDK USB interface support HID and MSC modes?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Our SDK will provide examples of HID and MSC classes in the future. And specific device classes need to be implemented by themselves. 
+  - Our SDK will provide examples of HID and MSC classes in the future. And specific device classes need to be implemented by yourselves referring to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__.
 
 ---------------
 
 When using DAC output for ESP32-S2-Saola-1, the power supply is 3.3 V. But the actual tested voltage is only 3.1 V. Why?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Due to the internal voltage drop, even when using 3.3 V power supply, the actual maximum output is only about 3.2 V.
+  Due to the internal voltage drop, even when using 3.3 V power supply, the actual maximum output is only about 3.2 V.
 
 --------------------
 
 If I float the ADC pin and print out VDD3P3 value (65535), then the voltage of VDD3P3 should be 65535/1024 ≈ 63 V. Why this is not the correct voltage value?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ADC pins cannot be left floating, and the value measured by floating ADC pins is not the correct value.
+  ADC input range cannot reach 3.3 V. See `ADC Attenuation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-attenuation>`__ for details.
   
 -----------------
 
@@ -547,17 +542,7 @@ What is the input resistance of ESP32 ADC?
 When using ESP32's ADC to detect the power supply voltage, is it necessary to divide the voltage?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes, it is necessary if you are using ADC for ESP32 devices to detect voltage. The ADC default reference voltage of ESP32 is 1100 mV. However, the ADC reading width can be expanded by calling the ADC attenuation function ``adc_atten_t()``. Please refer to the ADC attenuation configuration instructions as follows:
-
-  .. code-block:: c
-
-      typedef enum {
-          ADC_ATTEN_DB_0   = 0,  /*!<No input attenumation, ADC can measure up to approx. 800 mV. */
-          ADC_ATTEN_DB_2_5 = 1,  /*!<The input voltage of ADC will be attenuated, extending the range of measurement to up to approx. 1100 mV. */
-          ADC_ATTEN_DB_6   = 2,  /*!<The input voltage of ADC will be attenuated, extending the range of measurement to up to  approx. 1350 mV. */
-          ADC_ATTEN_DB_11  = 3,  /*!<The input voltage of ADC will be attenuated, extending the range of measurement to up to  approx. 2600 mV. */
-          ADC_ATTEN_MAX,
-      } adc_atten_t;
+  The ADC reference voltage of ESP32 is 1100 mV, but the ADC measurable range can be increased by internal attenuation. For more information on the measurable range, please refer to `ADC Attenuation <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/adc.html#adc-attenuation>`__. If it exceeds the range, voltage division is required.
 
 -------------------------
 
@@ -571,7 +556,7 @@ The maximum data transmission of ESP32 SPI DMA is 4092 bytes. Is it because of h
 What is the stable current output for ESP32-S2's USB interface? 
 -------------------------------------------------------------------------------------------------------------------
 
-  - ESP32-S2 supports USB 1.1 Full-Speed mode, under which the output of data line （D+ and D-) is voltage signal. Thus, there is no need to consider current driving capability here. As for the driving capability for VBUS line, it has nothing to do with ESP32-S2 as it is decided by the power-supply chip.
+  The current output capability of the VBUS power line is determined by the power supply, not by the ESP32-S2 chip.
 
 -------------------------
 
@@ -633,7 +618,7 @@ When an ESP32 calling "adc2_get_raw()" between "esp_wifi_start()" and "esp_wifi_
 What is the maximum resolution supported by ESP32 LCD? What is the corresponding frame rate?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32's LCD can support up to 800 × 480 of resolution, and the corresponding frame rate is about 30 frames. Please see `Screen <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/display/screen.html>`_.
+  Over the 8080 16-bit parallel interface, the ESP32 LCD can support up to 800 × 480 of resolution, and the corresponding frame rate is about 30 frames. Please see `Screen <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/display/screen.html>`_.
 
 -----------------------
 
@@ -655,7 +640,7 @@ What are the USB features of ESP32-S2 and ESP32-S3?
 Are there any references to the library and demo of ESP32-S2 USB Host? 
 --------------------------------------------------------------------------------------------------------------------------
 
-  - This part is already under internal development and is expected to be released with SDK release/v4.4. If you want to do some functional verification first, please refer to the `USB example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`_ in esp-iot-solution.
+  This part is already under internal development. If you want to do some functional verification first, please refer to the `USB example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`_ in esp-iot-solution.
 
 ---------------
 
@@ -694,29 +679,11 @@ Does ESP32-C3 support USB Host?
 
 ---------------
 
-Does ESP32-S2 have USB UVC demo?
---------------------------------------------------------------------
-
-  - Please refer to `uvc_stream demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_.
-
-----------------------
 
 Does ESP32 support using ADC2 and Bluetooth simultaneously?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes.
-
-----------------------
-
-Can ESP32 read SD card whose file format is exFAT?
------------------------------------------------------------------
-
-  - Is is not supported by default. exFAT is not free and needs license payment to Microsoft (or some other IP provider).
-
-  - There are 2 options if the user wants to use exFAT:
-  
-    - keep using Fatfs, which is already included in IDF, and pay royalties to Microsoft for the license. The easiest way to do this is through a reseller, for example, `exfat-royalties <http://embedded-access.com/exfat-royalties/>`_. In IDF, the user needs to modify ``ffconf.h`` to enable ``FF_FS_EXFAT`` option.
-    - use a commercial third-party FAT implementation, which will include exFAT royalties into its price. Options include `hcc-embedded <https://www.hcc-embedded.com/exfat/>`_ and `embedded-access <http://embedded-access.com/exfat-file-system/>`_. Some porting to ESP-IDF may be required, but most likely it won't be very difficult.
 
 ----------------
 
@@ -772,10 +739,10 @@ When using ESP32-C3 to drive the LCD display through the SPI interface, can I us
 
 -----------------
 
-What is the frequency range supported by the ADC DMA mode of the ESP32-S2 chip?
+What is the sampling rate range supported by the ADC DMA mode of the ESP32-S2 chip?
 --------------------------------------------------------------------------------------------------------------------------
 
-  - Frequency limit : 611 Hz ~ 83333 Hz
+  Frequency limit : 611 Hz ~ 83333 Hz.
   
 ---------------
   
@@ -842,7 +809,8 @@ How to set interrupt priority for timers?
 
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
 
-  - esp_timer is implemented based on task, which cannot configure interrupt priority. timer_group can have interrupt priority by modifying the last parameter of the `timer_isr_callback_add <https://docs.espressif.com/projects/esp-idf/en/latest /esp32/api-reference/peripherals/timer.html?highlight=timer_isr_callback_add#_CPPv422timer_isr_callback_add13timer_group_t11timer_ idx_t11timer_isr_tPvi>`_ interface.
+  - esp_timer is implemented based on task, so interrupt priority cannot be configured.
+  - timer_group can have interrupt priority by modifying the last parameter of the `timer_isr_callback_add <https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32/api-reference/peripherals/timer.html#_CPPv422timer_isr_callback_add13timer_group_t11timer_idx_t11timer_isr_tPvi>`_ interface.
 
 ---------------
 
@@ -885,12 +853,11 @@ Does ESP32-S2 support eMMC?
 When using the release/v4.2 version of ESP-IDF, how to set a single GPIO as input/output mode simultaneously for ESP32?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - You can set via the `esp_err_t gpio_set_direction(gpio_num_t gpio_num, gpio_mode_t mode) <https://docs.espressif.com/projects/esp-idf/en/release-v4.2/esp32/api-reference/peripherals/gpio.html# _CPPv418gpio_set_direction10gpio_num_t11gpio_mode_t>`_ API.
-  - Please refer to `gpio_types.h <https://github.com/espressif/esp-idf/blob/release/v4.2/components/soc/include/hal/gpio_types.h>`_.
+  You can set via the `esp_err_t gpio_set_direction(gpio_num_t gpio_num, gpio_mode_t mode) <https://docs.espressif.com/projects/esp-idf/en/release-v4.2/esp32/api-reference/peripherals/gpio.html# _CPPv418gpio_set_direction10gpio_num_t11gpio_mode_t>`_ API.
 
 ------------------
 
-Does RTOS SDK support full duplex for SPI?
+Does ESP8266 RTOS SDK support full duplex for SPI?
 --------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP8266:
@@ -932,4 +899,4 @@ Does ESP32-S2 support SDIO as a slave?
 Does ESP32 support using the MCPWM Timer to trigger AD sampling?
 -------------------------------------------------------------------------------------
 
-  - ESP32 does not support using MCPWM Timer to trigger AD sampling.
+  - No, it does not.
