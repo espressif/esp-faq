@@ -145,7 +145,7 @@ Can ESP32 use LittleFS file system?
 How to check the memory usage (e.g., DRAM, IRAM, rodata) of ESP32 chips?
 ------------------------------------------------------------------------------------------------------------------
 
-  You can check the usage of related memories for ESP32 chips by inputting the instruction `size-components` under corresponding directories in terminal, e.g., `make size-components` or `idf.py size-components`.
+  You can check memory usage of ESP32 chips by inputting the instruction ``idf.py size-components`` under corresponding directories in terminal.
 
 -----------------
 
@@ -187,7 +187,7 @@ What is the available size of RTC RAM in ESP8266 for users?
 How to deal with the file with long filename when using the FAT filesystem？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - You can change the configuration in ``menuconfig -> Component config -> FAT Filesystem support -> Long filename support`` by selecting the `Long filename buffer in heap` or `Long filename buffer on stack` option. Then you can modify the maximum length for a file name in ``Component config -> FAT Filesystem support -> Max long filename length``.
+  - You can change the configuration in ``menuconfig`` -> ``Component config`` -> ``FAT Filesystem support`` -> ``Long filename support`` by selecting the ``Long filename buffer in heap`` or ``Long filename buffer on stack`` option. Then you can modify the maximum length for a file name in ``Component config`` -> ``FAT Filesystem support`` -> ``Max long filename length``.
 
 ---------------
 
@@ -236,7 +236,7 @@ How to read the remaining memory of the ESP32 chip?
 How do I store the keys and certs of ESP32 devices in spiffs?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
- - Please refer to `spiffsgen.py <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_.
+ You can generate an SPIFFS image from files and flash it to the corresponding partition. See `SPIFFS Filesystem <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_ for details.
 
 ----------------------
 
