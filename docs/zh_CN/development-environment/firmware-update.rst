@@ -124,7 +124,7 @@ ESP32 能否通过 OTA 开启 Security Boot 功能？
 ESP 芯片烧录通讯协议是什么？
 ------------------------------------------------------------------------------
 
-  - ESP 烧录协议规范：`Serial-Protocol <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_。
+  - ESP 烧录协议规范：`Serial Protocol <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html>`__。
   - 串口协议 Python 实现：`esptool <https://github.com/espressif/esptool>`_。
   - 串口协议 C 语言实现：`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_。
 
