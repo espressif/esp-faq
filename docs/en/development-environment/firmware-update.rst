@@ -121,10 +121,10 @@ How to download firmware based on esp-idf using flash_download_tool?
 
 --------------
   
-What is the communicationg protocol for flashing ESP chips?
+What is the communication protocol for flashing ESP chips?
 -------------------------------------------------------------------------------------------------------------------
 
-  - ESP Serial Protocol: `Serial-Protocol <https://github.com/espressif/esptool/wiki/Serial-Protocol>`_.
+  - ESP Serial Protocol: `Serial Protocol <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html>`__.
   - Python-based implementation: `esptool <https://github.com/espressif/esptool>`_.
   - C-language based implementation: `esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_.
 
