@@ -822,3 +822,10 @@ ESP32 在使用 esp_timer 时，出现网络通信或者蓝牙通信异常，是
 
   - esp_timer 是高精度的硬件定时器组件，后台一些组件也使用 esp_timer 完成一些系统任务。在使用 esp_timer 时，请不要在该定时器的回调函数中使用延时、阻塞类的 API，应尽可能地保证回调函数能够快速地被执行结束，以免影响系统其他组件的功能。
   - 如您需要的定时精度不是太高，请使用 FreeRTOS 中的定时器组件 `xTimer <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/freertos.html#timer-api>`_。
+
+--------------
+
+使用 ESP32，请问 ULP 里面用 ``jump`` 跳转到一个函数，是否有返回的指令？
+----------------------------------------------------------------------------------------
+
+  目前 ULP CPU 指令列表以及说明参见 `这里 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ulp_instruction_set.html#add-add-to-register>`_。返回指令通常使用一个通用寄存器备份 PC 地址，用于后续跳回，由于目前 ULP 只有 4 个通用寄存器，所以需要合理使用。

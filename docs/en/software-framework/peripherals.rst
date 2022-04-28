@@ -908,3 +908,9 @@ Can ESP32 support 9-bit clock mode for 3-wire SPI (i.e. a mode where the first b
 
   - Yes, you can refer to the command or address phase mentioned in `SPI Transactions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#spi-transactions>`_, define one of the phases as 1-bit wide, and then assign 0 or 1 to it to distinguish whether the next 8 bits are data or command. In doing so, the 9-bit clock mode for 3-wire SPI is implemented.
 
+--------------
+
+Does ESP32 support PCI-E protocol?
+-----------------------------------------------------
+
+  No, it doesn't.

@@ -22,13 +22,6 @@ Does ESP8266 OpenSSL support Hostname validation?
 
 --------------
 
-Does ESP32 support PCI-E protocol?
------------------------------------------------------
-
-  No, it doesn't.
-
---------------
-
 How to optimize communication latency for ESP32？
 -----------------------------------------------------------------------
 
@@ -74,13 +67,6 @@ How to configure the server address so as to make it an autonomic cloud platform
 -----------------------------------------------------------------------------------------------------------------------------------------
 
   Please refer to `MQTT Examples <https://github.com/espressif/esp-idf/tree/master/examples/protocols/mqtt>`_.
-
---------------
-
-With ESP32, are there any return instructions if I skip to a function using the ``jump`` instruction in ULP？
------------------------------------------------------------------------------------------------------------------------------------------------
-
-  Please see `here <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ulp_instruction_set.html#add-add-to-register>`_ for ULP CPU instructions list and corresponding specifications. Normally, a general register is used for return instructions to store backup PC addresses for later jumping backs. Since there are only four general registers in ULP for now, please make proper use of them.
 
 --------------
 
