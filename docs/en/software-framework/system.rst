@@ -250,3 +250,10 @@ When ESP32 uses esp_timer, network communication or Bluetooth communication is a
 
   - esp_timer is a high-precision hardware timer component, and some background components also use it to complete some system tasks. When using esp_timer, please do not call delay and blocking APIs in the callback function of the timer, and try to ensure that the function is executed as quickly as possible, so as not to affect the performance of other system components.
   - If you do not need very high time precision, please use the timer component `xTimer <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos.html#timer-api>`_ in FreeRTOS.
+
+--------------
+
+With ESP32, are there any return instructions if I skip to a function using the ``jump`` instruction in ULP？
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+  Please see `here <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ulp_instruction_set.html#add-add-to-register>`_ for ULP CPU instructions list and corresponding specifications. Normally, a general register is used for return instructions to store backup PC addresses for later jumping backs. Since there are only four general registers in ULP for now, please make proper use of them.

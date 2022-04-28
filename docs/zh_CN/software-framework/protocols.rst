@@ -23,13 +23,6 @@ ESP8266 OpenSSL 是否⽀持 Hostname validation？
 
 --------------
 
-ESP32 是否⽀持 PCI-E 协议？
--------------------------------------
-
-  ESP32 不支持 PCI-E 协议。
-
---------------
-
 ESP32 如何优化通信延时？
 -----------------------------------
 
@@ -75,13 +68,6 @@ TCP 链接关闭后占用的相关资源何时释放？
 ------------------------------------------------------
 
   可以参考 `MQTT 例程 <https://github.com/espressif/esp-idf/tree/master/examples/protocols/mqtt>`_。
-
---------------
-
-使用 ESP32，请问 ULP 里面用 ``jump`` 跳转到一个函数，是否有返回的指令？
-----------------------------------------------------------------------------------------
-
-  目前 ULP CPU 指令列表以及说明参见 `这里 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ulp_instruction_set.html#add-add-to-register>`_。返回指令通常使用一个通用寄存器备份 PC 地址，用于后续跳回，由于目前 ULP 只有 4 个通用寄存器，所以需要合理使用。
 
 --------------
 
