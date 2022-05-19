@@ -390,7 +390,7 @@ What profile does ESP32's classic Bluetooth® support?
 How many stable connections can be reached for ESP32-C3's Bluetooth® LE (BLE)? 
 ------------------------------------------------------------------------------------------------
 
- - Eight.
+ - Recommend 4 or less.
  
 ----------------
 
