@@ -18,7 +18,7 @@
 SDIO 最⾼速度能⽀持到多少？
 -------------------------------------
 
-  SDIO 时钟能到 50 MHz, 理论最⾼速度是 200 Mbps。
+  SDIO 时钟能到 50 MHz，理论最⾼速度是 200 Mbps。
 
 --------------
 
@@ -46,11 +46,11 @@ ESP-WROOM-S2 作为从机，STM32 作为 MCU ，可以使⽤ SPI 接⼝下载吗
 ESP8266 的 SDIO 是否⽀持 SD 卡？
 --------------------------------------------
 
-  ESP8266 是 SDIO Slave，不⽀持 SD 卡。
+  ESP8266 是 SDIO 从机，不⽀持 SD 卡。
 
 --------------
 
-ESP8266 是否支持 I2C slave 模式？
+ESP8266 是否支持 I2C 从机模式？
 ------------------------------------------------
 
   不支持，如果要使用此功能，推荐使用 ESP32 或者 ESP32-S2 芯片。ESP32 参考示例：`i2C_self_test <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/i2c/i2c_self_test>`_。
@@ -62,24 +62,24 @@ ESP32 管脚配置需要注意什么？
 
   ESP32 系列模组分为 ESP32-WROOM 系列和 ESP32-WROVER 系列，GPIO 使用配置注意事项如下。
 
-  WROOM-32/32D/32U 系列共有 26 个 pin 脚可供客户使用，注意事项如下：
+  WROOM-32/32D/32U 系列共有 26 个 管脚可供客户使用，注意事项如下：
 
   - GPIO6 ～ GPIO11 被内置 flash 占用，不可用做它用； 
-  - GPIO34、35、36 和 39 为 input only pin 脚，不具备 output 能力；
-  - ESP32 内置 GPIO 矩阵，部分外设接口可以配置到任意空闲 pin 脚上。即硬件设计时，不需要严格将某些功能固定在某些 pin 脚上。
+  - GPIO34、35、36 和 39 为输入管脚，不具备输出能力；
+  - ESP32 内置 GPIO 矩阵，部分外设接口可以配置到任意空闲管脚上。即硬件设计时，不需要严格将某些功能固定在某些管脚上。
 
   详细信息可以参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中表格 9 的内容。
 
-  WROVER／WROVER-I／WROVER-B／WROVER-IB 共有 24 个 pin 脚可供客户使用，注意事项如下： 
+  WROVER／WROVER-I／WROVER-B／WROVER-IB 共有 24 个管脚可供客户使用，注意事项如下： 
 
   - GPIO6 ～ GPIO11 被内置 flash 占用，不可用做它用； 
-  - GPIO34、35、36 和 39 为 input only pin 脚，不具备 output 能力；
+  - GPIO34、35、36 和 39 为输入管脚，不具备输出能力；
   - WROVER 系列模组中，GPIO12 由于在模组内部被上拉，不建议用做触摸传感功能；
-  - ESP32 内置 GPIO 矩阵，部分外设接口可以配置到任意空闲 pin 脚上。即硬件设计时，不需要严格将某些功能固定在某些 pin 脚上。
+  - ESP32 内置 GPIO 矩阵，部分外设接口可以配置到任意空闲管脚上。即硬件设计时，不需要严格将某些功能固定在某些管脚上。
 
   详细信息可以参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中表格 9 的内容。 
 
-  ESP32 有 3 组 UART，但下载只可使用 UART0，且 pin 脚固定。
+  ESP32 有 3 组 UART，但下载只可使用 UART0，且管脚固定。
 
 --------------
 
@@ -104,7 +104,7 @@ ESP8266 I2C 是软件模拟的吗？
 
     E:M 536    E:M 1528
 
-  以 E:M 开头的 log 是内存不足的原因。
+  以 E:M 开头的报错表示内存不足。
 
 --------------
 
@@ -143,7 +143,7 @@ ESP32-S2 Touch Sensor 的防水流功能在屏蔽有水流的 Touchpad 时，是
 
 --------------
 
-Touch Sensor 的 Pin 能否重映射？
+Touch Sensor 的管脚能否重映射？
 ----------------------------------------------------------------
 
   不能，因为 Touch Sensor 属于模拟信号处理。
@@ -168,7 +168,7 @@ ESP32 SD 卡支持的最大容量是多少？
 -------------------------------------------------
 
   - SD3.01 规范中 SDXC 的卡最大支持 2 TB (2048 GB) 容量。
-  - ESP32 的 SDMMC Host 符合 SD3.01 协议，通过该外设可以访问最多 2 TB 的区域；使用 SDSPI 驱动通过 SPI 总线访问卡时，硬件也支持访问 2 TB 的区域。
+  - ESP32 的 SDMMC 主机符合 SD3.01 协议，通过该外设可以访问最多 2 TB 的区域；使用 SDSPI 驱动通过 SPI 总线访问卡时，硬件也支持访问 2 TB 的区域。
   - 在软件层面上，卡能使用的空间还受文件系统的影响。
 
 --------------
@@ -181,7 +181,7 @@ ESP32 是否支持 USB 功能？
 
 --------------
 
-ESP8266 使⽤ HW timer 中断有哪些注意事项？
+ESP8266 使⽤ HW 定时器中断有哪些注意事项？
 ------------------------------------------------------
 
   - 可以参考相关 API 文档 `《ESP8266 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_cn.pdf>`_。
@@ -208,10 +208,10 @@ ESP32 是否有 I2S 驱动 LCD 的参考代码？
 
 --------------
 
-使用 ESP8266 RTOS v2.1 以及之前版本 SDK，如何将 LOG 配置到 UART1？
+使用 ESP8266 RTOS v2.1 以及之前版本 SDK，如何将日志配置到 UART1？
 ------------------------------------------------------------------------------
 
-  在配置 UART1 初始化后，可以通过 API 切换 LOG 输出到 UART1。
+  在配置 UART1 初始化后，可以通过 API 切换日志输出到 UART1。
 
   .. code-block:: c
 
@@ -219,10 +219,10 @@ ESP32 是否有 I2S 驱动 LCD 的参考代码？
 
 -----------------
 
-使用 ESP8266 RTOS v3.0 以及之后的 SDK，如何将 LOG 配置到 UART1 ？
+使用 ESP8266 RTOS v3.0 以及之后的 SDK，如何将日志配置到 UART1 ？
 ------------------------------------------------------------------------------------
 
-  可通过 ``menuconfig -> Component config -> ESP8266-specific -> UART for console output -> custom -> UART peripheral to use for console output -> UART0`` 修改为 UART1 接口。
+  可通过 ``menuconfig`` -> ``Component config`` -> ``ESP8266-specific`` -> ``UART for console output`` -> ``custom`` -> ``UART peripheral to use for console output`` -> ``UART0`` 修改为 UART1 接口。
 
 --------------
 
@@ -237,8 +237,8 @@ ESP32 IDF 中如何使能 UART 流控？
 ESP8266 NonOS SDK PWM 的变化缓慢，有哪些原因？
 --------------------------------------------------------------
 
-  - 如果使用 SDK example/IOT_demo 中的渐变 API，如 light_set_aim 或 light_set_aim_r 这些 API，需要渐变的过程。
-  - 若需要 PWM Duty 设置后⽴即⽣效，则可以调⽤接⼝ pwm_set_duty，需要注意调⽤ pwm_set_duty 后要调⽤ pwm_start 此次设置才能⽣效。
+  - 如果使用 SDK example/IOT_demo 中的渐变 API，如 ``light_set_aim`` 或 ``light_set_aim_r`` 这些 API，需要渐变的过程。
+  - 若需要 PWM Duty 设置后⽴即⽣效，则可以调⽤接⼝ ``pwm_set_duty``，需要注意调⽤ ``pwm_set_duty`` 后要调⽤ ``pwm_start`` 此次设置才能⽣效。
 
 --------------
 
@@ -246,23 +246,23 @@ ESP8266 部分 GPIO 出现高电平的原因是什么？
 ---------------------------------------------------------
 
   - 根据硬件设计，部分 GPIO 存在默认上下拉状态，所以在系统初始化时，该管脚的电平状态不受程序控制，所以会出现程序在引导过程中部分 GPIO 电平不正确。
-  - 如果需要使用这些 GPIO ，硬件上建议外接器件与默认上下拉电平一致，软件可以在 bootloader 过程中调整电平状态，软件方法也会存在短暂电平异常。
+  - 如果需要使用这些 GPIO ，硬件上建议外接器件与默认上下拉电平一致，软件可以在引导加载程序过程中调整电平状态，软件方法也会存在短暂电平异常。
 
 --------------
 
 ESP8266 ADC 的精度如何？
 ------------------------------------------------
 
-  - ESP8266 ADC 为 10 bit, 理论精度为 2 :sup:`10` = 1024。
+  - ESP8266 ADC 为 10 位，理论精度为 2 :sup:`10` = 1024。
   - ESP8266 连接路由器后，单 STA 模式会进⼊ Modem-sleep 模式，导致芯⽚内部参考值变化，因此 ADC 测量得数据变化。
-  - 如果想要测量精确，可以在关闭 Wi-Fi 后，使用 system_adc_fast_read 函数读取。
+  - 如果想要测量精确，可以在关闭 Wi-Fi 后，使用 ``system_adc_fast_read`` 函数读取。
 
 --------------
 
-ESP8266 如何获取 ADC 寄存器 Bitmap 信息？
+ESP8266 如何获取 ADC 寄存器位图信息？
 ---------------------------------------------------------
 
-  由于 ESP8266 ADC 是和内部 RF 电路⾼度集成的，所以 Bitmap 和寄存器信息没有公开，如有特殊需求请联系 sales@espressif.com。
+  由于 ESP8266 ADC 是和内部 RF 电路⾼度集成的，所以位图和寄存器信息没有公开，如有特殊需求请联系 sales@espressif.com。
 
 --------------
 
@@ -300,14 +300,14 @@ ESP32 SD 卡是否可以与 flash & PSRAM 共同使用？
 ESP32 使用 UART0 作为通信串口，有哪些需要注意的地方？
 ---------------------------------------------------------
 
-  - 通常情况下不建议将 UART0 作为普通的通信串口，因为 UART0 为设备默认 LOG 输出串口。
+  - 通常情况下不建议将 UART0 作为普通的通信串口，因为 UART0 为设备默认日志输出串口。
   - 若 ESP32 的 UART 不够用，或者硬件设计已经不方便更改的情况下，如果您要使用 UART0 作为普通的通信串口，请参考以下建议：
 
   **软件方面**：防止打印影响串口通信，默认程序中 UART0 主要有三处打印设置。
 
-    - 第一处是上电 ROM 打印，上电时可将 MTDO pin 设为低电平屏蔽上电 ROM 打印。
-    - 第二处是 bootloader log 信息输出，您可以将 ``menuconfig -> Bootloader config -> Bootloader log verbosity`` 设置为 ``No output`` 来屏蔽 bootloader log 输出。
-    - 第三处是 app log 信息输出，您可以将 ``menuconfig -> Component config -> Log output -> Default log verbosity`` 设置为 ``No output`` 来屏蔽 app log 输出。
+    - 第一处是上电 ROM 打印，上电时可将 MTDO 管脚设为低电平屏蔽上电 ROM 打印。
+    - 第二处是引导加载程序日志信息输出，您可以将 ``menuconfig`` -> ``Bootloader config`` -> ``Bootloader log verbosity`` 设置为 ``No output`` 来屏蔽引导加载程序日志输出。
+    - 第三处是应用日志输出，您可以将 ``menuconfig`` -> ``Component config`` -> ``Log output`` -> ``Default log verbosity`` 设置为 ``No output`` 来屏蔽应用日志输出。
     
   **硬件方面**：
 
@@ -336,12 +336,12 @@ ESP32 是否支持使用晶振作为 I2S 的时钟源？
 
 ---------------
 
-使用 ESP8266 调用 adc_read_fast() API 会导致 Wi-Fi 断连吗？
+使用 ESP8266 调用 ``adc_read_fast()`` API 会导致 Wi-Fi 断连吗？
 ---------------------------------------------------------------------------------
 
-  - 调用 adc_read_fast() API 前需要将 Wi-Fi 和中断关闭，可参见此 API 的 `使用说明 <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/peripherals/adc.html?highlight=adc_read#_CPPv413adc_read_fastP8uint16_t8uint16_t>`_。
-  - 由于 adc_read_fast() API 会进行连续采集，ADC 内部与 Wi-Fi RF 存在耦合部分，无法在 Wi-Fi 开启的状态下调用该函数。
-  - 在 Wi-Fi 开启的时候请使用 adc_read() API 进行 ADC 采集。为保证数据稳定，需要使用 esp_wifi_set_ps(WIFI_PS_NONE); 函数关闭 Wi-Fi Modem-sleep 休眠模式。
+  - 调用 ``adc_read_fast()`` API 前需要将 Wi-Fi 和中断关闭，可参见此 API 的 `使用说明 <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/peripherals/adc.html?highlight=adc_read#_CPPv413adc_read_fastP8uint16_t8uint16_t>`_。
+  - 由于 ``adc_read_fast()`` API 会进行连续采集，ADC 内部与 Wi-Fi RF 存在耦合部分，无法在 Wi-Fi 开启的状态下调用该函数。
+  - 在 Wi-Fi 开启的时候请使用 ``adc_read()`` API 进行 ADC 采集。为保证数据稳定，需要使用 ``esp_wifi_set_ps(WIFI_PS_NONE)`` 函数关闭 Wi-Fi Modem-sleep 休眠模式。
  
 .. note::
 
@@ -352,7 +352,7 @@ ESP32 是否支持使用晶振作为 I2S 的时钟源？
 使用 ESP32 如何动态修改串口波特率并立即生效？
 ---------------------------------------------------------------
 
-  请使用 uart_set_baudrate() API 来修改 UART 波特率。参见 `API 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_get_baudrate11uart_port_tP8uint32_t>`_。
+  请使用 ``uart_set_baudrate()`` API 来修改 UART 波特率。参见 `API 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_get_baudrate11uart_port_tP8uint32_t>`_。
 
 --------------
 
@@ -370,11 +370,11 @@ ESP32 GPIO 电平翻转速度是多少？
 
 --------------
 
-ESP32 如何连接 MIC？
+ESP32 如何连接麦克风？
 ------------------------------
 
-  - 如果连接数字 MIC ，可以连接 I2S 外设。
-  - 如果连接模拟 MIC ，可以连接 ADC 外设。
+  - 如果连接数字麦克风，可以连接 I2S 外设。
+  - 如果连接模拟麦克风，可以连接 ADC 外设。
 
 --------------
 
@@ -382,7 +382,7 @@ ESP32 是否支持模拟音频或是数字音频输出？
 -----------------------------------------------------
 
   - ESP32 支持 DAC 模拟音频输出，可以使用它播放提示音等简单音频。
-  - ESP32 支持 PWM 模拟音频输出，相比 DAC 效果稍好，演示代码：` esp-iot-solution  <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`_。
+  - ESP32 支持 PWM 模拟音频输出，相比 DAC 效果稍好，演示代码：`esp-iot-solution  <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`__。
   - ESP32 同时支持 I2S 数字音频输出，I2S 可配置引脚可以在 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ > 外设接口和传感器章节。
 
 ---------------
@@ -479,38 +479,38 @@ ESP8266 可以实现脉冲计数吗？
 
 ---------------
 
-ESP-IDF SDK USB 接口支持 HID，MSC 这些模式吗？
+ESP-IDF SDK USB 接口支持 HID、MSC 这些模式吗？
 -----------------------------------------------------------------------------------------------------------
 
-  SDK 后续会提供 HID、MSC 类作为 example，具体的设备类需要用户自行实现，可参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`_
+  SDK 后续会提供 HID、MSC 类作为例程，具体的设备类需要用户自行实现，可参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__。
 
 ---------------
 
 ESP32-S2-Saola-1 使用 DAC 输出时，采用 3.3 V 进行供电，为什么实际测试电压只有 3.1 V？
 ----------------------------------------------------------------------------------------------------------
 
-  - 由于存在内部压降，即使使用 3.3 V 供电，实际最大输出只有 3.2 V 左右。
+  由于存在内部压降，即使使用 3.3 V 供电，实际最大输出只有 3.2 V 左右。
 
 -----------
 
 悬空 ADC 引脚，打印出 VDD3P3 的值为 65535，那么 VDD3P3 的电压就是 65535/1024 ≈ 63 V。这个电压值不符，是什么原因？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-ADC 输入范围不能到 3.3 V，可参考 `ADC Attenuation <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/adc.html#adc-attenuation>`__。
+  ADC 输入范围不能到 3.3 V，可参考 `ADC Attenuation <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/adc.html#adc-attenuation>`__。
 
 ---------------------
 
 ESP8266 通过直接写硬件定时器 FRC1 的寄存器产⽣ PWM，发现初始化 Wi-Fi 时，Wi-Fi 产⽣的中断会⼲扰硬件定时器的中断，导致错误的 PWM 输出，是否可以使⽤ FRC2 产⽣ PWM？是否可以使 FRC1 的优先级⾼于 Wi-Fi？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 不可以使⽤ FRC2，其被系统占⽤。Wi-Fi 使⽤ NMI 中断，其优先级⾼于其他普通中断，推荐使⽤ ESP8266 RTOS SDK 的 PWM 库，参考 `ESP8266_RTOS_SDK/examples/peripherals/pwm <https://github.com/espressif/ESP8266_RTOS_SDK/tree/release/v3.4/examples/peripherals/pwm>`_。
+  不可以使⽤ FRC2，其被系统占⽤。Wi-Fi 使⽤ NMI 中断，其优先级⾼于其他普通中断，推荐使⽤ ESP8266 RTOS SDK 的 PWM 库，参考 `ESP8266_RTOS_SDK/examples/peripherals/pwm <https://github.com/espressif/ESP8266_RTOS_SDK/tree/release/v3.4/examples/peripherals/pwm>`_。
 
 ----------------
 
 使用 v3.3.3 版本 ESP-IDF 在 ESP32 设备上测试 ledc 例程，当启用了 auto light sleep，LED PWM 无输出；但不启用 auto light sleep，LED PWM 有输出。ESP-IDF 编程指南里关于 `LED PWM <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/ledc.html?highlight=pwm#id1>`_  的说明表示 LED PWM 在 Sleep 模式下是能工作的，请问是什么原因？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-- esp-idf v3.3.3 版本的 SDK 不支持 LED PWM 在 Sleep 模式下工作。请使用新版的 esp-idf （v4.0 以上版本）下的 ledc 例程来测试，例如 esp-idf release/v4.2 版本的 SDK，且需要将 LED PWM 时钟源改为内部 RTC8M 时钟源。如下：
+- esp-idf v3.3.3 版本的 SDK 不支持 LED PWM 在 Sleep 模式下工作。请使用新版的 esp-idf（v4.0 以上版本）下的 LEDC 例程来测试，例如 esp-idf release/v4.2 版本的 SDK，且需要将 LED PWM 时钟源改为内部 RTC8M 时钟源。如下：
 
   .. code-block:: c
 
@@ -527,7 +527,7 @@ ESP8266 通过直接写硬件定时器 FRC1 的寄存器产⽣ PWM，发现初�
 ESP32 ADC 的输入电阻是多少？
 ---------------------------------------------------------
 
-  - ADC 是电容性的，可以认为电阻很大。
+  ADC 是电容性的，可以认为电阻很大。
 
 ----------------
 
@@ -538,31 +538,31 @@ ESP32 ADC 的输入电阻是多少？
 
 ----------------
 
-ESP32 使用 SPI DMA 时最大的数据传输量是 4092 bytes，是因为硬件限制吗？
+ESP32 使用 SPI DMA 时最大的数据传输量是 4092 字节，是因为硬件限制吗？
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 是的，这属于硬件限制。单个节点只能存 4092 bytes，但 DMA 可以通过链表来发送更多的数据。
+  是的，这属于硬件限制。单个节点只能存 4092 字节，但 DMA 可以通过链表来发送更多的数据。
 
 ----------------
 
 ESP32-S2 USB 接口电流稳定输出为多少？
 ------------------------------------------------------
 
-  - 对于 VBUS 电源线的电流输出能力，由供电决定，与 ESP32-S2 芯片无关。
+  对于 VBUS 电源线的电流输出能力，由供电决定，与 ESP32-S2 芯片无关。
 
 ----------------
 
-ESP32-S3 的 USB 支持 USB Host 吗？
+ESP32-S3 的 USB 支持 USB 主机吗？
 ------------------------------------------------------
 
-  - 支持，ESP32-S3 USB Host 功能与 ESP32-S2 一致。
+  支持，ESP32-S3 USB 主机功能与 ESP32-S2 一致。
 
 ----------------
 
 ESP32-C3 USB 支持 USB 串口功能和 USB JTAG 功能吗？
 ---------------------------------------------------------------------------------------------------------------------
 
-  - 支持。
+  支持。
 
 ----------------
 
@@ -574,11 +574,11 @@ ESP32 触摸屏有哪些参考驱动？
 
 -----------------
 
-ESP32-S2 的 SPI 同时访问三个 SPI Slave 设备，是否需要做信号量同步才能访问？
+ESP32-S2 的 SPI 同时访问三个 SPI 从机设备，是否需要做信号量同步才能访问？
 ------------------------------------------------------------------------------------------------------------------------------
 
-  - 同一个 SPI 外设作为 Master，一次只能与一个 Slave 进行通信，由 CS 决定与哪个 Slave 进行通信。如果是给 SPI 驱动挂 3 个 Slave 设备，并与它们分别通信的话是可以的，推荐这种用法。
-  - 可使用 ``spi_device_transmit()`` 接口， 这个接口是一个 blocking 接口，在一次传输完成后返回。多个任务逐次调用这个接口，用不同的 handle 进行通信即可。
+  - 同一个 SPI 外设作为主机，一次只能与一个从机进行通信，由 CS 决定与哪个从机进行通信。如果是给 SPI 驱动挂 3 个 从机设备，并与它们分别通信的话是可以的，推荐这种用法。
+  - 可使用 ``spi_device_transmit()`` 接口，这个接口是一个阻塞接口，在一次传输完成后返回。多个任务逐次调用这个接口，用不同的 handle 进行通信即可。
   
 ---------------------
 
@@ -589,28 +589,28 @@ ESP32-S2 的 SPI 同时访问三个 SPI Slave 设备，是否需要做信号量�
 
     spi_flash:Detected size(8192K) smaller than the size in the binary image header(16384K).Probe failed. 
 
-  - 原因是配置的 Flash Size 比实际使用的 Flash Size 要大，为避免误用更大的地址空间而对实际使用的 Flash Size 进行检测。
+  - 原因是配置的 flash 大小比实际使用的 flash 大小要大，为避免误用更大的地址空间而对实际使用的 flash 大小进行检测。
 
 --------------
 
 ESP32 芯片 ADC DMA 模式最高支持多大的采样频率？
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 理论最高支持 2 MHz 的采样频率。
+  理论最高支持 2 MHz 的采样频率。
   
 ---------------------
 
-使用 ESP32，在 esp_wifi_start() 和 esp_wifi_stop() 之间读取 adc2_get_raw() 操作失败，是什么原因？
+使用 ESP32，在 ``esp_wifi_start()`` 和 ``esp_wifi_stop()`` 之间读取 ``adc2_get_raw()`` 操作失败，是什么原因？
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 由于 ADC2 与 Wi-Fi 模块共享， Wi-Fi 驱动程序使用 ADC2，且 Wi-Fi 模块具有更高的优先级。因此，该应用程序只能在未启动 Wi-Fi 驱动程序时使用 ADC2。
+  由于 ADC2 与 Wi-Fi 模块共享， Wi-Fi 驱动程序使用 ADC2，且 Wi-Fi 模块具有更高的优先级。因此，该应用程序只能在未启动 Wi-Fi 驱动程序时使用 ADC2。
 
 ---------------
 
 ESP32 LCD 最大可以支持多大的分辨率？相应的帧率是多少？
 ----------------------------------------------------------------------------------------------------------
 
-  - ESP32 LCD 在 8080 16 位并口的接口下，分辨率最大能够支持 800 × 480，相应的帧率约为 30 帧。请参考 `显示屏 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/display/screen.html>`_。
+  ESP32 LCD 在 8080 16 位并口的接口下，分辨率最大能够支持 800 × 480，相应的帧率约为 30 帧。请参考 `显示屏 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/display/screen.html>`_。
 
 --------------
 
@@ -618,92 +618,92 @@ ESP32 LCD 最大可以支持多大的分辨率？相应的帧率是多少？
 ----------------------------------------------------------------------------------------------------------------------------------
 
   - Strapping 管脚（GPIO0 和 GPIO15）和下载管脚（GPIO1 和 GPIO3）可以作为普通 GPIO 使用。 
-  - 使用 Strapping 管脚作为普通 GPIO 使用时，在 Flash 下载模式时需要注意 Strapping 管脚电平的要求。
+  - 使用 Strapping 管脚作为普通 GPIO 使用时，在 flash 下载模式时需要注意 Strapping 管脚电平的要求。
 
 ---------------
 
 ESP32-S2 和 ESP32-S3 USB 的特征是？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32-S3 和 ESP32-S2 具有相同的 USB 1.1 OTG 外设，可支持 USB Host 和 USB Device 功能。除此以外，ESP32-S3 还支持 USB-Serial-JTAG 专用外设，可用于固件下载和调试。
+  ESP32-S3 和 ESP32-S2 具有相同的 USB 1.1 OTG 外设，可支持 USB 主机和 USB 设备功能。除此以外，ESP32-S3 还支持 USB-Serial-JTAG 专用外设，可用于固件下载和调试。
 
 ---------------
 
-ESP32-S2 USB Host 的库和 Demo 是否有参考？
+ESP32-S2 USB 主机的库和例程是否有参考？
 --------------------------------------------------------------------------------------------------------------------------
 
-  - 这部分已经在内部开发中，如果想预先完成部分功能验证，可参考 esp-iot-solution 的 `USB 示例程序 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`_。
+  这部分已经在内部开发中，如果想预先完成部分功能验证，可参考 esp-iot-solution 的 `USB 示例程序 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`_。
 
 ---------------
 
-ESP32-S2 支持的 USB 协议是 OTG 1.1，速度最高是 12 Mbps。这样的话能和 USB 2.0 设备通信吗？
+ESP32-S2 支持的 USB 协议是 OTG 1.1，速度最高是 12 Mbps。能和 USB 2.0 设备通信吗？
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 大部分 USB 2.0 的设备能向下兼容 USB 1.1，所以能以 USB 1.1 进行通信（full speed 模式下）。
+  大部分 USB 2.0 的设备能向下兼容 USB 1.1，所以能以 USB 1.1 进行通信（full speed 模式下）。
 
 ---------------
 
 ESP32-S2 支持 USB 摄像头吗？
 ----------------------------------------------------------------
 
-  - 支持，但是目前 ESP32-S2 仅支持到 USB 1.1。所以需要购买兼容 USB 1.1 的摄像头。示例代码请参考 `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_。
+  支持，但是目前 ESP32-S2 仅支持到 USB 1.1。所以需要购买兼容 USB 1.1 的摄像头。示例代码请参考 `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_。
   
 ---------------
 
 是否有 ESP32-S2 做 U 盘 (MSC DEVICE) 的参考示例？
 ----------------------------------------------------------------------------------------------------------------
 
-  - 请参考 `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_msc_wireless_disk>`_。目前测试的平均读写速度为：读 540 KB/s，写 350 KB/s。
+  请参考 `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_msc_wireless_disk>`_。目前测试的平均读写速度为：读 540 KB/s，写 350 KB/s。
 
 ---------------
 
 ESP32-C3 有 USB，是否不需要 cp2102 芯片就可以直接通过 USB 下载固件？
 -------------------------------------------------------------------------------------------------------------------------------
 
-  - 是的，ESP32-C3 可通过 USB 串口直接烧录程序，对应 USB 串口号 Windows 设备上显示为 COMx，Linux 设备上显示为 ttyACMx。
+  是的，ESP32-C3 可通过 USB 串口直接烧录程序，对应 USB 串口号 Windows 设备上显示为 COMx，Linux 设备上显示为 ttyACMx。
 
 ---------------
 
-ESP32-C3 是否支持 USB Host？
+ESP32-C3 是否支持 USB 主机？
 ------------------------------------------------------
 
-  - 不支持，ESP32-C3 仅支持 USB-Serial-JTAG 功能。
+  不支持，ESP32-C3 仅支持 USB-Serial-JTAG 功能。
 
 ---------------
 
 
-ESP32 是否支持 ADC2 与 蓝牙同时使用？
+ESP32 是否支持 ADC2 与蓝牙同时使用？
 ---------------------------------------------------------
 
-  - 支持。
+  支持。
 
 ----------------
 
-SPI slave 支持最大速度是多少？
+SPI 从机支持最大速度是多少？
 -------------------------------------------------------------------------------
   :CHIP\: ESP32 :
 
-  - ESP32 作为 SPI slave 时钟最高只支持到 10 M。
+  ESP32 作为 SPI 从机时钟最高只支持到 10 M。
 
 -------------------------
 
-使用 ESP32 作为 SPI Master 设备，在非 DMA 模式下最大可一次性传输多少字节的数据？
+使用 ESP32 作为 SPI 主机设备，在非 DMA 模式下最大可一次性传输多少字节的数据？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 使用 ESP32 作为 SPI Ｍaster 设备，在非 DMA 模式下最大可一次性传输 64 Bytes 的数据。
-  - 但当传输超过 32 bits 时，需要设置 SPI 发送数据的缓冲区，可参考 `SPI Master Driver <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/peripherals/spi_master.html?highlight=spi#spi-master-driver>`_ 说明。
-  - 使用 ESP32 作为 SPI Master 设备在非 DMA 模式下传输超过 32 bits 的 SPI 数据，可参考例程 `esp-idf/examples/peripherals/spi_slave/sender <https://github.com/espressif/esp-idf/tree/release/v4.4/examples/peripherals/spi_master/lcd>`_。
+  - 使用 ESP32 作为 SPI 主机设备，在非 DMA 模式下最大可一次性传输 64 字节的数据。
+  - 但当传输超过 32 比特时，需要设置 SPI 发送数据的缓冲区，可参考 `SPI Master Driver <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/peripherals/spi_master.html?highlight=spi#spi-master-driver>`_ 说明。
+  - 使用 ESP32 作为 SPI 主机设备在非 DMA 模式下传输超过 32 比特的 SPI 数据，可参考例程 `esp-idf/examples/peripherals/spi_slave/sender <https://github.com/espressif/esp-idf/tree/release/v4.4/examples/peripherals/spi_master/lcd>`_。
   
 ---------------------------
 
 使用 ESP32-S3-WROOM-1 (ESP32-S3R2) 模组基于 ESP-IDF v4.4 版本的 hello-world 例程开启 PSRAM 的设置后，打印如下报错，是什么原因？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    .. code-block:: text
+  .. code-block:: text
 
       E (232) spiram: Virtual address not enough for PSRAM!
 
-  - ESP32-S3R2 芯片集成了 4 线的 2 MB PSRAM，请在 menuconfig 中将 PSRAM 模式设置为 **Quad** 模式。如下：
+  ESP32-S3R2 芯片集成了 4 线的 2 MB PSRAM，请在 menuconfig 中将 PSRAM 模式设置为 **Quad** 模式。如下：
 
     ``menuconfig → Component config → ESP32S3 Specific → Support for external, SPI connected RAM → SPI RAM config → Mode (QUAD/OCT) of SPI RAM chip in use (Quad Mode PSRAM)`` 
 
@@ -711,12 +711,13 @@ SPI slave 支持最大速度是多少？
 
 使用 ESP32-S3-WROOM-2 (ESP32-S3R8V) 模组基于 ESP-IDF v4.4 版本的 hello-world 例程开启 PSRAM 的设置后，打印如下报错，是什么原因？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    .. code-block:: text
+
+  .. code-block:: text
 
       E (453) psrm: psrm ID read error: 0x00ffff
       E (454) cpu start: Failed to init external RAM!
 
-  - ESP32-S3R8V 芯片集成了 8 线的 8 MB PSRAM，请在 menuconfig 中将 PSRAM 模式设置为 **Octal** 模式。如下：
+  ESP32-S3R8V 芯片集成了 8 线的 8 MB PSRAM，请在 menuconfig 中将 PSRAM 模式设置为 **Octal** 模式。如下：
 
     ``menuconfig → Component config → ESP32S3 Specific → Support for external, SPI connected RAM → SPI RAM config → Mode (QUAD/OCT) of SPI RAM chip in use (Octal Mode PSRAM)`` 
 
@@ -725,7 +726,7 @@ SPI slave 支持最大速度是多少？
 使用 ESP32-C3 通过 SPI 接口驱动 LCD 液晶显示屏，是否可使用 RTC_CLK 作为 SPI 时钟，让 LCD 液晶显示屏能在 Deep-sleep 模式下正常显示静态图片？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Deep-sleep 模式：CPU 和大部分外设都会掉电，只有 RTC 存储器处于工作状态。请阅读`《ESP32-C3 Datasheet》 <https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_cn.pdf>`_ 关于“低功耗管理”的说明。
+  - Deep-sleep 模式：CPU 和大部分外设都会掉电，只有 RTC 存储器处于工作状态。请阅读`《ESP32-C3 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_cn.pdf>`_ 关于“低功耗管理”的说明。
   - ESP32-C3 的 SPI 只支持 APB_CLK 和 XTAL_CLK 两种时钟源，不支持使用 RTC_CLK。因此在 Deep-sleep 模式下，LCD 液晶屏无法显示静态图片。请阅读 `《ESP32-C3 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp32-c3_technical_reference_manual_cn.pdf>`_  关于“外设时钟”说明。
   
 ------------------
@@ -737,17 +738,24 @@ ESP32-S2 芯片 ADC DMA 模式支持的采样率范围是多大？
 
 -------------
 
+ESP32-C3 芯片可以使用 USB 下载固件，但在 ESP-IDF v4.3 下不支持。如何使用 USB 下载固件？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  请在 ESP-IDF v4.4 及以后版本下编译，拉出最新分支并 `更新 IDF 工具 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_，然后便可正常编译并使用 USB 下载固件，使用方法请见 `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_。
+
+----------------------
+
 ESP32 的 ADC 支持多通道同时采样吗？
 ----------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 的 ADC 不支持多通道同时采样，若使用 ADC 多通道采样，需采取轮询采样的方式来实现。
+  ESP32 的 ADC 不支持多通道同时采样，若使用 ADC 多通道采样，需采取轮询采样的方式来实现。
 
 -------------------------------
 
 请问 ESP32 芯片支持 USRAT（Universal Synchronous Asynchronous Receiver Transmitter） 吗？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 不支持，ESP32 仅支持 UART，无法提供同步时钟。
+  不支持，ESP32 仅支持 UART，无法提供同步时钟。
 
 ----------------
 
@@ -762,14 +770,14 @@ ESP32 的 ADC 支持多通道同时采样吗？
 ESP32 芯片的串口校验支持 ＭARK 和 SPACE 校验吗？
 --------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 芯片不支持。
+  ESP32 芯片不支持。
     
 -----------------------
 
 ESP8266 串口的硬件 FIFO 是多大？
 ----------------------------------------------------------------------------------------------------------------
 
-  - ESP8266 的 UART0 和 UART1 各有⼀个⻓度为 128-byte 的硬件 FIFO 和读写 FIFO，且都在同⼀个地址操作。参见 `《ESP8266 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_cn.pdf>`_ 中“11.2. 硬件资源”章节说明。
+  ESP8266 的 UART0 和 UART1 各有⼀个⻓度为 128 字节的硬件 FIFO 和读写 FIFO，且都在同⼀个地址操作。参见 `《ESP8266 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_cn.pdf>`_ 中“11.2. 硬件资源”章节说明。
 
 --------------------------------------------------------------------------
 
@@ -777,14 +785,14 @@ RMT 中如何将时钟修改为 REF_TICK?
 --------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
 
-  - 可以调用 `rmt_set_source_clk <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/rmt.html?highlight=rmt_set_source_clk#_CPPv418rmt_set_source_clk13rmt_channel_t16rmt_source_clk_t>`_ 接口设置。
+  可以调用 `rmt_set_source_clk <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/rmt.html?highlight=rmt_set_source_clk#_CPPv418rmt_set_source_clk13rmt_channel_t16rmt_source_clk_t>`_ 接口设置。
 
 ---------------------------
 
 ESP8266 的串⼝波特率范围是多大？
 ---------------------------------------------------------------------------------------------------------------------------
 
-  - ESP8266 的串⼝波特率范围为 300 ~ 115200*40 bps。参见 `《ESP8266 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_cn.pdf>`_ 中的“ 11.3.1. 波特率”章节说明。
+  ESP8266 的串⼝波特率范围为 300 ~ 115200*40 bps。参见 `《ESP8266 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_cn.pdf>`_ 中的“ 11.3.1. 波特率”章节说明。
 
 -----------------------------------------------------------------------------------------------------
 
@@ -801,7 +809,7 @@ ESP32-C3 系列芯片将 GPIO19 配置成输入下拉时，读取该 IO 口状�
 
   - ESP32-C3 的 GPIO19 为 USB 管脚，USB 管脚的上拉电阻由管脚上拉和 USB 上拉共同控制，当其中一种上拉方式为 1 时，对应的上拉电阻就会使能。
   - GPIO19 是默认 USB 上拉使能的，因此配置了管脚为输入下拉后依旧是上拉使能，管脚显示高电平。
-  - 如果需要修改，在 USB_SERIAL_JTAG_DP_PULLUP 寄存器进行配置。
+  - 如果需要修改，在 ``USB_SERIAL_JTAG_DP_PULLUP`` 寄存器进行配置。
 
 -----------------------------------------------------------------------------------------------------
 
@@ -810,7 +818,7 @@ ESP32-C3 系列芯片将 GPIO19 配置成输入下拉时，读取该 IO 口状�
 
   :CHIP\: ESP32 | ESP32 | ESP32-C3:
 
-  - 可以在 menuconfig 中进行设置，``idf.py menuconfig —> Component config —> Common ESP-related -> Channel for console output(custom UART)``。
+  可以在 menuconfig 中进行设置，``idf.py menuconfig`` —> ``Component config`` —> ``Common ESP-related`` -> ``Channel for console output(custom UART)``。
 
 ---------------------------------------
 
@@ -819,7 +827,7 @@ REF_TICK 时钟频率可以修改吗 ?
 
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
 
-  - 不可以修改，REF_TICK 时钟是固定的。
+  不可以修改，REF_TICK 时钟是固定的。
 
 --------------------------
 
@@ -828,7 +836,7 @@ ESP32-S2 支持 eMMC 吗？
 
   :CHIP\: ESP32-S2:
 
-  - 不支持。
+  不支持。
 
 -----------------------
 
@@ -844,14 +852,14 @@ ESP8266 RTOS SDK 是否支持 SPI 全双工？
 
   :CHIP\: ESP8266:
 
-  - 不支持。因为 ESP8266 不支持 DMA，因此为了提高传输性能利用了全部 FIFO，所以只能半双工，具体的详情请参考 `SPI readme <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/peripherals/spi#spi-demo-user-guide>`_。
+  不支持。因为 ESP8266 不支持 DMA，因此为了提高传输性能利用了全部 FIFO，所以只能半双工，具体的详情请参考 `SPI readme <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/peripherals/spi#spi-demo-user-guide>`_。
 
 -------------
 
 ESP32 芯片的 ADC 之间的测量误差是多大？
 ----------------------------------------------------------------------------------------------
 
-  - 默认情况下，ESP32 芯片 ADC 之间的测量差异是 ±6%，可参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
+  默认情况下，ESP32 芯片 ADC 之间的测量差异是 ±6%，可参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
 
 -----------------
 
@@ -867,28 +875,28 @@ ESP32 芯片的 ADC 之间的测量误差是多大？
 ESP32-S2 是否支持 USB HID？
 -----------------------------------------------------------------------
 
-  - 支持。
+  支持。
 
 ----------------
 
 ESP32-S2 是否支持 SDIO 作从机？
 ----------------------------------------------------------------------------------------
 
-  - ESP32-S2 没有 SDIO 接口，不支持 SDIO 作从机。
+  ESP32-S2 没有 SDIO 接口，不支持 SDIO 作从机。
 
 ---------------
 
-ESP32 支持使用 MCPWM 的 Timer 来触发 AD 采样吗？
+ESP32 支持使用 MCPWM 的定时器来触发 AD 采样吗？
 -------------------------------------------------------------------------------------
 
-  - 不支持。
+  不支持。
 
 ---------------
 
 ESP32 能支持三线 SPI 的 9 位时钟模式（即用第 1 位表示后 8 位是命令还是数据的模式）吗？
 -----------------------------------------------------------------------------------------------------------
 
-  - 支持，可以参考使用 `SPI Transactions <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/spi_master.html#spi-transactions>`_ 里提到的命令或地址阶段，定义其中一个阶段大小为 1 位，然后给这个位赋值 0 或者 1 来区分后续 8 位是数据还是命令，这样即可实现三线 SPI 的 9 位时钟模式。
+  支持，可以参考使用 `SPI Transactions <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/spi_master.html#spi-transactions>`_ 里提到的命令或地址阶段，定义其中一个阶段大小为 1 位，然后给这个位赋值 0 或者 1 来区分后续 8 位是数据还是命令，这样即可实现三线 SPI 的 9 位时钟模式。
 
 --------------
 
