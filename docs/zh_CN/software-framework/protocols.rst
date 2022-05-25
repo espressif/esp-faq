@@ -16,10 +16,10 @@
 --------------
 
 
-ESP8266 OpenSSL 是否⽀持 Hostname validation？
+ESP8266 OpenSSL 是否⽀持验证主机名？
 --------------------------------------------------------
 
-  ⽀持，目前 ESP8266 OpenSSL 是基于 mbedTLS 封装的接口，mbedTLS 支持 ``Hostname validation``。使用 ESP-TLS 可以根据配置切换 mbedTLS 与 wolfSSL。
+  ⽀持，目前 ESP8266 OpenSSL 是基于 Mbed TLS 封装的接口，Mbed TLS 支持 验证主机名。使用 ESP-TLS 可以根据配置切换 mbedTLS 与 wolfSSL。
 
 --------------
 
@@ -117,7 +117,7 @@ ESP32 是否有特殊的固件或者 SDK，可以不使用芯片内部的 TCP/IP
 -----------------------------------------------------------------------------------------------------------
 
   - 目前的 ESP-Touch 协议下发送的数据内容都是固定的，不支持自定义数据。
-  - 如果需要发送自定义数据的话，建议使用 Blufi，这是基于 Bluetooth LE 的配网协议。请参见：
+  - 如果需要发送自定义数据的话，建议使用 BluFi，这是基于 Bluetooth LE 的配网协议。请参见：
 
     - Android APP：https://github.com/EspressifApp/EspBlufiForAndroid。
     - iOS APP：https://github.com/EspressifApp/EspBlufiForiOS。
@@ -128,7 +128,7 @@ ESP8266 测试 RTOS SDK ``mqtt/ssl_mutual_auth`` 为何连接服务器失败？
 -------------------------------------------------------------------------------------
 
   - 出现 SSL 无法连接可能是由于 ESP8266 内存不足导致。
-  - 请使用 ESP8266-RTOS-SDK Master 版本来测试此例程，master 版本支持在 menuconfig 配置端动态分配内存，可以减少峰值内存的开销，通过 menuconfig -> ``Component  config`` -> ``mbadTLS`` ->（键 “Y” 使能）``Using  dynamic TX /RX buffer`` ->（键 “Y” 使能）``Free SSL peer certificate after its usage`` ->（键 “Y” 使能）``Free certificate, key and DHM data after its usage``。
+  - 请使用 ESP8266-RTOS-SDK master 版本来测试此例程，master 版本支持在 menuconfig 配置端动态分配内存，可以减少峰值内存的开销，通过 menuconfig -> ``Component  config`` -> ``mbedTLS`` ->（键 “Y” 使能） ``Using  dynamic TX /RX buffer`` ->（键 “Y” 使能） ``Free SSL peer certificate after its usage`` ->（键 “Y” 使能） ``Free certificate, key and DHM data after its usage``。
 
 ----------------
 
@@ -140,18 +140,18 @@ ESP32-S2 在调用 ``esp_netif_t* wifiAP  = esp_netif_create_default_wifi_ap()`
 
 --------------
 
-ESP32 & ESP8266 做 TCP Server 时端口释放后如何立即被再次使用？
+ESP32 & ESP8266 做 TCP server 时端口释放后如何立即被再次使用？
 --------------------------------------------------------------------------------------------
 
-  - 关闭 TCP 套接字后，往往会进入 TIME-WAIT 状态，此时绑定与之前相同端口相同源地址的套接字会失败，需要借助套接字选项 SO_REUSEADDR，它的作用是允许设备绑定处于 TIME-WAIT 状态，端口和源地址与之前相同的 TCP 套接字。
-  - 故 TCP server 程序可以在调用 bind() 之前设置 SO_REUSEADDR 套接字选项后来绑定同样的端口。
+  - 关闭 TCP 套接字后，往往会进入 ``TIME-WAIT`` 状态，此时绑定与之前相同端口相同源地址的套接字会失败，需要借助套接字选项 ``SO_REUSEADDR``，它的作用是允许设备绑定处于 ``TIME-WAIT`` 状态，端口和源地址与之前相同的 TCP 套接字。
+  - 故 TCP server 程序可以在调用 bind() 之前设置 ``SO_REUSEADDR`` 套接字选项后来绑定同样的端口。
 
 ------------------
 
 使用 ESP32 模组下载 tcp_client 例程，通过 Wi-Fi 连接路由器，在电脑端进行 Ping 测试，偶尔出现高延时，是什么原因？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-- Wi-Fi 默认开启 Power Save 模式，关闭 Power Save 可降低由于 Power Save 引起的 Ping 高延时，在 esp_wifi_start() 之后调用 esp_wifi_set_ps(WIFI_PS_NONE) 来关闭 Power Save 模式。
+  Wi-Fi 默认开启 Power Save 模式，关闭 Power Save 可降低由于 Power Save 引起的 Ping 高延时，在 esp_wifi_start() 之后调用 esp_wifi_set_ps(WIFI_PS_NONE) 来关闭 Power Save 模式。
 
 --------------
 
@@ -166,14 +166,14 @@ ESP32 & ESP8266 做 TCP Server 时端口释放后如何立即被再次使用？
     I (4228) MQTT_EXAMPLE: MQTT_EVENT_DISCONNECTED
     I (19361) MQTT_CLIENT: Sending MQTT CONNECT message, type: 1, id: 0000
 
-  - 当出现如上报错，表示服务器拒绝了连接，原因是客户端错误的 MQTT 用户名和密码导致服务端认证没有通过。建议您确认是否使用了正确的 MQTT 用户名和密码。
+  当出现如上报错，表示服务器拒绝了连接，原因是客户端错误的 MQTT 用户名和密码导致服务端认证没有通过。建议您确认是否使用了正确的 MQTT 用户名和密码。
 
 ----------------
 
 使用 ESP-IDF release/v3.3 版本的 SDK ，请问以太网有设置静态 IP 的例程吗？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 可通过 tcpip_adapter_set_ip_info() API 来设置，请参见 `API 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/tcpip_adapter.html?highlight=tcpip_adapter_set_ip_info#_CPPv425tcpip_adapter_set_ip_info18tcpip_adapter_if_tPK23tcpip_adapter_ip_info_t>`_。
+  - 可通过 ``tcpip_adapter_set_ip_info()`` API 来设置，请参见 `API 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/tcpip_adapter.html?highlight=tcpip_adapter_set_ip_info#_CPPv425tcpip_adapter_set_ip_info18tcpip_adapter_if_tPK23tcpip_adapter_ip_info_t>`_。
   - 例程参考如下：
 
   .. code-block:: text
@@ -189,39 +189,39 @@ ESP32 & ESP8266 做 TCP Server 时端口释放后如何立即被再次使用？
 
 ----------------
 
-ESP32 有没有 LTE 连接 demo？
+ESP32 有没有 LTE 连接示例？
 -----------------------------------------------------------------------------
 
-  - 可以参考 ESP-IDF v4.2 及以上版本里的 examples/protocols/pppos_client demo。
+  可以参考 ESP-IDF v4.2 及以上版本里的 examples/protocols/pppos_client 示例。
 
 ----------------
 
 ESP32 TCP 反复关闭并重建 socket 时会出现内存泄漏的情况 (ESP-IDF v3.3)，原因是什么？
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-  -  IDF v3.3 版本，每次创建 socket 时，如果内部该 socket 数组没有分配过锁，就会给该 socket 分配锁，并且该锁在 socket 释放后并不会回收，下次分配该 socket 数组时就使用之前分配的。所以每次分配新的 socket 数组后释放，就会多一个锁的内存消耗。当每个 socket 数组都分配一遍后，就不会存在内存泄漏。
+  IDF v3.3 版本，每次创建 socket 时，如果内部该 socket 数组没有分配过锁，就会给该 socket 分配锁，并且该锁在 socket 释放后并不会回收，下次分配该 socket 数组时就使用之前分配的。所以每次分配新的 socket 数组后释放，就会多一个锁的内存消耗。当每个 socket 数组都分配一遍后，就不会存在内存泄漏。
 
 ----------------
 
-ESP32 使用 mbedtls 时如何优化内存？
+ESP32 使用 Mbed TLS 时如何优化内存？
 -----------------------------------------------------------------------------
 
-  - 可以在 menuconfig 里开启动态 Buffer， 具体操作为 ``menuconfig -> Component config -> mbedTLS -> Using dynamic TX/RX buffer（键 "Y" 使能）``。
+  - 可以在 menuconfig 里开启动态 buffer， 具体操作为 ``menuconfig -> Component config -> mbedTLS -> Using dynamic TX/RX buffer（键 "Y" 使能）``。
   - 同时可以使能上一步的 ``Using dynamic TX/RX buffer`` 里的子选项 ``Free SSL peer certificate after its usage`` 和 ``Free certificate, key and DHM data after its usage``。
 
 --------------
 
-ESP-IDF 中 MQTT 组件 Keepalive 的默认值是多少？
+ESP-IDF 中 MQTT 组件 keepalive 的默认值是多少？
 ----------------------------------------------------
 
-  - 默认值为 120 s，在 ``mqtt_config.h`` 中通过 ``MQTT_KEEPALIVE_TICK`` 定义。
+  默认值为 120 s，在 ``mqtt_config.h`` 中通过 ``MQTT_KEEPALIVE_TICK`` 定义。
 
 ----------------
 
 ESP32 额外开启 TCP server 后对 TCP client 的最大连接数是否有限制？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 有限制，ESP32 同时存在的 socket fd 数量受限于 LWIP_MAX_SOCKETS，默认为 10。
+  有限制，ESP32 同时存在的 socket fd 数量受限于 ``LWIP_MAX_SOCKETS``，默认为 10。
 
 --------------
 
@@ -236,21 +236,21 @@ MQTT 支持自动重连吗？
 使用 ESP32，LWIP 的 MTU 默认是多大？
 -----------------------------------------------------------------------------------
 
-  - LWIP 的 MTU 默认是 1500（固定值），不建议自行修改。
+  LWIP 的 MTU 默认是 1500（固定值），不建议自行修改。
 
 ---------------
 
 ESP32 如何增大 DNS 请求时间？
 -----------------------------------------------------------------------------------
 
-  - 可以手动修改位于 esp-idf/components/lwip/lwip/src/include/lwip/opt.h 里的 ``#define DNS_MAX_RETRIES 4``，例如将 ``#define DNS_MAX_RETRIES`` 的值改成 10，这样 DNS 在一个服务器上会尝试 10 次域名请求，每次请求的超时时间(s)是 1，1，2，3，4，5，6，7，8，9，总时间是 46 s。
+  可以手动修改位于 esp-idf/components/lwip/lwip/src/include/lwip/opt.h 里的 ``#define DNS_MAX_RETRIES 4``，例如将 ``#define DNS_MAX_RETRIES`` 的值改成 10，这样 DNS 在一个服务器上会尝试 10 次域名请求，每次请求的超时时间(s)是 1，1，2，3，4，5，6，7，8，9，总时间是 46 s。
 
 ---------------
 
 如何使用 ``esp_http_client`` 发送块 (chunked) 数据？
 -----------------------------------------------------------------------------------
 
-  - 可以通过 `HTTP Stream <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_http_client.html#http-stream>`_ 的方式，将 ``esp_http_client_open()`` 的 ``write_len``　参数设置为　-1，代码中会自动将 ``Transfer-Encoding`` 设置为 ``chunked``，参考　`esp_http_client.c <https://github.com/espressif/esp-idf/blob/master/components/esp_http_client/esp_http_client.c>`_ 中的 ``http_client_prepare_first_line()``。
+  - 可以通过 `HTTP Stream <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_http_client.html#http-stream>`_ 的方式，将 ``esp_http_client_open()`` 的 ``write_len``　参数设置为 -1，代码中会自动将 ``Transfer-Encoding`` 设置为 ``chunked``，参考 `esp_http_client.c <https://github.com/espressif/esp-idf/blob/master/components/esp_http_client/esp_http_client.c>`_ 中的 ``http_client_prepare_first_line()``。
   - 可使用如下代码：
 
     .. code-block:: c
@@ -296,12 +296,12 @@ ESP32 如何增大 DNS 请求时间？
 
 -----------------------------------------------------------------------------------------------------
 
-如何实现 certificate 自动下载功能 ?
+如何实现证书自动下载功能 ?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32:
 
-  - 具体操作详情参考 `aws 下面证书自动下载功能 <https://docs.aws.amazon.com/zh_cn/iot/latest/developerguide/auto-register-device-cert.html>`_ 。
+  具体操作详情参考 `aws 下面证书自动下载功能 <https://docs.aws.amazon.com/zh_cn/iot/latest/developerguide/auto-register-device-cert.html>`_ 。
 
 -----------------------------
 
@@ -332,14 +332,14 @@ ESP8266 收到 "tcp out of order" 的报文会怎么处理？
 ES32 支持 PPP 功能吗？
 ----------------------------------------------------------------------------------------------------------------
 
-  - 支持，请参考 `usb_cdc_4g_module <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_4g_module/>`_ 示例。
+  支持，请参考 `usb_cdc_4g_module <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_4g_module/>`_ 示例。
 
 ----------------
 
 ESP32 作为 HTTP 客户端，可以设置 cookie 的方式吗？
 ----------------------------------------------------------------------------------------------------------------
 
-  - ESP32 本身没有直接设置 cookie 的 API，但可以通过 `esp_http_client_set_header <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_http_client.html#_CPPv426esp_http_client_set_header24esp_http_client_handle_tPKcPKc>`_  向 HTTP 头里添加 cookie 等头数据的方式来设置 cookie。
+  ESP32 本身没有直接设置 cookie 的 API，但可以通过 `esp_http_client_set_header <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_http_client.html#_CPPv426esp_http_client_set_header24esp_http_client_handle_tPKcPKc>`_ 向 HTTP 头里添加 cookie 等头数据的方式来设置 cookie。
 
 ----------------
 
@@ -354,7 +354,7 @@ ESP32 使用套接字中的 ``read`` 和 ``recv`` API 读取 4 KB 数据时，�
 ESP-IDF 里目前使用的 lwIP 版本是什么？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - lwIP 版本目前是 2.1.2。
+  lwIP 版本目前是 2.1.2。
 
 ----------------
 
@@ -390,21 +390,21 @@ ESP32 是否支持在连上路由后使用上一次成功连接路由器时的 I
 ESP32 是否有至少在 HTTP/2 上实现 gRPC 客户端的示例？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - 目前还没有。
+  目前还没有。
 
 ----------------
 
 在 ESP-IDF 中，如何通过 HTTP 下载文件里的某一特定段（即在头部添加 ``Range:bytes`` 信息）？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - 可以参考 `esp http client 示例 <https://github.com/espressif/esp-idf/tree/v4.4.1/examples/protocols/esp_http_client>`_ 里的 ``http_partial_download`` 函数。
+  可以参考 `esp http client 示例 <https://github.com/espressif/esp-idf/tree/v4.4.1/examples/protocols/esp_http_client>`_ 里的 ``http_partial_download`` 函数。
 
 ----------------
 
 在 DHCP 模式下，ESP32 申请到 IP 后，如果租期到期，会续约此 IP 还是重新申请 IP？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - DHCP 模式下有两个租期，T1（租约的 1/2 时间）和 T2（租约的 7/8 时间），通常这两个租期期满后会续租同一 IP，只有当上述两个租期时间点都续租失败，才会重新申请 IP。
+  DHCP 模式下有两个租期，T1（租约的 1/2 时间）和 T2（租约的 7/8 时间），通常这两个租期期满后会续租同一 IP，只有当上述两个租期时间点都续租失败，才会重新申请 IP。
 
 ----------------
 
@@ -420,7 +420,7 @@ ESP32 是否有至少在 HTTP/2 上实现 gRPC 客户端的示例？
 ESP-IDF 里使用 ``setsockopt`` 的 ``SO_SNDBUF`` 选项获取或者设置发送缓冲区大小会报错，为什么？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - lwIP 默认不支持 ``SO_SNDBUF`` 选项，如果需要配置发送缓冲区大小可以在 menuconfig -> ``Component config`` -> ``LWIP`` -> ``TCP`` -> ``Default send buffer size`` 设置。如果需要获取或者设置接收缓冲区大小，此时需要在 menuconfig 里使能 ``CONFIG_LWIP_SO_RCVBUF`` 选项后才支持使用 ``setsockopt`` 的 ``SO_SNDBUF`` 选项获取或者设置接收缓冲区大小。
+  lwIP 默认不支持 ``SO_SNDBUF`` 选项，如果需要配置发送缓冲区大小可以在 menuconfig -> ``Component config`` -> ``LWIP`` -> ``TCP`` -> ``Default send buffer size`` 设置。如果需要获取或者设置接收缓冲区大小，此时需要在 menuconfig 里使能 ``CONFIG_LWIP_SO_RCVBUF`` 选项后才支持使用 ``setsockopt`` 的 ``SO_SNDBUF`` 选项获取或者设置接收缓冲区大小。
 
 ----------------
 
@@ -435,7 +435,7 @@ ESP-IDF 里如何根据错误码来获取更多的调试信息？
 ESP-IDF 支持的 MQTT 版本有哪些？
 -----------------------------------------------------------------------------------------------------------
 
-  - ESP-IDF 目前支持的 MQTT 版本为 MQTT 3.1 和 MQTT 3.1.1.
+  ESP-IDF 目前支持的 MQTT 版本为 MQTT 3.1 和 MQTT 3.1.1.
 
 ----------------
 
@@ -450,14 +450,14 @@ ESP-IDF 支持的 TLS 版本有哪些？
 ESP8266_RTOS_SDK 是否支持 TR-069 协议？
 -----------------------------------------------------------------------------------------------------------
 
-  - 不支持。
+  不支持。
 
 ----------------
 
 ESP32 支持 SAVI 吗？
 -----------------------------------------------------------------------------------------------------------
 
-  - 不支持，SAVI (Source Address Validation Improvements) 是通过监听控制类报文（如 ND、DHCPv6），即 CPS (Control Packet Snooping)，在接入设备上（AP 或交换机）为终端建立基于 IPv6 源地址、源 MAC 地址及接入设备端口的绑定关系，进而对通过指定端口的 IP 报文进行源地址校验。只有报文源地址与绑定表项匹配时才可以转发，保证网络上数据报文源地址真实性。这种一般针对于交换机或者企业级 AP 路由器的，是策略协议。目前 ESP32 支持 IPv6 链路本地地址、全球地址通信。
+  不支持，SAVI (Source Address Validation Improvements) 是通过监听控制类报文（如 ND、DHCPv6），即 CPS (Control Packet Snooping)，在接入设备上（AP 或交换机）为终端建立基于 IPv6 源地址、源 MAC 地址及接入设备端口的绑定关系，进而对通过指定端口的 IP 报文进行源地址校验。只有报文源地址与绑定表项匹配时才可以转发，保证网络上数据报文源地址真实性。这种一般针对于交换机或者企业级 AP 路由器的，是策略协议。目前 ESP32 支持 IPv6 链路本地地址、全球地址通信。
 
 ----------------
 
@@ -491,7 +491,7 @@ ESP32 做双网卡（比如 ETH+STA）时，默认路由如何选择？
 ESP-IDF 里 TCP 如何开启 keepalive？
 -----------------------------------------------------------------------------------------------------------
 
-  - 可以参考 `esp_tls.c <https://github.com/espressif/esp-idf/blob/v4.4.1/components/esp-tls/esp_tls.c#L207>`_ 里的使能 TCP keepalive 相关代码。
+  可以参考 `esp_tls.c <https://github.com/espressif/esp-idf/blob/v4.4.1/components/esp-tls/esp_tls.c#L207>`_ 里的使能 TCP keepalive 相关代码。
 
 ----------------
 
@@ -514,42 +514,42 @@ ESP32-C3 MQTT 是否能不设置对应的 ``client_id`` 而将 ``client_id`` 默
 使用 ESP-IDF MQTT 客户端发布 QoS 为 1 或者 2 的数据后，当 ``MQTT_EVENT_PUBLISHED`` 触发时是否意味着已经收到了对端合适的 ack 来证明这次发布已完成？还是仅仅只能说明成功发送了一次数据给服务器？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ``MQTT_EVENT_PUBLISHED`` 事件触发代表代理已确认收到客户端的发布的 QoS 为 1 或者 2 的消息，证明这次发布已经顺利完成。
+  ``MQTT_EVENT_PUBLISHED`` 事件触发代表代理已确认收到客户端的发布的 QoS 为 1 或者 2 的消息，证明这次发布已经顺利完成。
   
 ----------------
 
 ESP MQTT 客户端断开连接后，如何手动释放 MQTT 资源？
 -----------------------------------------------------------------------------------------------------------
 
-  - 手动调用 ``esp_mqtt_client_destroy`` API 即可。
+  手动调用 ``esp_mqtt_client_destroy`` API 即可。
 
 ----------------
 
 ESP-IDF 里可以在多线程里操作同一个套接字吗？
 -----------------------------------------------------------------------------------------------------------
 
-  - 多线程操作同一个套接字有风险，因此不建议该做法。
+  多线程操作同一个套接字有风险，因此不建议该做法。
 
 ----------------
 
 ESP DHCP 服务器模式下，ESP 设备分配到其他设备 IP 的时间是多少？
 -----------------------------------------------------------------------------------------------------------
 
-  - 默认为 120 s，具体见 ``DHCPS_LEASE_TIME_DEF`` 参数，不建议修改为太小的值。
+  默认为 120 s，具体见 ``DHCPS_LEASE_TIME_DEF`` 参数，不建议修改为太小的值。
 
 ----------------
 
 ESP-IDF DHCP 里三个租约相关时间是指什么？具体对应代码里的什么参数？
 -----------------------------------------------------------------------------------------------------------
 
-  - DHCP 有租约时间 (Address Lease Time)、租约续期时 (Lease Renewal Time) 和租约重新设定的时间 (Lease Rebinding Time)，分别对应 lwIP 代码 ``offered_t0_lease``、``offered_t1_renew`` 和 ``offered_t2_rebind``。
+  DHCP 有租约时间 (Address Lease Time)、租约续期时 (Lease Renewal Time) 和租约重新设定的时间 (Lease Rebinding Time)，分别对应 lwIP 代码 ``offered_t0_lease``、``offered_t1_renew`` 和 ``offered_t2_rebind``。
 
 ----------------
 
 ESP-IDF lwIP 里每次发送数据的最大长度是多少？
 -----------------------------------------------------------------------------------------------------------
 
-  - 如果使用套接字接口 ``send``，支持最大长度有 ``SSIZE_MAX`` 参数决定。如果使用 ``tcp_write`` 函数，最大发送的长度受限于 ``snd_buf`` （发送缓存区长度）。 ``send`` 接口是 lwIP 基于顺序 API 封装的套接字接口，是比 ``tcp_write`` 还要上层的接口，更适合于用户层开发调用。这两个 API 调用资源占用几乎没有差别。
+  如果使用套接字接口 ``send``，支持最大长度有 ``SSIZE_MAX`` 参数决定。如果使用 ``tcp_write`` 函数，最大发送的长度受限于 ``snd_buf`` （发送缓存区长度）。 ``send`` 接口是 lwIP 基于顺序 API 封装的套接字接口，是比 ``tcp_write`` 还要上层的接口，更适合于用户层开发调用。这两个 API 调用资源占用几乎没有差别。
 
 ----------------
 
@@ -564,7 +564,7 @@ ESP-IDF lwIP 里每次发送数据的最大长度是多少？
 ESP32 Wi-Fi 和低功耗蓝牙共存时，MQTT keepalive 时间该如何配置？有没有什么合适的配置时间？
 -----------------------------------------------------------------------------------------------------------
 
-  - 无需特殊考虑这种情况，只要不是太小即可，如可以配置为 30 s、60 s 等。
+  无需特殊考虑这种情况，只要不是太小即可，如可以配置为 30 s、60 s 等。
 
 ----------------
 
@@ -586,14 +586,14 @@ ESP MQTT 客户端的 disconnect 事件消息什么时候才会触发？
 ESP32 MQTT 客户端与服务器断开后会自动尝试重新连接吗?
 -----------------------------------------------------------------------------------------------------------
 
-  - ESP MQTT 客户端里的 ``esp_mqtt_client_config_t`` 结构体配置里有 ``disable_auto_reconnect`` 参数，可以通过配置这个参数为 ``true`` 或者 ``false`` 来决定是否需要 MQTT 自动重连，MQTT 默认会自动进行重连。
+  ESP MQTT 客户端里的 ``esp_mqtt_client_config_t`` 结构体配置里有 ``disable_auto_reconnect`` 参数，可以通过配置这个参数为 ``true`` 或者 ``false`` 来决定是否需要 MQTT 自动重连，MQTT 默认会自动进行重连。
 
 ----------------
 
 如何检测 ESP32 是否已经与 MQTT 服务器断开?
 -----------------------------------------------------------------------------------------------------------
 
-  - 检测 ESP32 是否已经与服务器断开可以使用 MQTT 的 ``PING`` 机制。也就是配置 ESP-MQTT 中 ``esp_mqtt_client_config_t`` 结构体里的 ``keepalive`` 参数 ``disable_keepalive`` 和 ``keepalive``，比如将 ``disable_keepalive`` 配置为 ``false`` （默认参数也是 ``false``，即默认开启 keepalive 机制），然后配置 ``keepalive`` 参数为 120 s 来设置保活时间，默认为 120 s。这样 MQTT 客户端会定期发送 ``PING`` 来检测和 MQTT 服务器的连接是否正常。
+  检测 ESP32 是否已经与服务器断开可以使用 MQTT 的 ``PING`` 机制。也就是配置 ESP-MQTT 中 ``esp_mqtt_client_config_t`` 结构体里的 ``keepalive`` 参数 ``disable_keepalive`` 和 ``keepalive``，比如将 ``disable_keepalive`` 配置为 ``false`` （默认参数也是 ``false``，即默认开启 keepalive 机制），然后配置 ``keepalive`` 参数为 120 s 来设置保活时间，默认为 120 s。这样 MQTT 客户端会定期发送 ``PING`` 来检测和 MQTT 服务器的连接是否正常。
 
 ----------------
 

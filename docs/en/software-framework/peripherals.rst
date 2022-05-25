@@ -36,11 +36,10 @@ Is ESP-WROOM-02D module able to connect SPI flash?
 
 --------------
 
-Taken ESP-WROOM-S2 as the slave device and STM32 as MCU, is it possible to download through SPI interface?
+Taking ESP-WROOM-S2 as the slave device and STM32 as MCU, is it possible to download through SPI interface?
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
   No, we use UART0 to download by default. You can also design OTA support yourself in firmware.
-
 
 --------------
 
@@ -128,7 +127,6 @@ When there is water on ESP32-S2 Touch Sensor, does it block or recognize the Tou
 
   When there is a small amount of water droplets, the waterproof function of the ESP32-S2 Touch Sensor can work normally. In the event of a large area of standing water (i.e. the Touch contact area is completely covered), the Touch will temporarily lock and will not resume operation until the water is cleared.
 
-
 --------------
 
 While the waterproof feature of ESP32-S2 Touch Sensor shielding the Touchpad with water flow, does other pads with no water still usable?
@@ -138,21 +136,21 @@ While the waterproof feature of ESP32-S2 Touch Sensor shielding the Touchpad wit
 
 --------------
 
-Are there any recommendations for materials that can be used to test Touch Sensor, can trigger Touch Sensor stably and is close to the parameters of human touches？
+Are there any recommendations for materials that can be used to test Touch Sensor, can trigger Touch Sensor stably and is close to the parameters of human touches?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   For experiments with high consistency requirements, it is doable to replace human hands with cell phone pencils.
 
 --------------
 
-Can the pins of Touch Sensor be remapped？
+Can the pins of Touch Sensor be remapped?
 ---------------------------------------------------------------------
 
   No, because Touch Sensor is realized via software programming.
 
 --------------
 
-Do I need to reset a check threshold for Touch Sensor after covering it with a acrylic plate？
+Do I need to reset a check threshold for Touch Sensor after covering it with a acrylic plate?
 -----------------------------------------------------------------------------------------------------------------------------
 
   Yes.
@@ -210,10 +208,10 @@ Is there any example code for I2S driving LCD with ESP32?
 
 --------------
 
-When using ESP8266 RTOS SDK v2.1 and previous versions, how to set LOG to UART1?
+When using ESP8266 RTOS SDK v2.1 and previous versions, how to set log to UART1?
 ----------------------------------------------------------------------------------------------------------------
 
-  After initializing UART1, you can switch LOG to UART1 via API:
+  After initializing UART1, you can switch log to UART1 via API:
 
   .. code-block:: c
 
@@ -221,10 +219,10 @@ When using ESP8266 RTOS SDK v2.1 and previous versions, how to set LOG to UART1?
 
 -----------------
 
-When using ESP8266 RTOS SDK v3.0 and later versions, how to set LOG to UART1?
+When using ESP8266 RTOS SDK v3.0 and later versions, how to set log to UART1?
 ----------------------------------------------------------------------------------------------------------
 
-  Go to  ``menuconfig -> Component config -> ESP8266-specific -> UART for console output -> custom -> UART peripheral to use for console output -> UART0`` and change the option to "UART1".
+  Go to ``menuconfig`` -> ``Component config`` -> ``ESP8266-specific`` -> ``UART for console output`` -> ``custom`` -> ``UART peripheral to use for console output`` -> ``UART0`` and change the option to "UART1".
 
 --------------
 
@@ -239,8 +237,8 @@ How to enable UART Flow Control in ESP32 IDF?
 The PWM of ESP8266 NonOS SDK changes slow. What could be the reasons?
 ---------------------------------------------------------------------------------------------------
 
-  - If you are using the gradient APIs in SDK example/IOT_demo, e.g., light_set_aim or light_set_aim_r, it will need a gradual process for PWM changes.
-  - If you need the PWM Duty to take effect immediately after configuration, please call API pwm_set_duty, and call pwm_start next to make this configuration take effect.
+  - If you are using the gradient APIs in SDK example/IOT_demo, e.g., ``light_set_aim`` or ``light_set_aim_r``, it will need a gradual process for PWM changes.
+  - If you need the PWM Duty to take effect immediately after configuration, please call API ``pwm_set_duty``, and call ``pwm_start`` next to make this configuration take effect.
 
 --------------
 
@@ -255,9 +253,9 @@ Some ESP8266 GPIOs are high level. What could be the reasons?
 How is the accuracy of ESP8266 ADC?
 ----------------------------------------------------------
 
-  - The ESP8266 ADC is 10 bit, and its theoretical accuracy is 2 :sup:`10` = 1024.
+  - The ESP8266 ADC is 10 bits, and its theoretical accuracy is 2 :sup:`10` = 1024.
   - After connected to a router, the ESP8266 will enter Modem-sleep mode from STA mode, causing the change of the reference value inside the chip. Therefore, the ADC could measure the data change.
-  - If you expect an accurate result, please read the ADC value using function system_adc_fast_read after turning off Wi-Fi.
+  - If you expect an accurate result, please read the ADC value using function ``system_adc_fast_read`` after turning off Wi-Fi.
 
 --------------
 
@@ -268,13 +266,13 @@ How to get the Bitmap information of the ADC register?
 
 --------------
 
-How many channels does ESP32 ADC have? What is the sampling rate and significant digit？
+How many channels does ESP32 ADC have? What is the sampling rate and significant digit?
 ---------------------------------------------------------------------------------------------------------------
 
   - The ESP32 ADC has 18 channels.
   - Its sampling rate can reach 100000 times per second without Wi-Fi.
   - Its sampling rate can reach 1000 times per second with Wi-Fi.
-  - The internal significant digit of ADC is 12-bit.
+  - The internal significant digit of ADC is 12 bits.
 
 --------------
 
@@ -288,7 +286,6 @@ Can I disable the thread scheduling and use a single CPU for ESP32 to realize re
     - See if the hardware RMT can generate the desired waveform with enough length.
     - When the hardware interrupt generated corresponding waveform, all callbacks need to be put in IRAM.
     - Use the co-processor in the chip as a single chip without an operation system. But it only supports assembly language for now.
-
 
 --------------
 
@@ -306,15 +303,13 @@ When using UART0 as a serial communication port for ESP32, what should I pay att
   - Generally, it is not recommended to use UART0 as a normal serial communication port, because it is the default LOG output port.
   - If the UART number in ESP32 is not enough for you or it is not convenient to change your hardware designs anymore, and UART0 is therefore going to be used as a normal communication port, please pay attention to the following suggestions:
 
-  **Software**: 
-
-    You need to protect the serial communication port from being affected by printing. The UART0 mainly has three print settings in the default program:
+  **Software**: You need to protect the serial communication port from being affected by printing. The UART0 mainly has three print settings in the default program:
 
     - First, power-on ROM print. You can set the MTDO pin as low level when powered on to block the power-on ROM print.
-    - Second, bootloader log output. You can set ``menuconfig -> Bootloader config -> Bootloader log verbosity`` as ``Not output`` to block bootloader log output.
-    - Third, app log output. You can set ``menuconfig -> Component config -> Log output -> Default log verbosity`` as ``Not output`` to block app log output.
+    - Second, bootloader log output. You can set ``menuconfig`` -> ``Bootloader config`` -> ``Bootloader log verbosity`` as ``Not output`` to block bootloader log output.
+    - Third, app log output. You can set ``menuconfig`` -> ``Component config`` -> ``Log output`` -> ``Default log verbosity`` as ``Not output`` to block app log output.
     
-  **Hardware**：
+  **Hardware**:
 
     - Pay attention to other devices on UART0 when downloading programs since they could affect downloading. It is recommended to reserve a 0 Ω resistance between ESP32 and other devices so that if there is something wrong while downloading, you can still disconnect this resistance.
 
@@ -327,26 +322,26 @@ Is it possible to use GPIO34 ～ GPIO39 from ESP32-SOLO-1 as the RX signal pin f
   
 ---------------
 
-Does ESP-WROOM-S2 module support using SDIO as a slave？
+Does ESP-WROOM-S2 module support using SDIO as a slave?
 ---------------------------------------------------------------------------------------
 
   Yes, it does.
 
 -----------------
 
-Does ESP32 support using crystal oscillator as the clock source of I2S？
+Does ESP32 support using crystal oscillator as the clock source of I2S?
 ---------------------------------------------------------------------------------------------------
 
   No. Please go to `ESP32 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf>`_ to read about clock source configurations of I2S.
 
 ---------------
 
-When calling the API adc_read_fast() with ESP8266, will it cause a Wi-Fi disconnection?
+When calling the API ``adc_read_fast()`` with ESP8266, will it cause a Wi-Fi disconnection?
 ----------------------------------------------------------------------------------------------------------------------
 
-  - Please turn off Wi-Fi and interrupts first before calling adc_read_fast(). Please refer to the `Specification <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/peripherals/adc.html?highlight=adc_read#_CPPv413adc_read_fastP8uint16_t8uint16_t>`_ of this API.
-  - Since the API adc_read_fast() performs continuous acquisition and the ADC is partially coupled internally with Wi-Fi RF, so it is not possible to call this function with Wi-Fi turned on.
-  - Please use adc_read() for ADC acquisition when Wi-Fi is on. To ensure data stability, you need to use function esp_wifi_set_ps(WIFI_PS_NONE); to turn off Wi-Fi Modem-sleep mode.
+  - Please turn off Wi-Fi and interrupts first before calling ``adc_read_fast()``. Please refer to the `Specification <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/peripherals/adc.html?highlight=adc_read#_CPPv413adc_read_fastP8uint16_t8uint16_t>`_ of this API.
+  - Since the ``API adc_read_fast()`` performs continuous acquisition and the ADC is partially coupled internally with Wi-Fi RF, so it is not possible to call this function with Wi-Fi turned on.
+  - Please use ``adc_read()`` for ADC acquisition when Wi-Fi is on. To ensure data stability, you need to use function ``esp_wifi_set_ps(WIFI_PS_NONE)`` to turn off Wi-Fi Modem-sleep mode.
  
 .. note::
 
@@ -357,7 +352,7 @@ When calling the API adc_read_fast() with ESP8266, will it cause a Wi-Fi disconn
 How to dynamically change the serial baud rate and make it take effect immediately with ESP32?
 ------------------------------------------------------------------------------------------------------------------------------
 
-  Please use the API uart_set_baudrate() to change the baud rate of UART. Please see `API Reference <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_get_baudrate11uart_port_tP8uint32_t>`_.
+  Please use the API ``uart_set_baudrate()`` to change the baud rate of UART. Please see `API Reference <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_get_baudrate11uart_port_tP8uint32_t>`_.
 
 --------------
 
@@ -371,15 +366,15 @@ Since ESP32-S2 has removed the SDIO interface, does it still support external TF
 What is the turning speed of ESP32 GPIO levels?
 ---------------------------------------------------------------------
 
-  It will take around 300 ns.
+  It takes around 300 ns.
 
 --------------
 
-How to connect MIC with ESP32?
+How to connect a microphone with ESP32?
 -----------------------------------------------------
 
-  - You can connect I2S peripheral if it is digital MIC.
-  - You can connect ADC peripheral if it is analog MIC.
+  - You can connect I2S peripheral if it is a digital microphone.
+  - You can connect ADC peripheral if it is an analog microphone.
 
 --------------
 
@@ -387,7 +382,7 @@ Does ESP32 support analog audio output or digital audio output?
 -------------------------------------------------------------------------------------------
 
   - ESP32 supports DAC analog audio output for simple outputs such as tones. But if you use it for music playing, the effect will not be so desirable.
-  - ESP32 supports PWM analog audio output, which has slightly better effect than DAC. The demo code is at ` esp-iot-solution  <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`_.
+  - ESP32 supports PWM analog audio output, which has slightly better effect than DAC. The demo code is at `esp-iot-solution  <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`__.
   - ESP32 also supports I2S digital audio output. For I2S configurable pins, please see `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ > Chapter Peripherals and Sensors.
 
 ---------------
@@ -398,17 +393,16 @@ What is the difference among SPI, HSPI and VSPI in ESP32?
   - ESP32 has four SPIs. SPI0 and SPI1 are occupied by default to connect to flash that stores programs. SPI2 and SPI3 are general-purpose SPIs that are available for customers to use.
   - HSPI represents the above-mentioned SPI2, and VSPI represents the SPI3. The two sets of SPIs are general-purpose SPIs. 
 
-
 --------------
 
-When certain RTC peripherals（SARADC1，SARADC2，AMP，HALL） are powered on, the inputs of GPIO36 and GPIO39 will be pulled down for approximately 80 ns. 
+When certain RTC peripherals (SARADC1, SARADC2, AMP, HALL) are powered on, the inputs of GPIO36 and GPIO39 will be pulled down for approximately 80 ns. How to solve the issue?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   When enabling power for any of these peripherals, ignore input from GPIO36 and GPIO39. 
 
 --------------
 
-When the LEDC is in decremental fade mode, a duty overflow error can occur.
+When the LEDC is in decremental fade mode, a duty overflow error can occur. How to solve the issue?
 ----------------------------------------------------------------------------------------------------------------
 
   When using LEDC, avoid the concurrence of following three cases: 
@@ -422,7 +416,7 @@ When the LEDC is in decremental fade mode, a duty overflow error can occur.
 When the TWAI® controller enters reset mode or when the TWAI controller undergoes bus-off recovery, the REC is still permitted to change. How to resolve such issue?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  When entering reset mode, the TWAI controller should set the the LISTEN_ONLY_MODE to freeze the REC. The desired mode of operation should be restored before exiting reset mode or when bus-off recovery completes. 
+  When entering reset mode, the TWAI controller should set the ``LISTEN_ONLY_MODE`` to freeze the REC. The desired mode of operation should be restored before exiting reset mode or when bus-off recovery completes. 
 
 --------------
 
@@ -453,7 +447,7 @@ When the TWAI® Controller receives an erroneous data frame, the data bytes of t
 The ESP32 GPIO peripheral may not trigger interrupts correctly if multiple GPIO pads are configured with edge-triggered interrupts. How to resolve such issue?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Workaround 1: 
+  - Solution 1: 
 
     - Follow the steps below to trigger a GPIO interrupt on a rising edge: 
 
@@ -467,14 +461,12 @@ The ESP32 GPIO peripheral may not trigger interrupts correctly if multiple GPIO 
       2. Set the interrupt trigger type of the CPU to edge.
       3. After the CPU services the interrupt, change the GPIO interrupt type to high. A second interrupt occurs at this time, and the CPU needs to ignore the interrupt service routine.
 
-  - Workaround 2: 
+  - Solution 2: 
 
     Assuming GPIO0 ~ GPIO31 is Group1 and GPIO32 ~ GPIO39 is Group2. 
 
-      - If an edge-triggered interrupt is configured in either group then no other GPIO
-        interrupt of any type should be configured in the same group.
-      - Any number of level-triggered interrupts can be configured in a single group, if no
-        edge-triggered interrupts are configured in that group. 
+      - If an edge-triggered interrupt is configured in either group then no other GPIO interrupt of any type should be configured in the same group.
+      - Any number of level-triggered interrupts can be configured in a single group, if no edge-triggered interrupts are configured in that group. 
 
 ---------------
 
@@ -490,7 +482,7 @@ Does ESP8266 support pulse counting?
 Does the ESP-IDF SDK USB interface support HID and MSC modes?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Our SDK will provide examples of HID and MSC classes in the future. And specific device classes need to be implemented by yourselves referring to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__.
+  Our SDK will provide examples of HID and MSC classes in the future. And specific device classes need to be implemented by yourselves referring to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__.
 
 ---------------
 
@@ -511,14 +503,14 @@ If I float the ADC pin and print out VDD3P3 value (65535), then the voltage of V
 When using ESP8266 to generate PWM by directly writing to the register of the hardware timer FRC1, I found there are error PWM outputs after Wi-Fi is initialized since it may disturb the interrupt of FRC1. Is it possible to use FRC2 instead to generate PWM? Or is it possible to set FRC1 higher priority than Wi-Fi?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - FRC2 cannot be used as it is occupied by the system. Wi-Fi uses NMI interrupt, which have a higher priority than other ordinary interrupts. It is recommended to use the PWM library of ESP8266_RTOS_SDK. Please refer to `ESP8266_RTOS_SDK/examples/peripherals/pwm <https://github.com/espressif/ESP8266_RTOS_SDK/tree/release/v3.4/examples/peripherals/pwm>`_ example.
+  FRC2 cannot be used as it is occupied by the system. Wi-Fi uses NMI interrupt, which have a higher priority than other ordinary interrupts. It is recommended to use the PWM library of ESP8266_RTOS_SDK. Please refer to `ESP8266_RTOS_SDK/examples/peripherals/pwm <https://github.com/espressif/ESP8266_RTOS_SDK/tree/release/v3.4/examples/peripherals/pwm>`_ example.
 
 -------------------------
 
 I'm using v3.3.3 version of ESP-IDF to test the ledc example on ESP32. The LED PWM outputs when Auto Light Sleep mode is disabled, but does not output when this mode is enabled. According the description of  `LED PWM <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/ledc.html?highlight=pwm#id1>`_  in ESP-IDF programming guide, LED PWM should work in sleep modes. What is the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - v3.3.3 does not support LED PWM working in sleep modes. Please use the ledc example under the new versions of ESP-IDF (v4.0 and later versions) to test, e.g., ESP-IDF release/v4.2 version of the SDK. Plus, it is also necessary to change the LED PWM clock source to the internal RTC_8M clock source. Please see below:
+  v3.3.3 does not support LED PWM working in sleep modes. Please use the LEDC example under the new versions of ESP-IDF (v4.0 and later versions) to test, e.g., ESP-IDF release/v4.2 version of the SDK. Plus, it is also necessary to change the LED PWM clock source to the internal RTC_8M clock source. Please see below:
 
   .. code-block:: c
 
@@ -535,7 +527,7 @@ I'm using v3.3.3 version of ESP-IDF to test the ledc example on ESP32. The LED P
 What is the input resistance of ESP32 ADC?
 -----------------------------------------------------------------------------------------------------------------------------
 
-  - ADC is capacitive and can be considered as a large resistance.
+  ADC is capacitive and can be considered as a large resistance.
 
 -------------------------
 
@@ -549,7 +541,7 @@ When using ESP32's ADC to detect the power supply voltage, is it necessary to di
 The maximum data transmission of ESP32 SPI DMA is 4092 bytes. Is it because of hardware limitation?
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes. A single node can only store 4092 bytes of data, but the DMA can send more data through link lists.
+  Yes. A single node can only store 4092 bytes of data, but the DMA can send more data through link lists.
 
 -------------------------
 
@@ -563,18 +555,18 @@ What is the stable current output for ESP32-S2's USB interface?
 Does ESP32-S3's USB peripheral supports USB Host?
 ------------------------------------------------------
 
-  - Yes, regarding this function, ESP32-S3 is the same as ESP32-S2.
+  Yes, regarding this function, ESP32-S3 is the same as ESP32-S2.
 
 -------------------------
 
 Does ESP32-C3 USB support USB serial port function and USB JTAG function? 
 ---------------------------------------------------------------------------------------------------------------------
 
-  - Yes.
+  Yes.
   
 ---------------
 
-What reference drivers does ESP32 touch screen have?
+What reference drivers does the ESP32 touch screen have?
 ------------------------------------------------------------------------------------------
 
   - Code: please refer to `touch_panel_code <https://github.com/espressif/esp-iot-solution/tree/master/components/display/touch_panel>`_.
@@ -597,21 +589,21 @@ When using an ESP32 board for development and testing based on ESP-IDF release/v
 
     spi_flash:Detected size(8192K) smaller than the size in the binary image header(16384K).Probe failed. 
 
-  - The reason is that the configured "Flash Size" is larger than the actual "Flash Size". In order to avoid misuse of a larger address space, the actual "Flash Size" is checked.
+  The reason is that the configured flash size is larger than the actual flash size. In order to avoid misuse of a larger address space, the actual flash size is checked.
   
 -----------------
 
 What is ESP32's highest sampling rate in ADC DMA mode?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 supports up to 2 MHz of sampling rate theoretically.
+  ESP32 supports up to 2 MHz of sampling rate theoretically.
   
 -----------------
 
-When an ESP32 calling "adc2_get_raw()" between "esp_wifi_start()" and "esp_wifi_stop()", the read operation fails. What is the reason?
+When an ESP32 calling ``adc2_get_raw()`` between ``esp_wifi_start()`` and ``esp_wifi_stop()``, the read operation fails. What is the reason?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Because ADC2 is shared with the Wi-Fi module. The Wi-Fi driver uses ADC2 and has higher priority. Therefore, the application can only use ADC2 when the Wi-Fi driver is not activated.
+  Because ADC2 is shared with the Wi-Fi module. The Wi-Fi driver uses ADC2 and has higher priority. Therefore, the application can only use ADC2 when the Wi-Fi driver is not activated.
 
 ---------------
 
@@ -633,7 +625,7 @@ Using ESP-WROOM-02D module, can GPIO0, GPIO15, GPIO1 and GPIO3 be used as normal
 What are the USB features of ESP32-S2 and ESP32-S3? 
 --------------------------------------------------------------------------------------------------------------------------------
 
- - ESP32-S3 and ESP32-S2 support USB 1.1 OTG, and both support Host and Device functions. On top of that, ESP32-S3 also supports USB-Serial-JTAG peripheral, which can be used to download and debug firmware.
+  ESP32-S3 and ESP32-S2 support USB 1.1 OTG, and both support Host and Device functions. On top of that, ESP32-S3 also supports USB-Serial-JTAG peripheral, which can be used to download and debug firmware.
  
 ---------------
 
@@ -647,35 +639,35 @@ Are there any references to the library and demo of ESP32-S2 USB Host?
 The USB protocol supported by ESP32-S2 is OTG 1.1, with the maximum speed of 12 Mbps. Can it communicate with USB 2.0 devices?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Most USB 2.0 devices can backward compatible with USB 1.1, so they can communicate with USB 1.1 (in full speed mode).
+  Most USB 2.0 devices can backward compatible with USB 1.1, so they can communicate with USB 1.1 (in full speed mode).
   
 ---------------
 
 Does ESP32-S2 support USB camera?
 ------------------------------------------------------------------------
 
-  - Yes, but currently ESP32S2 only supports USB 1.1. So please choose the camera which is compatible with USB 1.1. For demo code, please refer to example `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_.
+  Yes, but currently ESP32S2 only supports USB 1.1. So please choose the camera which is compatible with USB 1.1. For demo code, please refer to example `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_.
 
 ---------------
 
 Is there any reference for the example of using ESP32S2 as a USB flash drive (MSC DEVICE)?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Please refer to `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_msc_wireless_disk>`_. The average read and write speed currently tested is: read 540 KB/s, write 350 KB/s.
+  Please refer to `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_msc_wireless_disk>`_. The average read and write speed currently tested is: read 540 KB/s, write 350 KB/s.
   
 ---------------
 
 As ESP32-C3 already has USB function, can I download firmware directly via USB without using the cp2102 chip?
 -------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes, ESP32-C3 can download firmware via USB, The USB serial port number should be displayed as COMx on Windows devices and ttyACMx on Linux devices.
+  Yes, ESP32-C3 can download firmware via USB, The USB serial port number should be displayed as COMx on Windows devices and ttyACMx on Linux devices.
   
 ---------------
 
 Does ESP32-C3 support USB Host?
 ------------------------------------------------------
 
- - No, it only supports USB-Serial-JTAG function.
+  No, it only supports USB-Serial-JTAG function.
 
 ---------------
 
@@ -683,7 +675,7 @@ Does ESP32-C3 support USB Host?
 Does ESP32 support using ADC2 and Bluetooth simultaneously?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes.
+  Yes.
 
 ----------------
 
@@ -691,7 +683,7 @@ What is the maximum transmission speed supported by SPI slave?
 -------------------------------------------------------------------------------
   :CHIP\: ESP32 :
 
-  - ESP32 can support up to 10 M of transmission speed when serves as an SPI slave.
+  ESP32 can support up to 10 M of transmission speed when serves as an SPI slave.
 
 ------------------------------
 
@@ -720,12 +712,12 @@ When using the ESP32-S3-WROOM-1 (ESP32-S3R2) module to enable its PSRAM configur
 When using the ESP32-S3-WROOM-2 (ESP32-S3R8V) module to enable the PSRAM configuration based on the "hello-world" example in ESP-IDF v4.4, the following error is printed. What is the reason?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    .. code-block:: text
+  .. code-block:: text
     
       E (453) psrm: psrm ID read error: 0x00ffff
       E (454) cpu start: Failed to init external RAM!
 
-  - ESP32-S3R8V chip integrates a 8-wire 8 MB PSRAM, please set PSRAM mode to **Octal** mode in menuconfig before your action as follows:
+  ESP32-S3R8V chip integrates a 8-wire 8 MB PSRAM, please set PSRAM mode to **Octal** mode in menuconfig before your action as follows:
 
     ``menuconfig → Component config → ESP32S3 Specific → Support for external, SPI connected RAM → SPI RAM config → Mode (QUAD/OCT) of SPI RAM chip in use (Octal Mode PSRAM)``
 
@@ -749,21 +741,21 @@ What is the sampling rate range supported by the ADC DMA mode of the ESP32-S2 ch
 The ESP32-C3 chip can use USB to download firmware, but it is not supported under ESP-IDF v4.3. How to use USB to download firmware?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-   - You need to compile under ESP-IDF v4.4 or later versions. After pulling the latest branch and `updating the IDF tool <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_, you can compile normally and download it using USB. Please refer to `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_ for the usage.
+  You need to compile under ESP-IDF v4.4 or later versions. After pulling the latest branch and `updating the IDF tool <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_, you can compile normally and download it using USB. Please refer to `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_ for the usage.
 
 ----------------------
 
 Does the ADC of ESP32 support simultaneous sampling of multiple channels?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - No, If you are using ADC to do multi-channel sampling, please implement it via ADC polling scheme.
+  No, If you are using ADC to do multi-channel sampling, please implement it via ADC polling scheme.
 
 -------------------------
 
 Does the ESP32 chip support USRAT (Universal Synchronous Asynchronous Receiver Transmitter)?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - It's not support. ESP32 only supports UART and cannot provide the synchronous clock.
+  It's not support. ESP32 only supports UART and cannot provide the synchronous clock.
   
 --------------------
 
@@ -778,14 +770,14 @@ When using the ESP32-WROVER-B module with release/v4.2 version of ESP-IDF, I set
 Does the serial port verification of the ESP32 chip support MARK and SPACE verification?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - No.
+  No.
   
 ----------------------------
 
 What is the size of the hardware FIFO in ESP8266's serial port?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Both UART0 and UART1 of ESP8266 have a 128-byte hardware FIFO and a 128-byte RW FIFO, which operate at the same address. Please refer to Section 11.2. Hardware Resources in `ESP8266 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_en.pdf>`_.
+  Both UART0 and UART1 of ESP8266 have a 128-byte hardware FIFO and a 128-byte RW FIFO, which operate at the same address. Please refer to Section 11.2. Hardware Resources in `ESP8266 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_en.pdf>`_.
 
 --------------------------------------------------------------------------
 
@@ -793,33 +785,31 @@ How to change the clock to REF_TICK in RMT?
 ---------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
 
-  - By using the `rmt_set_source_clk <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/rmt.html?highlight=rmt_set_source_clk#_CPPv418rmt_set_source_clk13rmt_channel_t16rmt_source_clk_t>`_ interface.
+  By using the `rmt_set_source_clk <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/rmt.html?highlight=rmt_set_source_clk#_CPPv418rmt_set_source_clk13rmt_channel_t16rmt_source_clk_t>`_ interface.
 
 ---------------------------
 
 What is the serial port baud rate range of ESP8266?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  -  300 ~ 115200*40 bps. Please refer to Section 11.3.1. Baud Rate in `ESP8266 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_en.pdf>`_.
+  300 ~ 115200*40 bps. Please refer to Section 11.3.1. Baud Rate in `ESP8266 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_en.pdf>`_.
 
 -----------------------------------------------------------------------------------------------------
 
 How to set interrupt priority for timers?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
-
   - esp_timer is implemented based on task, so interrupt priority cannot be configured.
   - timer_group can have interrupt priority by modifying the last parameter of the `timer_isr_callback_add <https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32/api-reference/peripherals/timer.html#_CPPv422timer_isr_callback_add13timer_group_t11timer_idx_t11timer_isr_tPvi>`_ interface.
 
 ---------------
 
-After configuring the GPIO19 for ESP32-C3 as pulled-down input, the level of this pin still stays high. However other pins in ESP32-C3 does not have this issue. What is the reason？
+After configuring the GPIO19 for ESP32-C3 as pulled-down input, the level of this pin still stays high. However other pins in ESP32-C3 does not have this issue. What is the reason?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - In ESP32-C3, GPIO19 is a USB pin, whose pull-up resistor is controlled by the pin's pull-up value together with USB's pull-up value. If any of the two pull-up values is 1, the pin's pull-up resistor will be enabled.
   - The USB pull-up value of GPIO19 is 1 by default, so when the pin is pulled down, GPIO19 still keeps high level. 
-  - You can configure it via USB_SERIAL_JTAG_DP_PULLUP.
+  - You can configure it via the register ``USB_SERIAL_JTAG_DP_PULLUP``.
 
 -----------------------------------------------------------------------------------------------------
 
@@ -828,7 +818,7 @@ How to modify the output port of UART0?
 
   :CHIP\: ESP32 | ESP32 | ESP32-C3:
 
-  - This can be set in menuconfig: ``idf.py menuconfig —> Component config —> Common ESP-related -> Channel for console output(custom UART)``.
+  This can be set in menuconfig: ``idf.py menuconfig`` —> ``Component config`` —> ``Common ESP-related`` -> ``Channel for console output(custom UART)``.
 
 -----------------------------------------------------------------------------------------------------
 
@@ -837,7 +827,7 @@ Can the REF_TICK clock frequency be modified?
 
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
 
- - No, the REF_TICK clock is fixed.
+  No, the REF_TICK clock is fixed.
 
 ----------------------
 
@@ -846,7 +836,7 @@ Does ESP32-S2 support eMMC?
 
   :CHIP\: ESP32-S2:
 
-  - No.
+  No.
 
 ------------------
 
@@ -862,14 +852,14 @@ Does ESP8266 RTOS SDK support full duplex for SPI?
 
   :CHIP\: ESP8266:
 
-  - No, it doesn't. Because ESP8266 doesn't support DMA, in order to improve the transmission performance, the entire FIFO is used. So it can only be half duplex. Please refer to `spi readme <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/peripherals/spi#spi-demo-user-guide>`_ for more details.
+  No, it doesn't. Because ESP8266 doesn't support DMA, in order to improve the transmission performance, the entire FIFO is used. So it can only be half duplex. Please refer to `spi readme <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/peripherals/spi#spi-demo-user-guide>`_ for more details.
 
 ---------------------
 
 What is the measurement error between the ADCs of the ESP32 chip?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - By default, the measurement error between ESP32 ADCs is ±6%, please refer to `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ for details.
+  By default, the measurement error between ESP32 ADCs is ±6%, please refer to `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ for details.
 
 ------------------
 
@@ -885,28 +875,28 @@ When using ESP8266, I want to use UART0 exclusively for downloading, and then us
 Does the ESP32-S2 support USB HID?
 -----------------------------------------------------------------------
 
-  - Supported.
+  Supported.
 
 ----------------------
 
 Does ESP32-S2 support SDIO as a slave?
 -------------------------------------------------------------------------------------------
 
-  - ESP32-S2 has no SDIO interface and does not support SDIO as a slave.
+  ESP32-S2 has no SDIO interface and does not support SDIO as a slave.
 
 --------------------
 
 Does ESP32 support using the MCPWM Timer to trigger AD sampling?
 -------------------------------------------------------------------------------------
 
-  - No, it does not.
+  No, it does not.
 
 ---------------
 
 Can ESP32 support 9-bit clock mode for 3-wire SPI (i.e. a mode where the first bit indicates whether the next 8 bits are command or data)?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes, you can refer to the command or address phase mentioned in `SPI Transactions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#spi-transactions>`_, define one of the phases as 1-bit wide, and then assign 0 or 1 to it to distinguish whether the next 8 bits are data or command. In doing so, the 9-bit clock mode for 3-wire SPI is implemented.
+  Yes, you can refer to the command or address phase mentioned in `SPI Transactions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#spi-transactions>`_, define one of the phases as 1-bit wide, and then assign 0 or 1 to it to distinguish whether the next 8 bits are data or command. In doing so, the 9-bit clock mode for 3-wire SPI is implemented.
 
 --------------
 
