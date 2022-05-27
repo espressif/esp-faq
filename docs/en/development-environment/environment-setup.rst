@@ -40,7 +40,7 @@ When installing esp-idf version master using ESP-IDF Tools 2.3 in Windows system
 
 --------------
 
-When setting up environment using `esp-idf-tools-setup-2.3.exe <link:https://dl.espressif.com/dl/esp-idf-tools-setup-2.3.exe>`_ in Windows system, errors occurred in "make menuconfig": 
+When setting up environment using `esp-idf-tools-setup-2.3.exe <link:https://dl.espressif.com/dl/esp-idf-tools-setup-2.3.exe>`_ on Windows, errors occurred when ``make menuconfig`` is executed: 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code:: shell
@@ -48,7 +48,7 @@ When setting up environment using `esp-idf-tools-setup-2.3.exe <link:https://dl.
     -- Warning: Did not find file Compiler/-ASM Configure
     -- Configuring incomplete, erros occurred!
 
-  This is because the system could not find the compiling tool. You can test and verify this in example esp-idf/examples/get-started/hello_world.
+  This is because the system could not find the project to be compiled. You need to change directory to the IDF project before running commands to configure and compile the project. For example, to build the project hello world, go to ``esp-idf/examples/get-started/hello_world`` before running the commands.
 
 --------------
 
