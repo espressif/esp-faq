@@ -103,11 +103,11 @@ ESP-WIFI-MESH 是否有无路由方案完成自组网？
 
 --------------
 
-利用 Mwifi 自动组网后，如何获得某个节点的所有潜在父节点的信号强度 (rssi) ？
+利用 Mwifi 自动组网后，如何获得某个节点的所有潜在父节点的信号强度 (rssi)？
 ------------------------------------------------------------------------------------------
 
-  - 可以通过 ``mwifi_get_parent_rssi()`` 获取其父节点的信号强度
-  - 可以通过例程 https://github.com/espressif/esp-mdf/blob/master/examples/wireless_debug 参与获取其他结点的信号强度
+  - 可以通过 ``mwifi_get_parent_rssi()`` 获取其父节点的信号强度。
+  - 可以通过例程 https://github.com/espressif/esp-mdf/blob/master/examples/wireless_debug 参与获取其他结点的信号强度。
 
 --------------
 
@@ -143,7 +143,7 @@ esp_mesh_set_parent 函数成功连接后，断开 AP，该函数会不断发起
 设置按钮后报错：``phy_init: failed to load RF calibration data``。
 ------------------------------------------------------------------------
 
-  乐鑫芯片初次上电会有 RF 自校准，并将数据存在 NVS 里，若擦除了该部分，就会出现这行打印，做全校准。
+  乐鑫芯片初次上电会有 RF 自校准，并将数据存在 NVS 里。若擦除了该部分，就会出现这行打印，做全校准。
 
 --------------
 
@@ -172,7 +172,8 @@ Mwifi 例程怎么修改网络的 AP 连接和最大层数？通信时的最大�
 ----------------------------------------------------------------------------------
 
   - 可以通过 menuconfig 里面的配置进行修改，位于：Component config -> MDF Mwifi -> Capacity config。
-  - 通信性能可参考：`performance <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/mesh.html#performance>`__。
+  - 通信性能可参考：`performance <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/esp-wifi-mesh.html#performance>`__。
+  - WIFI-MESH 带宽可通过 `console_test <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/console_test>`__ 例程进行测试。
 
 --------------
 
