@@ -222,3 +222,14 @@ ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region access
   :CHIP\: ESP32:
 
   - 在工程下的 CMakeLists.txt 中添加 “set(EXTRA_COMPONENT_DIRS $ENV{IDF_PATH}/examples/common_components/protocol_examples_common)” 这一行语句即可。
+
+--------------
+
+使用 ESP8266 NonOS v3.0 版本的 SDK，如下报错是什么原因？
+------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    E:M 536    E:M 1528
+
+  以 E:M 开头的报错表示内存不足。

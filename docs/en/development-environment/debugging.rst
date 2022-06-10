@@ -227,3 +227,14 @@ The RTC_watch_dog keeps resetting during ESP32 SPI boot, what is the reason?
 
   - Reason: The flash has a requirement for time interval between VDD_SDIO power-up and the first access. For example, GD's 1.8V flash requires 5 ms of time interval, while the time interval of ESP32 is about 1 ms (XTAL frequency is 40 MHz). Under such condition, the flash access will fail and either timer watchdog reset or RTC watchdog reset is triggered, depending on which one is triggered first. The threshold for RTC watchdog reset is 128 KB cycle, while the threshold for timer watchdog reset is 26 MB cycle. Taking a 40 MHz XTAL clock as an example, when the frequency of RTC slow clock is greater than 192 KHz, RTC watchdog reset will be triggered first, otherwise timer watchdog reset will be triggered. VDD_SDIO will be continuously powered when timer watchdog is reset, so there will be no problem in accessing flash and the chip will work normally. When RTC watchdog is reset, the VDD_SDIO power supply will be disabled and the access to flash will fail, thus the RTC_watch_dog resets continuously.
   - Solution: When an RTC watchdog reset occurs, the power supply to VDD_SDIO is disabled. You can add a capacitor to VDD_SDIO to ensure that the voltage of VDD_SDIO does not drop below the voltage that the flash can tolerate during this period.
+
+--------------
+
+When using ESP8266 NonOS v3.0 SDK, the following error occurred. What could be the reasons?
+------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    E:M 536    E:M 1528
+
+  Any error logs beginning with E:M indicate insufficient memory.

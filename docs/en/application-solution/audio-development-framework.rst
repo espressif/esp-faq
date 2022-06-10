@@ -90,3 +90,20 @@ Can ESP-DSP fft run 4096, 8192 and more samples?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes, up to 32 K samples are supported. The maximum number can be configured in menuconfig, e.g., for `fft demo <https://github.com/espressif/esp-dsp/tree/master/examples/fft>`_, go to ``idf.py menuconfig-->Component config-->DSP Library-->Maximum FFT length-->(*)32768``.
+
+---------------
+
+How to connect a microphone with ESP32?
+-----------------------------------------------------
+
+  - You can connect I2S peripheral if it is a digital microphone.
+  - You can connect ADC peripheral if it is an analog microphone.
+
+--------------
+
+Does ESP32 support analog audio output or digital audio output?
+-------------------------------------------------------------------------------------------
+
+  - ESP32 supports DAC analog audio output for simple outputs such as tones. But if you use it for music playing, the effect will not be so desirable.
+  - ESP32 supports PWM analog audio output, which has slightly better effect than DAC. The demo code is at `esp-iot-solution  <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`__.
+  - ESP32 also supports I2S digital audio output. For I2S configurable pins, please see `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ > Chapter Peripherals and Sensors.
