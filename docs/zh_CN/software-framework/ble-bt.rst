@@ -569,3 +569,10 @@ ESP32 如何手动重置 BLE mesh 设备（不通过 mobile provisioning app 或
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 可以调用 `esp_ble_mesh_node_local_reset <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`__ 接口去重置 BLE Mesh Node，擦除所有的配网信息，还需要等到重置事件到达，确认重置成功，调用后，设备需要重新配网。
+
+--------------
+
+ESP32 是否支持 A2DP 发送音频？
+--------------------------------------
+
+  ESP32 支持 A2DP 发送音频，可参考例程 `a2dp_source <https://github.com/espressif/esp-idf/tree/d85d3d969ff4b42e2616fd40973d637ff337fae6/examples/bluetooth/bluedroid/classic_bt/a2dp_source#esp-idf-a2dp-source-demo>`_。

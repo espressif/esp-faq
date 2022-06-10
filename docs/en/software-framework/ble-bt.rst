@@ -574,3 +574,10 @@ How do I manually reset a BLE mesh device? (not via the mobile provisioning app 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - You can call the `esp_ble_mesh_node_local_reset <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`__ interface to reset the BLE Mesh Node, erase all the provisioning information, and wait until the reset event arrives to confirm a successful reset. After the call, the device needs to be provisioned again.
+
+--------------
+
+Does ESP32 support transmitting audio stream using A2DP?
+----------------------------------------------------------------------------
+
+  Yes, please refer to example `a2dp_source <https://github.com/espressif/esp-idf/tree/d85d3d969ff4b42e2616fd40973d637ff337fae6/examples/bluetooth/bluedroid/classic_bt/a2dp_source#esp-idf-a2dp-source-demo>`_.

@@ -240,3 +240,21 @@ ESP-DSP fft 可以运行 4096、8192 以及更多采样吗？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 可以，最大支持到 32 K 采样。最大值可以在 menuconfig 中配置，以 `fft demo <https://github.com/espressif/esp-dsp/tree/master/examples/fft>`_ 为例为 ``idf.py menuconfig--->Component config--->DSP Library--->Maximum FFT length--->(*)32768``。
+
+---------------
+
+ESP32 如何连接麦克风？
+------------------------------
+
+  - 如果连接数字麦克风，可以连接 I2S 外设。
+  - 如果连接模拟麦克风，可以连接 ADC 外设。
+
+--------------
+
+ESP32 是否支持模拟音频或是数字音频输出？
+-----------------------------------------------------
+
+  - ESP32 支持 DAC 模拟音频输出，可以使用它播放提示音等简单音频。
+  - ESP32 支持 PWM 模拟音频输出，相比 DAC 效果稍好，演示代码：`esp-iot-solution  <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`__。
+  - ESP32 同时支持 I2S 数字音频输出，I2S 可配置引脚可以在 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ > 外设接口和传感器章节。
+
