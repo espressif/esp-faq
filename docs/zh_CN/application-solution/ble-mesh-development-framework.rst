@@ -679,3 +679,10 @@ Bluetooth® LE (BLE) Mesh 数据传送最大的包是多少 Bytes？
 
   - 可以使用接口 `esp_ble_mesh_set_unprovisioned_device_name() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_set_unprovisioned_device_name#_CPPv442esp_ble_mesh_set_unprovisioned_device_namePKc>`_, 建议在 `esp_ble_mesh_init() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_init#_CPPv417esp_ble_mesh_initP19esp_ble_mesh_prov_tP19esp_ble_mesh_comp_t>`_ 后进行调用，否则还会是默认的 ESP-BLE-MESH。
 
+-------------
+
+ESP32 的 BLE-MESH 应用可以连接多少个节点设备？
+------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 理论上，ESP32 的 BLE-MESH 应用最大支持接入设备为 32767 个，实际应用中的接入设备数取决于内存占用情况。
+  
