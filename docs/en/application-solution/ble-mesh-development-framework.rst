@@ -34,3 +34,11 @@ For unprovisioned device in BLE-MESH, the default name is ESP-BLE-MESH, how to m
 ------------------------------------------------------------------------------------------------
 
   - You can use API `esp_ble_mesh_set_unprovisioned_device_name() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_set_unprovisioned_device_name#_CPPv442esp_ble_mesh_set_unprovisioned_device_namePKc>`_, it is suggested to call it after `esp_ble_mesh_init() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_init#_CPPv417esp_ble_mesh_initP19esp_ble_mesh_prov_tP19esp_ble_mesh_comp_t>`_, otherwise the device name is still ESP-BLE-MESH.
+
+--------------
+
+How many node devices can ESP32's BLE-MESH application connect to?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  -  Theoretically, the ESP32 BLE-MESH application supports 32767 node devices. The number of connections supported in actual application depends on the memory usage.
+  
