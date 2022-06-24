@@ -15,17 +15,17 @@
 
 --------------
 
-ESP32 中 I2S 信号管脚分布太散，是否可以配置集中⼀些，例如配置到 ``GPIO5，GPIO18，GPIO23、GPIO19、GPIO22`` 或者 ``GPIO25、GPIO26、GPIO32、GPIO33`` 管脚上？
+ESP32 中 I2S 信号管脚过于分散，是否可以配置集中⼀些，例如配置到 ``GPIO5，GPIO18，GPIO23、GPIO19、GPIO22`` 或者 ``GPIO25、GPIO26、GPIO32、GPIO33`` 管脚上？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 所有 I2S 的 I/O 均可任意分配，需要注意有的 I/O 只能作为输⼊，请参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 最后⼀⻚。
+  - 所有 I2S 的 I/O 均可任意分配，需要注意有的 I/O 只能作为输⼊，请参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ > 章节外设管脚分配和附录 IO_MUX 管脚清单。
 
 --------------
 
-ESP32 在 Light Sleep 模式下如何避免 VDD3P3_RTC 掉电？
+ESP32 在 Light-sleep 模式下如何避免 VDD3P3_RTC 管脚的电压掉电？
 ----------------------------------------------------------------------------------------------
 
-  - ESP32 进⼊ Light Sleep 模式后，pads powered by VDD3P3_RTC 对应的 GPIO 的电平会被拉低，根本原因是进⼊ Light Sleep 后 RTC 掉电导致的。
+  - ESP32 进⼊ Light-sleep 模式后，VDD3P3_RTC 管脚对应的 GPIO 的电平会被拉低，根本原因是进⼊ Light-sleep 后 RTC 掉电导致的。
   - 使⽤函数 ``esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_ON)`` 可维持 RTC 的供电。
 
 --------------
@@ -33,15 +33,15 @@ ESP32 在 Light Sleep 模式下如何避免 VDD3P3_RTC 掉电？
 ESP32 管脚配置需要注意什么事项？
 --------------------------------------------------------------------------------
 
-  - 大部分数字外设可以通过 IO_Matrix 配置到任意管脚。SDIO，SPI 高速，以及模拟类相关功能只能通过 IO_MUX 切换使用。
-  - 管脚使用注意事项可参考 `“ GPIO & RTC GPIO ” <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/gpio.html?highlight=gpio#gpio-rtc-gpio>`_ 说明。
+  - 大部分数字外设可以通过 GPIO 交换矩阵配置到任意管脚。SDIO、SPI 高速以及模拟类相关功能只能通过 IO MUX 切换使用。
+  - 管脚使用注意事项可参考 `GPIO & RTC GPIO <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/gpio.html?highlight=gpio#gpio-rtc-gpio>`_ 说明。
 
   .. note::
-    - Strapping 管脚默认电平，详情参考芯片数据手册；
-    - GPIO34 〜 39（⽤作输⼊ IO，并且无上下拉功能）；
-    - GPIO6 〜 GPIO11 被 Flash 引脚占⽤；
-    - GPIO1 和 GPIO3 是 UART0 的 TX 和 RX 引脚，是⽆法配置的；
-    - 其中带有 PSRAM 的模组， GPIO16 和 GPIO17 会被 PSRAM 占⽤。
+    - Strapping 管脚默认电平，详情参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`__；
+    - GPIO34 ~ GPIO39（⽤作输⼊ IO，并且无上下拉功能）；
+    - GPIO6 ~ GPIO11 被 flash 管脚占⽤；
+    - GPIO1 和 GPIO3 是 UART0 的 TX 和 RX 管脚，是⽆法配置的；
+    - 其中带有 PSRAM 的模组，GPIO16 和 GPIO17 会被 PSRAM 占⽤。
 
 --------------
 
@@ -60,29 +60,29 @@ ESP8266 电压电流需求？
   - 模拟电源峰值 350 mA；
   - 数字电源峰值 200 mA。
 
-  .. note:: 选择的 SPI Flash ⼯作电压也需要与 GPIO 的电压匹配。CHIP_EN 还是⼯作在 3.0 ~ 3.6 V，使⽤ 1.8 V GPIO 控制时需要注意电平转换。
+  .. note:: 选择的 SPI flash ⼯作电压也需要与 GPIO 的电压匹配。CHIP_EN 还是⼯作在 3.0 V ~ 3.6 V，使⽤ 1.8 V GPIO 控制时需要注意电平转换。
 
 --------------
 
 乐鑫 Wi-Fi 模组是否有单面板 PCB 的方案？
 ------------------------------------------------------
 
-  - ESP32 属于无线模块，射频性能对与 PCB 材质有较高的要求。 我们测试过 4 层与 2 层的方案，但未测试过单层的设计。
+  - ESP32 属于无线模块，射频性能对与 PCB 材质有较高的要求。我们测试过 4 层与 2 层的方案，但未测试过单层的设计。
   - 在此不建议使用单层板子的方案，建议产品 PCB 可以使用单层板，贴装我们的模组。单层板子的模组，射频性能无法预估。
   - 为保证良好的 RF 性能，我们建议使用 4 层板设计。
 
 --------------
 
-ESP8266 电池供电有那些要求？
+ESP8266 电池供电有哪些要求？
 -----------------------------------------------------------------
 
   - ESP8266 电压范围为 3.0 V ~ 3.6 V，两节 AA 电池可以给 ESP8266 供电，需要注意电池压降是否满足芯片电压范围。
   - 锂电池电压范围超过模组要求，并且放电时压降较⼤，不适合直接给 ESP8266 供电。
-  - 推荐电池使⽤ DC-DC 或 LDO 升降压后给 ESP8266 供电，并且注意电源芯片压差要求。
+  - 推荐电池使⽤ DC/DC 或 LDO 升降压后给 ESP8266 供电，并且注意电源芯片压差要求。
 
 --------------
 
-ESP32系列芯片 footprint 提供？
+如何获取 ESP32 系列芯片 footprint？
 ------------------------------------------------------
 
   可以参考 `模组设计 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=%E6%A8%A1%E7%BB%84%E5%8F%82%E8%80%83>`_，下载芯片对应的模组参考设计，里面有管脚封装设计。
@@ -99,30 +99,30 @@ ESP32系列芯片 footprint 提供？
 使用 ESP32 模块，使用 GPIO0、GPIO4 作为 I2C 信号接口，需要注意什么？
 ----------------------------------------------------------------------------------------------
 
-  GPIO0 做 I2C 信号接口需要加上拉，烧写的时候只要保证上电时 GPIO0 能拉低，之后就可以释放了，GPIO0 不需要一直拉低，只有下载的时候需要拉低。
+  GPIO0 作为 I2C 信号接口需要加上拉，烧写的时候只要保证上电时 GPIO0 能拉低，然后便可释放，GPIO0 无需一直拉低，只有下载的时候需要拉低。
 
 --------------
 
-ESP32 的外接 Flash 占用了 GPIO6 ~ 11 ，这 6 个 IO 是否还能作为 SPI 来使用？
+ESP32 的外接 flash 占用了 GPIO6 ~ GPIO11，这 6 个 IO 是否还能作为 SPI 来使用？
 -----------------------------------------------------------------------------------------------
 
-  ESP32 的外接 Flash 占用了 GPIO6 ~ 11 ，这 6 个 IO 就不能再作为 SPI 来使用了。
+  ESP32 的外接 flash 占用了 GPIO6 ~ GPIO11，这 6 个 IO 就不能再作为 SPI 来使用了。
 
 --------------
 
-ESP8285 作为 Wi-Fi 模块时，是否需要连接外部晶振？
+使用 ESP8285 芯片时，是否需要连接外部晶振？
 ----------------------------------------------------------------------
 
-  ESP8285 作为 Wi-Fi 模块时，需要连接外部晶振，芯片内部无晶振。
+  ESP8285 芯片内部无晶振，需要连接外部晶振。
 
 --------------
 
 ESP32-D2WD 外接 PSRAM 的参考设计？
 -------------------------------------------------------------------------
 
-  建议参考 ESP32-PICO-D4 外接 PSRAM 的设计 `datasheet V7 章节 <https://www.espressif.com/sites/default/files/documentation/esp32-pico-d4_datasheet_cn.pdf>`_。
+  建议参考 `《ESP32-PICO-D4 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32-pico-d4_datasheet_cn.pdf>`_ > 章节外围设计原理图。
 
-  .. note:: ESP32-D2WD 是 1.8 V Flash，所以外部 VDD_SDIO 需要加电阻和电容，并且连接 1.8 V PSRAM。
+  .. note:: ESP32-D2WD 是 1.8 V flash，所以 VDD_SDIO 需要加电阻和电容，并且连接 1.8 V PSRAM。
 
 --------------
 
@@ -136,25 +136,25 @@ ESP32 是否可以用 PWM 或 DAC 来播放音乐？
 为什么 ESP32 模组和 ESP32 芯片的建议工作电压范围不一样？
 -------------------------------------------------------------------------------
 
-  - 因为模组要考虑 Flash 的电压，所以 ESP32 模组的建议工作电压会更高一些。
-  - 更多信息可对比查看模组和芯片的 `技术规格书 <https://www.espressif.com/zh-hans/support/documents/technical-documents>`_。
+  - 因为模组要考虑 flash 的电压，所以 ESP32 模组的建议工作电压会更高一些。
+  - 了解更多信息，请对比模组和芯片的 `技术规格书 <https://www.espressif.com/zh-hans/support/documents/technical-documents>`_。
 
 --------------
 
-自主设计模组 Flash 擦除速度相比乐鑫模组较慢有哪些原因？
+自主设计模组 flash 擦除速度相比乐鑫模组较慢有哪些原因？
 -------------------------------------------------------------------------
 
-  - 由于不同厂家 Flash 器件存在差异，擦除扇区部分所需时间也各不相同，该时间差异属于正常现象。
-  - 如果希望擦除速度较快，可以测试不同厂家 Flash 的擦除速度进行综合评估。
+  - 由于不同厂家 flash 器件存在差异，擦除扇区部分所需时间也各不相同，该时间差异属于正常现象。
+  - 如果希望擦除速度较快，可以测试不同厂家 flash 的擦除速度进行综合评估。
 
 --------------
 
 ESP8266 为何上电瞬间会电流较大？
 ------------------------------------------------------------------
 
-  - ESP8266 的 RF 和数字电路具有极⾼的集成度, 上电后 RF ⾃校准，在校准时会需要⼤电流。
-  - 模拟部分电路路最⼤的极限电路可能达到 500 mA, 数字电路部分最⼤电流达到 200 mA。
-  - 常规应用时，平均电流约 100 mA 。
+  - ESP8266 的 RF 和数字电路具有极⾼的集成度，上电后 RF ⾃校准，在校准时会需要⼤电流。
+  - 模拟部分电路路最⼤的极限电路可能达到 500 mA，数字电路部分最⼤电流达到 200 mA。
+  - 常规应用时，平均电流约 100 mA。
   - 综上，ESP8266 电源设计需要满足 500 mA 电流。
 
 --------------
@@ -174,37 +174,37 @@ ESP32-LyraT 开发板扬声器接口规格？
 
 --------------
 
-基于 ESP32 设计的模组，哪些引脚无法被用户使用？
+基于 ESP32 设计的模组，哪些管脚无法被用户使用？
 ----------------------------------------------------------------------------
 
-  - ESP32-WROOM 系列模组，IO6 - IO11 为 flash 引脚，作为 flash 通信使⽤，不可被用户使用。
+  - ESP32-WROOM 系列模组，IO6 ~ IO11 为 flash 管脚，作为 flash 通信使⽤，不可被用户使用。
   - ESP32-WROVER 系列模组，GPIO16 和 GPIO17 被模组 PSRAM 占⽤，不可被用户使用。
-  - 此外，ESP32 有 5 个 Strapping 引脚，在使⽤时需要额外注意，具体细节请参考 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
+  - 此外，ESP32 有 5 个 Strapping 管脚，在使⽤时需要额外注意，具体细节请参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`__。
 
 --------------
 
 ESP32 如何使用管脚复位芯片？
 -----------------------------------------------------------------
 
-  - ESP32 的复位可使用 CHIP_PU 管脚。当 CHIP_PU 为低电平时，复位电平 (VIL_nRST ) 要求足够低，并且持续一段时间。注意：该管脚不可浮空。可参见`《ESP32 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf>`_ 中的 “2.2.2 复位” 章节说明。
+  - ESP32 的复位可使用 CHIP_PU 管脚。当 CHIP_PU 为低电平时，复位电平 (VIL_nRST) 要求足够低，并且持续一段时间。注意：该管脚不可浮空。可参见 `《ESP32 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf>`_ > 章节复位。
 
 --------------
 
 ESP8266 供电设计需要注意哪些问题？
 -------------------------------------------------------------------
 
-  - 如果是使⽤ LDO 变压，请确保输⼊电压在 (2.7 V ~ 3.6 V) 和输出电流(大于 500 mA) 要⾜够⼤。
+  - 如果是使⽤ LDO 变压，请确保输⼊电压在 (2.7 V ~ 3.6 V) 和输出电流（大于 500 mA）要⾜够⼤。
   - 电源轨去耦电容器必须接近 ESP8266 摆放，等效电阻要⾜够低。
-  - ESP8266 不能直连 5V ，仅支持 3.3V，电压误差范围 2.7 V ~ 3.6 V。
+  - ESP8266 不能直连 5 V，仅支持 3.3 V，电压范围 2.7 V ~ 3.6 V。
   - 如果是通过 DC-DC 给 ESP8266 供电，必要时要加上 LC 滤波电路。
-  - 可参考 `《ESP8266 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_cn.pdf>`_ 中关于 “ 1.4.1. 电源 ” 章节说明。
+  - 可参考 `《ESP8266 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_cn.pdf>`_ > 章节电源。
 
 --------------
 
-ESP8266 使用 TOUT 管脚做 ADC 采样时，超过 0 ~ 1.0V 是否会损坏管脚？
+ESP8266 使用 TOUT 管脚做 ADC 采样时，超过 0 V ~ 1.0 V 是否会损坏管脚？
 -----------------------------------------------------------------------------------------------
 
-  - 输入电压在芯片管脚电压范围内均不会损坏管脚（默认为0 ~ 3.6V）。
+  - 输入电压在芯片管脚电压范围内均不会损坏管脚（默认为 0 V ~ 3.6 V）。
   - 超过采样阈值将会影响采集的数据结果，导致数据结果异常。
 
 --------------
@@ -213,31 +213,31 @@ ESP8266 使用 TOUT 管脚做 ADC 采样时，超过 0 ~ 1.0V 是否会损坏管
 -----------------------------------------------------------------------------
 
   - 如产品采⽤模组进⾏ on-board 设计，则需注意考虑模组在底板的布局，应尽可能地减⼩底板对模组 PCB 天线性能的影响。 
-  - 条件允许的情况下，建议将模组 PCB 天线区域延伸出底板板框外，并将模组尽可能地靠 近底板板边放置，使天线的馈点距离板边距离最近。
-  - 请确保模块不被任何⾦属的外壳包裹，模块 PCB 天线区 域及外扩 15 mm 区域需净空（严禁铺铜、⾛线、摆放元件）。
-  - 具体说明：请阅读对应模组的 `硬件设计指南 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=&field_download_document_type_tid%5B%5D=513>`__ 。
+  - 条件允许的情况下，建议将模组 PCB 天线区域延伸出底板板框外，并将模组尽可能地靠近底板板边放置，使天线的馈点距离板边距离最近。
+  - 请确保模块不被任何⾦属的外壳包裹，模块 PCB 天线区域及外扩 15 mm 区域需净空（严禁铺铜、⾛线、摆放元件）。
+  - 具体说明：请阅读对应模组的 `硬件设计指南 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=&field_download_document_type_tid%5B%5D=513>`__。
 
 ---------------
 
-使用 ESP32 GPIO 34～GPIO39 是否可作为 UART 的 RX ？
+使用 ESP32 GPIO34 ~ GPIO39 是否可作为 UART 的 RX ？
 -----------------------------------------------------------------------
 
-- GPIO 34～GPIO39 作为接收使用，可应用 UART 的 RX 。
+- GPIO34 ~ GPIO39 作为接收使用，可应用 UART 的 RX。
 
 --------------
 
-ESP32 模组外接 32 KHz 晶振参考设计？
+ESP32 模组外接 32 kHz 晶振参考设计？
 ------------------------------------------
 
-  - 请参考 `ESP32 硬件设计指南 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf/>`_ V2.4.2 章节。
+  - 请参考 `《ESP32 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf>`_ > 章节 RTC 时钟（可选）。
 
 --------------
 
-ESP32 模组 Flash 是否支持 80 MHz 的 QIO 模式？
+ESP32 模组 flash 是否支持 80 MHz 的 QIO 模式？
 --------------------------------------------------
 
-  - ESP32 模组可以同时支持 Flash mode: QIO 和 Flash speed: 80 MHz。
-  - 使用 QIO 模式建议使用在二级 Bootlaoder 中开启，因为部分 Flash 状态寄存器默认 QE 未使能。 
+  - ESP32 模组可以同时支持 flash 模式：QIO 和 flash 速度：80 MHz。
+  - 使用 QIO 模式建议使用在二级 Bootloader 中开启，因为部分 flash 状态寄存器默认 QE 未置 1。
 
 ---------------
 
@@ -245,9 +245,9 @@ ESP32 模组 Flash 是否支持 80 MHz 的 QIO 模式？
 ----------------------------------------------------------------------------------------------------------------------------------
 
   - 请下载 `esp-idf/examples/ethernet/basic <https://github.com/espressif/esp-idf/tree/release/v4.4/examples/ethernet/basic>`_ 例程进行测试。
-  - IP101 PHY 芯片在 GPIO0 输出 CLK 时会出现网络不稳定的现象，所以推荐 PHY 外接 50 MHz 晶振， GPIO0 作为输入。
-  - 由于 GPIO0 的特殊性， 所以需要配置 IO 控制 PHY 的使能管脚。 
-  - 请阅读 `配置 MAC 和 PHY <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`_。
+  - IP101 PHY 芯片在 GPIO0 输出 CLK 时会出现网络不稳定的现象，所以推荐 PHY 外接 50 MHz 晶振，GPIO0 作为输入。
+  - 由于 GPIO0 的特殊性，所以需要配置 IO 控制 PHY 的使能管脚。 
+  - 请阅读 `配置 MAC 和 PHY <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`__。
   - 可参考 `SCH_ESP32-ETHERNET-KIT 原理图设计 <https://dl.espressif.com/dl/schematics/SCH_ESP32-ETHERNET-KIT_A_V1.1_20190711.pdf>`_。
 
 ---------------
@@ -256,7 +256,7 @@ ESP32 模组 Flash 是否支持 80 MHz 的 QIO 模式？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP8266 的 Pin32 EXT_RSTB 为复位管脚。此管脚内部有上拉电阻，低电平有效。为防⽌外界⼲扰引起的重启，建议 EXT_RSTB 的⾛线尽量短，并在 EXT_RSTB 管脚处增加⼀个 RC 电路。
-  - ESP8266 的 CHIP_EN 管脚也可作为硬件复位管脚，当使用 CHIP_EN 管脚作为复位管脚时，复位信号是低电平有效。复位条件为当输入电平低于 0.6 V 并持续 200 μs 以上时，ESP8266 会复位重启。我们推荐使用 CHIP_EN 管脚进行芯片复位。可参考 `《ESP8266 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_cn.pdf>`_ 中的“1.4.2.2 复位”章节的说明。
+  - ESP8266 的 CHIP_EN 管脚也可作为硬件复位管脚，当使用 CHIP_EN 管脚作为复位管脚时，复位信号是低电平有效。复位条件为当输入电平低于 0.6 V 并持续 200 μs 以上时，ESP8266 会复位重启。我们推荐使用 CHIP_EN 管脚进行芯片复位。可参考 `《ESP8266 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_cn.pdf>`__ > 章节复位。
 
 --------------
 
@@ -276,13 +276,13 @@ ESP32 模组 Flash 是否支持 80 MHz 的 QIO 模式？
 如何在 ESP32-S2 中使用多天线？
 ------------------------------------------------------------------------
 
-  - ESP32-S2 的多天线使用和 ESP32 类似，可以参考 `ESP32-WROOM-DA <https://www.espressif.com/sites/default/files/documentation/esp32-wroom-da_datasheet_cn.pdf>`_ 中的多天线使用。
-  - `ESP-IDF 编程指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/wifi.html#id55>`_ 中提供了详细的操作说明。
-  - 使用时添加一个 RF switch，通过 switch 选择具体工作的天线。
+  - ESP32-S2 的多天线使用和 ESP32 类似，可以参考 `《ESP32-WROOM-DA 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32-wroom-da_datasheet_cn.pdf>`_ 中的多天线使用。
+  - `《ESP-IDF 编程指南》 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/wifi.html#id55>`_ 中提供了详细的操作说明。
+  - 使用时添加一个 RF 开关，通过开关选择具体工作的天线。
 
 -----------------------------------------------------------------------------------------------------
 
-ESP32-C3F SPI CS0 是否需要外接 10 K 上拉电阻？
+ESP32-C3F SPI CS0 是否需要外接 10 kΩ 上拉电阻？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32-C3F:
@@ -294,23 +294,23 @@ ESP32-C3F SPI CS0 是否需要外接 10 K 上拉电阻？
 ESP-Skainet 有语音识别硬件设计参考吗？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - 请参考 ` ESP32-Korvo V1.1 硬件参考设计 <https://github.com/espressif/esp-skainet/blob/master/docs/zh_CN/hw-reference/esp32/user-guide-esp32-korvo-v1.1.md#2-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83>`_。
+  - 请参考 `ESP32-Korvo V1.1 硬件参考设计 <https://github.com/espressif/esp-skainet/blob/master/docs/zh_CN/hw-reference/esp32/user-guide-esp32-korvo-v1.1.md#2-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83>`_。
   
 ----------------------------------------------------------------------------------------
 
-硬件上是否有必要接 32 KHz 的 RTC 晶振？
+硬件上是否有必要接 32 kHz 的 RTC 晶振？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-C3 | ESP32-S3:
 
-  - 外接 32 KHz 晶振主要是用于 BLE light 睡眠计时，所以应用场景中不使用 BLE light 睡眠时不需要外接。
+  - 外接 32 KHz 晶振主要是用于 Bluetooth LE Light-sleep 计时，所以应用场景中不使用 Bluetooth LE Light-sleep 时不需要外接。
 
 ----------------------
 
 使用 ESP32-MINI-1 模组，是否可提供 Altium Designer 的元件库？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 我们的硬件原理图是在 PADS 中开发设计的，在｀《ESP32-MINI-1 参考设计》 <https://www.espressif.com/sites/default/files/documentation/ESP32-MINI-1_V1.0_Reference_Design.zip>`_ 中有一个 ASC 的文件，可在  Altium Designer 里转换打开。
-  - 更多型号的模组的硬件设计资料可在 ｀技术文档 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=mini>`_ 中获取。
+  - 我们的硬件原理图是在 PADS 中开发设计的，在 `《ESP32-MINI-1 参考设计》 <https://www.espressif.com/sites/default/files/documentation/ESP32-MINI-1_V1.0_Reference_Design.zip>`_ 中有一个 ASC 的文件，可在 Altium Designer 里转换打开。
+  - 更多型号的模组的硬件设计资料可在 `技术文档 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=mini>`_ 中获取。
 
 ----------------------
   
@@ -321,10 +321,10 @@ ESP8266 的 UART0 的输入电压能由 3.3 V 改为 1.8 V 吗？
 
 --------------
 
-ESP8266 的 UART0 的电平是由 VDD 决定的，还是由 VDDPST 决定的？
+ESP8266 UART0 的电平是由 VDD 决定的，还是由 VDDPST 决定的？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP8266 的 UART0 的电平是由 VDDPST（硬件电源域）决定的，数字电源电压都是由 VDDPST 决定的。
+  - ESP8266 UART0 的电平是由 VDDPST（硬件电源域）决定的，数字电源电压都是由 VDDPST 决定的。
 
 --------------
 
@@ -333,10 +333,10 @@ ESP32-D2WD 芯片外接 PSRAM 软件配置注意事项是什么？
 
   - 需要在 menuconfig 中使能 ``CPU frequece 240 Mhz`` 和 ``RTC clock 80 Mhz``，具体配置如下：
   
-    - menuconfig ---> Serial flasher config--->Flash SPI Speed(80 Mhz)
-    - Component config---->CPU frequency(240 Mhz)
-    - Component config---->ESP32 specific---->[*]Support for external , SPI-connected RAM
-    - Component config---->ESP32 specific------->SPI RAM config---->Set RAM clock speed(80 Mhz clock speed) 
+    - ``menuconfig`` > ``Serial flasher config`` > ``Flash SPI Speed (80 Mhz)``
+    - ``Component config`` > ``CPU frequency (240 Mhz)``
+    - ``Component config`` > ``ESP32 specific`` > ``[*]Support for external, SPI-connected RAM``
+    - ``Component config`` > ``ESP32 specific`` > ``SPI RAM config`` > ``Set RAM clock speed (80 Mhz clock speed)``
     
 ----------------
 
@@ -347,26 +347,26 @@ ESP32 芯片当 VDD 供电从 0 V 慢慢升到 3.3 V 时，芯片为何无法正
   - 但 VDD 上电时间过慢时，芯片 EN 端的 RC 电路将 EN 延时的功能就丧失了。
   - 可以调整 RC 电路，增加电容，调整电阻，或是使用 Reset 芯片管控 EN 状态。
   - 建议检测到供给 ESP32 的电压低于 2.3 V 时将 ESP32 的 EN 脚拉低。
-  - ESP32 上电时序说明参见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
+  - ESP32 上电时序说明参见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`__。
 
 --------------
 
 使用 ESP32-WROOM-32D 模组，是否可以使用 GPIO12 用作其他功能？
 --------------------------------------------------------------------------------------------------------------------------------------
 
-  - GPIO12 为 Strapping 管脚，控制 SPI Flash 的启动电压。ESP32-WROOM-32D 模组的 SPI Flash 启动电压为 3.3 V，因此在上电启动时 GPIO12 需要拉高。
-  - 若需要使用 GPIO12 用作其他功能，请使用 esptool 工具通过 `espefuse.py set_flash_voltage 3.3V <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html?highlight=vdd_sdio#fixed-3-3v-vdd-sdio>`_ 命令将 VDD_SDIO 固定为 3.3 V，那么 GPIO12 将可以用作其他功能。
+  - GPIO12 为 Strapping 管脚，控制 SPI flash 的启动电压。ESP32-WROOM-32D 模组的 SPI flash 启动电压为 3.3 V，因此在上电启动时 GPIO12 需要拉高。
+  - 若需要使用 GPIO12 用作其他功能，请使用 esptool 工具通过 `espefuse.py set_flash_voltage 3.3V <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html?highlight=vdd_sdio#fixed-3-3v-vdd-sdio>`_ 命令将 VDD_SDIO 固定为 3.3 V。
 
 ---------------------
 
 ESP32-WROOM-32D 模组的外接 flash，是否可以不使用 GPIO6 ~ GPIO11 的接口？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 共有 3 组 SPI（SPI、HSPI 和 VSPI）接口，可以通过 SPI0/1(HSPI/VSPI) 总线访问外部 flash。但接到其他脚（GPIO6~GPIO11 以外的 GPIO）的外接 flash 不能跑程序，只能接收数据作存储。需要跑程序的 flash 只能接在 GPIO6 ~ GPIO11 接口上。
+  - ESP32 共有 3 组 SPI（SPI、HSPI 和 VSPI）接口，可以通过 SPI0/1 (HSPI/VSPI) 总线访问外部 flash。但接到其他脚（GPIO6 ~ GPIO11 以外的 GPIO）的外接 flash 不能跑程序，只能接收数据作存储。需要跑程序的 flash 只能接在 GPIO6 ~ GPIO11 接口上。
   
 --------------
 
 ESP32 芯片设计模组，PCB 板是否需要加屏蔽盖？
 ---------------------------------------------------------------------
 
-  - 除模组之外没有其他信号干扰就不需要加屏蔽盖，如果板子还有其他的信号干扰，比如 2g、3g、4g 或者 Wi-Fi、BT、Zigbee 等等建议加上屏蔽盖。
+  - 除模组之外没有其他信号干扰就不需要加屏蔽盖，如果板子还有其他信号干扰，比如 2G、3G、4G 或者 Wi-Fi、Bluetooth、Zigbee 等等建议加上屏蔽盖。
