@@ -43,14 +43,14 @@ ESP32 模组在 2.8 V 电源下运行，射频性能会有下降吗？
 ESP32 使用 RF Test Tool 时为什么在高温 80 °C 下运行会自动降低发射功率？
 ----------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 的定频测试固件上电默认是不开温度补偿的，当温度较高时功率会变低，如果需要打开温度补偿就需要通过默认的 log 串口向 ESP32 发送 ``txpwr_track_en 1 1 0``。
+  - ESP32 的定频测试固件默认不开启温度补偿，当温度较高时功率会变低，如果需要打开温度补偿就需要通过默认的 log 串口向 ESP32 发送 ``txpwr_track_en 1 1 0``。
 
 --------------
 
 ESP32-WROVER-E 模组如何提高 Wi-Fi 信号的接收距离和强度？(应用场景：Wi-Fi 探针)
 -----------------------------------------------------------------------------------
 
-  - 软件上可以通过 API `esp_wifi_set_max_tx_power() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`_ 设置最大发射功率。也可通过 menuconfig 进行配置：``Component config -> PHY -> Max Wi-Fi TX power(dBm)``，默认发射功率为最大值 20 dBm。
+  - 软件上可以通过 API `esp_wifi_set_max_tx_power() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`_ 设置最大发射功率。也可通过 menuconfig 进行配置： ``Component config`` > ``PHY`` > ``Max Wi-Fi TX power(dBm)``，默认发射功率为最大值 20 dBm。
   - 若发射功率已设置为最大值，可从天线和接收设备考虑。
 
     - 可以考虑调整模组的摆放方向，使天线较强的辐射方向指向接收设备，使辐射距离最远。
@@ -65,4 +65,4 @@ ESP32-WROVER-E 模组如何提高 Wi-Fi 信号的接收距离和强度？(应用
 
   :CHIP\: ESP32 :
 
-  - 可以通过 power limit tool 烧写。下载 `ESP_RF_TEST Tool <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_CN.zip>`_，解压完成后，打开 EspRFTestTool_v2.6_Manual.exe，点击 ``help ---> Tool help ---> PowerLimitTool help`` 查看详细的操作步骤。
+  - 可以通过 power limit tool 烧写。下载 `ESP_RF_TEST Tool <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_CN.zip>`_，解压完成后，打开 EspRFTestTool_vx.x_Manual.exe，点击 ``help`` > ``Tool help`` > ``PowerLimitTool help`` 查看详细的操作步骤。

@@ -1,5 +1,5 @@
-RF related
-==========
+RF Related
+=============
 
 :link_to_translation:`zh_CN:[中文]`
 
@@ -15,10 +15,10 @@ RF related
 
 --------------
 
-If an ESP32 module is running under a 2.8 V supply, is there any degradation in its RF performance?
+Does the RF performance of an ESP32 module degrade if it runs at a 2.8 V supply?
 ------------------------------------------------------------------------------------------------------------------------------
 
-  Yes, its RF performance may become unstable. It is recommended that the voltage be supplied in accordance with the suggested operating voltage range specified in the `Module's Datasheet <https://www.espressif.com/en/support/documents/technical-documents>`_.
+  Yes, its RF performance may become unstable. It is recommended that the supplied voltage follows the suggested operating voltage range specified in the `module's datasheet <https://www.espressif.com/en/support/documents/technical-documents>`_.
 
 --------------
 
@@ -40,29 +40,29 @@ How can I get the RF related information (e.g., antenna specification, antenna p
 
 --------------
 
-Why does ESP32 automatically reduce the transmit power when running at a high temperature of 80 °C when using the RF Test Tool?
+Why does ESP32 automatically reduce its transmit power when it uses the RF Test Tool at 80 °C?
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The temperature compensation function on testing firmware with a fixed frequency is disabled by default. Therefore, when the temperature is high, the power will be lower. If you need to enable the temperature compensation, please send ``txpwr_track_en 1 1 0`` to ESP32 through the default log serial port.
+  - Temperature compensation is disabled by default when ESP32 runs the fixed frequency firmware. Therefore, the power reduces at a high temperature. To enable temperature compensation, please send ``txpwr_track_en 1 1 0`` to ESP32 through the default log serial port.
 
 --------------
 
-How to improve the distance and strength of Wi-Fi signals for ESP32-WROVER-E? (Application scenario: Wi-Fi probe)
------------------------------------------------------------------------------------------------------------------------
+How to improve the receiving distance and strength of Wi-Fi signals for ESP32-WROVER-E? (Application scenario: Wi-Fi probe)
+----------------------------------------------------------------------------------------------------------------------------------
 
-  - In terms of software, you can either set the maximum transmit power by API `esp_wifi_set_max_tx_power() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`_, or set that via menuconfig: ``Component config -> PHY -> Max Wi-Fi TX power(dBm)`` (the default transmit power is 20 dBm).
-  - If the transmit power has been set to the maximum, you can improve the effeciency the antenna and receiving device.
+  - By software, you can either set the maximum transmit power by API `esp_wifi_set_max_tx_power() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`_, or set that via menuconfig: ``Component config`` > ``PHY`` > ``Max Wi-Fi TX power(dBm)`` (the default maximum transmit power is 20 dBm).
+  - If the transmit power has been set to the maximum, you can improve the efficiency of the antenna and receiving devices by the following methods.
   
-    - You can consider adjusting the placement direction of the module so that the stronger radiation direction of the antenna points to the receiving device to make the farthest radiation distance.
-    - Make sure there is no metal or blocking object near the antenna of the module, no PCB on the back of the antenna, and the Wi-Fi signal is not interfered by other signals of the whole machine.
-    - If the PCB antenna is not effective, you can use the IE series module with an external IPEX antenna with higher directional gain.
-    - The receiving device can also increase the antenna radiation efficiency.
+    - Adjust the module direction so that the stronger radiation direction of the antenna points to the receiving device to achieve the farthest radiation distance.
+    - Make sure there is no metal or blocking object near the antenna of the module, no PCB on the back of the antenna, and the Wi-Fi signal is not interfered by other signals of the end device.
+    - Use the IE series module with an antenna connector if the performance of the PCB antenna cannot meet requirements, so that an external antenna with higher directional gain can be connected.
+    - Increase the radiation efficiency of the antenna in the receiving device.
 
 ---------------
 
-How to write phy_init data to Flash ?
+How to write phy_init data to flash ?
 ---------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32 :
 
- - You can write via the power limit tool. Please download the `ESP_RF_TEST Tool <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_CN.zip>`_, unzip the package and open the EspRFTestTool_v2.6_Manual.exe file, then click ``help ---> Tool help ---> PowerLimitTool help`` for detailed operations.
+  - You can write it via the power limit tool. Please download the `ESP_RF_TEST Tool <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_EN.zip>`_, unzip the package, open the EspRFTestTool_vx.x_Manual.exe file, and then click ``help`` > ``Tool help`` > ``PowerLimitTool help`` for detailed operations.

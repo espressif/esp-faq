@@ -1,5 +1,5 @@
-Power consumption verification
-==============================
+Power Consumption Verification
+===================================
 
 :link_to_translation:`zh_CN:[中文]`
 
@@ -15,19 +15,34 @@ Power consumption verification
 
 --------------
 
-What sleep modes does ESP32 have? What is the difference between them?
---------------------------------------------------------------------------
+Why does ESP32 reboot when it is woken up from Deep-sleep mode?
+-----------------------------------------------------------------------
 
-  ESP32 has three sleep modes: modem sleep, light sleep, and deep sleep.
+  When ESP32 is in Deep-sleep mode, the digital core is powered off and the information stored in CPU will be lost. After ESP32 is woken up from Deep-sleep mode, it re-boots firmwares and re-loads them to the internal memory. The application information that requires to be reserved can be saved in RTC as RTC is still powered on in Deep-sleep mode. The reserved information can be loaded after wake-up.
 
-  - Modem sleep: CPU works normally and the clock is configurable. After the station (ESP32) is connected to the AP, it is automatically turned on. After the station enters the modem sleep mode, the RF module is shut down. During the sleep, the connection to the AP is maintained. After the AP disconnects from the station, modem sleep does not work. When ESP32 is in the modem sleep mode, the CPU clock frequency can be lowered to further reduce the current.
-  - Light sleep: CPU is suspended and the digital core clock is limited. It differs from the modem sleep in that besides the RF module, the CPU and part of the system clock are suspended during the sleep. After ESP32 exits the light sleep mode, the CPU resumes working. 
-  - Deep sleep: The digital core is powered off and the CPU content is lost. After ESP32 enters the deep sleep mode, all modules are closed except for RTC modules; After ESP32 exits the deep sleep mode, the entire system restarts, which is similar to the system reboot; During the deep sleep, no connection to the AP is maintained.
+
+-------------
+
+Which sleep modes does ESP32 support? What is the difference between them?
+---------------------------------------------------------------------------
+
+  ESP32 supports three sleep modes: Modem-sleep, Light-sleep, and Deep-sleep.
+
+  - Modem-sleep: CPU works normally and the clock is configurable. The station (ESP32) automatically turns on after it is connected to the AP. After ESP32 enters Modem-sleep mode, the RF module is shut down, and the station remain connection to the AP. If ESP32 disconnects to the AP, it will not work in Wi-Fi Modem-sleep mode. In Modem-sleep mode, the CPU clock frequency can be lowered to further reduce the current consumption.
+  - Light-sleep: CPU is suspended and the digital core clock is limited. When ESP32 is in Light-sleep mode, not only the RF module is closed, CPU and partial system clocks are also suspended. After ESP32 exits Light-sleep mode, the CPU resumes working. 
+  - Deep-sleep: The digital core is powered off and the information stored in CPU is lost. After ESP32 enters Deep-sleep mode, all modules are closed except for RTC. After it exits Deep-sleep mode, the entire system restarts, which is similar to the system reboot. ESP32 does not remain connection to the AP in Deep-sleep mode.
 
 --------------
 
-What is the power consumption of ESP8266 when the CHIP_PU pin is low?
+Can ESP32 in Deep-sleep mode be woken up by any RTC_GPIO?
+---------------------------------------------------------------
+
+  Yes. For the configuration of RTC_GPIO, please refer to `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ > Chapter *Pin Definitions* > Section *Pin Description*.
+
+---------------
+
+What is the power consumption of ESP8266 when the CHIP_PU pin is at the low level?
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
-   - CHIP_PU pin is the module EN pin. When the pin is set to low level, the power consumption of the chip is about 0.5 uA.
-   - In `ESP8266 datasheet <https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_cn.pdf>`_ Table 3-4, the power consumption mode is off, which means the CHIP_PU is pulled down and the chip is disabled.
+   - CHIP_PU pin is the module EN pin. When the pin is set to the low level, the power consumption of the chip is about 0.5 μA.
+   - In Table Power Consumption by Power Modes of `ESP8266 Datasheet <https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf>`_, shut down power mode means CHIP_PU is pulled down and the chip is disabled.
