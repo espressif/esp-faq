@@ -287,6 +287,13 @@ What is the maximum resolution supported by ESP32 LCD? What is the corresponding
 
   Over the 8080 16-bit parallel interface, the ESP32 LCD can support up to 800 × 480 of resolution, and the corresponding frame rate is about 30 frames. Please see `Screen <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/display/screen.html>`_.
 
+----------------
+
+What models of touch panels are supported for testing the `LVGL <https://github.com/espressif/esp-iot-solution/tree/master/examples/hmi/lvgl_example>`_ example on ESP32-S3?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - For the currently supported models of touch panels, please refer to `Touch Panel <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/input_device/touch_panel.html#touch-panel>`_.
+
 LEDC
 ====
 
@@ -558,6 +565,8 @@ Can ESP32 support 9-bit clock mode for 3-wire SPI (i.e. a mode where the first b
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Yes, you can refer to the command or address phase mentioned in `SPI Transactions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#spi-transactions>`_, define one of the phases as 1-bit wide, and then assign 0 or 1 to it to distinguish whether the next 8 bits are data or command. In doing so, the 9-bit clock mode for 3-wire SPI is implemented.
+
+------------
 
 TIMER
 ===========
