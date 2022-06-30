@@ -884,6 +884,19 @@ ESP32-S2 是否支持 USB HID？
 
   支持。
 
+--------------
+
+测试 `USB 摄像头 Wi-Fi 传输 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_camera_wifi_transfer>`_ 例程，日志打印如下报错，是什么原因?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+   E (1437) UVC STREAM: Configuration descriptor larger than control transfer max length
+
+  此报错日志是因为 USB Camera 发送的描述符长度大于默认预设的长度（256），可以修改如下配置为 2048 进行测试：
+
+  ``Component config`` > ``UVC Stream`` > ``(2048) Max control transfer data size (Bytes)``
+
 其他外设
 ========
 
