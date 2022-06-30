@@ -1064,3 +1064,10 @@ ESP8089 是否支持 Wi-Fi Direct 模式？
 -----------------------------------------------------------------------------------
 
   - 在 ESP32 staion 模式下，有一个 `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv417wifi_sta_config_t/>`_ 的结构体，下面有 2 个变量，分别是 `sort_method <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11scan_methodE/>`_ 和 `threshold <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE/>`_ 变量，通过给这两个变量赋值来设置 RSSI 阈值。
+
+--------------
+
+ESP32 Wi-Fi 出现信标丢失 (beacon lost) 且在 6 秒钟之后给 AP 发 5 个探测请求 (probe request)，此时 AP 没回应就会导致断开连接，这个 6 秒钟可以配置吗?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  用 API `esp_wifi_set_inactive_time <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv426esp_wifi_set_inactive_time16wifi_interface_t8uint16_t>`__ 即可配置。
