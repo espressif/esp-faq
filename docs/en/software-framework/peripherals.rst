@@ -886,6 +886,19 @@ Does the ESP32-S2 support USB HID?
 
   Supported.
 
+---------------
+
+Why is this error log printed when I am testing the `USB Camera + Wi-Fi Transfer <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_camera_wifi_transfer>`_ example?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+   E (1437) UVC STREAM: Configuration descriptor larger than control transfer max length
+
+  This error log is reported because the length of the descriptor sent by the USB Camera is larger than the default length (256). You can modify the following configuration to 2048 for testing:
+
+  ``Component config`` > ``UVC Stream`` > ``(2048) Max control transfer data size (Bytes)``
+  
 Other peripherals
 =====================
 
