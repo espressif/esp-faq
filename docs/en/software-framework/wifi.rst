@@ -1061,3 +1061,11 @@ How does ESP32 connect to an AP whose RSSI does not fall below the configured th
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - In ESP32 staion mode, there is a `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv417wifi_sta_config_t/>`_ structure with 2 variables underneath, i.e., `sort_method <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11sort_methodE/>`_ and `threshold <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE/>`_. The RSSI threshold is configured by assigning values to these two variables.
+
+--------------
+
+ESP32 Wi-Fi has a beacon lost and sends 5 probe requests to the AP after 6 seconds. If the AP does not respond, disconnection will be caused. Can this 6 seconds be configured?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Use API `esp_wifi_set_inactive_time <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv426esp_wifi_set_inactive_time16wifi_interface_t8uint16_t>`__ to configure the time.
+  
