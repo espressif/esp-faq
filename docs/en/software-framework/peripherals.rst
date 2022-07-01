@@ -285,7 +285,7 @@ Is there any example code for I2S driving LCD with ESP32?
 What is the maximum resolution supported by ESP32 LCD? What is the corresponding frame rate?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Over the 8080 16-bit parallel interface, the ESP32 LCD can support up to 800 × 480 of resolution, and the corresponding frame rate is about 30 frames. Please see `Screen <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/display/screen.html>`_.
+  Over the 8080 16-bit parallel interface, the ESP32 LCD can support up to 800 × 480 of resolution, and the corresponding frame rate is about 30 frames. Please see `Screen <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/display/screen.html>`__.
 
 ----------------
 
@@ -915,3 +915,10 @@ Does ESP32 support PCI-E protocol?
 -----------------------------------------------------
 
   No, it doesn't.
+
+-------------------
+
+Does the `screen <https://github.com/espressif/esp-iot-solution/tree/master/examples/screen>`__ example support 9-bit bus and 18-bit color depth when tested with the ILI9488 LCD screen?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Theoretically, the ILI9488 LCD can support 9-bit bus and 18-bit color depth, but currently our driver can only support up to 8-bit bus and 16-bit color depth. You can modify the driver by yourself according to the ILI9488 LCD manual to implement the support.
