@@ -31,4 +31,12 @@
 
   :CHIP\: ESP32 | ESP8266:
 
-  - `产测工具下载链接 <https://download.espressif.com/fac_tool_release/Qrelease/the_latest_release/ESP_PRODUCTION_TEST_TOOL_NORMAL.zip>`_。
+  - 请点击 `产测工具 <https://download.espressif.com/fac_tool_release/Qrelease/the_latest_release/ESP_PRODUCTION_TEST_TOOL_NORMAL.zip>`_ 进行下载。
+
+--------------
+
+ESP32 使用 ``esptool.py burn_custom_mac`` 命令写入用户自定义 MAC 地址，为什么通过 ``esptool.py read_mac`` 读到的还是出厂默认的 MAC 地址？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ``esptool.py read_mac`` 命令默认只能读到出厂写在 eFuse BLOCK0 的 MAC 地址，而使用 ``esptool.py burn_custom_mac`` 命令写入的用户自定义的 MAC 地址是写到 eFuse BLOCK3 中，可以使用 ``espefuse.py get_custom_mac`` 命令来查询写入 eFuse BLOCK3 中的 MAC 地址。
+
