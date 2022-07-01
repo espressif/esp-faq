@@ -22,7 +22,7 @@ Why does a program not work if some modules download the firmware in the QOUT/QI
   - Secondly, please check the QE bit of the status register of flash, which determines whether the flash supports the QUAD mode or not.
   - The flashes in Espressif's chips and modules are supplied by different manufacturers. However, the QE bit is disabled by default for some flashes. So modules should be tested to determine whether they support the QUAD mode or not.
   - When ROM boots a second stage bootloader, the secondary read will fail if the configuration parameters are read in the QIO mode because the QE bit is disabled.
-  - It is recommended to program firmware in the DIO mode and to configure the QIO mode in menuconfig. The configuration enables the QE bit in the second stage bootloader and then boots the app bin to use the QUAD mode.
+  - It is recommended to program firmware in the DIO mode and to configure the QIO mode in ``menuconfig``. The configuration enables the QE bit in the second stage bootloader and then boots the app bin to use the QUAD mode.
 
 ---------------
 
@@ -31,4 +31,11 @@ How to get the production test tool?
 
   :CHIP\: ESP32 | ESP8266:
 
-  - Please download `Production Test Tool <https://download.espressif.com/fac_tool_release/Qrelease/the_latest_release/ESP_PRODUCTION_TEST_TOOL_NORMAL.zip>`_.
+  - Please click `production test tool <https://download.espressif.com/fac_tool_release/Qrelease/the_latest_release/ESP_PRODUCTION_TEST_TOOL_NORMAL.zip>`_ to download.
+
+----------------
+
+When I use the ``esptool.py burn_custom_mac`` command to write the user-defined MAC address, why is the MAC address read by the ``esptool.py read_mac`` command still factory default?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The ``esptool.py read_mac`` command can only read the MAC address written in eFuse BLOCK0 by default, but the user-defined MAC address written with the ``esptool.py burn_custom_mac`` command is in eFuse BLOCK3. You may use the ``espefuse.py get_custom_mac`` command to check the MAC address written to eFuse BLOCK3.
