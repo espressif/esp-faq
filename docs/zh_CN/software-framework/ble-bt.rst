@@ -46,10 +46,9 @@ ESP32 可以支持 Bluetooth® LE 5.0 吗？
 ESP32 能否使用蓝牙进行 OTA？
 ----------------------------------
 
-  可以使用蓝牙进行 OTA。如果是用 Bluetooth®，可以基于 `bt_spp_acceptor <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_acceptor>`_ 
-  和 `bt_spp_initiator <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_initiator>`_ 修改；如果是用 Bluetooth LE，
-  可以基于 `ble_spp_server <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_spp_server>`_ 
-  和 `ble_spp_client <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_spp_client>`_ 修改。
+  可以使用蓝牙进行 OTA。如果是用 Bluetooth®，可以基于 `bt_spp_acceptor <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_acceptor>`_ 和 `bt_spp_initiator <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_initiator>`_ 修改。
+  
+  如果是用 Bluetooth LE，可以基于 `ble_spp_server <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_spp_server>`_ 和 `ble_spp_client <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_spp_client>`_ 修改。
 
 --------------
 
@@ -80,7 +79,7 @@ ESP32 是否支持 BT4.2 DLE (Data Length Extension)？
 ESP32 的蓝⽛和 Wi-Fi 如何共存？
 ----------------------------------
 
-  在 menuconfig 中，有个特殊选项 “Software controls WiFi/Bluetooth coexistence”，⽤于通过软件来控制 ESP32 的蓝⽛和 Wi-Fi 共存，可以平衡 Wi-Fi、蓝⽛控制 RF 的共存需求。
+  在 ``menuconfig`` 中，有个特殊选项 ``Software controls WiFi/Bluetooth coexistence``，⽤于通过软件来控制 ESP32 的蓝⽛和 Wi-Fi 共存，可以平衡 Wi-Fi、蓝⽛控制 RF 的共存需求。
 
   - 如果使能 ``Software controls WiFi/Bluetooth coexistence`` 选项，Bluetooth® LE scan 间隔不应超过 ``0x100 slots`` （约 160 ms）。若只是 Bluetooth LE 与 Wi-Fi 共存，则开启这个选项和不开启均可正常使⽤。但不开启的时候需要注意 Bluetooth LE scan window 应大于 150 ms，并且 Bluetooth LE scan interval 尽量⼩于 500 ms。 
   - 若经典蓝⽛与 Wi-Fi 共存，则建议开启这个选项。
@@ -114,13 +113,13 @@ ESP32 的 Bluetooth® LE 工作电流是多少？
   +--------------------------------------------------------------+---------------+---------------+----------+
   | 电流                                                         | 最大值 (mA)   | 最小值 (mA)   | 平均值   |
   +==============================================================+===============+===============+==========+
-  | Advertising: Adv Interval = 40ms                             | 142.1         | 32            | 42.67    |
+  | Advertising: Adv Interval = 40 ms                            | 142.1         | 32            | 42.67    |
   +--------------------------------------------------------------+---------------+---------------+----------+
-  | Scanning: Scan Interval = 160ms,Window = 20ms                | 142.1         | 32            | 44.4     |
+  | Scanning: Scan Interval = 160 ms,Window = 20 ms              | 142.1         | 32            | 44.4     |
   +--------------------------------------------------------------+---------------+---------------+----------+
-  | Connection(Slave): Connection Interval = 20ms, Iatency = 0   | 142.1         | 32            | 42.75    |
+  | Connection(Slave): Connection Interval = 20 ms, Iatency = 0  | 142.1         | 32            | 42.75    |
   +--------------------------------------------------------------+---------------+---------------+----------+
-  | Connection(Slave): Connection Interval = 80ms, Iatency = 0   | 142.1         | 32            | 35.33    |
+  | Connection(Slave): Connection Interval = 80 ms, Iatency = 0  | 142.1         | 32            | 35.33    |
   +--------------------------------------------------------------+---------------+---------------+----------+
 
 --------------
@@ -160,17 +159,17 @@ ESP32 Bluetooth® LE 如何进入 Light-sleep 模式呢？
 
   软件上（SDK4.0 以及以上版本才会支持）在 menuconfig 中需要使能以下配置：
 
-  - Power Management:| menuconfig ---> Component config ---> Power management --->[*] Support for power management
+  - Power Management:| ``menuconfig`` > ``Component config`` > ``Power management`` > ``[*] Support for power management``
 
-  - Tickless Idle:| menuconfig ---> Component config ---> FreeRTOS --->[*] Tickless idle support (3) Minimum number of ticks to enter sleep mode for (NEW)
+  - Tickless Idle:| ``menuconfig`` > ``Component config`` > ``FreeRTOS`` > ``[*] Tickless idle support (3) Minimum number of ticks to enter sleep mode for (NEW)``
 
-  .. note:: 需使能 "Tickless idle" 功能使 ESP32 自动进入 Light-sleep 模式。如果在 3 个节拍（默认）内无任务运行，则 FreeRTOS 将进入 Light-sleep 模式，即 100 Hz 节拍率下为 30 ms。若您希望缩短 Light-sleep 模式的持续时间，可通过将 FreeRTOS 节拍率调高来实现，如：menuconfig ---> Component config ---> FreeRTOS ->(1000) Tick rate (Hz)。
+  .. note:: 需使能 "Tickless idle" 功能使 ESP32 自动进入 Light-sleep 模式。如果在 3 个节拍（默认）内无任务运行，则 FreeRTOS 将进入 Light-sleep 模式，即 100 Hz 节拍率下为 30 ms。若您希望缩短 Light-sleep 模式的持续时间，可通过将 FreeRTOS 节拍率调高来实现，如：``menuconfig`` > ``Component config`` > ``FreeRTOS`` > ``(1000) Tick rate (Hz)``。
 
-  - | Configure external 32.768Hz crystal as RTC clock source :| menuconfig ---> Component config ---> ESP32-specific --->RTC clock source (External 32kHz crystal)[*] Additional current for external 32kHz crystal
+  - | Configure external 32.768 kHz crystal as RTC clock source :| ``menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``RTC clock source (External 32 kHz crystal)[*] Additional current for external 32 kHz crystal``
 
   .. note:: "additional current" 选项为解决 ESP32 晶振失败的替代方案。请在您使用外部 32 kHz 晶体时使能该选项。该硬件问题将在下一个 ECO 芯片中解决。
 
-  - | Enable Bluetooth modem sleep with external 32.768kHz crystal as low power clock :| menuconfig ---> Component config ---> Bluetooth ---> Bluetooth controller ---> MODEM SLEEP Options --->[*] Bluetooth modem sleep
+  - | Enable Bluetooth modem sleep with external 32.768 kHz crystal as low power clock :| ``menuconfig`` > ``Component config`` > ``Bluetooth`` > ``Bluetooth controller`` > ``MODEM SLEEP Options`` > ``[*] Bluetooth modem sleep``
 
 --------------
 
@@ -223,8 +222,7 @@ ESP32 Wi-Fi Smartconfig 配网和 Bluetooth® LE Mesh 可以同时使用吗？
   不推荐同时打开。
   
   - Smartconfig 需要一直收配网数据，所以会一直占用天线，如果和 Bluetooth LE Mesh 共同使用，会导致失败率非常高。
-
-  - Bluetooth LE Mesh 可以和 Blufi 同时使用，所以推荐配网方式选择 Blufi 配网。
+  - Bluetooth LE Mesh 可以和 BluFi 同时使用，所以推荐配网方式选择 BluFi 配网。
 
 --------------
 
@@ -255,7 +253,7 @@ ESP32 如何修改蓝牙的发射功率？
 ESP32 的 Bluetooth® LE 蓝牙配网兼容性如何？是否开源？
 -----------------------------------------------------------------
 
-  - ESP32 的蓝牙配网，简称 Blu-Fi 配网，兼容性与 Bluetooth LE 兼容性一致，测试过苹果、华为、小米、OPPO、魅族、 一加、中兴等主流品手机，兼容性良好。
+  - ESP32 的蓝牙配网，简称 Blu-Fi 配网，兼容性与 Bluetooth LE 兼容性一致，测试过苹果、华为、小米、OPPO、魅族、一加、中兴等主流品手机，兼容性良好。
   - 目前 Blu-Fi 协议及手机应用部分的代码不开源。
 
 --------------
@@ -306,16 +304,16 @@ ESP32 的 Bluetooth® LE 连接数 6 个以上会有哪些风险？
   - 通常要根据具体的应用决定，在常规场景下，ESP32 Bluetooth LE 连接 3 个设备可以稳定通信。
   - Bluetooth LE 的最大连接数未有一个准确的值，在多个 Bluetooth LE 设备同时连接的的时候，RF 是分时复用的，需要设计者保证每一个设备不会长时间占用导致其他设备超时断开。
   - 连接参数里面有 connection interval、connection window、latency、timeout, 可以在 ``latency`` 以内的不应答，但是若超过 ``timeout`` 的时间，将会导致连接断开。
-  - 假设配置参数中 ``interval`` 是 100，window 是 5 , Wi-Fi 关闭时，将会连接较多设备。如果用了 Wi-Fi，或者 ``interval`` 设置的太小，将只能连接较少设备。
-  - 当 Bluetooth LE 支持多的设备并发连接时，RF 的 solt 管理出错概率会增加，所以 Bluetooth LE 设备连接较多时，需要针对具体场景调试。
+  - 假设配置参数中 ``interval`` 是 100，window 是 5，Wi-Fi 关闭时，将会连接较多设备。如果用了 Wi-Fi，或者 ``interval`` 设置的太小，将只能连接较少设备。
+  - 当 Bluetooth LE 支持多个设备并发连接时，RF 的 solt 管理出错概率会增加，所以 Bluetooth LE 设备连接较多时，需要针对具体场景调试。
 
 ----------------
 
 使用 ESP32 设备作为 Bluetooth® LE 主机，最大支持多少台从机设备进行连接？
 --------------------------------------------------------------------------------------
 
-  - ESP32 的 Bluetooth LE 最大支持 9 台从机设备进行连接，建议连接数量 3 个设备以内。
-  - 可通过 menuconfig -> Component config -> Bluetooth -> Bluetooth controller -> BLE MAX Connections 进行配置。
+  - ESP32 的 Bluetooth LE 最大支持 9 台从机设备进行连接，建议连接数量不超过 3 个。
+  - 可通过 ``menuconfig`` > ``Component config`` > ``Bluetooth`` > ``Bluetooth controller`` > ``BLE MAX Connections`` 进行配置。
 
 ----------------
 
@@ -342,18 +340,18 @@ ESP32 下载 ESP_SPP_SERVER 例程，如何修改蓝牙设备名称？
 
 -------------
 
-ESP32 下载 Blufi 例程进行配网，若使用 EspBluFi APP 在配网过程配置了一个错误的 wi-Fi 从而无法连接 ，此时从 APP 端向设备端发送“扫描”命令后就会导致设备重启，是什么原因？
+ESP32 下载 BluFi 例程进行配网，若使用 EspBluFi APP 在配网过程配置了一个错误的 Wi-Fi 从而无法连接，此时从 APP 端向设备端发送“扫描”命令后就会导致设备重启，是什么原因？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Blufi 例程规定在 Wi-Fi 连接时不可以发送 Wi-Fi 扫描命令。
-  - 但可在 blufi_example_main.c 文件下的  case ESP_BLUFI_EVENT_GET_WIFI_LIST:{}; 函数的首行增加 ESP_ERROR_CHECK(esp_wifi_disconnect());  函数来解决此问题。
+  - BluFi 例程规定在 Wi-Fi 连接时不可以发送 Wi-Fi 扫描命令。
+  - 但可在 blufi_example_main.c 文件下的  case ESP_BLUFI_EVENT_GET_WIFI_LIST:{}; 函数的首行增加 ESP_ERROR_CHECK(esp_wifi_disconnect()); 函数来解决此问题。
  
 ----------------
 
 使用 ESP32，如何指定 BLE 连接/发送在 core 0 上运行？
 ------------------------------------------------------------------------------
 
-  - ESP32 的 BLE 连接/发送目前仅支持指定在 core 1 上运行。可通过 menuconfig -> Component config -> FreeRTOS -> Run FreeRTOS only on first core（启动此选项） 进行设置。
+  - ESP32 的 BLE 连接/发送目前仅支持指定在 core 1 上运行。可通过使能 ``menuconfig`` > ``Component config`` > ``FreeRTOS`` > ``Run FreeRTOS only on first core`` 进行设置。
   - 根据此应用需求，可使用 xTaskCreatePinnedToCore() 或 xTaskCreateStaticPinnedToCore() API 来创建任务核分配。具体说明参见  `core assignment <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/freertos-smp.html?highlight=run%20freertos%20only%20first%20core#overview>`_。
 
 ---------------
@@ -361,11 +359,11 @@ ESP32 下载 Blufi 例程进行配网，若使用 EspBluFi APP 在配网过程�
 ESP32 设置中文蓝牙设备名称会异常显示乱码，原因是什么？
 -------------------------------------------------------------------------------------------------------
 
-  - 这是因为此时编辑器的中文编码格式不是 UTF-8， 需要把编辑器的编码格式改成 UTF-8。
+  - 这是因为此时编辑器的中文编码格式不是 UTF-8，需要把编辑器的编码格式改成 UTF-8。
   
 ----------------
 
-使用 ESP32 在蓝牙通道上传分包时，一包最大传输数据长度为 253（MTU 设置为 263），导致在传输大量数据包进行多包读取时传输较慢。请问是否有 Blufi 扩展协议，可支持一包传输较大长度的数据，或者有其他解决方案可提高传输速率吗？
+使用 ESP32 在蓝牙通道上传分包时，一包最大传输数据长度为 253（MTU 设置为 263），导致在传输大量数据包进行多包读取时传输较慢。请问是否有 BluFi 扩展协议，可支持一包传输较大长度的数据，或者有其他解决方案可提高传输速率吗？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 在蓝牙通道上传输大量数据包进行多包读取时传输较慢，可通过调整蓝牙连接参数来改善传输速度。
@@ -382,7 +380,7 @@ ESP32 设置中文蓝牙设备名称会异常显示乱码，原因是什么？
 ESP32 经典蓝牙支持哪些 Profile？
 ------------------------------------------------------------
 
-  - 目前支持 A2DP、 AVRCP、 SPP、 HFP， HID 正在开发中。
+  - 目前支持 A2DP、AVRCP、SPP、HFP，HID 正在开发中。
 
 ----------------
 
@@ -407,8 +405,8 @@ ESP32 经典蓝牙配对时如何使手机端输入 PIN 码？
 
   可以通过禁用 ``Secure Simple Pairing``，从而仅支持 ``Legacy Pairing``。
 
-  - v3.3 到 v4.0（不包含 v4.0）：``Component config > Bluetooth > Bluedroid Enable > [*] Classic Bluetooth > [ ]Secure Simple Pairing``
-  - v4.0 及以上：``Component config → Bluetooth → Bluedroid Options → [ ] Secure Simple Pairing``
+  - v3.3 到 v4.0（不包含 v4.0）：``Component config`` > ``Bluetooth`` > ``Bluedroid Enable`` > ``[*] Classic Bluetooth`` > ``[ ]Secure Simple Pairing``
+  - v4.0 及以上：``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` > ``[ ] Secure Simple Pairing``
 
 ----------------
 
@@ -433,14 +431,14 @@ ESP32 蓝牙占用多少内存？
 
   - 优化 PSRAM 版本：
 
-  在 ESP-IDF V3.0 及以后，打开 menuconfig 里蓝牙菜单的 PSRAM 相关选项，将 Bluedroid(Host) 的部分 .bss/.data 段及堆放入 PSRAM，可额外省出近 50 KB。
+  在 ESP-IDF V3.0 及以后，打开 ``menuconfig`` 里蓝牙菜单的 PSRAM 相关选项，将 Bluedroid(Host) 的部分 .bss/.data 段及堆放入 PSRAM，可额外省出近 50 KB。
 
 ---------------
 
-ESP32 使用 gattc_gatts_coex.c 例程测试 BLE 多连接，在 "menuconfig" 中将 “BLE Max connections” 配置选项设置为 "5" ，但实际只能连 4 个设备，连接第 5 个设备的时候会报错，是什么原因？
+ESP32 使用 gattc_gatts_coex.c 例程测试 BLE 多连接，在 ``menuconfi`` 中将 ``BLE Max connection`` 配置选项设置为 "5" ，但实际只能连 4 个设备，连接第 5 个设备的时候会报错，是什么原因？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 请在 "menuconfig" 中将 “BT/BLE MAX ACL CONNECTIONS” 配置选项设置为 “5”。 
+  - 请在 ``menuconfig`` 中将 ``BT/BLE MAX ACL CONNECTIONS`` 配置选项设置为 “5”。 
   
 ----------------
 
@@ -480,7 +478,7 @@ BLE 如何抓包？
 
 ------------
 
-使用 ESP32 开发板，测试好几个版本的 ESP-IDF 下的 blufi 例程进行配网，点击配网之后都会打印如下报错，是什么原因？
+使用 ESP32 开发板，测试好几个版本的 ESP-IDF 下的 BluFi 例程进行配网，点击配网之后都会打印如下报错，是什么原因？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: text
@@ -498,6 +496,8 @@ BLE 如何抓包？
 
   - ESP32 使用 light-sleep 模式，需要 ESP-IDF release/4.0 以上版本的 SDK 外加 32.768 kHz 晶振。
   - light-sleep 模式下，蓝牙可以保持连接。请参考 `Bluetooth modem sleep with external 32.768 kHz xtal under light sleep <https://github.com/espressif/esp-idf/issues/947#issuecomment-500312453>`_ 指南。
+
+----------------------------
 
 如何修改 ESP32 的蓝牙广播名称？
 ----------------------------------------------------------------------------
@@ -540,6 +540,8 @@ BLE 5.0 广播设置为 legacy 模式时支持最大广播长度为多少？
 BLE 广播包如何设置为不可连接包?
 ---------------------------------------------------------------------------------------------
 
+  :CHIP\: ESP32:
+  
   - 可参考 `gatt_server demo <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server>`_， 将广播包类型 adv_type 变量修改为 ADV_TYPE_NONCONN_IND。
 
     .. code:: text
@@ -576,3 +578,10 @@ ESP32 是否支持 A2DP 发送音频？
 --------------------------------------
 
   ESP32 支持 A2DP 发送音频，可参考例程 `a2dp_source <https://github.com/espressif/esp-idf/tree/d85d3d969ff4b42e2616fd40973d637ff337fae6/examples/bluetooth/bluedroid/classic_bt/a2dp_source#esp-idf-a2dp-source-demo>`_。
+
+----------------
+
+ESP32 Bluetooth LE 白名单最多支持多少个设备？
+--------------------------------------------------------------------------------------
+
+  - 最多支持 12 个。

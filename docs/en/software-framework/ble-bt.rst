@@ -43,7 +43,7 @@ After the Bluetooth® LE starts advertising, why some mobile phones cannot succe
 
 --------------
 
-Is it able to process OTA through Bluetooth® on ESP32?
+Can I process OTA through Bluetooth® on ESP32?
 -------------------------------------------------------------------
 
   Yes, please operate basing on `bt\_spp\_acceptor <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_acceptor>`_ and `bt\_spp\_initiator <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_initiator>`_. 
@@ -52,8 +52,8 @@ Is it able to process OTA through Bluetooth® on ESP32?
 
 --------------
 
-How does ESP32 Bluetooth® and Bluetooth® LE dual-mode coexist and use?
-------------------------------------------------------------------------------------
+How do ESP32 Bluetooth® and Bluetooth® LE dual-mode coexist and how can I use this coexistence mode?
+---------------------------------------------------------------------------------------------------------------------------------------
 
   The ESP32 Bluetooth and Bluetooth LE dual-mode does not require complex configurations. For developers, it is simple as calling Bluetooth LE API for Bluetooth LE, and calling Classic Bluetooth API for Classic Bluetooth.
 
@@ -79,14 +79,14 @@ Does ESP32 support Bluetooth® 4.2 DLE (Data Length Extension)？
 How do ESP32 Bluetooth® and Wi-Fi coexist?
 ----------------------------------------------------
   
-  In the menuconfig, there is a special option called “Software controls WiFi/Bluetooth coexistence”, which is used to control the coexistence of Bluetooth and Wi-Fi for ESP32 using software, thus balancing the coexistence requirement for controlling the RF module by both the Wi-Fi and Bluetooth modules. Please note that if ``Software controls WiFi/Bluetooth coexistence`` is enabled, the Bluetooth LE scan interval shall not exceed ``0x100 slots`` (about 160 ms).
+  In the ``menuconfig``, there is a special option called ``Software controls WiFi/Bluetooth coexistence``, which is used to control the coexistence of Bluetooth and Wi-Fi for ESP32 using software, thus balancing the coexistence requirement for controlling the RF module by both the Wi-Fi and Bluetooth modules.
 
-  - If the Bluetooth LE and Wi-Fi coexistence is required, this option can be enabled or disabled. However, if this option is not enabled, please note that the Bluetooth LE scan window should be larger than 150 ms, and the Bluetooth LE scan interval should be less than 500 ms.
+  - Please note that if ``Software controls WiFi/Bluetooth coexistence`` is enabled, the Bluetooth LE scan interval shall not exceed ``0x100 slots`` (about 160 ms). If the Bluetooth LE and Wi-Fi coexistence is required, this option can be enabled or disabled. However, if this option is not enabled, please note that the Bluetooth LE scan window should be larger than 150 ms, and the Bluetooth LE scan interval should be less than 500 ms.
   - If the Classic Bluetooth and Wi-Fi coexistence is required, it is recommended to enable this option.
 
 --------------
 
-How to get ESP32 Bluetooth® Compatibility Test Report?
+How can I get ESP32 Bluetooth® Compatibility Test Report?
 ----------------------------------------------------------------
 
   Please contact sales@espressif.com.
@@ -103,7 +103,7 @@ What is the transmit power of ESP32 Bluetooth®?
 Could ESP32 realize bridging between Wi-Fi and Bluetooth® LE?
 ------------------------------------------------------------------------
 
-  Yes, this function is developed on application layer. Users can retrieve data through Bluetooth LE and send them out via Wi-Fi. For detailed information, please refer to `Wi-Fi and Bluetooth LE Coexist demo <https://github.com/espressif/esp-idf/tree/release/v4.0/examples/bluetooth/esp_ble_mesh/ble_mesh_wifi_coexist>`_.
+  Yes, this function is developed on the application layer. You can retrieve data through Bluetooth LE and send them out via Wi-Fi. For detailed information, please refer to `Wi-Fi and Bluetooth LE Coexist demo <https://github.com/espressif/esp-idf/tree/release/v4.0/examples/bluetooth/esp_ble_mesh/ble_mesh_wifi_coexist>`_.
 
 --------------
 
@@ -122,57 +122,54 @@ What is the operating current of ESP32 Bluetooth® LE?
 | Connection(Slave): Connection Interval = 80 ms, latency = 0   | 142.1         | 32            | 35.33          |
 +---------------------------------------------------------------+---------------+---------------+----------------+
 
-
 --------------
 
 What kinds of Bluetooth® LE profiles does ESP32 support?
 -------------------------------------------------------------------
   
-  Currently, ESP32 Bluetooth LE fully supports some basic profiles, such as GATT/SMP/GAP, as well as some self-defined profiles. The ones that have already been implemented include Bluetooth LE HID (receiving side), Bluetooth LE SPP-Like, Battery, DIS, Blu-Fi (Bluetooth Network Configuration- transmitting side), and so on.
+  Currently, ESP32 Bluetooth LE fully supports some basic profiles, such as GATT/SMP/GAP, as well as some self-defined profiles. The ones that have already been implemented include Bluetooth LE HID (receiving side), Bluetooth LE SPP-Like, Battery, DIS, BluFi (Bluetooth Network Configuration-transmitting side), and so on.
 
 --------------
 
-How to connect mobile phones and play music using ESP32 Bluetooth®?
+How do I connect mobile phones and play music using ESP32 Bluetooth®?
 --------------------------------------------------------------------------------
   
-  ESP32 is used as an A2DP receiver when connected to a cell phone to play music. 
-
-  Please note that the A2DP Sink Demo uses a mobile phone to obtain SBC encoded data stream only. In order to play sounds, you will also need to decode the data and some peripherals, including codec modules, D/A converter, and speaker.
+  ESP32 is used as an A2DP receiver when connected to a cell phone to play music. Please note that the A2DP Sink Demo uses a mobile phone to obtain SBC encoded data stream only. In order to play sounds, you will also need to decode the data and some peripherals, including codec modules, D/A converter, and speaker.
 
 --------------
 
 How is the ESP32 SPP performance?
 ------------------------------------------------
 
-  When using two ESP32 boards to run SPP, one-way throughput can reach up to 1900 Kbps (about 235 KB/s), which is close to the theoretical value in the specifications.
+  When we use two ESP32 boards to run SPP, one-way throughput can reach up to 1900 Kbps (about 235 KB/s), which is close to the theoretical value in the specifications.
 
 --------------
 
 What is the maximum transmission rate for ESP32 Bluetooth® LE?
 --------------------------------------------------------------------------
 
-  The transmission rate of ESP32 Bluetooth LE can reach 700 Kbps tested in a shielded box.
+  The transmission rate of ESP32 Bluetooth LE can reach 700 Kbps when it is tested in a shielded box.
 
 --------------
 
 How does ESP32 Bluetooth® LE enter Light-sleep mode?
 --------------------------------------------------------------
 
-  In hardware level, a 32 kHz external crystal oscillator should be added, or the Light-sleep mode will not take effect.
+  On the hardware level, a 32 kHz external crystal should be added, or the Light-sleep mode will not take effect.
 
-  In software level (SDK4.0 and later versions), the following configurations should be enabled in menuconfig:
+  On the software level (SDK4.0 and later versions), the following configurations should be enabled in menuconfig:
 
-  - Power Management:| menuconfig ---> Component config ---> Power management --->[*] Support for power management
+  - Power Management:| ``menuconfig`` > ``Component config`` > ``Power management`` > ``[*] Support for power management``
 
-  - Tickless Idle:| menuconfig ---> Component config ---> FreeRTOS --->[*] Tickless idle support (3) Minimum number of ticks to enter sleep mode for (NEW)
+  - Tickless Idle:| ``menuconfig`` > ``Component config`` > ``FreeRTOS`` > ``[*] Tickless idle support (3) Minimum number of ticks to enter sleep mode for (NEW)``
 
-  .. note:: Tickless idle needs to be enabled to allow automatic light sleep. FreeRTOS will enter Light-sleep mode if no tasks need to run for 3 ticks (by default), that is 30 ms if tick rate is 100 Hz. Configure the FreeRTOS tick rate to be higher if you want to allow shorter duration light sleep, for example: menuconfig —> Component config —> FreeRTOS ->(1000) Tick rate (Hz).
+  .. note:: Tickless idle needs to be enabled to allow automatic light-sleep mode. FreeRTOS will enter Light-sleep mode if no tasks need to run for 3 ticks (by default), that is 30 ms if tick rate is 100 Hz. Configure the FreeRTOS tick rate to be higher if you want to allow shorter duration of light-sleep mode, for example: ``menuconfig > ``Component config`` > ``FreeRTOS`` > ``(1000) Tick rate (Hz)``.
 
-  - | Configure external 32.768Hz crystal as RTC clock source :| menuconfig ---> Component config ---> ESP32-specific --->RTC clock source (External 32kHz crystal)[*] Additional current for external 32kHz crystal
+  - | Configure external 32.768 kHz crystal as RTC clock source :| ``menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``RTC clock source (External 32 kHz crystal)[*] Additional current for external 32 kHz crystal``
 
   .. note:: The "additional current" option is a workaround for a hardware issue on ESP32 that the crystal can fail in oscillating. Please enable this option when you use external 32 kHz crystal. This hardware issue will be resolved in the next ECO chip.
 
-  - | Enable Bluetooth modem sleep with external 32.768kHz crystal as low power clock :| menuconfig ---> Component config ---> Bluetooth ---> Bluetooth controller ---> MODEM SLEEP Options --->[*] Bluetooth modem sleep
+  - | Enable Bluetooth modem sleep with external 32.768kHz crystal as low power clock :| ``menuconfig`` > ``Component config`` > ``Bluetooth`` > ``Bluetooth controller`` > ``MODEM SLEEP Options`` > ``[*] Bluetooth modem sleep``
 
 --------------
 
@@ -204,7 +201,7 @@ How many Bluetooth® clients can be connected to ESP32?
 
 --------------
 
-How to get the MAC address of Bluetooth® devices for ESP32?
+How can I get the MAC address of Bluetooth® devices for ESP32?
 ------------------------------------------------------------------
 
   You can get the MAC address configured by Bluetooth via API `esp_bt_dev_get_address(void); <https://github.com/espressif/esp-idf/blob/f1b8723996d299f40d28a34c458cf55a374384e1/components/bt/host/bluedroid/api/include/api/esp_bt_device.h#L33>`_, also the system pre-defined MAC address types via API `esp_err_t esp_read_mac(uint8_t* mac,esp_mac_type_ttype); <https://github.com/espressif/esp-idf/blob/6c17e3a64c02eff3a4f726ce4b7248ce11810833/components/esp_system/include/esp_system.h#L233>`_.
@@ -215,7 +212,7 @@ What is the default Bluetooth® transmit power for ESP32 SDK?
 ------------------------------------------------------------------------
 
   - By default, the power level of ESP32 SDK is 5, and the corresponding transmit power is +3 dBm.
-  - The power level of ESP32 Bluetooth ranges from 0 to 7, with the corresponding transmit power ranges from -12 dBm to 9 dBm. Each time the power level increases 1, the corresponding transmit power will increase by 3 dBm.
+  - The power level of ESP32 Bluetooth ranges from 0 to 7, with the corresponding transmit power ranges from -12 dBm to 9 dBm. Each time the power level increases by 1, the corresponding transmit power will increase by 3 dBm.
 
 --------------
 
@@ -225,7 +222,7 @@ Is it possible to use Wi-Fi Smartconfig and Bluetooth® LE Mesh for ESP32 simult
   It is not recommended to use them simultaneously.
   
   - The Smartconfig will need to receive the networking data, thus occupying the antenna all the time. If it is used together with Bluetooth LE Mesh, there will be an extremely high rate of failure.
-  - The Bluetooth LE Mesh can be used together with Blufi. So it is recommended to use Blufi for networking.
+  - The Bluetooth LE Mesh can be used together with BluFi. So it is recommended to use BluFi for networking.
 
 --------------
 
@@ -234,19 +231,19 @@ What is the operating current for ESP32 Classic Bluetooth®？
 
   A2DP (Single core CPU 160 Mhz，DFS = false，commit a7a90f)
 
-  +--------------------------------------------------------------+---------------+---------------+----------+
-  | Current                                                      | Maximum (mA)  | Minimum (mA)  | Average  |
-  +==============================================================+===============+===============+==========+
-  | Scanning                                                     | 106.4         | 30.8          | 37.8     |
-  +--------------------------------------------------------------+---------------+---------------+----------+
-  | Sniff                                                        | 107.6         | 31.1          | 32.2     |
-  +--------------------------------------------------------------+---------------+---------------+----------+
-  | Play Music                                                   | 123           | 90.1          | 100.4    |
-  +--------------------------------------------------------------+---------------+---------------+----------+
+  +--------------------------------------------------------------+---------------+---------------+--------------+
+  | Current                                                      | Maximum (mA)  | Minimum (mA)  | Average (mA) |
+  +==============================================================+===============+===============+==============+
+  | Scanning                                                     | 106.4         | 30.8          | 37.8         |
+  +--------------------------------------------------------------+---------------+---------------+--------------+
+  | Sniff                                                        | 107.6         | 31.1          | 32.2         |
+  +--------------------------------------------------------------+---------------+---------------+--------------+
+  | Play Music                                                   | 123           | 90.1          | 100.4        |
+  +--------------------------------------------------------------+---------------+---------------+--------------+
 
 ------------
 
-How to modify the transmit power for ESP32 Bluetooth®？
+How can I modify the transmit power for ESP32 Bluetooth®？
 -------------------------------------------------------------------
 
   The Bluetooth transmit power can be configured via function esp_ble_tx_power_set();. Please refer to `esp_bt.h <https://github.com/espressif/esp-idf/blob/c77c4ccf6c43ab09fd89e7c907bf5cf2a3499e3b/components/bt/include/esp_bt.h>`_.
@@ -256,12 +253,12 @@ How to modify the transmit power for ESP32 Bluetooth®？
 How is the networking compatibility of ESP32 Bluetooth® LE? Is it open-sourced?
 --------------------------------------------------------------------------------------------
 
-  - ESP32 Bluetooth networking, Blu-Fi networking for short, has a good compatibility as Bluetooth LE and is compatible with many mainstream mobile phones such as Apple, HUAWEI, Mi, OPPO, MEIZU, OnePlus, ZTE and etc.
-  - Currently, the Blu-Fi protocol and phone application code is not open-sourced.
+  - ESP32 Bluetooth networking, BluFi networking for short, has a good compatibility as Bluetooth LE and is compatible with many mainstream mobile phones such as Apple, HUAWEI, Mi, OPPO, MEIZU, OnePlus, ZTE and etc.
+  - Currently, the BluFi protocol and phone application code is not open-sourced.
 
 --------------
 
-When executing example bt_spp_acceptor on ESP32, the IOS device cannot find the ESP32 device during scanning. What could be the reasons?
+When I execute example bt_spp_acceptor on ESP32, the IOS device cannot find the ESP32 device during scanning. What could be the reasons?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Apple has opened Bluetooth® as: A2DP, HID's keyboard, avrcp, SPP (need MFI), high-level Bluetooth LE and ANCS for Bluetooth LE.
@@ -277,15 +274,15 @@ How is the security of ESP32 Bluetooth® LE/Bluetooth® Secure Simple Pairing (S
 
 --------------
 
-How to certify the MTU size of ESP32 Bluetooth® LE?
+How can I confirm the MTU size of ESP32 Bluetooth® LE?
 ------------------------------------------------------------------
 
   - By default, the MTU size of ESP32 Bluetooth LE is 23 bytes, and can be configured to reach 517 bytes.
-  - For phones, the MTU size can be self-defined. Then, the end device with a smaller MTU will be chose for communication.
+  - For phones, the MTU size can be self-defined. Then, the end device with a smaller MTU will be chosen for communication.
 
 --------------
 
-When advertising in ESP32 Bluetooth® LE mode, an error occurred as "W (17370) BT_BTM: data exceed max adv packet length". How to resolve such issue?
+When advertising in ESP32 Bluetooth® LE mode, an error occurred as "W (17370) BT_BTM: data exceed max adv packet length". How can I resolve such issue?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - This is because the advertising data has exceeded the maximum advertising packet length.
@@ -301,10 +298,10 @@ Does ESP32 Bluetooth® LE support Client-Server mode, in which gatt server and g
 
 --------------
 
-What are the risks if there are over 6 devices connected to ESP32 Bluetooth® LE?
+What are the risks if there are over six devices connected to ESP32 Bluetooth® LE?
 ---------------------------------------------------------------------------------------------
 
-  - Usually it depends on the specific application scenario. In general, the ESP32 Bluetooth LE can communicate stably with 3 devices connected.
+  - Usually it depends on the specific application scenario. In general, the ESP32 Bluetooth LE can communicate stably with three devices connected.
   - There is no exact number for maximum Bluetooth LE connections. When there are multiple devices connected to Bluetooth LE simultaneously, the RF is time-multiplexed, thus requiring the designer to ensure that each device is not overly occupied, causing other devices to timeout and disconnected.
   - The connection parameters include: connection interval, connection window, latency and timeout. It is ok for devices to not respond within the ``latency``, but if the responding time exceeds ``timeout`` threshold, the device will be disconnected.
   - If the ``interval`` is configured to 100 and ``window`` to 5, the Bluetooth LE will be able to connect to more devices with Wi-Fi disconnected. However, If Wi-Fi is connected and the value of ``interval`` is too small, only a few devices can be connected.
@@ -315,19 +312,19 @@ What are the risks if there are over 6 devices connected to ESP32 Bluetooth® LE
 When using ESP32 device as the server of Bluetooth® LE, how many client devices can be connected?
 ---------------------------------------------------------------------------------------------------------------------
 
-  - The ESP32 Bluetooth LE supports up to 9 client devices for connection. It is recommended to hold this number within 3.
-  - Please make configurations via menuconfig -> Component config -> Bluetooth -> Bluetooth controller -> BLE MAX Connections.
+  - The ESP32 Bluetooth LE supports up to nine client devices for connection. It is recommended to hold this number within three.
+  - Please make configurations via ``menuconfig`` > ``Component config`` > ``Bluetooth`` > ``Bluetooth controller`` > ``BLE MAX Connections``.
 
 ----------------
 
-How to send files via Bluetooth® BR/EDR for ESP32?
+How can I send files via Bluetooth® BR/EDR for ESP32?
 ------------------------------------------------------------
 
   - Please refer to example ``bt_spp_acceptor`` or ``bt_spp_initiator`` in `classic bt <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt>`_.
 
 ---------------
 
-When downloading example ESP_SPP_SERVER for ESP32, how to modify the name of the Bluetooth® device?
+When I download example ESP_SPP_SERVER for ESP32, how can I modify the name of the Bluetooth® device?
 ------------------------------------------------------------------------------------------------------------------
 
   - The name of the Bluetooth device can be modified via ``adv`` parameter:
@@ -339,37 +336,37 @@ When downloading example ESP_SPP_SERVER for ESP32, how to modify the name of the
       0x03,0x03,0xF0,0xAB,
       0x0F,0x09,0x45,0x53,0x50,0x5f,0x53,0x50,0x50,0x5f,0x53,0x45,0x52,0x56,0x45,0x52};
 
-  - The "0x0F" on the third line means the length of the following data is 15, "0x09" stands for data type (fixed) and data from "0x45" indicates the corresponding ASCII code of the device names (BLE_SPP_SERVER by default).
+  - The "0x0F" in the third line means the length of the following data is 15, "0x09" stands for data type (fixed) and data from "0x45" indicates the corresponding ASCII code of the device names (BLE_SPP_SERVER by default).
 
 ----------------------
 
-When using the "Blufi" example to configure network for ESP32, the Wi-Fi cannot be connected during the distribution process via the EspBluFi application since a wrong Wi-Fi has been configured. Then the device is restarted after sending a SCAN command from the application. What is the reason?
+When I use the "BluFi" example to configure network for ESP32, the Wi-Fi cannot be connected during the distribution process via the EspBluFi application since a wrong Wi-Fi has been configured. Then the device is restarted after sending a SCAN command from the application. What is the reason?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The "Blufi" example stipulates that Wi-Fi "SCAN" commands cannot be sent when Wi-Fi is connected.
+  - The "BluFi" example stipulates that Wi-Fi "SCAN" commands cannot be sent when Wi-Fi is connected.
   - To solve this issue, you can add ``ESP_ERROR_CHECK(esp_wifi_disconnect());`` to the first line of the ``ESP_BLUFI_EVENT_GET_WIFI_LIST:{};`` function under the ``blufi_example_main.c`` file.
 
 -------------------
 
-Using ESP32, how to specify a BLE connection/transmit operation to run on core 0?
+How can I specify a BLE connection/transmit operation to run on core 0 when I use ESP32?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Currently, ESP32's BLE connection/transmit operation only can be run on core 1. You can enable this via "menuconfig -> Component config -> FreeRTOS -> Run FreeRTOS only on first core (enable this option)".
+  - Currently, ESP32's BLE connection/transmit operation only can be run on core 1. You can enable this via ``menuconfig`` > ``Component config`` > ``FreeRTOS`` > ``Run FreeRTOS only on first core`` .
   - According to this application requirement, you can distribute tasks to a certain core using the "xTaskCreatePinnedToCore()" or "xTaskCreateStaticPinnedToCore()" API. For specific instructions, please see `core assignment <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/freertos-smp.html?highlight=run%20freertos%20only%20first%20core #overview>`_.
 
 --------------
 
-When setting name for the bluetooth of an ESP32 device using Chinese characters, messy code shows instead. What is the reason？
+When I set name for the bluetooth of an ESP32 device using Chinese characters, messy code shows instead. What is the reason？
 ----------------------------------------------------------------------------------------------------------------------------------------
 
   - This is because the Chinese encoding format of the editor is not UTF-8 at this time, and the encoding format of the editor needs to be changed to UTF-8.
 
 ----------------
 
-Using ESP32, when uploading sub-packages on the Bluetooth channel, the maximum transmission data length of a packet is 253 (MTU is set to 263), which results in slower transmission when a large number of data packets are transmitted for multi-packet reading. Is there a Blufi extension protocol that can support the transmission of a larger length of data in one packet, or are there other solutions to increase the transmission rate?
+When I upload sub-packages to the Bluetooth channel using ESP32, the maximum transmission data length of a packet is 253 (MTU is set to 263). This results in slower transmission when a large number of data packets are transmitted for multi-packet reading. Is there a BluFi extension protocol that can support the transmission of a larger length of data in one packet, or are there other solutions to increase the transmission rate?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - When transmitting a large number of data packets on the Bluetooth channel for multi-packet reading, the transmission is slow, and the transmission speed can be improved by adjusting the Bluetooth connection parameters.
+  - The transmission is slow When a large number of data packets on the Bluetooth channel are transmitted for multi-packet reading. You can improve the transmission speed by adjusting the Bluetooth connection parameters.
   - The BLE packet length setting depends on the ``ESP_GATT_MAX_MTU_SIZE`` setting, please refer to the `Description <https://github.com/espressif/esp-idf/blob/cf056a7d0b90261923b8207f21dc270313b67456/examples/bluetooth/bluedroid/ble/gatt_client/tutorial/Gatt_Client_Example_Walkthrough.md>`_.
   - The configured MTU size will affect the data transmission rate. The effective MTU length needs to be changed by MTU exchange to change the default MTU size. The MTU size used in the final MTU exchange is used as the MTU size for the communication between the two devices. You can check the value of the MTU after exchange, such as the follows:
 
@@ -390,26 +387,26 @@ What profile does ESP32's classic Bluetooth® support?
 How many stable connections can be reached for ESP32-C3's Bluetooth® LE (BLE)? 
 ------------------------------------------------------------------------------------------------
 
- - Recommend 4 or less.
+ - We recommend the connection number does not exceed four.
  
 ----------------
 
-How to adjust the BLE advertising interval?
+How can I adjust the BLE advertising interval?
 ------------------------------------------------------------------------------------------
 
   - The advertising interval is decided by ``adv_int_min`` and ``adv_int_max`` parameters in BLE advertising struct, which configures the minimum and maximum advertising interval respectively.
-  - The range of advertising interval value is 0x0020 to 0x4000 and the default value is 0x0800. The interval time is the value * 0.625 ms, i.e., 20 ms to 10.24 sec.
+  - The advertising interval ranges from 0x0020 to 0x4000 and the default value is 0x0800. The interval time is the value * 0.625 ms, i.e., 20 ms to 10.24 sec.
   - If the values of ``adv_int_min`` and ``adv_int_max`` are different, the advertising interval is within the range of the two values. If the values are the same, the interval will be this fixed value.
 
 ----------------
 
-How to input the PIN code via mobile phone during ESP32's Classic Bluetooth Pairing mode?
+How can I input the PIN code via mobile phone during ESP32's Classic Bluetooth Pairing mode?
 -----------------------------------------------------------------------------------------------------------------------------
 
   You can disable ``Secure Simple Pairing`` to support only ``Legacy Pairing``.
 
-  - From esp-idf v3.3 to v4.0 (not include v4.0): ``Component config > Bluetooth > Bluedroid Enable > [*] Classic Bluetooth > [ ]Secure Simple Pairing``
-  - esp-idf v4.0 and above: ``Component config → Bluetooth → Bluedroid Options → [ ] Secure Simple Pairing``
+  - From esp-idf v3.3 to v4.0 (not include v4.0): ``Component config`` > ``Bluetooth`` > ``Bluedroid Enable`` > ``[*] Classic Bluetooth`` > ``[ ]Secure Simple Pairing``
+  - esp-idf v4.0 and above: ``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` > ``[ ] Secure Simple Pairing``
 
 ----------------
 
@@ -430,18 +427,18 @@ How much memory does ESP32 Bluetooth occupy?
     - SMP: 5 KB
     - Classic Bluetooth (Classic Bluetooth A2DP_SINK demo, including SMP/SDP/A2DP/AVRCP): 48 KB (.bss+.data) + 24 KB (heap) = 72 KB (an additional 13 KB is added when the example is running)
   
-  .. note:: The above heap (Heap) all include the task stack (Task Stack), because the task stack is allocated from the heap and counted as a heap.
+  .. note:: The above heap (Heap) all include the task stack (Task Stack), because the task stack is allocated from the heap and considered as a heap.
 
-  - Optimize PSRAM version:
+  - Optimized PSRAM version:
 
-   In ESP-IDF v3.0 and later versions, if you open the PSRAM related options of the Bluetooth menu in menuconfig, and put part of the .bss/.data section and heap of Bluedroid (Host) into PSRAM, this can save additional 50 KB of memory spaces.
+   In ESP-IDF v3.0 and later versions, if you open the PSRAM related options of the Bluetooth menu in ``menuconfig``, and put part of the .bss/.data section and heap of Bluedroid (Host) into PSRAM, almost 50 KB memory space can be saved.
 
 ----------------------
 
-When using the "gattc_gatts_coex.c" example on ESP32 to test BLE multi-connection, it can only connect to 4 devices even after I set the "BLE Max connections" in "menuconfig" to 5. What is the reason?
+When I use the "gattc_gatts_coex.c" example on ESP32 to test BLE multi-connection, it can only connect to four devices even after I set the ``BLE Max connections`` in ``menuconfig`` to five. What is the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Please set the "BT/BLE MAX ACL CONNECTIONS" in "menuconfig" to 5.
+  - Please set the ``BT/BLE MAX ACL CONNECTION`` in ``menuconfig`` to five.
 
 ----------------
 
@@ -450,7 +447,7 @@ Does ESP32-C3 BLE support master and slave mode at the same time? What is the nu
 
   :IDF\: release/v4.3, master:
 
-  - ESP32-C3 supports master and slave mode at the same time, sharing 8 connections. For example, if ESP32-C3 connects to 4 slave devices, it can be connected by 8 - 4 = 4 master devices.
+  - ESP32-C3 supports master and slave mode at the same time, which share 8 connections. For example, if ESP32-C3 connects to 4 slave devices, it can be connected by 8 - 4 = 4 master devices.
   - In addition, when ESP32-C3 is used as a slave, it can be connected by 8 master devices; when used as a master, it can connect to 8 slave devices.
 
 -------------------
@@ -462,8 +459,8 @@ What is the maximum MTU Size of ESP32 Classic Bluetooth?
 
 ---------------
 
-How to resolve the frequently occurred ELxXX error (such as ELx200) when Wi-Fi and Ble co-exit？
---------------------------------------------------------------------------------------------------
+How can I resolve the frequently occurred ELxXX error (such as ELx200) when Wi-Fi and Ble co-exit？
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32:
 
@@ -474,14 +471,14 @@ How to resolve the frequently occurred ELxXX error (such as ELx200) when Wi-Fi a
 How does BLE capture packets?
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - There are many tools available in the market, such as:
+  - There are many available tools, such as:
 
     - TI Packet sniffer
     - NRF Packet sniffer
 
 ---------------------
 
-When using an ESP32 development board to test several versions of bluefi example under ESP-IDF for networking, the following error kept printing. What is the reason?
+When I use an ESP32 development board to test several versions of bluefi example under ESP-IDF for networking, the following error kept printing. What is the reason?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: text
@@ -494,15 +491,15 @@ When using an ESP32 development board to test several versions of bluefi example
 
 --------------------
 
-When using ESP32, can light-sleep mode be enabled for Bluetooth and can Bluetooth be kept connected in light-sleep mode?
+When I use ESP32, can Light-sleep mode be enabled for Bluetooth and can Bluetooth be kept connected in Light-sleep mode?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - To use light-sleep mode for ESP32, release/4.0 or above versions of ESP-IDF and a 32.768 kHz crystal oscillator are needed.
-  - Bluetooth can be kept connected in light-sleep mode. Please refer to `Bluetooth modem sleep with external 32.768 kHz xtal under light sleep <https://github.com/espressif/esp-idf/issues/947#issuecomment-500312453>`_.
+  - To use Light-sleep mode for ESP32, release/4.0 or above versions of ESP-IDF and a 32.768 kHz crystal are needed.
+  - Bluetooth can be kept connected in Light-sleep mode. Please refer to `Bluetooth modem sleep with external 32.768 kHz xtal under light sleep <https://github.com/espressif/esp-idf/issues/947#issuecomment-500312453>`_.
 
 --------------
 
-How to modify the Bluetooth broadcast name of ESP32?
+How can I modify the Bluetooth device name of ESP32?
 ---------------------------------------------------------------------------------------
 
   - The structure to be modified is as follows:
@@ -529,18 +526,18 @@ How to modify the Bluetooth broadcast name of ESP32?
 
      };
 
-  - The above ``/* device name*/`` is the modified item. Among them, 0x0f is the total length of the field type plus specific content, and 0x09 indicates that this type refers to the device name. Subsequent'E','S','P','_','G','A','T','T','S','_','D','E', 'M','O' are the ASCII code expressions of the broadcast device name.
+  - The above ``/* device name*/`` is the modified item. Among them, 0x0f is the total length of the field type plus specific content, and 0x09 indicates that this type refers to the device name. Subsequent'E','S','P','_','G','A','T','T','S','_','D','E', 'M','O' are the ASCII code of the broadcast device name.
 
 ----------------
 
-After set the BLE 5.0 broadcast to legacy mode, what is the maximum broadcast length supported?
+What is the maximum supported broadcast length of BLE 5.0 broadcast after it is set to legacy mode?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The maximum supported length is 31-byte.
 
 ---------------
 
-How to set a BLE broadcast package as unconnectable package?
+How can I set a BLE broadcast package as unconnectable package?
 --------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32:
@@ -562,7 +559,7 @@ How to set a BLE broadcast package as unconnectable package?
 
 ---------------
 
-How to send Bluetooth HCI commands directly to ESP32-WROOM-32D module through the serial port?
+How can I send Bluetooth HCI commands directly to ESP32-WROOM-32D module through the serial port?
 --------------------------------------------------------------------------------------------------------
 
   - Please refer to `controller_hci_uart_esp32 <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/hci/controller_hci_uart_esp32>`_.
@@ -581,3 +578,10 @@ Does ESP32 support transmitting audio stream using A2DP?
 ----------------------------------------------------------------------------
 
   Yes, please refer to example `a2dp_source <https://github.com/espressif/esp-idf/tree/d85d3d969ff4b42e2616fd40973d637ff337fae6/examples/bluetooth/bluedroid/classic_bt/a2dp_source#esp-idf-a2dp-source-demo>`_.
+
+--------------------
+
+How many devices can be connected at the most as suggested by the White List of ESP32 Bluetooth LE?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The maximum supported number is 12.
