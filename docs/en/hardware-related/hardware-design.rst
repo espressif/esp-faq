@@ -22,7 +22,7 @@ The I2S pins of ESP32 are scattered. Can I route I2S signals to adjacent pins? F
 
 --------------------
 
-How to stop the voltage through VDD3P3\_RTC from going down after ESP32 enters Light-sleep mode?
+How can I stop the voltage through VDD3P3\_RTC from going down after ESP32 enters Light-sleep mode?
 -----------------------------------------------------------------------------------------------------------
 
   - After ESP32 enters Light-sleep mode, the GPIOs powered by VDD3P3_RTC are pulled down. This is usually because the RTC powers down during Light-sleep mode.
@@ -153,7 +153,7 @@ Why does the current surge when ESP8266 is powered on?
 -----------------------------------------------------------
 
   - The RF and digital circuits of ESP8266 are highly integrated. When ESP8266 is powered on, the RF automatic calibration starts to work, which requires high current.
-  - The maximal current of the analog circuit can reach 500 mA, while that of the digital circuit 200 mA.
+  - The maximal current of the analog circuit can reach 500 mA, while that of the digital circuit is 200 mA.
   - Usually the average current is 100 mA.
   - To wrap up, ESP8266 needs a 500 mA power supply.
 
@@ -252,7 +252,7 @@ How to configure the RMII synchronous clock for the Ethernet of ESP32?
 
 -------------
 
-How to hard reset ESP8266? Is hard reset active low or active high? What are the requirements for reset?
+How can I hard reset ESP8266? Is hard reset active low or active high? What are the requirements for reset?
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The Pin32 EXT_RSTB of ESP8266 is the reset pin. This active low pin has an internal pull-up resistor. To prevent external factors triggering a restart, it is recommended that the EXT_RSTB cabling be as short as possible and an RC circuit be added to the EXT_RSTB pin.
@@ -273,7 +273,7 @@ What does the term ``NC`` mean in Espressif schematics?
 
 --------------
 
-How to use multiple antennas with ESP32-S2?
+How can I use multiple antennas with ESP32-S2?
 --------------------------------------------------------------------------
 
   - Using multiple antennas with ESP32-S2 is similar to that with ESP32. You may refer to `ESP32-WROOM-DA Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-wroom-da_datasheet_en.pdf>`_.
@@ -370,3 +370,10 @@ Do I need to add a shield cover to the PCB of ESP32 modules?
 --------------------------------------------------------------------------------------------------------
 
   - If there is no interference such as 2G, 3G, 4G, Wi-Fi, Bluetooth, or Zigbee, then there is no need to add a shield cover.
+
+--------------
+
+Do I must use GPIO0, GPIO1 or GPIO3 of ESP32 as the I2S CLK pin?
+------------------------------------------------------------------------------------------------------------
+
+  - The MCLK pin must use GPIO0, GPIO1 or GPIO3. The other clock pins can use any GPIOs. Note that GPIO0 is generally not recommended for other functions because it is a strapping pin.
