@@ -9,7 +9,7 @@
    以太网 <ethernet>
    共存 <coexistence>
    外设 <peripherals/index>
-   协议 <protocols>
+   协议 <protocols/index>
    配置 <provisioning>
    安全 <security>
    储存 <storage>
