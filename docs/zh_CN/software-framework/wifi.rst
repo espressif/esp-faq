@@ -1071,3 +1071,10 @@ ESP32 Wi-Fi 出现信标丢失 (beacon lost) 且在 6 秒钟之后给 AP 发 5 �
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   用 API `esp_wifi_set_inactive_time <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv426esp_wifi_set_inactive_time16wifi_interface_t8uint16_t>`__ 即可配置。
+
+-----------------
+
+ESP32 Wi-Fi 可以使用 PSRAM 吗？
+------------------------------------------------------------------------------------------------------
+
+  - 关于 Wi-Fi 使用 PSRAM 的信息，请参考 `使用 PSRAM <https://docs.espressif.com/projects/esp-idf/zh_CN/v4.4.1/esp32/api-guides/wifi.html#psram>`_。

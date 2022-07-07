@@ -1068,4 +1068,10 @@ ESP32 Wi-Fi has a beacon lost and sends 5 probe requests to the AP after 6 secon
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Use API `esp_wifi_set_inactive_time <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv426esp_wifi_set_inactive_time16wifi_interface_t8uint16_t>`__ to configure the time.
-  
+
+--------------
+
+Does ESP32 Wi-Fi work with PSRAM?
+------------------------------------------------------------------------------------------------------
+
+  - For information on using Wi-Fi with PSRAM, please refer to `Using PSRAM <https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/api-guides/wifi.html#psram>`_.
