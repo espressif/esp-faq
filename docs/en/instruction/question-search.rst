@@ -36,17 +36,11 @@ For example, if you search ``ESP32 -ble``, then any results with ``ble`` inside 
 Question Classification Categories
 ------------------------------------
 
-Once you have mastered the abovementioned ``question search techniques``, you can use the categories in ESP-FAQ for reference to extract keywords for the questions you expect to ask and then search for them. The framework of ESP-FAQ categories is shown as follows:
+Once you have mastered the above mentioned ``question search techniques``, you can use the categories in ESP-FAQ for reference to extract keywords for the questions you expect to ask and then search for them. The framework of ESP-FAQ categories is shown as follows:
 
-ESP-FAQ
-
-.. toctree::
-   :maxdepth: 1
-
-
-   Development environment <../development-environment/index>
-   Application solution <../application-solution/index>
-   Software framework <../software-framework/index>
-   Hardware related <../hardware-related/index>
-   Test verification <../test-verification/index>
-   Commercial FAQ <../commercial-faq/index>
+- :doc:`Development environment <../development-environment/index>`
+- :doc:`Application solution <../application-solution/index>`
+- :doc:`Software framework <../software-framework/index>`
+- :doc:`Hardware related <../hardware-related/index>`
+- :doc:`Test verification <../test-verification/index>`
+- :doc:`Commercial FAQ <../commercial-faq/index>`

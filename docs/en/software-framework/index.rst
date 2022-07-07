@@ -9,7 +9,7 @@ Software framework
    Bluetooth LE & Bluetooth <ble-bt>
    Ethernet <ethernet>
    Coexistence <coexistence>
-   Peripherals <peripherals>
+   Peripherals <peripherals/index>
    Protocols <protocols>
    Provisioning <provisioning>
    Security <security>
