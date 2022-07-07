@@ -38,16 +38,9 @@
 
 在掌握上述 ``搜索问题技巧`` 后，可以利用 ESP-FAQ 已经做好的分类来提取想搜索问题里的关键词并搜索。以下是此网站的框架： 
 
-
-ESP-FAQ
-
-.. toctree::
-   :maxdepth: 1
-
-
-   开发环境 <../development-environment/index>
-   应用方案 <../application-solution/index>
-   软件平台 <../software-framework/index>
-   硬件相关 <../hardware-related/index>
-   测试校验 <../test-verification/index>
-   商务问题 <../commercial-faq/index>
+   - :doc:`开发环境 <../development-environment/index>`
+   - :doc:`应用方案 <../application-solution/index>`
+   - :doc:`软件平台 <../software-framework/index>`
+   - :doc:`硬件相关 <../hardware-related/index>`
+   - :doc:`测试校验 <../test-verification/index>`
+   - :doc:`商务问题 <../commercial-faq/index>`

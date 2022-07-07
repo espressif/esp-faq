@@ -1,0 +1,126 @@
+USB
+============
+
+:link_to_translation:`en:[English]`
+
+.. raw:: html
+
+   <style>
+   body {counter-reset: h2}
+     h2 {counter-reset: h3}
+     h2:before {counter-increment: h2; content: counter(h2) ". "}
+     h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
+     h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
+   </style>
+
+--------------
+
+ESP32 是否支持 USB 功能？
+--------------------------------------
+
+  - ESP32 不支持 USB 功能。
+  - ESP32-S2 支持 USB1.1。
+
+---------------
+
+ESP-IDF SDK USB 接口支持 HID、MSC 这些模式吗？
+-----------------------------------------------------------------------------------------------------------
+
+  SDK 后续会提供 HID、MSC 类作为例程，具体的设备类需要用户自行实现，可参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__。
+
+----------------
+
+ESP32-S2 USB 接口电流稳定输出为多少？
+------------------------------------------------------
+
+  对于 VBUS 电源线的电流输出能力，由供电决定，与 ESP32-S2 芯片无关。
+
+----------------
+
+ESP32-S3 的 USB 支持 USB 主机吗？
+------------------------------------------------------
+
+  支持，ESP32-S3 USB 主机功能与 ESP32-S2 一致。
+
+----------------
+
+ESP32-C3 USB 支持 USB 串口功能和 USB JTAG 功能吗？
+---------------------------------------------------------------------------------------------------------------------
+
+  支持。
+
+---------------
+
+ESP32-S2 和 ESP32-S3 USB 的特征是？
+--------------------------------------------------------------------------------------------------------------------------------
+
+  ESP32-S3 和 ESP32-S2 具有相同的 USB 1.1 OTG 外设，可支持 USB 主机和 USB 设备功能。除此以外，ESP32-S3 还支持 USB-Serial-JTAG 专用外设，可用于固件下载和调试。
+
+---------------
+
+ESP32-S2 USB 主机的库和例程是否有参考？
+--------------------------------------------------------------------------------------------------------------------------
+
+  这部分已经在内部开发中，如果想预先完成部分功能验证，可参考 esp-iot-solution 的 `USB 示例程序 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`_。
+
+---------------
+
+ESP32-S2 支持的 USB 协议是 OTG 1.1，速度最高是 12 Mbps。能和 USB 2.0 设备通信吗？
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+  大部分 USB 2.0 的设备能向下兼容 USB 1.1，所以能以 USB 1.1 进行通信（full speed 模式下）。
+
+---------------
+
+ESP32-S2 支持 USB 摄像头吗？
+----------------------------------------------------------------
+
+  支持，但是目前 ESP32-S2 仅支持到 USB 1.1。所以需要购买兼容 USB 1.1 的摄像头。示例代码请参考 `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_。
+  
+---------------
+
+是否有 ESP32-S2 做 U 盘 (MSC DEVICE) 的参考示例？
+----------------------------------------------------------------------------------------------------------------
+
+  请参考 `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_msc_wireless_disk>`_。目前测试的平均读写速度为：读 540 KB/s，写 350 KB/s。
+
+---------------
+
+ESP32-C3 有 USB，是否不需要 cp2102 芯片就可以直接通过 USB 下载固件？
+-------------------------------------------------------------------------------------------------------------------------------
+
+  是的，ESP32-C3 可通过 USB 串口直接烧录程序，对应 USB 串口号 Windows 设备上显示为 COMx，Linux 设备上显示为 ttyACMx。
+
+---------------
+
+ESP32-C3 是否支持 USB 主机？
+------------------------------------------------------
+
+  不支持，ESP32-C3 仅支持 USB-Serial-JTAG 功能。
+
+-------------
+
+ESP32-C3 芯片可以使用 USB 下载固件，但在 ESP-IDF v4.3 下不支持。如何使用 USB 下载固件？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  请在 ESP-IDF v4.4 及以后版本下编译，拉出最新分支并 `更新 IDF 工具 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_，然后便可正常编译并使用 USB 下载固件，使用方法请见 `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_。
+
+---------------
+
+ESP32-S2 是否支持 USB HID？
+-----------------------------------------------------------------------
+
+  支持。
+
+--------------
+
+测试 `USB 摄像头 Wi-Fi 传输 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_camera_wifi_transfer>`_ 例程，日志打印如下报错，是什么原因?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+   E (1437) UVC STREAM: Configuration descriptor larger than control transfer max length
+
+  此报错日志是因为 USB Camera 发送的描述符长度大于默认预设的长度（256），可以修改如下配置为 2048 进行测试：
+
+  ``Component config`` > ``UVC Stream`` > ``(2048) Max control transfer data size (Bytes)``
