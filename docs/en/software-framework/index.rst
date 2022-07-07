@@ -10,7 +10,7 @@ Software framework
    Ethernet <ethernet>
    Coexistence <coexistence>
    Peripherals <peripherals/index>
-   Protocols <protocols>
+   Protocols <protocols/index>
    Provisioning <provisioning>
    Security <security>
    Storage <storage>
