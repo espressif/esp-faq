@@ -13,6 +13,6 @@ Software framework
    Protocols <protocols/index>
    Provisioning <provisioning>
    Security <security>
-   Storage <storage>
+   Storage <storage/index>
    System <system>
    Wi-Fi <wifi>

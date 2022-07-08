@@ -12,6 +12,6 @@
    协议 <protocols/index>
    配置 <provisioning>
    安全 <security>
-   储存 <storage>
+   储存 <storage/index>
    系统 <system>
    Wi-Fi <wifi>
