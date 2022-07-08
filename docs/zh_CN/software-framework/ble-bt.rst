@@ -585,3 +585,10 @@ ESP32 Bluetooth LE 白名单最多支持多少个设备？
 --------------------------------------------------------------------------------------
 
   - 最多支持 12 个。
+
+-------------
+
+ESP32 低功耗蓝牙可以使用 PSRAM 吗？
+-------------------------------------------------------------------
+
+  请前往 ``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` 开启 `BT/BLE will first malloc the memory from the PSRAM <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/kconfig.html?highlight=config_bt_allocation_from_spiram_first#config-bt-allocation-from-spiram-first>`_ 配置，即可让低功耗蓝牙使用 PSRAM。
