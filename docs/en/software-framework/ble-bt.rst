@@ -585,3 +585,10 @@ How many devices can be connected at the most as suggested by the White List of 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The maximum supported number is 12.
+
+----------------
+
+Can ESP32 Bluetooth LE use PSRAM?
+-------------------------------------------------------------------
+
+  To enable Bluetooth LE to use PSRAM, please go to ``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` and enable `BT/BLE will first malloc the memory from the PSRAM <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-reference/kconfig.html?highlight=config_bt_allocation_from_spiram_first#config-bt-allocation-from-spiram-first>`_。
