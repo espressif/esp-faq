@@ -43,3 +43,15 @@ I'm using an ESP32 development board with the official PSRAM chip PSRAM64H embed
   - If you need to change the PSRAM chip, please update configuration options in  "menuconfig -> Component config -> ESP32-specific -> Support for external, SPI-connected RAM -> SPI RAM config -> Type of SPI RAM chip in use".
   - If you cannot find the corresponding type options of the new PSRAM chip you are about to use, please add the chip driver manually.
   - It is recommended to use Espressif's official ESP-PSRAM chip for ESP32 series.
+
+----------------------
+
+Why is the following error printed when I download the hello-world example into the ESP32-WROOM-32E module?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: c
+
+    E (225) psram: PSRAM ID read error: 0xffffffff
+    E (225) spiram: SPI RAM enabled but initialization failed. Bailing out. 
+
+  The reason for the error is that the PSRAM (``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM``) setting is enabled in the software, but there is no PSRAM support in the hardware.
