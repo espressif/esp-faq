@@ -128,3 +128,17 @@ Can ESP32 support 9-bit clock mode for 3-wire SPI (i.e. a mode where the first b
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Yes, you can refer to the command or address phase mentioned in `SPI Transactions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#spi-transactions>`_, define one of the phases as 1-bit wide, and then assign 0 or 1 to it to distinguish whether the next 8 bits are data or command. In doing so, the 9-bit clock mode for 3-wire SPI is implemented.
+
+---------------
+
+After routing the SDA signal of the SPI screen to GPIO35 of ESP32-S2, I expect that the SDA signal is low when idle and high when writing data. But why does this pin turn out to be high when idle and low when writing data on power-up? How to achieve my expected result? 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Please modify the ``mode`` member variable in the `spi_device_interface_config_t <https://github.com/espressif/esp-idf/blob/master/components/driver/include/driver/spi_master.h#L58>`_ structure.
+
+---------------
+
+Why does ESP32 return `ESP_ERR_NOT_FOUND` when using `gpio_install_isr_service() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv424gpio_install_isr_servicei>`_ to initialize a new GPIO interrupt service?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This error often means that ESP32 is running out of available interrupt sources. In this case, there should be multiple peripherals occupying interrupt sources at the same time. Try reducing the number of interrupt sources used by other components to initialize new GPIO interrupts.

@@ -33,3 +33,10 @@ What models of touch panels are supported for testing the `LVGL <https://github.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - For the currently supported models of touch panels, please refer to `Touch Panel <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/input_device/touch_panel.html#touch-panel>`_.
+
+---------------
+
+Does ESP32-S3 require an external PSRAM to use the RGB screen?
+------------------------------------------------------------------------------------------------------
+
+  Yes, and it must be an 8-line PSRAM. Otherwise, the frame rate will be too low.

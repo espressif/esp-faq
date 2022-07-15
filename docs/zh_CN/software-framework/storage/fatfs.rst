@@ -59,3 +59,10 @@ FAT 文件系统
 
 .. Note::
     这里烧录的地址一定要是分区表里 FatFs 挂载时对应分区的地址，创建的镜像需要与分区表中设置的大小一致。menuconfig 中的 ``Component config -> Wear Levelling -> Wear Levelling library sector size`` 需要设置为 512，否则将导致挂载失败。
+
+--------------
+
+FATFS 与 SPIFFS 这两种文件系统有何差异，我们怎么选择?
+----------------------------------------------------------------
+
+  请参考 `文件系统 <https://github.com/espressif/esp-iot-solution/blob/master/docs/zh_CN/storage/file_system.rst>`_。

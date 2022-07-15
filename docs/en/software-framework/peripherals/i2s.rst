@@ -19,3 +19,10 @@ Does ESP32 support using crystal oscillator as the clock source of I2S?
 ---------------------------------------------------------------------------------------------------
 
   No. Please go to `ESP32 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf>`_ to read about clock source configurations of I2S.
+
+---------------
+
+When working as the I2S master, does ESP32 support connection to the I2S slave that only has the three signal lines, I2S_DATA, I2S_SCK, and I2S_WS?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+  
+  Yes, but the connection to MCLK depends on the requirements of the codec chip on the other side.

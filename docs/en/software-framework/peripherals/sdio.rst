@@ -73,3 +73,10 @@ Does ESP32-S2 support SDIO as a slave?
 -------------------------------------------------------------------------------------------
 
   ESP32-S2 has no SDIO interface and does not support SDIO as a slave.
+
+----------------
+
+How does ESP32 enable and disable the interrupt for the SDIO slave to receive data?
+---------------------------------------------------------------------------------------------------------------------------
+
+  The data reception of the SDIO slave is related to the state of the mounted buffer. After the data is received, you need to call `sdio_slave_recv_load_buf <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/sdio_slave.html#_CPPv424sdio_slave_recv_load_buf23sdio_slave_buf_handle_t>`_ to release the buffer. Otherwise, the SDIO host will not be able to continue to send data to the SDIO slave.

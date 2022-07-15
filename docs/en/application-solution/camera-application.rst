@@ -26,3 +26,10 @@ Where is the factory firmware of ESP-EYE?
 -------------------------------------------------------------------------------
 
   - Please refer to `ESP-EYE's factory firmware <https://github.com/espressif/esp-who/tree/master/default_bin>`_.
+
+--------------
+
+Does ESP32 support the camera with a 12-bit DVP interface?
+--------------------------------------------------------------------
+
+  No, the driver currently only supports an 8-bit DVP interface.

@@ -123,3 +123,10 @@ When using the release/v4.2 version of ESP-IDF, how to set a single GPIO as inpu
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   You can set via the `esp_err_t gpio_set_direction(gpio_num_t gpio_num, gpio_mode_t mode) <https://docs.espressif.com/projects/esp-idf/en/release-v4.2/esp32/api-reference/peripherals/gpio.html# _CPPv418gpio_set_direction10gpio_num_t11gpio_mode_t>`_ API.
+
+-----------------------
+
+Is it possible to set the drive capability of the GPIO in ESP-IDF?
+--------------------------------------------------------------------------------------------------------
+
+  Yes. Please use `API gpio_set_drive_capability <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv425gpio_set_drive_capability10gpio_num_t16gpio_drive_cap_t>`_ to set the GPIO drive capability.
