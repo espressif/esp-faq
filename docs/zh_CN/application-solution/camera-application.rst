@@ -134,3 +134,10 @@ Camera 方案相关的示例在哪里？
 
   - 请参考 `ESP-WHO <https://github.com/espressif/esp-who>`_。
   - 请参考 `esp-dev-kits <https://github.com/espressif/esp-dev-kits>`_。
+
+--------------
+
+ESP32 支持 12 位 DVP 接口的摄像头吗？
+-----------------------------------------------------------------
+
+  不支持，目前驱动只支持 8 位的 DVP 接口。

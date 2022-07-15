@@ -123,3 +123,10 @@ ESP32-C3 系列芯片将 GPIO19 配置成输入下拉时，读取该 IO 口状�
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   可使用 `esp_err_t gpio_set_direction(gpio_num_t gpio_num, gpio_mode_t mode) <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.2/esp32/api-reference/peripherals/gpio.html#_CPPv418gpio_set_direction10gpio_num_t11gpio_mode_t>`_ API 来设置。
+
+-----------------------
+
+ESP-IDF 里是否能设置 GPIO 的驱动强度？
+------------------------------------------------------------
+
+  可以。请使用 `API gpio_set_drive_capability <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/gpio.html#_CPPv425gpio_set_drive_capability10gpio_num_t16gpio_drive_cap_t>`_ 来设置 GPIO 驱动强度。

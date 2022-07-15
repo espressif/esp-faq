@@ -122,3 +122,10 @@ What is the measurement error between the ADCs of the ESP32 chip?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   By default, the measurement error between ESP32 ADCs is ±6%, please refer to `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ for details.
+
+-------------
+
+Can ESP32 measure different data from two ADC channels at the same time, such as current and voltage?
+---------------------------------------------------------------------------------------------------------------------------------------------------
+   
+  It is not possible to read multiple ADC channels at the same time using one ADC, but you can poll the data of both ADC channels in turn.

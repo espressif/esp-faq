@@ -73,3 +73,10 @@ ESP32-S2 是否支持 SDIO 作从机？
 ----------------------------------------------------------------------------------------
 
   ESP32-S2 没有 SDIO 接口，不支持 SDIO 作从机。
+
+----------------
+
+ESP32 如何开启和关闭 SDIO 从机接收数据的中断？
+--------------------------------------------------------------------------------------------------------------
+
+  SDIO 从机数据接收与挂载的 buffer 状态有关，接收完之后需要调用 `sdio_slave_recv_load_buf <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/sdio_slave.html#_CPPv424sdio_slave_recv_load_buf23sdio_slave_buf_handle_t>`_ 释放 buffer，否则 SDIO 主机将无法继续向 SDIO 从机发送数据。

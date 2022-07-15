@@ -59,3 +59,10 @@ How to make and flash the image of a FatFs file system?
 
 .. Note::
     The address to be flashed in step 2 must be the corresponding partition address in the partition table where FatFs is mounted, and the image created must be the same size as the one set in the partition table. Please remember to go to menuconfig and set ``Component config -> Wear Levelling -> Wear Levelling library sector size`` to 512, or the mounting would fail.
+
+--------------
+
+What are the differences between the two file systems, FatFs and SPIFFS, and how do we choose?
+---------------------------------------------------------------------------------------------------------------------------------
+
+  Please refer to `File System <https://github.com/espressif/esp-iot-solution/blob/master/docs/en/storage/file_system.rst>`.
