@@ -46,3 +46,12 @@ ESP8266 的 CHIP_PU 管脚为低电平时，芯片的功耗是多少？
 
   - CHIP_PU 管脚即模组 EN 管脚，管脚设为低电平时，芯片的功耗约为 0.5 μA。
   - 在 `《ESP8266 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_cn.pdf>`_ 不同功耗模式下的功耗一表中，功耗模式为关闭，即代表的是 CHIP_PU 管脚拉低，芯片处于关闭状态。
+
+--------------
+
+ESP32 进入 Light-sleep 时，如果仅配置 GPIO 唤醒而不配置定时器唤醒，底电流为什么会升高？
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 默认情况下，调用函数 `esp_light_sleep_start <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#_CPPv421esp_light_sleep_startv>`_ 和 `esp_deep_sleep_start <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#_CPPv420esp_deep_sleep_startv>`_ 不会断电 flash，这是为了防止设备刚进入休眠就立刻被唤醒，而如果 flash 还没断电完又重新上电可能会出错。
+  - 而在配置了定时器唤醒的情况下，系统会对 flash 进行掉电，所以底电流会相对较低。 
+  - 在不配置定时器的情况下，对于一些功耗敏感型的应用，可以在 menuconfig 中通过以下的操作来进行 flash 的掉电：关闭 ``Power down flash in light sleep when there is no SPIRAM`` 这个选项，同时打开 ``Flash leakage current workaround in light sleep`` 这个选项。
