@@ -46,3 +46,12 @@ What is the power consumption of ESP8266 when the CHIP_PU pin is at the low leve
 
    - CHIP_PU pin is the module EN pin. When the pin is set to the low level, the power consumption of the chip is about 0.5 μA.
    - In Table Power Consumption by Power Modes of `ESP8266 Datasheet <https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf>`_, shut down power mode means CHIP_PU is pulled down and the chip is disabled.
+
+--------------
+
+Why does the minimum current of ESP32 in Light-sleep increase when the timer is not used as a wakeup source?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - By default, to avoid potential issues, `esp_light_sleep_start <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#_CPPv421esp_light_sleep_startv>`_ and `esp_deep_sleep_start <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#_CPPv420esp_deep_sleep_startv>`_ functions will not power down flash. It takes time to power down the flash and during this period the system may be woken up, which then actually powers up the flash before this flash could be powered down completely.
+  - And the flash will be powered down if the timer wakeup source is enabled. As a result, the minimum current will be relatively small. 
+  - For power-sensitive applications without timer wakeup, you can close the ``Power down flash in light sleep when there is no SPIRAM`` and open ``Flash leakage current workaround in light sleep`` in menuconfig.
