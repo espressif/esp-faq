@@ -492,6 +492,17 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 
 --------------
 
+[Sleep] What kinds of power-saving modes does ESP32 have? What are the differences?
+---------------------------------------------------------------------------------------------------------------------------------------
+
+  There are mainly three modes: minimum modem power-saving, maximum modem power-saving, and no power save modes.
+
+  - Minimum modem: default type. In this mode, the station wakes up to receive beacon every DTIM period, which is equal to (DTIM * 102.4) ms. For example, if the DTIM of the router is 1, the station will wake up every 100 ms.
+  - Maximum modem: in this mode, the interval to receive beacons is determined by the ``listen_interval`` parameter in ``wifi_sta_config_t``. The interval is equal to (listen interval * 102.4) ms. For example, if the DTIM of the router is 1, and the listen interval is 10, the station will wake up every 1 s.
+  - No power save: no power save.
+
+--------------
+
 Does ESP8266 support 802.11k/v/r protocol?
 ---------------------------------------------------
 
