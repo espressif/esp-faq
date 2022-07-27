@@ -186,7 +186,6 @@ How can I suppress the harmonics of 80 MHz?
 
 --------------
 
-
 [LWIP] What is the default IP address of ESP8266 SoftAP?
 ---------------------------------------------------------------------------
 
@@ -332,7 +331,6 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 
   The domain name is resolved via DNS within the stack, and the resolved data will be cached within the specified time. The cache time is based on the TTL data obtained from the DNS server, which is a parameter filled when configuring the domain name, usually 10 minutes.
 
-
 --------------
 
 [Connect] What does the number after the state machine switch in Wi-Fi log mean?
@@ -351,7 +349,6 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 ----------------------------------------------------------------------
 
   The STA does not receive the Beacon frame within the specified time (6 s by default for ESP32, equals to 60 Beacon Intervals).
-
   - The reason could be:
 
     - Insufficient memory. "ESP32_WIFI_MGMT_SBUF_NUM" is not enough (there will be errors like "esf_buf: t=8, l=beacon_len, ..." in the log). You can check this by typing the heap size when received a Disconnect event. 
@@ -388,7 +385,6 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 -------------------------------------------------------------------------
 
   There is no limit to the maximum number of APs that can be scanned. The number depends on how many APs are around and configurations of the scanning parameters, such as the time spent on each channel, the longer time spent on each channel the more likely it is to find all the APs.
-
 
 --------------
 
@@ -489,6 +485,17 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 
   - The application layer code is running continuously, thus the CPU does not get chance to suspend.
   - The application layer has enabled ets timer or esp timer and the timeout interval is short, thus the CPU does not get chance to suspend.
+
+--------------
+
+[Sleep] What kinds of power-saving modes does ESP32 have? What are the differences?
+---------------------------------------------------------------------------------------------------------------------------------------
+
+  There are mainly three modes: minimum modem power-saving, maximum modem power-saving, and no power save modes.
+
+  - Minimum modem: default type. In this mode, the station wakes up to receive beacon every DTIM period, which is equal to (DTIM * 102.4) ms. For example, if the DTIM of the router is 1, the station will wake up every 100 ms.
+  - Maximum modem: in this mode, the interval to receive beacons is determined by the ``listen_interval`` parameter in ``wifi_sta_config_t``. The interval is equal to (listen interval * 102.4) ms. For example, if the DTIM of the router is 1, and the listen interval is 10, the station will wake up every 1 s.
+  - No power save: no power save.
 
 --------------
 
@@ -665,6 +672,13 @@ Why does ESP8266 print out an AES PN error log when using esptouch v2?
 
 ----------------------
 
+Does ESP32 WFA certification support multicast?
+--------------------------------------------------------------------------------------------
+
+  - No. It is recommended to refer to the ASD-1148 method of testing.
+
+---------------
+
 When using ESP32 to establish a hotspot, can I scan all APs and the occupied channels first, and then select the smallest and cleanest channel to establish my own AP?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -762,13 +776,12 @@ In ESP-IDF, the ``esp_wifi_80211_tx()`` interface can only be used to send data 
 What are the reasons for the high failure rate of esptouch networking?
 ------------------------------------------------------------------------------------------
 
-:CHIP\: ESP32, ESP32S2, ESP32S3, ESP32C3, ESP8266:
+  :CHIP\: ESP32, ESP32S2, ESP32S3, ESP32C3, ESP8266:
 
   - The same hotspot is connected too many people.
   - The signal quality of the hotspot connected by cell phone is poor.
   - The router does not forward multicast data.
   - The router has enabled dual-band integration, and the phone is connected to the 5G frequency band.
-
 
 ----------------
 
@@ -790,7 +803,6 @@ What is the maximum length of Wi-Fi MTU for an ESP32?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The maximum Wi-Fi MTU length for ESP32 is 1500.
-
 
 ---------------
 
@@ -1029,7 +1041,7 @@ When using ESP32 with release/v3.3 version of ESP-IDF. When configuring the rout
 When testing the Station example of ESP32 base on v4.4 version of ESP-IDF, how to support WPA3 encryption mode?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Open ```menuconfig → Component config → Wi-Fi → Enable WPA3-Personal`` configuration;
+  - Open ``menuconfig → Component config → Wi-Fi → Enable WPA3-Personal`` configuration;
   - Set ``capable = true`` in ``pmf_cfg`` in the application code;
   - Please refer to `Wi-Fi Security <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-guides/wifi-security.html#wi-fi-security>`_ for more descriptions.
 
@@ -1086,3 +1098,145 @@ Does ESP32 Wi-Fi work with PSRAM?
 ------------------------------------------------------------------------------------------------------
 
   - For information on using Wi-Fi with PSRAM, please refer to `Using PSRAM <https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/api-guides/wifi.html#psram>`_.
+
+-----------------
+
+[Connect] How to troubleshoot the issue that ESP32 series of products cannot connect to the router over Wi-Fi from the hardware and software aspects?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Please follow the steps below to troubleshoot the issue:
+
+  - Firstly, use the `Wi-Fi error code <https://docs.espressif.com/projects/espressif-esp-faq/en/latest/software-framework/wifi.html#connect-while-esp32-connecting-wi-fi-how-can-i-determine-the-reason-of-failure-by-error-codes>`_ to determine the possible cause for the failure.
+  - Then, try connecting another device, such as a phone, to the router to determine whether this is a problem with the router or ESP32.
+
+    - If the phone cannot connect to the router either, please check if there is any problem with the router.
+    - If it can, please check whether there is any issue with ESP32.
+
+  - Steps to troubleshoot router issues:
+
+    - Check whether the router is in the stage of power off and rebooting. In this stage, the router cannot be connected. Please do not connect to it until it is initialized.
+    - Check whether the configured SSID and PASSWORD are consistent with those of the router.
+    - Check whether the router can be connected after being configured in OPEN mode.
+    - Check whether the router can connect to other routers.
+
+  - Steps to troubleshoot ESP32 issues:
+
+    - Troubleshoot the ESP32 hardware:
+
+      - Check whether the issue occurs only in a specific ESP32. If it occurs in a small number of specific ESP32 devices, identify how likely the issue is to occur and compare the hardware differences between them and regular ESP32 devices.
+
+    - Troubleshoot the ESP32 software:
+
+      - Check whether the Wi-Fi connection works using the `station example <https://github.com/espressif/esp-idf/tree/v4.4.1/examples/wifi/getting_started/station>`_ in ESP-IDF. The example has a reconnecting mechanism by default, so please watch if ESP32 can connect to Wi-Fi as it is trying reconnecting.
+      - Check whether the configured SSID and PASSWORD are consistent with those of the router.
+      - Check whether ESP32 can connect to the router when the router is configured in OPEN mode.
+      - Check whether ESP32 can connect to Wi-Fi after calling the API ``esp_wifi_set_ps(WIFI_PS_NONE)`` additionally before executing the code for connecting to Wi-Fi.
+      
+  - If all the above steps still fail to locate the issue, please capture Wi-Fi packets for further analysis by referring to `Espressif Wireshark User Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html>`_.
+
+-----------------
+
+After being connected to the router, ESP32 prints ``W (798209) wifi:<ba-add>idx:0 (ifx:0, f0:2f:74:9b:20:78), tid:0, ssn:154, winSize:64`` and ``W (798216) wifi:<ba-del>idx`` several times every 5 minutes and consumes much more power. Why?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - This log does not indicate any issue. It is related to the Wi-Fi block acknowledgment mechanism. ``ba-add`` means the ESP32 received an add block acknowledgment request frame from the router. ``ba-del`` means the ESP32 received a delete block acknowledgment request frame from the router. Frequent printing of this log suggests that the router has been sending packets.
+  - If this log is printed periodically every five minutes, it may indicate that the router is updating the group secret key. You could double-check it according to the following steps:
+    
+    - Print log in `wpa_supplicant_process_1_of_2() <https://github.com/espressif/esp-idf/blob/v4.4.1/components/wpa_supplicant/src/rsn_supp/wpa.c#L1519>`_ to check if this function is called every 5 minutes when the group key is updated every 5 minutes.
+    - In the router's Wi-Fi configuration interface, check if there is the ``Group Key Update Time`` option and it is set to 5 minutes.
+
+-------------------
+
+Why can't ESP32 keep the Wi-Fi sending rate at a fixed value with the function `esp_wifi_config_80211_tx_rate() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429esp_wifi_config_80211_tx_rate16wifi_interface_t15wifi_phy_rate_t>`_ to maintain stable transmission?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - `esp_wifi_config_80211_tx_rate() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429esp_wifi_config_80211_tx_rate16wifi_interface_t15wifi_phy_rate_t>`_ is used to configure the sending rate of `esp_wifi_80211_tx() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib>`_.
+  - To set and fix the Wi-Fi sending rate, use the function `esp_wifi_internal_set_fix_rate <https://github.com/espressif/esp-idf/blob/v4.4.1/components/esp_wifi/include/esp_private/wifi.h#L267>`_.
+
+-----------------
+
+How do I set the rate at which ESP-NOW data is sent?
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+  Use the `esp_wifi_config_espnow_rate() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html#_CPPv427esp_wifi_config_espnow_rate16wifi_interface_t15wifi_phy_rate_t>`_ function to configure the rate, such as ``esp_wifi_config_espnow_rate(WIFI_IF_STA, WIFI_ PHY_RATE_MCS0_LGI)``.
+
+-----------------
+
+ESP-NOW allows pairing with a maximum of 20 devices. Is there a way to control more devices?
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  You can use broadcast packets and provide the destination addresses in the payload. The number of addresses is not affected by the limited number. You only need to configure the correct broadcast address.
+
+-----------------
+
+What is the maximum number of devices that can be controlled by ESP-NOW?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This depends on the specific communication method:
+
+  - If unicast packets are used, up to 20 devices can be paired and controlled at the same time.
+  - If ESP-NOW encrypted mode is used, up to 6 devices can be paired and controlled at the same time.
+  - If broadcast packets are used, theoretically there is no upper limit to the number of devices that can be controlled. You only need to configure the correct broadcast address and consider the interference issue when too many devices are paired.
+
+-----------------
+
+Do I need to connect a router for communication between ESP-NOW devices?
+---------------------------------------------------------------------------------------------------------
+
+  ESP-NOW interacts directly from device to device and does not require a router to forward data.
+
+-----------------
+
+How do I debug the ESP32 station that is connected to a router but does not get an IP properly?
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Open the debug log of DHCP in lwIP, go to ESP-IDF menuconfig, and configure ``Component config`` > ``LWIP`` > ``Enable LWIP Debug(Y)`` and ``Component config -> LWIP`` > ``Enable DHCP debug messages(Y)``.
+  - Earlier IDF versions do not have the above options, so please refer to `DHCP_DEBUG <https://github.com/espressif/esp-idf/blob/v4.0.1/components/lwip/port/esp32/include/lwipopts.h#L806-#L807>`_  to change ``LWIP_DBG_OFF`` to ``LWIP_DBG_ON`` in both lines of code as follows.
+
+    .. code-block:: c
+
+      #define DHCP_DEBUG LWIP_DBG_ON
+      #define LWIP_DEBUG LWIP_DBG_ON
+
+-----------------
+
+When ESP32 works as a softAP, the station connected to it does not get the IP. How to debug?
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  To open the debug log of DHCP in lwIP for debugging, please go to `dhcpserver.c <https://github.com/espressif/esp-idf/blob/v4.0.1/components/lwip/apps/dhcpserver/dhcpserver.c#L63>`_ and change ``#define DHCPS_DEBUG 0`` to ``#define DHCPS_DEBUG 1``.
+
+-----------------
+
+In ESP-IDF menuconfig, after ``Component config`` > ``PHY`` > ``Max Wi-Fi TX power(dBm)`` is configured to adjust the Wi-Fi transmit power, what is the actual power? For example, what is the actual maximum transmit power when the option is configured to 17 dBm?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - For ESP32, the actual maximum transmit power in the example is 16 dBm. For the mapping rules, please refer to the function `esp_wifi_set_max_tx_power() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`_.
+  - For ESP32-C3, the maximum transmit power value configured in menuconfig is the actual maximum power value.
+
+-----------------
+
+ESP-IDF currently supports connecting to Chinese SSID routers with UTF-8 encoding. Is there a way to connect to Chinese SSID routers with GB2312 encoding?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, please keep the encoding method of the ESP device consistent with that of the router. In this case, make the ESP device also use the GB2312-based Chinese SSID.
+
+-----------------
+
+After connecting to the router, ESP32 consumes much power in an idle state, with an average current of about 60 mA. How to troubleshoot the issue?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please capture Wi-Fi packets for further analysis. See `espressif Wireshark User Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html>`_. After the packets are captured, check whether the NULL data packet sent by the device contains ``NULL(1)``. If ``NULL(1)`` is sent every 10 seconds, it means that ESP32 is interacting with the router in keepalive mode.
+  - You can also check the ``TIM(Traffic Indication Map)`` field of the beacon packet in the captured packets. If ``Traffic Indication`` is equal to 1, it means Group Frames Buffered. In this case, ESP32 will turn on RF, resulting in higher power consumption. 
+
+-----------------
+
+How to configure the Wi-Fi country code when the ESP end product needs to be sold worldwide?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Different Wi-Fi country codes need to be set for different countries.
+  - The default country code configuration can be used for most countries, but it is not compatible with some special cases. The default country code is ``CHINA {.cc="CN", .schan=1, .nchan=13, policy=WIFI_COUNTRY_POLICY_AUTO}``. Since channels 12 and 13 are passively scanned by default, they do not violate the regulations of most countries. Besides, the country code of the ESP product is automatically adapted to the router that it is connected to. When disconnected from the router, it automatically goes back to the default country code.
+  
+  .. note::
+
+    - There is a potential issue. If the router hides the SSID and is on channel 12 or 13, the ESP end product can not scan the router. In this case, you need to set ``policy=WIFI_COUNTRY_POLICY_MANUAL`` to enable ESP end products to actively scan on channels 12 and 13.
+    - Some countries, such as Japan, support channels 1-14, and channel 14 only supports 802.11b. ESP end products cannot connect to routers on channel 14 by default.  
