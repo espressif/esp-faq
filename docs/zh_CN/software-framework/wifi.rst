@@ -32,7 +32,7 @@ ESP32 和 ESP8266 是否支持中文 SSID？
 
   是支持的，使用中需要路由器或者手机的中文编码方式一致。
 
-  示例：路由器中文编码使用 UTF-8 ，设备中文编码使用 UTF-8，设备就可以正确连接中文 SSID 的路由器。
+  示例：路由器中文编码使用 UTF-8，设备中文编码使用 UTF-8，设备就可以正确连接中文 SSID 的路由器。
 
 --------------
 
@@ -499,6 +499,17 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
 
 --------------
 
+[Sleep] ESP32 有哪几种 Wi-Fi 节能模式及其区别？
+--------------------------------------------------------------------------
+
+  ESP32 的节能模式一共有三种类型：modem 最小节能模式、modem 最大节能模式、以及不节能模式。
+
+  - modem 最小节能模式：该模式为默认模式。在该模式下，ESP32 从 Light-sleep 中醒来收 beacon 的时间间隔由路由器端的 DTIM 决定，为 (DTIM * 102.4) ms，即假如路由器的 DTIM 为 1，则每隔 100 ms ESP32 会醒来进行一次收包。
+  - modem 最大节能模式：在该模式下，ESP32 从 Light-sleep 中醒来收 beacon 的时间间隔由 ``wifi_sta_config_t`` 这个结构体中的 ``listen_interval`` 参数决定，为 (listen interval * 102.4) ms，即假如路由器的 DTIM 为 1，而 listen_interval = 10，则每隔 1 s ESP32 会醒来进行一次收包。
+  - 不节能模式：不进行节能处理。
+
+--------------
+
 ESP8266 是否支持 802.11k/v/r 协议？
 -----------------------------------------
 
@@ -580,8 +591,8 @@ ESP32 如何收发 Wi-Fi 802.11 数据包？
 乐鑫芯片是否支持 WPA3？
 ----------------------------------
 
-  - ESP32 系列：esp-idf 从 release/v4.1 版本开始支持 WPA3 ，默认使能，可在 menuconfig > Component config > Wi-Fi 中配置。
-  - ESP8266：ESP8266_RTOS_SDK 的 release/v3.4 分支开始支持 WPA3 ，默认使能，可在 menuconfig > Component config > Wi-Fi 中配置。
+  - ESP32 系列：esp-idf 从 release/v4.1 版本开始支持 WPA3，默认使能，可在 menuconfig > Component config > Wi-Fi 中配置。
+  - ESP8266：ESP8266_RTOS_SDK 的 release/v3.4 分支开始支持 WPA3，默认使能，可在 menuconfig > Component config > Wi-Fi 中配置。
 
 --------------
 
@@ -661,10 +672,10 @@ ESP8266 在使用 esptouch v2 出现 AES PN 错误 log？
 
 ---------------
 
-ESP32 WFA 认证支持 Multicast 吗？
+ESP32 WFA 认证支持多播吗？
 ------------------------------------------
 
-  - 不支持， 建议参考 ASD-1148 方式测试。
+  - 不支持，建议参考 ASD-1148 方式测试。
 
 ---------------------------------
 
@@ -676,7 +687,7 @@ ESP32 WFA 认证支持 Multicast 吗？
 
 ---------------
 
-使用 ESP32 ，ESP-IDF 版本为 release/v3.3，Wi-Fi Scan 时，当有多个相同的 ssid 时，获取的列表中有多个重复的 SSID，是否有 API 进行过滤，只保留一个 SSID？
+使用 ESP32，ESP-IDF 版本为 release/v3.3，Wi-Fi Scan 时，当有多个相同的 ssid 时，获取的列表中有多个重复的 SSID，是否有 API 进行过滤，只保留一个 SSID？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 不能对重复 ssid 进行过滤。因为 ssid 重复不代表是同一个路由器，扫描到的 ssid 相同的路由器的 bssid 是不同的。
@@ -765,7 +776,7 @@ ESP32 使用 release/v3.3 版本的 ESP-IDF 进行开发，只需要蓝牙功能
 esptouch 配网失败概率较高的原因有哪些？
 ------------------------------------------
 
-:CHIP\: ESP32, ESP32S2, ESP32S3, ESP32C3, ESP8266:
+  :CHIP\: ESP32, ESP32S2, ESP32S3, ESP32C3, ESP8266:
 
   - 手机连接的热点使用人数较多。
   - 手机连接的热点信号质量较差。
@@ -919,7 +930,6 @@ ESP32 支持 FTM(Fine Timing Measurement) 吗？
   - 绑定 STA 接口可以建立 ESP32 和 PC 的 tcp 连接，绑定 AP 接口无法建立 ESP32 和 PC 的 tcp 连接；
   - 默认情况下可以建立 ESP32 到手机的 tcp 连接(手机作为 STA 接入 ESP32)。
 
-
 ---------------------------------------------------------------------------------------
 
 ESP8266 `wpa2_enterprise <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/wifi/wpa2_enterprise>`_  如何开启 Wi-Fi 调试功能?
@@ -957,7 +967,6 @@ WFA 漏洞修复最新情况？
 
   - 详情请参考乐鑫官网上  `Wi-Fi 安全公告 <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability.pdf>`_。
   
-
 -----------------------------------------------------------------------------------------------------
 
 Wi-Fi 连接失败时产生的错误码代表什么?
@@ -970,16 +979,16 @@ Wi-Fi 连接失败时产生的错误码代表什么?
   
 --------------
 
-使用 ESP32 Release/v3.3 版本的 SDK 下载 Station 例程，无法连接不加密的 Wi-Fi ，是什么原因？
+使用 ESP32 Release/v3.3 版本的 SDK 下载 Station 例程，无法连接不加密的 Wi-Fi，是什么原因？
 ------------------------------------------------------------------------------------------------------------------------------------
  
-  - 例程下默认是连接加密模式的 AP ，如下设置：
+  - 例程下默认是连接加密模式的 AP，如下设置：
 
     .. code-block:: c
 
       .threshold.authmode = WIFI_AUTH_WPA2_PSK,
 
-  - 若连接不加密的 AP ，需将以下参数改为 0 ，
+  - 若连接不加密的 AP，需将以下参数改为 0，
 
     .. code-block:: c
 
@@ -1089,3 +1098,146 @@ ESP32 Wi-Fi 可以使用 PSRAM 吗？
 ------------------------------------------------------------------------------------------------------
 
   - 关于 Wi-Fi 使用 PSRAM 的信息，请参考 `使用 PSRAM <https://docs.espressif.com/projects/esp-idf/zh_CN/v4.4.1/esp32/api-guides/wifi.html#psram>`_。
+
+-----------------
+
+[Connect] ESP32 系列产品如何从软件、硬件方面来排查 Wi-Fi 连不上路由器的问题？
+------------------------------------------------------------------------------------------------------
+
+  可以按以下步骤来排查问题：
+
+  - 首先通过 `Wi-Fi 错误码 <https://docs.espressif.com/projects/espressif-esp-faq/zh_CN/latest/software-framework/wifi.html#connect-esp32-wi-fi>`_ 判断可能的失败原因。
+  - 然后，当在 ESP32 连接不上路由器时，尝试连接其他设备到该路由器来定位是路由器还是 ESP32 问题：
+
+    - 如手机也无法连上路由器，请排查路由器是否存在问题。
+    - 如手机可以正常连上路由器，请排查 ESP32 是否存在问题。
+
+  - 排查路由器问题的步骤：
+
+    - 查看路由器是否处于断电重启的阶段，在此阶段将无法正常连接此路由器，需要等待一段时间至路由器初始化完成后才能正常连接。
+    - 查看配置的 SSID 和密码是否与路由器一致。
+    - 查看在配置路由器为 OPEN 模式后是否能正常连上。
+    - 查看是否能正常连上其他路由器。
+
+  - 排查 ESP32 问题的步骤：
+
+    - 排查 ESP32 硬件部分：
+
+      - 查看是否是特定的 ESP32 才会出现此问题，如仅有固定的少许 ESP32 出现此问题，统计出现问题的 ESP32 的概率并比较它们和正常 ESP32 的硬件差异。
+
+    - 排查 ESP32 软件部分：
+
+      - 查看使用 ESP-IDF 里的 `station 示例 <https://github.com/espressif/esp-idf/tree/v4.4.1/examples/wifi/getting_started/station>`_ 是否能正常连上 Wi-Fi，此处示例里默认存在重连机制，可以同步观察在几次重连后是否能正常连上 Wi-Fi。
+      - 查看配置的 SSID 和密码是否与路由器一致。
+      - 查看在配置路由器为 OPEN 模式后是否能正常连上。
+      - 查看在 Wi-Fi 连接前的代码逻辑里额外调用 API ``esp_wifi_set_ps(WIFI_PS_NONE)`` 后是否能正常连上 Wi-Fi。
+      
+  - 如进行上述所有步骤仍然没有定位到问题，建议进行 Wi-Fi 抓包来进一步分析，可参考 `乐鑫 Wireshark 使用指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wireshark-user-guide.html>`_。
+
+-----------------
+
+ESP32 连上路由器后会每 5 分钟会反复打印几次 ``W (798209) wifi:<ba-add>idx:0 (ifx:0, f0:2f:74:9b:20:78), tid:0, ssn:154, winSize:64`` 与 ``W (798216) wifi:<ba-del>idx`` 并明显发现 ESP32 的功耗增大，这是什么原因？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 首先此日志往往没有问题，这里是 Wi-Fi 块确认机制的相关日志，``ba-add`` 表示 ESP32 收到路由器的添加块确认请求帧， ``ba-del`` 表示 ESP32 收到路由器的删除块确认请求帧。打印频繁说明路由器一直在发包。
+  - 如果是每五分钟定期观察到此日志，往往是路由器在进行组秘钥更新，可以通过以下步骤来进一步验证：
+    
+    - 在 `wpa_supplicant_process_1_of_2() <https://github.com/espressif/esp-idf/blob/v4.4.1/components/wpa_supplicant/src/rsn_supp/wpa.c#L1519>`_ 里进行日志打印来确认是不是每 5 分钟调用了此函数来配合路由器每五分钟进行组秘钥更新。
+    - 查看路由器的 Wi-Fi 配置界面是否存在 ``组秘钥更新时间`` 选项并被配置为 5 分钟。
+
+-----------------
+
+ESP32 使用函数 `esp_wifi_config_80211_tx_rate() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429esp_wifi_config_80211_tx_rate16wifi_interface_t15wifi_phy_rate_t>`_ 为何无法固定 Wi-Fi 发送速率来保持稳定传输？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - `esp_wifi_config_80211_tx_rate() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429esp_wifi_config_80211_tx_rate16wifi_interface_t15wifi_phy_rate_t>`_ 函数用来配置 `esp_wifi_80211_tx() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib>`_ 这个函数的发送速率。
+  - 如要设置并固定 Wi-Fi 的发送速率，请使用函数 `esp_wifi_internal_set_fix_rate <https://github.com/espressif/esp-idf/blob/v4.4.1/components/esp_wifi/include/esp_private/wifi.h#L267>`_。
+
+-----------------
+
+如何设置 ESP-NOW 数据的发送速率？
+------------------------------------------------------------------------------
+
+  使用 `esp_wifi_config_espnow_rate() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html#_CPPv427esp_wifi_config_espnow_rate16wifi_interface_t15wifi_phy_rate_t>`_ 函数进行配置即可，例如 ``esp_wifi_config_espnow_rate(WIFI_IF_STA, WIFI_PHY_RATE_MCS0_LGI)``。
+
+-----------------
+
+ESP-NOW 配对限制最大 20 个设备，那是否有办法控制更多的设备？
+------------------------------------------------------------------------------------------
+
+  使用广播包进行控制即可，目的地址包含在 payload 中，不受配对数量限制。仅需配置正确的广播地址即可。
+
+-----------------
+
+ESP-NOW 最多可以控制多少个设备？
+------------------------------------------------------------------------------------------
+
+  这取决于具体的通信方式：
+
+  - 如使用单播包，同时最多配对并控制 20 个设备
+  - 如使用 ESP-NOW 加密模式，同时最多配对并控制 6 个设备
+  - 如使用广播包，仅需配置正确的广播地址即可。控制设备的数量理论上没有上限，但需考虑设备过多时的干扰问题。
+
+-----------------
+
+ESP-NOW 设备间通信需要连接路由器吗？
+------------------------------------------------------------------------------------------
+
+  ESP-NOW 的交互方式为直接从设备到设备进行通信，不需要通过路由器来转发数据。
+
+-----------------
+
+ESP32 做 station 连接路由器时发现没有正常获取到 IP，如何调试？
+-------------------------------------------------------------------------------------------
+
+  - 打开 lwIP 里 DHCP 的调试日志，在 ESP-IDF menuconfig 配置 ``Component config`` > ``LWIP`` > ``Enable LWIP Debug(Y)`` 和 ``Component config -> LWIP`` > ``Enable DHCP debug messages(Y)``。 
+  - 早期 IDF 版本没有上述选项时，请参考 `DHCP_DEBUG <https://github.com/espressif/esp-idf/blob/v4.0.1/components/lwip/port/esp32/include/lwipopts.h#L806-#L807>`_，将这两行代码里的 ``LWIP_DBG_OFF`` 都改成 ``LWIP_DBG_ON``，如下所示。
+
+    .. code-block:: c
+
+      #define DHCP_DEBUG           LWIP_DBG_ON
+      #define LWIP_DEBUG           LWIP_DBG_ON
+
+-----------------
+
+ESP32 做 softAP 时发现连接它的 station 没有正常获取到 IP，如何调试？
+-------------------------------------------------------------------------------------------
+
+  请将 `dhcpserver.c <https://github.com/espressif/esp-idf/blob/v4.0.1/components/lwip/apps/dhcpserver/dhcpserver.c#L63>`_ 中的 ``#define DHCPS_DEBUG 0`` 修改为 ``#define DHCPS_DEBUG 1``，即可打开 lwIP 里 DHCP 的调试日志进调试。
+
+-----------------
+
+在 ESP-IDF menuconfig 配置 ``Component config`` > ``PHY`` > ``Max Wi-Fi TX power(dBm)`` 来调整 Wi-Fi 发射功率后实际功率如何？比如设置 17 dBm 时实际最大发射功率是多少？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 对于 ESP32，此时的实际最大发射功率为 16 dbm，具体请参考 `esp_wifi_set_max_tx_power() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`_ 函数描述的映射规则。
+  - 对于 ESP32-C3，在 menuconfig 中配置的最大发射功率值即为实际最大功率值。
+
+-----------------
+
+ESP-IDF 目前支持连接 UTF-8 编码的中文 SSID 路由器，是否有方法连接到编码为 GB2312 的中文 SSID 路由器？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  此时让 ESP 设备端的编码方式和路由器保持一致即可，比如这种情况下让 ESP 设备端也采用基于 GB2312 编码的中文 SSID。
+
+-----------------
+
+ESP32 在连接上路由器后发现在空闲状态下功耗偏高，大约有 60 mA 的平均电流，如何排查？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 此时建议进行 Wi-Fi 抓包来进一步分析，可参考 `乐鑫 Wireshark 使用指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wireshark-user-guide.html>`_。抓包后查看设备发送的 NULL data 包里是否包含 ``NULL(1)``，其中若每 10 秒发送一次 ``NULL(1)`` 则说明是和路由器在进行保活交互。
+  - 也可以查看 Wi-Fi 抓包结果里的 beacon 包中 ``TIM(Traffic Indication Map)`` 字段，如果 ``Traffic Indication`` 等于 1，说明存在广播包缓存 (Group Frames Buffered)，ESP32 在此时会打开 RF，导致功耗增高。
+
+-----------------
+
+当 ESP 终端产品需要销往全球时，对应的 Wi-Fi 国家码要如何配置？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 需要在不同国家的产品中，设置不同的 Wi-Fi 国家码。
+  - 默认的国家码配置可以用于大多数国家，但不能兼容一些特殊情况。默认的国家码为 ``CHINA {.cc="CN", .schan=1, .nchan=13, policy=WIFI_COUNTRY_POLICY_AUTO}``。由于 12 和 13 信道默认为被动扫描，所以不会触犯大多数国家的法规。同时 ESP 终端产品连上路由器后国家码会自动根据路由器改变。断开路由器后，会自动配置为默认的国家码。
+  
+  .. note::
+
+    - 此时可能存在一个问题：如果路由器隐藏了 SSID，且于 12 或 13 信道，ESP 终端产品就扫描不到路由器。此时需要设置 ``policy=WIFI_COUNTRY_POLICY_MANUAL`` 来让 ESP 终端产品在 12、13 信道进行主动扫描。
+    - 对于其他特殊的国家，比如日本支持 1-14 信道，14 信道只支持 802.11b。ESP 终端产品在默认配置下，无法连接 14 信道的路由器。
+    

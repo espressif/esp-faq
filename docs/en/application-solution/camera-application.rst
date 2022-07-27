@@ -40,3 +40,4 @@ Does ESP32 support acquiring JPEG images using a camera without JEPG encoding?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - If the camera itself does not support JPEG encoding, you can refer to the `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/ master/examples/camera/pic_server>`_ example provided by us to achieve software JPEG encoding on the ESP32 devices. This method encodes YUV422 or RGB565 data by software to obtain JPEG images. 
+
