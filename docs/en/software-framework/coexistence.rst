@@ -37,13 +37,6 @@ When Wi-Fi coexists with ESP-BLE-MESH, the Wi-Fi throughput is low, why?
 
 --------------
 
-Does ESP32 support coexistence between 16 MB External Flash and 8 MB External PSRAM?
--------------------------------------------------------------------------------------------------
-
-  Yes, ESP32 supports coexistence between 16 MB External Flash and 8 MB External PSRAM.
-
---------------
-
 Does ESP32 support coexistence between ESP-WIFI-MESH and Bluetooth® LE Mesh?
 ---------------------------------------------------------------------------------------
 

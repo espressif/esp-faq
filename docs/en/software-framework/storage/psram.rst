@@ -55,3 +55,11 @@ Why is the following error printed when I download the hello-world example into 
     E (225) spiram: SPI RAM enabled but initialization failed. Bailing out. 
 
   The reason for the error is that the PSRAM (``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM``) setting is enabled in the software, but there is no PSRAM support in the hardware.
+
+--------------
+
+Does ESP32 support coexistence between 16 MB External Flash and 8 MB External PSRAM?
+-------------------------------------------------------------------------------------------------
+
+  Yes, ESP32 supports coexistence between 16 MB External Flash and 8 MB External PSRAM.
+  

@@ -55,3 +55,11 @@ ESP32 模组挂载 8 MB PSRAM, 为何实际映射的只有 4 MB？
     E (225) spiram: SPI RAM enabled but initialization failed. Bailing out. 
 
   报错原因是：软件上开启了 PSRAM (``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM``) 的设置，但硬件上没有 PSRAM 的支持。
+
+--------------
+
+ESP32 支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存吗？
+----------------------------------------------------------------------------------
+
+  ESP32 可以支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存使用。
+  
