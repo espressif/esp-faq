@@ -37,13 +37,6 @@ Wi-Fi 和 ESP-BLE-MESH 共存时，为什么 Wi-Fi 吞吐量很低？
 
 --------------
 
-ESP32 支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存吗？
-----------------------------------------------------------------------------------
-
-  ESP32 可以支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存使用。
-
---------------
-
 ESP32 的 ESP-WIFI-MESH 和 Bluetooth® LE Mesh 可以同时支持吗？
 ------------------------------------------------------------------
 
