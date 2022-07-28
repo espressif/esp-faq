@@ -686,3 +686,9 @@ ESP32 的 BLE-MESH 应用可以连接多少个节点设备？
 
   - 理论上，ESP32 的 BLE-MESH 应用最大支持接入设备为 32767 个，实际应用中的接入设备数取决于内存占用情况。
   
+--------------------------------------------------------
+
+ESP32 如何手动重置 BLE mesh 设备（不通过 mobile provisioning app 或 provisioning device）？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以调用 `esp_ble_mesh_node_local_reset <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`__ 接口去重置 BLE Mesh Node，擦除所有的配网信息，还需要等到重置事件到达，确认重置成功，调用后，设备需要重新配网。

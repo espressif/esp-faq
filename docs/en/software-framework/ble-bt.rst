@@ -565,13 +565,6 @@ How can I send Bluetooth HCI commands directly to ESP32-WROOM-32D module through
   - Please refer to `controller_hci_uart_esp32 <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/hci/controller_hci_uart_esp32>`_.
   - When ESP32 is used as a controller, and the other device serves as a host, HCI commands can be sent to ESP32 via UART.
 
---------------------------------------------------------
-
-How do I manually reset a BLE mesh device? (not via the mobile provisioning app or provisioning device)?
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  - You can call the `esp_ble_mesh_node_local_reset <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`__ interface to reset the BLE Mesh Node, erase all the provisioning information, and wait until the reset event arrives to confirm a successful reset. After the call, the device needs to be provisioned again.
-
 --------------
 
 Does ESP32 support transmitting audio stream using A2DP?
