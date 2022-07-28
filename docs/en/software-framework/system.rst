@@ -170,7 +170,7 @@ How does ESP8266-RTOS-SDK store data to RTC memory?
 
   - The definition method of storing data in RTC memory is as follows:
 
- .. code::text
+  .. code::text
 
     #define RTC_DATA_ATTR _SECTION_ATTR_IMPL(".rtc.data", __COUNTER__)
 
