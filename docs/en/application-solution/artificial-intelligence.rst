@@ -20,23 +20,37 @@ What kinds of cameras can be used on AI image recognition products?
   With ESP32 as its main control chip, ESP-EYE supports various types of cameras, such as 0V2640, OV3660, OV5640, OV7725 and etc (See `esp32-camera Github <https://github.com/espressif/esp32-camera/tree/master/sensors>`_).
 
 
-Does esp-who support IDF 4.1?
---------------------------------
+Which versions of ESP-IDF are supported by ESP-WHO??
+--------------------------------------------------------------------------------------
 
-  No. Currently, the esp-who only supports IDF V3.3.1 and V 4.0.0 (esp-who commit: ``2470e47 Update esp32-camera``). The subsequent supported versions will be updated on `ESP-WHO Github <https://github.com/espressif/esp-who>`_.
-
---------------
-
-Does ESP modules support TensorFlow?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  :CHIP\: ESP32 | ESP32-S3:
-
-  - Yes, please refer to Github `tensorflow <https://github.com/espressif/tensorflow/>`_ examples and `blog <https://blog.tensorflow.org/2020/08/announcing-tensorflow-lite-micro-esp32.html>`_ for instructions.
+  The subsequent supported versions will be updated on `ESP-WHO Github <https://github.com/espressif/esp-who>`_.
 
 ------------------------------------------------------------------
 
-what languages are supported by the `esp-skainet <https://github.com/espressif/esp-skainet>`_ demo ?
+What languages are supported by the `esp-skainet <https://github.com/espressif/esp-skainet>`_ demo ?
 --------------------------------------------------------------------------------------------------------------------------------------
 
   - Only Chinese and English currently.
+
+------------------------------------------------------------------
+
+What model frameworks does `ESP-DL <https://github.com/espressif/esp-dl>`_ support?
+-------------------------------------------------------------------------------------------------------------------------------
+
+  - Currently, `ESP-DL <https://github.com/espressif/esp-dl>`_ supports models from mxnet, pytorh, and tensorflow.
+
+--------------
+
+Does `ESP-DL <https://github.com/espressif/esp-dl>`_ support all models of the three platforms mentioned above?
+-------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP-DL supports models in which all the operators are supported by ESP-DL. Please check `layer <https://github.com/espressif/esp-dl/tree/master/include/layer>` for the supported operators.
+
+--------------
+
+Do the model files of `ESP-DL <https://github.com/espressif/esp-dl>`_ support being placed on the SD card? 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Support.
+
+----------------------
