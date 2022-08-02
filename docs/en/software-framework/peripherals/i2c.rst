@@ -26,3 +26,10 @@ Is ESP8266 I2C realized via software programming?
 -----------------------------------------------------------------------
 
   Yes, ESP8266 I2C is realized via GPIO software programming.
+
+--------------
+
+When the I2C of the ESP32 series chip is operating (especially in fast mode), spikes often occur on the data lines, especially after the falling edge of the 8th/9th clock. Is this normal?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The spike on the data line at the 8th/9th clocks is caused by the I2C master-slave control handover. It is a normal phenomenon and is mentioned in the I2C protocol.
