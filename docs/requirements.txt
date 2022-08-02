@@ -15,5 +15,5 @@ seqdiag>=0.9.6, <2.0.0
 actdiag>=0.5.4, <2.0.0
 nwdiag==2.0.0
 recommonmark==0.7.0
-sphinx-markdown-tables==0.0.14
+sphinx-markdown-tables==0.0.15
 Jinja2<3.1
