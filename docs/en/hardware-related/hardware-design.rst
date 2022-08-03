@@ -377,3 +377,11 @@ Do I must use GPIO0, GPIO1 or GPIO3 of ESP32 as the I2S CLK pin?
 ------------------------------------------------------------------------------------------------------------
 
   - The MCLK pin must use GPIO0, GPIO1 or GPIO3. The other clock pins can use any GPIOs. Note that GPIO0 is generally not recommended for other functions because it is a strapping pin.
+
+----------------
+
+Does the ESP32-U4WDH chip support external PSRAM chips?
+-----------------------------------------------------------------------------------------------------------------
+
+  Yes.
+  
