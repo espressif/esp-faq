@@ -385,3 +385,11 @@ Does the ESP32-U4WDH chip support external PSRAM chips?
 
   Yes.
   
+-----------------
+
+Does ESP32 support connection to an external SD NAND flash chip (instead of the default NOR flash chip) via the SPI0/SPI1 interface for storing application firmware?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The ESP32 chip does not support external SD NAND Flash chips using the SPI0/SPI1 (connect the core Flash) interface.
+  - If you want to store external data, it is recommended to use the SPI2, SPI3, or SDIO interface of ESP32 to connect to an external NAND SD chip.
+  - SPI2 and SPI3 can be used via any GPIOs, while the SDIO interface can only be used via the specified interface. For more information, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ > Section Peripheral Pin Configurations.
