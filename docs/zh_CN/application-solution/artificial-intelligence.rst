@@ -67,7 +67,7 @@ ESP-WHO 支持使用 ESP-IDF 哪些版本？
 
 ----------------------
 
-`ESP-DL <https://github.com/espressif/esp-dl>`_ 模型文件支持放在 SD 卡中吗？
+`ESP-SKAINET <https://github.com/espressif/esp-skainet>`_ 模型文件支持放在 SD 卡中吗？
 ----------------------------------------------------------------------------------------
 
   - 支持放在 SD 卡中。
