@@ -48,7 +48,7 @@ Does `ESP-DL <https://github.com/espressif/esp-dl>`_ support all models of the t
 
 --------------
 
-Do the model files of `ESP-DL <https://github.com/espressif/esp-dl>`_ support being placed on the SD card? 
+Do the model files of `ESP-SKAINET <https://github.com/espressif/esp-skainet>`_ support being placed on the SD card? 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Support.
