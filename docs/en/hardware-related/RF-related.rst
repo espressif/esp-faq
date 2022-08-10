@@ -84,3 +84,9 @@ How can I suppress the harmonics of 80 MHz?
 
   If the harmonics of 80 MHz (160 MHz, 240 MHz, 320 MHz, etc) exceed the allowable levels of spurious emissions, you can add a resistor of approximately 470 Ω to the data transmission circuit (TXD) to suppress those harmonics.
   
+---------------
+
+Is manual power calibration required for the Espressif modules that connect to external antennas?
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  No, it is not required. When an external antenna is used, please make sure it is connected properly before the module is powered up. Then, the module performs a self-calibration, including power calibration.
