@@ -257,3 +257,11 @@ With ESP32, are there any return instructions if I skip to a function using the 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
   Please see `here <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ulp_instruction_set.html#add-add-to-register>`_ for ULP CPU instructions list and corresponding specifications. Normally, a general register is used for return instructions to store backup PC addresses for later jumping backs. Since there are only four general registers in ULP for now, please make proper use of them.
+
+--------------
+
+How to modify the GPIO used for log output on ESP32?
+-------------------------------------------------------------------------------------------------
+
+  - Go to ``menuconfig`` > ``Component Config`` > ``ESP System Settings`` > ``Channel for console output`` > ``Custom UART`` and select the UART port.
+  - Go back to the previous level of menu, find the options `UART TX on GPIO#` and `UART RX on GPIO#`, and use them to modify the log output GPIO.

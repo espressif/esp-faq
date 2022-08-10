@@ -458,10 +458,11 @@ ESP32 & ESP8266 如何通过局域网的 APP 进行 OTA 升级？
 
 -----------------
 
-ESP32 如何修改 LOG 输出至串口 UART1 ?
+ESP32 如何修改日志输出串口使用的 GPIO？
 -------------------------------------------------------------------------------------------------
 
-  - 更换 LOG 输出串口为 UART1 可通过配置 menuconfig -> Component Config ->Common ESP-related -> Channel for console output -> Custom UART -> UART peripheral to use for console output(0-1) -> UART1
+  - 配置 ``menuconfig`` > ``Component Config`` > ``ESP System Settings`` > ``Channel for console output`` > ``Custom UART``，选择自定义 UART 管脚。
+  - 返回上一层，会看到出现 ``UART TX on GPIO#`` 和 ``UART RX on GPIO#`` 的选项，通过修改这两个选项可以更改日志输出串口使用的 GPIO。
 
 -----------------
 
