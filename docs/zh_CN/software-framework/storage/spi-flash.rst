@@ -48,3 +48,18 @@ ESP8266 如何读取 flash 数据？
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
   - 这是由于 flash 型号不同导致的，部分型号的 flash 进行擦除时没有空块跳过的机制，所以耗时较长。
+
+------------------
+
+使用 ESP32-S3-WROOM-2-32R8V 模组，设置 flash SPI mode 为 QIO 模式，固件运行时打印如下错误是什么原因？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    E (47) qio_mode: Failed to set QIE bit, not enabling QIO mode
+
+  ESP32-S3-WROOM-2-32R8V 模组使用的是 32 MB Octal SPI flash 和 8 MB Octal SPI RAM。请在配置选项中开启 Octal SPI flash 和 Octal PSRAM 的设置：
+  
+  - ``(Top)`` > ``Serial flasher config`` > ``[*] Enable Octal Flash`` > ``Flash SPI mode (OPI)``
+  - ``(Top)`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``Mode (QUAD/OCT) of SPI RAM chip in use``
+
