@@ -48,3 +48,18 @@ Why do different ESP32 modules have inconsistent flash erase times?
 --------------------------------------------------------------------------------------------------------
 
   - This is due to the difference in flash models. Some flash models do not have an empty block skip mechanism when erasing, so it takes longer time.
+
+------------
+
+When the flash SPI mode is set to QIO mode on the ESP32-S3-WROOM-2-32R8V module, the running firmware prints the following error. Why?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    E (47) qio_mode: Failed to set QIE bit, not enabling QIO mode
+
+  The ESP32-S3-WROOM-2-32R8V module uses the 32 MB Octal flash and the 8 MB Octal PSRAM. Please enable the settings in the configuration options: 
+
+  - ``(Top)`` > ``Serial flasher config`` > ``[*] Enable Octal Flash`` > ``Flash SPI mode (OPI)``
+  - ``(Top)`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``Mode (QUAD/OCT) of SPI RAM chip in use``
+  
