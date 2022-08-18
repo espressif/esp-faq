@@ -1223,3 +1223,24 @@ How to configure the Wi-Fi country code when the ESP end product needs to be sol
 
     - There is a potential issue. If the router hides the SSID and is on channel 12 or 13, the ESP end product can not scan the router. In this case, you need to set ``policy=WIFI_COUNTRY_POLICY_MANUAL`` to enable ESP end products to actively scan on channels 12 and 13.
     - Some countries, such as Japan, support channels 1-14, and channel 14 only supports 802.11b. ESP end products cannot connect to routers on channel 14 by default.  
+
+-----------------
+
+Sometimes the rate drops or even a disconnection occurs after a period of iperf testing. What is the reason and how to solve it?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Possible reasons:
+
+    - Bad network environment.
+    - Incompatibility between the computer or mobile phone and the ESP32-S2 or ESP32-S3 softAP.
+  
+  - Solutions:
+
+    - In the case of a bad network environment, change the network environment or test in a shielded box.
+    - In the case of incompatibility, disable ``menuconfig`` > ``Component config`` > ``Wi-Fi`` > ``WiFi AMPDU RX``. If disconnections occur again, disable ``menuconfig`` > ``Component config`` > ``Wi-Fi`` > ``WiFi AMPDU TX``.
+
+  .. note::
+
+    - AMPDU stands for Aggregated MAC Protocol Data Unit and is a technique used in the IEEE 802.11n standard to increase network throughput.
+    - When ``WiFi AMPDU RX`` is disabled, the device will not receive AMPDU packets, which will affect the RX performance of the device.
+    - When ``WiFi AMPDU TX`` is disabled, the device will not send AMPDU packets, which will affect the TX performance of the device.
