@@ -30,46 +30,45 @@ ESP-WHO 支持使用 ESP-IDF 哪些版本？
 
 --------------
 
-如何查看 ESP-FACE 组件的 API 参考？
-------------------------------------------------------------------------
-
-  - 人脸检测介绍：`MTMN <https://github.com/espressif/esp-face/blob/master/face_detection/README.md>`_ 与 `FRMN <https://github.com/espressif/esp-face/blob/master/face_recognition/README.md>`_。
-  - 关于 API 的使用实例，可以参考 ESP-WHO 中的 `example <https://github.com/espressif/esp-who>`_。
-
---------------
-
 请问微信小程序 ESP-EYE 有相关资料吗？
 ---------------------------------------------------------------------------
 
-  - ESP-EYE 微信小程序的介绍及示例：`recognition_wechat <https://github.com/espressif/esp-who/tree/master/examples/single_chip/face_recognition_wechat>`_。
-  - esp-eye demo 微信小程序的开源资料：`EspEyeForWeChat <https://github.com/EspressifApp/EspEyeForWeChat>`_。
+  esp-eye demo 微信小程序的开源资料：`EspEyeForWeChat <https://github.com/EspressifApp/EspEyeForWeChat>`_。
 
 ----------------------
 
 `esp-skainet <https://github.com/espressif/esp-skainet>`_ 示例支持哪些语言呢？
 ----------------------------------------------------------------------------------------
 
-  - 目前仅支持中文和英文。
+  目前仅支持中文和英文。
 
 ----------------------
 
 `ESP-DL <https://github.com/espressif/esp-dl>`_ 支持哪些模型框架？
 ----------------------------------------------------------------------------------------
 
-  - 目前支持 mxnet、 pytorh、 tensorflow 三个平台的模型。
+  目前支持 mxnet、pytorch、tensorflow 三个平台的模型。
 
 ----------------------
 
-`ESP-DL <https://github.com/espressif/esp-dl>`_ 支持上述三个平台的所有的模型吗？
-----------------------------------------------------------------------------------------
+`ESP-DL <https://github.com/espressif/esp-dl>`_ 支持上述三个平台(mxnet, pytorch, and tensorflow)的所有的模型吗？
+----------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 模型中所有的算子须为 ESP-DL 所支持的算子。有关支持的算子，请参考 `layer <https://github.com/espressif/esp-dl/tree/master/include/layer>`。
+  模型中所有的算子须为 ESP-DL 所支持的算子。有关支持的算子，请参考 `layer <https://github.com/espressif/esp-dl/tree/master/include/layer>`_。
 
 ----------------------
 
 `ESP-SKAINET <https://github.com/espressif/esp-skainet>`_ 模型文件支持放在 SD 卡中吗？
 ----------------------------------------------------------------------------------------
 
-  - 支持放在 SD 卡中。
+  支持放在 SD 卡中。
+
+----------------------
+
+
+`ESP-SKAINET <https://github.com/espressif/esp-skainet>`_ 如何定制命令词？
+------------------------------------------------------------------------------------
+
+  定制命令词，请查看 `ESP-SR GitHub <https://github.com/espressif/esp-sr/blob/master/docs/speech_command_recognition/README_cn.md>`_。 
 
 ----------------------
