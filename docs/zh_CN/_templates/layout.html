@@ -1,4 +1,6 @@
 {% extends '!layout.html' %}
 {% block comments %}
-<p style="text-align:center"><a href="https://www.espressif.com/zh-hans/company/documents/documentation_feedback?docId=4960&sections={{ title|striptags|e }} ({{ pagename }})&version={{ release }} ({{ version }})">提供有关此文档的反馈</a></p>
+<p id="content" style="background-color:#f7f7f7; height:110px;width:100%;float:left;">
+    <b><br>没找到答案？</b> 请前往 <a href="https://www.esp32.com/viewforum.php?f=24">ESP 论坛</a> 或 <a href="https://github.com/espressif">ESP GitHub</a> 发现更多信息吧！<br><br><b>对本文档有建议？</b>请 <a href="https://www.espressif.com/zh-hans/company/documents/documentation_feedback?docId=4960&sections={{ title|striptags|e }} ({{ pagename }})&version={{ release }} ({{ version }})">提交文档反馈</a>！</p>
+    
 {% endblock %}
