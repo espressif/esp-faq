@@ -30,27 +30,34 @@ Which versions of ESP-IDF are supported by ESP-WHO??
 What languages are supported by the `esp-skainet <https://github.com/espressif/esp-skainet>`_ demo ?
 --------------------------------------------------------------------------------------------------------------------------------------
 
-  - Only Chinese and English currently.
+  Only Chinese and English currently.
 
 ------------------------------------------------------------------
 
 What model frameworks does `ESP-DL <https://github.com/espressif/esp-dl>`_ support?
 -------------------------------------------------------------------------------------------------------------------------------
 
-  - Currently, `ESP-DL <https://github.com/espressif/esp-dl>`_ supports models from mxnet, pytorh, and tensorflow.
+  Currently, `ESP-DL <https://github.com/espressif/esp-dl>`_ supports models from mxnet, pytorch, and tensorflow.
 
 --------------
 
-Does `ESP-DL <https://github.com/espressif/esp-dl>`_ support all models of the three platforms mentioned above?
--------------------------------------------------------------------------------------------------------------------------------
+Does `ESP-DL <https://github.com/espressif/esp-dl>`_ support all models of the three platforms mentioned above(mxnet, pytorch, and tensorflow)?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP-DL supports models in which all the operators are supported by ESP-DL. Please check `layer <https://github.com/espressif/esp-dl/tree/master/include/layer>` for the supported operators.
+  ESP-DL supports models in which all the operators are supported by ESP-DL. Please check `layer <https://github.com/espressif/esp-dl/tree/master/include/layer>`_ for the supported operators.
 
 --------------
 
 Do the model files of `ESP-SKAINET <https://github.com/espressif/esp-skainet>`_ support being placed on the SD card? 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Support.
+  Yes.
+
+----------------------
+
+How to customize command words in `ESP-SKAINET <https://github.com/espressif/esp-skainet>`_?
+------------------------------------------------------------------------------------------------------------------------------------------
+
+  To customize command words, please see `ESP-SR GitHub <https://github.com/espressif/esp-sr/blob/master/docs/speech_command_recognition/README.md>`_. 
 
 ----------------------
