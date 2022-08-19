@@ -265,3 +265,19 @@ How to modify the GPIO used for log output on ESP32?
 
   - Go to ``menuconfig`` > ``Component Config`` > ``ESP System Settings`` > ``Channel for console output`` > ``Custom UART`` and select the UART port.
   - Go back to the previous level of menu, find the options `UART TX on GPIO#` and `UART RX on GPIO#`, and use them to modify the log output GPIO.
+
+--------------
+
+How to adjust the warning level for project build?
+-------------------------------------------------------------------------------------------------
+
+  When building the project, it is found that some warnings being treated as errors, causing build failure, as follows:
+
+  .. code:: text
+
+    error: format '%d' expects argument of type 'int *', but argument 3 has type 'uint32_t *' {aka 'long unsigned int *'} [-Werror=format=]
+
+  For the error above, you can modify compilation flags at a component level (in component CMakeLists.txt) or at a project level (in project CMakeLists.txt). These two ways have roughly the same effect.
+
+  - To modify compilation flags for a specific component, use the standard CMake function ``target_compile_options``. Please refer to `Controlling Component Compilation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html#controlling-component-compilation>`_. For an example of target_compile_options at the component level, please see `CMakeLists.txt#L3 <https://github.com/espressif/esp-idf/blob/4d14c2ef2d9d08cd1dcbb68a8bb0d76a666e2b4b/examples/bluetooth/bluedroid/ble/ble_ancs/main/CMakeLists.txt#L3>`_.
+  - To modify compilation flags for the whole project, either use standard CMake function ``add_compile_options`` or IDF-specific function ``idf_build_set_property`` to set ``COMPILE_OPTIONS`` property. Please refer to `overriding-default-build-specifications <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html#overriding-default-build-specifications>`_.

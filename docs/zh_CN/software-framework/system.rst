@@ -830,3 +830,19 @@ ESP32 在使用 esp_timer 时，出现网络通信或者蓝牙通信异常，是
 ----------------------------------------------------------------------------------------
 
   目前 ULP CPU 指令列表以及说明参见 `这里 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ulp_instruction_set.html#add-add-to-register>`_。返回指令通常使用一个通用寄存器备份 PC 地址，用于后续跳回，由于目前 ULP 只有 4 个通用寄存器，所以需要合理使用。
+
+--------------
+
+如何调整编译的警告级别？
+-----------------------------------------------------------
+
+  编译工程时，发现一些警告被视为错误，导致编译失败，如下：
+
+  .. code:: text
+      
+    error: format '%d' expects argument of type 'int *', but argument 3 has type 'uint32_t *' {aka 'long unsigned int *'} [-Werror=format=]
+
+  针对于上述错误，用户可以在组件级别（在组件 CMakeLists.txt 中）或项目级别（在项目 CMakeLists.txt 中）修改编译标志，这两种方式的效果大致相同。
+  
+  - 要修改特定组件的编译标志，请使用标准 CMake 函数 ``target_compile_options``。请参考 `组件编译控制 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/build-system.html#component-build-control>`_。组件级别的 ``target_compile_options`` 示例请见 `CMakeLists.txt#L3 <https://github.com/espressif/esp-idf/blob/4d14c2ef2d9d08cd1dcbb68a8bb0d76a666e2b4b/examples/bluetooth/bluedroid/ble/ble_ancs/main/CMakeLists.txt#L3>`_。
+  - 要修改整个项目的编译标志，请使用标准 CMake 函数 ``add_compile_options`` 或 IDF 特定函数 ``idf_build_set_property`` 来设置 ``COMPILE_OPTIONS`` 属性。请参考 `覆盖默认的构建规范 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/build-system.html#id11>`_。
