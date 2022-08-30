@@ -107,3 +107,11 @@ Does ESP32 support analog audio output or digital audio output?
   - ESP32 supports DAC analog audio output for simple outputs such as tones. But if you use it for music playing, the effect will not be so desirable.
   - ESP32 supports PWM analog audio output, which has slightly better effect than DAC. The demo code is at `esp-iot-solution  <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`__.
   - ESP32 also supports I2S digital audio output. For I2S configurable pins, please see `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ > Chapter Peripherals and Sensors.
+
+---------------------
+
+What audio formats does the ESP32 chip support?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The ESP32 chip supports audio formats such as MP3, AAC, FLAC, WAV, OGG, OPUS, AMR, G.711, etc. Please refer to the `ESP-ADF <https://github.com/espressif/esp-adf#overview>`_ SDK for instructions.
+  
