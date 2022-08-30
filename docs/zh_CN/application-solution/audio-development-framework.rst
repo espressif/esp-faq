@@ -258,3 +258,9 @@ ESP32 是否支持模拟音频或是数字音频输出？
   - ESP32 支持 PWM 模拟音频输出，相比 DAC 效果稍好，演示代码：`esp-iot-solution  <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`__。
   - ESP32 同时支持 I2S 数字音频输出，I2S 可配置引脚可以在 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ > 外设接口和传感器章节。
 
+----------------
+
+ESP32 芯片支持哪些音频格式？
+-------------------------------------------------------------------------------
+
+  ESP32 支持的音频格式有 MP3、AAC、FLAC、WAV、OGG、OPUS、AMR、G.711 等，可参考 `ESP-ADF <https://github.com/espressif/esp-adf#overview>`_ SDK 下的说明。
