@@ -140,3 +140,11 @@ Does ESP32-S3 support devices with USB Device being Class 0?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes, please refer to the example `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/release/v5.0/components/tinyusb/additions/src/usb_descriptors.c>`_. When class code == 00H, the class category is specified by the interface.
+
+-----------
+
+Can the ESP32-S3's USB OTG interface be used in both USB Host and USB Device modes?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The ESP32-S3's USB OTG interface can not be used both as USB Host and USB Device at the same time. However, it is possible to switch between USB Host and USB Device modes by software. 
+  
