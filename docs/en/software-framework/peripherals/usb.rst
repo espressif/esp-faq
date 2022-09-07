@@ -133,3 +133,10 @@ Does ESP32-S3 support USB CDC for printing program log and downloading firmware?
   Yes, ESP32-S3 supports printing program log and downloading firmware using USB CDC when the following configuration option is enabled:
 
   ``Component config`` > ``ESP System Settings`` > ``Channel for console output`` > ``USB CDC``
+
+-------------------
+
+Does ESP32-S3 support devices with USB Device being Class 0?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, please refer to the example `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/release/v5.0/components/tinyusb/additions/src/usb_descriptors.c>`_. When class code == 00H, the class category is specified by the interface.

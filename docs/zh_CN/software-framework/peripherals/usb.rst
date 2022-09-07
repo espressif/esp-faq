@@ -134,3 +134,9 @@ ESP32-S3 支持 USB CDC 输出程序日志和下载固件吗？
   
   ``Component config`` > ``ESP System Settings`` > ``Channel for console output`` > ``USB CDC``
   
+-----------------
+
+ESP32-S3 是否支持 USB Device 为 Class 0 的裝置?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 支持，可参考示例： `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/release/v5.0/components/tinyusb/additions/src/usb_descriptors.c>`_ 。当 Class code == 00H 时，class 类别由 interface 指定。
