@@ -124,3 +124,12 @@ Why is this error log printed when I am testing the `USB Camera + Wi-Fi Transfer
   This error log is reported because the length of the descriptor sent by the USB Camera is larger than the default length (256). You can modify the following configuration to 2048 for testing:
 
   ``Component config`` > ``UVC Stream`` > ``(2048) Max control transfer data size (Bytes)``
+
+-------------
+
+Does ESP32-S3 support USB CDC for printing program log and downloading firmware?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, ESP32-S3 supports printing program log and downloading firmware using USB CDC when the following configuration option is enabled:
+
+  ``Component config`` > ``ESP System Settings`` > ``Channel for console output`` > ``USB CDC``

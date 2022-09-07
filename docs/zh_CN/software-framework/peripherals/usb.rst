@@ -124,3 +124,13 @@ ESP32-S2 是否支持 USB HID？
   此报错日志是因为 USB Camera 发送的描述符长度大于默认预设的长度（256），可以修改如下配置为 2048 进行测试：
 
   ``Component config`` > ``UVC Stream`` > ``(2048) Max control transfer data size (Bytes)``
+
+-------------
+
+ESP32-S3 支持 USB CDC 输出程序日志和下载固件吗？
+-------------------------------------------------------------------------------------------------------
+
+  ESP32-S3 可以用 USB CDC 输出程序日志和下载固件，但是需要开启如下配置选项：
+  
+  ``Component config`` > ``ESP System Settings`` > ``Channel for console output`` > ``USB CDC``
+  
