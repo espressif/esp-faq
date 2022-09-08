@@ -40,3 +40,10 @@ Does ESP32-S3 require an external PSRAM to use the RGB screen?
 ------------------------------------------------------------------------------------------------------
 
   Yes, and it must be an 8-line PSRAM. Otherwise, the frame rate will be too low.
+
+--------------------
+
+Which image decoding formats are supported by the ESP32-S3 series of chips?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Currently, only the JPEG decoding format is supported. For an application example, please refer to `esp-idf/examples/peripherals/lcd/tjpgd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd/tjpgd>`_.
