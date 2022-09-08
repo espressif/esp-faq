@@ -281,3 +281,18 @@ How to adjust the warning level for project build?
 
   - To modify compilation flags for a specific component, use the standard CMake function ``target_compile_options``. Please refer to `Controlling Component Compilation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html#controlling-component-compilation>`_. For an example of target_compile_options at the component level, please see `CMakeLists.txt#L3 <https://github.com/espressif/esp-idf/blob/4d14c2ef2d9d08cd1dcbb68a8bb0d76a666e2b4b/examples/bluetooth/bluedroid/ble/ble_ancs/main/CMakeLists.txt#L3>`_.
   - To modify compilation flags for the whole project, either use standard CMake function ``add_compile_options`` or IDF-specific function ``idf_build_set_property`` to set ``COMPILE_OPTIONS`` property. Please refer to `overriding-default-build-specifications <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html#overriding-default-build-specifications>`_.
+
+------------------
+
+The firmware compiled based on the ESP-IDF SDK varies as it contains the information about ``IDF_PATH`` and compilation time. How to remove that information?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - For SDK v5.0 and the above versions, you can enable the ``CONFIG_APP_REPRODUCIBLE_BUILD`` configuration option. In doing so, the application built upon ESP-IDF does not depend on the build environment and both the .elf file and .bin file of the application remain unchanged even if the following variables change:
+
+    - Directory where the project is located
+    - Directory where ESP-IDF is located (IDF_PATH)
+    - Build time
+
+    Please refer to the `Reproducible Builds <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/reproducible-builds.html#reproducible-builds>`_ description.
+
+  - For SDK versions below v5.0, you can disable ``CONFIG_APP_COMPILE_TIME_DATE=n`` to remove the built timestamp information and enable ``COMPILER_HIDE_PATHS_MACROS=y`` to hide ``IDF_PATH``.

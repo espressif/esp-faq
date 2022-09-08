@@ -846,3 +846,18 @@ ESP32 在使用 esp_timer 时，出现网络通信或者蓝牙通信异常，是
   
   - 要修改特定组件的编译标志，请使用标准 CMake 函数 ``target_compile_options``。请参考 `组件编译控制 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/build-system.html#component-build-control>`_。组件级别的 ``target_compile_options`` 示例请见 `CMakeLists.txt#L3 <https://github.com/espressif/esp-idf/blob/4d14c2ef2d9d08cd1dcbb68a8bb0d76a666e2b4b/examples/bluetooth/bluedroid/ble/ble_ancs/main/CMakeLists.txt#L3>`_。
   - 要修改整个项目的编译标志，请使用标准 CMake 函数 ``add_compile_options`` 或 IDF 特定函数 ``idf_build_set_property`` 来设置 ``COMPILE_OPTIONS`` 属性。请参考 `覆盖默认的构建规范 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/build-system.html#id11>`_。
+
+-----------------
+
+基于 ESP-IDF SDK 编译固件时，会包含 ``IDF_PATH`` 的信息和存储编译时间，导致编译的 bin 不一样。如何删除这些信息？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 如果是 v5.0 及以上版本的 SDK，可以开启 ``CONFIG_APP_REPRODUCIBLE_BUILD`` 配置选项，开启后，使用 ESP-IDF 构建的应用程序不依赖于构建环境。应用程序的 .elf 文件和 .bin 文件都保持完全相同，即使以下变量发生变化：
+
+    - 项目所在目录
+    - ESP-IDF 所在目录（IDF_PATH）
+    - 构建时间
+
+    详情参见 `Reproducible Builds <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/reproducible-builds.html#reproducible-builds>`_ 说明。
+  
+  - 如果是 v5.0 以下版本的 SDK，可以关闭 ``CONFIG_APP_COMPILE_TIME_DATE=n`` 配置，来删除编译时间戳信息，并且开启 ``COMPILER_HIDE_PATHS_MACROS=y`` 配置来隐藏 IDF_PATH。
