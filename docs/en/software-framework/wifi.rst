@@ -1244,3 +1244,20 @@ Sometimes the rate drops or even a disconnection occurs after a period of iperf 
     - AMPDU stands for Aggregated MAC Protocol Data Unit and is a technique used in the IEEE 802.11n standard to increase network throughput.
     - When ``WiFi AMPDU RX`` is disabled, the device will not receive AMPDU packets, which will affect the RX performance of the device.
     - When ``WiFi AMPDU TX`` is disabled, the device will not send AMPDU packets, which will affect the TX performance of the device.
+
+---------------
+
+Why is this log frequently printed when the phone connects to the ESP32-S3 that works as the Wi-Fi AP based on the ESP-IDF v5.0 SDK?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    พ (13964) wifi:<ba-del>idx
+    ฟ (13964) wifi:<ba-add>idx:2 (ifx:1, 48:2c:a0:7b:4e:ba), tid:0, ssn:5, winSize:64
+
+  This is because A-MPDU is created and deleted all the time. The printing is only auxiliary and does not affect communication. If you need to remove this log, add the following code before the Wi-Fi initialization code.
+
+  .. code-block:: c
+
+    esp_log_level_set("wifi", ESP_LOG_ERROR); 
+
