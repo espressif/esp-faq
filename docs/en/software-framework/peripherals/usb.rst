@@ -148,3 +148,9 @@ Can the ESP32-S3's USB OTG interface be used in both USB Host and USB Device mod
 
   The ESP32-S3's USB OTG interface can not be used both as USB Host and USB Device at the same time. However, it is possible to switch between USB Host and USB Device modes by software. 
   
+----------------
+
+When testing the `esp-idf/examples/peripherals/usb/device/tusb_serial_device <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/peripherals/usb/device/tusb_serial_device>`_ example to send data using TinyUSB, do I have to use the `tinyusb_cdcacm_write_flush() <https://github.com/espressif/esp-idf/blob/203c3e6e1cdb1861cecaed4834fb09b0e097b10d/examples/peripherals/usb/device/tusb_serial_device/main/tusb_serial_device_main.c#L34>`_ function?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  To prevent sending FIFO overflows, you can use the 'tinyusb_cdcacm_write_flush()' function to flush. However, a large number of cycles of flushing may fail. So, it is recommended to set it according to the actual application.
