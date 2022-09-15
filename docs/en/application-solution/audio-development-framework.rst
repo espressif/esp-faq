@@ -115,3 +115,9 @@ What audio formats does the ESP32 chip support?
 
   The ESP32 chip supports audio formats such as MP3, AAC, FLAC, WAV, OGG, OPUS, AMR, G.711, etc. Please refer to the `ESP-ADF <https://github.com/espressif/esp-adf#overview>`_ SDK for instructions.
   
+-----------------
+
+How to use the ESP32 chip to decode compressed audio?
+-----------------------------------------------------------------------------------------
+
+  - Application examples that use the ESP32 chip to decode compressed audio can be found under the `esp-adf/examples/recorder <https://github.com/espressif/esp-adf/tree/c50f3dc43bd754568d0f52dbc111b543f0baa5cd/examples/recorder>`_ folder.

@@ -264,3 +264,10 @@ ESP32 芯片支持哪些音频格式？
 -------------------------------------------------------------------------------
 
   ESP32 支持的音频格式有 MP3、AAC、FLAC、WAV、OGG、OPUS、AMR、G.711 等，可参考 `ESP-ADF <https://github.com/espressif/esp-adf#overview>`_ SDK 下的说明。
+
+---------------
+
+如何使用 ESP32 芯片解码压缩音频?
+---------------------------------------------------------------------------------------
+
+  -  使用 ESP32 芯片解码压缩音频的应用可参考 `esp-adf/examples/recorder <https://github.com/espressif/esp-adf/tree/c50f3dc43bd754568d0f52dbc111b543f0baa5cd/examples/recorder>`_ 文件夹中的例程。
