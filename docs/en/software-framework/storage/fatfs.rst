@@ -66,3 +66,10 @@ What are the differences between the two file systems, FatFs and SPIFFS, and how
 ---------------------------------------------------------------------------------------------------------------------------------
 
   Please refer to `File System <https://github.com/espressif/esp-iot-solution/blob/master/docs/en/storage/file_system.rst>`.
+
+--------------
+
+What is the maximum size supported by FatFs?
+--------------------------------------------------------------------------
+
+  Due to the limitations of the Windows system, FatFs is currently generally only available on storage devices up to 32 GB. Storage devices larger than 32 GB use other file systems, such as exFAT.
