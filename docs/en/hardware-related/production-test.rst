@@ -39,3 +39,15 @@ When I use the ``esptool.py burn_custom_mac`` command to write the user-defined 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The ``esptool.py read_mac`` command can only read the MAC address written in eFuse BLOCK0 by default, but the user-defined MAC address written with the ``esptool.py burn_custom_mac`` command is in eFuse BLOCK3. You may use the ``espefuse.py get_custom_mac`` command to check the MAC address written to eFuse BLOCK3.
+
+---------------
+
+When downloading bin files to ESP32-WROVER-E (16 MB flash) using Flash Download Tool, multiple separate bin files can be downloaded successfully, but downloading the combined firmware (12 MB) fails. Why?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Since the combined firmware is mostly "0xFF" and the compression rate is relatively high, the amount of data after decompression is relatively large for the same length of compressed data, resulting in a timeout error (default 7 seconds) after a long download time. To solve this issue, in Flash Download Tool, go to ``configure`` > ``esp32`` > ``spi_download`` file, and disable the compression configuration option as follows:
+
+  .. code-block:: c
+
+    compress = False
+    no_compress = True
