@@ -482,17 +482,6 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
 
 --------------
 
-[Sleep] ESP32 有哪几种 Wi-Fi 节能模式及其区别？
---------------------------------------------------------------------------
-
-  ESP32 的节能模式一共有三种类型：modem 最小节能模式、modem 最大节能模式、以及不节能模式。
-
-  - modem 最小节能模式：该模式为默认模式。在该模式下，ESP32 从 Light-sleep 中醒来收 beacon 的时间间隔由路由器端的 DTIM 决定，为 (DTIM * 102.4) ms，即假如路由器的 DTIM 为 1，则每隔 100 ms ESP32 会醒来进行一次收包。
-  - modem 最大节能模式：在该模式下，ESP32 从 Light-sleep 中醒来收 beacon 的时间间隔由 ``wifi_sta_config_t`` 这个结构体中的 ``listen_interval`` 参数决定，为 (listen interval * 102.4) ms，即假如路由器的 DTIM 为 1，而 listen_interval = 10，则每隔 1 s ESP32 会醒来进行一次收包。
-  - 不节能模式：不进行节能处理。
-
---------------
-
 ESP8266 是否支持 802.11k/v/r 协议？
 -----------------------------------------
 
@@ -818,7 +807,7 @@ ESP32 在 AP + STA 模式下，如何关闭 AP 模式?
 ESP32 使用 Wi-Fi 的功能后，是否 ADC2 的所有通道都不能使用了？
 -------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 在使用 Wi-Fi 的情况下，没有被 Wi-Fi 占用的 ADC2 的引脚可以做普通 GPIO 使用。可参考官方 `ADC 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/adc.html?highlight=adc#analog-to-digital-converter>`_。
+  - ESP32 在使用 Wi-Fi 的情况下，没有被 Wi-Fi 占用的 ADC2 的引脚可以做普通 GPIO 使用。可参考官方 `ADC 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/v4.4.2/esp32/api-reference/peripherals/adc.html#analog-to-digital-converter-adc>`_。
   
 -----------------------------------------------------------------------------------------------------
 

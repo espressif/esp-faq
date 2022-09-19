@@ -482,17 +482,6 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 
 --------------
 
-[Sleep] What kinds of power-saving modes does ESP32 have? What are the differences?
----------------------------------------------------------------------------------------------------------------------------------------
-
-  There are mainly three modes: minimum modem power-saving, maximum modem power-saving, and no power save modes.
-
-  - Minimum modem: default type. In this mode, the station wakes up to receive beacon every DTIM period, which is equal to (DTIM * 102.4) ms. For example, if the DTIM of the router is 1, the station will wake up every 100 ms.
-  - Maximum modem: in this mode, the interval to receive beacons is determined by the ``listen_interval`` parameter in ``wifi_sta_config_t``. The interval is equal to (listen interval * 102.4) ms. For example, if the DTIM of the router is 1, and the listen interval is 10, the station will wake up every 1 s.
-  - No power save: no power save.
-
---------------
-
 Does ESP8266 support 802.11k/v/r protocol?
 ---------------------------------------------------
 
@@ -818,7 +807,7 @@ How to disable AP mode when ESP32 is in AP + STA mode?
 After ESP32 used the Wi-Fi function, are all ADC2 channels unavailable?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - When an ESP32 device is using Wi-Fi function, the ADC2 pins that are not occupied by Wi-Fi can be used as normal GPIOs. You can refer to the official `ADC Description <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html?highlight=adc#analog-to-digital-converter>`_.
+  - When an ESP32 device is using Wi-Fi function, the ADC2 pins that are not occupied by Wi-Fi can be used as normal GPIOs. You can refer to the official `ADC Description <https://docs.espressif.com/projects/esp-idf/en/v4.4.2/esp32/api-reference/peripherals/adc.html#analog-to-digital-converter-adc>`_.
   
 -----------------------------------------------------------------------------------------------------
 
