@@ -254,7 +254,7 @@ How is the networking compatibility of ESP32 Bluetooth® LE? Is it open-sourced?
 --------------------------------------------------------------------------------------------
 
   - ESP32 Bluetooth networking, BluFi networking for short, has a good compatibility as Bluetooth LE and is compatible with many mainstream mobile phones such as Apple, HUAWEI, Mi, OPPO, MEIZU, OnePlus, ZTE and etc.
-  - Currently, the BluFi protocol and phone application code is not open-sourced.
+  - Currently, the BluFi protocol and phone application code is open-sourced.
 
 --------------
 
@@ -380,7 +380,7 @@ When I upload sub-packages to the Bluetooth channel using ESP32, the maximum tra
 What profile does ESP32's classic Bluetooth® support?
 -------------------------------------------------------
 
-  - It supports A2DP, AVRCP, SPP, HFP currently, while HID is under development.
+  - Currently, it supports A2DP, AVRCP, SPP, HFP, and HID.
 
 ----------------
 
