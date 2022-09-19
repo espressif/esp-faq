@@ -176,7 +176,7 @@ How does ESP32 Bluetooth® LE enter Light-sleep mode?
 Are there any documentation references for ESP32 BluFi networking?
 ---------------------------------------------------------------------------------
 
-  For BluFi networking, please refer to `ESP32 Blufi <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/blufi.html?highlight=blufi>`_. For BluFi networking examples, please refer to `Blufi <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/blufi>`_.
+  For BluFi networking, please refer to `ESP32 Blufi <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/blufi.html?highlight=blufi>`_. For BluFi networking examples, please refer to `Blufi <https://github.com/espressif/esp-idf/tree/v4.4.2/examples/bluetooth/blufi>`_.
 
 --------------
 
@@ -570,7 +570,7 @@ How can I send Bluetooth HCI commands directly to ESP32-WROOM-32D module through
 Does ESP32 support transmitting audio stream using A2DP?
 ----------------------------------------------------------------------------
 
-  Yes, please refer to example `a2dp_source <https://github.com/espressif/esp-idf/tree/d85d3d969ff4b42e2616fd40973d637ff337fae6/examples/bluetooth/bluedroid/classic_bt/a2dp_source#esp-idf-a2dp-source-demo>`_.
+  Yes, please refer to example `a2dp_source <https://github.com/espressif/esp-idf/tree/d85d3d969ff4b42e2616fd40973d637ff337fae6/examples/bluetooth/bluedroid/classic_bt/a2dp_source>`_.
 
 --------------------
 
