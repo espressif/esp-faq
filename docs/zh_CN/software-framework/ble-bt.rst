@@ -176,7 +176,7 @@ ESP32 Bluetooth® LE 如何进入 Light-sleep 模式呢？
 选择 ESP32 芯片实现蓝牙配网的方式，是否有文档可以提供参考？
 -----------------------------------------------------------
 
-  蓝牙配网说明可参考 `ESP32 Blufi <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/blufi.html?highlight=blufi>`_。蓝牙配网示例可以参考 `Blufi <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/blufi>`_。
+  蓝牙配网说明可参考 `ESP32 Blufi <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/blufi.html?highlight=blufi>`_。蓝牙配网示例可以参考 `Blufi <https://github.com/espressif/esp-idf/tree/v4.4.2/examples/bluetooth/blufi>`_。
 
 --------------
 
@@ -380,7 +380,7 @@ ESP32 设置中文蓝牙设备名称会异常显示乱码，原因是什么？
 ESP32 经典蓝牙支持哪些 Profile？
 ------------------------------------------------------------
 
-  - 目前支持 A2DP、AVRCP、SPP、HFP、HID 。
+  - 目前支持 A2DP、AVRCP、SPP、HFP、HID。
 
 ----------------
 
@@ -570,7 +570,7 @@ BLE 广播包如何设置为不可连接包?
 ESP32 是否支持 A2DP 发送音频？
 --------------------------------------
 
-  ESP32 支持 A2DP 发送音频，可参考例程 `a2dp_source <https://github.com/espressif/esp-idf/tree/d85d3d969ff4b42e2616fd40973d637ff337fae6/examples/bluetooth/bluedroid/classic_bt/a2dp_source#esp-idf-a2dp-source-demo>`_。
+  ESP32 支持 A2DP 发送音频，可参考例程 `a2dp_source <https://github.com/espressif/esp-idf/tree/d85d3d969ff4b42e2616fd40973d637ff337fae6/examples/bluetooth/bluedroid/classic_bt/a2dp_source>`_。
 
 ----------------
 
