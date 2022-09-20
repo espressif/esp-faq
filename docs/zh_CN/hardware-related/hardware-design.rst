@@ -393,3 +393,13 @@ ESP32 芯片是否支持使用 SPI0/SPI1 接口外接 SD NAND flash 来存储程
   - ESP32 芯片不支持使用 SPI0/SPI1（连接程序 flash）接口来外接 SD NAND flash 芯片。
   - 如果要存储外部数据，建议使用 ESP32 的 SPI2、SPI3 或 SDIO 接口来外接 NAND SD 芯片。
   - SPI2 和 SPI3 可以使用任意 GPIO，但 SDIO 接口则只能使用指定接口，详细说明请见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ > 章节 外设管脚分配。
+
+-------------------
+
+是否支持基于 ESP32-S3R8 芯片外挂第二个 PSRAM 芯片？
+-------------------------------------------------------------------------------------------------------------
+
+  - 不支持。原因如下：
+
+    - PSRAM 芯片与 MSPI 总线相连。MSPI 外设只有两个 CS 信号，一个与 flash 相连，另一个则与 PSRAM 相连。
+    - CPU 通过 cache 和 MSPI 访问外部存储器。GPSPI 外设是不能被 cache 访问的。
