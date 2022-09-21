@@ -64,20 +64,26 @@ How to customize command words in `ESP-SKAINET <https://github.com/espressif/esp
 
 How to reduce the system footprint of AI speech models?
 ------------------------------------------------------------------------------
-You can choose to turn off the three functions AEC, AE, and VAD.
+
+  You can choose to turn off the three functions AEC, AE, and VAD.
+
 ----------------------
 
 What is the difference between a 16-bit quantization model and an 8-bit quantization model?
 -------------------------------------------------------------------------------------------------------
-The 16-bit quantization model has higher precision and more accurate results. 8-bit quantization model is more lightweight.
+
+  The 16-bit quantization model has higher precision and more accurate results. 8-bit quantization model is more lightweight.
+
 ----------------------
 
 How does the AI voice model modify the number of microphone channels?
 -------------------------------------------------------------------------------
-The number of microphone channels and the number of playback channels can be configured in the AFE.
+
+  The number of microphone channels and the number of playback channels can be configured in the AFE.
+
 ----------------------
 
 How do I get the actual audio captured in the development board?
 --------------------------------------------------------------------
-SD card interface is required to store audio files to the SD card.
-----------------------
+
+  SD card interface is required to store audio files to the SD card.
