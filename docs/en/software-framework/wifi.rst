@@ -1275,3 +1275,11 @@ When ESP32/ESP32-S2/ESP32-S3 series chips work in SoftAP mode, they are suscepti
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   It is recommended to turn off ``WiFi AMPDU RX`` and ``WiFi AMPDU TX`` options in menuconfig.
+
+---------------
+
+Why does ESP-NOW limit the data length of each packet to 250 bytes? Can it be modified?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The maximum length cannot be changed. ESP-NOW uses one vendor-specific element field of action frame to transmit ESP-NOW data, whose length field is only 1 byte (0xff = 255) as defined by IEEE 802.11. Thus, the maximum length of ESP-NOW data is limited to 250 bytes.
+  - Or try with API ``esp_wifi_80211_tx()`` to send and sniffer mode to receive, both could work only base on Wi-Fi stack and without TCP/IP stack.
