@@ -45,7 +45,7 @@ What is the difference between secure boot v1 and v2?
 After enabling secure boot, there is a build error indicating missing files. What could be the reasons？
 -------------------------------------------------------------------------------------------------------------------------------
 
-  Error log: /d/ESP32/esp-mdf/esp-idf/components/bootloader_support/Makefile.projbuild:7/f/ESP32Root/secure_boot_signing_key.pem。
+  Error log: /Makefile.projbuild:7/f/ESP32Root/secure_boot_signing_key.pem。
 
   Reason: security boot is a function for firmware signature verification, which requires generating key pairs.
   - For the method of generating a key pair when secure boot v1 is enabled, please refer to `secure boot v1 key generation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html#generating-secure-boot-signing-key>`_.
@@ -143,3 +143,35 @@ Enabling secure boot failed with the log "Checksum failure". How to fix it?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - After enabling secure boot, the size of bootloader.bin will increase, please check whether the size of the bootloader partition is enough to store the compiled bootloader.bin. For more information, please refer to `Bootloader Size <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/bootloader.html#bootloader-size>`_。
+
+
+NVS encryption failed to start and an error occurred as ``nvs: Failed to read NVS security cfg: [0x1117] (ESP_ERR_NVS_CORRUPT_KEY_PART)``. How can I solve this issue?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please erase flash before starting NVS encryption, and then flash the firmware which can enable the NVS encryption to the SoC.
+
+
+After flash encryption was enabled, a warning occurred as ``esp_image: image at 0x520000 has invalid magic byte (nothing flashed here)``. How can I solve this issue?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - After SoC starts flash encryption, it will try to encrypt the data of all the partitions of the app type. If there is no corresponding app firmware stored in one app partition, the above log will appear. To avoid this warning, you can flash pre-compiled app firmware to the partitions of the app type when starting flash encryption.
+
+Why is reltead data not encrypted after I enable ``CONFIG_EFUSE_VIRTUAL`` and flash encryption?
+-----------------------------------------------------------------------------------------------------------
+
+  - Currently, Virtual eFuses is only used to test the update of eFuse data. Thus, flash encryption is not enabled completely even this function is enabled.
+
+Can I update an app firmware which enables flash encryption in a device which does not enable fash encryption through OTA?
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, please deselect ``Check Flash Encryption enabled on app startup`` when compiling.
+
+How can I delete keys of secure boot?
+--------------------------------------------------
+
+  - Keys of secure boot should be deleted in the firmware ``new_app.bin``. First, please assure that ``new_app.bin`` is employed with two signatures. Then, flash ``new_app.bin`` to the device. At last, when the original signatures are verified, you can delete the original keys through ``esp_ota_revoke_secure_boot_public_key()`` in ``new_app.bin``. Please note that if you use the OTA rollback scheme, please call ``esp_ota_revoke_secure_boot_public_key()`` after ``esp_ota_mark_app_valid_cancel_rollback()`` returns ``ESP_OK``. For more details, please refer to `Key Revocation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/security/secure-boot-v2.html?highlight=esp_ota_revoke_secure_boot_public_key#key-revocation>`_.
+
+After I enabled secure boot or flash encryption (development mode), I cannot flash the new firmware, and an error occured as ``Failed to enter Flash download mode``. How can I solve this issue?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Generally, the above log indicates that your flash command is incorrect. Please use script ``idf.py`` to execute ``idf.py bootloader`` and ``idf.py app`` to compile ``bootloader.bin`` and ``app.bin``. Then execute the flash command through ``idf.py`` according to the tips after compiling. If you still cannot flash your firmware, please use ``espefuse.py -p PORT summary`` to check the eFuse of the current device and check whether the flash download mode is enabled or not.

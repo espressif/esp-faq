@@ -45,7 +45,7 @@ secure boot v1 和 secure boot v2 的区别？
 开启 secure boot 后，编译报错缺少文件？
 -----------------------------------------------------
 
-  错误 log：/d/ESP32/esp-mdf/esp-idf/components/bootloader_support/Makefile.projbuild:7：/f/ESP32Root/secure_boot_signing_key.pem。
+  错误 log：/Makefile.projbuild:7：/f/ESP32Root/secure_boot_signing_key.pem。
 
   报错原因：security boot 是固件签名校验的功能，该功能需要生成密钥对。
   - 启用 secure boot v1 时生成密钥对的方法请参考 `secure boot v1 生成密钥 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html#generating-secure-boot-signing-key>`_。
@@ -143,3 +143,35 @@ secure boot 和 flash 加密中涉及的存储在 eFuse 数据有哪些？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 启用 secure boot 后，bootloader.bin 的大小将增大，请检查引导加载程序分区的大小是否足够存放编译得到的 bootloader.bin。更多说明请参考 `引导加载程序大小 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/bootloader.html#bootloader-size>`_。
+
+
+启用 NVS 加密失败，提示 ``nvs: Failed to read NVS security cfg: [0x1117] (ESP_ERR_NVS_CORRUPT_KEY_PART)``，怎么解决？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 启用 NVS 加密前，建议先擦除一次 flash，然后烧录包含使能 NVS 加密的固件。
+
+
+启用 flash 加密后，提示 ``esp_image: image at 0x520000 has invalid magic byte (nothing flashed here)``，怎么解决？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 启用 flash 加密后，将尝试对所有 app 类型的分区的数据进行加密，当 app 分区中没有存储对应的 app 固件时，将提示该 log。您可以在启用 flash 加密时对所有 app 类型的分区烧录预编译的 app 固件来避免出现这种警告。
+
+使能 ``CONFIG_EFUSE_VIRTUAL`` 选项后，开启 flash 加密，为何相关数据未被加密？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Virtual eFuses 功能目前仅仅用于测试 eFuse 数据的更新，启用该功能后，flash 加密功能并未完全开启。
+
+可以向一个未使能 flash 加密的设备中通过 OTA 更新一个使能了 flash 加密的 app 固件吗？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以，请在编译时取消选中 ``Check Flash Encryption enabled on app startup``。
+
+如何撤销 secure boot 的 key？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 撤销 secure boot key 的操作是在 ``new_app.bin`` 固件中完成的。首先 ``new_app.bin`` 必须附带两个签名。然后，下发 ``new_app.bin`` 到设备上。最后，当旧的签名校验通过后，通过 ``new_app.bin`` 中的 ``esp_ota_revoke_secure_boot_public_key()`` 执行撤销旧 key 的操作。注意，如果您使用了 OTA 回滚方案，请在 ``esp_ota_mark_app_valid_cancel_rollback()`` 返回 ``ESP_OK`` 后再调用 ``esp_ota_revoke_secure_boot_public_key()``。 更多说明请参考 `Key Revocation <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/security/secure-boot-v2.html?highlight=esp_ota_revoke_secure_boot_public_key#key-revocation>`_。
+
+启用 secure boot 或者 flash 加密（开发模式）后，无法烧录新固件，提示 ``Failed to enter Flash download mode``，怎么解决？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 这种提示通常代表您使用的烧录命令不正确。请使用 ``idf.py`` 脚本执行 ``idf.py bootloader``、``idf.py app`` 命令编译 ``bootloader.bin``、``app.bin``。然后根据编译后的提示使用 ``idf.py`` 执行烧录命令。如果还不能烧录程序，请使用 ``espefuse.py -p PORT summary`` 命令查看当前设备的 eFuse，并检查 ``flash download mode`` 是否是 enable 状态。
