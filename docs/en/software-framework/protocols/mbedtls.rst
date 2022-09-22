@@ -25,5 +25,6 @@ Does ESP8266 OpenSSL support hostname validation?
 How to optimize memory when ESP32 uses Mbed TLS?
 ------------------------------------------------------------------------------------------------
 
-  - You can enable dynamic buffer in menuconfig, the specific operation is ``menuconfig -> Component config -> mbedTLS -> Using dynamic TX/RX buffer (key "Y" to enable)``.
+  - You can enable dynamic buffer in menuconfig, the specific operation is ``menuconfig`` > ``Component config`` > ``mbedTLS`` > ``Using dynamic TX/RX buffer (key "Y" to enable)``.
   - At the same time, you can enable the sub-options ``Free SSL peer certificate after its usage`` and ``Free certificate, key and DHM data after its usage`` in the ``Using dynamic TX/RX buffer`` in the previous step.
+  - However, ESP-IDF v5.0 and later no longer have sub-optioin ``Free SSL peer certificate after its usage``, and Mbed TLS enables ``MBEDTLS_SSL_KEEP_PEER_CERTIFICATE`` by default. If you want to save memory, you can close it by ``menuconfig`` > ``Component config`` > ``mbedTLS`` > ``mbedTLS v3.x related`` > ``Keep peer certificate after handshake completion (key "N" to disable）``.

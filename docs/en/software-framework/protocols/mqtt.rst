@@ -55,7 +55,7 @@ Does MQTT support automatic reconnection?
 What are the supported MQTT versions of ESP-IDF?
 -----------------------------------------------------------------------------------------------------------
 
-  ESP-IDF currently supports the MQTT versions MQTT 3.1 and MQTT 3.1.1.
+  ESP-IDF currently supports MQTT 3.1 and MQTT 3.1.1, and MQTT 5.0.
 
 ----------------
 

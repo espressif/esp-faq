@@ -27,3 +27,4 @@ ESP32 使用 Mbed TLS 时如何优化内存？
 
   - 可以在 menuconfig 里开启动态 buffer， 具体操作为 ``menuconfig -> Component config -> mbedTLS -> Using dynamic TX/RX buffer（键 "Y" 使能）``。
   - 同时可以使能上一步的 ``Using dynamic TX/RX buffer`` 里的子选项 ``Free SSL peer certificate after its usage`` 和 ``Free certificate, key and DHM data after its usage``。
+  - 如果使用的是 v5.0 及以上版本，``Free SSL peer certificate after its usage`` 配置功能将不存在，Mbed TLS 默认提供配置 ``MBEDTLS_SSL_KEEP_PEER_CERTIFICATE``。如果您需要节省内存，可关闭 ``MBEDTLS_SSL_KEEP_PEER_CERTIFICATE``， 具体操作为 ``menuconfig`` > ``Component config`` > ``mbedTLS`` > ``mbedTLS v3.x related`` > ``Keep peer certificate after handshake completion （键 "N" 关闭）``。

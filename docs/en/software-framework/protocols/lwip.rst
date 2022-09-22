@@ -175,7 +175,7 @@ Every time ESP32 attempts to read 4 KB of data with ``read`` and ``recv`` APIs i
 What is the version of lwIP currently used in ESP-IDF?
 --------------------------------------------------------------------------------------------------------------------------------
 
-  The version is 2.1.2 currently.
+  lwIP v2.1.3 is used currently.
 
 ----------------
 
