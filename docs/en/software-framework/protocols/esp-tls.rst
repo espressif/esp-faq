@@ -48,4 +48,4 @@ What are the TLS versions supported by ESP-IDF?
 -----------------------------------------------------------------------------------------------------------
 
   - The recommended TLS protocol in ESP-IDF is the Mbed TLS protocol.
-  - The TLS versions currently supported by ESP-IDF are TLS1.0, TLS1.1 and TLS1.2.
+  - ESP-IDF v5.0 and later no longer support SSL 3.0, TLS 1.0 and TLS 1.1, but only support TLS 1.2 and TLS 1.3.
