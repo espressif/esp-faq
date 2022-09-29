@@ -19,7 +19,7 @@ Host MCU 如何通过串口对 ESP32 进行烧录升级？
 ---------------------------------------------------------------------
 
   - 相关协议应用请参考：`ESP32 串口协议 <https://github.com/espressif/esptool>`_；对应文档说明参见 `串口协议 <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html#serial-protocol>`_。
-  - 示例实现代码参考：`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_。
+  - 示例实现代码请参考：`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_。
 
 --------------
 
@@ -49,27 +49,27 @@ macOS 与 Linux 如何烧录固件？
 ESP32 是否支持使用 JTAG 管脚直接烧写程序？
 -------------------------------------------------------------------------
 
-  ESP32 支持使用 `JTAG 管脚 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html#id1>`_ 直接烧写程序，参考文档：`上传待调试的应用程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_。
+  ESP32 支持使用 `JTAG 管脚 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html#id1>`_ 直接烧写程序，请参考文档：`上传待调试的应用程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_。
 
 --------------
 
-ESP_Flash_Downloader_Tool 是否可以自定义编程控制？
+ESP_Flash_Downloader_Tool 是否支持自定义编程控制？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP_Flash_Downloader_Tool GUI 工具不开源，且不支持嵌入执行脚本。
-  - ESP_Flash_Downloader_Tool 底层组件 `esptool <https://github.com/espressif/esptool>`_ 开源，可以完成烧录加密等所有功能，建议基于该组件二次开发。
+  - ESP_Flash_Downloader_Tool 底层组件 `esptool <https://github.com/espressif/esptool>`_ 开源，支持完成烧录加密等所有功能，建议基于该组件二次开发。
 
 ---------------
 
 ESP32 能否通过 OTA 开启 Security Boot 功能？
 ------------------------------------------------------------------------------------------------
 
-  - 不推荐这样开启，因为这样操作存在风险，并且需要多次 OTA 固件。
-  - Security Boot 功能存在于 Bootloader 中，需要首先更新 Bootloader 才可以开启该功能。
+  - 不推荐通过 OTA 开启 Security Boot 功能，因为这样存在操作风险，并且需要多次 OTA 固件。
+  - Security Boot 功能存在于 Bootloader 中，需要首先更新 Bootloader 才可以启用该功能。
 
     1. 首先，检测目前设备的分区表是否可以存放开启 Security Boot 后的 Bootloader。
     2. 然后，更新一个支持写入 Bootloader 分区的中间固件。默认配置中无法擦写 Bootloader 分区，需要 `make menuconfig` 单独开启。
-    3. 随后，将中间固件签名后 OTA 到目标设备，运行中间固件，中间固件先进行 OTA Bootloader, 再 OTA 被签名的新固件。
+    3. 随后，将中间固件签名后 OTA 到目标设备，运行中间固件，中间固件先进行 OTA Bootloader，再 OTA 被签名的新固件。
     4. 如果在 OTA Bootloader 时出现中途断电或者断网失败重启，设备将无法启动，需要重新烧录。
 
 --------------
@@ -105,11 +105,11 @@ ESP32 能否通过 OTA 开启 Security Boot 功能？
 
 --------------
 
-如何使用 flash_download_tool 下载基于 esp-idf 编译的固件？
+如何使用 flash_download_tool 下载基于 ESP-IDF 编译的固件？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 以 hello-world 例程为例，初次编译 esp-idf 工程请参考 `get-started-guide <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/index.html>`_。
-  - 执行 ``idf.py build``（esp-idf v4.0 及以后版本，v4.0 之前请使用 ``make``）。编译工程后，会生成如下的 bin 文件的烧录指令提示：
+  - 以 hello-world 例程为例，初次编译 ESP-IDF 工程请参考 `get-started-guide <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/index.html>`_。
+  - 运行 ``idf.py build``（支持 ESP-IDF v4.0 及以后版本，v4.0 之前版本请使用 ``make``）。编译工程后，会生成如下的 bin 文件的烧录指令提示：
 
   .. code:: shell 
 
@@ -130,10 +130,11 @@ ESP 芯片烧录通讯协议是什么？
 
 --------------
 
-如何对 ESP32-C3 进行离线程序烧录？
+如何对 ESP32-C3 进行固件离线烧录？
 ------------------------------------------------------------------------------------------
 
-  - 可以在官网下载最新的 Flash Download Tools, v3.8.8 之后的版本已经支持 ESP32-C3 系列的烧录。
+  - 目前没有任何工具支持 ESP32-C3 固件离线烧录。但官方发布的 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 可以直接烧录二进制固件，且支持量产烧录模式，最多支持 8 个 ESP32-C3 设备同时下载固件。
+  - 另外，官方也提供了用于量产生产的 `治具 <https://www.espressif.com/zh-hans/products/equipment/production-testing-equipment/overview>`_ ，最多支持 4 个 ESP32-C3 模组同时下载固件。
 
 --------------
 
@@ -156,11 +157,11 @@ ESP32 如何设置 Flash SPI 为 QIO 模式？
 
 ----------------
 
-乐鑫模组烧录工具有那些？
+乐鑫模组烧录工具有哪些？
 -----------------------------------------------------------
 
-  - 乐鑫烧录软件可以点击此网页并进行下载： `flash download tool <https://www.espressif.com/zh-hans/support/download/other-tools>`_, 免安装 GUI 工具，仅适用于 `Windows` 环境。
-  - 乐鑫烧录工具 `esptool <https://github.com/espressif/esptool>`_，基于 `python` 编写，开放源代码，并且支持用户二次开发。
+  - 请前往 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 下载乐鑫烧录工具。免安装 GUI 工具，仅适用于 `Windows` 环境。
+  - 乐鑫烧录工具 `esptool <https://github.com/espressif/esptool>`_ 基于 `python` 编写，开放源代码，并且支持用户二次开发。
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -172,7 +173,7 @@ ESP32 如何设置 Flash SPI 为 QIO 模式？
 
 ----------------------
 
-ESP32-C3 芯片可以使用 USB 进行固件的下载，但在 ESP-IDF v4.3 下使用并不支持，如何使用 USB 进行固件下载？
+ESP32-C3 芯片可以使用 USB 进行固件下载，但在 ESP-IDF v4.3 下使用并不支持，如何使用 USB 进行固件下载？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 需要在 ESP-IDF v4.4 以上版本下进行编译，拉取最新分支并 `更新 IDF 工具 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_ 后可以正常编译并使用 USB 进行下载。使用过程请参考 `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_。
@@ -184,7 +185,7 @@ ESP32-C3 芯片可以使用 USB 进行固件的下载，但在 ESP-IDF v4.3 下�
 
   :CHIP\: ESP32 | ESP8266  :
 
-  - 因为乐鑫产品启动时通过一些发包来完成校准操作，此操作需要 3.3 V 电压并保证有 500 mA 的峰值电流。所以，在一拖多的情况下，通过连接电脑 USB 的方式来烧录时，会出现由于电脑 USB 供电不足引起无法烧录或者烧录中断的情况，建议使用 hub 进行烧录并给 hub 供电。
+  - 乐鑫产品启动时会通过一些发包来完成校准操作，此操作需要 3.3 V 电压并保证有 500 mA 的峰值电流。所以，在一拖多的情况下，通过连接电脑 USB 的方式来烧录时，会出现由于电脑 USB 供电不足而引起无法烧录或者烧录中断的情况，建议使用 hub 进行烧录并给 hub 供电。
   
 ------------
 
@@ -219,7 +220,7 @@ ESP32-C3 芯片可以使用 USB 进行固件的下载，但在 ESP-IDF v4.3 下�
 
 -------------
 
-使用 ESP8266 通过 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ ，下载程序固件后无程序运行日志输出，串口打印如下，是什么原因？
+使用 ESP8266 通过 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 下载程序固件后无程序运行日志输出，串口打印如下，是什么原因？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: shell
@@ -228,8 +229,8 @@ ESP32-C3 芯片可以使用 USB 进行固件的下载，但在 ESP-IDF v4.3 下�
     2013,rst cause:1, boot mode:(3,7)
     ets_main.c
 
-  - 请先检查硬件接线是否正确。参见 `Boot mode 接线说明 <https://docs.espressif.com/projects/esptool/en/latest/esp8266/advanced-topics/boot-mode-selection.html#boot-mode-selection>`_。
-  - 请检查 bootloader.bin 的下载偏移地址是否正确，ESP8266 的 bootloader.bin 下载的偏移地址为 0x0 ，若此偏移地址错误将会导致 Flash 无法启动。
+  - 请先检查硬件接线是否正确。参见 `Boot mode 接线说明 <https://docs.espressif.com/projects/esptool/en/latest/esp8266/advanced-topics/boot-mode-selection.html>`_。
+  - 请检查 bootloader.bin 的下载偏移地址是否正确，ESP8266 的 bootloader.bin 下载的偏移地址为 0x0，若此偏移地址错误将会导致 Flash 无法启动。
 
 ----------------
 
