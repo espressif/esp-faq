@@ -18,7 +18,7 @@ FAT 文件系统
 意外的断电导致 FatFs 文件系统损坏如何改善？
 -------------------------------------------------------
 
-  因为 FatFs 设计不支持 write transactions，因此在擦写时意外断电会导致分区错误，并且无法通过简单修改 FatFs 来修复这个问题。目前建议：可以通过创建两个相同的 FatFs 分区进行双备份来从应用层避免该问题，也可以选择使用具有更高安全性的文件系统，如：`LittleFS <https://github.com/joltwallet/esp_littlefs>`_ 和 `SafeFAT <https://www.hcc-embedded.com/safefat>`_ （收费）。
+  因为 FatFs 设计不支持 write transactions，因此意外断电可能会导致分区错误，并且无法通过简单修改 FatFs 来修复这个问题。目前建议：可以通过创建两个相同的 FatFs 分区进行双备份来从应用层避免该问题，也可以选择使用具有更高安全性的文件系统，如：`LittleFS <https://github.com/joltwallet/esp_littlefs>`_ 和 `SafeFAT <https://www.hcc-embedded.com/safefat>`_ （收费）。
 
 --------------
 
@@ -72,4 +72,11 @@ FATFS 与 SPIFFS 这两种文件系统有何差异，我们怎么选择?
 FatFs 支持的最大容量是多少?
 ----------------------------------------------------------------
 
-  由于 Windows 系统的限制，目前 FatFs 普遍最大只在 32 GB 的存储设备上使用。大于 32 GB 的存储设备会使用 exFAT 等文件系统。
+  由于 Windows 系统的限制，目前 FatFs 普遍最大只在 32 GB 的存储设备上使用。大于 32 GB 的存储设备默认会使用 exFAT 等文件系统。
+
+--------------
+
+使用 FAT 文件系统时，文件名稍微长一点的文件无法打开，该如何处理？
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以在 ``menuconfig`` -> ``Component config`` -> ``FAT Filesystem support`` -> ``Long filename support 中进行修改，选择 ``Long filename buffer in heap`` 或 ``Long filename buffer on stack`` 配置项。然后可以在 ``Component config`` -> ``FAT Filesystem support`` -> ``Max long filename length`` 中修改最大的文件名长度。

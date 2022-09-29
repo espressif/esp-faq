@@ -18,7 +18,7 @@ FAT Filesystem
 How to improve the damage to FatFs file system caused by accidental power loss?
 -----------------------------------------------------------------------------------------------------
 
-  Since FatFs is designed to not support write transactions, the accidental power loss during the erase process will cause error to partitions, which cannot be restored by simply modifying FatFs. For now, it is recommended to resolve this problem in application level by creating two identical FatFs partitions to do backups, or you can also choose a more secure file system instead, such as `LittleFS <https://github.com/joltwallet/esp_littlefs>`_ and `SafeFAT <https://www.hcc-embedded.com/safefat>`_ (charged).
+  Since FatFs is designed to not support write transactions, the accidental power loss may cause error to partitions, which cannot be restored by simply modifying FatFs. For now, it is recommended to resolve this problem in application level by creating two identical FatFs partitions to do backups, or you can also choose a more secure file system instead, such as `LittleFS <https://github.com/joltwallet/esp_littlefs>`_ and `SafeFAT <https://www.hcc-embedded.com/safefat>`_ (charged).
 
 --------------
 
@@ -73,3 +73,10 @@ What is the maximum size supported by FatFs?
 --------------------------------------------------------------------------
 
   Due to the limitations of the Windows system, FatFs is currently generally only available on storage devices up to 32 GB. Storage devices larger than 32 GB use other file systems, such as exFAT.
+
+---------------
+
+I cannot open the files with long names when I use the FAT file system. How can I fix this issue?
+------------------------------------------------------------------------------------------------------
+
+  You can change the configuration in ``menuconfig`` > ``Component config`` > ``FAT Filesystem support`` > ``Long filename support`` by selecting the option ``Long filename buffer in heap`` or ``Long filename buffer on stack``. Then you can update the maximum lengh in ``Component config`` > ``FAT Filesystem support`` > ``Max long filename length``.

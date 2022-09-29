@@ -27,7 +27,7 @@ If data needs to be stored or updated to flash every minute, can ESP32 NVS meet 
 Does NVS have wear levelling function?
 -------------------------------------------------
 
-   NVS does not use the wear_levelling component in ESP-IDF, but uses an erase levelling mechanism implemented internally. The flash in use is in a wear-levelling state.
+  Yes, NVS does not use the wear_levelling component in ESP-IDF, but uses an erase levelling mechanism implemented internally. The flash in use is in a wear-levelling state.
 
 --------------
 

@@ -27,7 +27,7 @@
 NVS 是否具有磨损均衡？
 ----------------------------
 
-  NVS 使用的不是 ESP-IDF 中的 wear_levelling 组件，而是在其内部实现的一种擦写平衡机制，使用中 flash 磨损是处于均衡状态。
+  是，NVS 使用的不是 ESP-IDF 中的 wear_levelling 组件，而是在其内部实现的一种擦写平衡机制，使用中 flash 磨损是处于均衡状态。
 
 --------------
 
@@ -51,4 +51,4 @@ ESP32 是否可以在外挂的 SPI flash 中挂载文件系统分区？
   - 默认会存在 NVS 里，不会因为掉电而消失，您也可以通过 ``esp_wifi_set_storage()`` 设置，此时分为两种情况：
 
     - 如果想要实现掉电保存 Wi-Fi SSID 和 PSAAWORD，可通过调用 ``esp_wifi_set_storage(WIFI_STORAGE_FLASH)`` 将 Wi-Fi 信息存储在 flash 内。
-    - 如果想要实现掉电不保存 Wi-Fi SSID 和 PASSWORD 的操作，可通过调用 ``esp_wifi_set_storage(WIFI_STORAGE_RAM)`` 讲  Wi-Fi 信息存储在 RAM 内。
+    - 如果想要实现掉电不保存 Wi-Fi SSID 和 PASSWORD 的操作，可通过调用 ``esp_wifi_set_storage(WIFI_STORAGE_RAM)`` 将 Wi-Fi 信息存储在 RAM 内。

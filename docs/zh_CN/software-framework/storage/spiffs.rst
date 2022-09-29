@@ -13,13 +13,6 @@ SPIFFS 文件系统
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
 
---------------
-
-使用 FAT 文件系统时文件名稍微长一点的文件无法打开，该如何处理？
---------------------------------------------------------------------------------------------------------------------------------------------------
-
-  - 可以在 ``menuconfig`` -> ``Component config`` -> ``FAT Filesystem support`` -> ``Long filename support 中进行修改，选择 ``Long filename buffer in heap`` 或 ``Long filename buffer on stack`` 配置项。然后可以在 ``Component config`` -> ``FAT Filesystem support`` -> ``Max long filename length`` 中修改最大的文件名长度。
-
 ---------------
 
 SPIFFS 支持磁盘加密吗？
@@ -34,4 +27,4 @@ SPIFFS 支持磁盘加密吗？
 如何将 ESP32 设备的 key 和 certs 存储到 spiffs 中呢？
 ---------------------------------------------------------
 
- 可将文件生成 SPIFFS 镜像后烧录到对应分区，可参考 `SPIFFS 文件系统 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_。
+  可将文件生成 SPIFFS 镜像后烧录到对应分区，可参考 `SPIFFS 文件系统 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_。

@@ -25,7 +25,7 @@ Can ESP32 use LittleFS file system?
 How to check the memory usage (e.g., DRAM, IRAM, rodata) of ESP32 chips?
 ------------------------------------------------------------------------------------------------------------------
 
-  You can check memory usage of ESP32 chips by inputting the instruction ``idf.py size-components`` under corresponding directories in terminal.
+  You can check the estimated occupied memory of ESP32 chips by inputting the instruction ``idf.py size-components`` under corresponding directories in terminal.
 
 -----------------
 
