@@ -13,13 +13,6 @@ SPIFFS Filesystem
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
 
---------------
-
-How to deal with the file with long filename when using the FAT filesystem？
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  - You can change the configuration in ``menuconfig`` -> ``Component config`` -> ``FAT Filesystem support`` -> ``Long filename support`` by selecting the ``Long filename buffer in heap`` or ``Long filename buffer on stack`` option. Then you can modify the maximum length for a file name in ``Component config`` -> ``FAT Filesystem support`` -> ``Max long filename length``.
-
 ---------------
 
 Can SPIFFS partition be encrypted?
@@ -34,4 +27,4 @@ Can SPIFFS partition be encrypted?
 How do I store the keys and certs of ESP32 devices in spiffs?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
- You can generate an SPIFFS image from files and flash it to the corresponding partition. See `SPIFFS Filesystem <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_ for details.
+  You can generate an SPIFFS image from files and flash it to the corresponding partition. See `SPIFFS Filesystem <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_ for details.
