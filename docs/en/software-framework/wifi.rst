@@ -1250,3 +1250,9 @@ Why is this log frequently printed when the phone connects to the ESP32-S3 that 
 
     esp_log_level_set("wifi", ESP_LOG_ERROR); 
 
+--------------
+
+Does ESP32 support the coexistence of the network port (LAN8720) and Wi-Fi (Wifi-AP)?
+-------------------------------------------------------------------------------------------------------
+
+  Yes, this can be achieved by writing the detection events of both connections as one.
