@@ -73,3 +73,11 @@ Does the ESP32 support SAVI?
 -----------------------------------------------------------------------------------------------------------
 
   No, SAVI (Source Address Validation Improvements) is to establish a binding relationship based on IPv6 source address, source MAC address and access device port on the access device (AP or switch) by listening to control packets (such as ND, DHCPv6), i.e. CPS (Control Packet Snooping), and then perform source address validation on IP packets passing through the specified port. Only when the source address of the message matches with the binding table entry can it be forwarded to ensure the authenticity of the source address of data messages on the network. This is generally a policy protocol for switches or enterprise-class AP routers. Currently ESP32 supports IPv6 link-local address and global address for communication.
+
+--------------------------------
+
+When Ethernet and Wi-Fi coexist, does Ethernet take precedence over Wi-Fi in data transfer?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  :CHIP\: ESP32 :
+
+  - Call `esp_netif_get_route_prio first <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_netif.html#_CPPv424esp_netif_get_route_prioP11esp_netif_t>`_ to check the priority of Ethernet and Wi-Fi. If Wi-Fi takes priority over Ethernet, you can prioritize them by modifying ``route_prio`` in the structure ``esp_netif_t``.
