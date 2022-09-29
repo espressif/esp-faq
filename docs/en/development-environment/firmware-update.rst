@@ -49,7 +49,7 @@ How to flash firmware in macOS and Linux systems?
 Does ESP32 support programming using JTAG pins directly?
 ---------------------------------------------------------------------------------------------------
 
-  Yes, ESP32 supports using the `JTAG Pin <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html#id1>`_ to flash directly. Please refer to `Upload application for debugging <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_.
+  Yes, ESP32 supports using `JTAG Pins <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html#id1>`_ to flash directly. Please refer to `Upload application for debugging <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_.
 
 --------------
 
@@ -105,11 +105,11 @@ How to resolve the following error occured when flashing firmware to ESP32-S2 ba
 
 --------------
 
-How to download firmware based on esp-idf using flash_download_tool?
+How to download firmware based on ESP-IDF using flash_download_tool?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Taken hello-world example for instance, please refer to `get-started-guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html>`_ when building an esp-idf project for the first time.
-  - Run ``idf.py build`` (Only for esp-idf v4.0 or later versions. Please use ``make`` for previous versions). After the build finished, the following flash command for the bin file will be generated:
+  - Taken hello-world example for instance, please refer to `get-started-guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html>`_ when building an ESP-IDF project for the first time.
+  - Run ``idf.py build`` (Only for ESP-IDF v4.0 or later versions. Please use ``make`` for previous versions). After the build finished, the following flash command for the bin file will be generated:
 
   .. code:: shell 
 
@@ -133,18 +133,19 @@ What is the communication protocol for flashing ESP chips?
 How to program ESP32-C3's firmware offline?
 -----------------------------------------------------------------------------------------------------------
 
-   - Download the latest Flash Download Tools from espressif.com. Versions after v3.8.8 and later versions already support ESP32-C3 series programming.
+   - Currently, there is no tool that supports the offline programming of ESP32-C3's firmware. However, we offer the `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_ that can directly download binary firmware and support mass production download mode for up to eight ESP32-C3 devices at the same time.
+   - In addition, we also offer the `Test Fixture <https://www.espressif.com/en/products/equipment/production-testing-equipment/overview>`_ for mass production, which supports up to four ESP32-C3 modules to download firmware simultaneously.
 
 ----------------------
 
 How does ESP32 set Flash SPI to QIO mode?
 ----------------------------------------------------------------------------------------------
 
-  - It can be set in configuration terminal through "menuconfig -> Serial flasher config -> Flash SPI mode", the corresponding API is `esp_image_spi_mode_t() <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-reference/system/app_image_format.html?highlight=esp_image_spi_mode_t#_CPPv420esp_image_spi_mode_t>`_.
+  - It can be set in the configuration terminal through "menuconfig -> Serial flasher config -> Flash SPI mode", the corresponding API is `esp_image_spi_mode_t() <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-reference/system/app_image_format.html?highlight=esp_image_spi_mode_t#_CPPv420esp_image_spi_mode_t>`_.
 
 -------------------
 
-After downloaded program and powered on EPS8266, the serial port prints the following log. What is the reason?
+After downloading program and powering on EPS8266, the serial port printed the following log. What is the reason?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: text
@@ -154,21 +155,13 @@ After downloaded program and powered on EPS8266, the serial port prints the foll
 
   - `waiting for host` means the Boot is in SDIO mode, indicating that GPIO15 (MTDO) is pulled up (HIGH), please refer to `ESP8266 Boot Mode Description <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process#esp -boot-modes>`_.
   
---------------------------
-
-When using UART to upgrade firmware for ESP32, how to set two `app_main` spaces?
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  - Sorry, ESP32 chips do not support setting two `app_main` spaces when upgrading firmware via UART.
-  - The mechanism of UART upgrading firmware is the same as that of flash download tool. The upgraded firmware will directly replace the old one, and it is not supported to keep the old firmware.
-  
 ----------------
 
 What are the Espressif module programming tools?
 ------------------------------------------------------------------------------------------------------------------
 
-  - For Espressif programming software, you can go to this webpage and download it: `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_. Only `Windows` environment can support no GUI tool embedded.
-  - Espressif programming tool `esptool <https://github.com/espressif/esptool>`_ is written based on `python` and open source code, supports secondary development.
+  - For Espressif programming software, please go to  `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_. Installation-free GUI tools for `Windows` environment only.
+  - Espressif programming tool `esptool <https://github.com/espressif/esptool>`_ is written based on `Python` with open-source code, supporting secondary development.
 
 -----------------------------------------------------------------------------------------------------
 
@@ -229,19 +222,19 @@ I am using ESP8266 to download the firmware via `flash download tool <https://ww
     2013,rst cause:1, boot mode:(3,7)
     ets_main.c
 
-  - Please check whether the hardware wiring  is correct. See `Boot mode wiring instructions <https://docs.espressif.com/projects/esptool/en/latest/esp8266/advanced-topics/boot-mode-selection.html#boot-mode-selection>`_.
+  - Please check whether the hardware wiring is correct. See `Boot mode wiring instructions <https://docs.espressif.com/projects/esptool/en/latest/esp8266/advanced-topics/boot-mode-selection.html>`_.
   - Please check whether the download offset address of ``bootloader.bin`` is correct. The offset address downloaded from ``bootloader.bin`` of ESP8266 is "0x0". If the offset address is wrong, the flash cannot be started.
   
 ----------------
 
-Why does my USB driver failed to be recognized by the Windows 7 system?
+Why does my USB driver failed to be recognized by the Windows7 system?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Please download and install the `USB Serial JTAG driver <https://dl.espressif.com/dl/idf-driver/idf-driver-esp32-usb-jtag-2021-07-15.zip>` manually first.
+  - Please download and install the `USB Serial JTAG driver <https://dl.espressif.com/dl/idf-driver/idf-driver-esp32-usb-jtag-2021-07-15.zip>` manually for the Windows7 system.
 
 ----------------------------
 
-After using the ESP32-WROVER-E module downloading the program, the following log is printed after powered on,  What is the reason?
+After using the ESP32-WROVER-E module to download the program, the following log is printed after powered on.  What is the reason?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: shell
