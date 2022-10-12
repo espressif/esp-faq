@@ -70,8 +70,8 @@ ESP RainMaker 公有云与 ESP RainMaker 私有云有什么区别？
 Nova Home 跟 ESP RainMaker 有什么关系？
 --------------------------------------------
 
-  - Nova Home 是一套私有部署的 ESP RainMaker 平台，与公有 ESP RainMaker 独立，账户不互通，是一套面向终端客户评估方案的平台。
-  - Nova Home 平台提供专用 Nova Home App，此 App 对 UI、icon 做了相关优化，增加了一些业务侧逻辑，目前以通用固件的形式对接了插座、开关、球泡灯等电工照明产品，提供固件及 App。如您希望接入试用，可以联系 `乐鑫商务 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`_ 获取更多详细信息。
+  - Nova Home 与公有 ESP RainMaker 所使用的服务器完全一致，账户互通，不同点在于 App 端。 
+  - Nova Home App 相对于 ESP RainMaker App， 对 UI 界面及图标做了相关优化，增加了一些业务侧逻辑，目前以通用固件的形式对接了插座、开关、球泡灯等电工照明产品。如您希望接入试用，可以联系 `乐鑫商务 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`_ 获取更多详细信息。
 
 --------------
 
@@ -129,7 +129,7 @@ ESP RainMaker 是否支持 App 端的消息推送？
 ESP RainMaker 是否支持带时间戳数据的上报及后续的分析？
 -------------------------------------------------------------
 
-  支持，设备支持按时间戳上报数据，云侧支持按时间点过滤并拉取数据。在 ESP RainMaker 中该数据称为时间序列数据 (Time Series data)，使用单独的 MQTT 主题上报，云端以完成集成。通过 `tsdata <https://swaggerapis.rainmaker.espressif.com/#/Time%20Series%20Data/GetTSData>`_ 拉取数据，设备固件侧可提供测试代码，请联系 `乐鑫商务 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`_ 获取。
+  支持，设备支持按时间戳上报数据，云侧支持按时间点过滤并拉取数据。在 ESP RainMaker 中该数据称为时间序列数据 (Time Series data)，使用单独的 MQTT 主题上报，云端以完成集成。通过 `tsdata <https://swaggerapis.rainmaker.espressif.com/#/Time%20Series%20Data/GetTSData>`_ 拉取数据，可参考 ESP RainMaker 仓库中的 `温度传感器例程 <https://github.com/espressif/esp-rainmaker/tree/master/examples/temperature_sensor>`_。
 
 --------------
 
@@ -171,7 +171,7 @@ ESP RainMaker 方案适配了哪些芯片？用哪个 IDF 版本编译？是否�
 -------------------------------------------------------------------------------
 
   - RainMaker 设备固件开发 SDK 目前完成了对 ESP32 系列芯片适配。
-  - IDF 版本需大于 v4.1，若使用 ESP32-C3 需切换到 v4.3 及以上，使用 ESP32-S3 需切换到 v4.4 及以上。
+  - ESP-IDF 版本需大于 v4.1，若使用 ESP32-C3 需切换到 v4.3 及以上，使用 ESP32-S3 需切换到 v4.4 及以上，使用 ESP32-C2 需切换到 v5.0 及以上。
   - 支持，RainMaker 设备固件开发 SDK 提供 `MQTT 适配层 <https://github.com/espressif/esp-rainmaker-common/tree/473417c053888d4ad89def7d856e75a366f74122>`_，需要您自行完成对接。
 
 --------------
@@ -180,7 +180,7 @@ ESP RainMaker 方案中 Claiming 有 3 种形式，区别在哪？该如何选�
 -------------------------------------------------------------------------------------------
 
   - 具体区别请查看 `Claiming 实现细节 <https://rainmaker.espressif.com/docs/claiming.html>`_。
-  - 对带有蓝牙功能的芯片优先选择 `Assisted Claiming`，其次为 `Self Claiming` （`Self Claiming` 最近已更改为对所有 ESP32 系列芯片开放，并非仅仅适用于 ESP32-S2）。不带蓝牙功能的芯片选择 `Self Claiming`。若 `Assisted Claiming` 与 `Self Claiming` 均无法成功，则选择 `Host Driven Claiming` 或联系 `乐鑫商务 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`_ 处理。
+  - 对带有蓝牙功能的芯片优先选择 `Self Claiming`，其次为 `Assisted Claiming` （`Self Claiming` 最近已更改为对所有 ESP32 系列芯片开放，并非仅仅适用于 ESP32-S2）。不带蓝牙功能的芯片选择 `Self Claiming`。若 `Assisted Claiming` 与 `Self Claiming` 均无法成功，则选择 `Host Driven Claiming` 或联系 `乐鑫商务 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`_ 处理。
   - 不可使用，详细原因请查看 `为什么 Claiming 无法为私有服务器部署？ <http://customer.rainmaker.espressif.com/docs/faq/#why-doesnt-claiming-work-with-our-deployment>`_。
 
 --------------
