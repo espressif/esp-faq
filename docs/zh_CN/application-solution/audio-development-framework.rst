@@ -15,34 +15,34 @@
 
 --------------
 
-ESP-ADF 使用 VOIP 功能，手机和 ESP32 设备进行通话如何消除回音？
+使用 ESP-ADF 的 VOIP 功能时，手机和 ESP32 设备进行通话如何消除回音？
 ----------------------------------------------------------------------
 
-  - 从软件层面来讲，回声消除 (Acoustic Echo Cancelation, AEC) 对系统性能要求较高，而当前芯片性能无法支持通过软件实时 AEC。因此，VOIP 目前没有 AEC 的软件解决方案。
-  - 建议使用支持 AEC 的 DSP 芯片来消除回音。
+  - 乐鑫提供基于 ESP32、ESP32-S3 芯片的回声消除 (Acoustic Echo Cancelation, AEC) 算法，可以参考 `算法 Demo <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/algorithm>`_。
+  - 需要注意，AEC 的效果不仅仅依赖于软件参数配置和调试，还依赖于硬件设计，例如播放不能失真、录音不能有杂音以及回升参考信号没有问题等等，建议此部分设计参考乐鑫 `ESP32-Lyrat-Mini 开发板 <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/zh_CN/latest/design-guide/dev-boards/get-started-esp32-lyrat-mini.html>`_ 以及 `ESP32-S3-Korvo-2 开发板 <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/zh_CN/latest/design-guide/dev-boards/user-guide-esp32-s3-korvo-2.html>`_ 的设计。
 
 --------------
 
 使用 ESP32-Korvo-DU1906 开发板必须用百度云吗？
 ----------------------------------------------
 
-  - ESP32-Korvo-DU1906 开发板例程只限于使用百度云进行测试，并且需要 Profile。请联系百度获取 Profile。
-  - 与其他服务器通信（亚马逊、图灵等等）理论上是可以实现的，但当前未有相关测试用例。
+  - ESP32-Korvo-DU1906 开发板例程只限于使用百度云进行测试，并且需要 Profile。
+  - 请联系百度云，了解相关商务接入条款，见 `语音服务使用准备 <https://cloud.baidu.com/doc/SHC/s/wk7bl9g8i>`_。
 
 --------------
 
-乐鑫官网给出的网络电话例程是否支持 RTP？
+乐鑫官网提供的网络电话例程是否支持 RTP？
 ----------------------------------------
 
-  - 当前网络电话协议是 `VoIP <https://www.espressif.com/zh-hans/news/ESP32_VoIP>`_，媒体协议是 RTP。
+  - ESP-ADF 默认提供的当前网络电话协议是基于 SIP 实现的 VoIP，协议部分有用到 RTP。
   - 可使用 Espressif SDK ESP-ADF 下的 `VOIP 例程 <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/voip>`_。
 
 --------------
 
-ESP-ADF 中 RTP 协议是否开源？
+ESP-ADF 中 SIP 协议是否开源？
 ----------------------------------------
 
-  - 目前 RTP 协议未开源，是以 lib 形式供外部调用。
+  - 目前协议未开源，以 lib 形式供外部调用。
 
 --------------
 
@@ -51,7 +51,7 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？
 
   如：pipeline_a2dp_sink_and_hfp, pipeline_a2dp_sink_stream, pipeline_bt_sink
 
-  - 目前 ESP-ADF 还不支持 AVRCP 的调音操作，IDF release/v4.0 及以上已经支持了，您可以尝试使用 ESP-IDF 中 a2dp_sink 的 Demo 和 a2dp_source 对跑。
+  - 目前 ESP-ADF 还不支持 AVRCP 的调音操作，ESP-IDF release/v4.0 及以上版本已经支持了，您可以尝试使用 ESP-IDF 中 `a2dp_sink 示例 <https://github.com/espressif/esp-idf/tree/v4.4.2/examples/bluetooth/bluedroid/classic_bt/a2dp_sink>`_ 和 `a2dp_source 示例 <https://github.com/espressif/esp-idf/tree/v4.4.2/examples/bluetooth/bluedroid/classic_bt/a2dp_source>`_ 对跑。
   - 后续会在 ADF 的 Demo 中直接支持。
 
 --------------
@@ -63,10 +63,10 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？
 
 --------------
 
-如何输出 32bit 的 I2S 音频数据？
+如何输出 32 位的 I2S 音频数据？
 ---------------------------------
 
-  - 重新写一个 my_i2s_write 函数调用 i2s_write_expand, 然后把 my_i2s_write 用 ``audio_element_set_write_cb`` 修改 i2s_stream element 的 write 函数。
+  - 重新写一个 my_i2s_write 函数调用 i2s_write_expand，然后把 my_i2s_write 以 audio_element_set_write_cb 的形式替换 i2s_stream element 的 write 函数。
 
   .. code:: c
 
@@ -94,7 +94,7 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？
 
   错误日志：``fatal error: audio_type_def.h: No such file or directory``
 
-  - 文件 audio_type_def.h 位于 ESP-ADF 的 esp-adf-libs 中。如果在编译过程中找不到该文件，则说明 ESP-ADF v2.4 可能未被正确检测出。特别是子模块可能尚未更新。
+  - 文件 audio_type_def.h 位于 ESP-ADF 的 esp-adf-libs 中。如果在编译过程中找不到该文件，则说明 ESP-ADF v2.4 可能未被正确检测出，特别是子模块可能尚未更新。
   - 要正确检测 ESP-ADF v2.4，请按照所述的步骤进行操作：`更新至一个稳定发布版本 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/versions.html#id7>`_。
   - 尝试执行以下命令并重复编译。
 
@@ -114,14 +114,14 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？
 
 --------------
 
-加入 DuerOS 是否会将 esp32-lyrat 开发板的录音功能全程占用？
+加入 DuerOS 是否会将 ESP32-LyraT 开发板的录音功能全程占用？
 --------------------------------------------------------------------------------------------------------
 
-  目前的设计是全程占用录音数据。但是您可以通过使能 ``I2S_stream`` 的 ``multi_output`` 功能, 让录音的数据通过这个通道输出到想要的地方。
+  目前的设计是全程占用录音数据。但是您可以通过使能 ``I2S_stream`` 的 ``multi_output`` 功能，让录音的数据通过这个通道输出到想要的地方。
 
 --------------
 
-ESP32-LyraT V4.3 不支持 dueros 吗？烧进去 dueros 固件，机器一直重启？
+ESP32-LyraT v4.3 不支持 dueros 吗？烧进去 dueros 固件，机器一直重启？
 -----------------------------------------------------------------------
 
   - 设置 ram 为 64 M 或是自动 ``Component config -> ESP32 Specific -> SPI RAM config -> Type of SPIRAM in use->select ESP-PSRAM64``。
@@ -131,30 +131,28 @@ ESP32-LyraT V4.3 不支持 dueros 吗？烧进去 dueros 固件，机器一直�
 ESP-ADF 支持语音识别关键词自定义开发吗？
 ----------------------------------------
 
-  暂时还未开放语音训练接口，您可以直接使用免费唤醒词 “嗨 乐鑫”。如果目前您有定制需求，可以发送邮件至 Sales@espressif.com 咨询。
+  暂时还未开放语音训练接口，您可以直接使用免费唤醒词 “嗨，乐鑫”。如果您有定制需求，可以发送邮件至 Sales@espressif.com 咨询。
 
 --------------
 
 ESP-ADF 是否支持 ESP32-LyraTD-MSC V2.1 开发板跑 Alexa 例程？
 ---------------------------------------------------------------------
 
-  - 对于 Alexa 例程，请使用 `esp-prov-v2 <https://github.com/espressif/esp-avs-sdk/releases/download/v1.0b1r3/esp-prov-v2.apk>`_ 进行配网。
-  - ESP-ADF 已经支持 ESP32-LyraTD-MSC，将 ``ADF git submodule update`` 后可以直接使用 Demo 编译。
+  - ESP-ADF 中还没有直接支持 Alexa 的例程，对于 Alexa 例程，请参考 `esp-va-sdk <https://github.com/espressif/esp-avs-sdk>`_。
 
 --------------
 
 ESP32 关于语音识别方面，要能本地化，能否推荐相应的开发板？
 ----------------------------------------------------------------------------
 
-  - `ESP-Skainet <https://github.com/espressif/esp-skainet>`_ 是乐鑫推出的智能语音助手，目前支持唤醒词识别和命令词识别。
-  - 要运行 ESP-Skainet，您需要有一个集成了音频输入模块的 ESP32 开发板。在示例中，我们使用 ESP32-LyraT-Mini 或 ESP32-Korvo V1.1。
+  - 推荐使用 `ESP32-Lyrat-Mini 开发板 <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/zh_CN/latest/design-guide/dev-boards/get-started-esp32-lyrat-mini.html>`_ 或者 `ESP32-S3-Korvo-2 开发板 <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/zh_CN/latest/design-guide/dev-boards/user-guide-esp32-s3-korvo-2.html>`_ 来实现本地化。
 
 ---------------
 
 ESP32 是否有同时支持 MIC 和 AUX 拾音的开发板？
 ------------------------------------------------------------------------------
 
-  - ESP32-lyraT-4.3 开发板支持 MIC 和 AUX 拾音。开发板说明参见 `esp32-lyrat-v4-3 <https://docs.espressif.com/projects/esp-adf/zh_CN/latest/get-started/get-started-esp32-lyrat.html#esp32-lyrat-v4-3>`__。
+  - `ESP32-lyraT-4.3 开发板 <https://docs.espressif.com/projects/esp-adf/zh_CN/latest/get-started/get-started-esp32-lyrat.html#esp32-lyrat-v4-3>`__ 支持 MIC 和 AUX 拾音。
 
 ---------------
 
@@ -168,11 +166,12 @@ ESP32 是否有同时支持 MIC 和 AUX 拾音的开发板？
 ESP32 系列音频开发板支持多大功率的扬声器？
 ------------------------------------------------------------------
 
-  - ESP32 开发板默认使用 NS4150 的 PA，其 datasheet 提到功率不超过 3 W。
+  - ESP32 开发板默认使用 NS4150 的 PA，一般不超过 3 W 大小。
+  - 如果有另外需求，可以更换 PA 设计。
 
 ---------------
 
-Alexa solution 对环境噪声是否有一定的要求？
+乐鑫的语音唤醒方案对环境噪声是否有一定的要求？
 ------------------------------------------------------------------------
 
   - 当前乐鑫的语音方案可以满足信噪比 5 dB 以内的环境要求，对于一些固定的噪音场景还可以做到 0 dB 以内（需要针对实际产品进行优化）。
@@ -224,7 +223,7 @@ ESP32-WROVER-E 模组使用一路 I2S 是否可实现同时播音和录音？
 
   :CHIP\: ESP32 | ESP32-S2 | ESP32-S3 :
 
- - 当前不支持，建议考虑使用 dlna，会有类似的效果。
+ - 当前不支持，建议考虑使用 dlna，可以达到类似的效果。
 
 ----------------
 
@@ -239,7 +238,7 @@ ESP32-Korvo-DU1906 开发板运行 `korvo_du1906 <https://github.com/espressif/e
 ESP-DSP fft 可以运行 4096、8192 以及更多采样吗？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 可以，最大支持到 32 K 采样。最大值可以在 menuconfig 中配置，以 `fft demo <https://github.com/espressif/esp-dsp/tree/master/examples/fft>`_ 为例为 ``idf.py menuconfig--->Component config--->DSP Library--->Maximum FFT length--->(*)32768``。
+  - 可以，最大支持到 32 K 采样。最大值可以在 menuconfig 中配置，以 `fft demo <https://github.com/espressif/esp-dsp/tree/master/examples/fft>`_ 为例，为 ``idf.py menuconfig--->Component config--->DSP Library--->Maximum FFT length--->(*)32768``。
 
 ---------------
 
@@ -255,8 +254,8 @@ ESP32 是否支持模拟音频或是数字音频输出？
 -----------------------------------------------------
 
   - ESP32 支持 DAC 模拟音频输出，可以使用它播放提示音等简单音频。
-  - ESP32 支持 PWM 模拟音频输出，相比 DAC 效果稍好，演示代码：`esp-iot-solution  <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`__。
-  - ESP32 同时支持 I2S 数字音频输出，I2S 可配置引脚可以在 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ > 外设接口和传感器章节。
+  - ESP32 支持 PWM 模拟音频输出，相比 DAC 效果稍好，演示代码：`esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`__。
+  - ESP32 同时支持 I2S 数字音频输出，I2S 可配置引脚可以查看 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 外设接口和传感器章节。
 
 ----------------
 
