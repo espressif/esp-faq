@@ -296,3 +296,21 @@ The firmware compiled based on the ESP-IDF SDK varies as it contains the informa
     Please refer to the `Reproducible Builds <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/reproducible-builds.html#reproducible-builds>`_ description.
 
   - For SDK versions below v5.0, you can disable ``CONFIG_APP_COMPILE_TIME_DATE=n`` to remove the built timestamp information and enable ``COMPILER_HIDE_PATHS_MACROS=y`` to hide ``IDF_PATH``.
+
+--------------
+
+When I downloaded the official application hello_world using ESP32-S3-DevKitM-1, the following error occurred. What is the reason for that?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code:: text
+
+    ESP-ROM:esp32s3-20210327
+    Build:Mar 27 2021
+    rst:0x7 (TG0WDT_SYS_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+    Saved PC:0x40043ac8
+    Invalid chip id. expected 9 read 4. bootloader for wrong chip?
+    ets_main.c 329 
+
+
+  - The current error may be related to the chip version on the development board or to the fact that the software version of the esp-idf SDK is not the official production version. The chip (ROM) bootloader expects the chip ID is 9, which is the production version of the chip (not a test version). However, in the secondary bootloader header, it sees the chip ID is 4, which is the beta version of the chip. Please refer to the description in `esp-idf/issues/7960 <https://github.com/espressif/esp-idf/issues/7960>`_ . 
+  - The actual version of the chip can be obtained by the command ``esptool.py chip_id``. If the chip version is the production version, this error is related to the version of the used esp-idf SDK. For ESP32-S3 series products, esp-idf release/v4.4 and later are necessary.

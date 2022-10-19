@@ -861,3 +861,22 @@ ESP32 在使用 esp_timer 时，出现网络通信或者蓝牙通信异常，是
     详情参见 `Reproducible Builds <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/reproducible-builds.html#reproducible-builds>`_ 说明。
   
   - 如果是 v5.0 以下版本的 SDK，可以关闭 ``CONFIG_APP_COMPILE_TIME_DATE=n`` 配置，来删除编译时间戳信息，并且开启 ``COMPILER_HIDE_PATHS_MACROS=y`` 配置来隐藏 IDF_PATH。
+
+-------------------
+
+使用 ESP32-S3-DevKitM-1 开发板下载官方 hello_world 例程后出现如下报错，是什么原因？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code:: text
+
+    ESP-ROM:esp32s3-20210327
+    Build:Mar 27 2021
+    rst:0x7 (TG0WDT_SYS_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
+    Saved PC:0x40043ac8
+    Invalid chip id. Expected 9 read 4. Bootloader for wrong chip?
+    ets_main.c 329 
+
+
+  - 当前报错可能与开发板上的芯片版本或 esp-idf SDK 的软件版本不是正式量产版本有关。芯片 (ROM) 引导加载程序预期芯片 ID 为 9，这是芯片的量产版本（不是测试版本）。然而，在二级引导加载程序标头中，它看到了芯片 ID 为 4，这是 beta 版本的芯片。可参考`这里 <https://github.com/espressif/esp-idf/issues/7960>`_ 的说明： 
+
+  - 可以通过 esptool.py chip_id 命令来查询芯片的实际版本。如果芯片版本是量产版本，那么该报错与所使用的 esp-idf SDK 版本有关。ESP32-S3 系列的产品请使用 esp-idf release/v4.4 及以上版本的软件环境。
