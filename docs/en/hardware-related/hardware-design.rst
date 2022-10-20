@@ -18,11 +18,11 @@ Hardware design
 The I2S pins of ESP32 are scattered. Can I route I2S signals to adjacent pins? For example, to ``GPIO5, GPIO18, GPIO23, GPIO19, and GPIO22``, or to ``GPIO25, GPIO26, GPIO32, and GPIO33``.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - You may route I2S signals to different I/Os freely. Please note that some I/Os can only be set as input. For details, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ > Section *Peripheral Pin Configurations* and Appendix *IO_MUX*.
+  - All I2S signals can be routed to different I/Os freely. Please note that some I/Os can only be set as input. For details, please refer to Section *Peripheral Pin Configurations* and Appendix *IO_MUX* in the `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
 --------------------
 
-How can I stop the voltage through VDD3P3\_RTC from going down after ESP32 enters Light-sleep mode?
+How can I stop the voltage through VDD3P3_RTC from going down after ESP32 enters Light-sleep mode?
 -----------------------------------------------------------------------------------------------------------
 
   - After ESP32 enters Light-sleep mode, the GPIOs powered by VDD3P3_RTC are pulled down. This is usually because the RTC powers down during Light-sleep mode.
@@ -68,7 +68,7 @@ Do Espressif Wi-Fi modules support single-layer PCBs?
 -----------------------------------------------------
 
   - The ESP32 module is a wireless device. It needs PCB materials that fulfills its RF performance requirements. We have tested four-layer and two-layer PCBs, but not single-layer ones.
-  - Single-layer PCBs are not recommended, because desired RF performance cannot be guaranteed. You may use single-layer PCBs in your end products and then mount Espressif modules.
+  - Single-layer PCBs are not recommended as RF performance cannot be guaranteed. You may use single-layer PCBs in your end products and then mount Espressif modules.
   - Four-layer PCBs are recommended for desired RF performance.
 
 ----------------
@@ -77,8 +77,8 @@ What should be noted when I power ESP8266 with batteries?
 ----------------------------------------------------------
 
   - The operating voltage of ESP8266 ranges from 3.0 V to 3.6 V, so two AA batteries can be used to power ESP8266. Please ensure the battery voltage stays within the operating range of ESP8266 when it drops.
-  - If the lithium battery voltage falls outside the valid range, and the voltage drops heavily during discharge, then such batteries should not be used to power ESP8266.
-  - We recommend that you use DC/DC converters or LDO regulators to convert voltage before powering ESP8266. Please pay attention to the difference between the input and output voltages of converters or regulators.
+  - If the lithium battery voltage surpasses module operating voltage, and the voltage drops heavily during discharge, then such batteries should not be used to power ESP8266.
+  - We recommend you to use DC/DC converters or LDO regulators to convert voltage before powering ESP8266. Please pay attention to the difference between the input and output voltages of converters or regulators.
 
 ------------------------
 
@@ -120,7 +120,7 @@ Do I need to connect an external crystal when using the ESP8285 chip?
 Where can I find the reference design for connecting an external PSRAM to ESP32-D2WD?
 --------------------------------------------------------------------------------------
 
-  You may refer to the design for the external PSRAM of ESP32-PICO-D4. Please refer to `ESP32-PICO-D4 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-pico-d4_datasheet_en.pdf>`_ > Chapter *Peripheral Schematics*.
+  You may refer to the design for the external PSRAM of ESP32-PICO-D4. Please refer to Chapter *Peripheral Schematics* in the `ESP32-PICO-D4 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-pico-d4_datasheet_en.pdf>`_.
 
   .. note:: ESP32-D2WD has an 1.8 V flash, so please add a resistor and a capacitor to VDD_SDIO and connect an 1.8 V PSRAM.
 
@@ -177,7 +177,7 @@ What kind of socket is used on ESP32-LyraT development boards to connect a speak
 For modules housing ESP32, which pins cannot be set by users?
 --------------------------------------------------------------
 
-  - For ESP32-WROOM Series of modules, IO6 ~ IO11 are pins for flash and cannot be set for other uses.
+  - For ESP32-WROOM Series of modules, GPIO6 ~ GPIO11 are pins for flash and cannot be set for other uses.
   - For ESP32-WROVER Series of modules, GPIO16 and GPIO17 are pins for PSRAM and cannot be set for other uses.
   - Besides, please note that ESP32 has five strapping pins. For details, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__.
 
@@ -186,7 +186,7 @@ For modules housing ESP32, which pins cannot be set by users?
 Which is the reset pin of ESP32?
 ---------------------------------
 
-  - CHIP_PU serves as the reset pin of ESP32. The input level (VIL_nRST) for resetting the chip should be low enough and remain so for a period of time. Please refer to `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_ > Section *Reset*.
+  - CHIP_PU serves as the reset pin of ESP32. The input level (VIL_nRST) for resetting the chip should be low enough and remain so for a period of time. Please refer to Section *Reset* in the `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
 
 --------------
 
@@ -197,7 +197,7 @@ What should be noted when I design the power supply for ESP8266?
   - The decoupling capacitor must be as close to the chip as possible. The equivalent resistance should be low enough.
   - ESP8266 is not 5 V tolerant. It operates at 3.3 V, with the operating voltage ranging from 2.7 V to 3.6 V.
   - If you use DC/DC converters, please add LC filters when necessary.
-  - Please refer to `ESP8266 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_en.pdf>`_ > Section *Power Supply*.
+  - Please refer to Section *Power Supply* in the `ESP8266 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_en.pdf>`_.
 
 --------------
 
@@ -229,7 +229,7 @@ Can GPIO 34 ~ GPIO39 of ESP32 be used as UART RX pins?
 Where can I find the design reference for the external 32 kHz crystal of ESP32 modules?
 -------------------------------------------------------------------------------------------------------
 
-  - Please refer to `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_ > Section *RTC (optional)*.
+  - Please refer to Section *RTC (optional)* in the `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
 
 ----------------
 
@@ -256,7 +256,7 @@ How can I hard reset ESP8266? Is hard reset active low or active high? What are 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The Pin32 EXT_RSTB of ESP8266 is the reset pin. This active low pin has an internal pull-up resistor. To prevent external factors triggering a restart, it is recommended that the EXT_RSTB cabling be as short as possible and an RC circuit be added to the EXT_RSTB pin.
-  - The CHIP_EN pin of ESP8266 can also be used as a hard reset pin. When you use the CHIP_EN pin as a reset pin, the reset is active low. To reset and restart ESP8266, the input level should be lower than 0.6 V and last for more than 200 μs. It is recommended to use the CHIP_EN pin for chip reset. For more information, please refer to `ESP8266 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_en.pdf>`__ > Section *Reset*.
+  - The CHIP_EN pin of ESP8266 can also be used as a hard reset pin. When you use the CHIP_EN pin as a reset pin, the reset is active low. To reset and restart ESP8266, the input level should be lower than 0.6 V and last for more than 200 μs. It is recommended to use the CHIP_EN pin for chip reset. For more information, please refer to Section *Reset* in the `ESP8266 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_en.pdf>`__.
 
 --------------
 
@@ -266,7 +266,6 @@ What does the term ``NC`` mean in Espressif schematics?
   - NC is the acronym of “No Component”. If you see a pull-up resistor is marked NC as shown in the figure below, it indicates that the component is not installed.
   
   .. figure:: ../../_static/no-component.png
-    :align: center
     :scale: 100%
     :alt: no-component
     :figclass: align-center
@@ -383,8 +382,10 @@ Do I must use GPIO0, GPIO1 or GPIO3 of ESP32 as the I2S CLK pin?
 Does the ESP32-U4WDH chip support external PSRAM chips?
 -----------------------------------------------------------------------------------------------------------------
 
-  Yes.
-  
+  - The ESP32-U4WDH chip supports external PSRAM chips. However, only the `ESP-PSRAMXXH <https://www.espressif.com/en/support/documents/technical-documents?keys=psram>`_ chip released by Espressif is supported. Third-party PSRAM chips are not supported. 
+  - For hardware design, all the PSRAM pins except for the CS pin can be multiplexed with Flash. For more information, please refer to the `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_. 
+  - Also, when designing the PCB, please make sure that the GND of the PSRAM to the GND of the ESP32-U4WDH is as short as possible; Otherwise, the signal quality may be affected.
+
 -----------------
 
 Does ESP32 support connection to an external SD NAND flash chip (instead of the default NOR flash chip) via the SPI0/SPI1 interface for storing application firmware?
@@ -392,14 +393,14 @@ Does ESP32 support connection to an external SD NAND flash chip (instead of the 
 
   - The ESP32 chip does not support external SD NAND Flash chips using the SPI0/SPI1 (connect the core Flash) interface.
   - If you want to store external data, it is recommended to use the SPI2, SPI3, or SDIO interface of ESP32 to connect to an external NAND SD chip.
-  - SPI2 and SPI3 can be used via any GPIOs, while the SDIO interface can only be used via the specified interface. For more information, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ > Section Peripheral Pin Configurations.
+  - SPI2 and SPI3 can be used via any GPIOs, while the SDIO interface can only be used via the specified interface. For more information, please refer to Section *Peripheral Pin Configurations* in the `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
 -----------------
 
 Does it support to connect a second PSRAM chip externally based on the ESP32-S3R8 chip?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - No, it is not supported. The reasons are as follows :
+  - No, it is not supported. The reasons are as follows:
     
     - The PSRAM chip is connected to the MSPI bus. There are only two CS signals from the MSPI peripheral, one is connected to the flash, another is connected to the PSRAM.
     - CPU accesses external memory via cache and MSPI. A GPSPI peripheral is not accessible cache.

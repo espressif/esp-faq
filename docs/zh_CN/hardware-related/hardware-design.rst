@@ -15,10 +15,10 @@
 
 --------------
 
-ESP32 中 I2S 信号管脚过于分散，是否可以配置集中⼀些，例如配置到 ``GPIO5，GPIO18，GPIO23、GPIO19、GPIO22`` 或者 ``GPIO25、GPIO26、GPIO32、GPIO33`` 管脚上？
+ESP32 中 I2S 信号管脚过于分散，是否可以配置集中⼀些，例如配置到 ``GPIO5、GPIO18、GPIO23、GPIO19、GPIO22`` 或者 ``GPIO25、GPIO26、GPIO32、GPIO33`` 管脚上？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 所有 I2S 的 I/O 均可任意分配，需要注意有的 I/O 只能作为输⼊，请参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ > 章节外设管脚分配和附录 IO_MUX 管脚清单。
+  - 所有 I2S 的 I/O 均可任意分配。需要注意的是，有的 I/O 只能作为输⼊，请参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 的外设管脚分配章节和附录中的 IO_MUX 管脚清单。
 
 --------------
 
@@ -30,23 +30,23 @@ ESP32 在 Light-sleep 模式下如何避免 VDD3P3_RTC 管脚的电压掉电？
 
 --------------
 
-ESP32 管脚配置需要注意什么事项？
+配置 ESP32 管脚有什么注意事项？
 --------------------------------------------------------------------------------
 
   - 大部分数字外设可以通过 GPIO 交换矩阵配置到任意管脚。SDIO、SPI 高速以及模拟类相关功能只能通过 IO MUX 切换使用。
   - 管脚使用注意事项可参考 `GPIO & RTC GPIO <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/gpio.html?highlight=gpio#gpio-rtc-gpio>`_ 说明。
 
   .. note::
-    - Strapping 管脚默认电平，详情参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`__；
-    - GPIO34 ~ GPIO39（⽤作输⼊ IO，并且无上下拉功能）；
-    - GPIO6 ~ GPIO11 被 flash 管脚占⽤；
-    - GPIO1 和 GPIO3 是 UART0 的 TX 和 RX 管脚，是⽆法配置的；
-    - 其中带有 PSRAM 的模组，GPIO16 和 GPIO17 会被 PSRAM 占⽤。
+    - Strapping 管脚的默认电平，详情参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
+    - GPIO34 ~ GPIO39（⽤作输⼊ IO，并且无上下拉功能）。
+    - GPIO6 ~ GPIO11 由 flash 管脚占⽤。
+    - GPIO1 和 GPIO3 是 UART0 的 TX 和 RX 管脚，⽆法进行配置。
+    - 对于带有 PSRAM 的模组，GPIO16 和 GPIO17 由 PSRAM 占⽤。
 
 --------------
 
-乐鑫芯片 GPIO 最大承载电压？
------------------------------------------------------------------
+乐鑫芯片 GPIO 最大承载电压是多少？
+------------------------------------------------------------------------
 
   - GPIO 最大耐压设计为 3.6 V，超出部分建议从硬件设计上补充分压电路，否则会造成 GPIO 损坏。
 
@@ -55,12 +55,12 @@ ESP32 管脚配置需要注意什么事项？
 ESP8266 电压电流需求？
 --------------------------------------------------
 
-  - ESP8266 的数字部分的电压范围是 1.8 V ~ 3.3 V；
-  - 模拟部分的⼯作电压是 3.0 V ~ 3.6 V，最低 2.7 V；
-  - 模拟电源峰值 350 mA；
+  - ESP8266 的数字部分的电压范围是 1.8 V ~ 3.3 V。
+  - 模拟部分的⼯作电压是 3.0 V ~ 3.6 V，最低 2.7 V。
+  - 模拟电源峰值 350 mA。
   - 数字电源峰值 200 mA。
 
-  .. note:: 选择的 SPI flash ⼯作电压也需要与 GPIO 的电压匹配。CHIP_EN 还是⼯作在 3.0 V ~ 3.6 V，使⽤ 1.8 V GPIO 控制时需要注意电平转换。
+  .. note:: 选择的 SPI flash ⼯作电压也需要与 GPIO 的电压匹配。CHIP_EN ⼯作在 3.0 V ~ 3.6 V，使⽤ 1.8 V GPIO 控制时需要注意电平转换。
 
 --------------
 
@@ -73,10 +73,10 @@ ESP8266 电压电流需求？
 
 --------------
 
-ESP8266 电池供电有哪些要求？
+使用电池为 ESP8266 供电有哪些注意事项？
 -----------------------------------------------------------------
 
-  - ESP8266 电压范围为 3.0 V ~ 3.6 V，两节 AA 电池可以给 ESP8266 供电，需要注意电池压降是否满足芯片电压范围。
+  - ESP8266 电压范围为 3.0 V ~ 3.6 V，两节 AA 电池可以给 ESP8266 供电。需要注意电池压降是否满足芯片电压范围。
   - 锂电池电压范围超过模组要求，并且放电时压降较⼤，不适合直接给 ESP8266 供电。
   - 推荐电池使⽤ DC/DC 或 LDO 升降压后给 ESP8266 供电，并且注意电源芯片压差要求。
 
@@ -85,14 +85,14 @@ ESP8266 电池供电有哪些要求？
 如何获取 ESP32 系列芯片 footprint？
 ------------------------------------------------------
 
-  可以参考 `模组设计 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=%E6%A8%A1%E7%BB%84%E5%8F%82%E8%80%83>`_，下载芯片对应的模组参考设计，里面有管脚封装设计。
+  可以在 `模组设计 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=%E6%A8%A1%E7%BB%84%E5%8F%82%E8%80%83>`_ 中下载芯片对应的模组参考设计，里面有管脚封装设计。
 
 --------------
 
 使用 ESP32-S2 芯片，用了 DVP camera 接口后还能接入语音吗？
 ------------------------------------------------------------------------------------
 
-  ESP32-S2 的 LCD 接口、DVP camera 接口和 I2S 接口共用一套硬件资源，只能支持其中一个。
+  ESP32-S2 的 LCD 接口、DVP camera 接口和 I2S 接口共用一套硬件资源，只能同时支持其中一个。
 
 --------------
 
@@ -103,10 +103,10 @@ ESP8266 电池供电有哪些要求？
 
 --------------
 
-ESP32 的外接 flash 占用了 GPIO6 ~ GPIO11，这 6 个 IO 是否还能作为 SPI 来使用？
+ESP32 的外接 flash 占用了 GPIO6 ~ GPIO11，这 6 个 GPIO 是否还能作为 SPI 来使用？
 -----------------------------------------------------------------------------------------------
 
-  ESP32 的外接 flash 占用了 GPIO6 ~ GPIO11，这 6 个 IO 就不能再作为 SPI 来使用了。
+  ESP32 的外接 flash 占用了 GPIO6 ~ GPIO11，这 6 个 GPIO 就不能再作为 SPI 来使用了。
 
 --------------
 
@@ -120,7 +120,7 @@ ESP32 的外接 flash 占用了 GPIO6 ~ GPIO11，这 6 个 IO 是否还能作为
 ESP32-D2WD 外接 PSRAM 的参考设计？
 -------------------------------------------------------------------------
 
-  建议参考 `《ESP32-PICO-D4 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32-pico-d4_datasheet_cn.pdf>`_ > 章节外围设计原理图。
+  建议参考 `《ESP32-PICO-D4 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32-pico-d4_datasheet_cn.pdf>`_ 的外围设计原理图章节。
 
   .. note:: ESP32-D2WD 是 1.8 V flash，所以 VDD_SDIO 需要加电阻和电容，并且连接 1.8 V PSRAM。
 
@@ -177,7 +177,7 @@ ESP32-LyraT 开发板扬声器接口规格？
 基于 ESP32 设计的模组，哪些管脚无法被用户使用？
 ----------------------------------------------------------------------------
 
-  - ESP32-WROOM 系列模组，IO6 ~ IO11 为 flash 管脚，作为 flash 通信使⽤，不可被用户使用。
+  - ESP32-WROOM 系列模组，GPIO6 ~ GPIO11 为 flash 管脚，作为 flash 通信使⽤，不可被用户使用。
   - ESP32-WROVER 系列模组，GPIO16 和 GPIO17 被模组 PSRAM 占⽤，不可被用户使用。
   - 此外，ESP32 有 5 个 Strapping 管脚，在使⽤时需要额外注意，具体细节请参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`__。
 
@@ -186,7 +186,7 @@ ESP32-LyraT 开发板扬声器接口规格？
 ESP32 如何使用管脚复位芯片？
 -----------------------------------------------------------------
 
-  - ESP32 的复位可使用 CHIP_PU 管脚。当 CHIP_PU 为低电平时，复位电平 (VIL_nRST) 要求足够低，并且持续一段时间。注意：该管脚不可浮空。可参见 `《ESP32 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf>`_ > 章节复位。
+  - ESP32 的复位可使用 CHIP_PU 管脚。当 CHIP_PU 为低电平时，复位电平 (VIL_nRST) 要求足够低，并且持续一段时间。注意：该管脚不可浮空。可参见 `《ESP32 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf>`_ 中的 *复位* 章节。
 
 --------------
 
@@ -197,7 +197,7 @@ ESP8266 供电设计需要注意哪些问题？
   - 电源轨去耦电容器必须接近 ESP8266 摆放，等效电阻要⾜够低。
   - ESP8266 不能直连 5 V，仅支持 3.3 V，电压范围 2.7 V ~ 3.6 V。
   - 如果是通过 DC-DC 给 ESP8266 供电，必要时要加上 LC 滤波电路。
-  - 可参考 `《ESP8266 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_cn.pdf>`_ > 章节电源。
+  - 可参考 `《ESP8266 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_cn.pdf>`_ 中的 *电源* 章节。
 
 --------------
 
@@ -215,7 +215,7 @@ ESP8266 使用 TOUT 管脚做 ADC 采样时，超过 0 V ~ 1.0 V 是否会损坏
   - 如产品采⽤模组进⾏ on-board 设计，则需注意考虑模组在底板的布局，应尽可能地减⼩底板对模组 PCB 天线性能的影响。 
   - 条件允许的情况下，建议将模组 PCB 天线区域延伸出底板板框外，并将模组尽可能地靠近底板板边放置，使天线的馈点距离板边最近。
   - 请确保模块不被任何⾦属的外壳包裹，模块 PCB 天线区域及外扩 15 mm 区域需净空（严禁铺铜、⾛线、摆放元件）。
-  - 具体说明：请阅读对应模组的 `硬件设计指南 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=&field_download_document_type_tid%5B%5D=513>`__。
+  - 具体说明请阅读对应模组的 `硬件设计指南 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=&field_download_document_type_tid%5B%5D=513>`__。
 
 ---------------
 
@@ -229,14 +229,14 @@ ESP8266 使用 TOUT 管脚做 ADC 采样时，超过 0 V ~ 1.0 V 是否会损坏
 ESP32 模组外接 32 kHz 晶振参考设计？
 ------------------------------------------
 
-  - 请参考 `《ESP32 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf>`_ > 章节 RTC 时钟（可选）。
+  - 请参考 `《ESP32 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf>`_ 中的 *RTC 时钟（可选）* 章节。
 
 --------------
 
 ESP32 模组 flash 是否支持 80 MHz 的 QIO 模式？
 --------------------------------------------------
 
-  - ESP32 模组可以同时支持 flash 模式：QIO 和 flash 速度：80 MHz。
+  - ESP32 模组可以同时支持 flash 模式，QIO 和 flash 速度为 80 MHz。
   - 使用 QIO 模式建议使用在二级 Bootloader 中开启，因为部分 flash 状态寄存器默认 QE 未置 1。
 
 ---------------
@@ -256,7 +256,7 @@ ESP32 模组 flash 是否支持 80 MHz 的 QIO 模式？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP8266 的 Pin32 EXT_RSTB 为复位管脚。此管脚内部有上拉电阻，低电平有效。为防⽌外界⼲扰引起的重启，建议 EXT_RSTB 的⾛线尽量短，并在 EXT_RSTB 管脚处增加⼀个 RC 电路。
-  - ESP8266 的 CHIP_EN 管脚也可作为硬件复位管脚，当使用 CHIP_EN 管脚作为复位管脚时，复位信号是低电平有效。复位条件为当输入电平低于 0.6 V 并持续 200 μs 以上时，ESP8266 会复位重启。我们推荐使用 CHIP_EN 管脚进行芯片复位。可参考 `《ESP8266 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_cn.pdf>`__ > 章节复位。
+  - ESP8266 的 CHIP_EN 管脚也可作为硬件复位管脚，当使用 CHIP_EN 管脚作为复位管脚时，复位信号是低电平有效。复位条件为当输入电平低于 0.6 V 并持续 200 μs 以上时，ESP8266 会复位重启。我们推荐使用 CHIP_EN 管脚进行芯片复位。可参考 `《ESP8266 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_cn.pdf>`__ 中的 *复位* 章节。
 
 --------------
 
@@ -266,7 +266,6 @@ ESP32 模组 flash 是否支持 80 MHz 的 QIO 模式？
   - NC 是 No Component 的缩写，即不上件。如下图所示，上拉电阻标有 NC，即表示该上拉电阻不上件。
 
   .. figure:: ../../_static/no-component.png
-      :align: center
       :scale: 100%
       :alt: no-component
       :figclass: align-center
@@ -383,7 +382,9 @@ ESP32 的 I2S 的 CLK 管脚必须使用 GPIO0、GPIO1 或 GPIO3 吗？
 ESP32-U4WDH 芯片是否支持外接 PSRAM 芯片？
 -----------------------------------------------------------------------------------------------------------------
 
-  支持。
+  - ESP32-U4WDH 芯片支持外接 PSRAM 芯片，但仅支持乐鑫发布的 `ESP-PSRAMXXH <https://www.espressif.com/en/support/documents/technical-documents?keys=PSRAM>`_ 芯片，不支持使用第三方 PSRAM 芯片。
+  - 硬件设计上，除了 CS 管脚外，其他所有管脚都可以与 Flash 复用，更多指南请参考 `《ESP32 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf>`_。
+  - 另外，PCB 设计时请注意 PSRAM 的 GND 到 ESP32-U4WDH 的 GND 要尽量短，否则可能会影响信号质量。
   
 ------------
 
@@ -392,7 +393,7 @@ ESP32 芯片是否支持使用 SPI0/SPI1 接口外接 SD NAND flash 来存储程
 
   - ESP32 芯片不支持使用 SPI0/SPI1（连接程序 flash）接口来外接 SD NAND flash 芯片。
   - 如果要存储外部数据，建议使用 ESP32 的 SPI2、SPI3 或 SDIO 接口来外接 NAND SD 芯片。
-  - SPI2 和 SPI3 可以使用任意 GPIO，但 SDIO 接口则只能使用指定接口，详细说明请见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ > 章节 外设管脚分配。
+  - SPI2 和 SPI3 可以使用任意 GPIO，但 SDIO 接口则只能使用指定接口，详细说明请见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中的 *外设管脚分配* 章节。
 
 -------------------
 
