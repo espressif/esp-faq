@@ -1256,3 +1256,10 @@ ESP32 的网口 (LAN8720) 与 Wi-Fi (Wifi-AP) 能否共存？
 ---------------------------------------------------------
 
   可以共存的。将两个连接的检测事件写成一个就可以实现共存。
+
+---------------
+
+ESP 模组支持 WAPI (Wireless LAN Authentication and Privacy Infrastructure) 功能吗？
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - 支持，请参考 `WIFI_AUTH_WAPI_PSK <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_auth_wapi_psk#_CPPv4N16wifi_auth_mode_t18WIFI_AUTH_WAPI_PSKE>`_。

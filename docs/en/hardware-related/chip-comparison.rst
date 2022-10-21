@@ -15,13 +15,13 @@ Chip Comparison
 
 --------------
 
-What is the difference between ESP32 with a single core and ESP32 with dual cores (programming method, feature performance, power consumption, and etc.)?
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is the difference between ESP32 with a single core and ESP32 with dual cores regarding programming method, feature performance, power consumption, and so on?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Compared with the single-core chip, the dual-core chip has one more independent core, on which some highly real-time operations can be located.
 
-  - The two chips employ the same programming method except the following step only. You have to configure FreeRTOS to make it run on the single-core chip. The configuration path is ``make menuconfig`` > ``Component config`` > ``FreeRTOS`` > ``[*] Run FreeRTOS only on first core``. However, you do not need to configure FreeRTOS manually on the dual-core chip. 
-  - The two chips have similar performance in most cases, except in high-load such as AI algorithm, high real-time interrupts. However, they present similar performance in other calculations.
+  - The two chips employ the same programming method except the following step only. For single-core chip, You have to configure FreeRTOS to make it run. The configuration path is ``make menuconfig`` > ``Component config`` > ``FreeRTOS`` > ``[*] Run FreeRTOS only on first core``. However, you do not need to configure FreeRTOS manually on the dual-core chip. 
+  - The two chips have similar performance in most cases, except in high-load such as AI algorithm and high real-time interrupts. However, they present similar performance in other calculations.
   - The dual-core chip consumes a little more power than the single-core chip in Modem-sleep mode. For more details, please refer to `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
 --------------
@@ -29,8 +29,8 @@ What is the difference between ESP32 with a single core and ESP32 with dual core
 What's the difference between ESP32 ECO V3 and previous chip versions in software and hardware?
 ---------------------------------------------------------------------------------------------------
 
-  - ESP32 ECO V3 is same with chips of previous versions in software usage, and it can be compatible with old firmwares.
-  - Some bugs have been fixed in ESP32 ECO V3. For more information on design changes, please refer to `ESP32 ECO V3 User Guide <https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__EN.pdf>`_.
+  - For software usage, there is no difference, and ESP32 ECO V3 is compatible with old firmwares. For hardware, some bugs have been fixed in ESP32 ECO V3.
+  - For more information on design changes, please refer to `ESP32 ECO V3 User Guide <https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__EN.pdf>`_.
 
 ---------------
 
@@ -83,13 +83,6 @@ Do ESP modules support Thread?
 
 ---------------
 
-Does ESP modules support WAPI (Wireless LAN Authentication and Privacy Infrastructure)?
----------------------------------------------------------------------------------------------------------------------------------
-
-  - Yes.
-
----------------
-
 Does ESP8266 support the 32 MHz crystal?
 ---------------------------------------------------
 
@@ -100,4 +93,4 @@ Does ESP8266 support the 32 MHz crystal?
 Do ESP32 modules support Zephyr?
 ----------------------------------------------------------------------------------------------------------------------------------
 
-  - Some ESP32 modules support Zephyr. For details, please refer to `Zephyr Doc <https://docs.zephyrproject.org/latest/boards/riscv/index.html>`_. This file will be continuously updated to add new products.
+  - Some ESP32 modules support Zephyr. For details, please refer to `Zephyr Doc <https://docs.zephyrproject.org/latest/boards/riscv/index.html>`_, which will be continuously updated to add new products.

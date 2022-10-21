@@ -15,21 +15,21 @@
 
 --------------
 
-ESP32 单核与双核的区别？（从编程开发⽅式、性能表现、功耗表现等⽅⾯列举⼀下）
+请从编程开发⽅式、性能表现、功耗表现等⽅⾯列举⼀下 ESP32 单核与双核的区别？
 -----------------------------------------------------------------------------------------------------
 
-  ESP32 单核与双核主要差异是多了⼀个独⽴核⼼，可以把⼀些实时性⾼的操作放在独⽴的⼀个核⼼上。
+  ESP32 单核与双核的主要差异是双核多了⼀个独⽴核⼼，可以把⼀些实时性⾼的操作放在该独⽴核⼼上。
 
-  - 编程⽅式⼀致，单核芯片需要配置 FreeRTOS 运⾏在单核上。配置路径： ``make menuconfig`` > ``Component config`` > ``FreeRTOS`` > ``[*] Run FreeRTOS only on first core``。
-  - 性能表现仅在⾼负载运算时有差异，若⽆⼤量计算差异使⽤上⽆明显差异（例如 AI 算法，⾼实时性中断）。
-  - 功耗⽅⾯仅在 Modem-sleep 模式的时候会有细微差别，详情可参考 `《ESP32 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_cn.pdf>`_。
+  - 单核与双核的编程⽅式⼀致，不过单核芯片需要配置 FreeRTOS 运⾏在单核上，双核芯片则无需此步骤。配置路径：``make menuconfig`` > ``Component config`` > ``FreeRTOS`` > ``[*] Run FreeRTOS only on first core``。
+  - 性能表现仅在⾼负载运算时有差异（例如 AI 算法，⾼实时性中断），其余使⽤上⽆明显差异。
+  - 功耗仅在 Modem-sleep 模式下会有细微差别，此时双核芯片的功耗略高于单核芯片。详情可参考 `《ESP32 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_cn.pdf>`_。
 
 --------------
 
 ESP32 ECO V3 芯⽚在软硬件使⽤上和之前版本的芯片有什么区别呢？
 ------------------------------------------------------------------------
 
-  - 软件上使⽤⽆区别，是可以兼容之前的固件的，硬件上修复了⼀些 bug。
+  - 软件上使⽤⽆区别，是兼容之前的固件的，硬件上修复了⼀些 bug。
   - 具体的设计变化可以参考⽂档 `《ESP32 ECO V3 使用指南》 <https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__CN.pdf>`_。
 
 --------------
@@ -69,24 +69,17 @@ ESP32 的 VDD3P3_RTC 是否支持单独电池供电？
 ESP32-PICO-D4 和 ESP32-PICO-V3 以及 ESP32-PICO-V3-02 有什么区别？
 -----------------------------------------------------------------------
 
-  - ESP32-PICO-V3 和 ESP32-PICO-V3-02 使用的是 ESP32 的 ECO V3 版本芯片，ESP32-PICO-D4 是 ESP32 的 V1 版本芯片。
-  - 三者芯片封装面积相同，除 flash 与 PSRAM 外，GPIO 大部分相同，ECO V3 存在部分管脚功能调整，具体细则请参考技术规格书。
+  - ESP32-PICO-V3 和 ESP32-PICO-V3-02 使用的是 ESP32 的 ECO V3 版本芯片，ESP32-PICO-D4 使用的是 ESP32 的 ECO V1 版本芯片。
+  - 三者芯片封装面积相同，除 flash 与 PSRAM 外，GPIO 大部分相同。ECO V3 存在部分管脚功能调整，具体细则请参考技术规格书。
 
 ---------------
 
 ESP 模块支持 Thread 吗？
 --------------------------------------------------------------------------------------------------------------------------------
-  :CHIP\: ESP32 | ESP32-C3 | ESP32-S3:
+  :CHIP\: ESP32, ESP32-C3, ESP32-S3:
 
   - 不支持。
-  - 目前支持 Thread 协议的是 ESP32-H2 芯片。
-
----------------
-
-ESP 模组支持 WAPI (Wireless LAN Authentication and Privacy Infrastructure) 功能吗？
---------------------------------------------------------------------------------------------------------------------------------
-
-  - 支持。
+  - 目前仅有即将发布的 ESP32-H2 芯片支持 Thread 协议。
 
 ---------------
 
