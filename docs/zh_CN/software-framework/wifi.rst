@@ -1263,3 +1263,19 @@ ESP 模组支持 WAPI (Wireless LAN Authentication and Privacy Infrastructure) �
 --------------------------------------------------------------------------------------------------------------------------------
 
   - 支持，请参考 `WIFI_AUTH_WAPI_PSK <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_auth_wapi_psk#_CPPv4N16wifi_auth_mode_t18WIFI_AUTH_WAPI_PSKE>`_。
+
+-----------------
+
+ESP32 在弱网环境或干扰环境下，Wi-Fi 连上以后获取 IP 地址比较慢如何优化？
+--------------------------------------------------------------------------------------------
+
+  - 可以在 Wi-Fi start 之后先关闭 Modem-sleep `esp_wifi_set_ps(WIFI_PS_NONE);`, 在获取到 `IP_EVENT_STA_GOT_IP` 事件后再开启 Modem-sleep。
+  - 对于断开重连情况，可以在连接之前先主动关闭 Modem-sleep, 获取到 `IP_EVENT_STA_GOT_IP` 事件后再开启 Modem-sleep。
+  - 注意：该优化对于 Wi-Fi/BT 共存场景不适用。
+
+-----------------
+
+ESP32/ESP32-S2/ESP32-S3 工作在 SoftAP 模式时，与其他厂商手机、PC 等进行通信时容易出现断连该如何优化？
+---------------------------------------------------------------------------------------------------------------------------------------
+
+  建议关闭 menuconfig 里的 ``WiFi AMPDU RX`` 和 ``WiFi AMPDU TX`` 选项。
