@@ -1256,3 +1256,19 @@ Does ESP32 support the coexistence of the network port (LAN8720) and Wi-Fi (Wifi
 -------------------------------------------------------------------------------------------------------
 
   Yes, this can be achieved by writing the detection events of both connections as one.
+
+-----------------
+
+How can I optimize ESP32's slow IP address acquisition after Wi-Fi is connected in a weak network environment or interference environment?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can disable Modem-sleep using `esp_wifi_set_ps(WIFI_PS_NONE);` after Wi-Fi start, and enable Modem-sleep after getting the event `IP_EVENT_STA_GOT_IP`.
+  - For the situation of reconnection after disconnection, you can manually disable Modem-sleep before connection, and enable it after getting the event `IP_EVENT_STA_GOT_IP`.
+  - Note: This optimization is not applicable for Wi-Fi/BT coexistence scenarios.
+
+-----------------
+
+When ESP32/ESP32-S2/ESP32-S3 series chips work in SoftAP mode, they are susceptible to disconnect from mobile phones and PCs of other manufacturers when they are communicating with each other. How can I optimize this situation?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  It is recommended to turn off ``WiFi AMPDU RX`` and ``WiFi AMPDU TX`` options in menuconfig.
