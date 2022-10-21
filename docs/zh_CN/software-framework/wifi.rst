@@ -22,8 +22,10 @@ ESP32 ESP-Now 模式下一对一的通信速率是多少？
 
   - 测试样板：ESP32_Core_board_V2。
   - Wi-Fi 模式：station 模式。
+  - 物理层速率默认为 1 Mbps。
   - open 环境下大约是 214 Kbps。
   - 屏蔽箱内测试大约是 555 Kbps。
+  - 如果想要更高速率，可以通过 `esp_wifi_config_espnow_rate <https://github.com/espressif/esp-idf/blob/6cfa88ed49b7d1209732347dae55578f4a679c98/components/esp_wifi/include/esp_now.h#L244>`_ 进行配置。
 
 --------------
 
@@ -185,13 +187,13 @@ Wi-Fi 信道是什么？可以自行选择信道吗？
 
 --------------
 
-ESP8266/ESP32/ESP32-S2 是否支持 web/softAP 配网？
--------------------------------------------------------
+ESP8266/ESP32/ESP32-S2/S3/C2/C3 是否支持 web/softAP 配网？
+-----------------------------------------------------------------
 
   支持。
 
   - ESP8266 请参考此示例 `ESP8266 softap_prov <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/provisioning/legacy/softap_prov>`_；
-  - ESP32/ESP32-S2 请参考此示例 `ESP32/ESP32-S2 wifi_prov_mgr <https://github.com/espressif/esp-idf/tree/master/examples/provisioning/wifi_prov_mgr>`_。
+  - ESP32/ESP32-S2/S3/C2/C3 请参考此示例 `ESP32/ESP32-S2/S3/C2/C3 wifi_prov_mgr <https://github.com/espressif/esp-idf/tree/master/examples/provisioning/wifi_prov_mgr>`_。
 
 --------------
 
@@ -612,7 +614,8 @@ ESP32 如何自定义 hostname？
 如何获取 802.11 无线数据包？
 -----------------------------------
 
-  可以参考 ESP-IDF 编程文档中的 `Wireshark 使用指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wireshark-user-guide.html>`_ 。
+  - 可以参考 ESP-IDF 编程文档中的 `Wireshark 使用指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wireshark-user-guide.html>`_ 。
+  - 需要注意的是，所使用的无线网卡需要支持 Monitor 模式。
 
 --------------
 
@@ -970,10 +973,10 @@ Wi-Fi 连接失败时产生的错误码代表什么?
 
 -------------
 
-ESP32-S2 芯片，Wi-Fi 通信的最大速度是多少？
+ESP32-S2 芯片，Wi-Fi 通信的物理层最大速率是多少？
 ------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32-S2 Wi-Fi 通信的理论最大速度 为 150 Mbps。
+  - ESP32-S2 Wi-Fi 通信的物理层最大速率为 150 Mbps。
   
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
