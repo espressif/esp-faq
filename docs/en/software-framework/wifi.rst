@@ -22,8 +22,10 @@ What is the one-to-one bit rate for ESP32 in ESP-NOW mode？
 
   - Test board: ESP32_Core_board_V2.
   - Wi-Fi mode: station.
+  - PHY rate is 1 Mbps by default.
   - Around 214 Kbps in opened environment.
   - Around 555 Kbps in shielding box.
+  - If you require a higher rate, please configure by `esp_wifi_config_espnow_rate <https://github.com/espressif/esp-idf/blob/6cfa88ed49b7d1209732347dae55578f4a679c98/components/esp_wifi/include/esp_now.h#L244>`_.
 
 --------------
 
@@ -185,13 +187,13 @@ What is the definition for Wi-Fi channel? Can I select any channel of my choice?
 
 --------------
 
-Do ESP8266/ESP32/ESP32-S2 support web/SoftAP provisioning?
----------------------------------------------------------------------------
+Do ESP8266/ESP32/ESP32-S2/S3/C2/C3 support web/SoftAP provisioning?
+-----------------------------------------------------------------------------------------
 
   Yes.
 
   - For ESP8266, please refer to example `ESP8266 softap_prov <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/provisioning/legacy/softap_prov>`_.
-  - For ESP32/ESP32-S2, please refer to example `ESP32/ESP32-S2 wifi_prov_mgr <https://github.com/espressif/esp-idf/tree/master/examples/provisioning/wifi_prov_mgr>`_.
+  - For ESP32/ESP32-S2/S3/C2/C3, please refer to example `ESP32/ESP32-S2/S3/C2/C3 wifi_prov_mgr <https://github.com/espressif/esp-idf/tree/master/examples/provisioning/wifi_prov_mgr>`_.
 
 --------------
 
@@ -612,7 +614,8 @@ How to customize the hostname for ESP32？
 How to obtain 802.11 Wi-Fi packets？
 ----------------------------------------
 
-  Please refer to `Wireshark User Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html>`_ in ESP-IDF Programming Guide.
+  - Please refer to `Wireshark User Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html>`_ in ESP-IDF Programming Guide.
+  - Please note that the wireless network interface controller (WNIC) that you use should support the Monitor mode.
 
 --------------
 
@@ -970,10 +973,10 @@ When using ESP32's Release/v3.3 of SDK to download the Station example, the devi
 
 ------------------
 
-What is the maximum speed of Wi-Fi communication of ESP32-S2 chip?
+What is the maximum PHY rate of Wi-Fi communication of ESP32-S2 chip?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The theoretical maximum speed of ESP32-S2 Wi-Fi communication is 150 Mbps.
+  - The theoretical maximum PHY rate of ESP32-S2 Wi-Fi communication is 150 Mbps.
   
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
