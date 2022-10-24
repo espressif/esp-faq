@@ -12,5 +12,3 @@ Hardware related
    RF related <RF-related>
    Process and ESD <process-and-ESD>
    Production test <production-test>
-
-| Espressif Q & A.
