@@ -314,3 +314,10 @@ When I downloaded the official application hello_world using ESP32-S3-DevKitM-1,
 
   - The current error may be related to the chip version on the development board or to the fact that the software version of the esp-idf SDK is not the official production version. The chip (ROM) bootloader expects the chip ID is 9, which is the production version of the chip (not a test version). However, in the secondary bootloader header, it sees the chip ID is 4, which is the beta version of the chip. Please refer to the description in `esp-idf/issues/7960 <https://github.com/espressif/esp-idf/issues/7960>`_ . 
   - The actual version of the chip can be obtained by the command ``esptool.py chip_id``. If the chip version is the production version, this error is related to the version of the used esp-idf SDK. For ESP32-S3 series products, esp-idf release/v4.4 and later are necessary.
+
+----------------
+
+What is the accuracy of the internal 150 kHz RTC of ESP32 series chips?
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The accuracy of the internal 150 kHz RTC of ESP32 series chips is ±5%.
