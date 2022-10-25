@@ -277,3 +277,10 @@ ESP32 是否支持在连上路由后使用上一次成功连接路由器时的 I
 
   - 支持，可以在 menuconfig 里使能 ``Component config`` > ``LWIP ->DHCP: Restore last IP obtained from DHCP server`` 选项。
   - 需要注意的是，此时不能用静态 IP 来代替，因为静态 IP 设置没有冲突检测，可能会导致 IP 冲突。
+
+-----------------
+
+使用 socket 编程时，如何实现 connect 超时？
+------------------------------------------------------------------------------------------------------------------
+
+  - 将 socket 设置为非阻塞模式，connect() 函数也会是非阻塞，之后通过 select() 函数设置超时时间来判断 socket 是否连接成功，详细操作可参考 `“socket 连接超时设置” <https://blog.csdn.net/wy5761/article/details/17695349>`_。
