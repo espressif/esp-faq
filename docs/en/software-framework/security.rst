@@ -175,3 +175,10 @@ After I enabled secure boot or flash encryption (development mode), I cannot fla
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Generally, the above log indicates that your flash command is incorrect. Please use script ``idf.py`` to execute ``idf.py bootloader`` and ``idf.py app`` to compile ``bootloader.bin`` and ``app.bin``. Then execute the flash command through ``idf.py`` according to the tips after compiling. If you still cannot flash your firmware, please use ``espefuse.py -p PORT summary`` to check the eFuse of the current device and check whether the flash download mode is enabled or not.
+
+----------------------
+
+After I input the command ``espefuse.py read_protect_efuse BLOCK3 command`` in the terminal configured with ESP-IDF to enable the read-protection for Efuse BLOCK3, why is the data of the Efuse BLOCK3 all 0x00 when I input ``esp_efuse_read_block()`` to read the Efuse BLOCK3?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - After the Efuse BLOCK3 is read protected, it cannot be read anymore.
