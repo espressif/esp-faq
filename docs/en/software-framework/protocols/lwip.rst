@@ -277,3 +277,10 @@ Can ESP32 use the IP of the previous successful connection for communication aft
 
   - Yes, if you enable ``Component config`` -> ``LWIP ->DHCP: Restore last IP obtained from DHCP server`` option in menuconfig.
   - Note that you cannot use a static IP instead, because static IP settings do not have conflict detection. It may lead to IP conflict.
+
+----------------
+
+How do I achieve connect_timeout when programming with sockets?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  -  If you set the socket to the non-blocking mode, the connect() function will also be non-blocking. Then you can set the timeout by the select() function to determine whether the socket is connected successfully or not. For details, please refer to `"connect_timeout settings of sockets" <https://blog.csdn.net/wy5761/article/details/17695349>`_.
