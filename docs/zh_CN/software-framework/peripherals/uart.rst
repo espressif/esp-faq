@@ -36,8 +36,8 @@ UART 控制器
 ESP32 IDF 中如何使能 UART 流控？
 ----------------------------------------------
 
-  - 硬件流控使能：`uart-flow-control <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#multiple-steps>`_。
-  - 软件流控使能：`software-flow-control <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#software-flow-control>`_。
+  - 硬件流控使能： `uart-flow-control <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#multiple-steps>`_。
+  - 软件流控使能： `software-flow-control <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#software-flow-control>`_。
 
 --------------
 
@@ -52,7 +52,7 @@ ESP32 使用 UART0 作为通信串口，有哪些需要注意的地方？
     - 第一处是上电 ROM 打印，上电时可将 MTDO 管脚设为低电平屏蔽上电 ROM 打印。
     - 第二处是引导加载程序日志信息输出，您可以将 ``menuconfig`` -> ``Bootloader config`` -> ``Bootloader log verbosity`` 设置为 ``No output`` 来屏蔽引导加载程序日志输出。
     - 第三处是应用日志输出，您可以将 ``menuconfig`` -> ``Component config`` -> ``Log output`` -> ``Default log verbosity`` 设置为 ``No output`` 来屏蔽应用日志输出。
-    
+
   **硬件方面**：
 
     - 在下载程序的时候，注意防止 UART0 上有其它设备，如果有其它设备可能会影响程序的下载。建议在 ESP32 和其它设备之间预留一个 0 Ω 电阻，如果下载有问题可以断开这个 0 Ω 电阻。
@@ -63,13 +63,13 @@ ESP32-SOLO-1 的 GPIO34 ～ GPIO39 是否可作为 UART 的 RX 及 TWAI® 的 RX
 --------------------------------------------------------------------------------------------------------
 
   GPIO34 ～ GPIO39 仅作为接收，可作为 UART 的 RX 及 TWAI 的 RX 信号管脚。
-  
+
 ---------------
 
 使用 ESP32 如何动态修改串口波特率并立即生效？
 ---------------------------------------------------------------
 
-  请使用 ``uart_set_baudrate()`` API 来修改 UART 波特率。参见 `API 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_get_baudrate11uart_port_tP8uint32_t>`_。
+  请使用 ``uart_set_baudrate()`` API 来修改 UART 波特率。参见 `API 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_set_baudrate11uart_port_t8uint32_t>`_。
 
 -------------------------------
 
@@ -84,7 +84,7 @@ ESP32 芯片的串口校验支持 ＭARK 和 SPACE 校验吗？
 --------------------------------------------------------------------------------------------------------------------------------------------
 
   ESP32 芯片不支持。
-    
+
 -----------------------
 
 ESP8266 串口的硬件 FIFO 是多大？

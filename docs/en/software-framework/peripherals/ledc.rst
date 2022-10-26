@@ -22,17 +22,10 @@ What is the frequency range for ESP8266 PWM?
 
 --------------
 
-Are there any limits on outputting PWM via ESP32 GPIO pins?
-------------------------------------------------------------------------------------------
+Are there any limits on outputting PWM via ESP32 GPIO pins? Can I distribute it to any I/O?
+--------------------------------------------------------------------------------------------------------
 
-  The ESP32 can output PWM using any GPIO switched via IO Matrix except for GPIO34 ~ GPIO39, which are used for input only.
-
---------------
-
-Can I distribute the ESP32 PWM to any I/O?
--------------------------------------------------------------------
-
-  - Theoretically, the PWM can be distributed to any I/Os except for those that only have input functions (e.g., GPIO34 ~ GPIO39).
+  - The ESP32 can output PWM using any GPIO via IO Matrix. Theoretically, the PWM can be distributed to any I/O except for those that only have input functions (e.g., GPIO34 ~ GPIO39).
   - In the actual use, this could also be affected by the limitations of chips and modules, the un-pinned I/Os, flash occupations and etc.
 
 --------------
@@ -81,4 +74,5 @@ I'm using v3.3.3 version of ESP-IDF to test the ledc example on ESP32. The LED P
 Does ESP32 PWM support complementary outputs with dead bands on two channels?
 ------------------------------------------------------------------------------------------------------------
 
-  This feature is not supported by LED PWM but by the MCPWM peripheral.
+  - This feature is not supported by LEDC but by the MCPWM peripheral.
+  - By measurement, ESP32-S3 can generate complementary output waveforms with the frequency of 10 k, the duty cycle accuracy of 1 us and the dead band accuracy of 100 ns by MCPWM.

@@ -18,7 +18,9 @@ Secure Digital Input Output (SDIO)
 What is the maximum speed supported by the SDIO interface?
 -------------------------------------------------------------------------
 
-  The maximum clock speed supported by the hardware SDIO slave module is 50 MHz. As SDIO specifies use of quad data lines, the effective maximum bit rate is 200 Mbps.
+  - The maximum clock speed supported by ESP32 SDIO is 50 MHz, and ESP32 SDIO supports the Quad mode at the maximum.
+  - The maximum clock speed supported by ESP32-S3 SDIO is 80 MHz, and ESP32-S3 SDIO supports the Octal mode at the maximum.
+  - The practical speed is influenced by the read and write speed of storage media at the same time.
 
 --------------
 

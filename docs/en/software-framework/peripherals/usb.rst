@@ -19,14 +19,17 @@ Does ESP32 support USB function?
 ---------------------------------------------------
 
   - No, ESP32 does not support USB function.
-  - However, ESP32-S2 supports USB1.1.
+  - However, ESP32-S2/S3 supports USB2.0 Full-speed mode.
 
 ---------------
 
 Does the ESP-IDF SDK USB interface support HID and MSC modes?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Our SDK will provide examples of HID and MSC classes in the future. And specific device classes need to be implemented by yourselves referring to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__.
+  - ESP32S2/S3 can be used as MSC Host to support reading from or writing to storage devices such as USB flash disks. For details, please refer to `esp-idf <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/msc>`__.
+  - ESP32S2/S3 can be used as MSC Device to simulate storage of USB flash disks. For details, please refer to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__.
+  - ESP32S2/S3 does not support HID Host currently.
+  - ESP32S2/S3 can be used as HID Device. For details, please refer to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__.
 
 -------------------------
 
@@ -47,35 +50,35 @@ Does ESP32-S3's USB peripheral supports USB Host?
 Does ESP32-C3 USB support USB serial port function and USB JTAG function? 
 ---------------------------------------------------------------------------------------------------------------------
 
-  Yes.
+  Yes, but you cannot define the descriptor by yourself.
 
 ---------------
 
 What are the USB features of ESP32-S2 and ESP32-S3? 
 --------------------------------------------------------------------------------------------------------------------------------
 
-  ESP32-S3 and ESP32-S2 support USB 1.1 OTG, and both support Host and Device functions. On top of that, ESP32-S3 also supports USB-Serial-JTAG peripheral, which can be used to download and debug firmware.
+  ESP32-S3 and ESP32-S2 support USB 2.0 OTG, and both support Host and Device functions. On top of that, ESP32-S3 also supports USB-Serial-JTAG peripheral, which can be used to download and debug firmware.
  
 ---------------
 
 Are there any references to the library and demo of ESP32-S2 USB Host? 
 --------------------------------------------------------------------------------------------------------------------------
 
-  This part is already under internal development. If you want to do some functional verification first, please refer to the `USB example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`_ in esp-iot-solution.
+  Please refer to `USB Host <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/api-reference/peripherals/usb_host.html>`_ in ESP-IDF.
 
 ---------------
 
 The USB protocol supported by ESP32-S2 is OTG 1.1, with the maximum speed of 12 Mbps. Can it communicate with USB 2.0 devices?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Most USB 2.0 devices can backward compatible with USB 1.1, so they can communicate with USB 1.1 (in full speed mode).
+  In the full speed mode, USB 2.0 devices are compatible with USB 1.1 devices, so they can communicate with each other.
   
 ---------------
 
 Does ESP32-S2 support USB camera?
 ------------------------------------------------------------------------
 
-  Yes, but currently ESP32S2 only supports USB 1.1. So please choose the camera which is compatible with USB 1.1. For demo code, please refer to example `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_.
+  Yes. For demo code, please refer to example `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_.
 
 ---------------
 
@@ -161,4 +164,3 @@ Can ESP32-S3 use an external USB hub chip with two of its USB ports connecting t
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The ESP32-S3 USB does not support connection to an external USB hub chip currently because there is no driver support.
-  

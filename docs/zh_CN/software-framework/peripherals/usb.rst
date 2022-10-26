@@ -19,14 +19,17 @@ ESP32 是否支持 USB 功能？
 --------------------------------------
 
   - ESP32 不支持 USB 功能。
-  - ESP32-S2 支持 USB1.1。
+  - ESP32-S2/S3 支持 USB2.0 Full-speed 模式。
 
 ---------------
 
 ESP-IDF SDK USB 接口支持 HID、MSC 这些模式吗？
 -----------------------------------------------------------------------------------------------------------
 
-  SDK 后续会提供 HID、MSC 类作为例程，具体的设备类需要用户自行实现，可参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__。
+  - ESP32S2/S3 可作为 MSC 主机，支持读写 U 盘等存储设备，可参考 `esp-idf <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/msc>`__。
+  - ESP32S2/S3 可作为 MSC 设备，模拟 U 盘存储，可参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__。
+  - ESP32S2/S3 HID 主机暂时未支持。
+  - ESP32S2/S3 HID 设备类可参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__。
 
 ----------------
 
@@ -47,35 +50,35 @@ ESP32-S3 的 USB 支持 USB 主机吗？
 ESP32-C3 USB 支持 USB 串口功能和 USB JTAG 功能吗？
 ---------------------------------------------------------------------------------------------------------------------
 
-  支持。
+  支持，但无法自定义描述符。
 
 ---------------
 
 ESP32-S2 和 ESP32-S3 USB 的特征是？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  ESP32-S3 和 ESP32-S2 具有相同的 USB 1.1 OTG 外设，可支持 USB 主机和 USB 设备功能。除此以外，ESP32-S3 还支持 USB-Serial-JTAG 专用外设，可用于固件下载和调试。
+  ESP32-S3 和 ESP32-S2 具有相同的 USB 2.0 OTG 外设，可支持 USB 主机和 USB 设备功能。除此以外，ESP32-S3 还支持 USB-Serial-JTAG 专用外设，可用于固件下载和调试。
 
 ---------------
 
 ESP32-S2 USB 主机的库和例程是否有参考？
 --------------------------------------------------------------------------------------------------------------------------
 
-  这部分已经在内部开发中，如果想预先完成部分功能验证，可参考 esp-iot-solution 的 `USB 示例程序 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`_。
+  可参考 ESP-IDF 的 `USB Host 驱动 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-reference/peripherals/usb_host.html>`_。
 
 ---------------
 
 ESP32-S2 支持的 USB 协议是 OTG 1.1，速度最高是 12 Mbps。能和 USB 2.0 设备通信吗？
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
-  大部分 USB 2.0 的设备能向下兼容 USB 1.1，所以能以 USB 1.1 进行通信（full speed 模式下）。
+  USB 2.0 和 USB 1.1 full-speed 模式兼容，可以进行通信。
 
 ---------------
 
 ESP32-S2 支持 USB 摄像头吗？
 ----------------------------------------------------------------
 
-  支持，但是目前 ESP32-S2 仅支持到 USB 1.1。所以需要购买兼容 USB 1.1 的摄像头。示例代码请参考 `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_。
+  支持。示例代码请参考 `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_。
   
 ---------------
 

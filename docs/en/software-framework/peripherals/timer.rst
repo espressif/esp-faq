@@ -30,5 +30,5 @@ What should I pay attention to when using the HW timer interrupt with ESP8266?
 How to set interrupt priority for timers?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - esp_timer is implemented based on task, so interrupt priority cannot be configured.
-  - timer_group can have interrupt priority by modifying the last parameter of the `timer_isr_callback_add <https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32/api-reference/peripherals/timer.html#_CPPv422timer_isr_callback_add13timer_group_t11timer_idx_t11timer_isr_tPvi>`_ interface.
+  - Only with the chip of ESP32, esp_timer can set the interrupt priority by modifying `CONFIG_ESP_TIMER_INTERRUPT_LEVEL <https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32/api-reference/kconfig.html#config-esp-timer-interrupt-level>`_.
+  - General Purpose Timer can set the interrupt priority by modifying the last parameter of the interface `timer_isr_callback_add <https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32/api-reference/peripherals/timer.html#_CPPv422timer_isr_callback_add13timer_group_t11timer_idx_t11timer_isr_tPvi>`_.

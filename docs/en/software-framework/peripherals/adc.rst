@@ -15,10 +15,10 @@ Analog-to-Digital Converter (ADC)
 
 --------------
 
-How is the accuracy of ESP8266 ADC?
+What is the resolution of ESP8266 ADC?
 ----------------------------------------------------------
 
-  - The ESP8266 ADC is 10 bits, and its theoretical accuracy is 2 :sup:`10` = 1024.
+  - The 10-bit ESP8266 ADC has a theoretical resolution of 2 :sup:`10` = 1024.
   - After connected to a router, the ESP8266 will enter Modem-sleep mode from STA mode, causing the change of the reference value inside the chip. Therefore, the ADC could measure the data change.
   - If you expect an accurate result, please read the ADC value using function ``system_adc_fast_read`` after turning off Wi-Fi.
 
@@ -35,7 +35,7 @@ How many channels does ESP32 ADC have? What is the sampling rate and significant
 ---------------------------------------------------------------------------------------------------------------
 
   - The ESP32 ADC has 18 channels.
-  - Its sampling rate can reach 100000 times per second without Wi-Fi.
+  - If you stop Wi-Fi and use ADC DMA, the sampling rate does not exceed 2 MHz theoretically. However, we recommend you to use a smaller sampling rate in practice.
   - Its sampling rate can reach 1000 times per second with Wi-Fi.
   - The internal significant digit of ADC is 12 bits.
 
@@ -57,7 +57,7 @@ When calling the API ``adc_read_fast()`` with ESP8266, will it cause a Wi-Fi dis
 If I float the ADC pin and print out VDD3P3 value (65535), then the voltage of VDD3P3 should be 65535/1024 ≈ 63 V. Why this is not the correct voltage value?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  ADC input range cannot reach 3.3 V. See `ADC Attenuation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc.html#adc-attenuation>`__ for details.
+  The input of ADC should be in the range of 0 V to 3.3 V (the upper limit varies in different chips). The floating measurement is an undefined state.
 
 ---------------
 
@@ -71,7 +71,7 @@ What is the input resistance of ESP32 ADC?
 When using ESP32's ADC to detect the power supply voltage, is it necessary to divide the voltage?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  The ADC reference voltage of ESP32 is 1100 mV, but the ADC measurable range can be increased by internal attenuation. For more information on the measurable range, please refer to `ADC Attenuation <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/adc.html#adc-attenuation>`__. If it exceeds the range, voltage division is required.
+  The ADC reference voltage of ESP32 is 1100 mV, but the ADC measurable range can be increased by configuring the internal attenuation. For more information on the measurable range, please refer to `ADC Section <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__ in the chip datasheet. If the measurable range cannot satisfy your requirement, please add an external voltage division circuit.
 
 -----------------
 
@@ -85,7 +85,7 @@ What is ESP32's highest sampling rate in ADC DMA mode?
 When an ESP32 calling ``adc2_get_raw()`` between ``esp_wifi_start()`` and ``esp_wifi_stop()``, the read operation fails. What is the reason?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Because ADC2 is shared with the Wi-Fi module. The Wi-Fi driver uses ADC2 and has higher priority. Therefore, the application can only use ADC2 when the Wi-Fi driver is not activated.
+  Since Wi-Fi also requires the use of ADC2, and the Wi-Fi driver has a higher priority. Therefore, the application can only use ADC2 when the Wi-Fi driver is closed.
 
 ---------------
 

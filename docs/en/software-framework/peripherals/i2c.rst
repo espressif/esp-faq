@@ -33,3 +33,14 @@ When the I2C of the ESP32 series chip is operating (especially in fast mode), sp
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The spike on the data line at the 8th/9th clocks is caused by the I2C master-slave control handover. It is a normal phenomenon and is mentioned in the I2C protocol.
+
+------------------------
+
+How can I realize data are received by ESP32 series chips, which are used as the I2C master, only after these data are processed by the slave? For example, when ESP32 chips read data through ``i2c_master_read_to_device``, the slave should return data immediately after receiving the command. However, some slave devices wait for a while to return data after receiving the command.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This can be realized by dividing ``i2c_master_read_device`` into the following three steps:
+
+    1. Input commands and address: ``i2c_cmd_link_create_static`` > ``i2c_master_start`` > ``i2c_master_write_byte`` > ``i2c_master_cmd_begin`` > ``i2c_cmd_link_delete_static``
+    2. Delay
+    3. Read data of the slave: ``i2c_cmd_link_create_static`` > ``i2c_master_read`` > ``i2c_master_stop`` > ``i2c_master_cmd_begin`` > ``i2c_cmd_link_delete_static``
