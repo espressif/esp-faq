@@ -22,20 +22,20 @@ ESP32 管脚配置需要注意什么？
 
   WROOM-32/32D/32U 系列共有 26 个 管脚可供客户使用，注意事项如下：
 
-  - GPIO6 ～ GPIO11 被内置 flash 占用，不可用做它用； 
+  - GPIO6 ～ GPIO11 被内置 flash 占用，不可用做它用；
   - GPIO34、35、36 和 39 为输入管脚，不具备输出能力；
   - ESP32 内置 GPIO 矩阵，部分外设接口可以配置到任意空闲管脚上。即硬件设计时，不需要严格将某些功能固定在某些管脚上。
 
   详细信息可以参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中表格 9 的内容。
 
-  WROVER／WROVER-I／WROVER-B／WROVER-IB 共有 24 个管脚可供客户使用，注意事项如下： 
+  WROVER／WROVER-I／WROVER-B／WROVER-IB 共有 24 个管脚可供客户使用，注意事项如下：
 
-  - GPIO6 ～ GPIO11 被内置 flash 占用，不可用做它用； 
+  - GPIO6 ～ GPIO11 被内置 flash 占用，不可用做它用；
   - GPIO34、35、36 和 39 为输入管脚，不具备输出能力；
   - WROVER 系列模组中，GPIO12 由于在模组内部被上拉，不建议用做触摸传感功能；
   - ESP32 内置 GPIO 矩阵，部分外设接口可以配置到任意空闲管脚上。即硬件设计时，不需要严格将某些功能固定在某些管脚上。
 
-  详细信息可以参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中表格 9 的内容。 
+  详细信息可以参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中表格 9 的内容。
 
   ESP32 有 3 组 UART，但下载只可使用 UART0，且管脚固定。
 
@@ -94,7 +94,7 @@ ESP32 如果多个 GPIO 管脚配置了沿中断，则硬件可能⽆法正确�
         3. CPU 的中断服务响应后，把 GPIO 的中断类型改为⾼。此时会发⽣第⼆次中断，需要 CPU 忽略这次中断服务程序。
 
   - 解决⽅法 2：
-  
+
     假设 GPIO0 ~ GPIO31 为 Group1，GPIO32 ~ GPIO39 为 Group2，则：
 
     - ⼀个 group 中同时只能有⼀个沿中断；如果有⼀个沿中断，则不能有电平中断。
@@ -105,7 +105,7 @@ ESP32 如果多个 GPIO 管脚配置了沿中断，则硬件可能⽆法正确�
 使用 ESP-WROOM-02D 模组，GPIO0、GPIO15、GPIO1 和 GPIO3 是否可作为普通 GPIO 使用?
 ----------------------------------------------------------------------------------------------------------------------------------
 
-  - Strapping 管脚（GPIO0 和 GPIO15）和下载管脚（GPIO1 和 GPIO3）可以作为普通 GPIO 使用。 
+  - Strapping 管脚（GPIO0 和 GPIO15）和下载管脚（GPIO1 和 GPIO3）可以作为普通 GPIO 使用。
   - 使用 Strapping 管脚作为普通 GPIO 使用时，在 flash 下载模式时需要注意 Strapping 管脚电平的要求。
 
 ---------------
@@ -130,3 +130,10 @@ ESP-IDF 里是否能设置 GPIO 的驱动强度？
 ------------------------------------------------------------
 
   可以。请使用 `API gpio_set_drive_capability <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/gpio.html#_CPPv425gpio_set_drive_capability10gpio_num_t16gpio_drive_cap_t>`_ 来设置 GPIO 驱动强度。
+
+---------------
+
+ESP32 使用 `gpio_install_isr_service() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv424gpio_install_isr_servicei>`_ 初始化新的 GPIO 中断服务时返回 `ESP_ERR_NOT_FOUND`，可能是什么原因？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  这个错误通常代表 ESP32 的可用中断源不够用，此时应该同时有多个外设在同时占用中断源，可尝试减少其他组件的中断源使用个数来初始化新的 GPIO 中断。

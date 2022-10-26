@@ -52,7 +52,7 @@ When using UART0 as a serial communication port for ESP32, what should I pay att
     - First, power-on ROM print. You can set the MTDO pin as low level when powered on to block the power-on ROM print.
     - Second, bootloader log output. You can set ``menuconfig`` -> ``Bootloader config`` -> ``Bootloader log verbosity`` as ``Not output`` to block bootloader log output.
     - Third, app log output. You can set ``menuconfig`` -> ``Component config`` -> ``Log output`` -> ``Default log verbosity`` as ``Not output`` to block app log output.
-    
+
   **Hardware**:
 
     - Pay attention to other devices on UART0 when downloading programs since they could affect downloading. It is recommended to reserve a 0 Ω resistance between ESP32 and other devices so that if there is something wrong while downloading, you can still disconnect this resistance.
@@ -63,13 +63,13 @@ Is it possible to use GPIO34 ～ GPIO39 from ESP32-SOLO-1 as the RX signal pin f
 -----------------------------------------------------------------------------------------------------------------------------
 
   Yes, GPIO34 ～ GPIO39 are for receive only and can be used as the RX signal pins for UART and TWAI®.
-  
+
 ---------------
 
 How to dynamically change the serial baud rate and make it take effect immediately with ESP32?
 ------------------------------------------------------------------------------------------------------------------------------
 
-  Please use the API ``uart_set_baudrate()`` to change the baud rate of UART. Please see `API Reference <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_get_baudrate11uart_port_tP8uint32_t>`_.
+  Please use the API ``uart_set_baudrate()`` to change the baud rate of UART. Please see `API Reference <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_set_baudrate11uart_port_t8uint32_t>`_.
 
 --------------
 
@@ -84,7 +84,7 @@ Does the serial port verification of the ESP32 chip support MARK and SPACE verif
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   No.
-  
+
 ----------------------------
 
 What is the size of the hardware FIFO in ESP8266's serial port?

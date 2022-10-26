@@ -130,3 +130,10 @@ Is it possible to set the drive capability of the GPIO in ESP-IDF?
 --------------------------------------------------------------------------------------------------------
 
   Yes. Please use `API gpio_set_drive_capability <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv425gpio_set_drive_capability10gpio_num_t16gpio_drive_cap_t>`_ to set the GPIO drive capability.
+
+------------------------
+
+When ESP32 uses `gpio_install_isr_service() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html#_CPPv424gpio_install_isr_servicei>`_ to attach a new interrupt service routine on GPIO, why does it return `ESP_ERR_NOT_FOUND`?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Generally, this error means that ESP32 does not have enough available interrupt sources. In this case, there are multiple peripherals occupying the interrupt sources at the same time. You can try to reduce the interrupt sources used by other components to attach new GPIO interrupts.
