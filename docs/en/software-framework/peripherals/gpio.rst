@@ -79,26 +79,7 @@ When certain RTC peripherals (SARADC1, SARADC2, AMP, HALL) are powered on, the i
 The ESP32 GPIO peripheral may not trigger interrupts correctly if multiple GPIO pads are configured with edge-triggered interrupts. How to resolve such issue?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Solution 1: 
-
-    - Follow the steps below to trigger a GPIO interrupt on a rising edge: 
-
-      1. Set the GPIO interrupt type to high.
-      2. Set the interrupt trigger type of the CPU to edge. 
-      3. After the CPU services the interrupt, change the GPIO interrupt type to low. A second interrupt occurs at this time, and the CPU needs to ignore the interrupt service routine. 
-
-    - Similarly, follow the steps below to trigger a GPIO interrupt on a falling edge: 
-
-      1. Set the GPIO interrupt type to low.
-      2. Set the interrupt trigger type of the CPU to edge.
-      3. After the CPU services the interrupt, change the GPIO interrupt type to high. A second interrupt occurs at this time, and the CPU needs to ignore the interrupt service routine.
-
-  - Solution 2: 
-
-    Assuming GPIO0 ~ GPIO31 is Group1 and GPIO32 ~ GPIO39 is Group2. 
-
-      - If an edge-triggered interrupt is configured in either group then no other GPIO interrupt of any type should be configured in the same group.
-      - Any number of level-triggered interrupts can be configured in a single group, if no edge-triggered interrupts are configured in that group. 
+  - Please search for this question and its answer in `ESP32 Series SoC Errata <https://www.espressif.com/sites/default/files/documentation/esp32_errata_en.pdf>`_.
 
 -----------------------
 
