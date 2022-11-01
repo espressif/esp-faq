@@ -284,3 +284,11 @@ How do I achieve connect_timeout when programming with sockets?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   -  If you set the socket to the non-blocking mode, the connect() function will also be non-blocking. Then you can set the timeout by the select() function to determine whether the socket is connected successfully or not. For details, please refer to `"connect_timeout settings of sockets" <https://blog.csdn.net/wy5761/article/details/17695349>`_.
+
+----------------
+
+When ESP32 uses SNTP to synchronize the current time, I found that there is a random delay. After further analysis, I found that it is caused by ``SNTP_STARTUP_DELAY`` in the IDF lwip component, the default value of which is 1. Is there any way to avoid the random delay without modifying the IDF component?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - There is no way to avoid the random delay without modifying the IDF component. You need to manually add the code ``#define SNTP_STARTUP_DELAY 0`` to lwipopts.h in the lwip component. This code reduces the time that SNTP takes to send a request, so it can reduce the total time for ESP devices connecting to the cloud after they are powered up as a result.
+  - The reason for enabling this random delay option by default is that it is mandated by the SNTP RFC protocol. A random delay can reduce the number of simultaneous accessing devices, so this can prevent the SNTP server from being overloaded.
