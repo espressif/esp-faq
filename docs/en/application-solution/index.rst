@@ -12,6 +12,7 @@ application solution
    BLE Mesh development framework <ble-mesh-development-framework>
    Audio development framework <audio-development-framework>
    Third party cloud service <third-party-cloud-service>
+   ESP Matter <esp-matter>
    ESP RainMaker cloud service <esp-rainmaker-cloud-service>
    Community sw and platforms  <community-sw-and-platforms>
    iOS application  <ios-application>
