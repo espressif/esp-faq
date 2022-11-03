@@ -404,3 +404,10 @@ Does it support to connect a second PSRAM chip externally based on the ESP32-S3R
     
     - The PSRAM chip is connected to the MSPI bus. There are only two CS signals from the MSPI peripheral, one is connected to the flash, another is connected to the PSRAM.
     - CPU accesses external memory via cache and MSPI. A GPSPI peripheral is not accessible cache.
+
+----------------
+
+Could you please provide the 3D model and Footprint files of the ESP32-S3-WROOM-1 module?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The 3D models and Footprint files for the modules are available under the `espressif/kicad-libraries <https://github.com/espressif/kicad-libraries>`_ library.

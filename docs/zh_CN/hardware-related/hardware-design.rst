@@ -404,3 +404,10 @@ ESP32 芯片是否支持使用 SPI0/SPI1 接口外接 SD NAND flash 来存储程
 
     - PSRAM 芯片与 MSPI 总线相连。MSPI 外设只有两个 CS 信号，一个与 flash 相连，另一个则与 PSRAM 相连。
     - CPU 通过 cache 和 MSPI 访问外部存储器。GPSPI 外设是不能被 cache 访问的。
+
+----------------
+
+能否提供 ESP32-S3-WROOM-1 模组的 3D 模型和 Footprint 文件？
+-----------------------------------------------------------------------------------------------------------------------
+
+  - 可在 `espressif/kicad-libraries <https://github.com/espressif/kicad-libraries>`_ 库中获取模组的 3D 模型和 Footprint 文件。
