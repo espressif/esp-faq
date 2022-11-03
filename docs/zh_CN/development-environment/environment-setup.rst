@@ -136,3 +136,9 @@ Windows 环境下 ESP-IDF 编译比较慢如何优化？
 
   - 请将 ESP-IDF 源码目录以及编译器目录 ``.espressif`` 添加到杀毒软件的排除项。
   
+-----------------
+
+是否有可以直接在 Windows 上使用的 esptool 工具？
+---------------------------------------------------------------------------------------------------------------
+
+  - 可以前往 `esptool ——> Releases <https://github.com/espressif/esptool/releases>`_，在下拉页面的 Asset 栏下载 Windows 版本的 esptool 工具。
