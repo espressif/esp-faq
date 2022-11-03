@@ -136,3 +136,9 @@ How to optimize ESP-IDF compilation in Windows environment?
 
   - Please add the directories of ESP-IDF source code and compiler ``.espressif`` to the exclusions of anti-virus program.
 
+-------------------
+
+Is there an esptool that can be used directly on Windows?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can go to `esptool --> Releases <https://github.com/espressif/esptool/releases>`_ and download the Windows version of the esptool from the Asset column on the drop-down page. 
