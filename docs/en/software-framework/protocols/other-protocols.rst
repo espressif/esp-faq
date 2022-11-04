@@ -50,7 +50,7 @@ How to implement the certificate auto-download function?
 
   :CHIP\: ESP32:
 
-  Please refer to `aws certificate automatic download function <https://docs.aws.amazon.com/en/iot/latest/developerguide/auto-register-device-cert.html>`_ .
+  Please refer to `aws certificate automatic download function <https://docs.aws.amazon.com/iot/latest/developerguide/auto-register-device-cert.html>`_ .
 
 -----------------------------
 

@@ -247,7 +247,7 @@ How to configure the RMII synchronous clock for the Ethernet of ESP32?
   - To run a test, please refer to `esp-idf/examples/ethernet/basic <https://github.com/espressif/esp-idf/tree/release/v4.4/examples/ethernet/basic>`_.
   - When GPIO0 provides clock output for PHY, the Ethernet connection of the IP101 PHY chip can be unstable. Therefore, you are recommended to connect a 50 MHz crystal to PHY with GPIO0 as input.
   - Because of the characteristics of GPIO0, the IO should be set to control the enable pin of PHY.
-  - Please read `Configure MAC and PHY <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html>`__.
+  - Please read `Ethernet document <https://docs.espressif.com/projects/esp-idf/en/v4.4.2/esp32/api-reference/network/esp_eth.html>`__.
   - You may also refer to `1SCH_ESP32-ETHERNET-KIT Schematics <https://dl.espressif.com/dl/schematics/SCH_ESP32-ETHERNET-KIT_A_V1.1_20190711.pdf>`_.
 
 -------------
@@ -293,7 +293,7 @@ Does ESP32-C3F SPI CS0 pin need an external 10 kΩ pull-up resistor?
 Is there any hardware design reference for ESP-Skainet Speech Recognition?
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - Please refer to `ESP32-Korvo V1.1 Hardware Design Reference <https://github.com/espressif/esp-skainet/blob/master/docs/en/hw-reference/esp32/user-guide-esp32-korvo-v1.1.md#2%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83>`_.
+  - Please refer to `ESP32-Korvo V1.1 User Guide <https://github.com/espressif/esp-skainet/blob/master/docs/en/hw-reference/esp32/user-guide-esp32-korvo-v1.1.md>`_.
   
 ----------------------------------------------------------------------------------------
 
@@ -354,7 +354,7 @@ When using the ESP32-WROOM-32D module, can I set GPIO12 for other uses?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - GPIO12 is a strapping pin that controls the startup voltage of SPI flash. The SPI flash startup voltage of the ESP32-WROOM-32D module is 3.3 V, so GPIO12 needs to be pulled up during powering on.
-  - If you need to set GPIO12 for other uses, please use the command `espefuse.py set_flash_voltage 3.3v <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html?highlight=vdd_sdio#fixed-3-3v-vdd-sdio>`_ in the esptool to set the voltage through VDD_SDIO as 3.3 V.
+  - If you need to set GPIO12 for other uses, please use the command `espefuse.py set_flash_voltage 3.3v <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/set-flash-voltage-cmd.html#set-flash-voltage>`_ in the esptool to set the voltage through VDD_SDIO as 3.3 V.
 
 --------------------
 

@@ -228,7 +228,7 @@ ESP32 的 Wi-Fi Mesh 支持 No Router 自组网吗？
 ESP32 使用 Wi-Fi Mesh 时允许的最大节点层数是多少？
 --------------------------------------------------------------------------------------------
 
-  - 在 WiFi Mesh 网络中，可以通过 `esp_mesh_set_max_layer() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_mesh.html#_CPPv422esp_mesh_set_max_layeri>`_ 函数设置网络最大层数。
+  - 在 WiFi Mesh 网络中，可以通过 `esp_mesh_set_max_layer() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp-wifi-mesh.html#_CPPv422esp_mesh_set_max_layeri>`_ 函数设置网络最大层数。
   - 对于树形拓扑结构，最大值为 25；对于链式拓扑结构，最大值为 1000。
   
 ---------------------
@@ -304,7 +304,7 @@ ESP32 作为主设备对多个从设备进行时间同步，是否可以满足�
 ------------------------------------------------------------------------------------------------------------------------------------------
 
   - 针对此应用场景，建议基于 esp-mdf 来开发， 可参考 `esp-mdf/examples/development_kit/light <https://github.com/espressif/esp-mdf/blob/master/examples/development_kit/light/main/light_example.c>`_ 例程。
-  - 使用 `esp_mesh_get_tsf_time() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.2/esp32/api-reference/network/esp_mesh.html?highlight=esp_mesh_get_tsf_time#_CPPv421esp_mesh_get_tsf_time>`_ 来实现，此精度可满足需求。
+  - 使用 `esp_mesh_get_tsf_time() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp-wifi-mesh.html#_CPPv421esp_mesh_get_tsf_timev>`_ 来实现，此精度可满足需求。
 
 ---------------
 

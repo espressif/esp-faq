@@ -23,7 +23,7 @@ AT
   - ESP8266 AT HTTP 指令不支持重定向，在获取到服务器返回的状态码 301（永久性重定向）或者 302（临时性重定向）后不会自动跳转到新的 URL 地址。
   - 可以使用 wireshark 或者 postman 获取到实际访问的 URL，然后通过 HTTP 指令访问。
 
-  - 需要注意的是，当前 ESP8266-IDF-AT_V2.1.0.0 默认不支持 HTTP 指令，若想要使用 HTTP 的指令，需要基于 esp-at 编译，参考 `ESP8266 platform <https://docs.espressif.com/projects/esp-at/en/latest/Compile_and_Develop/How_to_clone_project_and_compile_it.html#esp8266-platform>`_。编译时需要在 menuconfig 中使能 HTTP：``menuconfig`` -> ``Component config`` -> ``AT`` -> ``[*] AT http command support``。
+  - 需要注意的是，当前 ESP8266-IDF-AT_V2.1.0.0 默认不支持 HTTP 指令，若想要使用 HTTP 的指令，需要基于 esp-at 编译，参考 `ESP8266 platform <https://espressif-docs.readthedocs-hosted.com/projects/esp-at/en/release-v2.1.0.0_esp8266/Compile_and_Develop/How_to_clone_project_and_compile_it.html#esp8266-platform>`_。编译时需要在 menuconfig 中使能 HTTP：``menuconfig`` -> ``Component config`` -> ``AT`` -> ``[*] AT http command support``。
 
   - ``AT+HTTPCLIENT`` 的参数 ``URL`` 的最大长度为 256，当获取到的实际访问的 URL 长度超过 256 时，会返回 ``ERROR``，可以使用 TCP 的相关指令发送构造的 HTTP 请求报文获取该资源。
 
@@ -88,7 +88,7 @@ ADV 广播参数超过 32 字节之后应该如何设置?
 
   :CHIP\: ESP32 :
 
-   - `AT+BLEADVDATA <https://docs.espressif.com/projects/esp-at/zh_CN/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-bleadvdata-set-bluetooth-le-advertising-data>`_  指令支持 adv 广播参数最大为 32 字节，如果需要设置更长的广播参数，请调用 `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>`_  指令来设置。
+   - `AT+BLEADVDATA <https://docs.espressif.com/projects/esp-at/zh_CN/latest/esp32/AT_Command_Set/BLE_AT_Commands.html#cmd-badvd>`_  指令支持 adv 广播参数最大为 32 字节，如果需要设置更长的广播参数，请调用 `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/zh_CN/latest/esp32/AT_Command_Set/BLE_AT_Commands.html#cmd-bscanr>`_  指令来设置。
    
 --------------------------------------------------------------------------
 
@@ -148,7 +148,7 @@ AT+BLEADVDATA 广播数据支持的最大长度为 31，如何支持更大的数
 
   :CHIP\: ESP32:
 
- - 可以将数据放到 BLE scan response 中，指令为 `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>`_。
+ - 可以将数据放到 BLE scan response 中，指令为 `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/zh_CN/latest/esp32/AT_Command_Set/BLE_AT_Commands.html#cmd-bscanr>`_。
 
 -----------------------------------------------------------------------------------------------------
 
@@ -157,7 +157,7 @@ WPA2 Enteprise 支持哪些认证方式呢 ?
 
   :CHIP\: ESP8266 | ESP32 | ESP32-C3:
 
-  - 仅支持 EAP-TLS/EAP-PEAP/EAP-TTLS 三种，详情参考 `AT+CWJEAP <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Wi-Fi_AT_Commands.html#esp32-only-at-cwjeap-connect-to-a-wpa2-enterprise-ap>`_ 指令介绍。
+  - 仅支持 EAP-TLS/EAP-PEAP/EAP-TTLS 三种，详情参考 `AT+CWJEAP <https://docs.espressif.com/projects/esp-at/zh_CN/latest/esp32/AT_Command_Set/Wi-Fi_AT_Commands.html#cmd-jeap>`_ 指令介绍。
 
 ---------------
 
@@ -244,21 +244,21 @@ AT+HTTPCPOST 有哪些使用示例?
 使用 ESP32 的 v2.2.0.0 版本的 AT 固件，AT+BLEGATTCWR 指令的 "length" 参数最大可以设置多大？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - `AT+BLEGATTCWR <https://docs.espressif.com/projects/esp-at/zh_CN/release-v2.2.0.0_esp32/AT_Command_Set/BLE_AT_Commands.html?highlight=BLEGATTCWR#esp32-only-at-blegattcwr-gattc-writes-characteristics>`_ 指令的 "length" 参数的最大设置对应 `example <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/components/customized_partitions/raw_data/ble_data/example.csv>`_ 文件的下的 "val_max_len" 参数设置，建议不要超过 512。请参见 `README <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/tools/README.md>`_ 下的 "val_max_len" 参数说明。
+  - `AT+BLEGATTCWR <https://docs.espressif.com/projects/esp-at/zh_CN/release-v2.2.0.0_esp32/AT_Command_Set/BLE_AT_Commands.html#cmd-gcwr>`_ 指令的 "length" 参数的最大设置对应 `example <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/components/customized_partitions/raw_data/ble_data/example.csv>`_ 文件的下的 "val_max_len" 参数设置，建议不要超过 512。请参见 `README <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/tools/README.md>`_ 下的 "val_max_len" 参数说明。
 
 ----------------
 
 ESP32 使用 v2.2.0.0 版本的 AT 固件连接上 AP，重新复位上电后会自动连接 AP，如何取消这个设置？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 建议使用 AT+SYSSTORE=0 指令。调用该指令后，相关受影响的指令对应的配置信息不会保存到 flash。比如，在使用 AT+CWJAP 命令连接 AP 前，先使用 `AT+SYSSTORE=0 <https://docs.espressif.com/projects/esp-at/zh_CN/release-v2.2.0.0_esp32/AT_Command_Set/Basic_AT_Commands.html#at-sysstore-query-set-parameter-store-mode>`_ 命令设置不保存历史 AP 信息到 flash。
+  - 建议使用 AT+SYSSTORE=0 指令。调用该指令后，相关受影响的指令对应的配置信息不会保存到 flash。比如，在使用 AT+CWJAP 命令连接 AP 前，先使用 `AT+SYSSTORE=0 <https://docs.espressif.com/projects/esp-at/zh_CN/release-v2.2.0.0_esp32/AT_Command_Set/Basic_AT_Commands.html#cmd-sysstore>`_ 命令设置不保存历史 AP 信息到 flash。
 
 ----------------
 
 ESP32-AT 支持 PPP 吗?
 ----------------------------------------------------------------------
 
-  - 不支持，可参考 `pppos_client <https://github.com/espressif/esp-idf/tree/master/examples/protocols/pppos_client/>`_ 示例自行实现。
+  - 不支持，可参考 `pppos_client <https://github.com/espressif/esp-idf/tree/v4.4.2/examples/protocols/pppos_client>`_ 示例自行实现。
 
 ----------------
 

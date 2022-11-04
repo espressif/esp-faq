@@ -27,4 +27,4 @@ SPIFFS 支持磁盘加密吗？
 如何将 ESP32 设备的 key 和 certs 存储到 spiffs 中呢？
 ---------------------------------------------------------
 
-  可将文件生成 SPIFFS 镜像后烧录到对应分区，可参考 `SPIFFS 文件系统 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_。
+  可将文件生成 SPIFFS 镜像后烧录到对应分区，可参考 `SPIFFS 文件系统 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py>`_。

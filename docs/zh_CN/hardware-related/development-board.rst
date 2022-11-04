@@ -93,7 +93,7 @@ ESP32S2-Kaluga 上的 Codec 芯片是否自带功放？最大支持外接多大�
 ESP32-S2-Kaluga-1 是否有并行 LCD 接口？如果有，硬件上需要如何使用？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32-S2-Kaluga-1 上有并行 LCD 接口，但是目前暂时没有提供配套的屏幕，硬件设计可以参考 `ESP32-S2-Kaluga-1 硬件设计指南 <https://docs.espressif.com/projects/espressif-esp-dev-kits/zh_CN/latest/esp32s2/esp32-s2-kaluga-1/reference/reference-doc.html#schematic>`_。 
+  - ESP32-S2-Kaluga-1 上有并行 LCD 接口，但是目前暂时没有提供配套的屏幕，硬件设计可以参考 `ESP32-S2-Kaluga-1 硬件设计指南 <https://docs.espressif.com/projects/espressif-esp-dev-kits/zh_CN/latest/esp32s2/esp32-s2-kaluga-1/reference/reference-doc.html>`_。 
 
 --------------
 

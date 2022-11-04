@@ -65,7 +65,7 @@ When using ESP32-WROVER-B module + ES8311 to design audio development board, whi
 Can ESP32-WROVER-E module use one I2S line to realize simultaneous broadcasting and recording?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes, you can refer to `ESP32-LyraT Development Board <https://docs.espressif.com/projects/esp-adf/en/latest/get-started/get-started-esp32-lyrat.html#esp32-lyrat-v4-3>`_.
+  - Yes, you can refer to `ESP32-LyraT Development Board <https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/dev-boards/get-started-esp32-lyrat.html>`_.
   
 ---------------
 
@@ -113,7 +113,7 @@ Does ESP32 support analog audio output or digital audio output?
 What audio formats does the ESP32 chip support?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  The ESP32 chip supports audio formats such as MP3, AAC, FLAC, WAV, OGG, OPUS, AMR, G.711, etc. Please refer to the `ESP-ADF <https://github.com/espressif/esp-adf#overview>`_ SDK for instructions.
+  The ESP32 chip supports audio formats such as MP3, AAC, FLAC, WAV, OGG, OPUS, AMR, G.711, etc. Please refer to the `ESP-ADF <https://github.com/espressif/esp-adf>`_ SDK for instructions.
   
 -----------------
 

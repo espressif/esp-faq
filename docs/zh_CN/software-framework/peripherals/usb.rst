@@ -106,7 +106,7 @@ ESP32-C3 是否支持 USB 主机？
 ESP32-C3 芯片可以使用 USB 下载固件，但在 ESP-IDF v4.3 下不支持。如何使用 USB 下载固件？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  请在 ESP-IDF v4.4 及以后版本下编译，拉出最新分支并 `更新 IDF 工具 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_，然后便可正常编译并使用 USB 下载固件，使用方法请见 `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_。
+  请在 ESP-IDF v4.4 及以后版本下编译，拉出最新分支并 `更新 IDF 工具 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/get-started/index.html>`_，然后便可正常编译并使用 USB 下载固件，使用方法请见 `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_。
 
 ---------------
 
@@ -142,7 +142,7 @@ ESP32-S3 支持 USB CDC 输出程序日志和下载固件吗？
 ESP32-S3 是否支持 USB Device 为 Class 0 的裝置?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 支持，可参考示例： `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/release/v5.0/components/tinyusb/additions/src/usb_descriptors.c>`_ 。当 Class code == 00H 时，class 类别由 interface 指定。
+  - 支持，可参考示例： `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/v5.0-dev/components/tinyusb/additions/src/usb_descriptors.c>`_ 。当 Class code == 00H 时，class 类别由 interface 指定。
 
 ---------------
 

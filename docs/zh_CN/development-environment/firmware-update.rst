@@ -153,7 +153,7 @@ ESP32 如何设置 Flash SPI 为 QIO 模式？
     ets Jan  8 2013,rst cause:1, boot mode:(7,7)
     waiting for host
 
-  - 打印 `waiting for host` 说明 Boot 模式是 SDIO 模式，表明 GPIO15 (MTDO) 被拉高，请参见 `ESP8266 Boot 模式说明 <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process#esp-boot-modes>`_。
+  - 打印 `waiting for host` 说明 Boot 模式是 SDIO 模式，表明 GPIO15 (MTDO) 被拉高，请参见 `ESP8266 Boot 模式说明 <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process>`_。
 
 ----------------
 
@@ -176,7 +176,7 @@ ESP32 如何设置 Flash SPI 为 QIO 模式？
 ESP32-C3 芯片可以使用 USB 进行固件下载，但在 ESP-IDF v4.3 下使用并不支持，如何使用 USB 进行固件下载？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 需要在 ESP-IDF v4.4 以上版本下进行编译，拉取最新分支并 `更新 IDF 工具 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_ 后可以正常编译并使用 USB 进行下载。使用过程请参考 `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_。
+  - 需要在 ESP-IDF v4.4 以上版本下进行编译，拉取最新分支并 `更新 IDF 工具 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html>`_ 后可以正常编译并使用 USB 进行下载。使用过程请参考 `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_。
 
 ---------------
 
@@ -251,4 +251,4 @@ Windows7 系统 USB 驱动无法识别是什么原因？
       invalrd header：0xffffffff
       invalrd header：0xffffffff
 
-  - 出现如上报错日志一般情况为 GPIO12 拉高导致，ESP32-WROVER-E 模组 GPIO12 不能拉高，建议将 GPIO12 拉低测试一下。可参见 `ESP32 boot log 指南 <https://docs.espressif.com/projects/esptool/zh_CN/latest/esp32/advanced-topics/boot-mode-selection.html?highlight=boot#boot-mode-message>`_。
+  - 出现如上报错日志一般情况为 GPIO12 拉高导致，ESP32-WROVER-E 模组 GPIO12 不能拉高，建议将 GPIO12 拉低测试一下。可参见 `ESP32 boot log 指南 <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html#select-bootloader-mode>`_。

@@ -142,7 +142,7 @@ ESP32 进入低功耗模式时， PSRAM 中的数据会丢失吗？
 ---------------------------------------------------------
 
   CPU 系统时间是由 esp_timer 内部的 64 位硬件定时器 CONFIG_ESP_TIMER_IMPL 产生的，是微秒级的时间分辨率。
-  参见 `说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/esp_timer.html?highlight=esp_timer_get_time#high-resolution-timer>`_。
+  参见 `高精度时钟说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/v4.4.2/esp32/api-reference/system/esp_timer.html#obtaining-current-time>`_。
 
 --------------
 
@@ -279,7 +279,7 @@ ESP32 是否可以永久更改 MAC 地址？
 
   - 芯片自带的 MAC 地址无法修改。efuse 中支持用户写入自己的 MAC 地址。
   - 在固件中调用 api 可以获取定制 MAC 地址，并且可以设置到系统中替代默认地址。
-  - 配置参考：`mac-address <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/system.html#mac-address>`_。
+  - 配置参考：`mac-address <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/system/misc_system_api.html#mac>`_。
   - 另外，Espressif 提供在芯片出厂之前，烧录用户提供的 MAC 地址服务。如有需要，可发送邮件至 sales@espressif.com
 
 --------------
@@ -403,10 +403,10 @@ ESP32 芯片出厂是否有唯一的 chip_id ？
 
 --------------
 
-ESP8266 rst curse 如何查看？
+ESP8266 rst cause 如何查看？
 ------------------------------------
 
-  - 请参考 `ESP8266 异常重启原因 <https://www.espressif.com/sites/default/files/documentation/esp8266_reset_causes_and_common_fatal_exception_causes_cn.pdf/>`_。
+  - 请参考 `ESP8266 异常重启原因 <https://www.espressif.com/sites/default/files/documentation/esp8266_reset_causes_and_common_fatal_exception_causes_cn.pdf>`_。
 
 -----------------
 
@@ -731,7 +731,7 @@ OTA 升级过程中 esp_ota_end 返回 ESP_ERR_OTA_VALIDATE_FAILED 报错，如�
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   :CHIP\: ESP32:
 
-  - 一般是由于下载的固件内容有误导致的，可以通过 `esptool <https://github.com/espressif/esptool>`_  中的  `read_flash <https://github.com/espressif/esptool#read-flash-contents-read_flash>`_  指令 dump 出模组中的内容，然后再用 Beyond Compare 工具对这 2 个 bin 文件进行 16 进制对比，看 bin 文件哪里下载有误。
+  - 一般是由于下载的固件内容有误导致的，可以通过 `esptool <https://github.com/espressif/esptool>`_  中的  `read_flash <https://docs.espressif.com/projects/esptool/en/latest/esp32/esptool/basic-commands.html#read-flash-contents-read-flash>`_  指令 dump 出模组中的内容，然后再用 Beyond Compare 工具对这 2 个 bin 文件进行 16 进制对比，看 bin 文件哪里下载有误。
 
 -------------
 
@@ -829,7 +829,7 @@ ESP32 在使用 esp_timer 时，出现网络通信或者蓝牙通信异常，是
 使用 ESP32，请问 ULP 里面用 ``jump`` 跳转到一个函数，是否有返回的指令？
 ----------------------------------------------------------------------------------------
 
-  目前 ULP CPU 指令列表以及说明参见 `这里 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ulp_instruction_set.html#add-add-to-register>`_。返回指令通常使用一个通用寄存器备份 PC 地址，用于后续跳回，由于目前 ULP 只有 4 个通用寄存器，所以需要合理使用。
+  目前 ULP CPU 指令列表以及说明参见 `这里 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/ulp_instruction_set.html>`_。返回指令通常使用一个通用寄存器备份 PC 地址，用于后续跳回，由于目前 ULP 只有 4 个通用寄存器，所以需要合理使用。
 
 --------------
 

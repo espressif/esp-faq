@@ -106,7 +106,7 @@ Does ESP32-C3 support USB Host?
 The ESP32-C3 chip can use USB to download firmware, but it is not supported under ESP-IDF v4.3. How to use USB to download firmware?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  You need to compile under ESP-IDF v4.4 or later versions. After pulling the latest branch and `updating the IDF tool <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html#step-3-set-up-the-tools>`_, you can compile normally and download it using USB. Please refer to `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_ for the usage.
+  You need to compile under ESP-IDF v4.4 or later versions. After pulling the latest branch and `updating the IDF tool <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html>`_, you can compile normally and download it using USB. Please refer to `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_ for the usage.
 
 ---------------
 
@@ -142,7 +142,7 @@ Does ESP32-S3 support USB CDC for printing program log and downloading firmware?
 Does ESP32-S3 support devices with USB Device being Class 0?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes, please refer to the example `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/release/v5.0/components/tinyusb/additions/src/usb_descriptors.c>`_. When class code == 00H, the class category is specified by the interface.
+  - Yes, please refer to the example `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/v5.0-dev/components/tinyusb/additions/src/usb_descriptors.c>`_. When class code == 00H, the class category is specified by the interface.
 
 -----------
 

@@ -25,7 +25,7 @@ What is the one-to-one bit rate for ESP32 in ESP-NOW mode？
   - PHY rate is 1 Mbps by default.
   - Around 214 Kbps in opened environment.
   - Around 555 Kbps in shielding box.
-  - If you require a higher rate, please configure by `esp_wifi_config_espnow_rate <https://github.com/espressif/esp-idf/blob/6cfa88ed49b7d1209732347dae55578f4a679c98/components/esp_wifi/include/esp_now.h#L244>`_.
+  - If you require a higher rate, please configure by `esp_wifi_config_espnow_rate <https://docs.espressif.com/projects/esp-idf/en/v4.4.2/esp32/api-reference/network/esp_now.html#_CPPv427esp_wifi_config_espnow_rate16wifi_interface_t15wifi_phy_rate_t>`_.
 
 --------------
 
@@ -715,7 +715,7 @@ How to get CSI data when using ESP32 device in Station mode?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - CSI data can be obtained by calling 'esp_wifi_set_csi_rx_cb()'. See description in `API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_csi_rx_cb13wifi_csi_cb_tPv>`_.
-  - See configuration steps in `Wi-Fi CSI <https://github.com/espressif/esp-idf/blob/master/docs/en/api-guides/wifi.rst#wi-fi-channel-state-information-configure>`_.
+  - See configuration steps in `Wi-Fi CSI <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#wi-fi-channel-state-information>`_.
 
 -------------------
 
@@ -1058,7 +1058,7 @@ Does ESP8089 support Wi-Fi Direct mode?
 How does ESP32 connect to an AP whose RSSI does not fall below the configured threshold when there are multiple APs in the environment?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - In ESP32 staion mode, there is a `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv417wifi_sta_config_t/>`_ structure with 2 variables underneath, i.e., `sort_method <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11sort_methodE/>`_ and `threshold <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE/>`_. The RSSI threshold is configured by assigning values to these two variables.
+  - In ESP32 staion mode, there is a `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N13wifi_config_t3staE>`_ structure with 2 variables underneath, i.e., `sort_method <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11sort_methodE>`_ and `threshold <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE>`_. The RSSI threshold is configured by assigning values to these two variables.
 
 --------------
 
@@ -1166,7 +1166,7 @@ How do I debug the ESP32 station that is connected to a router but does not get 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Open the debug log of DHCP in lwIP, go to ESP-IDF menuconfig, and configure ``Component config`` > ``LWIP`` > ``Enable LWIP Debug(Y)`` and ``Component config -> LWIP`` > ``Enable DHCP debug messages(Y)``.
-  - Earlier IDF versions do not have the above options, so please refer to `DHCP_DEBUG <https://github.com/espressif/esp-idf/blob/v4.0.1/components/lwip/port/esp32/include/lwipopts.h#L806-#L807>`_  to change ``LWIP_DBG_OFF`` to ``LWIP_DBG_ON`` in both lines of code as follows.
+  - Earlier IDF versions do not have the above options, so please refer to `lwipopts.h <https://github.com/espressif/esp-idf/blob/v4.0.1/components/lwip/port/esp32/include/lwipopts.h>`_ line 806 and 807, to change ``LWIP_DBG_OFF`` to ``LWIP_DBG_ON`` in both lines of code as follows.
 
     .. code-block:: c
 

@@ -247,7 +247,7 @@ ESP32 模组 flash 是否支持 80 MHz 的 QIO 模式？
   - 请下载 `esp-idf/examples/ethernet/basic <https://github.com/espressif/esp-idf/tree/release/v4.4/examples/ethernet/basic>`_ 例程进行测试。
   - IP101 PHY 芯片在 GPIO0 输出 CLK 时会出现网络不稳定的现象，所以推荐 PHY 外接 50 MHz 晶振，GPIO0 作为输入。
   - 由于 GPIO0 的特殊性，所以需要配置 IO 控制 PHY 的使能管脚。 
-  - 请阅读 `配置 MAC 和 PHY <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`__。
+  - 请阅读 `以太网文档 <https://docs.espressif.com/projects/esp-idf/zh_CN/v4.4.2/esp32/api-reference/network/esp_eth.html>`__。
   - 可参考 `SCH_ESP32-ETHERNET-KIT 原理图设计 <https://dl.espressif.com/dl/schematics/SCH_ESP32-ETHERNET-KIT_A_V1.1_20190711.pdf>`_。
 
 ---------------
@@ -293,7 +293,7 @@ ESP32-C3F SPI CS0 是否需要外接 10 kΩ 上拉电阻？
 ESP-Skainet 有语音识别硬件设计参考吗？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - 请参考 `ESP32-Korvo V1.1 硬件参考设计 <https://github.com/espressif/esp-skainet/blob/master/docs/zh_CN/hw-reference/esp32/user-guide-esp32-korvo-v1.1.md#2-%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83>`_。
+  - 请参考 `ESP32-Korvo V1.1 用户指南 <https://github.com/espressif/esp-skainet/blob/master/docs/zh_CN/hw-reference/esp32/user-guide-esp32-korvo-v1.1.md>`_。
   
 ----------------------------------------------------------------------------------------
 
@@ -354,7 +354,7 @@ ESP32 芯片当 VDD 供电从 0 V 慢慢升到 3.3 V 时，芯片为何无法正
 --------------------------------------------------------------------------------------------------------------------------------------
 
   - GPIO12 为 Strapping 管脚，控制 SPI flash 的启动电压。ESP32-WROOM-32D 模组的 SPI flash 启动电压为 3.3 V，因此在上电启动时 GPIO12 需要拉高。
-  - 若需要使用 GPIO12 用作其他功能，请使用 esptool 工具通过 `espefuse.py set_flash_voltage 3.3V <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html?highlight=vdd_sdio#fixed-3-3v-vdd-sdio>`_ 命令将 VDD_SDIO 固定为 3.3 V。
+  - 若需要使用 GPIO12 用作其他功能，请使用 esptool 工具通过 `espefuse.py set_flash_voltage 3.3V <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/set-flash-voltage-cmd.html#set-flash-voltage>`_ 命令将 VDD_SDIO 固定为 3.3 V。
 
 ---------------------
 

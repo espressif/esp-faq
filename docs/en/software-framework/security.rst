@@ -77,7 +77,7 @@ After enabling flash encryption and secure boot for ESP32, how to disable them?
 -------------------------------------------------------------------------------------------------
 
   - If you are using the one-time flash (Release) mode, both flash encryption and secure boot cannot be disabled.
-  - If you are using the reflashable (Development (NOT SECURE)) mode, the flash encryption can be disabled, please refer to `Disabling Flash Encryption <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/security/flash-encryption.html#disabling-flash-encryption>`_; while the secure boot cannot be disabled.
+  - If you are using the reflashable (Development (NOT SECURE)) mode, the flash encryption can be disabled, please refer to `Disabling Flash Encryption <https://docs.espressif.com/projects/esp-idf/en/v4.4.2/esp32/security/flash-encryption.html#disabling-flash-encryption>`_; while the secure boot cannot be disabled.
 
 --------------
 

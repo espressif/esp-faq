@@ -18,7 +18,7 @@
 ESP32 系列芯片支持哪种类型的摄像头？
 --------------------------------------
 
-  - 请参考 `ESP32 系列支持的摄像头型号 <https://github.com/espressif/esp32-camera#supported-sensor>`_。
+  - 请参考 `ESP32 系列支持的摄像头型号 <https://github.com/espressif/esp32-camera/blob/master/README.md>`_。
 
 --------------
 
@@ -117,7 +117,7 @@ ESP32 支持传输视频流吗？
 
   - 视频流的传输操作分为二进制传输和视频流编解码。
 
-   - 二进制传输：ESP32 支持二进制传输，此处是否支持取决于传输的网络带宽。目前 ESP32 TCP 的带宽为 20 MB/s，请参考 `WiFI 测试数据 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#esp32-wi-fi-throughput>`_。
+   - 二进制传输：ESP32 支持二进制传输，此处是否支持取决于传输的网络带宽。目前 ESP32 TCP 的带宽为 20 MB/s，请参考 `WiFI 测试数据 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#id52>`_。
    - 视频流编解码：目前视频流主要格式有 H264、H265、MJPEG 等，ESP32 暂无视频流编解码操作的能力。
 
 --------------
