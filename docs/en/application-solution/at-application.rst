@@ -23,7 +23,7 @@ How to download redirected resources via ESP8266 AT firmware?
 - ESP8266 AT HTTP command does not support redirection. After getting the status code 301 (permanent redirection) or 302 (temporary redirection) returned by the server, it will not automatically redirect to the new URL address.
 - You can use wireshark or postman to get the actual URL, and then access it through HTTP commands.
 
-  - Please note that ESP8266-IDF-AT_V2.1.0.0 cannot support HTTP command by default, you need to compile AT firmware based on esp-at, please refer to `ESP8266 platform <https://docs.espressif.com/projects/esp-at/en/latest/Compile_and_Develop/How_to_clone_project_and_compile_it.html#esp8266-platform>`_. HTTP needs to be enabled in menuconfig: ``menuconfig`` -> ``Component config`` -> ``AT`` -> ``[*] AT http command support``. 
+  - Please note that ESP8266-IDF-AT_V2.1.0.0 cannot support HTTP command by default, you need to compile AT firmware based on esp-at, please refer to `ESP8266 platform <https://espressif-docs.readthedocs-hosted.com/projects/esp-at/en/release-v2.1.0.0_esp8266/Compile_and_Develop/How_to_clone_project_and_compile_it.html#esp8266-platform>`_. HTTP needs to be enabled in menuconfig: ``menuconfig`` -> ``Component config`` -> ``AT`` -> ``[*] AT http command support``. 
 
   - The maximum length of the parameter ``URL`` in ``AT+HTTPCLIENT`` is 256. When the length of the actual URL obtained exceeds 256, it will return ``ERROR``. You can use TCP related commands to send the a constructed HTTP request message to obtain the resource.
 
@@ -87,7 +87,7 @@ How to set ADV broadcast parameters after it exceeds 32 bytes?
 
   :CHIP\: ESP32 :
 
-  - The AT+BLEADVDATA <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-bleadvdata-set-bluetooth-le-advertising-data>_ command supports up to 32 bytes of ADV broadcast parameters. If you need to set a bigger parameter, please use command AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>.
+  - The AT+BLEADVDATA <https://docs.espressif.com/projects/esp-at/en/latest/esp32/AT_Command_Set/BLE_AT_Commands.html#cmd-badvd>_ command supports up to 32 bytes of ADV broadcast parameters. If you need to set a bigger parameter, please use command AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/en/latest/esp32/AT_Command_Set/BLE_AT_Commands.html#cmd-bscanr>.
 
 --------------------------------------------------------------------------
 
@@ -147,7 +147,7 @@ The maximum length of AT+BLEADVDATA broadcast data is 31. How to realize a bigge
 
   :CHIP\: ESP32:
 
- - You can put the data in BLE scan response by using the `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/BLE_AT_Commands.html#esp32-only-at-blescanrspdata-set-bluetooth-le-scan-response>_` command.
+ - You can put the data in BLE scan response by using the `AT+BLESCANRSPDATA <https://docs.espressif.com/projects/esp-at/en/latest/esp32/AT_Command_Set/BLE_AT_Commands.html#cmd-bscanr>_` command.
 
 -----------------------------------------------------------------------------------------------------
 
@@ -156,7 +156,7 @@ What authentication methods does WPA2 Enteprise support?
 
   :CHIP\: ESP8266 | ESP32 | ESP32-C3:
 
-  - Only EAP-TLS/EAP-PEAP/EAP-TTLS are supported. For details, please refer to the `AT+CWJEAP <https://docs.espressif.com/projects/esp-at/en/latest/AT_Command_Set/Wi-Fi_AT_Commands.html#esp32-only-at-cwjeap-connect-to-a-wpa2-enterprise-ap>_` command introduction.
+  - Only EAP-TLS/EAP-PEAP/EAP-TTLS are supported. For details, please refer to the `AT+CWJEAP <https://docs.espressif.com/projects/esp-at/en/latest/esp32/AT_Command_Set/Wi-Fi_AT_Commands.html#cmd-jeap>_` command introduction.
 
 ---------------
 
@@ -239,21 +239,21 @@ Is there a limit to the maximum length of the broadcast packet sent by the "AT+B
 What is the maximum value of the ``length`` parameter in the AT+BLEGATTCWR command?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    - The maximum value of ``length`` in the `AT+BLEGATTCWR <https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp32/AT_Command_Set/BLE_AT_Commands.html?highlight=BLEGATTCWR#esp32-only-at-blegattcwr-gattc-writes-characteristics>`_ command is corresponds to the ``val_max_len`` parameter setting under the `example.csv <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/components/customized_partitions/raw_data/ble_data/example.csv>`_ file, and it is recommended not to exceed 512. Please refer to the description in `README <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/tools/README.md>`_.
+    - The maximum value of ``length`` in the `AT+BLEGATTCWR <https://docs.espressif.com/projects/esp-at/en/latest/esp32/AT_Command_Set/BLE_AT_Commands.html#cmd-gcwr>`_ command is corresponds to the ``val_max_len`` parameter setting under the `example.csv <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/components/customized_partitions/raw_data/ble_data/example.csv>`_ file, and it is recommended not to exceed 512. Please refer to the description in `README <https://github.com/espressif/esp-at/blob/release/v2.2.0.0_esp32/tools/README.md>`_.
     
 --------------------
 
 When using the v2.2.0.0 version of AT firmware to connect ESP32 to AP, it will automatically connect to the AP again after being reset and powered on. How to cancel this setting?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - This can be realized by using the AT+SYSSTORE=0 command. After calling this command, the related configuration information of affected commands will not be saved to flash. That is to say, before connecting AP using the AT+CWJAP command, you can call `AT+SYSSTORE=0 <https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp32/AT_Command_Set/Basic_AT_Commands.html#at-sysstore-query-set-parameter-store-mode>`_ first to make old AP information not be stored to flash.
+  - This can be realized by using the AT+SYSSTORE=0 command. After calling this command, the related configuration information of affected commands will not be saved to flash. That is to say, before connecting AP using the AT+CWJAP command, you can call `AT+SYSSTORE=0 <https://docs.espressif.com/projects/esp-at/zh_CN/latest/esp32/AT_Command_Set/Basic_AT_Commands.html#cmd-sysstore>`_ first to make old AP information not be stored to flash.
   
 ----------------
 
 Does ESP32-AT supports PPP?
 ----------------------------------------------------------------------
 
-  - Not supported, please reffer `pppos_client <https://github.com/espressif/esp-idf/tree/master/examples/protocols/pppos_client/>`_ demos for your own implementation.
+  - Not supported, please reffer `pppos_client <https://github.com/espressif/esp-idf/tree/v4.4.2/examples/protocols/pppos_client>`_ demos for your own implementation.
 
 ----------------
 

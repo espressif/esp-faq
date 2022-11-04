@@ -25,7 +25,7 @@ ESP32 ESP-Now 模式下一对一的通信速率是多少？
   - 物理层速率默认为 1 Mbps。
   - open 环境下大约是 214 Kbps。
   - 屏蔽箱内测试大约是 555 Kbps。
-  - 如果想要更高速率，可以通过 `esp_wifi_config_espnow_rate <https://github.com/espressif/esp-idf/blob/6cfa88ed49b7d1209732347dae55578f4a679c98/components/esp_wifi/include/esp_now.h#L244>`_ 进行配置。
+  - 如果想要更高速率，可以通过 `esp_wifi_config_espnow_rate <https://docs.espressif.com/projects/esp-idf/zh_CN/v4.4.2/esp32/api-reference/network/esp_now.html#_CPPv427esp_wifi_config_espnow_rate16wifi_interface_t15wifi_phy_rate_t>`_ 进行配置。
 
 --------------
 
@@ -715,7 +715,7 @@ ESP8266 作为 Wi-Fi SoftAP 模式，最多支持多少个 Station 设备连接�
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 通过调用 "esp_wifi_set_csi_rx_cb()" 可获取 CSI 数据。参见 `API <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_csi_rx_cb13wifi_csi_cb_tPv>`_ 说明。
-  - 参见 `Wi-Fi CSI <https://github.com/espressif/esp-idf/blob/master/docs/zh_CN/api-guides/wifi.rst#wi-fi-%E4%BF%A1%E9%81%93%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF%E9%85%8D%E7%BD%AE>`_ 配置步骤。
+  - 参见 `Wi-Fi CSI <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#id57>`_ 配置步骤。
 
 ---------------
 
@@ -1058,7 +1058,7 @@ ESP8089 是否支持 Wi-Fi Direct 模式？
 环境中有很多 AP，ESP32 如何连接 RSSI 不低于配置阈值的 AP?
 -----------------------------------------------------------------------------------
 
-  - 在 ESP32 staion 模式下，有一个 `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv417wifi_sta_config_t/>`_ 的结构体，下面有 2 个变量，分别是 `sort_method <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11scan_methodE/>`_ 和 `threshold <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE/>`_ 变量，通过给这两个变量赋值来设置 RSSI 阈值。
+  - 在 ESP32 staion 模式下，有一个 `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N13wifi_config_t3staE>`_ 的结构体，下面有 2 个变量，分别是 `sort_method <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11sort_methodE>`_ 和 `threshold <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE>`_ 变量，通过给这两个变量赋值来设置 RSSI 阈值。
 
 --------------
 
@@ -1166,7 +1166,7 @@ ESP32 做 station 连接路由器时发现没有正常获取到 IP，如何调�
 -------------------------------------------------------------------------------------------
 
   - 打开 lwIP 里 DHCP 的调试日志，在 ESP-IDF menuconfig 配置 ``Component config`` > ``LWIP`` > ``Enable LWIP Debug(Y)`` 和 ``Component config -> LWIP`` > ``Enable DHCP debug messages(Y)``。 
-  - 早期 IDF 版本没有上述选项时，请参考 `DHCP_DEBUG <https://github.com/espressif/esp-idf/blob/v4.0.1/components/lwip/port/esp32/include/lwipopts.h#L806-#L807>`_，将这两行代码里的 ``LWIP_DBG_OFF`` 都改成 ``LWIP_DBG_ON``，如下所示。
+  - 早期 IDF 版本没有上述选项时，请参考 `lwipopts.h <https://github.com/espressif/esp-idf/blob/v4.0.1/components/lwip/port/esp32/include/lwipopts.h>`_ 里的 806 到 807 行，将这两行代码里的 ``LWIP_DBG_OFF`` 都改成 ``LWIP_DBG_ON``，如下所示。
 
     .. code-block:: c
 

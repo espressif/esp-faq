@@ -161,7 +161,7 @@ During the OTA upgrade process, an ESP_ERR_OTA_VALIDATE_FAILED error occurred af
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   :CHIP\: ESP32:
 
-  - Generally it is caused by the error content in the downloaded firmware. You can dump out such content via `read_flash <https://github.com/espressif/esptool#read-flash-contents-read_flash>`_ in `esptool <https://github.com/espressif/esptool>`_ from your module. Then use the Beyond Compare tool to compare the two bin files in hexadecimal to see which part of the bin file is downloaded incorrectly.
+  - Generally it is caused by the error content in the downloaded firmware. You can dump out such content via `read_flash <https://docs.espressif.com/projects/esptool/en/latest/esp32/esptool/basic-commands.html#read-flash-contents-read-flash>`_ in `esptool <https://github.com/espressif/esptool>`_ from your module. Then use the Beyond Compare tool to compare the two bin files in hexadecimal to see which part of the bin file is downloaded incorrectly.
 
 -------------------------
 
@@ -256,7 +256,7 @@ When ESP32 uses esp_timer, network communication or Bluetooth communication is a
 With ESP32, are there any return instructions if I skip to a function using the ``jump`` instruction in ULP？
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
-  Please see `here <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ulp_instruction_set.html#add-add-to-register>`_ for ULP CPU instructions list and corresponding specifications. Normally, a general register is used for return instructions to store backup PC addresses for later jumping backs. Since there are only four general registers in ULP for now, please make proper use of them.
+  Please see `here <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/ulp_instruction_set.html>`_ for ULP CPU instructions list and corresponding specifications. Normally, a general register is used for return instructions to store backup PC addresses for later jumping backs. Since there are only four general registers in ULP for now, please make proper use of them.
 
 --------------
 

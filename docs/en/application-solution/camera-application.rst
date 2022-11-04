@@ -18,7 +18,7 @@ Camera application
 What type of camera does the ESP32 series chip support?
 -------------------------------------------------------------------------------
 
-   - Please refer to `Camera models supported by ESP32 series <https://github.com/espressif/esp32-camera#supported-sensor>`_.
+   - Please refer to `Camera models supported by ESP32 series <https://github.com/espressif/esp32-camera/blob/master/README.md>`_.
 
 --------------
 

@@ -53,7 +53,7 @@
 贵司的产品信息在哪里可以查看？ 量产产品有哪些？
 --------------------------------------------------
   
-  感谢您对乐鑫的关注。查看所有产品的基本信息请点击 `这里 <https://products.espressif.com/#/>`__ 。查看所有产品的技术⽂文档请点击 `这里 <https://www.espressif.com/zh-hans/support/documents/technical-documents>`__ 。
+  感谢您对乐鑫的关注。查看所有产品的基本信息请点击 `这里 <https://products.espressif.com>`__ 。查看所有产品的技术⽂文档请点击 `这里 <https://www.espressif.com/zh-hans/support/documents/technical-documents>`__ 。
 
 --------------
 
@@ -89,7 +89,7 @@
 请问你们各产品之间，有什么区别？包括不同系列与型号等。
 -----------------------------------------------------------------
 
-  您可以点击 `这里 <https://products.espressif.com/#/>`__ 查看所有产品的选型介绍。同时欢迎您联络我司 `商务工作人员 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ 获取详细解答。
+  您可以点击 `这里 <https://products.espressif.com>`__ 查看所有产品的选型介绍。同时欢迎您联络我司 `商务工作人员 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ 获取详细解答。
 
 --------------
 

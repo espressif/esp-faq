@@ -670,7 +670,7 @@ Bluetooth® LE (BLE) Mesh 数据传送最大的包是多少 Bytes？
 ----------------------------------------------------------------------------
 
   - 可以使用例程 `onoff_server <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/esp_ble_mesh/ble_mesh_node/onoff_server>`_，手机 APP 可以使用 nRF Mesh。
-  - 配网过程可参考 `ESP-BLE-MESH 快速入门 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-index.html#getting-started-with-esp-ble-mesh>`__。
+  - 配网过程可参考 `ESP-BLE-MESH 快速入门 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-index.html#getting-started-with-ble-mesh>`__。
   
 ----------------
 

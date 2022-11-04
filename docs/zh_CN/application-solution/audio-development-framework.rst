@@ -152,7 +152,7 @@ ESP32 关于语音识别方面，要能本地化，能否推荐相应的开发�
 ESP32 是否有同时支持 MIC 和 AUX 拾音的开发板？
 ------------------------------------------------------------------------------
 
-  - `ESP32-lyraT-4.3 开发板 <https://docs.espressif.com/projects/esp-adf/zh_CN/latest/get-started/get-started-esp32-lyrat.html#esp32-lyrat-v4-3>`__ 支持 MIC 和 AUX 拾音。
+  - `ESP32-lyraT-4.3 开发板 <https://docs.espressif.com/projects/esp-adf/zh_CN/latest/design-guide/dev-boards/get-started-esp32-lyrat.html>`__ 支持 MIC 和 AUX 拾音。
 
 ---------------
 
@@ -214,7 +214,7 @@ ESP32 的 AI 开发板上有 AUX 输入，MIC 就无法拾音了吗？
 ESP32-WROVER-E 模组使用一路 I2S 是否可实现同时播音和录音？
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 使用一路 I2S 可以实现同时播音和录音。可以参考 `ESP32-LyraT 开发板 <https://docs.espressif.com/projects/esp-adf/zh_CN/latest/get-started/get-started-esp32-lyrat.html#esp32-lyrat-v4-3>`_。
+  - 使用一路 I2S 可以实现同时播音和录音。可以参考 `ESP32-LyraT 开发板 <https://docs.espressif.com/projects/esp-adf/zh_CN/latest/design-guide/dev-boards/get-started-esp32-lyrat.html>`_。
 
 ----------------
 
@@ -262,7 +262,7 @@ ESP32 是否支持模拟音频或是数字音频输出？
 ESP32 芯片支持哪些音频格式？
 -------------------------------------------------------------------------------
 
-  ESP32 支持的音频格式有 MP3、AAC、FLAC、WAV、OGG、OPUS、AMR、G.711 等，可参考 `ESP-ADF <https://github.com/espressif/esp-adf#overview>`_ SDK 下的说明。
+  ESP32 支持的音频格式有 MP3、AAC、FLAC、WAV、OGG、OPUS、AMR、G.711 等，可参考 `ESP-ADF <https://github.com/espressif/esp-adf>`_ SDK 下的说明。
 
 ---------------
 

@@ -77,7 +77,7 @@ ESP32 打开 flash 加密和 secure boot 后，如何关闭？
 --------------------------------------------------------------------------
 
   - 如果您使用的是 one-time flash (Release) 模式，那么 flash 加密和 secure boot 都是不能关闭的。
-  - 如果您使用的是 reflashable (Development (NOT SECURE)) 模式，那么 flash 加密可以关闭，请参见 `关闭 Flash 加密 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/security/flash-encryption.html#disabling-flash-encryption>`_；secure boot 不能关闭。
+  - 如果您使用的是 reflashable (Development (NOT SECURE)) 模式，那么 flash 加密可以关闭，请参见 `关闭 Flash 加密 <https://docs.espressif.com/projects/esp-idf/zh_CN/v4.4.2/esp32/security/flash-encryption.html#id16>`_；secure boot 不能关闭。
 
 --------------
 
@@ -94,7 +94,7 @@ ESP32 保护固件安全的方式有那些？
 ESP32 启动 flash 加密后进行 GDB 调试，为何会不断复位重启？
 ---------------------------------------------------------------------------------------------------------
 
-  - ESP32 启动了 flash 加密或 secure Boot 后，默认将会禁用 JTAG 调试，请参见说明 `注意事项和补充内容 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-with-flash-encryption-or-secure-boot>`_。
+  - ESP32 启动了 flash 加密或 secure Boot 后，默认将会禁用 JTAG 调试，请参见说明 `注意事项和补充内容 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-debugging-security-features>`_。
   - 可以通过 esptool 工具包中的 ``espefuse.py summary`` 脚本指令读取当前芯片 JTAG 状态。 
 
 ---------------

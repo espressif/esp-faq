@@ -32,7 +32,7 @@ Does ESP32's Wi-Fi Mesh supports No Router self-networking?
 What is the maximum number of node layers allowed when ESP32 uses Wi-Fi Mesh?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - In the Wi-Fi Mesh network, you can set the maximum number of layers via `esp_mesh_set_max_layer() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_mesh.html#_CPPv422esp_mesh_set_max_layeri>`_.
+  - In the Wi-Fi Mesh network, you can set the maximum number of layers via `esp_mesh_set_max_layer() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp-wifi-mesh.html#_CPPv422esp_mesh_set_max_layeri>`_.
   - For tree topology structure, the maximum number is 25; while for chain topology structure, the maximum number is 1000.
   
 -----------------------
@@ -93,7 +93,7 @@ What is the default mode for ESP-MESH nodes without any configuration?
 ESP-MESH starts with AP+STA mode enabled, can the phone search for APs?
 ---------------------------------------------------------------------------------------------------------------------------------
 
-  - No, ESP-MESH is a private protocol of Espressif, please refer to `WIFI-MESH Introduction <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/esp-wifi-mesh.html/>`_ .
+  - No, ESP-MESH is a private protocol of Espressif, please refer to `WIFI-MESH Introduction <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/esp-wifi-mesh.html>`_ .
 
 ---------------
 
@@ -108,7 +108,7 @@ When using an ESP32 as a master device to synchronize time for multiple slave de
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - For this application scenario, it is recommended to develop based on esp-mdf, please refer to `esp-mdf/examples/development_kit/light <https://github.com/espressif/esp-mdf/blob/master/examples/development_kit/light /main/light_example.c>`_ example.
-  - Please use `esp_mesh_get_tsf_time() <https://docs.espressif.com/projects/esp-idf/en/release-v4.2/esp32/api-reference/network/esp_mesh.html?highlight=esp_mesh_get_tsf_time#_CPPv421esp_mesh_get_tsf_time>`_, whose accuracy can meet your demand.
+  - Please use `esp_mesh_get_tsf_time() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp-wifi-mesh.html#_CPPv421esp_mesh_get_tsf_timev>`_, whose accuracy can meet your demand.
 
 ---------------
 

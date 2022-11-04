@@ -116,7 +116,7 @@ ESP RainMaker 是否支持设备与设备之间的联动？
 -----------------------------------------------
 
   支持，在 ESP RainMaker 中称为自动触发与响应 (Automation Trigger and Actions)，但设置触发的对象为节点与节点而非设备与设备。通过 `addAutomationTriggerAction <https://swaggerapis.rainmaker.espressif.com/#/Automation%20Trigger%20and%20Actions/addAutomationTriggerAction>`_ 进行设置，该功能运行在云端，一旦符合预设的规则便会自动发送响应给目标节点。
-
+  
 --------------
 
 ESP RainMaker 是否支持 App 端的消息推送？
@@ -232,10 +232,10 @@ ESP RainMaker 是否支持本地控制？
 
 --------------
 
-`Swagger <https://swaggerapis.rainmaker.espressif.com/#/>`_ 上提供的 RESTful API 可以在线调试吗?
+`Swagger <https://swaggerapis.rainmaker.espressif.com/>`_ 上提供的 RESTful API 可以在线调试吗?
 ----------------------------------------------------------------------------------------------------------
 
-  可以，点击每条 API 右侧的 `Try it out` 按钮即可。需要注意的是，如果 API 带有锁的图标意味着需要 accesstoken 才能执行，您需要先使用 `login <https://swaggerapis.rainmaker.espressif.com/#/User/login>`_ 进行登录，该接口将返回三组 token，随后点击页面上方的 Authorize 将 accesstoken 填入到页面中即可。
+  可以，点击每条 API 右侧的 `Try it out` 按钮即可。需要注意的是，如果 API 带有锁的图标意味着需要 accesstoken 才能执行，您需要先使用 `swaggerapis <https://swaggerapis.rainmaker.espressif.com/>`_ 里的 user login 进行登录，该接口将返回三组 token，随后点击页面上方的 Authorize 将 accesstoken 填入到页面中即可。
 
 --------------
 

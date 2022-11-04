@@ -153,7 +153,7 @@ After downloading program and powering on EPS8266, the serial port printed the f
     ets Jan  8 2013,rst cause:1, boot mode:(7,7)
     waiting for host
 
-  - `waiting for host` means the Boot is in SDIO mode, indicating that GPIO15 (MTDO) is pulled up (HIGH), please refer to `ESP8266 Boot Mode Description <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process#esp -boot-modes>`_.
+  - `waiting for host` means the Boot is in SDIO mode, indicating that GPIO15 (MTDO) is pulled up (HIGH), please refer to `ESP8266 Boot Mode Description <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process>`_.
   
 ----------------
 
@@ -244,4 +244,4 @@ After using the ESP32-WROVER-E module to download the program, the following log
       invalrd header：0xffffffff
       invalrd header：0xffffffff
 
-  - Generally, it is because the GPIO12 was pulled high. It is recommended to pull it low and see the results. Please see `ESP32 Boot Log Guide <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html?highlight=boot#boot-mode-message>`_.
+  - Generally, it is because the GPIO12 was pulled high. It is recommended to pull it low and see the results. Please see `ESP32 Boot Log Guide <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html#select-bootloader-mode>`_.

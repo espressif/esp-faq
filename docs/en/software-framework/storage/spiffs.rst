@@ -27,4 +27,4 @@ Can SPIFFS partition be encrypted?
 How do I store the keys and certs of ESP32 devices in spiffs?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  You can generate an SPIFFS image from files and flash it to the corresponding partition. See `SPIFFS Filesystem <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py/>`_ for details.
+  You can generate an SPIFFS image from files and flash it to the corresponding partition. See `SPIFFS Filesystem <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/spiffs.html#spiffsgen-py>`_ for details.
