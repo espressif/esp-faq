@@ -100,3 +100,13 @@ Matter 是否可以对接三星的 smartthings？
 ----------------------------------------------------------------------------------------------------------------------
 
   - 可以对接，请参考 `配置测试 smartthings 官方博客 <https://blog.smartthings.com/roundups/smartthings-tests-matter-compatible-products-in-anticipation-of-new-smart-home-standard/>`_。
+
+---------------------
+
+能否使用 Amazon/Google/Apple 的语音设备远程控制支持 Matter 的 ESP 设备？语音设备是否需要支持 Matter 协议？（比如：语音 “Turn off the light” 可以关掉家里的灯）
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 使用支持 Matter 协议的 Amazon/Google/Apple 语音设备，可以实现在手机上远程控制支持 Matter 的设备。另外，对于其他的生态系统，如果也支持 Matter 协议的生态系统，那这个生态系统的音箱等家庭中枢设备也能实现远程控制支持 Matter 的设备。
+  - 具体实践步骤为：基于 `esp-matter <https://github.com/espressif/esp-matter>`_ SDK 来搭建 Matter 应用场景进行测试。
+    - `Google Matter 测试方法 <https://developers.home.google.com/matter/get-started>`_
+    - `Apple Matter 测试方法 <https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/darwin.md>`_
