@@ -6,6 +6,8 @@ stages:
 check_en_doc_links:
     stage: test
     image: $CI_SPHINX_DOCKER
+    rules:
+      - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^maintain/
     allow_failure: true
     tags:
       - build_docs
@@ -17,6 +19,8 @@ check_en_doc_links:
 check_cn_doc_links:
     stage: test
     image: $CI_SPHINX_DOCKER
+    rules:
+      - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME =~ /^maintain/
     allow_failure: true
     tags:
       - build_docs
