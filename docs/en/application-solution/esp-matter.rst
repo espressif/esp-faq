@@ -100,3 +100,13 @@ Does Matter work with Samsung's smartthings?
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes, please refer to `Configuration test smartthings official blog <https://blog.smartthings.com/roundups/smartthings-tests-matter-compatible-products-in-anticipation-of-new-smart-home-standard/>`_.
+
+---------------------
+
+Can Matter-enabled ESP devices be remotely controlled using Amazon/Google/Apple voice devices? Do these voice devices need to support the Matter protocol? (For example: Voice "Turn off the light" can turn off the lights in the house)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Using Amazon/Google/Apple voice devices that support Matter protocol, it is possible to remotely control Mattter ESP devices. In addition, if other ecosystems also support the ecosystem of the Matter protocol, then the home hub devices such as speakers in this ecosystem can also control the Matter devices remotely.
+  - The specific practical steps are: build a Matter application scenario for testing based on the `esp-matter <https://github.com/espressif/esp-matter>`_ SDK.
+    - `Google Matter Test Method <https://developers.home.google.com/matter/get-started>`_
+    - `Apple Matter Test Method <https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/darwin.md>`_
