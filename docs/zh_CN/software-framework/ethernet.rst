@@ -160,3 +160,10 @@ ESP32-S2 是否可以外接以太网？
 ------------------------------------------------------------------------
 
   - 可以，目前 ESP-IDF 已经提供了 DM9051 模块的驱动，该模块内部集成以太网的 MAC 和 PHY 功能，可以和 MCU 之间通过 SPI 接口进行通讯。DM9051 上集成了 MAC+PHY 的模块，请参考 `参考示例 <https://github.com/espressif/esp-idf/tree/master/examples/ethernet/>`_ 以及 `使用说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-reference/network/index.html#id1>`_。
+
+---------------------
+
+ESP32 是否支持 EMAC 与 SPI 以太网模块同时使用？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 支持，ESP32 可同时使用 EMAC 和一至两个 SPI 以太网模块。可基于 `esp-idf/examples/ethernet/basic <https://github.com/espressif/esp-idf/tree/master/examples/ethernet/basic>`_ 例程在 menuconfig 中同时开启 PHY 和 SPI 以太网进行测试。
