@@ -168,3 +168,10 @@ Is it possible to connect ESP32-S2 to Ethernet externally?
 ------------------------------------------------------------------------
 
   - Yes, ESP-IDF currently provides drivers for the DM9051 module, which has integrated Ethernet MAC and PHY functionality and can communicate with the MCU via the SPI interface. The DM9051 has an integrated MAC+PHY module, please refer to `example reference <https://github.com/espressif/esp- idf/tree/master/examples/ethernet/> `_ and `API reference <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-reference/network/index.html#id1>`_.
+
+------------
+
+Do the ESP32 series chips support to use EMAC and SPI-Ethernet modules simultaneously?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes. ESP32 series chips support to use EMAC and one or two SPI-Ethernet modules simultaneously. You can start PHY and SPI-Ethernet modules simultaneously in menuconfig to test by referring to the example `esp-idf/examples/ethernet/basic <https://github.com/espressif/esp-idf/tree/master/examples/ethernet/basic>`_.
