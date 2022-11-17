@@ -585,3 +585,10 @@ Can ESP32 Bluetooth LE use PSRAM?
 -------------------------------------------------------------------
 
   To enable Bluetooth LE to use PSRAM, please go to ``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` and enable `BT/BLE will first malloc the memory from the PSRAM <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-reference/kconfig.html?highlight=config_bt_allocation_from_spiram_first#config-bt-allocation-from-spiram-first>`_。
+
+-------------
+
+When using ESP32-C3 BLE Scan, can I set it to only scan the Long Range devices?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, you can make tests based on `esp-idf/examples/bluetooth/bluedroid/ble_50/ble50_security_client <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/bluetooth/bluedroid/ble_50/ble50_security_client>`_. By changing the configuration `.cfg_mask = ESP_BLE_GAP_EXT_SCAN_CFG_UNCODE_MASK | ESP_BLE_GAP_EXT_SCAN_CFG_CODE_MASK` in `ext_scan_params <https://github.com/espressif/esp-idf/blob/7f4bcc36959b1c483897d643036f847eb08d270e/examples/bluetooth/bluedroid/ble_50/ble50_security_client/main/ble50_sec_gattc_demo.c#L58>`_ to `.cfg_mask = ESP_BLE_GAP_EXT_SCAN_CFG_CODE_MASK`, you can scan the broadcast packets whose primary PHY type is LE CODED PHY.

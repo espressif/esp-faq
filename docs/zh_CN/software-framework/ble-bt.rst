@@ -585,3 +585,10 @@ ESP32 低功耗蓝牙可以使用 PSRAM 吗？
 -------------------------------------------------------------------
 
   请前往 ``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` 开启 `BT/BLE will first malloc the memory from the PSRAM <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/kconfig.html?highlight=config_bt_allocation_from_spiram_first#config-bt-allocation-from-spiram-first>`_ 配置，即可让低功耗蓝牙使用 PSRAM。
+
+------------
+
+使用 ESP32-C3 BLE Scan 时，是否可以设置仅扫描 Long Range 的设备？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以，可基于 `esp-idf/examples/bluetooth/bluedroid/ble_50/ble50_security_client <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/bluetooth/bluedroid/ble_50/ble50_security_client>`_ 例程来测试。将 `ext_scan_params <https://github.com/espressif/esp-idf/blob/7f4bcc36959b1c483897d643036f847eb08d270e/examples/bluetooth/bluedroid/ble_50/ble50_security_client/main/ble50_sec_gattc_demo.c#L58>`_ 参数配置中 `.cfg_mask = ESP_BLE_GAP_EXT_SCAN_CFG_UNCODE_MASK | ESP_BLE_GAP_EXT_SCAN_CFG_CODE_MASK` 改为 `.cfg_mask = ESP_BLE_GAP_EXT_SCAN_CFG_CODE_MASK`, 这样就可以仅扫描到 primary PHY 类型为 LE CODED PHY 的广播包。
