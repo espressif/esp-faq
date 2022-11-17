@@ -113,7 +113,7 @@ The ESP32-C3 chip can use USB to download firmware, but it is not supported unde
 Does the ESP32-S2 support USB HID?
 -----------------------------------------------------------------------
 
-  Supported.
+  Supported. But currently only USB HID Device is supported, please refer to `USB HID Device example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_hid_device>`_.
 
 ---------------
 
@@ -149,7 +149,8 @@ Does ESP32-S3 support devices with USB Device being Class 0?
 Can the ESP32-S3's USB OTG interface be used in both USB Host and USB Device modes?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  The ESP32-S3's USB OTG interface can not be used both as USB Host and USB Device at the same time. However, it is possible to switch between USB Host and USB Device modes by software. 
+  - The ESP32-S3's USB OTG interface can not be used as USB Host and USB Device at the same time. However, it is possible to switch between the USB Host mode and the USB Device mode by software.
+  - If you need the standard negotiation function of USB OTG, please note that currently ESP32-S3 only supports this function on the hardware, and does not support it in software protocol.
   
 ----------------
 
@@ -164,3 +165,73 @@ Can ESP32-S3 use an external USB hub chip with two of its USB ports connecting t
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The ESP32-S3 USB does not support connection to an external USB hub chip currently because there is no driver support.
+
+---------------------
+
+When ESP32-S2/ESP32-S3 serves as the UVC Host and connects some models of UVC cameras, why is there an error `HID_PIPI_EVENT_ERROR_OVERFLOW` in the log?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This is because MPS of the Alt interface endpoint of the selected camera is too large (ESP32-S2/ESP32-S3 supports up to 512 bytes). Please confirm whether the camera has an interface of less than or equal to 512 bytes under USB1.1.
+
+---------------------
+
+Does ESP32-S2/ESP32-S3 have a USB 4G Internet access solution?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, please refer to `USB CDC 4G Module Example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_4g_module>`_.
+
+---------------------
+
+Is there any USB CDC Host example for ESP32-S2/ESP32-S3?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, please refer to `USB CDC Host Example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_basic>`_.
+
+---------------------
+
+When burning firmware through the ESP32-S2/ESP32-S3 USB Serial/JTAG Controller function, I found that the PC sometimes cannot recognize the USB serial port, or automatically disconnects from the USB serial port repeatedly after recognizing it. What is the reason?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  At present, the startup logic of the ESP32/ESP32-S2/ESP32-S3/ESP32-C3 chip is: if it cannot start normally (due to empty flash, no correct data/firmware in flash, the power-on sequence problem of flash, etc.), the internal timer will trigger the chip to restart every few seconds. The chip cannot connect stably until the program starts normally or enters the download mode. The ESP32-S3/ESP32-C3 USB-Serial-JTAG peripheral will be re-initialized when the chip restarts, so the corresponding result is that the chip tries to connect to and disconnects from the PC every few seconds. We provide the following two solutions:
+
+  - You need to boot the chip to enter the download mode manually before the first download or after flash is erased, so that the chip can be connected stably.
+  - You can also burn the firmware that can run stably through UART in advance to solve this issue. If there is firmware that can run stably in the chip, the USB serial port of the chip can be connected stably in subsequent programming.
+  
+  If there is no strap pin test point reserved for booting manually, you may need to try several times in the initial USB download.
+
+---------------------
+
+Why does ESP32-S2/ESP32-S3 not reach the maximum USB full speed, 12 Mbps?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  We will explain this issue with the TinyUSB protocol stack as an example. As this USB mode does not use DMA, but directly uses CPU polling, some time slices are wasted in each transfer. As a result, the TinyUSB protocol stack is only expected to reach 6.4 Mbps (it can reach 9.628 Mbps theoretically if the batch transfer is adopted).
+
+---------------------
+
+How can I confirm if ESP32-S2/ESP32-S3 USB supports a certain USB camera or not?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  First, you need to acquire the descriptor information of the USB camera. For example, you need to enter `lsusb -v` in the Linux terminal, and then check the wMaxPacketSize of the endpoint descriptor in the interface descriptor where bInterfaceSubClass is `2 Video Streaming`. ESP32-S2/ESP32-S3 USB only supports USB cameras that correspond to wMaxPacketSize Video Streaming endpoints which include 512 bytes at the maximum.
+
+---------------------
+
+What is the maximum resolution of USB cameras that ESP32-S2/ESP32-S3 support?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - If we do not consider local JPEG decoding, the bottleneck is the throughput rate of USB. The USB camera generally adopts synchronous transmission. ESP USB has a limitation of FIFO size, which can reach 500 KB/s at the maximum currently. Thus, if you want to achieve 15 frames, the size of each frame can only be 33 KB. The maximum resolution that can be achieved by 33 KB depends on the compression rate, and generally it can reach 480 * 320.
+  - If you take local JPEG decoding into consideration, you also need to consider whether this resolution can reach 15 frames per second.
+
+---------------------
+
+Can the ESP32-S2/ESP32-S3 USB recognize the USB plugging and unplugging action when it is used as a USB CDC Device?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, the USB device uses the tinyusb protocol stack, including `mount and umount callback functions <https://github.com/espressif/esp-iot-solution/blob/usb/add_usb_solutions/examples/usb/device/usb_uart_bridge/main/usb_uart_bridge_main.c#L119>`_ to response the USB plugging and unplugging events.
+
+---------------------
+
+After enabling the RNDIS and CDC functions on the ESP32-S3 USB, I found that the PC can recognize the COM port. However, the automatic programming function of the COM port is invalid. Is it expected?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+   - Yes. The USB auto-programming function is implemented through the USB-Seial-JTAG peripheral, and the USB RNDIS function is implemented through the USB-OTG peripheral. However, only one of the two peripherals can work at a moment.
+   - If the USB-OTG peripheral is used in the application, the automatic programming function implemented by the USB-Seial-JTAG peripheral will not be available. But you can manually enter the download mode for USB burning.
