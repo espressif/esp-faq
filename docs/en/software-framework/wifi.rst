@@ -1283,3 +1283,11 @@ Why does ESP-NOW limit the data length of each packet to 250 bytes? Can it be mo
 
   - The maximum length cannot be changed. ESP-NOW uses one vendor-specific element field of action frame to transmit ESP-NOW data, whose length field is only 1 byte (0xff = 255) as defined by IEEE 802.11. Thus, the maximum length of ESP-NOW data is limited to 250 bytes.
   - Or try with API ``esp_wifi_80211_tx()`` to send and sniffer mode to receive, both could work only base on Wi-Fi stack and without TCP/IP stack.
+
+---------------
+
+What should I pay attention to when using ESP-NOW applications?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The device cannot switch channels after connecting to Wi-Fi, but can only transmit and receive data on the current Wi-Fi channel.
+  - After the device enters the modem sleep mode, it cannot receive data from ESP-NOW.
