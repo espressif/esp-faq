@@ -355,6 +355,8 @@ When using the ESP32-WROOM-32D module, can I set GPIO12 for other uses?
 
   - GPIO12 is a strapping pin that controls the startup voltage of SPI flash. The SPI flash startup voltage of the ESP32-WROOM-32D module is 3.3 V, so GPIO12 needs to be pulled up during powering on.
   - If you need to set GPIO12 for other uses, please use the command `espefuse.py set_flash_voltage 3.3v <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/set-flash-voltage-cmd.html#set-flash-voltage>`_ in the esptool to set the voltage through VDD_SDIO as 3.3 V.
+  - It is possible to connect VDD_SDIO to 3.3 V in hardware directly without burning eFuse again.
+  - In the mass production stage, you can also download the firmware directly by modifying the default configuration of ESP32_EFUSE_CONFIG to config_voltage = 3.3 V in config/esp32/utility.confgi in the flash download tool.
 
 --------------------
 
