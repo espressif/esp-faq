@@ -8,7 +8,7 @@ ESP-FAQ 是由乐鑫官方推出的针对常见问题的总结文档。
 
 ## 文档托管
 
-* English: https://docs.espressif.com/projects/espressif-esp-faq/en/latest/ (待完善)
+* English: https://docs.espressif.com/projects/espressif-esp-faq/en/latest/
 * 中文: https://docs.espressif.com/projects/espressif-esp-faq/zh_CN/latest/
 
 ## ESP-FAQ 文档框架
