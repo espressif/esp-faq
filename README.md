@@ -8,7 +8,7 @@ ESP-FAQ is a summary document for common problems launched by Espressif.
 
 ## Hosted Documentation
 
-* English: https://docs.espressif.com/projects/espressif-esp-faq/en/latest/ (TODO)
+* English: https://docs.espressif.com/projects/espressif-esp-faq/en/latest/
 * 中文: https://docs.espressif.com/projects/espressif-esp-faq/zh_CN/latest/
 
 ## ESP-FAQ Document framework

@@ -16,7 +16,7 @@ IDE plugins
 --------------
 
 How to add ESP32 development board on Arduino IDE?
--------------------------------------------------------------------
+----------------------------------------------------------------------------
 
   - For installation instructions of Arduino-ESP32, please refer to `arduino-ide getting started <https://docs.espressif.com/projects/arduino-esp32/en/latest/getting_started.html>`_.
   - For instructions on how to add development boards on Arduino IDE, please refer to `arduino Cores <https://www.arduino.cc/en/Guide/Cores>`_.
