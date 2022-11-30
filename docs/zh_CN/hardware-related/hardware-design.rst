@@ -353,7 +353,7 @@ ESP32 芯片当 VDD 供电从 0 V 慢慢升到 3.3 V 时，芯片为何无法正
 使用 ESP32-WROOM-32D 模组，是否可以使用 GPIO12 用作其他功能？
 --------------------------------------------------------------------------------------------------------------------------------------
 
-  - GPIO12 为 Strapping 管脚，控制 SPI flash 的启动电压。ESP32-WROOM-32D 模组的 SPI flash 启动电压为 3.3 V，因此在上电启动时 GPIO12 需要拉高。
+  - GPIO12 为 Strapping 管脚，控制 SPI flash 的启动电压。ESP32-WROOM-32D 模组的 SPI flash 启动电压为 3.3 V，因此在上电启动时 GPIO12 需要拉低。
   - 若需要使用 GPIO12 用作其他功能，请使用 esptool 工具通过 `espefuse.py set_flash_voltage 3.3V <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/set-flash-voltage-cmd.html#set-flash-voltage>`_ 命令将 VDD_SDIO 固定为 3.3 V。
   - 硬件上可以将 VDD_SDIO 直接连到 3.3 V 上，这样就不用再烧录 eFuse。
   - 在量产阶段，也可以直接将 flash 下载工具里 "config/esp32/utility.confgi" 文件下 ESP32_EFUSE_CONFIG 的默认配置选项修改为 config_voltage = 3.3 V 来下载固件。
