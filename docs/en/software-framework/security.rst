@@ -34,7 +34,7 @@ Is it possible to encrypt firmware for ESP8285?
 What is the difference between secure boot v1 and v2?
 ------------------------------------------------------
 
-  Currently, `secure boot v1 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html>`_ is reommended for earlier versions than ESP32 ECO3，and `secure boot v2 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html>`_ is recommended for ESP32 ECO3 and later versions, ESP32-C3, ESP32-S2, and ESP32-S3。
+  Currently, `secure boot v1 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html>`_ is reommended for earlier versions than ESP32 v3.0，and `secure boot v2 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html>`_ is recommended for ESP32 v3.0 and later versions, ESP32-C3, ESP32-S2, and ESP32-S3。
   
   Compared with secure boot v1, secure boot v2 has the following improvements:
   - The bootloader and app use the same signature format.
@@ -87,7 +87,7 @@ Is there any security strategy for ESP32 to protect its firmware?
   - ESP32 supports flash encryption and secure boot.
   - For flash encryption, please refer to `flash encryption <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html>`_.
   - For secure boot, please refer to `secure boot <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html>`_.
-  - For secure boot V2, please refer to `ECO3 Chip secure boot V2 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html>`_.
+  - For secure boot V2, please refer to `secure boot V2 for chip revision v3.0 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html>`_.
 
 --------------
 
