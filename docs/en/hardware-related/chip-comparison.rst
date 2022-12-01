@@ -26,11 +26,11 @@ What is the difference between ESP32 with a single core and ESP32 with dual core
 
 --------------
 
-What's the difference between ESP32 ECO V3 and previous chip versions in software and hardware?
----------------------------------------------------------------------------------------------------
+What's the difference between ESP32 chip revision v3.0 and previous chip revisions in software and hardware?
+-----------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - For software usage, there is no difference, and ESP32 ECO V3 is compatible with old firmwares. For hardware, some bugs have been fixed in ESP32 ECO V3.
-  - For more information on design changes, please refer to `ESP32 ECO V3 User Guide <https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__EN.pdf>`_.
+  - For software usage, there is no difference, and ESP32 v3.0 is compatible with old firmwares. For hardware, some bugs have been fixed in ESP32 v3.0.
+  - For more information on design changes, please refer to `ESP32 Chip Revision v3.0 User Guide <https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__EN.pdf>`_.
 
 ---------------
 
@@ -69,8 +69,8 @@ Can VDD3P3_RTC of ESP32 be powered by an independent battery?
 What is the difference between ESP32-PICO-D4, ESP32-PICO-V3, and ESP32-PICO-V3-02?
 -----------------------------------------------------------------------------------
 
-  - ESP32-PICO-D4 is based on the ECO V1 version of ESP32, whereas ESP32-PICO-V3 and ESP32-PICO-V3-02 adopt the ECO V3 version of ESP32.
-  - The three kinds of SiPs employ the same body size in package. Most of the GPIOs are same in the three kinds of SiPs except flash and PSRAM. The ECO V3 version changes functions of partial pins. For more information, please refer to the datasheets.
+  - ESP32-PICO-D4 is based on the chip revision v1.0 of ESP32, whereas ESP32-PICO-V3 and ESP32-PICO-V3-02 adopt the revision v3.0 of ESP32.
+  - The three kinds of SiPs employ the same body size in package. Most of the GPIOs are same in the three kinds of SiPs except flash and PSRAM. The revision v3.0 changes functions of partial pins. For more information, please refer to the datasheets.
 
 ---------------
 

@@ -167,7 +167,7 @@ ESP32 Bluetooth® LE 如何进入 Light-sleep 模式呢？
 
   - | Configure external 32.768 kHz crystal as RTC clock source :| ``menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``RTC clock source (External 32 kHz crystal)[*] Additional current for external 32 kHz crystal``
 
-  .. note:: "additional current" 选项为解决 ESP32 晶振失败的替代方案。请在您使用外部 32 kHz 晶体时使能该选项。该硬件问题将在下一个 ECO 芯片中解决。
+  .. note:: "additional current" 选项为解决 ESP32 晶振失败的替代方案。请在您使用外部 32 kHz 晶体时使能该选项。该硬件问题将在下一个芯片版本中解决。
 
   - | Enable Bluetooth modem sleep with external 32.768 kHz crystal as low power clock :| ``menuconfig`` > ``Component config`` > ``Bluetooth`` > ``Bluetooth controller`` > ``MODEM SLEEP Options`` > ``[*] Bluetooth modem sleep``
 

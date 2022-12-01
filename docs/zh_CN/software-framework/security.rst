@@ -34,7 +34,7 @@ ESP8285 是否可以固件加密？
 secure boot v1 和 secure boot v2 的区别？
 ------------------------------------------------------
 
-当前，仅 ESP32 ECO3 以下版本推荐使用 `secure boot v1 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html>`_，ESP32 ECO3 及以上、ESP32-C3、ESP32-S2 和 ESP32-S3 推荐使用 `secure boot v2 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html>`_。
+当前，仅 ESP32 v3.0 以下版本推荐使用 `secure boot v1 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html>`_，ESP32 v3.0 及以上、ESP32-C3、ESP32-S2 和 ESP32-S3 推荐使用 `secure boot v2 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html>`_。
   
   secure boot v2 相较于 secure boot v1 主要做了以下方面的改进：
   - bootloader 和 app 使用相同的签名格式。
@@ -87,7 +87,7 @@ ESP32 保护固件安全的方式有那些？
   - ESP32 支持 flash encryption 与 secure boot。
   - flash 加密参考文档：`flash encryption <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html>`_。
   - 安全引导参考文档：`secure boot <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html>`_。
-  - 安全引导 V2 参考文档：`ECO3 Chip secure boot V2 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html>`_。
+  - 安全引导 V2 参考文档：`v3.0 版本芯片的安全引导 V2 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html>`_。
 
 --------------
 

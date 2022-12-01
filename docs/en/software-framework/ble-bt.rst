@@ -167,7 +167,7 @@ How does ESP32 Bluetooth® LE enter Light-sleep mode?
 
   - | Configure external 32.768 kHz crystal as RTC clock source :| ``menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``RTC clock source (External 32 kHz crystal)[*] Additional current for external 32 kHz crystal``
 
-  .. note:: The "additional current" option is a workaround for a hardware issue on ESP32 that the crystal can fail in oscillating. Please enable this option when you use external 32 kHz crystal. This hardware issue will be resolved in the next ECO chip.
+  .. note:: The "additional current" option is a workaround for a hardware issue on ESP32 that the crystal can fail in oscillating. Please enable this option when you use external 32 kHz crystal. This hardware issue will be resolved in the next chip revision.
 
   - | Enable Bluetooth modem sleep with external 32.768kHz crystal as low power clock :| ``menuconfig`` > ``Component config`` > ``Bluetooth`` > ``Bluetooth controller`` > ``MODEM SLEEP Options`` > ``[*] Bluetooth modem sleep``
 

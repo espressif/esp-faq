@@ -26,11 +26,11 @@
 
 --------------
 
-ESP32 ECO V3 芯⽚在软硬件使⽤上和之前版本的芯片有什么区别呢？
+ESP32 芯片版本 v3.0 在软硬件使⽤上和之前版本的芯片有什么区别呢？
 ------------------------------------------------------------------------
 
   - 软件上使⽤⽆区别，是兼容之前的固件的，硬件上修复了⼀些 bug。
-  - 具体的设计变化可以参考⽂档 `《ESP32 ECO V3 使用指南》 <https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__CN.pdf>`_。
+  - 具体的设计变化可以参考⽂档 `《ESP32 芯片版本 v3.0 使用指南》 <https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__CN.pdf>`_。
 
 --------------
 
@@ -69,8 +69,8 @@ ESP32 的 VDD3P3_RTC 是否支持单独电池供电？
 ESP32-PICO-D4 和 ESP32-PICO-V3 以及 ESP32-PICO-V3-02 有什么区别？
 -----------------------------------------------------------------------
 
-  - ESP32-PICO-V3 和 ESP32-PICO-V3-02 使用的是 ESP32 的 ECO V3 版本芯片，ESP32-PICO-D4 使用的是 ESP32 的 ECO V1 版本芯片。
-  - 三者芯片封装面积相同，除 flash 与 PSRAM 外，GPIO 大部分相同。ECO V3 存在部分管脚功能调整，具体细则请参考技术规格书。
+  - ESP32-PICO-V3 和 ESP32-PICO-V3-02 使用的是 ESP32 的 v3.0 版本芯片，ESP32-PICO-D4 使用的是 ESP32 的 v1.0 版本芯片。
+  - 三者芯片封装面积相同，除 flash 与 PSRAM 外，GPIO 大部分相同。v3.0 存在部分管脚功能调整，具体细则请参考技术规格书。
 
 ---------------
 
