@@ -26,3 +26,10 @@ When working as the I2S master, does ESP32 support connection to the I2S slave t
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
   
   Yes, but the connection to MCLK depends on the requirements of the codec chip on the other side.
+
+------------------------
+
+Does the I2S interface of ESP32-C3 series chips support the PDM RX mode?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In the software driver, the I2S interface of ESP32-C3 series chips does not support the PDM RX mode. Unlike ESP32-S3, the PDM RX of ESP32-C3 does not have a module supporting converting from PDM to PCM, which means the acquired data is in the RAW PDM format. The data in this format can't be used directly in most cases.
