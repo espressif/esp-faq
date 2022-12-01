@@ -235,3 +235,10 @@ After enabling the RNDIS and CDC functions on the ESP32-S3 USB, I found that the
 
    - Yes. The USB auto-programming function is implemented through the USB-Seial-JTAG peripheral, and the USB RNDIS function is implemented through the USB-OTG peripheral. However, only one of the two peripherals can work at a moment.
    - If the USB-OTG peripheral is used in the application, the automatic programming function implemented by the USB-Seial-JTAG peripheral will not be available. But you can manually enter the download mode for USB burning.
+
+-------------
+
+Does the ESP32-S2/ESP32-S3 support the USB CDC NCM protocol?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Currently, ESP32-S2/ESP32-S3 only supports the USB CDC ECM protocol, but does not support the USB CDC NCM protocol.
