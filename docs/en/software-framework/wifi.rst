@@ -774,10 +774,10 @@ How to test ESP32's Wi-Fi transmission distance?
 
 ---------------------
 
-What is the maximum length of Wi-Fi MTU for an ESP32?
+What is the maximum length of Wi-Fi MTU for an ESP32 and how to change it?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The maximum Wi-Fi MTU length for ESP32 is 1500.
+  - The maximum Wi-Fi MTU length for ESP32 is 1500. You can change this value in the LwIP component by ``netif`` > ``mtu``. However, it is not recommended to change this value.
 
 ---------------
 
