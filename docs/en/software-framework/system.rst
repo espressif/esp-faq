@@ -328,3 +328,10 @@ What versions of esp-idf SDK are supported by ESP32-D0WDR2-V3 chip?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Supported IDF versions are: v4.4.1, v4.3.3, v4.2.3, and v4.1.3.
+
+------------------
+
+When I test OTA applications based on the ESP32 chip, can I delete the default factory partition in the partition table and set the address of the OTA_0 partition to 0x10000?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes. Please note that the offsets of partitions of any app type have to be aligned to 0x10000 (64K).
