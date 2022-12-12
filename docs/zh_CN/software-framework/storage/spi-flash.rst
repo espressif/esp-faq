@@ -63,3 +63,12 @@ ESP8266 如何读取 flash 数据？
   - ``(Top)`` > ``Serial flasher config`` > ``[*] Enable Octal Flash`` > ``Flash SPI mode (OPI)``
   - ``(Top)`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``Mode (QUAD/OCT) of SPI RAM chip in use``
 
+----------------
+
+如何判断 ESP-IDF 是否已经支持某款 flash？ 
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以参考 `Optional features for flash <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/spi_flash_optional_feature.html#bit-address-flash-chips>`_ 来进一步了解 ESP-IDF 支持的 flash 信息，需要注意的是，此文档仅说明 ESP-IDF 代码已支持这些 flash 的特性，并不是乐鑫认证的稳定 flash 列表。
+  - 如需要 flash 选型的进一步支持，可以联系 `乐鑫商务 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`_。
+
+  
