@@ -189,7 +189,7 @@ Is there any USB CDC Host example for ESP32-S2/ESP32-S3?
 
 ---------------------
 
-When burning firmware through the ESP32-S2/ESP32-S3 USB Serial/JTAG Controller function, I found that the PC sometimes cannot recognize the USB serial port, or automatically disconnects from the USB serial port repeatedly after recognizing it. What is the reason?
+When burning firmware through the ESP32-C3/ESP32-S3 USB Serial/JTAG Controller function, I found that the PC sometimes cannot recognize the USB serial port, or automatically disconnects from the USB serial port repeatedly after recognizing it. What is the reason?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   At present, the startup logic of the ESP32/ESP32-S2/ESP32-S3/ESP32-C3 chip is: if it cannot start normally (due to empty flash, no correct data/firmware in flash, the power-on sequence problem of flash, etc.), the internal timer will trigger the chip to restart every few seconds. The chip cannot connect stably until the program starts normally or enters the download mode. The ESP32-S3/ESP32-C3 USB-Serial-JTAG peripheral will be re-initialized when the chip restarts, so the corresponding result is that the chip tries to connect to and disconnects from the PC every few seconds. We provide the following two solutions:
