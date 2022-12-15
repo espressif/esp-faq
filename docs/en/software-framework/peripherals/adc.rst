@@ -129,3 +129,13 @@ Can ESP32 measure different data from two ADC channels at the same time, such as
 ---------------------------------------------------------------------------------------------------------------------------------------------------
    
   It is not possible to read multiple ADC channels at the same time using one ADC, but you can poll the data of both ADC channels in turn.
+
+-------------
+
+When ESP32-S3 ADC is configured as ``ADC_ATTEN_DB_11``, why does the measured voltage not reach ``3100 mV``?
+-------------------------------------------------------------------------------------------------------------------
+
+  When ESP32-S3 ADC1 or ADC2 is configured as ``ADC_ATTEN_DB_11``, the voltage measurement should be in the range of ``0 ~ 3100 mV``. However, the maximum voltage measurement of some chips may be less than ``3100 mV`` due to consistency issues. You may use the following two solutions to fix this issue:
+
+- Solution 1: Try to avoid using the boundary voltage values. You can use a divider circuit to reduce the input voltage to an intermediate value for higher accuracy and consistency. 
+- Solution 2: Use the software `ADC Range Extension Solution <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/others/adc_range.html>`_ to increase the maximum voltage measurement to ``3300 mV``.
