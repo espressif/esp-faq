@@ -15,13 +15,6 @@ System
 
 --------------
 
-Is it possible to compile the binaries in application layer and bottom layer separately?
---------------------------------------------------------------------------------------------
-
-  No, they cannot be compiled separately.
-
---------------
-
 My application does not really need the watchdog timer, can I disable it?
 ----------------------------------------------------------------------------
 
@@ -29,27 +22,36 @@ My application does not really need the watchdog timer, can I disable it?
 
   - If your routine needs a time frame of duration between software reset and hardware watchdog reset, you may use system_soft_wdt_stop () to disable the software watchdog. After the program has been executed, you can restart the software watchdog with system_soft_wdt_restart ().
   - You may feed the watchdog in between your codes by adding system_soft_wdt_feed () so that the watchdog is updated before it issues a reset.
-
-  The hardware watchdog interrupt interval is 0.8*2048 ms, that is 1638.4 ms. The interrupt handling interval is 0.8*8192 ms, equal to 6553.6 ms. The interrupt handling interval is the time limit to feed the watchdog after the interrupt occurs. If the interrupt handling interval expires, it will trigger a hardware watchdog reset. As a result, in the cases where there is only hardware watchdog, if a program runs for over 6553.6 ms, then it could cause a hardware watchdog reset. If the program runs for over 8192 ms, then it will invoke a watchdog reset for sure.
-
-  The software watchdog is based on MAC timer and task arrangement. The interrupt interval is 1600 ms, so is the interrupt handling interval. As a result, in the cases where there are both software and hardware watchdogs, if a program runs for over 1600 ms, it could cause a software watchdog reset. If the program runs for over 3200 ms, it will invoke a watchdog reset for sure.
+  - The hardware watchdog interrupt interval is 0.8*2048 ms, that is 1638.4 ms. The interrupt handling interval is 0.8*8192 ms, equal to 6553.6 ms.
+  - The interrupt handling interval is the time limit to feed the watchdog after the interrupt occurs. If the interrupt handling interval expires, it will trigger a hardware watchdog reset.
+  - As a result, in the cases where there is only hardware watchdog, if a program runs for over 6553.6 ms, then it could cause a hardware watchdog reset. If the program runs for over 8192 ms, then it will invoke a watchdog reset for sure.
+  - The software watchdog is based on MAC timer and task arrangement. The interrupt interval is 1600 ms, so is the interrupt handling interval.
+  - As a result, in the cases where there are both software and hardware watchdogs, if a program runs for over 1600 ms, it could cause a software watchdog reset. If the program runs for over 3200 ms, it will invoke a watchdog reset for sure.
 
 --------------
 
 What are the differences between RTOS SDK and Non-OS SDK?
 -----------------------------------------------------------
+
   The main differences are as follows:
 
-  - Non-OS SDK
+  **Non-OS SDK**
 
-     Non-OS SDK uses timers and callbacks as the main way to perform various functions - nested events and functions triggered by certain conditions. Non-OS SDK uses the espconn network interface; users need to develop their software according to the usage rules of the espconn interface.
+  - Non-OS SDK uses timers and callbacks as the main way to perform various functions - nested events and functions triggered by certain conditions. Non-OS SDK uses the espconn network interface; users need to develop their software according to the usage rules of the espconn interface.
 
-  - RTOS SDK
+  **RTOS SDK**
 
-     1. FreeRTOS SDK is based on FreeRTOS , a multi-tasking OS. You can use the standard FreeRTOS interfaces to realize resource management, recycling operations, execution delay, inter-task messaging and synchronization, and other task-oriented process design approaches. For the specifics of interface methods, please refer to the official website of FreeRTOS or the book USING THE FreeRTOS REAL TIME KERNEL-A Practical Guide.
-     2. The network operation interface in RTOS SDK is the standard lwIP API. RTOS SDK provides a package which enables BSD Socket API interface. Users can directly use the socket API to develop software applications; and port other applications from other platforms using socket API to ESP8266, effectively reducing the learning and development cost arising from platform switch.
-     3. RTOS SDK introduces cJSON library whose functions make it easier to parse JSON packets.
-     4. RTOS is compatible with Non-OS SDK in Wi-Fi interfaces, SmartConfig interfaces, Sniffer related interfaces, system interfaces, timer interface, FOTA interfaces and peripheral driver interfaces, but does not support the AT implementation.
+  - FreeRTOS SDK is based on FreeRTOS , a multi-tasking OS. You can use the standard FreeRTOS interfaces to realize resource management, recycling operations, execution delay, inter-task messaging and synchronization, and other task-oriented process design approaches. For the specifics of interface methods, please refer to the official website of FreeRTOS or the book USING THE FreeRTOS REAL TIME KERNEL-A Practical Guide.
+  - The network operation interface in RTOS SDK is the standard lwIP API. RTOS SDK provides a package which enables BSD Socket API interface. Users can directly use the socket API to develop software applications; and port other applications from other platforms using socket API to ESP8266, effectively reducing the learning and development cost arising from platform switch.
+  - RTOS SDK introduces cJSON library whose functions make it easier to parse JSON packets.
+  - RTOS is compatible with Non-OS SDK in Wi-Fi interfaces, SmartConfig interfaces, Sniffer related interfaces, system interfaces, timer interface, FOTA interfaces and peripheral driver interfaces, but does not support the AT implementation.
+
+--------------
+
+Why does the log output ets_main.c when ESP8266 starts?
+----------------------------------------------------------
+
+  If ESP8266 prints ``ets_main.c`` when it starts, it indicates there are no programs that can be operated. Please check the binary file and burn address if you encounter this issue.
 
 --------------
 
@@ -63,11 +65,61 @@ Why do I get compile errors when using IRAM_ATTR in Non-OS SDK?
 Where is main function in ESP8266?
 -----------------------------------
 
-  - ESP8266 SDK does not provide main function.
-  - Main function is stored in first-stage bootloader in ROM, which is used to load second-stage bootloader.
-  - The entry function of the second-stage bootloader is ets_main. After startup, the user_init in the user application will be loaded to lead the user to the program.
+  - ESP8266 SDK does not provide main function. Main function is stored in first-stage bootloader in ROM, which is used to load second-stage bootloader. The entry function of the second-stage bootloader is ets_main. After startup, the user_init in the user application will be loaded to lead the user to the program.
 
 ---------------------
+
+Which part of ESP8266 partition-tables should be paid special attention to?
+--------------------------------------------------------------------------------------------
+
+  Compared to those of ESP32, partition-tables of ESP8266 have some special requirements on OTA partitions due to cache characteristics of ESP8266. For details, please refer to `Offset & Size of ESP8266 Partition Tables <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-guides/partition-tables.html#offset-size>`__。
+
+--------------
+
+Is it possible to compile the binaries in application layer and bottom layer separately?
+--------------------------------------------------------------------------------------------
+
+  No, they cannot be compiled separately.
+
+--------------
+
+How can I to reduce the IRAM occupied by the ESP32 system?
+--------------------------------------------------------------------
+
+  - Please disable ``menuconfig`` > ``Component config`` > ``LWIP`` > ``Enable LWIP IRAM optimization`` by typing ``N``.
+  - Please change the configurations in ``menuconfig`` > ``Compiler option`` > ``Optimization Level`` > ``Optimize for size (-Os)``.
+  - Please disable ``WiFi IRAM speed optimization (N)`` and ``WiFi RX IRAM speed optimization (N)`` in ``menuconfig`` > ``Component config`` > ``wifi``.
+  - For more details, please refer to `Minimizing RAM Usage <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/performance/ram-usage.html>`__。
+
+----------------------
+
+How can I optimize the size of binary files compiled by ESP32?
+---------------------------------------------------------------
+
+  - Please optimize GCC compilation by ``idf.py menuconfig`` > ``Compiler options`` > ``Optimization level (Optimize for size(-Os))``。
+  - You can also optimize your code to improve the code reusability, and you can also adjust the log level to only print necessary logs.
+  - For more details, please refer to `Minimizing Binary Size <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/performance/size.html>`__。
+
+
+-----------------
+
+How can I turn off log output in ESP32？
+--------------------------------------------------------------------
+
+  - You can turn off the bootloader log by setting ``menuconfig`` > ``bootloader config`` > ``bootloader log verbosity`` to ``No output``.
+  - You can turn off the program log by setting ``menuconfig`` > ``Component config`` > ``log output`` > ``Default log verbosity`` to ``No output``.
+  - For ESP-IDF release/v4.3 and earlier versions, you can turn off UART0 output log by ``menuconfig`` > ``Component Config`` > ``Common ESP-related`` > ``Channel for console output`` > ``None``.
+  - For ESP-IDF release/v4.4 and later versions, you can turn off UART0 output log by ``Component config`` > ``ESP System Settings`` > ``Channel for console output`` > ``None``.
+
+------------------
+
+How to modify the GPIO used for log output on ESP32?
+-------------------------------------------------------------------------------------------------
+
+  - Go to ``menuconfig`` > ``Component Config`` > ``ESP System Settings`` > ``Channel for console output`` > ``Custom UART`` and select the UART port.
+  - Go back to the previous level of menu, find the options `UART TX on GPIO#` and `UART RX on GPIO#`, and use them to modify the log output GPIO.
+
+--------------
 
 When ESP8266 is in Deep sleep mode, can the data stored in RTC Memory work?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -106,13 +158,6 @@ While using mobile's hotpot for an ESP32 to download the OTA firmware, after a f
 
 -----------------
 
-Why do different ESP32 modules have different flash erase time?
-----------------------------------------------------------------------------------------------------------------------------------------------
-
-  - This is caused by different type of flash models. Some module of flash don't have a mechanism for passing empty blocks when erasing, so it takes longer time.
-  
----------------------
-
 Which GPIOs can be used to wake up ESP32-C3 from Deep-Sleep mode?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -134,7 +179,7 @@ How to check the maximum stack size used by a thread for ESP32?
 
 ----------------
 
-What is the meaning of the " SW_CPU_RESET" log when using ESP32? 
+What is the meaning of the " SW_CPU_RESET" log when using ESP32?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - "SW_CPU_RESET" is the software reset log. For example, calling the "esp_restart()" API will print this log.
@@ -188,7 +233,7 @@ After waking up from Deep-sleep mode, where does ESP8266 start boot?
 When will the RTC clock be reset?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Any reset (except the power-up reset) or sleep mode settings will not reset the RTC clock. 
+  - Any reset (except the power-up reset) or sleep mode settings will not reset the RTC clock.
 
 -------------------------
 
@@ -211,10 +256,13 @@ When using the release/v3.3 version of ESP8266-RTOS-SDK, how to enter Light-slee
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - First set the wake-up mode of Light-sleep mode, please refer to `ESP8266_RTOS_SDK/components/esp8266/include/esp_sleep.h <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.3/components/esp8266/include/esp_sleep.h>`_.
+
   - Then use the `esp_light_sleep_start() <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/system/sleep_modes.html?highlight=esp_light_sleep_start%28%29#_CPPv421esp_light_sleep_startv>`_ API to enter Light-sleep mode.
+
   - You can refer to the `esp-idf/examples/system/light_sleep/main/light_sleep_example_main.c <https://github.com/espressif/esp-idf/blob/release/v4.2/examples/system/light_sleep/main/light_sleep_example_main.c>`_ example for implementation logic.
+
   - Please read `API Reference <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/release-v3.3/api-reference/system/sleep_modes.html#sleep-modes>`_ for API descriptions about sleep modes in ESP8266-RTOS-SDK.
-  
+
 -------------------------
 
 How to wake up ESP8266 in Deep sleep mode?
@@ -227,7 +275,7 @@ How to wake up ESP8266 in Deep sleep mode?
 When using the ESP32-WROVER module, there is a problem of battery jitter or abnormal power-off and power-on, causing the system to crash and fail to wake up. What is the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Application scenario: The current is about 12 uA during sleep. When the battery is unplugged or the product is shaken, it will cause power failure, but there is still electricity in the capacitor. During the process of discharging ESP32 from 3.3 V to 0 V, ESP32 will fail to wake up when powered on again with 3.3 V.
+  - Application scenario: The current is about 12 uA during sleep. When the battery is unplugged or the product is shaken, it will cause power failure, but there is still electricity in the capacitor. During the process of discharging ESP32 from 3.3 V to 0 V, ESP32 will fail to wake up when powered on again with 3.3 V.
 
   - Please check whether the chip VCC and EN meet the power-on sequence requirements.
   - Consider adding a reset chip to ensure normal timing.
@@ -241,7 +289,7 @@ How to flash a customized mac address?
   - You can start by understanding the MAC mechanics of ESP modules, please refer to `Introduction to Mac Addresses <https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/system/system.html?highlight=MAC% 20address/>`_. There are currently 2 options for burning customized MAC addresses:
 
   - Option 1: directly flash it into efuse blk3.
-  - Option 2: Store in flash. It is not recommended to store the MAC address in the default NVS partition. It is recommended to create a customized NVS partition for storing customized Mac addresses. For more information on the use of customized MAC addresses, please refer to `base_mac_address <https://github.com/espressif/esp-idf/tree/master/examples/ system/base_mac_address/>`_. 
+  - Option 2: Store in flash. It is not recommended to store the MAC address in the default NVS partition. It is recommended to create a customized NVS partition for storing customized Mac addresses. For more information on the use of customized MAC addresses, please refer to `base_mac_address <https://github.com/espressif/esp-idf/tree/master/examples/ system/base_mac_address/>`_.
 
 ----------------------
 
@@ -257,14 +305,6 @@ With ESP32, are there any return instructions if I skip to a function using the 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
   Please see `here <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/ulp_instruction_set.html>`_ for ULP CPU instructions list and corresponding specifications. Normally, a general register is used for return instructions to store backup PC addresses for later jumping backs. Since there are only four general registers in ULP for now, please make proper use of them.
-
---------------
-
-How to modify the GPIO used for log output on ESP32?
--------------------------------------------------------------------------------------------------
-
-  - Go to ``menuconfig`` > ``Component Config`` > ``ESP System Settings`` > ``Channel for console output`` > ``Custom UART`` and select the UART port.
-  - Go back to the previous level of menu, find the options `UART TX on GPIO#` and `UART RX on GPIO#`, and use them to modify the log output GPIO.
 
 --------------
 
@@ -309,10 +349,11 @@ When I downloaded the official application hello_world using ESP32-S3-DevKitM-1,
     rst:0x7 (TG0WDT_SYS_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
     Saved PC:0x40043ac8
     Invalid chip id. expected 9 read 4. bootloader for wrong chip?
-    ets_main.c 329 
+    ets_main.c 329
 
 
-  - The current error may be related to the chip version on the development board or to the fact that the software version of the esp-idf SDK is not the official production version. The chip (ROM) bootloader expects the chip ID is 9, which is the production version of the chip (not a test version). However, in the secondary bootloader header, it sees the chip ID is 4, which is the beta version of the chip. Please refer to the description in `esp-idf/issues/7960 <https://github.com/espressif/esp-idf/issues/7960>`_ . 
+  - The current error may be related to the chip version on the development board or to the fact that the software version of the esp-idf SDK is not the official production version. The chip (ROM) bootloader expects the chip ID is 9, which is the production version of the chip (not a test version). However, in the secondary bootloader header, it sees the chip ID is 4, which is the beta version of the chip. Please refer to the description in `esp-idf/issues/7960 <https://github.com/espressif/esp-idf/issues/7960>`_ .
+
   - The actual version of the chip can be obtained by the command ``esptool.py chip_id``. If the chip version is the production version, this error is related to the version of the used esp-idf SDK. For ESP32-S3 series products, esp-idf release/v4.4 and later are necessary.
 
 ----------------
@@ -335,3 +376,18 @@ When I test OTA applications based on the ESP32 chip, can I delete the default f
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes. Please note that the offsets of partitions of any app type have to be aligned to 0x10000 (64K).
+
+---------------------
+
+Why can I not burn data to BLOCK3 of ESP32-C3 eFuse with ``espefuse.py burn_key``?
+---------------------------------------------------------------------------------------------------------
+
+  - ``espefuse.py burn_key`` can only burn data to eFuse blocks of the KEY_DATA type. However, BLOCK3 of ESP32-C3 is of the USR_DATA type by default.
+  - You can burn data to eFuse blocks of the USR_DATA type with ``espefuse.py burn_block_data``.
+
+------------------------
+
+Why do different ESP32 modules have different flash erase time?
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  - This is caused by different type of flash models. Some module of flash don't have a mechanism for passing empty blocks when erasing, so it takes longer time.

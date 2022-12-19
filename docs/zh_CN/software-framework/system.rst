@@ -149,8 +149,8 @@ ESP32 进入低功耗模式时， PSRAM 中的数据会丢失吗？
 ESP32 的 flash 和 psram 的时钟频率如何修改？
 --------------------------------------------
 
-  在 menuconfig 中修改。 
-  - flash 时钟频率：menuconfig -> Serial flasher config -> Flash SPI speed。 
+  在 menuconfig 中修改。
+  - flash 时钟频率：menuconfig -> Serial flasher config -> Flash SPI speed。
   - PSRAM 时钟频率：Component config -> ESP32-specific -> SPI RAM config -> Set RAM clock speed。
 
 --------------
@@ -176,8 +176,8 @@ esp-idf 是否可以配置 time_t 为 64 bit ？ （现在是 32 bit）
 
   .. code-block:: python
 
-    def get_efuses(self): 
-    # Return the 128 bits of ESP8266 efuse as a single Python integer 
+    def get_efuses(self):
+    # Return the 128 bits of ESP8266 efuse as a single Python integer
     return (self.read_reg(0x3ff0005c) << 96 | self.read_reg(0x3ff00058) << 64 | self.read_reg(0x3ff00054) << 32 | self.read_reg(0x3ff00050))
 
     def get_chip_description(self):
@@ -197,9 +197,10 @@ ESP32 能否以动态库的方式加载库文件运行？
 ESP32 如何减小系统对 IRAM 内存的占用？
 --------------------------------------------------------------------
 
-  - 请将 mencuofnig -> Component config -> LWIP -> Enable LWIP IRAM optimization (键"N" 禁用) 配置选项禁用。
-  - 请更改 menuconfig -> Compiler option -> Optimization Level -> Optimize for size (-Os) 中的配置选项。
-  - 请将 menuconfig -> Component config -> wifi 中的配置选项中的 WiFi IRAM speed optimization (N) 和 WiFi RX IRAM speed optimization (N) 配置选项禁用。
+  - 请将 ``menuconfig`` > ``Component config`` > ``LWIP`` > ``Enable LWIP IRAM optimization`` (键 ``N`` 禁用) 配置选项禁用。
+  - 请更改 ``menuconfig`` > ``Compiler option`` > ``Optimization Level`` > ``Optimize for size (-Os)`` 中的配置选项。
+  - 请将 ``menuconfig`` > ``Component config`` > ``wifi`` 中的配置选项中的 ``WiFi IRAM speed optimization (N)`` 和 ``WiFi RX IRAM speed optimization (N)`` 配置选项禁用。
+  - 更多细节请参考 `Minimizing RAM Usage <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/performance/ram-usage.html>`__。
 
 ----------------------
 
@@ -248,13 +249,13 @@ ESP8266-NONOS-V3.0 版本的 SDK，报错如下，是什么原因？
 
   .. code-block:: text
 
-    E:M 536 
-    E:M 1528 
+    E:M 536
+    E:M 1528
 
   - 导致出现 E:M 开头的 LOG 是由于剩余内存不足。
 
 --------------
-  
+
 ESP32 是否可以完整使用 8MB PSRAM 内存？
 -----------------------------------------------------------------
 
@@ -291,9 +292,9 @@ ESP8266 进行 ota 升级时如何校验 all.bin 为非法文件？
 
   - all.bin: 由 bootloader.bin，partition.bin 和 app.bin 合并生成。
   - ota.bin: 用于 ota 升级的目标 bin文件。
-  
+
   使用 `simple_ota_example <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/system/ota/simple_ota_example>`_ 进行 OTA 升级时，误从服务器上下载 all.bin,写入 ota 分区之后，设备会出现反复重启的现象。
-  
+
   **原因分析：**
 
   代码中未对 all.bin 进行校验，导致将非法的 bin 文件写入 ota 分区。
@@ -365,7 +366,7 @@ ESP8266 的看⻔狗是什么作⽤？
   - 为了提供系统稳定性，以应对多冲突的操作环境，ESP8266 集成了 2 级看⻔狗机制，包括软件看⻔狗和硬件看⻔狗。
   - 默认 2 个看⻔狗都是打开的，HW WDT 始终在运行，并且如果未重置 HW WDT 计时器，则会在大约 6 秒钟后重置 MCU。
   - SW WDT 大约在 1.5 秒左右将 MCU 复位。您可以启用/禁用 SW WDT，但不能启用/禁用 HW WDT。因为必须重置 SW WDT 后才能同时重置 HW WDT。
-  - 可通过修改 `make menuconfig` -> `Component config` -> `Common ESP-related` 里的 `Invoke panic handler on Task Watchdog timeout` 等来配置看门狗。 
+  - 可通过修改 `make menuconfig` -> `Component config` -> `Common ESP-related` 里的 `Invoke panic handler on Task Watchdog timeout` 等来配置看门狗。
 
 --------------
 
@@ -413,8 +414,9 @@ ESP8266 rst cause 如何查看？
 ESP32 编译生成的 bin 文件大小如何优化？
 --------------------------------------------------
 
-  - 可配置 GCC 编译优化，操作步骤：idf.py menuconfig---->Compiler options---->Optimization level (Optimize for size(-Os))。
+  - 可配置 GCC 编译优化，操作步骤 ``idf.py menuconfig`` > ``Compiler options`` > ``Optimization level (Optimize for size(-Os))``。
   - 可对代码进行优化，提高代码复用率，调整 log 等级，减少不必要的 log 打印。
+  - 更多细节请参考 `Minimizing Binary Size <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/performance/size.html>`__。
 
 
 -----------------
@@ -449,7 +451,7 @@ ESP32 使用 heap_caps_get_free_size 获取 RAM 约 300 KB，为何与手册 520
   - 如果剩余内存不足，可以选用带 PSRAM 模组，将内存分配在 PSRAM 中。
 
 --------------
-  
+
 ESP32 & ESP8266 如何通过局域网的 APP 进行 OTA 升级？
 --------------------------------------------------------------
 
@@ -559,7 +561,7 @@ ESP32 CPU 频率从 240 MHz 直接切换到 80/160 MHz 会卡死，如何解决�
   - 建议使⽤以下两种模式：
 
     (1) 2 MHz <-> 40 MHz <-> 80 MHz <-> 160 MHz
-    (2) 2 MHz <->40 MHz <->240 MHz 
+    (2) 2 MHz <->40 MHz <->240 MHz
   - 此问题已在芯⽚版本 1 中修复。
 
 --------------
@@ -604,7 +606,7 @@ ESP32 双核情况下，⼀个 CPU 的总线在读 A 地址空间，⽽另⼀个
 
 ESP32 CPU 通过读取 INTERRUPT_REG 寄存器来复位 CAN 控制器的中断信号。如果在同⼀个 APB 时钟周期内 CAN 控制器刚好产⽣发送中断信号，则发送中断信号丢失，如何解决？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
+
   数据等待发送完成期间（即发送请求已发起），每⼀次读取 INTERRUPT_REG 后，⽤户都应检查 ``STATUS_TRANSMIT_BUFFER`` 位。如果 ``STATUS_TRANSMIT_BUFFER`` 置位⽽
   ``CAN_TRANSMIT_INT_ST`` 没有置位，则说明发送中断信号丢失。
 
@@ -640,9 +642,10 @@ ESP32 CPU 访问 ``0x3FF0_0000 ~ 0x3FF1_EFFF`` 与 ``0x3FF4_0000 ~ 0x3FF7_FFFF``
 ESP32 如何关闭程序 LOG 输出？
 --------------------------------------------------------------------
 
-  - 关闭 bootloader 日志：menuconfig -> bootloader config --> bootloader log verbosity 选定为 No output 。
-  - 关闭程序日志：menuconfig -> Component config --> log output --> Default log verbosity 选定为 No output 。
-  - 关闭 UART0 输出日志：menuconfig -> Component Config ->Common ESP-related -> Channel for console output -> None 。
+  - 关闭 bootloader 日志：``menuconfig`` > ``bootloader config`` > ``bootloader log verbosity`` 选定为 ``No output``。
+  - 关闭程序日志：``menuconfig`` > ``Component config`` > ``log output`` > ``Default log verbosity`` 选定为 ``No output``。
+  - 在 ESP-IDF release/v4.3 及之前的版本中关闭 UART0 输出日志：``menuconfig`` > ``Component Config`` > ``Common ESP-related`` > ``Channel for console output`` > ``None``。
+  - 在 ESP-IDF release/v4.4 及之后的版本中关闭 UART0 输出日志：``Component config`` > ``ESP System Settings`` > ``Channel for console output`` > ``None``。
 
 ------------------
 
@@ -672,9 +675,9 @@ ESP-IDF release/v4.2 里的 cJSON 支持 uint64_t 的数据解析吗？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 启用 Flash 加密或安全启动 (secure boot) 后，将默认禁用 JTAG 调试功能，更多信息请参考 `JTAG 与闪存加密和安全引导 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-debugging-security-features>`_。
-  
+
 ---------------
-  
+
 ESP32 使用手机热点进行 OTA 固件下载时，关闭流量开关几秒后再次打开会出现程序一直卡死在 OTA 里的情况（使用路由器时插拔 wan 口网线同理），是什么原因？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -694,7 +697,7 @@ ESP32-C3 在 Deep-Sleep 模式下可以通过哪些 GPIO 进行唤醒？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 在低电情况下频繁操作 flash，flash 可能会接受错误的指令，然后把错误地址的 flash 擦除。建议在掉电的时候不要操作 flash，且要保证电源的稳定性。
-  
+
 ---------------------
 
 ESP32 如何查看线程使用过的最大栈大小？
@@ -724,7 +727,7 @@ ESP32 如何查看线程使用过的最大栈大小？
   :CHIP\: ESP32 | ESP32 | ESP32-C3:
 
  - 可以使用 c 语言 ``time()`` 接口来设置系统时间。
- 
+
 ----------------------------------------------------------------------------------------
 
 OTA 升级过程中 esp_ota_end 返回 ESP_ERR_OTA_VALIDATE_FAILED 报错，如何排查这类问题?
@@ -742,7 +745,7 @@ ESP8266-RTOS-SDK 如何将数据存储在 RTC memory 中？
 
   .. code::text
 
-    #define RTC_DATA_ATTR _SECTION_ATTR_IMPL(".rtc.data", __COUNTER__) 
+    #define RTC_DATA_ATTR _SECTION_ATTR_IMPL(".rtc.data", __COUNTER__)
 
   - 可参见 `esp_attr.h <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/include/esp_attr.h>`__ 文件说明。
 
@@ -801,8 +804,8 @@ ESP8266 在 Deep sleep 模式下如何唤醒？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 应用场景 ：休眠的时候电流大概是 12 uA, 当拔电池或震动摇晃产品的时候会造成掉电，但是电容里还有电，ESP32 从 3.3 V 放电到 0 V 的过程中，再上电恢复 3.3 V 会导致 ESP32 无法唤醒。
-  
-  - 请检查芯片 VCC 与 EN 是否满足上电时序要求。 
+
+  - 请检查芯片 VCC 与 EN 是否满足上电时序要求。
   - 可以考虑添加复位芯片保证时序正常。
   - ESP32 上电、复位时序说明，详见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
 
@@ -814,7 +817,7 @@ ESP8266 在 Deep sleep 模式下如何唤醒？
   - 可以先了解 ESP 模块 mac 的机制，请参考 `Mac 地址介绍 <https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/system/system.html?highlight=MAC%20address/>`_。目前烧录自定义 mac 地址有 2 种方案：
 
     - 方案 1：直接烧到 efuse blk3 中，可以保证不被修改；
-    - 方案 2：存储到 flash 中。不推荐将 mac 地址存放在默认 nvs 分区中，建议创建一块自定义的 nvs 分区用来存储自定义的 Mac 地址。关于自定义 mac 地址的使用，可以参考 `base_mac_address <https://github.com/espressif/esp-idf/tree/master/examples/system/base_mac_address/>`_。 
+    - 方案 2：存储到 flash 中。不推荐将 mac 地址存放在默认 nvs 分区中，建议创建一块自定义的 nvs 分区用来存储自定义的 Mac 地址。关于自定义 mac 地址的使用，可以参考 `base_mac_address <https://github.com/espressif/esp-idf/tree/master/examples/system/base_mac_address/>`_。
 
 ---------------
 
@@ -839,11 +842,11 @@ ESP32 在使用 esp_timer 时，出现网络通信或者蓝牙通信异常，是
   编译工程时，发现一些警告被视为错误，导致编译失败，如下：
 
   .. code:: text
-      
+
     error: format '%d' expects argument of type 'int *', but argument 3 has type 'uint32_t *' {aka 'long unsigned int *'} [-Werror=format=]
 
   针对于上述错误，用户可以在组件级别（在组件 CMakeLists.txt 中）或项目级别（在项目 CMakeLists.txt 中）修改编译标志，这两种方式的效果大致相同。
-  
+
   - 要修改特定组件的编译标志，请使用标准 CMake 函数 ``target_compile_options``。请参考 `组件编译控制 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/build-system.html#component-build-control>`_。组件级别的 ``target_compile_options`` 示例请见 `CMakeLists.txt#L3 <https://github.com/espressif/esp-idf/blob/4d14c2ef2d9d08cd1dcbb68a8bb0d76a666e2b4b/examples/bluetooth/bluedroid/ble/ble_ancs/main/CMakeLists.txt#L3>`_。
   - 要修改整个项目的编译标志，请使用标准 CMake 函数 ``add_compile_options`` 或 IDF 特定函数 ``idf_build_set_property`` 来设置 ``COMPILE_OPTIONS`` 属性。请参考 `覆盖默认的构建规范 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/build-system.html#id11>`_。
 
@@ -859,7 +862,7 @@ ESP32 在使用 esp_timer 时，出现网络通信或者蓝牙通信异常，是
     - 构建时间
 
     详情参见 `Reproducible Builds <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/reproducible-builds.html#reproducible-builds>`_ 说明。
-  
+
   - 如果是 v5.0 以下版本的 SDK，可以关闭 ``CONFIG_APP_COMPILE_TIME_DATE=n`` 配置，来删除编译时间戳信息，并且开启 ``COMPILER_HIDE_PATHS_MACROS=y`` 配置来隐藏 IDF_PATH。
 
 -------------------
@@ -874,10 +877,10 @@ ESP32 在使用 esp_timer 时，出现网络通信或者蓝牙通信异常，是
     rst:0x7 (TG0WDT_SYS_RST),boot:0x8 (SPI_FAST_FLASH_BOOT)
     Saved PC:0x40043ac8
     Invalid chip id. Expected 9 read 4. Bootloader for wrong chip?
-    ets_main.c 329 
+    ets_main.c 329
 
 
-  - 当前报错可能与开发板上的芯片版本或 esp-idf SDK 的软件版本不是正式量产版本有关。芯片 (ROM) 引导加载程序预期芯片 ID 为 9，这是芯片的量产版本（不是测试版本）。然而，在二级引导加载程序标头中，它看到了芯片 ID 为 4，这是 beta 版本的芯片。可参考`这里 <https://github.com/espressif/esp-idf/issues/7960>`_ 的说明： 
+  - 当前报错可能与开发板上的芯片版本或 esp-idf SDK 的软件版本不是正式量产版本有关。芯片 (ROM) 引导加载程序预期芯片 ID 为 9，这是芯片的量产版本（不是测试版本）。然而，在二级引导加载程序标头中，它看到了芯片 ID 为 4，这是 beta 版本的芯片。可参考`这里 <https://github.com/espressif/esp-idf/issues/7960>`_ 的说明：
 
   - 可以通过 esptool.py chip_id 命令来查询芯片的实际版本。如果芯片版本是量产版本，那么该报错与所使用的 esp-idf SDK 版本有关。ESP32-S3 系列的产品请使用 esp-idf release/v4.4 及以上版本的软件环境。
 
@@ -901,4 +904,9 @@ ESP32-D0WDR2-V3 芯片支持的 esp-idf SDK 的版本有哪些？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 可以省略 factory 分区并将 OTA_0 分区的地址设置为 0x10000，需要注意任何 app 类型的分区的偏移地址必须要与 0x10000 (64K) 对齐。
-  
+
+为什么使用 ``espefuse.py burn_key`` 命令无法烧录 ESP32-C3 eFuse 的 BLOCK3？
+---------------------------------------------------------------------------------------------------------
+
+  - ``espefuse.py burn_key`` 命令只能向类型为 KEY_DATA 的 eFuse 块烧录数据，但是默认情况下 ESP32-C3 的 BLOCK3 为 USR_DATA 类型。
+  - 可以通过 ``espefuse.py burn_block_data`` 命令向 USR_DATA 类型的 eFuse 块烧录数据。
