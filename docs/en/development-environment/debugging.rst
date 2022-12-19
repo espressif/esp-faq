@@ -38,9 +38,7 @@ How to modify the default method of RF calibration in ESP32?
 --------------------------------------------------------------------------
 
   - During RF initialization, the partial calibration solution is used by default. Go to menuconfig and enable the ``CONFIG_ESP32_PHY_CALIBRATION_AND_DATA_STORAGE`` option.
-
   - If the boot time is not critical, the full calibration solution can be used instead. Go to menuconfig and disable the ``CONFIG_ESP32_PHY_CALIBRATION_AND_DATA_STORAGE`` option.
-
   - It is recommended to use the **partial calibration** solution, which ensures less boot time and enables you to add the function of erasing RF calibration information in NVS so as to trigger the full calibration operation.
 
 --------------
@@ -99,15 +97,14 @@ How to monitor the free space of the task stack?
 Is it possible to use JTAG to debug with ESP32-S2？
 -------------------------------------------------------
 
-  Yes. For detailed information, please refer to `ESP32-S2 JATG Debugging <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/api-guides/jtag-debugging/>`_.
-
+  Yes. For detailed information, please refer to `ESP32-S2 JTAG Debugging <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/api-guides/jtag-debugging/>`_.
 
 --------------
 
 How to modify the log output without changing the output level of menuconfig？
 -----------------------------------------------------------------------------------
 
-  The output level of log can be modified by using function ``esp_log_level_set()``.
+  The output level of log can be modified by using the ``esp_log_level_set()`` function.
 
 --------------
 
@@ -115,8 +112,7 @@ ESP8266 enters boot mode (2,7) and hits a watchdog reset. What could be wrong?
 ---------------------------------------------------------------------------------
 
   - Please make sure that when ESP8266 boots, the strapping pins are held in the required logic levels. If externally connected peripherals drive the strapping pins to an inappropriate logic level, ESP8266 may boot into a wrong mode of operation. With the absence of a valid program, the WDT may then reset the chip.
-
-  - Thus, in design practices, it is recommended to only use the strapping pins for input to high resistive external devices so that the Strapping pin is not forced high/low at power-up. For more information, please refer to `ESP8266 Boot Mode Selection <https://github.com/espressif/esptool/wiki/ESP8266-Boot-Mode-Selection>`_.
+  - Thus, in design practices, it is recommended to only use the strapping pins for input to high resistive external devices so that the strapping pin is not forced high/low at power-up. For more information, please refer to `ESP8266 Boot Mode Selection <https://github.com/espressif/esptool/wiki/ESP8266-Boot-Mode-Selection>`_.
 
 ---------------
 
@@ -128,10 +124,10 @@ When using the ESP-WROVER-KIT board with openocd, an error occurred as: Can't fi
 
 --------------
 
-The RTC_watch_dog keeps resetting during ESP32 SPI boot, what is the reason?
+The RTC_watch_dog keeps resetting during ESP32 SPI boot. What could be the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Reason: The flash has a requirement for time interval between VDD_SDIO power-up and the first access. For example, GD's 1.8 V flash requires 5 ms of time interval, while the time interval of ESP32 is about 1 ms (XTAL frequency is 40 MHz). Under such condition, the flash access will fail and either timer watchdog reset or RTC watchdog reset is triggered, depending on which one is triggered first. The threshold for RTC watchdog reset is 128 KB cycle, while the threshold for timer watchdog reset is 26 MB cycle. Taking a 40 MHz XTAL clock as an example, when the frequency of RTC slow clock is greater than 192 KHz, RTC watchdog reset will be triggered first, otherwise timer watchdog reset will be triggered. VDD_SDIO will be continuously powered when timer watchdog is reset, so there will be no problem in accessing flash and the chip will work normally. When RTC watchdog is reset, the VDD_SDIO power supply will be disabled and the access to flash will fail, thus the RTC_watch_dog resets continuously.
+  - Reason: The flash has a requirement for time interval between VDD_SDIO power-up and the first access. For example, GD's 1.8 V flash requires 5 ms of time interval, while the time interval of ESP32 is about 1 ms (XTAL frequency is 40 MHz). Under such condition, the flash access will fail and either timer watchdog reset or RTC watchdog reset is triggered, depending on which one is triggered first. The threshold for RTC watchdog reset is 128 KB cycle, while the threshold for timer watchdog reset is 26 MB cycle. Taking a 40 MHz XTAL clock as an example, when the frequency of RTC slow clock is greater than 192 KHz, RTC watchdog reset will be triggered first, otherwise timer watchdog reset will be triggered. VDD_SDIO will be continuously powered when timer watchdog is reset, so there will be no problem in accessing flash and the chip will work normally. When RTC watchdog is reset, the VDD_SDIO power supply will be disabled and the access to flash will fail, resetting the RTC_watch_dog continuously.
   - Solution: When an RTC watchdog reset occurs, the power supply to VDD_SDIO is disabled. You can add a capacitor to VDD_SDIO to ensure that the voltage of VDD_SDIO does not drop below the voltage that the flash can tolerate during this period.
 
 --------------
@@ -160,16 +156,16 @@ How to do RF performance test with ESP32, ESP8266, and ESP32S2?
   
 --------------
 
-My PC cannot recognize the device connected in Win10 system. What could be the reasons?
+My PC cannot recognize the device connected in Win10 system. What could be the reason?
 ------------------------------------------------------------------------------------------------
 
   - Check if the device is identified in the Linux virtual subsystem of Win10.
   - If the device cannot be identified only in Win10 system, go to Device Manager to see whether such device exists (e.g., COM x). If the answer is still no, please check your cable and driver.
-  - If the device cannot be identified only in Linux virtual subsystem, taken VMWare as an example, please go to "Settings > USB Controller" and select "Show all USB input devices".
+  - If the device cannot be identified only in Linux virtual subsystem, taken VMWare as an example, please go to ``Settings`` > ``USB Controller`` and select ``Show all USB input devices``.
 
 --------------
 
-One error occurred with ESP32 as: Core 1 paniced (Cache disabled but cache memory region accessed). What could be the reasons?
+One error occurred with ESP32 as: Core 1 paniced (Cache disabled but cache memory region accessed). What could be the reason?
 ------------------------------------------------------------------------------------------------------------------------------------
 
   Reasons:
@@ -229,11 +225,11 @@ After imported the protocol_examples_common.h header file, how come it cannot be
 
 ---------------
 
-When using ESP8266 NonOS v3.0 SDK, the following error occurred. What could be the reasons?
+When using ESP8266 NonOS v3.0 SDK, the following error occurred. What could be the reason?
 ------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: text
 
     E:M 536    E:M 1528
 
-  Any error logs beginning with E:M indicate insufficient memory.
+  Any error logs beginning with ``E:M`` indicates insufficient memory.
