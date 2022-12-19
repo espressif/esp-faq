@@ -67,11 +67,10 @@ When a Wi-Fi connection is disconnected in ESP-IDF, will the memory previously r
 
 ----------------
 
-For ESP32-C3 MQTT, is ``client_id`` configured as an empty string by default when not set? 
+For ESP32-C3 MQTT, can I not set corrresponding ``client_id`` but configure it as an empty string by default? 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - No, the application code will configure the ``client_id`` as ESP32_XXX by default if it is not set. So, the code does not support null ``client_id`` for now.
-  - We have plans to add the function to configure ``client_id`` as an empty string by default, so stay tuned.
+  - Yes, you can achieve this by setting ``set_null_client_id`` to ``true`` in the application code.
 
 ----------------
 
