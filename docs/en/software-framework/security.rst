@@ -182,3 +182,12 @@ After I input the command ``espefuse.py read_protect_efuse BLOCK3 command`` in t
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - After the Efuse BLOCK3 is read protected, it cannot be read anymore.
+
+-----------------------------------------
+
+How can I enable secure boot or flash encryption by pre-burning eFuse?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  By default, you can enable secure boot or flash encryption by burning firmware with secure boot or flash encryption enabled. In addition, you can also enable secure boot or flash encryption by pre-burning eFuse in the following two methods:
+  - With `flash_download_tool <https://www.espressif.com/zh-hans/support/download/other-tools>`__, eFuse will be pre-burned automatically if secure boot or flash encryption is enabled.
+  - You can generate the key and burn corresponding eFuse blocks with `espsecure.py <https://docs.espressif.com/projects/esptool/en/latest/esp32/espsecure/index.html>`__ and `espefuse.py <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html>`__.
