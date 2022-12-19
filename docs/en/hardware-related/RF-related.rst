@@ -90,3 +90,10 @@ Is manual power calibration required for the Espressif modules that connect to e
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   No, it is not required. When an external antenna is used, please make sure it is connected properly before the module is powered up. Then, the module performs a self-calibration, including power calibration.
+
+---------------
+
+What is the default duty cycle for the "default" level when using the "RF Test Tool" to set the Wi-Fi "TX continues" mode?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The default duty cycle for the "default" level is 98% or higher, and cannot be modified.
