@@ -181,4 +181,14 @@ secure boot 和 flash 加密中涉及的存储在 eFuse 数据有哪些？
 在配置了 ESP-IDF 环境的终端里输入 ``espefuse.py read_protect_efuse BLOCK3`` 指令对 Efuse BLOCK3 进行读保护后，再输入 ``esp_efuse_read_block()`` 读取 Efuse BLOCK3 的数据，数据全为 0x00，是什么原因？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-- Efuse BLOCK3 被读保护之后就不能再被读取了。
+  - Efuse BLOCK3 被读保护之后就不能再被读取了。
+
+----------------------------------------
+
+如何通过预烧录 eFuse 的方式使能 secure boot 或者 flash 加密？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  默认情况下，可以通过向设备中烧录使能了 secure boot 或者 flash 加密的固件来启用 secure boot 或者 flash 加密。用户也可以通过下述两种通过预烧录 eFuse 的方式使能 secure boot 或者 flash 加密：
+  - `flash_download_tool <https://www.espressif.com/zh-hans/support/download/other-tools>`__ 在使能 secure boot 或者 flash 加密时会自动预烧录 eFuse.
+  - 通过使用 `espsecure.py <https://docs.espressif.com/projects/esptool/en/latest/esp32/espsecure/index.html>`__ 和 `espefuse.py <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html>`__ 来生成密钥以及烧录对应的 eFuse 存储块。
+
