@@ -52,7 +52,7 @@ ESP8266 的 CHIP_PU 管脚为低电平时，芯片的功耗是多少？
 ESP32 进入 Light-sleep 时，仅配置 GPIO 唤醒而不配置定时器唤醒时，底电流为什么会升高？
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 默认情况下，调用函数 `esp_light_sleep_start <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#_CPPv421esp_light_sleep_startv>`_ 和 `esp_deep_sleep_start <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#_CPPv420esp_deep_sleep_startv>`_ 不会断电 flash，这是为了防止当设备刚进入休眠又立刻被唤醒时，如果 flash 尚未完全断电又重新上电可能会导致的错误。
+  - 默认情况下，调用函数 `esp_light_sleep_start <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#_CPPv421esp_light_sleep_startv>`_ 后不会断电 flash，这是为了防止当设备刚进入休眠又立刻被唤醒时，如果 flash 尚未完全断电又重新上电可能会导致的错误。
   - 而在配置了定时器唤醒的情况下，系统会对 flash 进行掉电，所以底电流会相对较低。 
   - 在不配置定时器的情况下，对于一些功耗敏感型的应用，可以在 menuconfig 中通过以下的操作来进行 flash 掉电：关闭 ``Power down flash in light sleep when there is no SPIRAM`` 选项，同时打开 ``Flash leakage current workaround in light sleep`` 选项。
 

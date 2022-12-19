@@ -52,7 +52,7 @@ What is the power consumption of ESP8266 when the CHIP_PU pin is at the low leve
 Why does the minimum current of ESP32 in Light-sleep increase when the timer is not used as a wakeup source?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - By default, to avoid potential issues, `esp_light_sleep_start <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#_CPPv421esp_light_sleep_startv>`_ and `esp_deep_sleep_start <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#_CPPv420esp_deep_sleep_startv>`_ functions will not power down flash. This is to prevent errors that may be caused if the flash is not fully powered off and back on when the device has just gone to sleep and is immediately woken up.
+  - By default, to avoid potential issues, `esp_light_sleep_start <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#_CPPv421esp_light_sleep_startv>`_ functions will not power down flash. This is to prevent errors that may be caused if the flash is not fully powered off and back on when the device has just gone to sleep and is immediately woken up.
   - And the flash will be powered down if the timer wakeup source is enabled. As a result, the minimum current will be relatively small. 
   - For power-sensitive applications without timer wakeup, you can disable ``Power down flash in light sleep when there is no SPIRAM`` and enable ``Flash leakage current workaround in light sleep`` in menuconfig.
 
