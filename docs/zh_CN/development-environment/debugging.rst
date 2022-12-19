@@ -56,7 +56,7 @@ ESP8266 如何修改默认上电校准⽅式？
   **使⽤ RTOS SDK 3.0 及以后版本：**
 
   - 在 menuconfig 中关闭 CONFIG_ESP_PHY_CALIBRATION_AND_DATA_STORAGE。
-  - 如果在 menuconfig 中开启了 CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION，修改 phy_init_data.bin 中第 115 字节为 ``0x03``； 如果没有开启 CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION，修改 phy_init_data.h 中第 115 字节为 ``0x03``。
+  - 如果在 menuconfig 中开启了 CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION，修改 phy_init_data.bin 中第 115 字节为 ``0x03``；如果没有开启 CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION，修改 phy_init_data.h 中第 115 字节为 ``0x03``。
   
   **继续使⽤上电部分校准⽅案，若需在业务逻辑中增加触发全校准操作的功能：**
 
@@ -97,7 +97,7 @@ ESP32 boot 启动模式不正常如何排查？
 ESP32-S2 是否可以使用 JTAG 进行下载调试？
 -----------------------------------------
 
-  可以，详情请参考 `ESP32-S2 JATG 调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/jtag-debugging/>`_。
+  可以，详情请参考 `ESP32-S2 JTAG 调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/jtag-debugging/>`_。
 
 --------------
 
@@ -112,7 +112,7 @@ ESP32-S2 是否可以使用 JTAG 进行下载调试？
 -----------------------------------------------------
 
   - 请确保 ESP8266 启动时，Strapping 管脚处于所需的电平。如果外部连接的外设使 Strapping 管脚进⼊到错误的电平，ESP8266 可能进⼊错误的操作模式。在⽆有效程序的情况下，看⻔狗计时器将复位芯⽚。
-  - 因此在设计实践中，建议仅将 Strapping 管脚⽤于连接高阻态外部器件的输⼊，这样便不会在上电时强制 Strapping 管脚为高/低电平。参考链接：`ESP8266 Boot Mode Selection <https://github.com/espressif/esptool/wiki/ESP8266-Boot-Mode-Selection>`_。
+  - 因此在设计实践中，建议仅将 Strapping 管脚⽤于连接高阻态外部器件的输⼊，这样便不会在上电时强制 Strapping 管脚为高/低电平。详情请参考 `ESP8266 Boot Mode Selection <https://github.com/espressif/esptool/wiki/ESP8266-Boot-Mode-Selection>`_。
 
 --------------
 
@@ -124,11 +124,11 @@ ESP-WROVER-KIT 开发板 openocd 错误 Error: Can't find board/esp32-wrover-kit
 
 --------------
 
-ESP32 SPI boot 时会一直发生 RTC_watch_dog 复位是什么原因?
+ESP32 SPI boot 时会一直发生 RTC_WDT 复位是什么原因?
 ------------------------------------------------------------------------------------------------------
 
-  - 原因：Flash 对 VDD_SDIO 上电到第一次访问之间有时间间隔要求，例如 GD 的 1.8 V Flash 要求是 5 ms。而 ESP32 从供电到第一次访问的时间间隔为 1 ms 左右（XTAL 频率为 40 MHz），这时访问 Flash 会出错，接着会触发看门狗重置，可能是定时器看门狗重置或 RTC 看门狗重置，具体发生哪种重置取决于谁先被触发。RTC 看门狗重置的门限是 128 KB cycle，定时器看门狗重置的门限是 26 MB cycle。以 40 MHz 的 XTAL 时钟频率为例，当 RTC 慢速时钟的频率大于 192 KHz 时，会先发生 RTC 看门狗重置，否则会发生定时器看门狗重置。定时器看门狗重置时，VDD_SDIO 会持续供电，此时访问 Flash 不会出现问题，芯片可以正常工作。而 RTC 看门狗重置时会停止 VDD_SDIO 供电，此时访问 Flash 则会因为不满足 Flash 上电到第一次访问的时间间隔而导致持续复位。
-  - 解决办法：当发生 RTC 看门狗重置时，VDD_SDIO 的供电停止，可以通过 VDD_SDIO 加上一个电容来保证这段时间 VDD_SDIO 的电压不会掉到 Flash 能够容忍的电压以下。
+  - 原因：flash 对 VDD_SDIO 上电到第一次访问之间有时间间隔要求。例如，GD 的 1.8 V Flash 要求从供电到第一次访问的时间间隔为 5 ms，而 ESP32 的时间间隔则为 1 ms 左右（XTAL 频率为 40 MHz），此时，访问 flash 会出错，接着会触发定时器看门狗或 RTC 看门狗重置，具体的重置类型取决于谁先被触发。RTC 看门狗重置的门限是 128 KB cycle，定时器看门狗重置的门限是 26 MB cycle。以 40 MHz 的 XTAL 时钟频率为例，当 RTC 慢速时钟的频率大于 192 KHz 时，会先触发 RTC 看门狗重置，反之则触发定时器看门狗重置。定时器看门狗重置时，VDD_SDIO 会持续供电，此时访问 flash 不会出现问题，芯片可以正常工作。而 RTC 看门狗重置时会停止 VDD_SDIO 供电，此时访问 flash 则会因为不满足 flash 上电到第一次访问的时间间隔而导致持续复位。
+  - 解决办法：当发生 RTC 看门狗重置时，VDD_SDIO 的供电停止，可以通过 VDD_SDIO 加上一个电容来保证这段时间 VDD_SDIO 的电压不会掉到 flash 能够容忍的电压以下。
 
 --------------
 
@@ -160,7 +160,7 @@ Win 10 系统下识别不到设备有哪些原因？
 ----------------------------------------
 
   - 请检查是否是在 Win10 Linux 虚拟子系统下识别设备。
-  - 如果只是在 Win10 下识别不到设备，应前往设备管理器，查看是否有对应设备，如 COM x，若没有识别到任何设备，请查看设备接线以及驱动是否正常。
+  - 如果只是在 Win10 下识别不到设备，应前往设备管理器，查看是否有对应设备，如 COM x。若没有识别到任何设备，请查看设备接线以及驱动是否正常。
   - 如果是在 Linux 虚拟子系统下识别不到设备，在完成设备接线以及驱动检查后，以 VMWare 为例，前往虚拟机设置窗口里的 “USB 控制器”，勾选 “显示所有 USB 输入设备”。
 
 --------------
@@ -170,8 +170,8 @@ ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region access
 
   问题原因：
 
-  - 在 cache 被禁用期间（例如在使用 spi_flash API 读取/写入/擦除/映射 SPI Flash 的时候），发生了中断并且中断程序访问了 Flash 的资源。
-  - 通常发生在处理程序调用了在 Flash 中的程序，引用了 Flash 中的常量时。值得注意的是，当在中断程序里面使用 double 类型变量时，由于 double 型变量操作的实现属于软件实现，该部分实现也被链接在了 Flash 中（例如强制类型转换操作）。
+  - 在 cache 被禁用期间（例如在使用 spi_flash API 读取/写入/擦除/映射 SPI flash 的时候），发生了中断并且中断程序访问了 flash 的资源。
+  - 通常发生在处理程序调用了在 flash 中的程序，引用了 flash 中的常量时。值得注意的是，当在中断程序里面使用 double 类型变量时，由于 double 型变量操作的实现属于软件实现，该部分实现也被链接在了 flash 中（例如强制类型转换操作）。
 
   解决措施：
   
@@ -212,7 +212,7 @@ ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region access
   - ESP32 内置有掉电探测器，当其探测到芯片电压低于一定的预设阈值时，将重置芯片以防出现意外情况。
   - 该报错信息可能会在不同场景内出现，但根本原因都在于芯片的供电电压暂时或永久性地低于掉电阈值。可通过替换电源、USB 电缆，或在模组内增加电容来解决。
   - 除此之外，也可以通过配置重置掉电阈值，或禁用掉电探测功能。详细信息请参考 `config-esp32-brownout-det <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/kconfig.html#brownout-detector>`_。
-  - 关于 ESP32 上电、复位时序说明，详见 `《ESP32技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
+  - 关于 ESP32 上电、复位时序说明，详见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
 
 ---------------
   
