@@ -53,13 +53,12 @@ Why does the minimum current of ESP32 in Light-sleep increase when the timer is 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - By default, to avoid potential issues, `esp_light_sleep_start <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#_CPPv421esp_light_sleep_startv>`_ functions will not power down flash. This is to prevent errors that may be caused if the flash is not fully powered off and back on when the device has just gone to sleep and is immediately woken up.
-  - And the flash will be powered down if the timer wakeup source is enabled. As a result, the minimum current will be relatively small. 
-  - For power-sensitive applications without timer wakeup, you can disable ``Power down flash in light sleep when there is no SPIRAM`` and enable ``Flash leakage current workaround in light sleep`` in menuconfig.
+  - For the issue details and on how to optimize power consumption in this scenario please refer to `Power-down of Flash <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#power-down-of-flash>`_ section of the ESP-IDF Programming Guide.
 
 ---------------
 
 In ESP32's Deep-sleep mode, using an internal 150 KHz RTC clock or using an external 32 KHz, which consumes more power?
----------------------------------------------------------------------------------------------------------------------------------- -------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - If the RTC clock source is external 32 kHz crystal, there is no difference in power consumption.
   - If the RTC clock source is external 32 kHz oscillator, the power consumption is about 50~100 μA higher compared to an internal 150 KHz RTC clock.
