@@ -117,3 +117,16 @@ Does the product need to pass WiFi authentication and Bluetooth BQB authenticati
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes. Matter is a protocol that runs on other technologies such as Wi-Fi, Ethernet, Thread, and Bluetooth. Before the Matter authentication, the device must be pass the transport layer protocol authenticated. This requires not only the original Wi-Fi or Thread authentication, but also the BQB authentication of the Bluetooth SIG, given that Matter requires the use of Bluetooth for provisioning.
+
+---------------
+
+Where is the DAC (Device Attestation Certificate) pre-imported by ESP Matter module stored?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The DAC (Device Attestation Certificate) pre-imported by the ESP Matter module is stored in flash. In the Matter Pre-Provisioning service, the Matter DAC certificate is pre-flashed in esp_secure_cert partition. An example of adding this partition to a partitioned table is as follows:
+
+  .. code-block:: text
+
+    # ESP-IDF Partition Table
+    # Name,          Type, SubType, Offset,  Size, Flags
+    esp_secure_cert, 0x3F,    ,     0xd000,  0x2000,  , # Never mark this as an encrypted partition

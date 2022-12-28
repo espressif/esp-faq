@@ -117,3 +117,16 @@ Matter 是否可以对接三星的 smartthings？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 需要。Matter 是一种运行在 Wi-Fi、以太网、Thread 和蓝牙等其他技术上的协议。提交 Matter 认证前，要求设备已经通过传输层协议的认证。不仅要通过原有的 Wi-Fi 或 Thread 认证，并且基于 Matter 需要使用蓝牙来配网的规定，还需要过蓝牙技术联盟的 BQB 认证。
+
+--------------
+
+请问 ESP Matter 模组预先导入的 DAC (Device Attestation Certificate) 是存储在哪里的？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP Matter 模组预先导入的 DAC (Device Attestation Certificate) 存储在 flash 中。在 Matter Pre-Provisioning 服务中，Matter DAC 证书预烧录在 esp_secure_cert 分区。将此分区添加至分区表中的示例如下:
+  
+  .. code-block:: text
+
+    # ESP-IDF Partition Table
+    # Name,          Type, SubType, Offset,  Size, Flags
+    esp_secure_cert, 0x3F,    ,     0xd000,  0x2000,  , # Never mark this as an encrypted partition
