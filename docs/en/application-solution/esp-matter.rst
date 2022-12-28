@@ -110,3 +110,10 @@ Can Matter-enabled ESP devices be remotely controlled using Amazon/Google/Apple 
   - The specific practical steps are: build a Matter application scenario for testing based on the `esp-matter <https://github.com/espressif/esp-matter>`_ SDK.
     - `Google Matter Test Method <https://developers.home.google.com/matter/get-started>`_
     - `Apple Matter Test Method <https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/darwin.md>`_
+
+-----------------
+
+Does the product need to pass WiFi authentication and Bluetooth BQB authentication before submitting the Matter authentication?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes. Matter is a protocol that runs on other technologies such as Wi-Fi, Ethernet, Thread, and Bluetooth. Before the Matter authentication, the device must be pass the transport layer protocol authenticated. This requires not only the original Wi-Fi or Thread authentication, but also the BQB authentication of the Bluetooth SIG, given that Matter requires the use of Bluetooth for provisioning.
