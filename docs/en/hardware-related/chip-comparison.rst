@@ -30,7 +30,7 @@ What's the difference between ESP32 chip revision v3.0 and previous chip revisio
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
   - For software usage, there is no difference, and ESP32 v3.0 is compatible with old firmwares. For hardware, some bugs have been fixed in ESP32 v3.0.
-  - For more information on design changes, please refer to `ESP32 Chip Revision v3.0 User Guide <https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__EN.pdf>`_.
+  - For more information on design changes, please refer to `ESP32 Chip Revision v3.0 User Guide <https://www.espressif.com/sites/default/files/documentation/esp32_chip_revision_v3_0_user_guide_en.pdf>`_.
 
 ---------------
 
@@ -74,15 +74,6 @@ What is the difference between ESP32-PICO-D4, ESP32-PICO-V3, and ESP32-PICO-V3-0
 
 ---------------
 
-Do ESP modules support Thread?
---------------------------------------------------------------------------------------------------------------------------------
-  :CHIP\: ESP32 | ESP32-C3 | ESP32-S3:
-
-  - Currently, no ESP modules support Thread. 
-  - However, ESP32-H2, which will be released later, supports Thread.
-
----------------
-
 Does ESP8266 support the 32 MHz crystal?
 ---------------------------------------------------
 
@@ -90,7 +81,8 @@ Does ESP8266 support the 32 MHz crystal?
 
 ---------------------
 
-Do ESP32 modules support Zephyr?
+Do ESP products support Zephyr?
 ----------------------------------------------------------------------------------------------------------------------------------
 
-  - Some ESP32 modules support Zephyr. For details, please refer to `Zephyr Doc <https://docs.zephyrproject.org/latest/boards/riscv/index.html>`_, which will be continuously updated to add new products.
+  - Please refer to `Espressif's Support for Zephyr <https://www.espressif.com/zh-hans/news/Zephyr_updates>`_ for detailed information about the support for Zephyr in ESP products. While there are only a few functional modules have been adapted so far, other modules will be updated further later. For feature requests, you may check or ask on the `zephyr github issue <https://github.com/zephyrproject-rtos/zephyr/issues/29394>`_ first.
+  - You can also find information about ESP products in sections like `XTENSA Boards <https://docs.zephyrproject.org/latest/boards/xtensa/index.html>`_ and `RISCV Boards <https://docs.zephyrproject.org/latest/boards/riscv/index.html>`_ in `Zephyr Docs <https://docs.zephyrproject.org/latest/introduction/index.html>`.

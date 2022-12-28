@@ -30,7 +30,7 @@ ESP32 芯片版本 v3.0 在软硬件使⽤上和之前版本的芯片有什么�
 ------------------------------------------------------------------------
 
   - 软件上使⽤⽆区别，是兼容之前的固件的，硬件上修复了⼀些 bug。
-  - 具体的设计变化可以参考⽂档 `《ESP32 芯片版本 v3.0 使用指南》 <https://www.espressif.com/sites/default/files/documentation/ESP32_ECO_V3_User_Guide__CN.pdf>`_。
+  - 具体的设计变化可以参考⽂档 `《ESP32 芯片版本 v3.0 使用指南》 <https://www.espressif.com/sites/default/files/documentation/esp32_chip_revision_v3_0_user_guide_cn.pdf>`_。
 
 --------------
 
@@ -74,15 +74,6 @@ ESP32-PICO-D4 和 ESP32-PICO-V3 以及 ESP32-PICO-V3-02 有什么区别？
 
 ---------------
 
-ESP 模块支持 Thread 吗？
---------------------------------------------------------------------------------------------------------------------------------
-  :CHIP\: ESP32, ESP32-C3, ESP32-S3:
-
-  - 不支持。
-  - 目前仅有即将发布的 ESP32-H2 芯片支持 Thread 协议。
-
----------------
-
 ESP8266 是否支持 32 MHz 晶振频率？
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -90,7 +81,8 @@ ESP8266 是否支持 32 MHz 晶振频率？
   
 ---------------
 
-ESP32 是否支持 Zephyr？
+ESP 系列产品是否支持 Zephyr？
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-  - 对于 ESP 模块，目前仅对部分模块做了适配，后续会一直持续更新，详情请参考 `Zephyr Doc <https://docs.zephyrproject.org/latest/boards/riscv/index.html>`_。
+  - ESP 系列产品对 Zephyr 的支持可以参考 `乐鑫对 Zephyr 的最新支持 <https://www.espressif.com/zh-hans/news/Zephyr_updates>`_，目前仅适配了部分功能模块，后续会进一步更新。如果您有相关的功能需求，可以先在 `zephyr github issue <https://github.com/zephyrproject-rtos/zephyr/issues/29394>`_ 上查询或者提问。
+  - 也可以从 `Zephyr 官方文档 <https://docs.zephyrproject.org/latest/introduction/index.html>`_ 的 `XTENSA Boards <https://docs.zephyrproject.org/latest/boards/xtensa/index.html>`_ 和 `RISCV Boards <https://docs.zephyrproject.org/latest/boards/riscv/index.html>`_ 找到 ESP 产品的相关资料。
