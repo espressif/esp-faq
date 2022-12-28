@@ -110,3 +110,10 @@ Matter 是否可以对接三星的 smartthings？
   - 具体实践步骤为：基于 `esp-matter <https://github.com/espressif/esp-matter>`_ SDK 来搭建 Matter 应用场景进行测试。
     - `Google Matter 测试方法 <https://developers.home.google.com/matter/get-started>`_
     - `Apple Matter 测试方法 <https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/darwin.md>`_
+
+----------------
+
+在提交 Matter 认证之前，产品是否需要先通过 Wi-Fi 认证和蓝牙 BQB 认证？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 需要。Matter 是一种运行在 Wi-Fi、以太网、Thread 和蓝牙等其他技术上的协议。提交 Matter 认证前，要求设备已经通过传输层协议的认证。不仅要通过原有的 Wi-Fi 或 Thread 认证，并且基于 Matter 需要使用蓝牙来配网的规定，还需要过蓝牙技术联盟的 BQB 认证。
