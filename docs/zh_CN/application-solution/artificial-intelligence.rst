@@ -18,8 +18,7 @@ AI 应用
 AI 图像识别产品可兼容哪些摄像头？
 ---------------------------------
 
-  当前 ESP-EYE 主控芯⽚为 ESP32，可兼容 0V2640，OV3660，OV5640，OV7725 等多款摄像头。
-  详见：`esp32-camera Github <https://github.com/espressif/esp32-camera/tree/master/sensors>`_。
+  当前 ESP-EYE 主控芯⽚为 ESP32，可兼容 0V2640，OV3660，OV5640，OV7725 等多款摄像头。详见：`esp32-camera Github <https://github.com/espressif/esp32-camera/tree/master/sensors>`_。
 
 --------------
 
@@ -33,7 +32,7 @@ ESP-WHO 支持使用 ESP-IDF 哪些版本？
 请问微信小程序 ESP-EYE 有相关资料吗？
 ---------------------------------------------------------------------------
 
-  esp-eye demo 微信小程序的开源资料：`EspEyeForWeChat <https://github.com/EspressifApp/EspEyeForWeChat>`_。
+  ESP-EYE demo 微信小程序的开源资料：`EspEyeForWeChat <https://github.com/EspressifApp/EspEyeForWeChat>`_。
 
 ----------------------
 
@@ -68,7 +67,7 @@ ESP-WHO 支持使用 ESP-IDF 哪些版本？
 `ESP-SKAINET <https://github.com/espressif/esp-skainet>`_ 如何定制命令词？
 ------------------------------------------------------------------------------------
 
-  定制命令词，请查看 `ESP-SR GitHub <https://github.com/espressif/esp-sr/blob/master/docs/speech_command_recognition/README_cn.md>`_。 
+  定制命令词，请查看 `ESP-SR GitHub <https://github.com/espressif/esp-sr/blob/master/docs/speech_command_recognition/README_cn.md>`__。 
 
 ----------------------
 
@@ -97,3 +96,17 @@ AI 语音模型如何修改麦克风通道数量？
 ---------------------------------------
 
   需要有 SD 卡接口，将音频文件存入到 SD 卡中。
+
+----------------------
+
+有关 `ESP-SR GitHub <https://github.com/espressif/esp-sr/tree/master>`__ 的学习资料存放在哪里？
+---------------------------------------------------------------------------------------------------------------------
+
+  请参考 `ESP-SR 用户指南 <https://docs.espressif.com/projects/esp-sr/zh_CN/latest/esp32s3/index.html>`_。
+
+----------------------
+
+有关 `ESP-DL <https://github.com/espressif/esp-dl>`__ 的学习资料存放在哪里？
+---------------------------------------------------------------------------------------------------
+
+  请参考 `如何使用 ESP-DL 部署手势识别 <https://medium.com/the-esp-journal/hand-gesture-recognition-on-esp32-s3-with-esp-deep-learning-176d7e13fd37>`_。

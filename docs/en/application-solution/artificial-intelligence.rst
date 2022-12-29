@@ -13,12 +13,14 @@ Artificial intelligence
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
 
+--------------
 
 What types of cameras are supported on AI image recognition products?
 ------------------------------------------------------------------------------------
 
   With ESP32 as its main control chip, ESP-EYE supports various types of cameras, such as 0V2640, OV3660, OV5640, OV7725, etc. Please see `esp32-camera Github <https://github.com/espressif/esp32-camera/tree/master/sensors>`_.
 
+--------------
 
 Which versions of ESP-IDF are supported by ESP-WHO?
 --------------------------------------------------------------------------------------
@@ -26,6 +28,13 @@ Which versions of ESP-IDF are supported by ESP-WHO?
   The subsequent supported versions will be updated on `ESP-WHO Github <https://github.com/espressif/esp-who>`_.
 
 ------------------------------------------------------------------
+
+Is there any information about the WeChat mini program of ESP-EYE?
+---------------------------------------------------------------------------
+
+  For open source resources of ESP-EYE mini program demo, please check `EspEyeForWeChat <https://github.com/EspressifApp/EspEyeForWeChat>`_.
+
+----------------------
 
 What languages are supported by the `esp-skainet <https://github.com/espressif/esp-skainet>`_ demo?
 --------------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +67,7 @@ Can the model files of `ESP-SKAINET <https://github.com/espressif/esp-skainet>`_
 How to customize command words in `ESP-SKAINET <https://github.com/espressif/esp-skainet>`_?
 ------------------------------------------------------------------------------------------------------------------------------------------
 
-  To customize command words, please see `ESP-SR GitHub <https://github.com/espressif/esp-sr/blob/master/docs/speech_command_recognition/README.md>`_. 
+  To customize command words, please see `ESP-SR GitHub <https://github.com/espressif/esp-sr/blob/master/docs/speech_command_recognition/README.md>`__. 
 
 ----------------------
 
@@ -87,3 +96,17 @@ How do I get the actual audio captured in the development board?
 --------------------------------------------------------------------
 
   To obtain the actual audio, an SD card interface is required to store the audio files to the SD card.
+
+----------------------
+
+Do you have relevant study materials for `ESP-SR GitHub <https://github.com/espressif/esp-sr/tree/master>`__?
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Please refer to `ESP-SR User Guide <https://docs.espressif.com/projects/esp-sr/en/latest/esp32s3/index.html>`_.
+
+----------------------
+
+Do you have relevant study materials for `ESP-DL <https://github.com/espressif/esp-dl>`__?
+-----------------------------------------------------------------------------------------------------
+
+  Please refer to `How to deploy hand gesture recognition with ESP-DL <https://medium.com/the-esp-journal/hand-gesture-recognition-on-esp32-s3-with-esp-deep-learning-176d7e13fd37>`_.
