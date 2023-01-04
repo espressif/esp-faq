@@ -61,4 +61,4 @@ In ESP32's Deep-sleep mode, using an internal 150 KHz RTC clock or using an exte
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - If the RTC clock source is external 32 kHz crystal, there is no difference in power consumption.
-  - If an external 32 kHz crystal is connected to the hardware, the power consumption will increase by 50 to 100 μA regardless of which RTC clock source is selected.
+  - If an external 32 kHz oscillator is connected to the hardware, the power consumption will increase by 50 to 100 μA regardless of which RTC clock source is selected.
