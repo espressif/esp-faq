@@ -38,13 +38,6 @@ Can NVS sectors be corrupted by accidental power loss during writing?
 
 --------------
 
-Can ESP32 mount a file system partition in the external SPI flash？
----------------------------------------------------------------------------------------------
-
-  Yes, this function has been added in ESP-IDF v4.0 and later versions. Please note that when two partitions are mounted to ESP32, it is not permitted for multiple tasks to write files into the same partition at the same time.
-
---------------
-
 Will the configured Wi-Fi SSID and PASSWORD disappear after the ESP series development board is powered on again and need to be reconfigured?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
