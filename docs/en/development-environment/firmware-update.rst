@@ -247,7 +247,7 @@ After using the ESP32-WROVER-E module to download the program, the following log
   - Generally, it is because the GPIO12 was pulled high. It is recommended to pull it low and see the results. Please see `ESP32 Boot Log Guide <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html#select-bootloader-mode>`_.
 
 When using the `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_ to flash ESP32-C3 via USB, 8-download data fail occurs repeatedly. How can I solve it?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Please erase the chip completely first before flashing
   - This problem has been solved in V3.9.4 and above versions
