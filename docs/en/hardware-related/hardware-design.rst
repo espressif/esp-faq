@@ -413,3 +413,10 @@ Could you please provide the 3D model and Footprint files of the ESP32-S3-WROOM-
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The 3D models and Footprint files for the modules are available under the `espressif/kicad-libraries <https://github.com/espressif/kicad-libraries>`_ library.
+
+----------------
+
+Does ESP32/ESP32-S2/ESP32-C3/ESP32-S3 support powering the RTC power domain only to keep the chip working with low power consumption?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+   No, it is not supported. Take ESP32 as an example, detailed information will be updated to the RTC chapter in `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
