@@ -270,3 +270,10 @@ ESP32 芯片支持哪些音频格式？
 ---------------------------------------------------------------------------------------
 
   -  使用 ESP32 芯片解码压缩音频的应用可参考 `esp-adf/examples/recorder <https://github.com/espressif/esp-adf/tree/c50f3dc43bd754568d0f52dbc111b543f0baa5cd/examples/recorder>`_ 文件夹中的例程。
+
+---------------
+
+`ESP-LED-Strip <https://www.espressif.com/zh-hans/news/ESP-LEDStrip>`_ 对应的代码示例在哪?
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  -  对应的代码示例存放在 ESP-ADF 中，请参考 `led_pixels 示例 <https://github.com/espressif/esp-adf/tree/master/examples/display/led_pixels>`_。
