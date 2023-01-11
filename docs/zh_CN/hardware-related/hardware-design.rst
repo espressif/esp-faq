@@ -413,3 +413,10 @@ ESP32 芯片是否支持使用 SPI0/SPI1 接口外接 SD NAND flash 来存储程
 -----------------------------------------------------------------------------------------------------------------------
 
   - 可在 `espressif/kicad-libraries <https://github.com/espressif/kicad-libraries>`_ 库中获取模组的 3D 模型和 Footprint 文件。
+
+----------------
+
+ESP32/ESP32-S2/ESP32-C3/ESP32-S3 是否支持单独给 RTC 电源域供电来保持芯片低功耗工作？
+-----------------------------------------------------------------------------------------------------------------------
+
+  不支持。以 ESP32 为例，详细信息后续会更新到 `ESP32 硬件设计指南 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf>`_ 里的 RTC 章节。
