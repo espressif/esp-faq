@@ -245,3 +245,9 @@ After using the ESP32-WROVER-E module to download the program, the following log
       invalrd header：0xffffffff
 
   - Generally, it is because the GPIO12 was pulled high. It is recommended to pull it low and see the results. Please see `ESP32 Boot Log Guide <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html#select-bootloader-mode>`_.
+
+Using the `Flash Download Tool <https://www.espressif.com/en/support/download/other-tools>`_ to burn the ESP32C3 via USB, 8-download data fail occurs repeatedly.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please erase the chip completely first, then burn it
+  - This problem has been solved in version 3.9.4 and above
