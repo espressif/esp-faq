@@ -121,3 +121,10 @@ How to use the ESP32 chip to decode compressed audio?
 -----------------------------------------------------------------------------------------
 
   - Application examples that use the ESP32 chip to decode compressed audio can be found under the `esp-adf/examples/recorder <https://github.com/espressif/esp-adf/tree/c50f3dc43bd754568d0f52dbc111b543f0baa5cd/examples/recorder>`_ folder.
+
+-----------------
+
+Where is the code example for `ESP-LED-Strip <https://www.espressif.com/en/news/ESP-LEDStrip>`_?
+----------------------------------------------------------------------------------------------------------------------------------------
+
+   - Code examples for ESP-LED-Strip are provided in the ESP-ADF repo, please refer to `led_pixels example <https://github.com/espressif/esp-adf/tree/master/examples/display/led_pixels>`_.
