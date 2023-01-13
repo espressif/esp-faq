@@ -595,6 +595,13 @@ When using ESP32-C3 BLE Scan, can I set it to only scan the Long Range devices?
 
 --------------
 
+Is there a limit to the name length of ESP32 as a Bluetooth device?
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The names should be no longer than 248 bytes. However, in practice, the name length is also limited by the length of Bluetooth advertising packets. For the description of configurations, please refer to `CONFIG_BT_MAX_DEVICE_NAME_LEN <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/kconfig.html#config-bt-max-device-name-len>`__.
+
+--------------
+
 How do I set the ESP32 BLE Scan to the permanent scan without generating a timeout?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
