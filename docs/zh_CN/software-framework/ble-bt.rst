@@ -592,3 +592,10 @@ ESP32 低功耗蓝牙可以使用 PSRAM 吗？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 可以，可基于 `esp-idf/examples/bluetooth/bluedroid/ble_50/ble50_security_client <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/bluetooth/bluedroid/ble_50/ble50_security_client>`_ 例程来测试。将 `ext_scan_params <https://github.com/espressif/esp-idf/blob/7f4bcc36959b1c483897d643036f847eb08d270e/examples/bluetooth/bluedroid/ble_50/ble50_security_client/main/ble50_sec_gattc_demo.c#L58>`_ 参数配置中 `.cfg_mask = ESP_BLE_GAP_EXT_SCAN_CFG_UNCODE_MASK | ESP_BLE_GAP_EXT_SCAN_CFG_CODE_MASK` 改为 `.cfg_mask = ESP_BLE_GAP_EXT_SCAN_CFG_CODE_MASK`, 这样就可以仅扫描到 primary PHY 类型为 LE CODED PHY 的广播包。
+
+----------------
+
+使用 ESP32 如何设置 BLE Scan 永久扫描而不产生超时？
+--------------------------------------------------------------------------------------------------------------------------
+
+  - 在使用 `esp_ble_gap_start_scanning() <https://github.com/espressif/esp-idf/blob/490216a2ace6dc3e1b9a3f50d265a80481b32f6d/examples/bluetooth/bluedroid/ble/gatt_client/main/gattc_demo.c#L324>`__ 函数开始 BLE Scan 时，将 duration 参数设置为 0 即可。
