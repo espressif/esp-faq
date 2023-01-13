@@ -592,3 +592,10 @@ When using ESP32-C3 BLE Scan, can I set it to only scan the Long Range devices?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes, you can make tests based on `esp-idf/examples/bluetooth/bluedroid/ble_50/ble50_security_client <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/bluetooth/bluedroid/ble_50/ble50_security_client>`_. By changing the configuration `.cfg_mask = ESP_BLE_GAP_EXT_SCAN_CFG_UNCODE_MASK | ESP_BLE_GAP_EXT_SCAN_CFG_CODE_MASK` in `ext_scan_params <https://github.com/espressif/esp-idf/blob/7f4bcc36959b1c483897d643036f847eb08d270e/examples/bluetooth/bluedroid/ble_50/ble50_security_client/main/ble50_sec_gattc_demo.c#L58>`_ to `.cfg_mask = ESP_BLE_GAP_EXT_SCAN_CFG_CODE_MASK`, you can scan the broadcast packets whose primary PHY type is LE CODED PHY.
+
+--------------
+
+How do I set the ESP32 BLE Scan to the permanent scan without generating a timeout?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can realize this by setting "duration" to 0 before using the `esp_ble_gap_start_scanning() <https://github.com/espressif/esp-idf/blob/490216a2ace6dc3e1b9a3f50d265a80481b32f6d/examples/bluetooth/bluedroid/ble/gatt_client/main/gattc_demo.c#L324>`__ function to start BLE Scan.
