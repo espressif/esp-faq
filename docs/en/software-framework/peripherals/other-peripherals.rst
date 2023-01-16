@@ -29,9 +29,3 @@ Does ESP32 support PCI-E protocol?
 
   No, it doesn't.
 
--------------------
-
-Does the `screen <https://github.com/espressif/esp-iot-solution/tree/master/examples/screen>`__ example support 9-bit bus and 18-bit color depth when tested with the ILI9488 LCD screen?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  Theoretically, the ILI9488 LCD can support 9-bit bus and 18-bit color depth, but currently our driver can only support up to 8-bit bus and 16-bit color depth. You can modify the driver by yourself according to the ILI9488 LCD manual to implement the support.

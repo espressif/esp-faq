@@ -28,7 +28,7 @@ ESP-IDF SDK USB 接口支持 HID、MSC 这些模式吗？
 
   - ESP32S2/S3 可作为 MSC 主机，支持读写 U 盘等存储设备，可参考 `esp-idf <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/msc>`__。
   - ESP32S2/S3 可作为 MSC 设备，模拟 U 盘存储，可参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__。
-  - ESP32S2/S3 HID 主机暂时未支持。
+  - ESP32S2/S3 HID 主机可参考 `ESP-IDF Host HID <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/hid>`__。
   - ESP32S2/S3 HID 设备类可参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__。
 
 ----------------
@@ -78,8 +78,13 @@ ESP32-S2 支持的 USB 协议是 OTG 1.1，速度最高是 12 Mbps。能和 USB 
 ESP32-S2 支持 USB 摄像头吗？
 ----------------------------------------------------------------
 
-  支持。示例代码请参考 `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_。
-  
+  支持。ESP32-S2/ESP32-S3 USB Host UVC 示例代码请参考 `usb_stream <https://github.com/espressif/esp-iot-solution/tree/master/components/usb/usb_stream>`__。
+
+ESP32-S3 是否支持带有麦克风和扬声器的 USB 摄像头？
+----------------------------------------------------------------
+
+  支持。ESP32-S2/ESP32-S3 USB Host UVC + UAC 示例代码请参考 `usb_stream <https://github.com/espressif/esp-iot-solution/tree/master/components/usb/usb_stream>`__。
+
 ---------------
 
 是否有 ESP32-S2 做 U 盘 (MSC DEVICE) 的参考示例？
@@ -113,7 +118,7 @@ ESP32-C3 芯片可以使用 USB 下载固件，但在 ESP-IDF v4.3 下不支持�
 ESP32-S2 是否支持 USB HID？
 -----------------------------------------------------------------------
 
-  支持，但目前仅支持 USB HID Device，请参考 `USB HID Device 例程 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_hid_device>`_。
+  支持，USB HID Device 请参考 `USB HID Device 例程 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_hid_device>`__。 USB HID Host 请参考 `ESP-IDF Host HID 例程 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/hid>`__。
 
 --------------
 
@@ -185,7 +190,7 @@ ESP32-S2/ESP32-S3 是否有 USB 4G 上网方案？
 ESP32-S2/ESP32-S3 是否有 USB CDC Host 示例？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  有，请参考 `USB CDC Host 示例 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_basic>`_。
+  有，请参考 `ESP-IDF USB CDC Host 示例 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/cdc>`__ 或 `esp-iot-solution USB CDC Host 示例 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_basic>`__。
 
 ---------------------
 
@@ -242,4 +247,14 @@ ESP32-S3 USB 使能 RNDIS 和 CDC 功能后发现 PC 能识别到 COM 口，但�
 ---------------------------------------------------------------------------------------------------
 
   - 目前只支持 USB CDC ECM 协议，不支持 USB CDC NCM 协议。
-  
+
+将 ESP32-C3/ESP32-S3 的 USB 引脚初始化为 GPIO 或其它外设功能以后, 为什么无法再通过 USB 进入固件烧录？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-C3/ESP32-S3 的 USB 引脚可初始化为 GPIO 或其它外设引脚，但是需要注意的是，初始化完成以后，原有的 USB 下载功能将被断开，无法再通过 USB 接口自动进入下载模式，但用户可以通过手动拉低 Boot 引脚 (ESP32-C3 为 GPIO9, ESP32-S3 为 GPIO0)，手动使 ESP32-C3/ESP32-S3 进入下载模式，再通过 USB 进行下载。
+
+将 ESP32-C3/ESP32-S3 的 USB 接口作为产品唯一的固件下载接口，有哪些注意事项?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 禁止将 ESP32-C3 （GPIO18,GPIO19） / ESP32-S3（GPIO19,GPIO20） 的 USB 引脚复用为其它外设功能。
+  - 如果迫不得已，应用程序中必须将 USB 引脚复用为其它功能，那硬件上必须同时引出 Boot 引脚 (ESP32-C3 为 GPIO9, ESP32-S3 为 GPIO0)，用于手动进入下载模式。
