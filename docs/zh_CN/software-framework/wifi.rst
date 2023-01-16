@@ -1298,3 +1298,10 @@ ESP32/ESP32-S2/ESP32-S3 工作在 SoftAP 模式时，与其他厂商手机、PC 
 
   - 连接 Wi-Fi 以后不能再切换信道，只能在当前 Wi-Fi 信道收发数据。
   - 如果设备进入 modem sleep 模式，将接收不到 ESP-NOW 的数据。
+
+---------------
+
+ESP32 支持 WPA3-Enterprise 应用吗？
+----------------------------------------------------------------------------------------------------------------------------
+
+  - 在 esp-idf release/v5.0 版本的 SDK 上，ESP32 已经支持 WPA3-Enterprise 的应用，可基于 `"esp-idf/examples/wifi/wifi_enterprise" <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/wifi/wifi_enterprise>`__ 例程来测试，在 ``idf.py menuconfig`` > ``Example Configuration`` > ``Enterprise configuration to be used``  配置选项中设置为 WPA3_ENT 模式。
