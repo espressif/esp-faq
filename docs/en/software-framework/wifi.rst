@@ -1291,3 +1291,10 @@ What should I pay attention to when using ESP-NOW applications?
 
   - The device cannot switch channels after connecting to Wi-Fi, but can only transmit and receive data on the current Wi-Fi channel.
   - After the device enters the modem sleep mode, it cannot receive data from ESP-NOW.
+
+---------------
+
+Does ESP32 support WPA3-Enterprise applications?
+----------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 has supported WPA3-Enterprise applications on the SDK with esp-idf release/v5.0. You can use the `"esp-idf/examples/wifi/wifi_enterprise" <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/wifi/wifi_enterprise>`__ example for testing by setting ``idf.py menuconfig`` > ``Example Configuration`` > ``Enterprise configuration to be used`` to WPA3_ENT.
