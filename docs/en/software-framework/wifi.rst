@@ -109,28 +109,20 @@ What is the definition for Wi-Fi channel? Can I select any channel of my choice?
 
   .. code-block:: c
 
-    esp_netif_ip_info_t info_t = {0};
+   esp_netif_t *sta_netif = esp_netif_create_default_wifi_sta();
+    if (sta_netif)
+    {
+        esp_netif_ip_info_t info_t = {0};
+        esp_netif_dhcpc_stop(sta_netif);
+
+        info_t.ip.addr = ESP_IP4TOADDR(192, 168, 3, 23);
+        info_t.gw.addr = ESP_IP4TOADDR(192, 168, 3, 1);
+        info_t.netmask.addr = ESP_IP4TOADDR(255, 255, 255, 0);
+        esp_netif_set_ip_info(sta_netif, &info_t);
+    }
     esp_netif_dns_info_t dns_info = {0};
 
-    // Initialize TCP/IP network interface (should be called only once in application)
-    ESP_ERROR_CHECK(esp_netif_init());
-    // Create default event loop that running in background
-    ESP_ERROR_CHECK(esp_event_loop_create_default());
-    esp_netif_config_t cfg = ESP_NETIF_DEFAULT_ETH();
-    esp_netif_t *eth_netif = esp_netif_new(&cfg);
-    // Set default handlers to process TCP/IP stuffs
-    ESP_ERROR_CHECK(esp_eth_set_default_handlers(eth_netif));
-
-    esp_netif_dhcpc_stop(eth_netif);
-
-    info_t.ip.addr = ESP_IP4TOADDR(192,168,3,23);
-    info_t.gw.addr = ESP_IP4TOADDR(192,168,3,1);
-    info_t.netmask.addr = ESP_IP4TOADDR(255,255,255,0);
-    esp_netif_set_ip_info(eth_netif,&info_t);
-
-    dns_info.ip.u_addr.ip4.addr = ESP_IP4TOADDR(8,8,8,8);
-    esp_netif_set_dns_info(eth_netif,ESP_NETIF_DNS_MAIN,&dns_info);
-
+--------------
 
 [LWIP] How to configure the Option contents of DHCP Server in ESP-IDF?
 -----------------------------------------------------------------------------------------
@@ -435,7 +427,7 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 [Sleep] Where to enable the speedstep function for ESP32 in modem sleep mode?
 ----------------------------------------------------------------------------------------
 
-  Go to menuconfig -> Component Config -> Power Management.
+  Go to ``menuconfig`` > ``Component Config`` > ``Power Management`` > ``Enable dynamic frequency scaling (DFS) at startup``.
 
 --------------
 
