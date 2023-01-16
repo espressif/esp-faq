@@ -85,7 +85,7 @@ What is ESP32's highest sampling rate in ADC DMA mode?
 When an ESP32 calling ``adc2_get_raw()`` between ``esp_wifi_start()`` and ``esp_wifi_stop()``, the read operation fails. What is the reason?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Since Wi-Fi also requires the use of ADC2, and the Wi-Fi driver has a higher priority. Therefore, the application can only use ADC2 when the Wi-Fi driver is closed.
+  Since Wi-Fi also uses ADC2, and the Wi-Fi driver has a higher priority, the application may fail to read using ``adc2_get_raw()`` during the operation period of Wi-Fi. It is recommended to check the return value of this function and re-measure it after failure. 
 
 ---------------
 

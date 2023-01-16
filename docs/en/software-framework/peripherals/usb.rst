@@ -28,7 +28,7 @@ Does the ESP-IDF SDK USB interface support HID and MSC modes?
 
   - ESP32S2/S3 can be used as MSC Host to support reading from or writing to storage devices such as USB flash disks. For details, please refer to `esp-idf <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/msc>`__.
   - ESP32S2/S3 can be used as MSC Device to simulate storage of USB flash disks. For details, please refer to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__.
-  - ESP32S2/S3 does not support HID Host currently.
+  - ESP32S2/S3 can be used as HID Host. For details, please refer to `ESP-IDF Host HID <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/hid>`__.
   - ESP32S2/S3 can be used as HID Device. For details, please refer to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__.
 
 -------------------------
@@ -78,7 +78,12 @@ The USB protocol supported by ESP32-S2 is OTG 1.1, with the maximum speed of 12 
 Does ESP32-S2 support USB camera?
 ------------------------------------------------------------------------
 
-  Yes. For demo code, please refer to example `uvc_stream <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/components/usb/uvc_stream>`_.
+  Yes. For the demo code of ESP32-S2/ESP32-S3 USB Host UVC, please refer to `usb_stream <https://github.com/espressif/esp-iot-solution/tree/master/components/usb/usb_stream>`__.
+
+Does ESP32-S3 support USB cameras with microphones and speakers?
+----------------------------------------------------------------------------
+
+  Yes. For the demo code of ESP32-S2/ESP32-S3 USB Host UVC, please refer to `usb_stream <https://github.com/espressif/esp-iot-solution/tree/master/components/usb/usb_stream>`__.
 
 ---------------
 
@@ -113,7 +118,7 @@ The ESP32-C3 chip can use USB to download firmware, but it is not supported unde
 Does the ESP32-S2 support USB HID?
 -----------------------------------------------------------------------
 
-  Supported. But currently only USB HID Device is supported, please refer to `USB HID Device example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_hid_device>`_.
+  Yes. For the example of USB HID Device, please refer to `USB HID Device example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_hid_device>`__. For the example of USB HID Host, please refer to `ESP-IDF Host HID example <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/hid>`__.
 
 ---------------
 
@@ -185,7 +190,7 @@ Does ESP32-S2/ESP32-S3 have a USB 4G Internet access solution?
 Is there any USB CDC Host example for ESP32-S2/ESP32-S3?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes, please refer to `USB CDC Host Example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_basic>`_.
+  Yes, please refer to `ESP-IDF USB CDC Host example <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/cdc>`__ or `esp-iot-solution USB CDC Host example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_basic>`__.
 
 ---------------------
 
@@ -242,3 +247,14 @@ Does the ESP32-S2/ESP32-S3 support the USB CDC NCM protocol?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Currently, ESP32-S2/ESP32-S3 only supports the USB CDC ECM protocol, but does not support the USB CDC NCM protocol.
+
+After I initialize the USB pins of ESP32-C3/ESP32-S3 to GPIO or other peripheral pins, why cannot I burn firmware through USB?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  -The USB pin of the ESP32-C3/ESP32-S3 can be initialized to GPIO or other peripheral pins. However, please note that after the initialization, the original USB download function will be disconnected, and the download mode cannot be entered automatically through USB. But you can manually pull down the Boot pin (GPIO9 in ESP32-C3 and GPIO0 in ESP32-S3) to make ESP32-C3/ESP32-S3 enter the download mode. Then you can download firmware through USB.
+
+What should I pay attention to if I want to use the USB interface of ESP32-C3/ESP32-S3 as the unique download interface of firmware?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - DO NOT use USB pins of ESP32-C3 (GPIO18 and GPIO19) / ESP32-S3 (GPIO19 and GPIO20) as other peripheral functions.
+  - If the USB pins have to be reused as other functions in the application, the BOOT pin (GPIO9 in ESP32-C3, GPIO0 in ESP32-S3) must be wired to manually enter the chip into the download mode.
