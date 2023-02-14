@@ -139,3 +139,11 @@ ESP32-S3 ADC 配置为 ``ADC_ATTEN_DB_11`` 时，为何测量电压无法达到�
 
 - 方案 1：避开使用边界电压值，可通过外部分压电路将输入电压维持在中间电压值附近，以获得更高的精度和一致性。
 - 方案 2：使用软件 `ADC 扩展量程方案 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/others/adc_range.html>`_ ，将最大测量电压扩展到 ``3300 mV``。
+
+--------------
+
+我们可以使用 GPIO0 作为 ADC 管脚，同时将 ESP32 作为 Wi-Fi 热点吗？
+-----------------------------------------------------------------------------------------------------------------------------------------
+   
+   - 当使用 Wi-Fi 时，ESP32 ADC2 管脚不能同时使用。 因此，如果您在使用 Wi-Fi 时无法从 ADC2 GPIO 获取值，您可以考虑改用 ADC1 GPIO，这应该可以解决您的问题。有关详细信息，请参阅 `ADC 连续模式的硬件限制 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc_continuous.html>`__ 和 `ADC Oneshot 模式的硬件限制 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc_oneshot.html>`__。
+   - GPIO0、GPIO2、GPIO5、GPIO12 (MTDI) 和 GPIO15 (MTDO) 是 strapping 管脚。 将 GPIO0 用于其他功能时，需要注意上电时的 GPIO 电平。 如果上电时 GPIO0 为低电平，则很容易进入下载模式。 有关更多信息，请参阅 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`__。

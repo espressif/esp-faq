@@ -229,3 +229,10 @@ ESP32/ESP32-S2/ESP32-S3 是否有通过摄像头识别二维码的参考？
 ----------------------------------------------------------------------------
 
   有，可以参考 ESP-WHO 里的 `code recognition <https://github.com/espressif/esp-who/tree/master/examples/code_recognition>`_。
+
+--------------
+
+想为 OV5640 传感器添加 SD 卡接口和摄像头接口，但发现 ESP32 中不同外设的一些管脚存在冲突，请提供摄像头接口和 SD 卡接口的管脚。
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  `ESP-WROVER-KIT 开发板 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-wrover-kit-v3.html>`__ 中有 Camera 和 SD 卡电路，可以参考 `ESP-WROVER-KIT V3 入门指南的管脚配置 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-wrover-kit-v3.html>`__。

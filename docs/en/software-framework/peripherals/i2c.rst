@@ -44,3 +44,10 @@ How can I realize data are received by ESP32 series chips, which are used as the
     1. Input commands and address: ``i2c_cmd_link_create_static`` > ``i2c_master_start`` > ``i2c_master_write_byte`` > ``i2c_master_cmd_begin`` > ``i2c_cmd_link_delete_static``
     2. Delay
     3. Read data of the slave: ``i2c_cmd_link_create_static`` > ``i2c_master_read`` > ``i2c_master_stop`` > ``i2c_master_cmd_begin`` > ``i2c_cmd_link_delete_static``
+
+--------------
+
+When using ESP32 series chip, can we configure GPIO32 and GPIO33 as I2C_SDA and I2C_SCL respectively?
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes. I2C pins of the ESP32 chip can be remapped by any available GPIOs. Please refer to "4.2 Peripheral Pin Configurations" of `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__. If you do not need an external 32.768 KHz crystal, you can use GPIO32 and GPIO33 as I2C pins.
