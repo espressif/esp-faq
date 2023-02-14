@@ -44,3 +44,10 @@ ESP32 系列芯片作为 I2C 主机怎样才能等待从机处理数据后再接
     1. 写命令和地址：``i2c_cmd_link_create_static`` > ``i2c_master_start`` > ``i2c_master_write_byte`` > ``i2c_master_cmd_begin`` > ``i2c_cmd_link_delete_static``
     2. 延时
     3. 读从机数据：``i2c_cmd_link_create_static`` > ``i2c_master_read`` > ``i2c_master_stop`` > ``i2c_master_cmd_begin`` > ``i2c_cmd_link_delete_static``
+
+--------------
+
+使用 ESP32 系列芯片时，能否将 GPIO32 和 GPIO33 分别配置为 I2C_SDA 和 I2C_SCL？
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+   可以，ESP32 的 I2C 管脚可以使用任何空闲的 GPIO 进行重映射。请参阅 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`__ 的 4.2 小节，外设引脚配置部分。如果您不需要外部 32.768 KHz 晶振，那么您可以使用 GPIO32 和 GPIO33 作为 I2C 管脚。

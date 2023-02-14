@@ -120,3 +120,10 @@ Is there any reference for ESP32/ESP32-S2/ESP32-S3 to recognize the QR code thro
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
   Yes, please refer to the `code recognition <https://github.com/espressif/esp-who/tree/master/examples/code_recognition>`_ in ESP-WHO.
+
+--------------
+
+When adding the SD-card interface and camera interface for OV5640 sensor, we found that some pins of different ESP32 drivers conflicted with each other. Please suggest pins for the camera interface and SD-card interface.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  `ESP-WROVER-KIT development board <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-wrover-kit-v3.html>`__ includes the camera and SD card circuits, so you can refer to pins configuration of `ESP-WROVER-KIT V3 Getting Started Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-wrover-kit-v3.html>`__.
