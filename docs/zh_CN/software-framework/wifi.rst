@@ -1298,3 +1298,26 @@ ESP32 支持 WPA3-Enterprise 应用吗？
 ----------------------------------------------------------------------------------------------------------------------------
 
   - 在 esp-idf release/v5.0 版本的 SDK 上，ESP32 已经支持 WPA3-Enterprise 的应用，可基于 `"esp-idf/examples/wifi/wifi_enterprise" <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/wifi/wifi_enterprise>`__ 例程来测试，在 ``idf.py menuconfig`` > ``Example Configuration`` > ``Enterprise configuration to be used``  配置选项中设置为 WPA3_ENT 模式。
+
+--------------
+
+ESP32 Wi-Fi TX power 的取值范围是多少？
+---------------------------------------------------------------------------------------------------------
+
+  - 取值范围为 2 到 20 dBm，请参考 `esp_wifi_set_max_tx_power API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`__。
+
+--------------
+
+使用 ESP32 时如何获取 Wi-Fi RSSI 值？
+-----------------------------------------------------------------------------------------------
+
+   - 如果想采集周围网络的 RSSI 值，可以参考 ESP-IDF 中的 `scan example <https://github.com/espressif/esp-idf/tree/v5.0/examples/wifi/scan>`__。
+   - 如果要获取 AP 的 RSSI 值，您可以使用 `esp_wifi_sta_get_ap_info() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv424esp_wifi_sta_get_ap_infoP16wifi_ap_record_t>`__ 获取 WiFi AP RSSI 值。
+
+--------------
+
+ESP32 支持 WPA3 企业版吗？
+--------------------------------------------------------------------------------------------------------
+
+   - ESP32 支持 WPA/WPA2/WPA3/WPA2-Enterprise/WPA3-Enterprise/WAPI/WPS 和 DPP Wi-Fi 功能。有关信息，请参考`ESP32 Wi-Fi 功能列表 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#esp32-wi-fi-feature-list>`__。
+   - 在 esp-idf release/v5.0 版本 SDK 中，我们提供了 `wifi_enterprise 示例 <https://github.com/espressif/esp-idf/tree/v5.0/examples/wifi/wifi_enterprise>`__。 在 ESP-IDF 中，支持设置 WPA3-Enterprise 模式进行测试。可通过如下步骤进行配置 ``idf.py menuconfig`` > ``Example Configuration`` > ``Enterprise configuration to be used`` > ``WPA3_ENT``。
