@@ -1290,3 +1290,26 @@ Does ESP32 support WPA3-Enterprise applications?
 ----------------------------------------------------------------------------------------------------------------------------
 
   - ESP32 has supported WPA3-Enterprise applications on the SDK with esp-idf release/v5.0. You can use the `"esp-idf/examples/wifi/wifi_enterprise" <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/wifi/wifi_enterprise>`__ example for testing by setting ``idf.py menuconfig`` > ``Example Configuration`` > ``Enterprise configuration to be used`` to WPA3_ENT.
+
+--------------
+
+What is the value range of ESP32 Wi-Fi TX power?
+------------------------------------------------------------------------------------------------------------
+
+   - It ranges from 2 to 20 dBm. For more details, please refer to `esp_wifi_set_max_tx_power() API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`__.
+
+--------------
+
+How do I get Wi-Fi RSSI when using ESP32?
+------------------------------------------------------------------------------------------------------------
+
+  - If you want to get RSSI of surrounding networks, please refer to `scan example <https://github.com/espressif/esp-idf/tree/v5.0/examples/wifi/scan>`__ in ESP-IDF. 
+  - If you want to obtain RSSI of AP, you can use `esp_wifi_sta_get_ap_info() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv424esp_wifi_sta_get_ap_infoP16wifi_ap_record_t>`__.
+
+--------------
+
+Does ESP32 support WPA3-Enterprise?
+------------------------------------------------------------------------------------------------------------
+
+  - ESP32 supports WPA/WPA2/WPA3/WPA2-Enterprise/WPA3-Enterprise/WAPI/WPS and DPP. For more details, please refer to `ESP32 Wi-Fi Feature List <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#esp32-wi-fi-feature-list>`__. 
+  - esp-idf release/v5.0 has provided `wifi_enterprise example <https://github.com/espressif/esp-idf/tree/v5.0/examples/wifi/wifi_enterprise>`__, which supports setting WPA3-Enterprise mode for testing. You can configure it as following: ``idf.py menuconfig`` > ``Example Configuration`` > ``Enterprise configuration to be used`` > ``WPA3_ENT``.
