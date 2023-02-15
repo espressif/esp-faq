@@ -606,3 +606,75 @@ How do I set the ESP32 BLE Scan to the permanent scan without generating a timeo
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - You can realize this by setting "duration" to 0 before using the `esp_ble_gap_start_scanning() <https://github.com/espressif/esp-idf/blob/490216a2ace6dc3e1b9a3f50d265a80481b32f6d/examples/bluetooth/bluedroid/ble/gatt_client/main/gattc_demo.c#L324>`__ function to start BLE Scan.
+
+------------------
+
+How can I get RSSI of BLE devices through ESP32?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+   - You can use the `esp_ble_gap_read_rssi() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp_gap_ble.html#_CPPv421esp_ble_gap_read_rssi13esp_bd_addr_t>`__ function to get RSSI of connected BLE devices.
+   - If you want to get RSSI of all scanned BLE devices around, please use the `ble_scan_result_evt_param <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp_gap_ble.html#_CPPv4N22esp_ble_gap_cb_param_t8scan_rstE>`__ structure in the ESP_GAP_BLE_SCAN_RESULT_EVT event to enable the printing of RSSI.
+
+----------------
+
+How can I increase the transmission distance of BLE5.0? How can I set BLE5.0 to long-range mode?
+--------------------------------------------------------------------------------------------------------------------------------
+
+   - In practice, the transmission distance of BLE5.0 is about 200 m. It is recommended to refer to the actual test distance. ESP32-S3 supports the features of BLE5.0, and supports long-range communication through Coded PHY (125 Kbps and 500 Kbps) and broadcast extension.
+   - You can realize long-range communication by using 125 Kbps Coded PHY and increasing the transmit power (tx_power). Refer to the following settings:
+
+     .. code:: text
+
+       esp_ble_gap_ext_adv_params_t ext_adv_params_coded = {
+         .type = ESP_BLE_GAP_SET_EXT_ADV_PROP_SCANNABLE,
+         .interval_min = 0x50,
+         .interval_max = 0x50,
+         .channel_map = ADV_CHNL_ALL,
+         .filter_policy = ADV_FILTER_ALLOW_SCAN_ANY_CON_ANY,
+         .primary_phy = ESP_BLE_GAP_PHY_CODED,
+         .max_skip = 0,
+         .secondary_phy = ESP_BLE_GAP_PHY_CODED,
+         .sid = 0,
+         .scan_req_notif = false,
+         .own_addr_type = BLE_ADDR_TYPE_RANDOM,
+         .tx_power = 18,
+       };
+  
+   - For the BLE5.0 examples, please refer to `ble_50 examples <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble_50>`__ in ESP-IDF.
+
+------------------
+
+I have changed the name of the Bluetooth device with `esp_ble_gap_set_device_name() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-reference/bluetooth/esp_gap_ble.html#_CPPv427esp_ble_gap_set_device_namePKc>`_ in ESP32-C3. It works for Android devices and the customized device name can be shown. However, it does not work on IOS devices. The device name is still the default Bluetooth name. How can I make it work on Apple devices as well?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+   - In this case, you need to use raw data to create BLE advertising packets. First, enable the ``CONFIG_SET_RAW_ADV_DATA`` option in ``menuconfig`` (``idf.py menuconfig`` > ``Example 'GATT SERVER' Config`` > ``Use raw data for advertising packets and scan response data``), and then customize `Broadcast packet structure <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_server/main/gatts_demo.c#L77>`__ in the `gatt server example <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_server>`__.
+   - Please use nRF Connect APP to test. We have tested and it works on the nRF connect APP. This issue is related to IOS APPs.
+
+------------------
+
+I want to use two ESP32 development boards to test the Bluetooth connection. How can I set the specified key to automatically connect them with `gatt_security_client <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_client>`__ and `gatt_security_server <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server>`__ examples?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+   - In `gatt_security_client <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_client>`__ and `gatt_security_server <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server>`__ examples, the default key is 123456. For details, please refer to `uint32_t passkey = 123456 <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server/main/example_ble_sec_gatts_demo.c#L561>`__. You can also set other passwords.
+   - Since the ESP32 device has no display or input keyboard by default, the example sets the IO capability to `No output No input <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server/main/example_ble_sec_gatts_demo.c#L556>`__. For more details, please refer to `Gatt Security Server Example Walkthrough <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server/tutorial/Gatt_Security_Server_Example_Walkthrough.md>`__.
+   - To manually input the key, please set `esp_ble_io_cap_t iocap <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server/main/example_ble_sec_gatts_demo.c#L556>`__ in the `gatt_security_server <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server>`__ example to ESP_IO_CAP_OUT mode, and then you can use the nRF Connect APP to establish a connection with the BLE Server.
+
+------------------
+
+After setting `gatt_security_server <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server>`__ to ESP_IO_CAP_OUT mode and setting `gatt_security_client <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_client>`__ to ESP_IO_CAP_OUT mode, I deliberately set the wrong passkey. However, the two development boards can still be connected. What is the reason?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+   - When the server is set to ESP_IO_CAP_OUT mode, gatt_security_client should be set to ESP_IO_CAP_IN mode.
+   - To avoid such a situation, please add the following code into the `case ESP_GAP_BLE_PASSKEY_REQ_EVT <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_client/main/example_ble_sec_gattc_demo.c#_L386>`__ event on the gatt_security_client side:
+
+     .. code:: text
+
+       esp_ble_passkey_reply(param->ble_security.ble_req.bd_addr, true, 123457);
+
+------------------
+
+Does ESP32-C3/ESP32-C6/ESP32-S3 support Bluetooth AOA/AOD?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+   - ESP32-C3/ESP32-C6/ESP32-S3 does not support Bluetooth AOA/AOD. Currently, none of Espressif products support Bluetooth AOA/AOD.
+  
