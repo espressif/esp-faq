@@ -606,3 +606,74 @@ ESP32 蓝牙设备名称长度是否有限制？
 --------------------------------------------------------------------------------------------------------------------------
 
   - 在使用 `esp_ble_gap_start_scanning() <https://github.com/espressif/esp-idf/blob/490216a2ace6dc3e1b9a3f50d265a80481b32f6d/examples/bluetooth/bluedroid/ble/gatt_client/main/gattc_demo.c#L324>`__ 函数开始 BLE Scan 时，将 duration 参数设置为 0 即可。
+
+------------------
+
+如何通过 ESP32 获取 BLE 设备的 RSSI 的值？
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可使用 `esp_ble_gap_read_rssi() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp_gap_ble.html#_CPPv421esp_ble_gap_read_rssi13esp_bd_addr_t>`__ 函数来获取已连接的 BLE 设备的 RSSI 的值。
+  - 若需要获取周围扫描到的所有 BLE 设备的 RSSI 的值，请在 ESP_GAP_BLE_SCAN_RESULT_EVT 事件中使用 `ble_scan_result_evt_param <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp_gap_ble.html#_CPPv4N22esp_ble_gap_cb_param_t8scan_rstE>`__ 结构体设置 RSSI 参数的打印。
+
+----------------
+
+如何增大 BLE5.0 传输距离？如何设置 BLE5.0 的 Long Range 模式？
+--------------------------------------------------------------------------------------------------------------------------
+
+  - 在实际应用中，BLE5.0 的传输距离在 200 米左右，建议以实际测试距离为准。ESP32-S3 支持 BLE5.0 的特性，支持通过 Coded PHY（125 Kbps 和 500 Kbps）与广播扩展实现远距离 (Long Range) 通信。
+  - 您可以使用 125 Kbps Coded PHY 和增大发射功率 (tx_power)，来实现远距离通信。参考如下设置：
+
+    .. code:: text
+
+      esp_ble_gap_ext_adv_params_t ext_adv_params_coded = {
+        .type = ESP_BLE_GAP_SET_EXT_ADV_PROP_SCANNABLE,
+        .interval_min = 0x50,
+        .interval_max = 0x50,
+        .channel_map = ADV_CHNL_ALL,
+        .filter_policy = ADV_FILTER_ALLOW_SCAN_ANY_CON_ANY,
+        .primary_phy = ESP_BLE_GAP_PHY_CODED,
+        .max_skip = 0,
+        .secondary_phy = ESP_BLE_GAP_PHY_CODED,
+        .sid = 0,
+        .scan_req_notif = false,
+        .own_addr_type = BLE_ADDR_TYPE_RANDOM,
+        .tx_power = 18,
+      };
+  
+  - BLE5.0 例程参见 ESP-IDF 里的 `ble_50 示例 <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble_50>`__。
+
+------------------
+
+基于 ESP32-C3 通过 `esp_ble_gap_set_device_name() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-reference/bluetooth/esp_gap_ble.html#_CPPv427esp_ble_gap_set_device_namePKc>`_ 更改了蓝牙名称，在 Android 设备上运行良好，并显示自定义设备名称。在 IOS 设备上，设备名称仍然是之前默认的蓝牙名称，怎样才能使它在 Apple 设备上也能正常工作？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 此时需要使用 Raw data 的形式来创建 BLE 广播包，首先在 ``menuconfig`` 里使能 ``CONFIG_SET_RAW_ADV_DATA`` 选项（``idf.py menuconfig`` > ``Example 'GATT SERVER' Config`` > ``Use raw data for advertising packets and scan response data``），然后自定义 `gatt server 示例 <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_server>`__ 里的 `广播包结构体 <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_server/main/gatts_demo.c#L77>`__ 即可。
+  - 请使用 nRF Connect APP 进行测试。我们测试过，在nRF connect APP 上是正常的, 这种现象与 IOS APP 本身有关。
+
+------------------
+
+使用两块 ESP32 开发板测试蓝牙连接，使用 `gatt_security_client <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_client>`__ 和 `gatt_security_server <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server>`__ 示例怎么设置指定密钥自动连接？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - `gatt_security_client <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_client>`__ 和 `gatt_security_server <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server>`__ 示例默认设置的固定配对密钥就是 123456，参见代码 `uint32_t passkey = 123456 <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server/main/example_ble_sec_gatts_demo.c#L561>`__，您也可以自行设置为其他密码。
+  - 由于 ESP32 设备端默认没有显示器和输入键盘，因此例程将 IO 能力设置为 `No output No input <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server/main/example_ble_sec_gatts_demo.c#L556>`__。您也可以参考 `Gatt Security Server Example Walkthrough <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server/tutorial/Gatt_Security_Server_Example_Walkthrough.md>`__ 来了解更多细节。
+  - 若要设置为可手动输入配对密钥，可将 `gatt_security_server <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server>`__ 示例中的 `esp_ble_io_cap_t iocap <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server/main/example_ble_sec_gatts_demo.c#L556>`__ 设置为 ESP_IO_CAP_OUT 模式，然后您可以使用 nRF Connect APP 与 BLE Server 建立连接。
+
+------------------
+
+将 `gatt_security_server <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_server>`__ 设置为 ESP_IO_CAP_OUT 模式，并将 `gatt_security_client <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_client>`__ 也设置为 ESP_IO_CAP_OUT 模式，然后故意设置错误的 passkey，但是还是能连接上，请问是什么原因？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - server 设置为 ESP_IO_CAP_OUT 模式时，gatt_security_client 应该设置为 ESP_IO_CAP_IN 模式。
+  - 同时需要在 gatt_security_client 端的 `case ESP_GAP_BLE_PASSKEY_REQ_EVT <https://github.com/espressif/esp-idf/blob/v4.4.4/examples/bluetooth/bluedroid/ble/gatt_security_client/main/example_ble_sec_gattc_demo.c#L386>`__ 事件下，增加以下代码即可避免故意设置错误的 passkey 但是还是能连接上的情况：
+
+    .. code:: text
+
+      esp_ble_passkey_reply(param->ble_security.ble_req.bd_addr, true, 123457); 
+
+------------------
+
+ESP32-C3/ESP32-C6/ESP32-S3 是否支持蓝牙 AOA/AOD?
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-C3/ESP32-C6/ESP32-S3 均不支持蓝牙 AOA/AOD。目前，我们发布的产品都不支持蓝牙 AOA/AOD。
