@@ -677,4 +677,10 @@ Does ESP32-C3/ESP32-C6/ESP32-S3 support Bluetooth AOA/AOD?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
    - ESP32-C3/ESP32-C6/ESP32-S3 does not support Bluetooth AOA/AOD. Currently, none of Espressif products support Bluetooth AOA/AOD.
-  
+
+------------------
+
+What is the maximum length of data in a BLE advertising packet supported by ESP32-C3 with the BLE5.0 feature?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  -  The maximum length is 1650 bytes, which can be set via the `esp_ble_gap_config_ext_adv_data_raw() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32c3/api-reference/bluetooth/esp_gap_ble.html#_CPPv435esp_ble_gap_config_ext_adv_data_raw7uint8_t8uint16_tPK7uint8_t>`__ API.
