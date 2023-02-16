@@ -130,3 +130,10 @@ Matter 是否可以对接三星的 smartthings？
     # ESP-IDF Partition Table
     # Name,          Type, SubType, Offset,  Size, Flags
     esp_secure_cert, 0x3F,    ,     0xd000,  0x2000,  , # Never mark this as an encrypted partition
+
+---------------
+
+ESP32 Matter 设备可以通过 BLE 来配置 Wi-Fi 吗？
+------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 Matter 设备可以通过 BLE 来配置 Wi-Fi ，我们 `esp-matter <https://github.com/espressif/esp-matter>`_  SDK 下的所有应用测试例程都是通过 BLE 进行配置的。可阅读`"2.2 Commissioning and Control" <https://docs.espressif.com/projects/esp-matter/en/main/esp32c3/developing.html#commissioning-and-control>`_ 说明。

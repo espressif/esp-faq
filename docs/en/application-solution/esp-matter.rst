@@ -130,3 +130,10 @@ Where is the DAC (Device Attestation Certificate) pre-imported by ESP Matter mod
     # ESP-IDF Partition Table
     # Name,          Type, SubType, Offset,  Size, Flags
     esp_secure_cert, 0x3F,    ,     0xd000,  0x2000,  , # Never mark this as an encrypted partition
+
+--------------
+
+Can I configure Wi-Fi of ESP32 Matter devices by BLE？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes. For all the application examples in the `esp-matter <https://github.com/espressif/esp-matter>`_ SDK, Wi-Fi is configured by BLE. You can read the `"2.2 Commissioning and Control" <https://docs.espressif.com/projects/esp-matter/en/main/esp32c3/developing.html#commissioning-and-control>`_ guide.
