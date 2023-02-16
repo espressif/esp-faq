@@ -420,3 +420,17 @@ Does ESP32/ESP32-S2/ESP32-C3/ESP32-S3 support powering the RTC power domain only
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
    No, it is not supported. Take ESP32 as an example, detailed information will be updated to the RTC chapter in `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
+
+----------------
+
+How can I improve the EMC performance?
+------------------------------------------------------------------------------------------------------------------------------------
+
+  - At the hardware level, the following measures can be taken to improve the EMC performance of the PCB board.
+  
+    - The EMC performance with a four-layer board design will be better than a two-layer board hardware design.
+    - Add filtering circuits to the power supply circuit.
+    - Add ESD or magnetic beads to the antenna circuit.
+    - Add a zero-ohm series resistor to the SPI Flash communication lines to lower the driving current, reduce interference to RF, and adjust timing for better interference shielding.
+    - Keep GND intact as much as possible.
+    - For more hardware design suggestions, please refer to `《ESP Hardware Design Guidelines》 <https://www.espressif.com/en/support/documents/technical-documents?keys=Hardware+Design+Guidelines>`_.
