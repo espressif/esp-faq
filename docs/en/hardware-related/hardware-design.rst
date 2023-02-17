@@ -448,3 +448,10 @@ How to calibrate the ESP32-S3 ADC in hardware?
 -------------------------------------------------------------------------------------------------------------------------------
 
   - The ESP32-S3 already has the ADC calibrated in hardware on the chip. ESP32-S3 ADCs can be sensitive to noise, resulting in large differences in ADC readings. Depending on the usage scenario, you may need to connect a bypass capacitor (e.g. 100 nF ceramic capacitor) to the ADC input pads for minimising noise. In addition, multi-sampling can be used to further mitigate the effects of noise.
+
+--------------
+
+How to design an automatic download circuit based on the ESP32 series chip?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can refer to the hardware design of the automatic download circuit in the `ESP32-DevKitC V4 schematic <https://dl.espressif.com/dl/schematics/esp32_devkitc_v4-sch.pdf>`_.
