@@ -442,3 +442,9 @@ Why do I need to connect a 499 Ω resistor to U0TXD for ESP32-S3?
 
   - The 499 Ω resistor is reserved for the U0TXD to suppress 80 MHz harmonics. For more information, please refer to `《ESP32­S3 Series Hardware Design Guidelines》 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_hardware_design_guidelines_en.pdf>`_.
   
+--------------
+
+How to calibrate the ESP32-S3 ADC in hardware?
+-------------------------------------------------------------------------------------------------------------------------------
+
+  - The ESP32-S3 already has the ADC calibrated in hardware on the chip. ESP32-S3 ADCs can be sensitive to noise, resulting in large differences in ADC readings. Depending on the usage scenario, you may need to connect a bypass capacitor (e.g. 100 nF ceramic capacitor) to the ADC input pads for minimising noise. In addition, multi-sampling can be used to further mitigate the effects of noise.
