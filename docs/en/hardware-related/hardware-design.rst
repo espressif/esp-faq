@@ -434,3 +434,11 @@ How can I improve the EMC performance?
     - Add a zero-ohm series resistor to the SPI Flash communication lines to lower the driving current, reduce interference to RF, and adjust timing for better interference shielding.
     - Keep GND intact as much as possible.
     - For more hardware design suggestions, please refer to `《ESP Hardware Design Guidelines》 <https://www.espressif.com/en/support/documents/technical-documents?keys=Hardware+Design+Guidelines>`_.
+
+---------------
+
+Why do I need to connect a 499 Ω resistor to U0TXD for ESP32-S3?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The 499 Ω resistor is reserved for the U0TXD to suppress 80 MHz harmonics. For more information, please refer to `《ESP32­S3 Series Hardware Design Guidelines》 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_hardware_design_guidelines_en.pdf>`_.
+  

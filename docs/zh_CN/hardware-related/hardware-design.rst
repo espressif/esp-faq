@@ -434,3 +434,10 @@ ESP32/ESP32-S2/ESP32-C3/ESP32-S3 是否支持单独给 RTC 电源域供电来保
     - 在 SPI Flash 电路上增加一个 0 欧姆串联电阻，以降低驱动电流，减少对射频的干扰，调整时序，更好地屏蔽干扰。
     - 尽量保持 GND 完整。
     - 更多硬件设计建议可参考 `《ESP 硬件设计指南》 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=%E7%A1%AC%E4%BB%B6%E8%AE%BE%E8%AE%A1>`_。
+
+--------------
+
+ESP32-S3 U0TXD 为什么要预留 499 Ω 的电阻?
+------------------------------------------------------------------------------------------------------------------------
+
+  - U0TXD 预留 499 Ω 电阻是用于抑制 80 MHz 谐波。详细信息请参考 `《ESP32-S3 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_hardware_design_guidelines_cn.pdf>`_。
