@@ -455,3 +455,10 @@ How to design an automatic download circuit based on the ESP32 series chip?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - You can refer to the hardware design of the automatic download circuit in the `ESP32-DevKitC V4 schematic <https://dl.espressif.com/dl/schematics/esp32_devkitc_v4-sch.pdf>`_.
+
+---------------
+
+Which crystal oscillator should be used on the ESP8266 chip?
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The ESP8266 chip requires the 26 MHz crystal oscillators to start the chip. The crystal precision should be ±10 PPM. For details, please refer to `《ESP8266 Hardware Design Guidelines》 <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_en.pdf>`_.
