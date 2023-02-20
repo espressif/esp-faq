@@ -189,7 +189,7 @@ In DHCP mode, will ESP32 renew the IP or apply for a new IP when the lease expir
 Why does ESP-IDF report an error when ``SO_SNDBUF`` option of ``setsockopt`` are used to get or set the size of the send buffer?
 -------------------------------------------------------------------------------------------------------------------------------------
 
-  By default, lwIP does not support ``SO_SNDBUF``. To set the send buffer size, go to ``menuconfig`` -> ``Component config`` -> ``LWIP`` -> ``TCP`` -> ``Default send buffer size``. To get or set the receive buffer size, you need to enable the ``CONFIG_LWIP_SO_RCVBUF`` option in menuconfig before you can use the ``SO_SNDBUF`` option of ``setsockopt`` to get or set the receive buffer size.
+  By default, lwIP does not support ``SO_SNDBUF``. To set the send buffer size, go to ``menuconfig`` -> ``Component config`` -> ``LWIP`` -> ``TCP`` -> ``Default send buffer size``. To get or set the receive buffer size, you need to enable the ``CONFIG_LWIP_SO_RCVBUF`` option in menuconfig before you can use the ``SO_RCVBUF`` option of ``setsockopt`` to get or set the receive buffer size.
 
 ----------------
 
