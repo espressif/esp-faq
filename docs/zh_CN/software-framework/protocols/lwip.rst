@@ -189,7 +189,7 @@ ESP-IDF 里目前使用的 lwIP 版本是什么？
 ESP-IDF 里使用 ``setsockopt`` 的 ``SO_SNDBUF`` 选项获取或者设置发送缓冲区大小会报错，为什么？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  lwIP 默认不支持 ``SO_SNDBUF`` 选项，如果需要配置发送缓冲区大小可以在 menuconfig -> ``Component config`` -> ``LWIP`` -> ``TCP`` -> ``Default send buffer size`` 设置。如果需要获取或者设置接收缓冲区大小，此时需要在 menuconfig 里使能 ``CONFIG_LWIP_SO_RCVBUF`` 选项后才支持使用 ``setsockopt`` 的 ``SO_SNDBUF`` 选项获取或者设置接收缓冲区大小。
+  lwIP 默认不支持 ``SO_SNDBUF`` 选项，如果需要配置发送缓冲区大小可以在 menuconfig -> ``Component config`` -> ``LWIP`` -> ``TCP`` -> ``Default send buffer size`` 设置。如果需要获取或者设置接收缓冲区大小，此时需要在 menuconfig 里使能 ``CONFIG_LWIP_SO_RCVBUF`` 选项后才支持使用 ``setsockopt`` 的 ``SO_RCVBUF`` 选项获取或者设置接收缓冲区大小。
 
 ----------------
 
