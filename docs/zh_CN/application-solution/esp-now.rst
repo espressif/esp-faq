@@ -32,7 +32,7 @@ ESP32 ESP-Now 模式下一对一的通信速率是多少？
 ESP-NOW 是什么？有哪些优势与场景？
 -----------------------------------------------------------
 
-  - `ESP-NOW <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_now.html>`_ 是一种由乐鑫公司定义的无连接 Wi-Fi 通信协议。
+  - `ESP-NOW <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_now.html>`_ 是由乐鑫定义的无连接通信协议。
   - 在 ESP-NOW 中，应用程序数据被封装在各个供应商的动作帧中，然后在无连接的情况下，从一个 Wi-Fi 设备传输到另一个 Wi-Fi 设备。
   - ESP-NOW 广泛应用于智能照明、远程控制、传感器等领域。
 

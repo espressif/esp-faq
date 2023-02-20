@@ -32,7 +32,7 @@ What is the one-to-one bit rate for ESP32 in ESP-NOW mode？
 What is ESP-NOW? What are its advantages and application scenarios?
 --------------------------------------------------------------------------
 
-  - `ESP-NOW <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html>`_ is a kind of connectionless Wi-Fi communication protocol that is defined by Espressif.
+  - `ESP-NOW <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html>`_ is a connectionless communication protocol defined by Espressif.
   - In ESP-NOW, application data is encapsulated in action frames from different vendors and then transmitted from one Wi-Fi device to another without a connection.
   - ESP-NOW is ideal for smart lights, remote control devices, sensors and other applications.
 
