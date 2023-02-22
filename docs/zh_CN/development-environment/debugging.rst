@@ -51,13 +51,13 @@ ESP8266 如何修改默认上电校准⽅式？
   **使⽤ NONOS SDK 及 RTOS SDK 3.0 以前的版本：**
 
   - 在 user_pre_init 或 user_rf_pre_init 函数中调⽤ system_phy_set_powerup_option(3)。
-  - 修改 phy_init_data.bin 中第 115 字节为 ``0x03``。 
+  - 修改 phy_init_data.bin 中第 115 字节为 ``0x03``。
 
   **使⽤ RTOS SDK 3.0 及以后版本：**
 
   - 在 menuconfig 中关闭 CONFIG_ESP_PHY_CALIBRATION_AND_DATA_STORAGE。
   - 如果在 menuconfig 中开启了 CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION，修改 phy_init_data.bin 中第 115 字节为 ``0x03``；如果没有开启 CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION，修改 phy_init_data.h 中第 115 字节为 ``0x03``。
-  
+
   **继续使⽤上电部分校准⽅案，若需在业务逻辑中增加触发全校准操作的功能：**
 
   - 使⽤ NONOS SDK 及 RTOS SDK 3.0 以前的版本：擦除 RF 参数区中的内容，触发全校准操作。
@@ -70,7 +70,7 @@ ESP32 boot 启动模式不正常如何排查？
 
   - ESP32-WROVER 模组使用 1.8 V flash 与 PSRAM，启动状态默认为 ``0x33``，下载模式 ``0x23``。
   - 其余模组使用 3.3 V flash 与 PSRAM，启动状态默认为 ``0x13``，下载模式 ``0x03``。
-  - 详情请参考 `ESP32 系列芯片技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中的 Strapping 管脚部分。示例 ``0x13`` 对应如下： 
+  - 详情请参考 `ESP32 系列芯片技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中的 Strapping 管脚部分。示例 ``0x13`` 对应如下：
 
   +--------+--------+-------+-------+-------+--------+-------+
   | 管脚   | GPIO12 | GPIO0 | GPIO2 | GPIO4 | GPIO15 | GPIO5 |
@@ -104,7 +104,15 @@ ESP32-S2 是否可以使用 JTAG 进行下载调试？
 如何在不更改 menuconfig 输出级别的情况下调整日志输出？
 -------------------------------------------------------
 
-  可以通过函数 ``esp_log_level_set()`` 修改日志的输出级别。
+  要修改日志输出而不改变 menuconfig 的输出级别，您可以使用 ``esp_log_level_set()`` 函数。此函数允许您为特定模块或子系统设置日志级别，而不是更改全局日志级别。
+
+  例如，要将 network 模块的日志级别设置为 ``ESP_LOG_DEBUG``，可以使用以下代码：
+
+  .. code-block:: c
+
+    esp_log_level_set("network", ESP_LOG_DEBUG);
+
+  有关此功能的更多信息，请参阅 `Logging library <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/log.html>`_。
 
 --------------
 
@@ -153,7 +161,7 @@ ESP32、ESP8266、ESP32S2 如何做射频性能测试？
 -----------------------------------------------------------------
 
   - 参见 `ESP 射频测试指南 <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_CN.zip>`_。
-  
+
 --------------
 
 Win 10 系统下识别不到设备有哪些原因？
@@ -174,7 +182,7 @@ ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region access
   - 通常发生在处理程序调用了在 flash 中的程序，引用了 flash 中的常量时。值得注意的是，当在中断程序里面使用 double 类型变量时，由于 double 型变量操作的实现属于软件实现，该部分实现也被链接在了 flash 中（例如强制类型转换操作）。
 
   解决措施：
-  
+
   - 给在中断中访问的函数加上 IRAM_ATTR 修饰符。
   - 给在中断中访问的常量加上 DRAM_ATTR 修饰符。
   - 不在中断处理程序中使用 double 类型。
@@ -215,7 +223,7 @@ ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region access
   - 关于 ESP32 上电、复位时序说明，详见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
 
 ---------------
-  
+
 导入头文件 protocol_examples_common.h 后，为什么编译时提示找不到该文件?
 --------------------------------------------------------------------------------------------------------------
 

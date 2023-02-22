@@ -60,8 +60,11 @@ dkms.conf
 .#*
 \#*#
 
-# eclipse setting
+# eclipse settings
 .settings
+
+# VS Code settings
+.vscode
 
 # MacOS directory files
 .DS_Store

@@ -18,7 +18,7 @@ Debugging
 What is the serial port name of Wi-Fi devices？
 --------------------------------------------------
 
- - In Windows system: COM\* 
+ - In Windows system: COM\*
  - In the Linux subsystem of Windows 10: /dev/ttyS\*
  - In Linux system: /dev/ttyUSB\*
  - In macOS system: /dev/cu.usbserial-\*
@@ -45,7 +45,7 @@ How to modify the default method of RF calibration in ESP32?
 
 How to modify the default method of RF calibration in ESP8266?
 ----------------------------------------------------------------------------
-  
+
   During RF initialization, the partial calibration solution is used by default, in which the value of byte 115 in esp_init_data_default.bin is ``0x01``. The initialization only takes a short time. If the boot time is not critical, the full calibration solution can be used instead.
 
   **For NONOS SDK and earlier versions of RTOS SDK 3.0**:
@@ -60,7 +60,7 @@ How to modify the default method of RF calibration in ESP8266?
 
   **If you use the default partial calibration solution, and want to add the function of triggering the full calibration operation:**
 
-  - For NONOS SDK and earlier versions of RTOS SDK 3.0, please erase the RF parameters to trigger the full calibration operation. 
+  - For NONOS SDK and earlier versions of RTOS SDK 3.0, please erase the RF parameters to trigger the full calibration operation.
   - For RTOS SDK 3.0 and later versions, please erase the NVS partition to trigger the full calibration operation.
 
 --------------
@@ -76,7 +76,7 @@ How to troubleshoot in ESP32 Boot mode？
   | Pins   | GPIO12 | GPIO0 | GPIO2 | GPIO4 | GPIO15 | GPIO5 |
   +========+========+=======+=======+=======+========+=======+
   | Level  |    0   |   1   |   0   |   0   |    1   |   1   |
-  +--------+--------+-------+-------+-------+--------+-------+ 
+  +--------+--------+-------+-------+-------+--------+-------+
 
 --------------
 
@@ -104,7 +104,15 @@ Is it possible to use JTAG to debug with ESP32-S2？
 How to modify the log output without changing the output level of menuconfig？
 -----------------------------------------------------------------------------------
 
-  The output level of log can be modified by using the ``esp_log_level_set()`` function.
+  To modify the log output without changing the output level of menuconfig, you can use the ``esp_log_level_set()`` function. This function allows you to set the log level for a specific module or subsystem, rather than changing the global log level.
+
+  For example, to set the log level for the network module to ``ESP_LOG_DEBUG``, you can use the following code:
+
+  .. code-block:: c
+
+    esp_log_level_set("network", ESP_LOG_DEBUG);
+  
+  For more information about this functinality please refer to `Logging library <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/log.html>`_.
 
 --------------
 
@@ -132,7 +140,7 @@ The RTC_watch_dog keeps resetting during ESP32 SPI boot. What could be the reaso
 
 --------------
 
-How to obtain and parse coredump with ESP32? 
+How to obtain and parse coredump with ESP32?
 -------------------------------------------------
 
   - To obtain the 64 KB coredump file from the whole firmware, you need to know its offset from the partition table. Assuming the offset is ``0x3F0000``, the instruction should be as follows:
@@ -153,7 +161,7 @@ How to do RF performance test with ESP32, ESP8266, and ESP32S2?
 --------------------------------------------------------------------------------------------
 
 - Please refer to `ESP RF Test Guide <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_EN.zip>`_.
-  
+
 --------------
 
 My PC cannot recognize the device connected in Win10 system. What could be the reason?
@@ -174,7 +182,7 @@ One error occurred with ESP32 as: Core 1 paniced (Cache disabled but cache memor
   - It is usually because the processor called programs from the flash and used its constants. One important thing is that since the Double variable is implemented through software, thus when this kind of variable is used in the interrupt programs, it is also implemented in the flash (e.g., forced type conversion operation).
 
   Solution:
-  
+
   - Add an IRAM_ATTR modifier to the accessed function during interrupt
   - Add an DRAM_ATTR modifier to the accessed constant during interrupt
   - Do not use Double variable in the interrupt programs
