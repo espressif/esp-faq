@@ -16,7 +16,7 @@ Ethernet
 --------------
 
 When building an example on ESP32 Ethernet development board, an error occurred as "emac: Reset EMAC Timeout". What could be the reasons?
----------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 
   This is because the EMAC initialization is timeout, and is possibly related to the RMII clock. It is recommended to check your hardware, e.g., see if the PHY crystal oscillator is a cold joint.
 
