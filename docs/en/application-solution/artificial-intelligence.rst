@@ -16,7 +16,7 @@ Artificial intelligence
 --------------
 
 What types of cameras are supported on AI image recognition products?
-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
   With ESP32 as its main control chip, ESP-EYE supports various types of cameras, such as 0V2640, OV3660, OV5640, OV7725, etc. Please see `esp32-camera Github <https://github.com/espressif/esp32-camera/tree/master/sensors>`_.
 
