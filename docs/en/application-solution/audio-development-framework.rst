@@ -16,7 +16,7 @@ Audio development framework
 --------------
 
 What is the maximum power of supported speakers for ESP32 series audio development board?
---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
   - ESP32 development board uses NS4150 PA by default, and its maximum power is 3 W according to its datasheet.
 
