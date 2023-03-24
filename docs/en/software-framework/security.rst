@@ -16,7 +16,7 @@ Security
 --------------
 
 Is the firmware in ESP8266 readable?
---------------------------------------------------------
+---------------------------------------------------------
 
   Yes, because the firmware in ESP8266 is located in the external flash, thus can be read externally. In addition, ESP8266 does not support flash encryption and all the data is written in plaintext.
 
@@ -33,19 +33,19 @@ Is it possible to encrypt firmware for ESP8285?
 
 What is the difference between secure boot v1 and v2?
 ------------------------------------------------------
-
-  Currently, `secure boot v1 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html>`_ is reommended for earlier versions than ESP32 v3.0，and `secure boot v2 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html>`_ is recommended for ESP32 v3.0 and later versions, ESP32-C3, ESP32-S2, and ESP32-S3。
   
   Compared with secure boot v1, secure boot v2 has the following improvements:
   - The bootloader and app use the same signature format.
   - The bootloader and app use the same signing key.
+
+  Currently, `secure boot v1 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html>`_ is only reommended for earlier versions than ESP32 v3.0. For ESP32 v3.0 and later versions, ESP32-C3, ESP32-S2, and ESP32-S3, it is recommended to use `secure boot v2 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html>`_.
 
 --------------
 
 After enabling secure boot, there is a build error indicating missing files. What could be the reasons？
 -------------------------------------------------------------------------------------------------------------------------------
 
-  Error log: /Makefile.projbuild:7/f/ESP32Root/secure_boot_signing_key.pem。
+  Error log: /Makefile.projbuild:7/f/ESP32Root/secure_boot_signing_key.pem
 
   Reason: security boot is a function for firmware signature verification, which requires generating key pairs.
   - For the method of generating a key pair when secure boot v1 is enabled, please refer to `secure boot v1 key generation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html#generating-secure-boot-signing-key>`_.
@@ -62,14 +62,14 @@ After enabling secure boot, is it possible for modules to be flashed again?
 
 --------------
 
-With flash encrypted enabled, a module has an error as ``flash read error`` after reflashed. How to resolve such issue?
+With flash encryption enabled, a module reports an error as ``flash read error`` after reflashed. How to resolve such issue?
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
-  With flash encrypted enabled, the module will not support plaintext firmware flash. For common failures, please refer to `Possible Failures <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html#id9>`_. You can use the `espefuse <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html>`_ script to disable the encryption and then reflash the plaintext firmware, or directly flash the encrypted firmware to devices referring to the `example <https://github.com/espressif/esp-idf/tree/master/examples/security/flash_encryption>`_.
+  With flash encryption enabled, the module will not support plaintext firmware flash. For common failures, please refer to `Possible Failures <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html#id9>`_. You can use the `espefuse <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html>`_ script to disable the encryption and then reflash the plaintext firmware, or directly flash the encrypted firmware to devices referring to the `flash encryption example <https://github.com/espressif/esp-idf/tree/master/examples/security/flash_encryption>`_.
   
   .. note::
       
-      Please note there is a time limit for flash encrypted function.
+      Please note there is a time limit for the flash encrypted function.
 
 --------------
 
@@ -91,7 +91,7 @@ Is there any security strategy for ESP32 to protect its firmware?
 
 --------------
 
-When ESP32 debugging GDB after enabling flash encryption, why does it always continue to reset and restart?
+When ESP32 debugging GDB after enabling flash encryption, why does it continuously reset and restart?
 ---------------------------------------------------------------------------------------------------------------------------------
 
   - After ESP32 enabling flash encryption or secure boot, it will restrict JTAG debugging by default, please refer to `Tips and Quirks <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-with-flash-encryption-or-secure-boot>`_.
@@ -102,15 +102,15 @@ When ESP32 debugging GDB after enabling flash encryption, why does it always con
 How to enable flash encryption for ESP32?
 ----------------------------------------------------------------------------------------------------------------------------------------
 
-  - It can be enabled via `make menuconfig` or `idf.py menuconfig --> Security features --> Enable flash encryption on boot (READ DOCS FIRST)` configurations.
+  - It can be enabled via menuconfig or idf.py menuconfig by configuring ``Security features`` -> ``Enable flash encryption on boot (READ DOCS FIRST)``.
   - Please refer to `Flash encryption instructions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html#flash>`_.
   
 ------------------
 
-After GPIO0 is pulled down, the ESP32 cannot enter download mode and prints "download mode is disable". What is the reason?
+After GPIO0 is pulled down, the ESP32 cannot enter download mode and prints "download mode is disable". What could be the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - It means the chip's UART Download mode has been disabled, you can check this via the ``UART_DOWNLOAD_DIS`` bit in `efuse <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/efuse.html?highlight=download%20mode>`_.
+  - The log means the chip's UART Download mode has been disabled. You can check this via the ``UART_DOWNLOAD_DIS`` bit in `eFuse <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/efuse.html?highlight=download%20mode>`_.
   - Please note that after the Production mode of flash encryption is enabled, the UART Download mode will be disabled by default. For more information, please refer to `UART ROM download mode <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig.html#config-secure-uart-rom-dl-mode>`_.
   
 -----------------------
@@ -118,7 +118,7 @@ After GPIO0 is pulled down, the ESP32 cannot enter download mode and prints "dow
 Can the secure boot function be enabled for ESP32 in Arduino development environment?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - No. If you want to use arduino for development, the only way to use such functionality is to use Arduino as IDF component.
+  - No. If you want to use Arduino for development, the only way to enable the secure boot function is to use Arduino as an IDF component.
 
 ------------
 
@@ -130,8 +130,8 @@ What are the use scenarios for secure boot and flash encryption?
 
 ------------
 
-What data is stored in eFuse involved in secure boot and flash encryption?
-----------------------------------------------------------------------------
+What are the data stored in eFuse involved in secure boot and flash encryption?
+----------------------------------------------------------------------------------
 
   - For the data stored in eFuse used in secure boot v1, please refer to `secure boot v1 efuses <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html#background>`_。
   - For the data stored in eFuse used in secure boot v2, please refer to `secure boot v2 efuses <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html#efuse-usage>`_。
@@ -148,7 +148,7 @@ Enabling secure boot failed with the log "Checksum failure". How to fix it?
 NVS encryption failed to start and an error occurred as ``nvs: Failed to read NVS security cfg: [0x1117] (ESP_ERR_NVS_CORRUPT_KEY_PART)``. How can I solve this issue?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Please erase flash before starting NVS encryption, and then flash the firmware which can enable the NVS encryption to the SoC.
+  - Please erase flash once using the flash tool before starting NVS encryption, and then flash the firmware which can enable the NVS encryption to the SoC.
 
 
 After flash encryption was enabled, a warning occurred as ``esp_image: image at 0x520000 has invalid magic byte (nothing flashed here)``. How can I solve this issue?

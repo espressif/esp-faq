@@ -16,9 +16,9 @@
 --------------
 
 ESP8266 的固件是否能被读取？
----------------------------------------
+----------------------------------------
 
-  ESP8266 固件由于放置在外部 flash，数据可被外部读取。并且 ESP8266 不支持 flash 加密，所有数据均为明文。
+  ESP8266 固件放置在外部 flash，数据可被外部读取。并且 ESP8266 不支持 flash 加密，所有数据均为明文。
 
 --------------
 
@@ -26,26 +26,26 @@ ESP8285 是否可以固件加密？
 ------------------------------------
 
   - ESP8285 芯片自身未有固件加密功能，无法完成固件加密。
-  - ESP32 以及 ESP32-S2 芯片都有具备固件加密功能。
-  - 也可选择外置加密芯片来完成部分数据加密。
+  - ESP32 及 ESP32-S2 芯片支持固件加密功能，用户可以考虑使用这两款芯片。
+  - 如仍需使用 ESP8285，用户可以选择外置加密芯片完成部分数据加密。
 
 --------------
 
-secure boot v1 和 secure boot v2 的区别？
-------------------------------------------------------
-
-当前，仅 ESP32 v3.0 以下版本推荐使用 `secure boot v1 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html>`_，ESP32 v3.0 及以上、ESP32-C3、ESP32-S2 和 ESP32-S3 推荐使用 `secure boot v2 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html>`_。
+secure boot v1 和 secure boot v2 有什么区别？
+--------------------------------------------------------------
   
   secure boot v2 相较于 secure boot v1 主要做了以下方面的改进：
   - bootloader 和 app 使用相同的签名格式。
   - bootloader 和 app 使用统一的签名密钥。
 
+  当前，仅 ESP32 v3.0 以下版本推荐使用 `secure boot v1 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html>`_，ESP32 v3.0 及以上版本、ESP32-C3、ESP32-S2 和 ESP32-S3 推荐使用 `secure boot v2 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html>`_。
+
 --------------
 
-开启 secure boot 后，编译报错缺少文件？
------------------------------------------------------
+开启 secure boot 后，为什么编译报错缺少文件？
+-----------------------------------------------------------------------
 
-  错误 log：/Makefile.projbuild:7：/f/ESP32Root/secure_boot_signing_key.pem。
+  错误日志：/Makefile.projbuild:7：/f/ESP32Root/secure_boot_signing_key.pem。
 
   报错原因：security boot 是固件签名校验的功能，该功能需要生成密钥对。
   - 启用 secure boot v1 时生成密钥对的方法请参考 `secure boot v1 生成密钥 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html#generating-secure-boot-signing-key>`_。
@@ -56,8 +56,8 @@ secure boot v1 和 secure boot v2 的区别？
 模组使能 secure boot 后是否可以再次烧录？
 -------------------------------------------------------
 
-  - secure boot v1 配置为 one-time，那么就只能烧录一次，不可以再重新烧录 bootloader 固件。
-  - secure boot v1 配置为 reflashable，则可以重新烧录 bootloader 固件。
+  - 若 secure boot v1 配置为 one-time，则仅支持烧录一次，不可以再重新烧录 bootloader 固件。
+  - 若 secure boot v1 配置为 reflashable，则可以重新烧录 bootloader 固件。
   - secure boot v2 允许重新烧录 bootloader 和 app 固件。
 
 --------------
@@ -65,7 +65,7 @@ secure boot v1 和 secure boot v2 的区别？
 模组使能 flash encrypted，重新烧录后出现 ``flash read error`` 错误。如何解决？
 -----------------------------------------------------------------------------------------------
 
-  模组开启加密功能后将不支持明文固件烧录，常见的错误请参考 `重新烧录可能出现的错误 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html#id9>`_。可以通过 `espefuse <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html>`_ 脚本将加密关闭后再次烧录明文数据，或者参考`示例 <https://github.com/espressif/esp-idf/tree/master/examples/security/flash_encryption>`_将加密后的固件数据烧录到设备上。
+  模组开启加密功能后将不支持明文固件烧录，常见的错误请参考 `重新烧录可能出现的错误 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html#id9>`_。可以通过 `espefuse <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html>`_ 脚本关闭加密后再次烧录明文数据，或者参考 `flash 加密示例 <https://github.com/espressif/esp-idf/tree/master/examples/security/flash_encryption>`_，将加密后的固件数据烧录到设备上。
   
   .. note::
       
@@ -81,12 +81,12 @@ ESP32 打开 flash 加密和 secure boot 后，如何关闭？
 
 --------------
 
-ESP32 保护固件安全的方式有那些？
+ESP32 保护固件安全的方式有哪些？
 ------------------------------------------
 
-  - ESP32 支持 flash encryption 与 secure boot。
-  - flash 加密参考文档：`flash encryption <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html>`_。
-  - 安全引导参考文档：`secure boot <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html>`_。
+  - ESP32 支持 flash 加密与 secure boot。
+  - flash 加密参考文档：`flash 加密 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html>`_。
+  - 安全引导参考文档：`secure boot <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html>`_。
   - 安全引导 V2 参考文档：`v3.0 版本芯片的安全引导 V2 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html>`_。
 
 --------------
@@ -94,7 +94,7 @@ ESP32 保护固件安全的方式有那些？
 ESP32 启动 flash 加密后进行 GDB 调试，为何会不断复位重启？
 ---------------------------------------------------------------------------------------------------------
 
-  - ESP32 启动了 flash 加密或 secure Boot 后，默认将会禁用 JTAG 调试，请参见说明 `注意事项和补充内容 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-debugging-security-features>`_。
+  - ESP32 启动了 flash 加密或 secure Boot 后，默认将会禁用 JTAG 调试，请参见 `注意事项和补充内容 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/tips-and-quirks.html#jtag-debugging-security-features>`_。
   - 可以通过 esptool 工具包中的 ``espefuse.py summary`` 脚本指令读取当前芯片 JTAG 状态。 
 
 ---------------
@@ -102,7 +102,7 @@ ESP32 启动 flash 加密后进行 GDB 调试，为何会不断复位重启？
 ESP32 芯片如何开启 Flash 加密？
 -------------------------------------------------------------------------------------------------------------------
 
-  - 在 ESP-IDF 编译配置中修改，通过 `make menuconfig` 或 `idf.py menuconfig --> Security features --> Enable flash encryption on boot (READ DOCS FIRST)`。
+  - 在 ESP-IDF 编译配置中，通过 menuconfig 或 idf.py menuconfig 中的 ``Security features`` --> ``Enable flash encryption on boot (READ DOCS FIRST)`` 修改。
   - 请参见 `Flash 加密说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html#flash>`_。
 
 -------------
@@ -110,19 +110,19 @@ ESP32 芯片如何开启 Flash 加密？
 ESP32 的 GPIO0 拉低后无法进入下载模式，日志打印 "download mode is disable" 是什么原因？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 芯片上电打印 "download mode is disable" 日志，说明该芯片的 UART 下载模式 (UART download mode) 已被禁用，您可以通过检查该芯片的 `efuse <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/efuse.html?highlight=download%20mode>`_ 中的 ``UART_DOWNLOAD_DIS`` 位检查该模式是否被禁用。
-  - 注意，当启用 flash 加密的量产模式后，UART 下载模式将默认被禁用，更多信息请参考 `UART ROM download mode <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/kconfig.html#config-secure-uart-rom-dl-mode>`_。
+  - ESP32 芯片上电打印 "download mode is disable" 日志，说明该芯片的 UART 下载模式 (UART download mode) 已被禁用。您可以检查该芯片 `eFuse <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/efuse.html?highlight=download%20mode>`_ 中的 ``UART_DOWNLOAD_DIS`` 位，查看该模式是否被禁用。
+  - 注意，启用 flash 加密的量产模式后，UART 下载模式将默认被禁用。更多信息，请参考 `UART ROM download mode <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/kconfig.html#config-secure-uart-rom-dl-mode>`_。
   
 ----------------
 
 在 Arduino 开发环境中使用 ESP32 能开启 secure boot 功能吗？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 不能，如果要使用 arduino 进行开发，开启这种功能的唯一方法是使用 Arduino 作为 IDF 组件。
+  - 不能，如果要使用 Arduino 进行开发，开启 secure boot 功能的唯一方法是将 Arduino 作为 IDF 组件使用。
 
 -------------
 
-secure boot 和 flash 加密的使用场景？
+secure boot 和 flash 加密的使用场景有哪些？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 启用 secure boot 后，设备将仅加载运行指定密钥签名后的固件。因此，启用 secure boot 可以避免设备加载非法的固件、防止对设备刷写未经授权的固件。
@@ -148,7 +148,7 @@ secure boot 和 flash 加密中涉及的存储在 eFuse 数据有哪些？
 启用 NVS 加密失败，提示 ``nvs: Failed to read NVS security cfg: [0x1117] (ESP_ERR_NVS_CORRUPT_KEY_PART)``，怎么解决？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 启用 NVS 加密前，建议先擦除一次 flash，然后烧录包含使能 NVS 加密的固件。
+  - 启用 NVS 加密前，建议先使用烧录工具擦除一次 flash，然后烧录包含使能 NVS 加密的固件。
 
 
 启用 flash 加密后，提示 ``esp_image: image at 0x520000 has invalid magic byte (nothing flashed here)``，怎么解决？
