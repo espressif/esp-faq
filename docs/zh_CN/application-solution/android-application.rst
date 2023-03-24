@@ -16,18 +16,22 @@
 --------------
 
 为什么 APP 无法扫描到 Wi-Fi 或者蓝牙信号？
-------------------------------------------------
+-------------------------------------------------
 
-  - Android 6.0 之后的系统需要申请位置权限 (android.permission.ACCESS_FINE_LOCATION)。
-  - Android 9.0 之后的系统除申请位置权限外，还需要打开 GPS。
-  - Android 12.0 之后的系统需要申请扫描权限 (android.permission.BLUETOOTH_SCAN)。
+  - 对于 Android 6.0 之后的系统，需要申请位置权限 (android.permission.ACCESS_FINE_LOCATION)。
+  - 对于 Android 9.0 之后的系统，除申请位置权限外，还需打开 GPS。
+  - 对于 Android 12.0 之后的系统，需要申请扫描权限 (android.permission.BLUETOOTH_SCAN)。
 
 --------------
 
 为什么扫描 Wi-Fi 和蓝牙信号需要位置权限？
 ------------------------------------------------
 
-  - APP 有可能通过解析 Wi-Fi 和蓝牙信息来获取您当前所在的位置，Google 为了您的隐私考虑，对 Android 6.0 之后的相关 API 加入了位置权限需求。
+  - 在移动设备中，当 GPS 信号不可用或不精确时，可以使用 Wi-Fi 和蓝牙信号定位用户。因此，应用程序需要首先获取位置权限，以使用这些信号来确定设备位置。
+
+  - 此外，Wi-Fi 和蓝牙信号可能也会获取附近的 Wi-Fi 网络和蓝牙设备的相关信息，如设备的 MAC 地址，用于识别特定的设备。应用程序可以通过解析 Wi-Fi 和蓝牙信息来获取用户的当前位置，Google 为了您的隐私考虑，对 Android 6.0 之后的相关 API 加入了位置权限需求。尽管一些操作系统在最新版本中引入了 MAC 地址随机化技术来保护用户的隐私，应用程序仍然需要位置权限来访问这些信号。
+
+  - 总之，为了使用 Wi-Fi 和蓝牙信号来定位用户或获取附近设备的信息，应用程序需要获得位置权限。这有助于保护用户的隐私和安全，并确保应用程序只能使用这些信号来执行预期的操作。
 
 --------------
 
@@ -41,7 +45,7 @@ APP 需要继承第三方库中的 Application 类，但如需同时继承 Multi
 APP 发送 http 请求报错是为什么？
 ----------------------------------------
 
-  - Android 高版本中需要使用加密请求例如 https，若您依然需要发送 http 请求，在 AndroidMenifest.xml 中 application 标签下添加 android:usesCleartextTraffic="true" 即可。
+  - Android 高版本中需要使用加密请求，例如 https。若您需要发送 http 请求，在 AndroidMenifest.xml 中 application 标签下添加 android:usesCleartextTraffic="true" 即可。
 
 --------------
 
