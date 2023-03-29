@@ -15,11 +15,12 @@
 
 --------------
 
-Wi-Fi 设备的串口名称是什么？
-----------------------------------------
+ESP 设备的串口名称是什么？
+-----------------------------------------
+
+  串口名称通常是由操作系统指定的，不同的操作系统和设备可能会有不同的串口名称。常见如下：
 
   - Windows 系统中串口设备名称格式是：COM*
-  - Windows 10 子系统 linux 中串口设备名称的标准格式是：/dev/ttyS*
   - Linux 系统中串口设备名称格式是：/dev/ttyUSB*
   - macOS 系统中串口设备名称格式是：/dev/cu.usbserial-*
 
@@ -29,24 +30,26 @@ ESP32 如何关闭默认通过 UART0 发送的调试信息？
 ---------------------------------------------
 
   - 一级 Bootloader 日志信息可以通过 GPIO15 接地来屏蔽。
-  - 二级 Bootloader 日志信息可以通过 make menuconfig 中 ``Bootloader config`` 进⾏相关配置。
-  - ESP-IDF 中的日志信息可以通过 make menuconfig 中 ``Component config/Log output`` 进⾏相关配置。
+  - 二级 Bootloader 日志信息可以在 menuconfig 里的 ``Bootloader config`` 中进⾏相关配置。
+  - ESP-IDF 中的日志信息可以在 menuconfig 里的 ``Component config`` > ``Log output`` 中进⾏相关配置。
 
 --------------
 
-ESP32 如何修改默认上电校准⽅式？
+ESP32 如何修改默认上电 RF 校准⽅式？
 ------------------------------------
 
   - 上电时 RF 初始化默认采⽤部分校准的⽅案：打开 menuconfig 中 ``CONFIG_ESP32_PHY_CALIBRATION_AND_DATA_STORAGE`` 选项。
   - 不关注上电启动时间，可修改使⽤上电全校准⽅案：关闭 menuconfig 中 ``CONFIG_ESP32_PHY_CALIBRATION_AND_DATA_STORAGE`` 选项。
   - 建议默认使用 **部分校准** 的方案，这样既可以保证上电启动的时间，也可以在业务逻辑中增加擦除 NVS 中 RF 校准信息的操作，以触发全校准的操作。
 
+  请参考 `RF 校准文档 <https://docs.espressif.com/projects/esp-idf/en/v4.4.4/esp32/api-guides/RF_calibration.html>`__ 获取更多信息。
+
 --------------
 
 ESP8266 如何修改默认上电校准⽅式？
 --------------------------------------
 
-  上电时 RF 初始化默认采⽤部分校准的⽅案： esp_init_data_default.bin 中第 115 字节为 ``0x01``，RF 初始化时间较短。不关注上电启动时间，可修改使⽤上电全校准⽅案。
+  上电时 RF 初始化默认采⽤部分校准的⽅案。该方案中 esp_init_data_default.bin 的第 115 字节为 ``0x01``，RF 初始化时间较短。如不关注上电启动时间，可修改使⽤上电全校准⽅案。
 
   **使⽤ NONOS SDK 及 RTOS SDK 3.0 以前的版本：**
 
@@ -65,7 +68,7 @@ ESP8266 如何修改默认上电校准⽅式？
 
 --------------
 
-ESP32 boot 启动模式不正常如何排查？
+ESP32 Boot 启动模式不正常如何排查？
 -----------------------------------
 
   - ESP32-WROVER 模组使用 1.8 V flash 与 PSRAM，启动状态默认为 ``0x33``，下载模式 ``0x23``。
@@ -78,12 +81,14 @@ ESP32 boot 启动模式不正常如何排查？
   | 电平   |    0   |   1   |   0   |   0   |    1   |   1   |
   +--------+--------+-------+-------+-------+--------+-------+
 
+  您也可以直接参考 `Boot 模式选择文档 <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html>`__。  
+
 --------------
 
 使用 ESP32 JLINK 调试，发现会报 ERROR：No Symbols For Freertos，如何解决呢？
 -----------------------------------------------------------------------------
 
-  该错误日志不影响调试使用，解决措施可以参考 `此论坛 <https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd>`_。
+  该错误日志不影响调试使用，解决措施可以参考 `ST 论坛 <https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd>`_。
 
 --------------
 
@@ -116,7 +121,7 @@ ESP32-S2 是否可以使用 JTAG 进行下载调试？
 
 --------------
 
-为什么 ESP8266 进⼊启动模式（2，7）并触发看⻔狗复位？
+为什么 ESP8266 进⼊启动模式 (2,7) 并触发看⻔狗复位？
 -----------------------------------------------------
 
   - 请确保 ESP8266 启动时，Strapping 管脚处于所需的电平。如果外部连接的外设使 Strapping 管脚进⼊到错误的电平，ESP8266 可能进⼊错误的操作模式。在⽆有效程序的情况下，看⻔狗计时器将复位芯⽚。
@@ -124,11 +129,11 @@ ESP32-S2 是否可以使用 JTAG 进行下载调试？
 
 --------------
 
-ESP-WROVER-KIT 开发板 openocd 错误 Error: Can't find board/esp32-wrover-kit-3.3v.cfg，如何解决？
+ESP-WROVER-KIT 开发板 OpenOCD 错误 Error: Can't find board/esp32-wrover-kit-3.3v.cfg，如何解决？
 -----------------------------------------------------------------------------------------------------
 
-  - openocd 版本为 20190313 和 20190708，请使用 ``openocd -f board/esp32-wrover.cfg`` 指令打开。
-  - openocd 版本为 20191114 和 20200420（2020 以上版本），请使用 ``openocd -f board/esp32-wrover-kit-3.3v.cfg`` 指令打开。
+  - OpenOCD 版本为 20190313 和 20190708，请使用 ``openocd -f board/esp32-wrover.cfg`` 指令打开。
+  - OpenOCD 版本为 20191114 和 20200420（2020 以上版本），请使用 ``openocd -f board/esp32-wrover-kit-3.3v.cfg`` 指令打开。
 
 --------------
 
@@ -143,17 +148,19 @@ ESP32 SPI boot 时会一直发生 RTC_WDT 复位是什么原因?
 ESP32 如何获取与解析 coredump？
 -----------------------------------
 
-  - 从完整的固件中提取出 64 KB 大小的 coredump，需要先从分区表中确认 coredump 的偏移量，当前假设为 ``0x3F0000``。
+  - 从完整的固件中提取出 64 KB 大小的 coredump，需要先从分区表中确认 coredump 的偏移量。假设当前偏移量为 ``0x3F0000``，运行如下命令读取固件：
 
   .. code-block:: text
 
     python esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyUSB* read_flash 0x3f0000 0x10000  coredump.bin
 
-  - 使用 coredump 读取脚本将二进制的 coredump 文件转变成可读的信息。假设第一步获得的 coredump 文件为 coredump.bin，与固件对于的 elf 文件 hello_world.elf。
+  - 使用 coredump 读取脚本将二进制的 coredump 文件转变成可读的信息。假设第一步获得的 coredump 文件为 coredump.bin，此固件对应的 elf 文件为 hello_world.elf，运行如下命令转换文件：
 
   .. code-block:: text
 
     python esp-idf/components/espcoredump/espcoredump.py info_corefile -t raw -c coredump.bin hello_world.elf
+
+  也可以参考 `Core Dump 文档 <https://docs.espressif.com/projects/esp-idf/en/v4.4.4/esp32/api-guides/core_dump.html>`__ 了解更多信息。
 
 --------------
 
@@ -187,6 +194,8 @@ ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region access
   - 给在中断中访问的常量加上 DRAM_ATTR 修饰符。
   - 不在中断处理程序中使用 double 类型。
 
+  您也可以参考 `严重错误文档 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/fatal-errors.html#cache-err-msg>`__ 来获取更多信息。
+
 --------------
 
 如何读取模组 Flash 型号信息？
@@ -200,14 +209,14 @@ ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region access
 
 --------------
 
-调试 ESP-IDF 里的 Ethernet demo，出现如下异常日志如何解决？
-------------------------------------------------------------------------------------------
+调试 ESP-IDF 里的 `Ethernet 示例 <https://github.com/espressif/esp-idf/tree/master/examples/ethernet>`__，出现如下异常日志如何解决？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: text
 
     emac: Timed out waiting for PHY register 0x2 to have value 0x0243(mask 0xffff). Current value:
 
-  可以参考开发板的如下配置，详见板子原理图:
+  可以参考开发板的如下配置，详见开发板原理图:
 
     - CONFIG_PHY_USE_POWER_PIN=y
     - CONFIG_PHY_POWER_PIN=5
@@ -230,6 +239,7 @@ ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region access
   :CHIP\: ESP32:
 
   - 在工程下的 CMakeLists.txt 中添加语句 “set(EXTRA_COMPONENT_DIRS $ENV{IDF_PATH}/examples/common_components/protocol_examples_common)” 即可。
+  - 您也可以参考 `构建系统文档 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/build-system.html>`__ 来获取更多信息。
 
 --------------
 
