@@ -15,22 +15,23 @@ Debugging
 
 --------------
 
-What is the serial port name of Wi-Fi devices？
---------------------------------------------------
+What is the serial port name of ESP devices？
+---------------------------------------------------
+
+  The serial port name is usually assigned by the operating system, and different operating systems and devices may have different serial port names. Common ones are as follows:
 
  - In Windows system: COM\*
- - In the Linux subsystem of Windows 10: /dev/ttyS\*
  - In Linux system: /dev/ttyUSB\*
  - In macOS system: /dev/cu.usbserial-\*
 
 --------------
 
-How to block debugging messages sent through UART0 by default?
+How to block debugging messages sent through UART0 by default in ESP32?
 -------------------------------------------------------------------------
 
-  - For first-stage Bootloader log, connect GPIO15 to Ground.
-  - For second-stage Bootloader log, go to make menuconfig > ``Bootloader config`` to do configurations.
-  - For ESP-IDF log, go to make menuconfig > ``Component config`` > ``Log output`` to do configurations.
+  - For first-stage Bootloader log, you could block the logs by connecting GPIO15 to Ground.
+  - For second-stage Bootloader log, go to menuconfig and configure the ``Bootloader config`` option.
+  - For ESP-IDF log, go to menuconfig > ``Component config`` and configure the ``Log output`` option.
 
 --------------
 
@@ -41,6 +42,8 @@ How to modify the default method of RF calibration in ESP32?
   - If the boot time is not critical, the full calibration solution can be used instead. Go to menuconfig and disable the ``CONFIG_ESP32_PHY_CALIBRATION_AND_DATA_STORAGE`` option.
   - It is recommended to use the **partial calibration** solution, which ensures less boot time and enables you to add the function of erasing RF calibration information in NVS so as to trigger the full calibration operation.
 
+  For detailed information, please refer to the `RF Calibration documentation <https://docs.espressif.com/projects/esp-idf/en/v4.4.4/esp32/api-guides/RF_calibration.html>`__.
+
 --------------
 
 How to modify the default method of RF calibration in ESP8266?
@@ -48,12 +51,12 @@ How to modify the default method of RF calibration in ESP8266?
 
   During RF initialization, the partial calibration solution is used by default, in which the value of byte 115 in esp_init_data_default.bin is ``0x01``. The initialization only takes a short time. If the boot time is not critical, the full calibration solution can be used instead.
 
-  **For NONOS SDK and earlier versions of RTOS SDK 3.0**:
+  **For NONOS SDK and earlier versions of RTOS SDK 3.0:**
 
   - Call system_phy_set_powerup_option(3) in function user_pre_init or user_rf_pre_init.
   - In phy_init_data.bin, modify the value of byte 115 to ``0x03``.
 
-  **For RTOS SDK 3.0 and later versions**:
+  **For RTOS SDK 3.0 and later versions:**
 
   - Go to menuconfig and disable CONFIG_ESP_PHY_CALIBRATION_AND_DATA_STORAGE.
   - If CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION is enabled in menuconfig, please modify the value of byte 115 in phy_init_data.bin to ``0x03``. If CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION is disabled, please modify the value of byte 115 in phy_init_data.h to ``0x03``.
@@ -68,9 +71,9 @@ How to modify the default method of RF calibration in ESP8266?
 How to troubleshoot in ESP32 Boot mode？
 ------------------------------------------
 
-  - The ESP32-WROVER uses 1.8 V flash and PSRAM, which are ``0x33`` by default in boot status and ``0x23`` in download mode.
-  - Other modules use 3.3 V flash and PSRAM, which are ``0x13`` by default and ``0x03`` in download mode.
-  - For detailed information, please refer to Section Strapping Pins in `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_. Taken ``0x13`` as an example, the pins are as follows:
+  - The ESP32-WROVER uses 1.8 V flash and PSRAM, which is ``0x33`` by default in boot status and ``0x23`` in download mode.
+  - Other modules use 3.3 V flash and PSRAM, which are ``0x13`` by default in boot status and ``0x03`` in download mode.
+  - For detailed information, please refer to Section Strapping Pins in `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_. Taking ``0x13`` as an example, the pins are as follows:
 
   +--------+--------+-------+-------+-------+--------+-------+
   | Pins   | GPIO12 | GPIO0 | GPIO2 | GPIO4 | GPIO15 | GPIO5 |
@@ -78,19 +81,21 @@ How to troubleshoot in ESP32 Boot mode？
   | Level  |    0   |   1   |   0   |   0   |    1   |   1   |
   +--------+--------+-------+-------+-------+--------+-------+
 
+  You can also refer to the `Boot Mode Selection documentation <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html>`__ directly.
+
 --------------
 
-When debugging with ESP32 JLINK, an ERROR occurs as: No Symbols For Freertos. How to resolve such issue?
+When debugging with ESP32 JLINK, an ERROR occurs as: No Symbols For Freertos. How can I resolve such issue?
 ---------------------------------------------------------------------------------------------------------------
 
-  Such issue will not affect actual operations. For solutions, please go to the `ST Community <https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd>`_.
+  This issue will not affect actual operations. For solutions, please go to the `ST Community <https://community.st.com/s/question/0D50X0000BVp8RtSQJ/thread-awareness-debugging-in-freertos-stm32cubeide-110-has-a-bug-for-using-rtos-freertos-on-stlinkopenocd>`_.
 
 --------------
 
 How to monitor the free space of the task stack?
 -----------------------------------------------------
 
-  The function ``vTaskList()`` can be used to print the available space of the task stack regularly. For detailed information, please check `CSDN Blog <https://blog.csdn.net/espressif/article/details/104719907>`_.
+  The function ``vTaskList()`` can be used to print the available space of the task stack regularly. For detailed information, please refer to `CSDN Blog <https://blog.csdn.net/espressif/article/details/104719907>`_.
 
 --------------
 
@@ -112,7 +117,7 @@ How to modify the log output without changing the output level of menuconfig？
 
     esp_log_level_set("network", ESP_LOG_DEBUG);
   
-  For more information about this functinality please refer to `Logging library <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/log.html>`_.
+  For more information about this functinality, please refer to `Logging library <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/log.html>`_.
 
 --------------
 
@@ -124,18 +129,18 @@ ESP8266 enters boot mode (2,7) and hits a watchdog reset. What could be wrong?
 
 ---------------
 
-When using the ESP-WROVER-KIT board with openocd, an error occurred as: Can't find board/esp32-wrover-kit-3.3v.cfg. How to resolve such issue?
+When using the ESP-WROVER-KIT board with OpenOCD, an error occurred as: Can't find board/esp32-wrover-kit-3.3v.cfg. How can I resolve such issue?
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - With 20190313 and 20190708 versions of openocd, please use instruction ``openocd -f board/esp32-wrover.cfg``.
-  - With 20191114 and 20200420 (2020 later versions) versions of openocd, please use instruction ``openocd -f board/esp32-wrover-kit-3.3v.cfg``.
+  - With 20190313 and 20190708 versions of OpenOCD, please use instruction ``openocd -f board/esp32-wrover.cfg``.
+  - With 20191114 and 20200420 (2020 later versions) versions of OpenOCD, please use instruction ``openocd -f board/esp32-wrover-kit-3.3v.cfg``.
 
 --------------
 
 The RTC_watch_dog keeps resetting during ESP32 SPI boot. What could be the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Reason: The flash has a requirement for time interval between VDD_SDIO power-up and the first access. For example, GD's 1.8 V flash requires 5 ms of time interval, while the time interval of ESP32 is about 1 ms (XTAL frequency is 40 MHz). Under such condition, the flash access will fail and either timer watchdog reset or RTC watchdog reset is triggered, depending on which one is triggered first. The threshold for RTC watchdog reset is 128 KB cycle, while the threshold for timer watchdog reset is 26 MB cycle. Taking a 40 MHz XTAL clock as an example, when the frequency of RTC slow clock is greater than 192 KHz, RTC watchdog reset will be triggered first, otherwise timer watchdog reset will be triggered. VDD_SDIO will be continuously powered when timer watchdog is reset, so there will be no problem in accessing flash and the chip will work normally. When RTC watchdog is reset, the VDD_SDIO power supply will be disabled and the access to flash will fail, resetting the RTC_watch_dog continuously.
+  - Reason: The flash has a requirement for time interval between VDD_SDIO power-up and the first access. For example, GD's 1.8 V flash requires 5 ms of time interval, while the time interval of ESP32 is about 1 ms (XTAL frequency is 40 MHz). Under such condition, the flash access will fail and either timer watchdog reset or RTC watchdog reset is triggered, depending on which one is triggered first. The threshold for RTC watchdog reset is 128 KB cycle, while the threshold for timer watchdog reset is 26 MB cycle. Taking the 40 MHz XTAL clock as an example, when the frequency of RTC slow clock is greater than 192 KHz, an RTC watchdog reset will be triggered first, otherwise a timer watchdog reset will be triggered. VDD_SDIO will be continuously powered when the timer watchdog is reset, so there will be no problem in accessing flash and the chip will work normally. When the RTC watchdog is reset, the VDD_SDIO power supply will be disabled and the access to flash will fail, resetting the RTC_watch_dog continuously.
   - Solution: When an RTC watchdog reset occurs, the power supply to VDD_SDIO is disabled. You can add a capacitor to VDD_SDIO to ensure that the voltage of VDD_SDIO does not drop below the voltage that the flash can tolerate during this period.
 
 --------------
@@ -143,17 +148,19 @@ The RTC_watch_dog keeps resetting during ESP32 SPI boot. What could be the reaso
 How to obtain and parse coredump with ESP32?
 -------------------------------------------------
 
-  - To obtain the 64 KB coredump file from the whole firmware, you need to know its offset from the partition table. Assuming the offset is ``0x3F0000``, the instruction should be as follows:
+  - To obtain the 64 KB coredump file from the firmware, you need to know its offset from the partition table. Assuming the offset is ``0x3F0000``, run the following command to read the firmware:
 
   .. code-block:: text
 
     python esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyUSB* read_flash 0x3f0000 0x10000  coredump.bin
 
-  - Use the coredump reading script to convert the file obtained at the first step into readable messages. Assuming the coredump file is coredump.bin and the elf file is hello_wolrd.elf, the instruction should be as follows:
+  - Use the coredump reading script to convert the file obtained at the first step into readable messages. Assuming the coredump file is coredump.bin and the elf file is hello_wolrd.elf, run the following command to convert the file:
 
   .. code-block:: text
 
     python esp-idf/components/espcoredump/espcoredump.py info_corefile -t raw -c coredump.bin hello_world.elf
+
+  For more information, please refer to the `Core Dump documentation <https://docs.espressif.com/projects/esp-idf/en/v4.4.4/esp32/api-guides/core_dump.html>`__.
 
 --------------
 
@@ -187,9 +194,11 @@ One error occurred with ESP32 as: Core 1 paniced (Cache disabled but cache memor
   - Add an DRAM_ATTR modifier to the accessed constant during interrupt
   - Do not use Double variable in the interrupt programs
 
+  For more information, please refer to the `Fatal error documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/fatal-errors.html#cache-err-msg>`__.
+
 --------------
 
-How to read flash model information of the modules?
+How to read the flash model information of the modules?
 -----------------------------------------------------------
 
   - Please use the python script `esptool <https://github.com/espressif/esptool>`_ to read information of Espressif's chips and modules.
@@ -200,8 +209,8 @@ How to read flash model information of the modules?
 
 --------------
 
-What should I do when the Ethernet demo in debugging ESP-IDF outputs the following log？
---------------------------------------------------------------------------------------------
+When debugging the `Ethernet Example <https://github.com/espressif/esp-idf/tree/master/examples/ethernet>`__ in ESP-IDF, the following exception log appears. How can I resolve such issue?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: text
 
@@ -214,12 +223,12 @@ What should I do when the Ethernet demo in debugging ESP-IDF outputs the followi
 
 ---------------
 
-I found "Brownout detector was triggered" failure on my ESP32. How to resolve such issue?
+I found a "Brownout detector was triggered" failure on my ESP32. How to resolve such issue?
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 has a built-in brownout detector which can detect if the voltage is lower than a specific value. If this happens, it will reset the chip in order to prevent unintended behavior.
+  - ESP32 has a built-in brownout detector which can detect if the voltage is lower than a specific value. If it happens, the detector will reset the chip to prevent unintended behavior.
   - This message may be reported in various scenarios, while the root cause should always be that the chip with a power supply has momentarily or permanently dropped below the brownout threshold. Please try replacing power supply, USB cable, or installing capacitor on power supply terminals of your module.
-  - You can do configuration to reset the threshold value or disable the brownout detector. Please refer to `config-esp32-brownout-det <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig.html#brownout-detector>`_ for details.
+  - Apart from the above solution, you can also try to configure the reset threshold value or disable the brownout detector. For more information, please refer to `config-esp32-brownout-det <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig.html#brownout-detector>`_.
   - For ESP32 power-up and reset timing descriptions, see `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
 ---------------
@@ -230,6 +239,7 @@ After imported the protocol_examples_common.h header file, how come it cannot be
   :CHIP\: ESP32:
 
   - Please add "set(EXTRA_COMPONENT_DIRS $ENV{IDF_PATH}/examples/common_components/protocol_examples_common)" in CMakeLists.txt under the project.
+  - For more information, please refer to the `Build system documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html>`__.
 
 ---------------
 
