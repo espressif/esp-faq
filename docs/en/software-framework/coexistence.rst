@@ -23,7 +23,7 @@ When Wi-Fi coexists with Bluetooth, what mode does it support?
 --------------
 
 When Wi-Fi coexists with ESP-BLE-MESH, the Wi-Fi throughput is low, why?
------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 
   For ESP32-DevKitC boards without PSRAM, Wi-Fi can coexist with ESP-BLE-MESH but with a relatively low throughput. For ESP32-DevKitC boards with PSRAM, the transmit rate can stabilize at over 1 Mbps.
 
