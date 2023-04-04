@@ -16,14 +16,14 @@ Power Consumption Verification
 --------------
 
 Why does ESP32 reboot when it is woken up from Deep-sleep mode?
------------------------------------------------------------------------
+------------------------------------------------------------------------
 
-  When ESP32 is in Deep-sleep mode, the digital core is powered off and the information stored in CPU will be lost. After ESP32 is woken up from Deep-sleep mode, it re-boots firmwares and re-loads them to the internal memory. The application information that requires to be reserved can be saved in RTC as RTC is still powered on in Deep-sleep mode. The reserved information can be loaded after wake-up.
+  When ESP32 is in Deep-sleep mode, the digital core is powered off and the information stored in CPU will be lost. After ESP32 is woken up from Deep-sleep mode, it re-boots firmwares and re-loads them to the internal memory. The application information that requires to be reserved can be saved in RTC, as RTC is still powered on in Deep-sleep mode. The reserved information can be loaded after wake-up.
 
 
 -------------
 
-Which sleep modes does ESP32 support? What is the difference between them?
+What sleep modes does ESP32 support? What is the difference between them?
 ---------------------------------------------------------------------------
 
   ESP32 supports three sleep modes: Modem-sleep, Light-sleep, and Deep-sleep.
@@ -31,6 +31,8 @@ Which sleep modes does ESP32 support? What is the difference between them?
   - Modem-sleep: CPU works normally and the clock is configurable. The station (ESP32) automatically turns on after it is connected to the AP. After ESP32 enters Modem-sleep mode, the RF module is shut down, and the station remains connected to the AP. If ESP32 disconnects to the AP, it will not work in Wi-Fi Modem-sleep mode. In Modem-sleep mode, the CPU clock frequency can be lowered to further reduce the current consumption.
   - Light-sleep: CPU is suspended and the digital core clock is limited. When ESP32 is in Light-sleep mode, not only the RF module is closed, CPU and partial system clocks are also suspended. After ESP32 exits Light-sleep mode, the CPU resumes working. 
   - Deep-sleep: The digital core is powered off and the information stored in CPU is lost. After ESP32 enters Deep-sleep mode, all modules are closed except for RTC. After it exits Deep-sleep mode, the entire system restarts, which is similar to the system reboot. ESP32 does not remain connected to the AP in Deep-sleep mode.
+
+  Please refer to *Table 8: Power Consumption by Power Modes* in `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`__ for the corresponding sleep power consumption.
 
 --------------
 
@@ -53,7 +55,7 @@ Why does the minimum current of ESP32 in Light-sleep increase when the timer is 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - By default, to avoid potential issues, `esp_light_sleep_start <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#_CPPv421esp_light_sleep_startv>`_ functions will not power down flash. This is to prevent errors that may be caused if the flash is not fully powered off and back on when the device has just gone to sleep and is immediately woken up.
-  - For the issue details and on how to optimize power consumption in this scenario please refer to `Power-down of Flash <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#power-down-of-flash>`_ section of the ESP-IDF Programming Guide.
+  - For the issue details and on how to optimize power consumption in this scenario please refer to `Power-down of Flash <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/sleep_modes.html#power-down-of-flash>`_ in the ESP-IDF Programming Guide.
 
 ---------------
 
@@ -62,3 +64,10 @@ In ESP32's Deep-sleep mode, using an internal 150 KHz RTC clock or using an exte
 
   - If the RTC clock source is external 32 kHz crystal, there is no difference in power consumption.
   - If an external 32 kHz oscillator is connected to the hardware, the power consumption will increase by 50 to 100 μA regardless of which RTC clock source is selected.
+
+-----------------
+
+What are the requirements for CPU frequency to ensure normal operation of the RF module when reducing power consumption by reducing the CPU frequency?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  CPU frequency should be 80 Mhz at least.
