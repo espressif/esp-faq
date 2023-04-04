@@ -25,7 +25,7 @@
 
 --------------
 
-ESP32 可以支持 Bluetooth® LE 5.0 吗？
+ESP32 可以支持 Bluetooth LE 5.0 吗？
 ---------------------------------------------
 
   ESP32 硬件不支持 Bluetooth LE 5.0，支持 Bluetooth LE 4.2。

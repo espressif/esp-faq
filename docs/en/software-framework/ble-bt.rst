@@ -25,7 +25,7 @@ When porting example gatt_server, an error occurred indicating head file does no
 
 --------------
 
-Does ESP32 support Bluetooth® 5.0?
+Does ESP32 support Bluetooth 5.0?
 ---------------------------------------------
 
   No, the ESP32 hardware only supports Bluetooth LE 4.2.
