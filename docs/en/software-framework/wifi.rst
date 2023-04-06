@@ -18,9 +18,20 @@ Wi-Fi
 Do ESP32 and ESP8266 support Chinese SSID for Wi-Fi?
 ------------------------------------------------------------
 
-  Yes, but the CODEC format of router or smart phone should be the same.
+  Both ESP32 and ESP8266 support Chinese SSID, but you need to use corresponding libraries and implement some settings. It should be noted you need to make special configurations when using Chinese SSID as Chinese characters occupy different numbers of bytes.
 
-  For example, if both router and device use UTF-8 format, then the device can be successfully connected to the router with Chinese SSID.
+  For ESP32, you can use the Wi-Fi related API provided by ESP-IDF. When connecting AP, you can use the fuction `esp_wifi_set_config() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv419esp_wifi_set_config16wifi_interface_tP13wifi_config_t>`_ to set Wi-Fi. The SSID parameter can be set to Chinese characters. For example,
+
+  .. code-block:: c
+
+    wifi_config_t wifi_config = {
+      .sta = {
+          .ssid = "你好，世界",
+          .password = "password123",
+      },
+    };
+    ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config));
+
 
 --------------
 
@@ -52,7 +63,7 @@ How much time does an ESP32 scan take?
 What is the definition for Wi-Fi channel? Can I select any channel of my choice?
 ------------------------------------------------------------------------------------------
 
-  A channel refers to a specific frequency channel within the allowable range of frequencies allocated for use by Wi-Fi systems. Different countries and regions use different channel numbers. Please refer to `ESP8266 Wi-Fi Channel Selection Guidelines <https://www.espressif.com/sites/default/files/documentation/esp8266_wi-fi_channel_selection_guidelines_en.pdf>`_.
+  - A Wi-Fi channel is a frequency range used for wireless communication. Different countries and regions have regulations on the available Wi-Fi channels. For example, in North America, the Wi-Fi channel ranges from 1 to 11, while in Europe, the Wi-Fi channel ranges from 1 to 13. For more details, please refer to `ESP8266 Wi-Fi Channel Selection Guidelines <https://www.espressif.com/sites/default/files/documentation/esp8266_wi-fi_channel_selection_guidelines_en.pdf>`_.
 
 --------------
 
@@ -145,7 +156,7 @@ What is the definition for Wi-Fi channel? Can I select any channel of my choice?
 [Performance] How to test the bit rate of Wi-Fi modules?
 --------------------------------------------------------------------------
 
-  Please use the codes in example ``example/wifi/iperf`` provided by ESP-IDF SDK.
+  Please use the example `iperf <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/wifi/iperf>`_ in ESP-IDF for testing.
 
 --------------
 
@@ -161,7 +172,8 @@ What is the definition for Wi-Fi channel? Can I select any channel of my choice?
 [Connect] How many devices is ESP8266 able to connect in SoftAP mode?
 --------------------------------------------------------------------------------------
 
-  Up to eight devices in hardware level. However, to ensure module performance, it is recommended to connect four devices at most.
+  The ESP8266 chip in SoftAP mode supports connecting eight devices at most. This is because the NAT (Network Address Translation) mechanism used by the ESP8266 chip in SoftAP mode only supports eight devices at most.
+  However, it should be noted that each connected device will occupy a certain amount of bandwidth and resources. Therefore, we recommend connecting four devices as too many devices may affect the performance and stability of the Wi-Fi module.
 
 --------------
 
@@ -178,7 +190,26 @@ Do ESP8266/ESP32/ESP32-S2/S3/C2/C3 support web/SoftAP provisioning?
 [Connect] How do ESP8266 and ESP32 hide SSID in SoftAP mode?
 -------------------------------------------------------------------------
 
-  The variable `ssid_hidden <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=hidden#_CPPv4N18wifi_scan_config_t11show_hiddenE>`_ in `wifi_ap_config_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv416wifi_ap_config_t>`_ structure can be configured to hide the SSID.
+  To hide ESP8266 or ESP32 as SSID in SoftAP mode, you can use the following methods:
+
+  - Use the `esp_wifi_set_config() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv419esp_wifi_set_config16wifi_interface_tP13wifi_config_t>`_ function to configure the SSID and password in SoftAP mode and whether to hiding them. For example, the following code sets the SSID to "MySoftAP", the password to "MyPassword", and set .ssid_hidden = 1 to hide the SSID:
+
+    .. code-block:: c
+
+      wifi_config_t config = {
+        .ap = {
+          .ssid = "MySoftAP",
+          .ssid_len = strlen("MySoftAP"),
+          .password = "MyPassword",
+          .max_connection = 4,
+          .authmode = WIFI_AUTH_WPA_WPA2_PSK
+          .ssid_hidden = 1
+        },
+      };
+      esp_wifi_set_config(WIFI_IF_AP, &config);
+      
+  Then use `esp_wifi_start() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv>`_ function to starts Wi-Fi.
+
 
 --------------
 
@@ -199,14 +230,15 @@ What is the supported Wi-Fi frequency band and power meter for ESP-WROOM-32D?
 What is the maximum value of ESP32 Wi-Fi RF power？
 -----------------------------------------------------------
 
-  The RF power of ESP32 is 20 dB, which is exactly the maximum value.
+  The output RF power of ESP32 can be set to 20 dBm at maximum.
+  Please note that the maximum output power may vary in different countires and regions. Please ensure that you comply with local rules and regulations when using ESP32. In addition, high power output also influence battery life and Wi-Fi signal stability. As a result, you should confirm the output power depending on applications and requirements.
 
 --------------
 
 How does ESP32 adjust Wi-Fi TX power?
 --------------------------------------------
 
-  - Configure Component config -> PHY -> Max Wi-Fi TX power(dBm) via menuconfig, and the max value is 20 dB.
+  - Configure ``Component config`` > ``PHY`` > ``Max Wi-Fi TX power(dBm)`` via menuconfig, and the max value is 20 dBm.
   - Use API `esp_err_t esp_wifi_set_max_tx_power(int8_t power);`.
 
 --------------
@@ -340,8 +372,14 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 [Scan] Why does the STA cannot find any AP sometimes during the scanning?
 --------------------------------------------------------------------------------------
 
-  Generally, it is because the AP is too far away from the STA. Sometimes this can also be caused by inappropriate configurations of the scanning parameters.
+  There are many possible reasons why ESP32 and ESP8266 cannot scan any AP, and some common reasons and solutions are listed below.
 
+  - The AP is too far away or the signal is too weak, while Wi-Fi of ESP32 and ESP8266 can only work within a certain range. If the AP is too far away or the Wi-Fi signal is too weak, ESP32 and ESP8266 may not be able to scan the AP. You can move ESP32 or ESP8266 closer to the AP or use a signal amplifier to enhance the signal strength.
+  - SSID of the AP is hidden. SSID of some APs may be hidden, so they will not be broadcasted to nearby devices. In this case, ESP32 and ESP8266 cannot scan these APs. You can connect these APs by inputting their SSID and passwords manually.
+  - The AP is overloaded or malfunctioning. If the AP is overloaded or malfunctioning, it may not be able to handle new connection requests, and thus ESP32 and ESP8266 cannot connect to the AP. You can try to wait for a while and then scan the AP again.
+  - ESP32 or ESP8266 has some software issues. Sometimes, software issues of ESP32 or ESP8266 may cause problems with scanning for APs. In this case, you can try to reset ESP32 or ESP8266 and restart Wi-Fi. If this method does not work, you may need to update the firmware of ESP32 or ESP8266.
+  - Other reasons include wireless interference, security settings, and network configuration. These reasons may also affect Wi-Fi of ESP32 or ESP8266. In this case, you need to carefully check the Wi-Fi environment and implement corresponding settings.
+   
 --------------
 
 [Scan] What is the maximum number of APs that can be scanned？
@@ -388,7 +426,7 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 [LWIP] What is the retransmission interval of TCP？
 --------------------------------------------------------
 
-  When ESP32 serves as the transmitter, the first retransmission interval is normally 2 ～ 3 s by default. Then, the next interval is determined by Jacoboson's algorithm, which can be simply seen as a multiplication of 2.
+When ESP32 acts as the sender, the initial retransmission interval of the TCP protocol is usually set to 3 seconds. If the receiver does not send an ACK message, the next retransmission interval will be determined based on the Jacobson algorithm. The retransmission interval will be exponentially increased. Specially, it will be increased by 2, 4, 8, 16, 32 seconds gradually. This retransmission interval is not fixed and you can adjust it by changing some parameters such as timeout time and the size of sliding window.
 
 --------------
 
@@ -410,7 +448,7 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 
 --------------
 
-[Sleep] Where to enable the speedstep function for ESP32 in modem sleep mode?
+[Sleep] Where to enable the automatic speedstep function for ESP32 in modem sleep mode?
 ----------------------------------------------------------------------------------------
 
   Go to ``menuconfig`` > ``Component Config`` > ``Power Management`` > ``Enable dynamic frequency scaling (DFS) at startup``.
@@ -427,7 +465,14 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 [Sleep] What affects the average current of ESP32 in modem sleep mode?
 ---------------------------------------------------------------------------------
 
-  The main factors are: the core, the clock frequency and the percentage of idle time of the CPU, whether there is Wi-Fi data sent or received during the test, data sending or receiving frequency, the transmitting power of RF block, whether the time when the router sends beacon is accurate, whether there are peripheral modules working, and etc.
+  The modem sleep mode of ESP32 is achieved by setting wakeup cycles. ESP32 opens RF functions to communicate during every cycle and closes these functions in the rest of the time.
+
+  The average current of this mode is influenced by several factors, including:
+
+  - Wakeup cycle: A shorter wakeup cycle means the chip will be waked up more frequently, which increases the average current.
+  - Signal quality: If the Wi-Fi signal is weak, the chip will keep trying to reconnect or send data, which will increase the average current.  Using communication protocols with bigger transmission power will also increase the average current.
+  - Hardware configuration: The hardware configuration of the chip also affects power consumption, such as the number of CPU cores, CPU clock frequency, CPU idle time ratio, power supply voltage, external crystal oscillator, etc. All of these factors influence the size of average current.
+  - Other factors include whether the testing router accurately sends beacon timestamps, whether too many broadcast packets have been sent, whether peripheral modules are working, etc.
 
 --------------
 
@@ -519,7 +564,11 @@ How does ESP32 receive and transmit Wi-Fi 802.11 packets?
 [Connect] What are the specifications of Wi-Fi parameters when using SmartConfig?
 ------------------------------------------------------------------------------------------------------
 
-  According to `wifi spec`, the SSID should not exceed 32 bytes and its password should not exceed 64 bytes.
+  SmartConfig is a method of configuring Wi-Fi parameters via local network broadcasting. Users can send Wi-Fi account and password to the device through a matching APP. SmartConfig network configuration has some requirements on Wi-Fi parameters:
+
+    - SSID name: Supports Chinese characters and English letters, digits, with a maximum length of 32 bytes.
+    - Wi-Fi password: 8-64 digits, case-sensitive.
+    - Wi-Fi security encryption: Currently, SmartConfig supports WPA, WPA2, and WEP encryption methods, and does not support open methods without encryption.
 
 --------------
 
@@ -595,20 +644,6 @@ Does ESP32 Wi-Fi support PMF (Protected Management Frames) and PFS (Perfect Forw
 
 --------------
 
-How to get the RSSI of the AP for ESP32 IDF v4.1 Wi-Fi?
---------------------------------------------------------------------------
-
-  It can be obtained via scanning, please refer to example `scan <https://github.com/espressif/esp-idf/tree/master/examples/wifi/scan>`_.
-
---------------
-
-How to get the RSSI of the connected AP for ESP32 IDF v4.1 Wi-Fi?
---------------------------------------------------------------------------
-
-  You could call esp_wifi_sta_get_ap_info() to get it. For the API description, please refer to `esp_err_t esp_wifi_sta_get_ap_info(wifi_ap_record_t *ap_info) <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv424esp_wifi_sta_get_ap_infoP16wifi_ap_record_t>`_.
-
---------------
-
 Why does ESP8266 print out an AES PN error log when using esptouch v2?
 ------------------------------------------------------------------------------
 
@@ -652,13 +687,6 @@ I'm using the master version of ESP8266-RTOS-SDK to open the WiFi Qos applicatio
 
 -----------------
 
-Using ESP-IDF release/v4.2 version of SDK, how to enable mDNS function in AP mode?
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  - Please enable "Component config -> LWIP -> Enable mDNS queries in resolving host name" in menuconfig.
-
------------------
-
 Using ESP32, how to configure the maximum Wi-Fi transmission speed and stability without considering memory and power consumption?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -677,7 +705,7 @@ How to get CSI data when using ESP32 device in Station mode?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - CSI data can be obtained by calling 'esp_wifi_set_csi_rx_cb()'. See description in `API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_csi_rx_cb13wifi_csi_cb_tPv>`_.
-  - See configuration steps in `Wi-Fi CSI <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#wi-fi-channel-state-information>`_.
+  - For specific steps, please refer to `Espressif CSI examples <https://github.com/espressif/esp-csi>`_.
 
 -------------------
 
@@ -690,9 +718,31 @@ In AP + STA mode, after an ESP32 is connected to Wi-Fi, will the Wi-Fi connectio
 
 I'm using ESP-IDF release/v3.3 for ESP32 development, but only bluetooth function is needed, how to disable Wi-Fi function through software?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+ 
   - Please call ``esp_wifi_stop()`` to disable the Wi-Fi function. For API description, please see `esp_err_t esp_wifi_stop(void) <https://docs.espressif.com/projects/esp-idf/en/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_stop#_CPPv413esp_wifi_stopv>`_.
   - If you need to reclaim the resources occupied by Wi-Fi, call ``esp_wifi_deinit()``. For API description, please see `esp_err_t esp_wifi_deinit(void) <https://docs.espressif.com/projects/esp-idf/en/release-v3.3/api-reference/ network/esp_wifi.html?highlight=wifi_deinit#_CPPv415esp_wifi_deinitv>`_.
+  - Here is a simple example:
+
+  .. code-block:: c
+
+    #include "esp_wifi.h"
+    #include "esp_bt.h"
+
+    void app_main()
+    {
+      // Turn off Wi-Fi functionality
+      esp_wifi_stop();
+
+      // Initializing Bluetooth functionality
+      esp_bt_controller_config_t bt_cfg = BT_CONTROLLER_INIT_CONFIG_DEFAULT();
+      esp_bt_controller_init(&bt_cfg);
+      esp_bt_controller_enable(ESP_BT_MODE_BTDM);
+
+      // ...
+    }
+
+  In this example, the esp_wifi_stop() function is called to turn off Wi-Fi and then to initialize Bluetooth. It should be noted that once Wi-Fi is stopped, Wi-Fi related APIs cannot be used.
+
   
 ----------------------
 
@@ -1218,15 +1268,26 @@ Does ESP32 support WPA3-Enterprise applications?
 What is the value range of ESP32 Wi-Fi TX power?
 ------------------------------------------------------------------------------------------------------------
 
-   - It ranges from 2 to 20 dBm. For more details, please refer to `esp_wifi_set_max_tx_power() API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`__.
+   - It ranges from 2 to 20 dBm. In ESP-IDF, you can use ``esp_wifi_set_max_tx_power()`` to set the maximum of TX power, and use ``esp_wifi_get_max_tx_power()`` to the get the maximal TX power supported by the system.
+   - It should be noted that setting TX power too high may affect system stability and battery life, and may also violate wireless regulations in some countries and regions, so it should be used with caution. For more details, please refer to `esp_wifi_set_max_tx_power() API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`__.
 
 --------------
 
 How do I get Wi-Fi RSSI when using ESP32?
 ------------------------------------------------------------------------------------------------------------
 
-  - If you want to get RSSI of surrounding networks, please refer to `scan example <https://github.com/espressif/esp-idf/tree/v5.0/examples/wifi/scan>`__ in ESP-IDF. 
-  - If you want to obtain RSSI of AP, you can use `esp_wifi_sta_get_ap_info() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv424esp_wifi_sta_get_ap_infoP16wifi_ap_record_t>`__.
+  When using ESP32 as a station in ESP-IDF release/v4.1, you can use the following code example to obtain the RSSI of the connected AP:
+
+  .. code-block:: c
+
+    wifi_ap_record_t ap_info;
+    if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK) {
+      int rssi = ap_info.rssi;
+      // handle rssi
+    }
+
+  The ``wifi_ap_record_t`` structure contains information about the connected AP, including SSID, BSSID, channel, and encryption type. The RSSI field represents the RSSI value of the AP. Call ``esp_wifi_sta_get_ap_info()`` to get the information of this structure.
+  For details of the API, please refer to `esp_err_t esp_wifi_sta_get_ap_info(wifi_ap_record_t *ap_info) <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv424esp_wifi_sta_get_ap_infoP16wifi_ap_record_t>`_.
 
 --------------
 

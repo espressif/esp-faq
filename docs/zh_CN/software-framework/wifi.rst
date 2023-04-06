@@ -18,9 +18,20 @@ Wi-Fi
 ESP32 和 ESP8266 是否支持中文 SSID？
 ----------------------------------------
 
-  是支持的，使用中需要路由器或者手机的中文编码方式一致。
+  ESP32 和 ESP8266 均支持中文 SSID，但需要使用相应的库和设置。需要注意的是，由于中文字符占用的字节数不同，因此使用中文 SSID 时需要特殊处理。
 
-  示例：路由器中文编码使用 UTF-8，设备中文编码使用 UTF-8，设备就可以正确连接中文 SSID 的路由器。
+  对于 ESP32，可以使用 ESP-IDF 提供的 Wi-Fi 相关 API。在连接 AP 时，可以使用 `esp_wifi_set_config() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv419esp_wifi_set_config16wifi_interface_tP13wifi_config_t>`_ 函数设置 Wi-Fi 配置，其中的 ssid 参数可以设置为中文字符串。例如：
+
+  .. code-block:: c
+
+    wifi_config_t wifi_config = {
+      .sta = {
+          .ssid = "你好，世界",
+          .password = "password123",
+      },
+    };
+    ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config));
+
 
 --------------
 
@@ -52,7 +63,7 @@ ESP32 和 ESP8266 是否支持中文 SSID？
 Wi-Fi 信道是什么？可以自行选择信道吗？
 --------------------------------------
 
-  信道指的是 Wi-Fi 使用的指定频段中特定频率的波段。不同国家地区使用的信道数是不同的。⽤户可以参考 `ESP8266 Wi-Fi 信道选择指南 <https://www.espressif.com/sites/default/files/documentation/esp8266_wi-fi_channel_selection_guidelines_cn_1.pdf>`_。
+  信道指的是 Wi-Fi 使用的指定频段中特定频率的波段。不同国家地区使用的信道数是不同的。例如在北美，Wi-Fi 信道范围是 1 到 11，而在欧洲，Wi-Fi 信道范围是 1 到 13。⽤户可以参考 `ESP8266 Wi-Fi 信道选择指南 <https://www.espressif.com/sites/default/files/documentation/esp8266_wi-fi_channel_selection_guidelines_cn_1.pdf>`_。
 
 --------------
 
@@ -145,7 +156,7 @@ Wi-Fi 信道是什么？可以自行选择信道吗？
 [Performance] 如何测试 Wi-Fi 模组的通信速率？
 --------------------------------------------------
 
-  可以使⽤ SDK 中提供的示例 ``example/wifi/iperf`` 中代码进⾏测试。
+  可以使⽤ ESP-IDF 里的 `iperf <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/wifi/iperf>`_ 示例 进⾏测试。
 
 --------------
 
@@ -161,7 +172,8 @@ Wi-Fi 信道是什么？可以自行选择信道吗？
 [Connect] ESP8266 SoftAP 模式支持几个设备？
 -----------------------------------------------
 
-  硬件上最多⽀持 8 个，我们推荐 4 个，这样可以保证模组性能。
+  ESP8266 SoftAP 模式最多可以支持八个设备连接。这是由于 ESP8266 芯片在 SoftAP 模式下使用的 NAT（网络地址转换）机制只支持最多八个设备的连接。
+  但需要注意的是，每个连接的设备会占用一定的带宽和资源，因此我们推荐连接四个设备，因为连接过多设备可能会影响 Wi-Fi 模组的性能和稳定性。
 
 --------------
 
@@ -178,7 +190,26 @@ ESP8266/ESP32/ESP32-S2/S3/C2/C3 是否支持 web/softAP 配网？
 [Connect] ESP8266 和 ESP32 作为 softap 模式如何隐藏 SSID？
 ----------------------------------------------------------------
 
-  `wifi_ap_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv416wifi_ap_config_t>`_ 结构体中有一个变量 `ssid_hidden <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=hidden#_CPPv4N18wifi_scan_config_t11show_hiddenE>`_，可以设置为隐藏功能。
+  要隐藏 ESP8266 或 ESP32 作为 SoftAP 模式下的 SSID，可以通过以下方法实现：
+
+    - 调用 `esp_wifi_set_config() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv419esp_wifi_set_config16wifi_interface_tP13wifi_config_t>`_ 来配置 SoftAP 模式下的 SSID，密码以及是否隐藏。例如，以下代码设置 SSID 为 "MySoftAP"，密码为 "MyPassword"，函数中使用 .ssid_hidden = 1 选项来隐藏 SSID：
+  
+    .. code-block:: c
+
+      wifi_config_t config = {
+        .ap = {
+          .ssid = "MySoftAP",
+          .ssid_len = strlen("MySoftAP"),
+          .password = "MyPassword",
+          .max_connection = 4,
+          .authmode = WIFI_AUTH_WPA_WPA2_PSK
+          .ssid_hidden = 1
+        },
+      };
+      esp_wifi_set_config(WIFI_IF_AP, &config);
+      
+    配置完后调用 `esp_wifi_start() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv>`_ 启动 Wi-Fi。
+
 
 --------------
 
@@ -199,14 +230,15 @@ ESP-WROOM-32D 支持的 Wi-Fi 频段信息和功率表分别是什么？
 ESP32 Wi-Fi RF 功率最高值是多少？
 ---------------------------------
 
-  ESP32 RF 功率为 20 dB，即模组最大值。
+  ESP32 的 Wi-Fi RF（无线电频率）功率输出最高可以配置为 20 dBm。
+  请注意，最大功率输出水平可能会因不同的国家/地区和规定而有所不同。在使用 ESP32 时，请确保您遵守当地的规定和法规，以确保合法和安全使用。另外，高功率输出也会对电池寿命和 Wi-Fi 信号稳定性产生影响，因此在选择功率输出水平时，需要根据具体的应用场景和要求进行权衡和选择。
 
 --------------
 
 ESP32 如何调整 Wi-Fi 的发射功率？
 ---------------------------------
 
-  - 可通过 menuconfig 配置 Component config -> PHY -> Max Wi-Fi TX power(dBm) 来调整 Wi-Fi 的发射功率，最大是 20 dB。
+  - 可通过 menuconfig 配置 ``Component config`` > ``PHY`` > ``Max Wi-Fi TX power(dBm)`` 来调整 Wi-Fi 的发射功率，最大是 20 dBm。
   - 或者使用 API `esp_err_t esp_wifi_set_max_tx_power(int8_t power);` 设置调整。
 
 --------------
@@ -340,7 +372,13 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
 [Scan] 为什么有时候扫描不到 AP？
 ---------------------------------------
 
-  常见的原因是 AP 离 STA 太远，也有可能是 scan 的参数配置不恰当导致。
+  ESP32 和 ESP8266 扫描不到 AP 的原因可能有很多，以下是一些常见的原因和解决方法：
+
+  - AP 距离过远或信号质量差：ESP32 和 ESP8266 的 Wi-Fi 功能只能在一定范围内工作。如果 AP 距离过远或 Wi-Fi 信号质量太差，ESP32 和 ESP8266 可能无法扫描到 AP。可以尝试将 ESP32 或 ESP8266 靠近 AP，或者使用信号增强器来增强 AP 信号强度。
+  - AP 的 SSID 隐藏：一些 AP 可能隐藏其 SSID，这意味着它不会被广播到附近的设备。在这种情况下，ESP32 和 ESP8266 无法扫描到 AP。要解决这个问题，您可以手动输入 AP 的 SSID 和密码进行连接。
+  - AP 已满载或故障：如果 AP 已满载或故障，它可能无法处理新的连接请求，这会导致 ESP32 和 ESP8266 无法连接到 AP。您可以尝试等待一段时间，然后再次扫描 AP。
+  - ESP32 或 ESP8266 的软件问题：有时候，ESP32 或 ESP8266 的软件可能会出现问题，导致无法正确扫描 AP。在这种情况下，您可以尝试重置 ESP32 或 ESP8266，并重新启动 Wi-Fi 功能。如果问题仍然存在，您可能需要更新 ESP32 或 ESP8266 的固件。
+  - 其他因素：其他因素，如无线干扰、安全设置、网络配置等，也可能会影响 ESP32 或 ESP8266 的 Wi-Fi 功能。在这种情况下，您需要仔细检查 Wi-Fi 环境并进行相应的设置。
 
 --------------
 
@@ -388,7 +426,7 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
 [LWIP] TCP 重传间隔？
 -----------------------
 
-  ESP32 作为发送方时，默认情况下，首次重传通常在 2 ~ 3 秒左右, 之后依据 Jacoboson 算法决定下次重传间隔，重传间隔可以简单地理解为 2 的倍数递增。
+  ESP32 作为发送方时，TCP 协议的重传间隔初始值为 3 秒，如果接收方没有发送 ACK 消息，则会依据 Jacoboson 算法决定下次重传间隔,即指数级地增加重传间隔时间，一般是按照 2、4、8、16、32 秒逐渐增加。这个重传间隔时间不是固定的，TCP 协议的实现者可以通过调整一些参数，如超时时间、滑动窗口大小等来影响重传间隔的计算。
 
 --------------
 
@@ -410,7 +448,7 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
 
 --------------
 
-[Sleep] ESP32 modem sleep 降频功能在哪打开？
+[Sleep] ESP32 modem sleep 自动降频功能在哪打开？
 -------------------------------------------------
 
   在 ``menuconfig`` > ``Component Config`` > ``Power Management`` > ``Enable dynamic frequency scaling (DFS) at startup`` 中打开。
@@ -427,7 +465,14 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
 [Sleep] ESP32 modem sleep 平均电流大小影响因素？
 --------------------------------------------------
 
-  ESP32 modem sleep 平均电流大小与 CPU 单核还是双核，CPU 时钟频率，CPU 空闲时间比，测试过程中 Wi-Fi 是否有数据收发，数据收发频率，射频模块发射功率，测试路由器发送 beacon 时间点是否准确，是否有外设模块工作等因素有关。
+  ESP32 的 modem sleep 是通过设定一个唤醒周期，每个周期开始时打开芯片的射频进行通信其余时间关闭射频来降低功耗。
+
+  该模式下平均电流的大小受多种因素影响，下面列举了一些主要的影响因素：
+
+  - 唤醒周期：如果设定的唤醒周期越短，则单位时间内芯片唤醒的越频繁，平均电流也会相应增大。
+  - 信号质量：如果 Wi-Fi 信号质量较差，芯片会不断尝试重新连接或发送数据，或者改用较大发射功率的通信协议进行数据通信，这些都会导致平均电流增大。
+  - 硬件配置：芯片的硬件配置也会对功耗产生影响，如 CPU 单核还是双核、CPU 时钟频率、CPU 空闲时间比、电源电压、是否外接晶振等因素都会对平均电流大小产生影响。
+  - 其他因素：例如测试路由器发送 beacon 时间点是否准确，是否发送过多的广播包，芯片本身是否有外设模块工作等
 
 --------------
 
@@ -519,7 +564,11 @@ ESP32 如何收发 Wi-Fi 802.11 数据包？
 [Connect] SmartConfig 配⽹ Wi-Fi 参数信息有哪些要求？
 ---------------------------------------------------------------
 
-  根据 `wifi spec` 要求，SSID 不超过 32 bytes，Password 不超过 64 bytes。
+  SmartConfig 是一种通过局域网广播方式配置 Wi-Fi 参数的方案，用户可以通过使用配套的 APP 将 Wi-Fi 账号和密码发送给设备。下面是 SmartConfig 配网 Wi-Fi 参数信息的要求：
+
+    - SSID 名称：支持中英文和数字字符，长度不超过 32 个字节。
+    - Wi-Fi 密码：8-64 个字符，区分大小写。
+    - Wi-Fi 安全加密方式：目前 SmartConfig 支持的加密方式有：WPA、WPA2 和 WEP，不支持开放式无加密方式。
 
 --------------
 
@@ -595,20 +644,6 @@ ESP32 Wi-Fi 支持 PMF(Protected Management Frames) 和 PFS(Perfect Forward Secr
 
 --------------
 
-ESP32 IDF v4.1 Wi-Fi 怎样获取 AP 的 RSSI？
---------------------------------------------------------------
-
-  可以通过扫描获取 AP 的 RSSI，参考例程 `scan <https://github.com/espressif/esp-idf/tree/master/examples/wifi/scan>`_.
-
---------------
-
-ESP32 IDF v4.1 Wi-Fi 怎样获取已连接的 AP 的 RSSI？
---------------------------------------------------------------
-
-  可以通过 esp_wifi_sta_get_ap_info() 获取已连接的 AP 的 RSSI。API 说明参见 `esp_err_t esp_wifi_sta_get_ap_info(wifi_ap_record_t *ap_info) <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv424esp_wifi_sta_get_ap_infoP16wifi_ap_record_t>`_。
-
---------------
-
 ESP8266 在使用 esptouch v2 出现 AES PN 错误 log？
 ------------------------------------------------------------------------------
 
@@ -631,10 +666,10 @@ ESP32 WFA 认证支持多播吗？
 
 ---------------
 
-使用 ESP32，ESP-IDF 版本为 release/v3.3，Wi-Fi Scan 时，当有多个相同的 ssid 时，获取的列表中有多个重复的 SSID，是否有 API 进行过滤，只保留一个 SSID？
+使用 ESP32，ESP-IDF 版本为 release/v3.3，Wi-Fi Scan 时，当有多个相同的 SSID 时，获取的列表中有多个重复的 SSID，是否有 API 进行过滤，只保留一个 SSID？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 不能对重复 ssid 进行过滤。因为 ssid 重复不代表是同一个路由器，扫描到的 ssid 相同的路由器的 bssid 是不同的。
+  - 不能对重复 SSID 进行过滤。因为 SSID 重复不代表是同一个路由器，扫描到的 SSID 相同的路由器的 BSSID 是不同的。
 
 --------------
 
@@ -649,13 +684,6 @@ ESP8266 是否支持 EDCF (AC) 方案？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 可以通过设置 IPH_TOS_SET(iphdr, tos) 来确定。
-
----------------
-
-使用 ESP-IDF release/v4.2 版本的 SDK，如何在 AP 模式下开启 mDNS 功能？
-----------------------------------------------------------------------------------------------------------------------------------------------------
-
-  - 开启 mDNS 可通过在 menuconfig 中使能 "Component config -> LWIP -> Enable mDNS queries in resolving host name" 配置。
 
 ---------------
 
@@ -677,7 +705,7 @@ ESP8266 作为 Wi-Fi SoftAP 模式，最多支持多少个 Station 设备连接�
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 通过调用 "esp_wifi_set_csi_rx_cb()" 可获取 CSI 数据。参见 `API <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_csi_rx_cb13wifi_csi_cb_tPv>`_ 说明。
-  - 参见 `Wi-Fi CSI <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#id57>`_ 配置步骤。
+  - 具体使用方法参见 `Espressif CSI 示例 <https://github.com/espressif/esp-csi>`_
 
 ---------------
 
@@ -693,6 +721,28 @@ ESP32 使用 release/v3.3 版本的 ESP-IDF 进行开发，只需要蓝牙功能
 
   - 调用 esp_wifi_stop() 可关闭 Wi-Fi 功能。API 说明参见 `esp_err_t esp_wifi_stop(void) <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_stop#_CPPv413esp_wifi_stopv>`_。
   - 若需要回收 Wi-Fi 占用的资源，则还需要调用 esp_wifi_deinit()，API 说明请参见 `esp_err_t esp_wifi_deinit(void) <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_deinit#_CPPv415esp_wifi_deinitv>`_。
+  - 以下是一个简单的示例代码：
+
+  .. code-block:: c
+
+    #include "esp_wifi.h"
+    #include "esp_bt.h"
+
+    void app_main()
+    {
+      // 关闭 Wi-Fi 功能
+      esp_wifi_stop();
+
+      // 初始化蓝牙功能
+      esp_bt_controller_config_t bt_cfg = BT_CONTROLLER_INIT_CONFIG_DEFAULT();
+      esp_bt_controller_init(&bt_cfg);
+      esp_bt_controller_enable(ESP_BT_MODE_BTDM);
+
+      // ...
+    }
+
+  在这个示例中，先调用 esp_wifi_stop() 函数关闭 Wi-Fi，然后再初始化蓝牙功能。需要注意的是，一旦关闭了 Wi-Fi 功能，就无法再使用 Wi-Fi 相关的 API 了。
+
 
 ----------------
 
@@ -1218,15 +1268,26 @@ ESP32 支持 WPA3-Enterprise 应用吗？
 ESP32 Wi-Fi TX power 的取值范围是多少？
 ---------------------------------------------------------------------------------------------------------
 
-  - 取值范围为 2 到 20 dBm，请参考 `esp_wifi_set_max_tx_power API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`__。
+  - ESP32 Wi-Fi TX power 的取值范围为 2-20 dBm。在 ESP-IDF 中，可以使用函数 ``esp_wifi_set_max_tx_power()`` 设置 TX power 的最大值，同时也可以使用 ``esp_wifi_get_max_tx_power()`` 函数获取当前系统所支持的最大 TX power 值。
+  - 需要注意的是，设置 TX power 过高可能会影响系统的稳定性和电池寿命，同时也可能违反国家和地区的无线电规定，因此应该谨慎使用。详细请参考 `esp_wifi_set_max_tx_power API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`__。
 
 --------------
 
 使用 ESP32 时如何获取 Wi-Fi RSSI 值？
 -----------------------------------------------------------------------------------------------
 
-   - 如果想采集周围网络的 RSSI 值，可以参考 ESP-IDF 中的 `scan example <https://github.com/espressif/esp-idf/tree/v5.0/examples/wifi/scan>`__。
-   - 如果要获取 AP 的 RSSI 值，您可以使用 `esp_wifi_sta_get_ap_info() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv424esp_wifi_sta_get_ap_infoP16wifi_ap_record_t>`__ 获取 WiFi AP RSSI 值。
+  在 ESP-IDF release/v4.1 中，当 ESP32 作为 station 使用时，要获取连接到的 AP 的 RSSI，可以使用以下代码示例：
+
+  .. code-block:: c
+
+    wifi_ap_record_t ap_info;
+    if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK) {
+      int rssi = ap_info.rssi;
+      // 处理 rssi
+    }
+
+  ``wifi_ap_record_t`` 结构体中包含了连接到的AP的信息，包括 SSID 、BSSID 、频道、加密方式等， RSSI 字段则表示 AP 的RSSI 值。调用 ``esp_wifi_sta_get_ap_info()`` 函数即可获取该结构体信息。
+  API 说明参见 `esp_err_t esp_wifi_sta_get_ap_info(wifi_ap_record_t *ap_info) <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv424esp_wifi_sta_get_ap_infoP16wifi_ap_record_t>`_。
 
 --------------
 
