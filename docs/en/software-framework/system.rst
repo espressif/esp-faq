@@ -16,17 +16,9 @@ System
 --------------
 
 My application does not really need the watchdog timer, can I disable it?
-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
-  The current SDK allows disabling the software watchdog only. The following methods can be taken to avoid watchdog reset when user program occupies CPU for too long:
-
-  - If your routine needs a time frame of duration between software reset and hardware watchdog reset, you may use system_soft_wdt_stop () to disable the software watchdog. After the program has been executed, you can restart the software watchdog with system_soft_wdt_restart ().
-  - You may feed the watchdog in between your codes by adding system_soft_wdt_feed () so that the watchdog is updated before it issues a reset.
-  - The hardware watchdog interrupt interval is 0.8*2048 ms, that is 1638.4 ms. The interrupt handling interval is 0.8*8192 ms, equal to 6553.6 ms.
-  - The interrupt handling interval is the time limit to feed the watchdog after the interrupt occurs. If the interrupt handling interval expires, it will trigger a hardware watchdog reset.
-  - As a result, in the cases where there is only hardware watchdog, if a program runs for over 6553.6 ms, then it could cause a hardware watchdog reset. If the program runs for over 8192 ms, then it will invoke a watchdog reset for sure.
-  - The software watchdog is based on MAC timer and task arrangement. The interrupt interval is 1600 ms, so is the interrupt handling interval.
-  - As a result, in the cases where there are both software and hardware watchdogs, if a program runs for over 1600 ms, it could cause a software watchdog reset. If the program runs for over 3200 ms, it will invoke a watchdog reset for sure.
+There are two types of watchdog in ESP-IDF: task watchdog and interrupt watchdog. You can disable these two types of watchdog in menuconfig. For more details, please refer to `Watchdogs <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/index.html>`_.
 
 --------------
 
@@ -168,7 +160,12 @@ Which GPIOs can be used to wake up ESP32-C3 from Deep-Sleep mode?
 When using the ESP-WROOM-02D module with a battery for power supply, are there any risks in frequently formatted reading and writing flash as the battery is low (the module barely starts up)?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - In low power conditions, if the flash is frequently operated, it may accept error commands and then erase the flash at the wrong address. It is recommended to not to operate the flash when the power is off, and please ensure a stable power supply.
+  Frequent formatting and read/write operations on flash storage in low power situations may have some risks. It may not work properly or be susceptible to cause errors under low power conditions. In addition, frequent formatting and read/write operations in this situation may lead to the following risks:
+
+  - Data loss or corruption: Flash storage may not be able to write data properly under low power conditions. Frequent formatting and read/write operations may result in data loss or corruption.
+  - Module crash or damage: Frequent formatting and read/write operations on flash storage in low power conditions will consume the module's power, which may cause the module to crash or damage.
+
+  Therefore, it is recommended to minimize access and operations on flash storage in low power conditions and avoid frequent formatting and read/write operations. If formatting and read/write operations are necessary, ensure that the module has sufficient power, backup data before the operation to prevent data loss, use low power mode and optimize code to minimize power consumption.
 
 ---------------------
 
@@ -182,7 +179,10 @@ How to check the maximum stack size used by a thread for ESP32?
 What is the meaning of the " SW_CPU_RESET" log when using ESP32?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - "SW_CPU_RESET" is the software reset log. For example, calling the "esp_restart()" API will print this log.
+  On ESP32, the "SW_CPU_RESET" log is usually caused by abnormal termination of the program. 
+  ESP32 has two cores, the main core and the assistant core. In some cases, if the program is executed on the main core and some abnormal situations occur, such as accessing illegal addresses or unhandled interrupts, it may cause the main core to enter into an exception state and restart. When this happens, ESP32 will print the "SW_CPU_RESET" log on the serial terminal (UART).
+  In addition, when developing applications using ESP-IDF, it is also possible to call the esp_restart() function in the application to restart ESP32. In this case, ESP32 will also print the "SW_CPU_RESET" log on the serial terminal.
+  It should be noted that the appearance of the "SW_CPU_RESET" log does not necessarily mean that there is a problem with the program or ESP32 hardware. It may be a normal phenomenon caused by some abnormal situations. However, if the program frequently encounters exceptions and restarts, it is necessary to debug and troubleshoot the problem. You can determine the reason of the problem by checking the program log and hardware device status.
 
 ----------------
 
