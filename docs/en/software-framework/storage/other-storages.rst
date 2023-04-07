@@ -16,7 +16,7 @@ Other Storages
 --------------
 
 Can ESP32 use LittleFS file system?
------------------------------------------------------
+------------------------------------------------------
 
   Currently, LittleFS is not included in ESP-IDF, but there is a third-party porting component `esp_littlefs <https://github.com/joltwallet/esp_littlefs>`_ that can be used directly in ESP-IDF. You can use the `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_ tool for the image of LittleFS file system.
 
@@ -25,7 +25,7 @@ Can ESP32 use LittleFS file system?
 How to check the memory usage (e.g., DRAM, IRAM, rodata) of ESP32 chips?
 ------------------------------------------------------------------------------------------------------------------
 
-  You can check the estimated occupied memory of ESP32 chips by inputting the instruction ``idf.py size-components`` under corresponding directories in terminal.
+  You can check the estimated occupied static storage of ESP32 chips by inputting the instruction ``idf.py size-components`` under corresponding directories in terminal. You can use `heap_caps_get_info <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/mem_alloc.html#_CPPv418heap_caps_get_infoP17multi_heap_info_t8uint32_t>`_ to obtain dynamic applied memory during operation.
 
 -----------------
 
@@ -55,7 +55,7 @@ Is there a limit to the number of partitions in the partition table of ESP32?
 How to read the remaining memory of the ESP32 chip?
 -------------------------------------------------------------------------------------------------------------------------------
 
-  - The remaining memory of the chip RAM can be read through the ``esp_get_free_heap_size()`` API.
+  - The remaining memory of the chip RAM can be read through `esp_get_free_heap_size() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/misc_system_api.html#heap-memory>`__.
 
 ---------------
 

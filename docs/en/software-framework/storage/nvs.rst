@@ -16,7 +16,7 @@ Non-Volatile Storage (NVS)
 --------------
 
 If data needs to be stored or updated to flash every minute, can ESP32 NVS meet this requirement?
--------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 
   According to `NVS Specifications <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/nvs_flash.html>`_, NVS uses two main entities in its operation: pages and entries. Logical page corresponds to one physical sector of flash memory. For now, we assume that flash sector is 4096 bytes and each page can contain 126 entries (32 bytes for one entry), with the left spaces for page header (32 bytes) and entry state bitmap (32 bytes). Typical flash lifetime is 100 k erase cycles. Assuming that the device is expected to run for 10 years, and the data size written to flash is 4 bytes per minute with flash encryption disabled, then the number of flash write operation can be calculated as: 60×24×365×10=5256000. In this way, no more than 42 k of erase cycles (5256000/126) will be caused in NVS, which does not exceed 100 k. Therefore, such operation is supported even without the effects of multiple sectors. In actual use, usually there will be multiple sectors given to NVS, and the NVS can distribute erase cycles to different sectors, making the number of erase cycles in each sector necessarily less than 42 k.
 
@@ -27,7 +27,7 @@ If data needs to be stored or updated to flash every minute, can ESP32 NVS meet 
 Does NVS have wear levelling function?
 -------------------------------------------------
 
-  Yes, NVS does not use the wear_levelling component in ESP-IDF, but uses an erase levelling mechanism implemented internally. The flash in use is in a wear-levelling state.
+  Yes, NVS (Non-Volatile Storage) has wear leveling functionality. When storing data in flash memory, the limited number of writing and erasing operations to the flash will cause some storage blocks to have shorter service life than others, affecting the overall working life of the memory. To address this issue, NVS uses an erase-write balancing mechanism implemented internally, rather than the wear_levelling component in ESP-IDF, to evenly distribute data across the flash memory blocks, ensuring that each block is used as much as possible to extend the overall working life of the flash memory.
 
 --------------
 

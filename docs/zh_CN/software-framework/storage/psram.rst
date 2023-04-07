@@ -16,9 +16,19 @@ PSRAM
 --------------
 
 使用 ESP32 模组，如何查看模组的 PSRAM 的大小？
--------------------------------------------------------
+--------------------------------------------------------
 
-  需要先在 ``make menuconfig`` 中配置开启 PSRAM 功能。PSRAM 的大小可通过 bootloader 的 log 信息或调用 esp_spiram_get_size() 来查看。
+  对于使用 ESP32 模组的情况，可以使用 ESP-IDF 中的 `esp_spiram_get_size() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/migration-guides/release-5.x/5.0/system.html?highlight=esp_spiram_get_size#psram>`_ 函数来获取模组的 PSRAM 大小。该函数会返回 PSRAM 的总大小（单位为字节），可以用于进行内存分配和管理等操作。
+
+  以下是获取 PSRAM 大小的示例代码：
+
+  .. code-block:: c
+
+    size_t psram_size = esp_spiram_get_size();
+    printf("PSRAM size: %d bytes\n", psram_size);
+
+  注意，该函数需要在使用 PSRAM 之前调用，以确保正确获取 PSRAM 的大小。另外，需要先在 ``make menuconfig`` 中配置开启 PSRAM 功能，以便正确启用和配置 PSRAM。
+  此外，PSRAM 的大小可通过 bootloader 的 log 信息来查看。
 
 --------------
 
