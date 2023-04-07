@@ -16,7 +16,7 @@ Development board
 --------------------
 
 How long does it take for the ESP-WROOM-02D module to restart after the reset signal?
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - It will restart when the input level is lower than 0.6 V for more than 200 μs.
   
@@ -25,11 +25,11 @@ How long does it take for the ESP-WROOM-02D module to restart after the reset si
 According to the schematic of ESP32-LyraT-Mini, the analog output of the ES8311 codec chip is connected to the input of the ES7243 ADC chip. What is the purpose of this?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - To use the ES7243 ADC chip to obtain the necessary input reference signal for AEC.
+  - The hardware acquisition circuit of the AEC reference signal simultaneously transmits the DAC output of the Codec (ES8311) to the speaker PA and the ADC (ES7243) AINLP/N, of which the signal collected would be send back to the ESP32 as the reference signal for the AEC algorithm.
   
 -----------------
 
-When using the ESP32-MINI-1 module, the serial port printed the follows log when powered on. What is the reason?
+When using the ESP32-MINI-1 module, the serial port printed the follows log when powered on. What could be the reason?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: text
