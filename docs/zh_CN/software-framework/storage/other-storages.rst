@@ -16,7 +16,7 @@
 --------------
 
 ESP32 是否可以使用 LittleFS 文件系统？
---------------------------------------------------
+---------------------------------------------------
 
   目前 ESP-IDF 未包含 LittleFS，存在第三方移植组件 `esp_littlefs <https://github.com/joltwallet/esp_littlefs>`_，可直接在 ESP-IDF 中使用。匹配 LittleFS 文件系统镜像的工具为 `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_。
 
@@ -25,7 +25,7 @@ ESP32 是否可以使用 LittleFS 文件系统？
 ESP32 如何查看芯片内存（例如：DRAM、IRAM、rodata）使用情况？
 ------------------------------------------------------------------------------------------------------------------
 
-  可以在工程终端目录下输入 ``idf.py size-components`` 指令来查看相关内存使用估算情况。
+  可以在工程终端目录下输入 ``idf.py size-components`` 指令来查看静态存储空间使用估算情况。如需查询运行时内存动态申请信息，请使用 `heap_caps_get_info <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/mem_alloc.html#_CPPv418heap_caps_get_infoP17multi_heap_info_t8uint32_t>`_ 查询。
 
 -----------------
 
@@ -55,7 +55,7 @@ ESP32 分区表中的分区数量有限制吗？
 ESP32 如何读取芯片剩余内存？
 --------------------------------------------------------------------------------------------------
 
-  - 可通过 ``esp_get_free_heap_size()`` 来读取芯片 RAM 剩余内存。
+  - 可通过 `esp_get_free_heap_size() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/misc_system_api.html#id3>`__ 来读取芯片 RAM 剩余内存。
 
 ---------------
 

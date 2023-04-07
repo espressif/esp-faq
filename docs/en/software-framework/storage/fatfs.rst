@@ -16,7 +16,7 @@ FAT Filesystem
 --------------
 
 How to improve the damage to FatFs file system caused by accidental power loss?
------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 
   Since FatFs is designed to not support write transactions, the accidental power loss may cause error to partitions, which cannot be restored by simply modifying FatFs. For now, it is recommended to resolve this problem in application level by creating two identical FatFs partitions to do backups, or you can also choose a more secure file system instead, such as `LittleFS <https://github.com/joltwallet/esp_littlefs>`_ and `SafeFAT <https://www.hcc-embedded.com/safefat>`_ (charged).
 

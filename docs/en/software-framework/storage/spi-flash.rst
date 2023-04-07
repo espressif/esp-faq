@@ -16,12 +16,15 @@ SPI Flash
 --------------
 
 What is the requirement for the storage and usage of ESP32 flash?
-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 
   The external flash can be mapped into CPU instruction space and RO data space simultaneously. ESP32 can support up to 16 MB of external flash.
 
   - When it is mapped into CPU instruction space, up to 11 MB + 248 KB of data can be mapped at a time. If more than 3 MB + 248 KB is mapped at a time, the cache performance may be degraded due to speculative CPU reads.
   - When it is mapped into RO data space, up to 4 MB of data can be mapped at a time, and 8-bit, 16-bit and 32-bit reads are supported.
+  - You should specify flash partition table when programming. Specifically, you should divide flash into different partitions, such as app partition, data partition, and OTA partition, and you should specify the size and offset address of each partition.
+  - When using flash, you need to pay attention to its service life. As flash can sustain only a limited number of erase operations, you need to plan and manage the usage of flash. For example, you can use wear leveling to extend the service life of flash.
+  - It should be noted that writing operations to flash occupy CPU resources, which may influence the system response time. As a result, the writing operation to flash should be avoided as much as possible.
 
 --------------
 
@@ -47,7 +50,7 @@ How to read flash data for ESP8266?
 Why do different ESP32 modules have inconsistent flash erase times?
 --------------------------------------------------------------------------------------------------------
 
-  - This is due to the difference in flash models. Some flash models do not have an empty block skip mechanism when erasing, so it takes longer time.
+  - Different ESP32 modules may have different flash chips or flash controllers, which may affect the erase time. Some models of flash do not have a mechanism to skip empty blocks during erasing, so it takes longer time. Specifically, different flash chips may have different erase time, for example, the erase time of SPI flash and QSPI flash is different. Even the same type of flash chip may have different erase time as they are produced and packaged in different batches. In addition, the design and performance of the flash controller may also affect the erase time. Therefore, erase time varies in ESP32 modules with different flash chips and flash controllers.
 
 ------------
 
