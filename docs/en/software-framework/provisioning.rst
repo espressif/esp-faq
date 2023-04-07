@@ -16,10 +16,11 @@ Provisioning
 -----------------------
 
 Can I add any broadcast data I want to Android ESP-Touch (e.g., add a device ID so that ESP32 can receive this ID)?
-------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - No, the data content sent under the current ESP-Touch protocol is fixed and cannot be customized.
-  - If you expect to send customized data, it is recommended to use BluFi, which is the networking protocol based on Bluetooth LE. Please refer to the following references for BluFi:
+  - ESP-Touch is a communication protocol used to establish a Wi-Fi connection between a mobile phone and ESP8266/ESP32. It uses a special broadcast method to transmit Wi-Fi SSID and password. Typically, the data broadcasted by ESP-Touch should be in a fixed format and cannot include customized data.
+  - If you want ESP32 to receive customized data such as device ID, you can consider using other communication protocols such as MQTT or HTTP. With these protocols, you can define data formats as you wish and communicate between an Android App and ESP32.
+  - If you still want to broadcast customized data, you can use BluFi, which is the networking protocol based on Bluetooth LE. Please refer to the following references for BluFi:
 
     - Android APP：https://github.com/EspressifApp/EspBlufiForAndroid.
     - iOS APP：https://github.com/EspressifApp/EspBlufiForiOS.
