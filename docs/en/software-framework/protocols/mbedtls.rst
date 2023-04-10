@@ -16,7 +16,7 @@ Mbed TLS
 --------------
 
 Does ESP8266 OpenSSL support hostname validation?
------------------------------------------------------------------------
+------------------------------------------------------------------------
 
   Yes. ESP8266 OpenSSL is based on Mbed TLS encapsulation, which supports ``hostname validation``. ESP-TLS can be used to switch between Mbed TLS and wolfSSL.
 

@@ -16,9 +16,9 @@ lwIP
 --------------
 
 How soon can the associated resources be released after the TCP connection is closed?
-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 
-  The associated resources can be released in 20 seconds or can be specified by the sent ``linger/send_timeout`` parameter.
+  The associated resources can be released in 2 MSL, i.e. 120 seconds, or after the sent ``linger/send_timeout`` parameter is timeout.
 
 --------------
 
@@ -67,41 +67,43 @@ Is there any special firmware or SDK in ESP32 that can only provide AP/STA (TCP/
 When ESP32 & ESP8266 are used as TCP servers, how can the ports be used again immediately after they are released?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - After closing the TCP socket, it often enters the ``TIME-WAIT`` state. At this time, the socket with the same source address of the same port as before will fail. The socket option ``SO_REUSEADDR`` is needed. Its function is to allow the device binding to be in ``TIME-WAIT`` state, the port and source address are the same as the previous TCP socket.
-  - So the TCP server program can set the ``SO_REUSEADDR`` socket option before calling bind() and then bind the same port.
+  - On both ESP32 and ESP8266, TCP ports are not immediately released after being closed. They remain in a TIME_WAIT state for a certain period of time. During this period, binding a socket with the same port and source address as before will fail. This is to ensure that you can receive the FIN signal sent by the server and can close the connection successfully. In this state, the port cannot be immediately reused. To address this issue, the socket option "SO_REUSEADDR" should be used, which allows the device to bind a TCP socket with the same port and source address in the TIME-WAIT state.
+
+  - Therefore, a TCP server program can set the "SO_REUSEADDR" socket option before calling bind() to bind the same port.
+  - Alternatively, the setsockopt() function can be used to set the SO_REUSEADDR option. Here is an example:
+
+    .. code-block:: c
+    
+      int reuse = 1;
+      if (setsockopt(socket, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse)) < 0) {
+        ESP_LOGE(TAG, "setsockopt(SO_REUSEADDR) failed");
+        return ESP_FAIL;
+      }
+
+    In the above code, "socket" means a socket that has already been created, and "reuse" is an integer variable with a value of 1, indicating that the SO_REUSEADDR option is enabled. If the setsockopt() function returns a negative value, it means that the setting has failed. 
+    Enabling the SO_REUSEADDR option allows the port to be immediately reused after being closed. However, there are some potential risks. If another connection uses the same port while it is still in the TIME_WAIT state, it may cause packet confusion. Thus, it's better to make choice based on actual situations.
 
 ------------------
 
 After downloading the tcp_client example for an ESP32 module, I connected the module to the router via Wi-Fi and performed a Ping test on the computer. Then the it shows high latency sometimes, what is the reason?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  When Wi-Fi is connected, Power Save mode will be turned on by default, which may cause high Ping delay. To solve this issue, you can turn off Power Save mode to reduce the delay by calling ``esp_wifi_set_ps (WIFI_PS_NONE)`` after ``esp_wifi_start()``.
+  When Wi-Fi is connected, Power Save mode will be turned on by default, which may cause high Ping delay. To solve this issue, you can turn off Power Save mode to reduce the delay by calling `esp_wifi_set_ps(WIFI_PS_NONE) <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv415esp_wifi_set_ps14wifi_ps_type_t>`_ after ``esp_wifi_start()``.
 
 ----------------------
 
-Using esp-idf release/v3.3 version of the SDK, is there an example for setting static IP for Ethernet?
+How can I set static IP when using ESP-IDF?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - It can be set through the ``tcpip_adapter_set_ip_info()`` API , please refer to `API description <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/tcpip_adapter.html?highlight=tcpip_adapter_set_ip_info#_CPPv425tcpip_adapter_set_ip_info18tcpip_adapter_if_tPK23tcpip_adapter_ip_info_t>`_.
-  - Please refer to the example as follows:
-
-    .. code-block:: text
-
-      /* Stop dhcp client */
-      tcpip_adapter_dhcpc_stop(TCPIP_ADAPTER_IF_STA);
-      /* static ip settings */
-      tcpip_adapter_ip_info_t sta_ip;
-      sta_ip.ip.addr = ipaddr_addr("192.168.1.102");
-      sta_ip.gw.addr = ipaddr_addr("192.168.1.1");
-      sta_ip.netmask.addr = ipaddr_addr("255.255.255.0");
-      tcpip_adapter_set_ip_info(TCPIP_ADAPTER_IF_STA, &sta_ip);
+  For details, please refer to `static_ip example <https://github.com/espressif/esp-idf/tree/master/examples/protocols/static_ip>`__.
         
 --------------
 
 Does ESP32 have an LTE connection demo?
 ---------------------------------------------------------------------------------------
 
-  Yes, please refer to the example/protocols/pppos_client demo in ESP-IDF v4.2 and later versions.
+  - Yes. For ESP-IDF v4.2 and later versions, please refer to the `example/protocols/pppos_client demo <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/protocols/pppos_client>`__.
+  - For ESP-IDF v5.0 and later versions, please refer to `examples <https://github.com/espressif/esp-protocols/tree/master/components/esp_modem/examples/pppos_client>`__ in the `esp-protocols` repo.
 
 --------------
 
@@ -160,7 +162,7 @@ What happens when ESP8266 receives a "tcp out of order" message?
 Does ES32 support PPP functionality?
 ----------------------------------------------------------------------------------------------------------------
 
-  Yes, please refer to `usb_cdc_4g_module <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_4g_ module/>`_ example.
+  Yes, please refer to `esp_modem <https://github.com/espressif/esp-protocols/tree/master/components/esp_modem/examples/>`__ example.
 
 ----------------
 
@@ -230,7 +232,7 @@ How do I enable keepalive for TCP in ESP-IDF?
 Is it possible to operate the same socket in multiple threads in ESP-IDF?
 -----------------------------------------------------------------------------------------------------------
 
-  It is risky to operate the same socket with multiple threads, and thus not recommended.
+  In ESP-IDF, it is possible for multiple threads to share one single socket for communication. Each thread can use the same socket to send and receive data, but it is important to ensure thread synchronization when accessing the socket to avoid race conditions and deadlocks. Typically, a mutex can be used to control access to the socket, ensuring that each thread's access to the socket is mutually exclusive to avoid data corruption caused by concurrent access to the socket. However, operating on the same socket from multiple threads is risky, and it is not recommended.
 
 ----------------
 

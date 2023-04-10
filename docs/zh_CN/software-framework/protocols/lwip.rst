@@ -16,9 +16,9 @@ lwIP
 --------------
 
 TCP 链接关闭后占用的相关资源何时释放？
-------------------------------------------------
+-------------------------------------------------
 
-  TCP 链接关闭后占用的相关资源会在 20 s 或者发送的 ``linger/send_timeout`` 超时之后释放。
+  TCP 链接关闭后占用的相关资源会在 2 MSL，即 120 s, 或者发送的 ``linger/send_timeout`` 超时之后释放。
 
 --------------
 
@@ -67,41 +67,43 @@ ESP32 是否有特殊的固件或者 SDK，可以不使用芯片内部的 TCP/IP
 ESP32 & ESP8266 做 TCP server 时端口释放后如何立即被再次使用？
 --------------------------------------------------------------------------------------------
 
-  - 关闭 TCP 套接字后，往往会进入 ``TIME-WAIT`` 状态，此时绑定与之前相同端口相同源地址的套接字会失败，需要借助套接字选项 ``SO_REUSEADDR``，它的作用是允许设备绑定处于 ``TIME-WAIT`` 状态，端口和源地址与之前相同的 TCP 套接字。
+  - 在 ESP32 和 ESP8266 上，TCP 端口关闭后并不会立即释放，而是在一定时间内处于 TIME_WAIT 状态，此时绑定与之前相同端口相同源地址的套接字会失败，这是为了确保客户端接收到服务器发送的 FIN 信号并成功关闭连接。在这个状态下，端口无法立即重新使用。需要借助套接字选项 ``SO_REUSEADDR``，它的作用是允许设备绑定处于 ``TIME-WAIT`` 状态，端口和源地址与之前相同的 TCP 套接字。
+
   - 故 TCP server 程序可以在调用 bind() 之前设置 ``SO_REUSEADDR`` 套接字选项后来绑定同样的端口。
+  - 也可以使用 setsockopt() 函数来设置 SO_REUSEADDR 选项。以下是一个示例代码：
+
+    .. code-block:: c
+
+      int reuse = 1;
+      if (setsockopt(socket, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse)) < 0) {
+        ESP_LOGE(TAG, "setsockopt(SO_REUSEADDR) failed");
+        return ESP_FAIL;
+      }
+
+    在以上代码中，socket 是一个已经创建的套接字，reuse 是一个 int 类型的变量，其值为 1，表示开启 SO_REUSEADDR 选项。如果 setsockopt() 函数返回负值，表示设置失败。
+    设置 SO_REUSEADDR 选项可以让端口在关闭后立即被再次使用，但也需要注意潜在的风险。如果在端口仍处于 TIME_WAIT 状态时，另一个连接使用该端口，可能会导致数据包错乱，因此需要根据实际情况权衡利弊。
 
 ------------------
 
 使用 ESP32 模组下载 tcp_client 例程，通过 Wi-Fi 连接路由器，在电脑端进行 Ping 测试，偶尔出现高延时，是什么原因？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Wi-Fi 默认开启 Power Save 模式，关闭 Power Save 可降低由于 Power Save 引起的 Ping 高延时，在 esp_wifi_start() 之后调用 esp_wifi_set_ps(WIFI_PS_NONE) 来关闭 Power Save 模式。
+  Wi-Fi 默认开启 Power Save 模式，关闭 Power Save 可降低由于 Power Save 引起的 Ping 高延时，在 esp_wifi_start()  之后调用 `esp_wifi_set_ps(WIFI_PS_NONE) <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv415esp_wifi_set_ps14wifi_ps_type_t>`_ 来关闭 Power Save 模式。
 
 --------------
 
-使用 ESP-IDF release/v3.3 版本的 SDK ，请问以太网有设置静态 IP 的例程吗？
+使用 ESP-IDF 如何设置静态 IP？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 可通过 ``tcpip_adapter_set_ip_info()`` API 来设置，请参见 `API 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v3.3/api-reference/network/tcpip_adapter.html?highlight=tcpip_adapter_set_ip_info#_CPPv425tcpip_adapter_set_ip_info18tcpip_adapter_if_tPK23tcpip_adapter_ip_info_t>`_。
-  - 例程参考如下：
-
-  .. code-block:: text
-
-      /* Stop dhcp client */
-      tcpip_adapter_dhcpc_stop(TCPIP_ADAPTER_IF_STA);
-      /* static ip settings */
-      tcpip_adapter_ip_info_t sta_ip;
-      sta_ip.ip.addr = ipaddr_addr("192.168.1.102");
-      sta_ip.gw.addr = ipaddr_addr("192.168.1.1");
-      sta_ip.netmask.addr = ipaddr_addr("255.255.255.0");
-      tcpip_adapter_set_ip_info(TCPIP_ADAPTER_IF_STA, &sta_ip);
+  可以参考 `static_ip 示例 <https://github.com/espressif/esp-idf/tree/master/examples/protocols/static_ip>`__。
 
 ----------------
 
 ESP32 有没有 LTE 连接示例？
 -----------------------------------------------------------------------------
 
-  可以参考 ESP-IDF v4.2 及以上版本里的 examples/protocols/pppos_client 示例。
+  - 可以参考 ESP-IDF v4.2 及以上版本里的 `examples/protocols/pppos_client <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/protocols/pppos_client>`__ 示例。
+  - 对于 ESP-IDF v5.0 及以上版本，请参考 `esp-protocols` 仓库下 `示例 <https://github.com/espressif/esp-protocols/tree/master/components/esp_modem/examples/pppos_client>`__。
 
 ----------------
 
@@ -160,7 +162,7 @@ ESP8266 收到 "tcp out of order" 的报文会怎么处理？
 ES32 支持 PPP 功能吗？
 ----------------------------------------------------------------------------------------------------------------
 
-  支持，请参考 `usb_cdc_4g_module <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_4g_module/>`_ 示例。
+  支持，请参考 `esp_modem <https://github.com/espressif/esp-protocols/tree/master/components/esp_modem/examples/>`_ 示例。
 
 ----------------
 
@@ -230,7 +232,7 @@ ESP-IDF 里 TCP 如何开启 keepalive？
 ESP-IDF 里可以在多线程里操作同一个套接字吗？
 -----------------------------------------------------------------------------------------------------------
 
-  多线程操作同一个套接字有风险，因此不建议该做法。
+  可以，在 ESP-IDF 中，多线程可以共享同一个套接字进行通信。每个线程都可以使用同一个套接字来发送和接收数据，但需要确保在访问套接字时进行线程同步，避免竞争条件和死锁等问题。一般可以使用互斥锁（mutex）来控制套接字的访问，确保每个线程访问套接字时都是互斥的，避免出现同时访问套接字导致数据混乱的情况。多线程操作同一个套接字有风险，不建议该做法。
 
 ----------------
 
