@@ -16,20 +16,10 @@
 --------------
 
 为 ESP32-S2 搭建环境时，使用 ``idf.py set-target esp32s2`` 指令，显示 "Error: No such command 'set-target'"，为什么？
----------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 因为 ESP-IDF 是从 release/v4.2 版本开始适配 ESP32-S2 的，所以如果在之前的 ESP-IDF 版本上搭建 ESP32-S2 环境，就会出现错误。例如使用指令 ``idf.py set-target esp32s2`` 时，会报错 "Error: No such command 'set-target'"。
-  - 建议使用 ESP-IDF release/v4.2 及以后版本进行 ESP32-S2 的测试开发。更多请参考 `ESP32-S2 入门指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/get-started/>`_。
-
---------------
-
-idf.py menuconfig 编译报 "Configuring incomplete, errors occured" 的错误信息如何解决呢？
------------------------------------------------------------------------------------------
-
-  使用 ``cmake --version`` 查看 CMake 版本，如果低于 3.10.0，则认为是较低版本，建议更新 CMake 版本：
-
-  - 下载 CMake：https://cmake.org/download/
-  - 操作参考链接：http://www.mamicode.com/info-detail-2594302.html
+  - 因为 ESP-IDF 是从 release/v4.2 版本开始适配 ESP32-S2 的，所以如果在之前的 ESP-IDF 版本上搭建 ESP32-S2 环境，就会出现错误。例如使用指令 ``idf.py set-target esp32s2`` 时，会报错 "Error: No such command 'set-target'"。建议使用 ESP-IDF release/v4.2 及以后版本进行 ESP32-S2 的测试开发。更多请参考 `ESP32-S2 入门指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/get-started/>`_。
+  - 不同 ESP-IDF 版本的 ESP 芯片支持情况，请查阅 `ESP-IDF Release and SoC Compatibility <https://github.com/espressif/esp-idf#esp-idf-release-and-soc-compatibility>`_
 
 --------------
 
@@ -126,8 +116,9 @@ Windows 下执行 export.bat，提示 CMake、gdbgui 版本错误：
 如何查看当前 ESP-IDF 的版本号，是否存在记录版本号的文件？
 ------------------------------------------------------------------------------------------------------------------------------
 
-  - 官方有个变量 ``IDF_VER``，可以通过调用函数 ``esp_get_idf_version`` 进行查看。
-  - 具体信息还可以查看 "components/esp_common/include/esp_idf_version.h"。
+  - 命令行中获取版本号：可以通过在 IDF 环境中执行 ``idf.py --version`` 获取当前 IDF 版本号。
+  - CMake 脚本中获取版本号：可以通过变量 ``${IDF_VERSION_MAJOR}.${IDF_VERSION_MINOR}.${IDF_VERSION_PATCH}`` 获取当前版本号。
+  - 代码编译期间获取版本号：可以通过调用函数 ``esp_get_idf_version`` 查询，或直接使用 "components/esp_common/include/esp_idf_version.h" 中的版本号宏定义。
 
 --------------
 
