@@ -16,7 +16,7 @@ HTTP
 --------------
 
 Does ESP8266 support HTTP hosting?
-------------------------------------------------------
+-------------------------------------------------------
 
   Yes, it does. ESP8266 can run as a server in both SoftAP and Station modes.
 

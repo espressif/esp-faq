@@ -16,7 +16,7 @@ MQTT
 --------------
 
 How to configure the server address so as to make it an autonomic cloud platform by using MQTT?
------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------
 
   Please refer to `MQTT Examples <https://github.com/espressif/esp-idf/tree/master/examples/protocols/mqtt>`_.
 
@@ -84,14 +84,16 @@ When ``MQTT_EVENT_PUBLISHED`` is triggered after an ESP-IDF MQTT client has publ
 How does an ESP MQTT client manually release MQTT resources after disconnection?
 -----------------------------------------------------------------------------------------------------------
 
-  Calling the ``esp_mqtt_client_destroy`` API will do the trick.
+  Calling the `esp_mqtt_client_destroy <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/mqtt.html#_CPPv423esp_mqtt_client_destroy24esp_mqtt_client_handle_t>`__ API will do the trick.
 
 ----------------
 
 How should I configure the MQTT keepalive time when ESP32 Wi-Fi and Bluetooth LE coexist? Is there any appropriate configuration time?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  No special consideration is needed for this case, as long as it is not too small, e.g. 30 s, 60 s, etc.
+  - When using Wi-Fi and Bluetooth LE concurrently in ESP32, it is recommended to configure the MQTT keepalive time properly. Since both Wi-Fi and Bluetooth LE require system resources, setting the keepalive time too short may cause high system load, affecting system stability and performance.
+  - Generally, it is advisable to set the MQTT keepalive time based on actual needs to ensure the device stays online while minimizing system resource consumption. In the case of Wi-Fi and Bluetooth LE coexistence, it is recommended to set the MQTT keepalive time to a longer duration, such as 30 seconds or 60 seconds, to reduce communication between the device and the MQTT broker, thereby reducing system load.
+  - It is important to note that setting the keepalive time too long may cause a delay in detecting the device offline when it disconnects, which may affect real-time performance and reliability. Therefore, the MQTT keepalive time should be set based on actual needs and system performance.
 
 ----------------
 

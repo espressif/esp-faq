@@ -16,7 +16,7 @@ Other Protocols
 --------------
 
 How to optimize communication latency for ESP32?
------------------------------------------------------------------------
+------------------------------------------------------------------------
 
   - It is recommended to turn off the sleep function for Wi-Fi by calling the API ``esp_wifi_set_ps(WIFI_PS_NONE)``.
   - You can also disable the ``AMPDU`` function in menuconfig.
@@ -65,7 +65,7 @@ How to get more debug information based on errno in ESP-IDF?
 Does the ESP8266_RTOS_SDK support the TR-069 protocol?
 -----------------------------------------------------------------------------------------------------------
 
-  No.
+  No.The ESP8266_RTOS_SDK itself does not provide native support for the TR-069 protocol, but you can implement TR-069 protocol stack according to your requirements and integrate it into the ESP8266_RTOS_SDK. You can also use third-party TR-069 protocol stacks for integration. In summary, ESP8266_RTOS_SDK can support the TR-069 protocol, but requires yourself to integrate and implement.
 
 ----------------
 

@@ -16,7 +16,7 @@ ESP-TLS
 --------------
 
 When testing RTOS SDK ``mqtt/ssl_mutual_auth`` with ESP8266, the server connection failed. Why?
--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
 
   - The failure of SSL connection may due to insufficient memory of ESP8266.
   - Please use the master version of ESP8266-RTOS-SDK to test this example, since it supports dynamic memory allocation in menuconfig so as to reduce the usage of memory peak. The specific action is: menuconfig -> ``Component config`` -> ``mbedTLS`` -> (type “Y” to enable) ``Using dynamic TX /RX buffer`` -> (type “Y” to enable) ``Free SSL peer certificate after its usage`` -> (type “Y” to enable) ``Free certificate, key and DHM data after its usage``.
