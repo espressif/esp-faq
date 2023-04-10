@@ -16,20 +16,10 @@ Environment setup
 --------------
 
 When setting up ESP32-S2 environment using command ``idf.py set-target esp32s2``, an error occurred as "Error: No such command 'set-target'". What could be the reason?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The ESP-IDF is adapted to ESP32-S2 from release/v4.2, thus setting up ESP32-S2 environment in previous versions will cause errors. In this case, when using command ``idf.py set-target esp32s2``, there will be error as "Error: No such command 'set-target'".
-  - It is recommended to perform tests and development on ESP32-S2 using ESP-IDF release/v4.2 and later versions. For more information, please refer to `ESP32-S2 Get Started <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/>`_.
-
---------------
-
-When using idf.py menuconfig to build, how to deal with errors as "Configuring incomplete, errors occured"?
---------------------------------------------------------------------------------------------------------------------------
-
-  Please check your CMake version first using ``cmake --version``. If it is lower than version 3.10.0, please update your CMake version:
-
-  - Download CMake: https://CMake.org/download/
-  - For details, please refer to http://www.mamicode.com/info-detail-2594302.html
+  - The ESP-IDF is adapted to ESP32-S2 from release/v4.2, thus setting up ESP32-S2 environment in previous versions will cause errors. In this case, when using command ``idf.py set-target esp32s2``, there will be error as "Error: No such command 'set-target'". It is recommended to perform tests and development on ESP32-S2 using ESP-IDF release/v4.2 and later versions. For more information, please refer to `ESP32-S2 Get Started <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/>`_.
+  - To check which ESP chips are supported by different ESP-IDF versions, please refer to `ESP-IDF Release and SoC Compatibility <https://github.com/espressif/esp-idf#esp-idf-release-and-soc-compatibility>`_.
 
 --------------
 
@@ -126,8 +116,9 @@ Do I need to use command ``idf.py set-target`` every time when switching to anot
 How to know the version of ESP-IDF, is it recorded in a certain document? 
 ----------------------------------------------------------------------------------------------------------------------------
 
-  - There is an official variable ``IDF_VER``. You can call the function ``esp_get_idf_version`` to check.
-  - Please refer to "components/esp_common/include/esp_idf_version.h" to see more details.
+  - Command line: You can obtain the version number by inputting ``idf.py --version`` in the terminal with an IDF environment. 
+  - CMake script: You can obtain the version number through the variable ``${IDF_VERSION_MAJOR}.${IDF_VERSION_MINOR}.${IDF_VERSION_PATCH}``.
+  - Code compilation: You can obtain the version number by calling ``esp_get_idf_version`` during code compilation or directly using the macro definition of version in "components/esp_common/include/esp_idf_version.h".
 
 ---------------
 
