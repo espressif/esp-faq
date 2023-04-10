@@ -16,17 +16,29 @@ Hardware design
 --------------
 
 The I2S pins of ESP32 are scattered. Can I route I2S signals to adjacent pins? For example, to ``GPIO5, GPIO18, GPIO23, GPIO19, and GPIO22``, or to ``GPIO25, GPIO26, GPIO32, and GPIO33``.
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - All I2S signals can be routed to different I/Os freely. Please note that some I/Os can only be set as input. For details, please refer to Section *Peripheral Pin Configurations* and Appendix *IO_MUX* in the `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
 --------------------
 
-How can I stop the voltage through VDD3P3_RTC from going down after ESP32 enters Light-sleep mode?
+How can I stop the power loss of VDD3P3_RTC after ESP32 enters Light-sleep mode?
 -----------------------------------------------------------------------------------------------------------
 
-  - After ESP32 enters Light-sleep mode, the GPIOs powered by VDD3P3_RTC are pulled down. This is usually because the RTC powers down during Light-sleep mode.
-  - Please use ``esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_ON)`` to maintain the power supply for RTC.
+  After entering Light-sleep mode, if RTC power loss occurs, the level of the GPIO corresponding to the VDD3P3_RTC pin will be pulled low, causing external RTC or other devices to malfunction. There are two possible ways to solve this problem:
+
+  - Set the RTC hardware voltage control register (RTC_CNTL_REG) to control the voltage. Specifically, set the FORCE_PU and FORCE_PD bits in the RTC_CNTL_REG register to 1, namely, ``RTC_CNTL_REG |= RTC_CNTL_FORCE_PU_M | RTC_CNTL_FORCE_PD_M;``.
+  - Set GPIO hold pins. The ESP32's Light-sleep mode supports GPIO hold function, which can set some GPIO pins as hold pins to maintain their voltage level when the system enters Low-power mode. Specifically, the VDD3P3_RTC pin can be set as a hold pin to maintain its voltage. The relevant code snippet is as follows:
+
+    .. code-block:: c
+
+      esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_ON);
+      esp_sleep_enable_gpio_wakeup();
+      gpio_hold_en(GPIO_NUM_X);
+
+  Among them, ESP_PD_DOMAIN_RTC_PERIPH represents the power domain of the RTC subsystem. ESP_PD_OPTION_ON enables the power domain. And the gpio_hold_en() function can set the specified GPIO pin as a hold pin. After setting the VDD3P3_RTC pin as a hold pin, even if the system enters Light-sleep mode, the voltage of the pin will be held.
+
+  Please note that using the GPIO hold function will increase the power consumption of the system, so the appropriate solution should be selected according to the specific application scenario. If only the power supply of the RTC hardware needs to be held, the first method can be adopted. If the power supply of other external devices needs to be held as well, the second method can be adopted.
 
 --------------
 
@@ -48,7 +60,7 @@ What should be noted when I configure the pins of ESP32?
 What is the voltage tolerance of GPIOs of ESP chips?
 ----------------------------------------------------------------
 
-  - The voltage tolerance is 3.6 V. If the voltage exceeds 3.6 V, please add a voltage divider to protect GPIO pins from damage.
+  - The voltage tolerance of GPIO is 3.6 V. If the voltage exceeds 3.6 V, please add a voltage divider to protect GPIO pins from damage.
 
 -------------
 
@@ -67,7 +79,7 @@ What are the power supply specifications for ESP8266?
 Do Espressif Wi-Fi modules support single-layer PCBs?
 -----------------------------------------------------
 
-  - The ESP32 module is a wireless device. It needs PCB materials that fulfills its RF performance requirements. We have tested four-layer and two-layer PCBs, but not single-layer ones.
+  - The ESP32 module is a wireless device, which needs rather high-quality PCB materials to fulfill the RF performance requirements. We have tested four-layer and two-layer PCBs, but not single-layer ones.
   - Single-layer PCBs are not recommended as RF performance cannot be guaranteed. You may use single-layer PCBs in your end products and then mount Espressif modules.
   - Four-layer PCBs are recommended for desired RF performance.
 
@@ -82,10 +94,10 @@ What should be noted when I power ESP8266 with batteries?
 
 ------------------------
 
-Where can I find the footprint of ESP32 Series?
+Where can I get the footprint of ESP32 Series?
 -----------------------------------------------
 
-  You may find the footprint in the PCB layout of different modules. Please refer to `reference designs <https://www.espressif.com/en/support/documents/technical-documents?keys=&field_download_document_type_tid%5B%5D=519>`_.
+  You may get the footprint in the PCB layout of different modules. Please refer to `reference designs <https://www.espressif.com/en/support/documents/technical-documents?keys=&field_download_document_type_tid%5B%5D=519>`_.
 
 -----------------
 
@@ -99,7 +111,7 @@ For ESP32-S2 chips, can I have audio connection when the DVP camera interface is
 What should be noted when I assign I2C signals to GPIO0 and GPIO4 of ESP32 modules?
 --------------------------------------------------------------------------------------
 
-  Please pull GPIO0 up when assigning I2C signals to the pin. Only pull GPIO0 down when flashing firmware on ESP32 modules.
+  Please pull GPIO0 up when assigning I2C signals to the pin. Please also ensure GPIO0 can be pulled down when powered on during flashing, which can be released afterwards. Only pull GPIO0 down when flashing firmware on ESP32 modules.
 
 ----------------
 
@@ -136,7 +148,11 @@ Can I use ESP32 to play music with PWM or DAC?
 Why is the suggested voltage range of ESP32 modules diffrent from that of ESP32 chips?
 --------------------------------------------------------------------------------------
 
-  - For modules, the flash voltage needs to be considered. That is why the module voltage is greater.
+  - This is because of the different working environments and usage scenarios.
+    - The ESP32 chip is a bare die and requires external circuitry on a circuit board to function properly. The recommended operating voltage range for the ESP32 chip is 2.3 V to 3.6 V, which is determined by the chip's electrical parameters. Within this voltage range, the ESP32 chip can function properly and provide optimal performance and power consumption.
+    - The ESP32 module, on the other hand, is a packaged electronic module that typically includes voltage regulators, external crystals, external antennas, and other peripheral chips, such as flash memory and RAM, and can be used directly. As the module's circuitry has already been optimized and tested, its recommended operating voltage range may be narrower. For example, the ESP32-WROOM-32 module has a recommended operating voltage range of 3.0 V to 3.6 V. Apart from that, as the module has to take flash voltage into account, the recommended operating voltage for the ESP32 module would thus be higher.
+
+  - When using these chips and modules, appropriate power supplies and peripheral circuits should be chosen based on the specific situation to ensure that they function properly.
   - For more information, please check `module and chip datasheets <https://www.espressif.com/en/support/documents/technical-documents>`_.
 
 --------------
@@ -162,8 +178,8 @@ Why does the current surge when ESP8266 is powered on?
 What choices do I have when configuring the RMII clock for the Ethernet of ESP32?
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - We recommend you connect an external crystal to GPIO0 as input. Please pay attention to the state of GPIO0 when ESP32 is powered on.
-  - For details, please refer to `Configure MAC and PHY <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`_.
+  - We recommend use GPIO0 as the RMII clock input pin. Please note that the GPIO0 cannot be low level when the chip powered on.
+  - For details, please refer to the `Configure MAC and PHY <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`_ guide.
 
 --------------
 
@@ -286,7 +302,9 @@ Does ESP32-C3F SPI CS0 pin need an external 10 kΩ pull-up resistor?
 
   :CHIP\: ESP32-C3F:
 
-  - No.
+  - The SPI controller of ESP32-C3F supports software-programmable CS (Chip Select) pin without external 10 kΩ pull-up resistor.
+    - In ESP32-C3F, the CS pin can be set to any GPIO pin via SPI controller configuration. The GPIO state can be set in the code to control the level of the CS pin. When the SPI bus is idle, the CS pin is automatically pulled up to the default state of the GPIO pin without an external pull-up resistor.
+  - Please note that when using a software-programmable CS pin, to select the target device, the pin should be manually pulled down before the SPI bus transmission. After the transmission is completed, pull the CS pin high to release the device. Additionally, the level and status of the CS pin should be adjusted according to the actual situation to ensure the stability and reliability of the SPI bus.
 
 --------------
 
@@ -370,14 +388,17 @@ When connecting an external flash to ESP32-WROOM-32D module, is it possible if I
 Do I need to add a shield cover to the PCB of ESP32 modules?
 --------------------------------------------------------------------------------------------------------
 
-  - If there is no interference such as 2G, 3G, 4G, Wi-Fi, Bluetooth, or Zigbee, then there is no need to add a shield cover.
+    - Whether a shield needs to be added depends on the specific application scenarios and requirements.
+    - In some high-demand application scenarios, such as environments with severe wireless communication interference or high electromagnetic compatibility (EMC) testing requirements, adding a shield can effectively reduce external interference and mutual interference on the PCB board, improving system stability and reliability. At this time, the shield should be made of conductive material and grounded to ensure its effectiveness.
+    - On the other hand, if the application scenario is relatively simple, such as low wireless communication interference and low EMC requirements, the effect of adding a shield may not be very obvious and may increase system cost and complexity.
+    - If the board has other signal interference, such as 2G, 3G, 4G, Wi-Fi, Bluetooth, Zigbee, etc., it is recommended to add a shield cover.
 
 --------------
 
-Do I must use GPIO0, GPIO1 or GPIO3 of ESP32 as the I2S CLK pin?
+Do I must use GPIO0, GPIO1, or GPIO3 of ESP32 as the I2S CLK pin?
 ------------------------------------------------------------------------------------------------------------
 
-  - The MCLK pin must use GPIO0, GPIO1 or GPIO3. The other clock pins can use any GPIOs. Note that GPIO0 is generally not recommended for other functions because it is a strapping pin.
+  - The MCLK pin must use GPIO0, GPIO1, or GPIO3. The other clock pins can use any GPIOs. Note that GPIO0 is generally not recommended for other functions because it is a strapping pin.
 
 ----------------
 
