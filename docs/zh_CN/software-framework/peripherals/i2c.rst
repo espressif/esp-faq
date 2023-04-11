@@ -16,7 +16,7 @@ I2C 驱动程序
 --------------
 
 ESP8266 是否支持 I2C 从机模式？
-------------------------------------------------
+-------------------------------------------------
 
   不支持，如果要使用此功能，推荐使用 ESP32 或者 ESP32-S2 芯片。ESP32 参考示例：`i2C_self_test <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/i2c/i2c_self_test>`_。
 

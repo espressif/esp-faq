@@ -16,7 +16,7 @@ Motor Control Pulse Width Modulator (MCPWM)
 --------------
 
 Does ESP32 support using the MCPWM Timer to trigger AD sampling?
--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
 
   No, it does not.
 

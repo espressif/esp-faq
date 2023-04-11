@@ -16,7 +16,7 @@
 --------------
 
 ESP8266 使⽤ HW 定时器中断有哪些注意事项？
-------------------------------------------------------
+-------------------------------------------------------
 
   - 可以参考相关 API 文档 `《ESP8266 技术参考手册》 <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_cn.pdf>`_。
   - 如果使用 NonOS SDK，可参考 `《ESP8266 Non-OS SDK API 参考》 <https://www.espressif.com/sites/default/files/documentation/2c-esp8266_non_os_sdk_api_reference_cn.pdf>`_。

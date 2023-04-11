@@ -16,7 +16,7 @@ Touch Sensor
 --------------
 
 When using ESP32 to develop Touch Sensor applications, where can I find references?
------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
 
   Please refer to `Software and Hardware Designs <https://github.com/espressif/esp-iot-solution/tree/release/v1.1/examples/touch_pad_evb>`_.
 

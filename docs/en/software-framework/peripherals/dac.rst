@@ -16,6 +16,6 @@ Digital-to-Analog Converter (DAC)
 --------------
 
 When using DAC output for ESP32-S2-Saola-1, the power supply is 3.3 V. But the actual tested voltage is only 3.1 V. Why?
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Due to the internal voltage drop, even when using 3.3 V power supply, the actual maximum output is only about 3.2 V.

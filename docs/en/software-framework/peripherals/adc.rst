@@ -16,7 +16,7 @@ Analog-to-Digital Converter (ADC)
 --------------
 
 What is the resolution of ESP8266 ADC?
-----------------------------------------------------------
+-----------------------------------------------------------
 
   - The 10-bit ESP8266 ADC has a theoretical resolution of 2 :sup:`10` = 1024.
   - After connected to a router, the ESP8266 will enter Modem-sleep mode from STA mode, causing the change of the reference value inside the chip. Therefore, the ADC could measure the data change.
@@ -114,7 +114,7 @@ When using the ESP32-WROVER-B module with release/v4.2 version of ESP-IDF, I set
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Please do not set the ADC interface as input-only GPIO.
-  - When disabling the ADC interface mode, please use ``adc_digi_stop()`` to disable the ADC.
+  - When disabling the ADC interface mode, please use `adc_digi_stop() <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-reference/peripherals/adc.html#_CPPv413adc_digi_stopv>`__ to disable the ADC.
 
 ---------------------
 

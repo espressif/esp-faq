@@ -16,7 +16,7 @@ Universal Asynchronous Receiver/Transmitter (UART)
 --------------
 
 When using ESP8266 RTOS SDK v2.1 and previous versions, how to set log to UART1?
-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 
   After initializing UART1, you can switch log to UART1 via API:
 

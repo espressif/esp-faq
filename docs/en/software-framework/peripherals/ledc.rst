@@ -16,7 +16,7 @@ LED Control (LEDC)
 --------------
 
 What is the frequency range for ESP8266 PWM?
-----------------------------------------------------------------
+-----------------------------------------------------------------
 
   The PWM of ESP8266 is realized via software programming, so the maximum CLK value is 1 M limited by timer. It is recommended to set the frequency to 1 K. The PWM frequency can also be improved by decreasing the resolution of duty cycle.
 

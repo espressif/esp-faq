@@ -16,7 +16,7 @@ Remote Control Transceiver (RMT)
 --------------
 
 How to change the clock to REF_TICK in RMT?
----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
 
   By using the `rmt_set_source_clk <https://docs.espressif.com/projects/esp-idf/zh_CN/v4.4.2/esp32/api-reference/peripherals/rmt.html#_CPPv418rmt_set_source_clk13rmt_channel_t16rmt_source_clk_t>`_ interface.

@@ -16,7 +16,7 @@ Inter-Integrated Circuit (I2C)
 --------------
 
 Does ESP8266 support I2C slave mode?
---------------------------------------------------
+---------------------------------------------------
 
   No. If you want to use this function, it is recommended to choose ESP32 or ESP32-S2 chips instead. For ESP32 examples, please refer to `i2C_self_test <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/i2c/i2c_self_test>`_.
 

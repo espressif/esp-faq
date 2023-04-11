@@ -16,7 +16,7 @@ Timer
 --------------
 
 What should I pay attention to when using the HW timer interrupt with ESP8266?
-----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 
   - Please refer to `ESP8266 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp8266-technical_reference_en.pdf>`_ regarding the related APIs.
   - If you are using NonOS SDK, please refer to `ESP8266 Non-OS SDK API Reference <https://www.espressif.com/sites/default/files/documentation/2c-esp8266_non_os_sdk_api_reference_en.pdf>`_.
