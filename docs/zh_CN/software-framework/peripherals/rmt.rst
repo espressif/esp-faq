@@ -16,7 +16,7 @@
 --------------
 
 RMT 中如何将时钟修改为 REF_TICK?
---------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3:
 
   可以调用 `rmt_set_source_clk <https://docs.espressif.com/projects/esp-idf/en/v4.4.2/esp32/api-reference/peripherals/rmt.html#_CPPv418rmt_set_source_clk13rmt_channel_t16rmt_source_clk_t>`_ 接口设置。

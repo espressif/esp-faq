@@ -16,7 +16,7 @@ USB
 --------------
 
 ESP32 是否支持 USB 功能？
---------------------------------------
+---------------------------------------
 
   - ESP32 不支持 USB 功能。
   - ESP32-S2/S3 支持 USB2.0 Full-speed 模式。
@@ -36,7 +36,7 @@ ESP-IDF SDK USB 接口支持 HID、MSC 这些模式吗？
 ESP32-S2 USB 接口电流稳定输出为多少？
 ------------------------------------------------------
 
-  对于 VBUS 电源线的电流输出能力，由供电决定，与 ESP32-S2 芯片无关。
+  对于 VBUS 电源线的电流输出能力，由供电决定，与 ESP32-S2 芯片无关。如果采用自供电，请参考 `Self-Powered Device <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/usb_device.html#self-powered-device>`__。
 
 ----------------
 

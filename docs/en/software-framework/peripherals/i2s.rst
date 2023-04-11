@@ -16,7 +16,7 @@ Inter-IC Sound (I2S)
 --------------
 
 Does ESP32 support using crystal oscillator as the clock source of I2S?
----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 
   No. Please go to `ESP32 Technical Reference Manual <https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf>`_ to read about clock source configurations of I2S.
 

@@ -16,6 +16,6 @@ Two-Wire Automotive Interface (TWAI)
 --------------
 
 What are the considerations when using the ESP32 TWAI® controller?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Please refer to the `ESP32 Series SoC Errata <https://www.espressif.com/sites/default/files/documentation/esp32_errata_en.pdf>`_ > Section *ESP32 TWAI Errata*.

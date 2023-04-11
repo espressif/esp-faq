@@ -16,7 +16,7 @@ USB
 --------------
 
 Does ESP32 support USB function?
----------------------------------------------------
+----------------------------------------------------
 
   - No, ESP32 does not support USB function.
   - However, ESP32-S2/S3 supports USB2.0 Full-speed mode.
@@ -36,7 +36,7 @@ Does the ESP-IDF SDK USB interface support HID and MSC modes?
 What is the stable current output for ESP32-S2's USB interface? 
 -------------------------------------------------------------------------------------------------------------------
 
-  The current output capability of the VBUS power line is determined by the power supply, not by the ESP32-S2 chip.
+  The current output capability of the VBUS power line is determined by the power supply, not by the ESP32-S2 chip.  If the chip is self-powered, please refer to `Self-Powered Device <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/usb_device.html#self-powered-device>`__.
 
 -------------------------
 

@@ -16,7 +16,7 @@ Secure Digital Input Output (SDIO)
 --------------
 
 What is the maximum speed supported by the SDIO interface?
--------------------------------------------------------------------------
+--------------------------------------------------------------------------
 
   - The maximum clock speed supported by ESP32 SDIO is 50 MHz, and ESP32 SDIO supports the Quad mode at the maximum.
   - The maximum clock speed supported by ESP32-S3 SDIO is 80 MHz, and ESP32-S3 SDIO supports the Octal mode at the maximum.
@@ -43,8 +43,8 @@ What is the maximum capacity for ESP32 SD card?
 Is it possible to use ESP32 SD card together with flash & PSRAM?
 ---------------------------------------------------------------------------------------------
 
-  - Yes, they can be used simultaneously.
-  - However, they do not share the same group of SDIO.
+  - Yes, they can be used simultaneously when they apply different pins.
+  - Note that when ESP32 uses the SDMMC host driver, the SDMMC Slot0 pins in the ESP32-WROOM and ESP32-WROVER modules conflict with the flash.
 
 --------------
 

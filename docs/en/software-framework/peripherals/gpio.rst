@@ -16,7 +16,7 @@ GPIO & RTC GPIO
 --------------
 
 What should I pay attention to for ESP32 pin configurations?
---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
 
   The ESP32 has ESP32-WROOM and ESP32-WROVER series modules. Please pay attention to the following configurations with GPIOs.
 
@@ -72,7 +72,9 @@ What is the turning speed of ESP32 GPIO levels?
 When certain RTC peripherals (SARADC1, SARADC2, AMP, HALL) are powered on, the inputs of GPIO36 and GPIO39 will be pulled down for approximately 80 ns. How to solve the issue?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  When enabling power for any of these peripherals, ignore input from GPIO36 and GPIO39. 
+  For applications that require accurate timing and detecting digital input status, the above problems can be avoided by software:
+    - Ignore the inputs from GPIO36 and GPIO39 when turning on the power domain of the above sensors.
+    - Debounce digital inputs through software. When reading the input states of GPIO36 and GPIO39, debouncing can be implemented through software by sampling and filtering the inputs for multiple times, thus reducing misjudgments caused by short voltage drops.
 
 --------------
 

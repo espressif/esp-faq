@@ -18,7 +18,7 @@ LCD
 .. _lcd-examples:
 
 Where are the LCD drivers and reference examples for ESP32 series chips?
--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
 
    - You can find ESP's LCD driver in `components/esp_lcd <https://github.com/espressif/esp-idf/tree/master/components/esp_lcd>`__ in **ESP-IDF**. However, this document is only available in * *release/v4.4 and newer** versions. **esp_lcd** can drive LCD screens with four interfaces (**I2C**, **SPI**, **8080**, and **RGB**) supported by ESP series chips. For the LCD interfaces supported by ESP32 series chips, see `ESP32 series chip screen interface <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/display/screen.html#esp32>`__.
    - For the application examples of the LCD driver of each interface, please refer to `examples/peripherals/lcd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd>`__ in ESP-IDF. Currently, these examples are only available in **release/v5.0** and newer versions. As the API names of esp_lcd in **release/v4.4** are basically same as those of higher versions, you can also refer to the above examples (please note the API implementations are a little different).
@@ -124,7 +124,14 @@ Why do I get drift (overall drift of the display) when driving an RGB LCD screen
 
   - **Applications**
 
-    - When writing flash for a long time, such as continuously performing OTA, NVS and other write operations, you can try to segment and time-share it. In addition, you can also set RGB to the `Bounce Buffer` mode. For details, please see `lcd documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__. You need to enable `CONFIG_SPIRAM_FETCH_INSTRUCTIONS` and `CONFIG_SPIRAM_RODATA` (cannot enable `GDMA_ISR_IRAM_SAFE`, otherwise the cache will report an error).
+    - If you need to use Wi-Fi and continuous write operation to flash, please use `XIP PSRAM + RGB Bounce buffer` method, and the settings are as follows:
+      - Make sure the ESP-IDF version is (> 2022.12.12) release/v5.0 and above (released after 2022.12.12), as older versions do not support the `XIP PSRAM` function.
+      - Verify that whether `SPIRAM_FETCH_INSTRUCTIONS` and `SPIRAM_RODATA` can be enabled in the PSRAM configuration (too large rodata segment will cause insufficient space in the PSRAM).
+      - Check if there is any memory (SRAM) left, and it takes about [10 * screen_width * 4] bytes.
+      - Set `Data cache line size` to 64 Bytes (you can set `Data cache size` to 32 KB to save memory).
+      - If all the above conditions are met, then you can refer to `Documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`_ to modify the RGB driver to `Bounce buffer` mode.
+      - If you still have the drift problem when dealing with Wi-Fi, you can try to turn off CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP in PSRAM, which takes up much SRAM space.
+      - The effects of this setting include higher CPU usage, possible interrupt watchdog reset, and higher memory overhead.
     - For the drift caused by short-term operations of flash, such as before and after Wi-Fi connection, you can call `esp_lcd_rgb_panel_set_pclk()` before the operation to reduce the PCLK (such as 6 MHz) and delay about 20 ms (the time for RGB to complete one frame), and then increase PCLK to the original level after the operation. This operation may cause the screen to flash blank in a short-term.
     - Enable `flags.refresh_on_demand` in `esp_lcd_rgb_panel_config_t`, and manually refresh the screen by calling the `esp_lcd_rgb_panel_refresh()` interface. In addition, you need to reduce the refreshing frequency as much as possible while ensuring that the screen does not flash blank.
     - If unavoidable, you can call the `esp_lcd_rgb_panel_restart()` interface to reset the RGB timing to prevent permanent drift.

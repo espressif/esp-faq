@@ -16,9 +16,13 @@ Serial Peripheral Interface (SPI)
 --------------
 
 Is ESP-WROOM-02D module able to connect SPI flash?
-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
-  The ESP-WROOM-02D has free SPI peripherals, and can be externally connected to SPI flash to store data.
+  The ESP-WROOM-02D module is a Wi-Fi module based on the ESP8266 chip, which supports communication with external SPI flash devices using SPI interfaces. Specifically, the ESP-WROOM-02D module provides 4 SPI interface pins, GPIO12, GPIO13, GPIO14, and GPIO15. Among these pins, GPIO12~GPIO14 can be used as the MISO, MOSI, and SCLK pins for the SPI master interface, and GPIO15 can be used as the CS pin for the SPI slave interface.
+
+  To connect an external SPI flash device to the ESP-WROOM-02D module, the MOSI, MISO, SCK, and CS pins of the SPI flash device should be connected to the GPIO12~GPIO14 and GPIO15 pins of the ESP-WROOM-02D module. Additionally, the SPI interface needs to be properly configured and initialized in the firmware to ensure correct communication of ESP8266 with the external SPI flash device.
+
+  It should be noted that the model and capacity of the external SPI flash device should be selected based on the specific application requirements. In addition, timing characteristics and reliability of the SPI flash device should be considered to ensure data can be transmitted correctly and stably. Moreover, factors such as environment noise and physical distance between the SPI flash device and the ESP-WROOM-02D module should be considered to improve the reliability and performance of the system as much as possible.
 
 --------------
 
@@ -40,7 +44,9 @@ What is the difference among SPI, HSPI and VSPI in ESP32?
 The maximum data transmission of ESP32 SPI DMA is 4095 bytes. Is it because of hardware limitation?
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes. A single node can only store 4095 bytes of data, but the DMA can send more data through link lists.
+  - Yes, this is a hardware limitation.
+  - A single node in the DMA table can only mount 4095 bytes of data, but it is possible to send more data through several nodes.
+  - The maximum number of bytes that the SPI can send through the DMA table is also limited by the hardware register `SPI_LL_DATA_MAX_BIT_LEN` (the value varies by chip family and can be obtained in the ESP-IDF), i.e. `max_transfer_sz <= (SPI_LL_DATA_MAX_BIT_LEN >> 3)`.
 
 --------------------
 
