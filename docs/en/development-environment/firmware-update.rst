@@ -16,7 +16,7 @@ Firmware update
 --------------
 
 How does the host MCU flash ESP32 via serial interfaces?
------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 
   - For the related protocol, please refer to `ESP32 Serial Protocol <https://github.com/espressif/esptool>`_. For the corresponding documentation, please refer to `Serial Protocol <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html#serial-protocol>`_.
   - For code examples, please refer to `esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_.
@@ -64,10 +64,10 @@ Does ESP_Flash_Downloader_Tool support customized programming control？
 Can I enable the Security Boot function for ESP32 via OTA?
 ------------------------------------------------------------------------------------------------
 
-  - This is not recommended since it may cause risks and needs to upgrade OTA firmware for multiple times.
+  - It is not recommended to enable Security Boot function through OTA, as it poses operational risks and requires multiple OTA firmware updates.
   - Since the Security Boot function is in Bootloader, please update Bootloader first to enable this function.
 
-    1. First, check the partition table of your current device to see if it can store the Bootloader with Security Boot function enabled.
+    1. First, check the partition table of your current device to see if it can store the Bootloader with Security Boot enabled.
     2. Then, update an intermediate firmware which can be written in Bootloader partition. By default, the Bootloader partition cannot be erased or written, you need to enable them via `make menuconfig`.
     3. Sign the intermediate firmware and upgrade it to the target device through OTA. Then upgrade the Bootloader of this firmware and the signed new firmware through OTA.
     4. If there are situations as powered-down or network break-down and restart during the Bootloader OTA process, the device would not be started and needs to be re-flashed.
@@ -95,21 +95,21 @@ How to resolve the following error occured when flashing firmware to ESP32-S2 ba
 
   **Solution**
 
-  If the chip you are using is ESP32-S2 instead of ESP32-S2 Beta, please update ESP-IDF to v4.2 or later versions.
+  If you are using ESP32-S2 instead of ESP32-S2 Beta, please update ESP-IDF to v4.2 or later versions.
 
   **Notes:**
 
   - ESP-IDF v4.1 only supports ESP32-S2 Beta, which is not compatible with ESP32-S2.
-  - The version of esptool came with ESP-IDF v4.1 is v2.9-dev, which also only supports ESP32-S2 Beta.
-  - ESP-IDF v4.2 supports ESP32-S2 chips, and its esptool is v3.0-dev, which supports ESP32-S2 too.
+  - The version of esptool came with ESP-IDF v4.1 is v2.9-dev, which only supports ESP32-S2 Beta as well.
+  - Both ESP-IDF v4.2 and its esptool v3.0-dev support ESP32-S2 series chips.
 
 --------------
 
 How to download firmware based on ESP-IDF using flash_download_tool?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Taken hello-world example for instance, please refer to `get-started-guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html>`_ when building an ESP-IDF project for the first time.
-  - Run ``idf.py build`` (Only for ESP-IDF v4.0 or later versions. Please use ``make`` for previous versions). After the build finished, the following flash command for the bin file will be generated:
+  - Please refer to `get-started-guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html>`_ when building an ESP-IDF project for the first time.
+  - Taken hello-world example for instance, run ``idf.py build`` (Only for ESP-IDF v4.0 or later versions. Please use ``make`` for previous versions). After building, the following flash command for the bin file will be generated:
 
   .. code:: shell 
 
@@ -133,7 +133,7 @@ What is the communication protocol for flashing ESP chips?
 How to program ESP32-C3's firmware offline?
 -----------------------------------------------------------------------------------------------------------
 
-   - Currently, there is no tool that supports the offline programming of ESP32-C3's firmware. However, we offer the `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_ that can directly download binary firmware and support mass production download mode for up to eight ESP32-C3 devices at the same time.
+   - Currently, there is no tool that supports the offline programming of ESP32-C3's firmware. However, the `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_ we released can directly download binary firmware and support mass production download mode for up to eight ESP32-C3 devices at the same time.
    - In addition, we also offer the `Test Fixture <https://www.espressif.com/en/products/equipment/production-testing-equipment/overview>`_ for mass production, which supports up to four ESP32-C3 modules to download firmware simultaneously.
 
 ----------------------
@@ -141,7 +141,7 @@ How to program ESP32-C3's firmware offline?
 How does ESP32 set Flash SPI to QIO mode?
 ----------------------------------------------------------------------------------------------
 
-  - It can be set in the configuration terminal through "menuconfig -> Serial flasher config -> Flash SPI mode", the corresponding API is `esp_image_spi_mode_t() <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-reference/system/app_image_format.html?highlight=esp_image_spi_mode_t#_CPPv420esp_image_spi_mode_t>`_.
+  - It can be set in menuconfig through ``Serial flasher config`` -> ``Flash SPI mode``, the corresponding API is `esp_image_spi_mode_t() <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-reference/system/app_image_format.html?highlight=esp_image_spi_mode_t#_CPPv420esp_image_spi_mode_t>`_.
 
 -------------------
 
@@ -153,19 +153,19 @@ After downloading program and powering on EPS8266, the serial port printed the f
     ets Jan  8 2013,rst cause:1, boot mode:(7,7)
     waiting for host
 
-  - `waiting for host` means the Boot is in SDIO mode, indicating that GPIO15 (MTDO) is pulled up (HIGH), please refer to `ESP8266 Boot Mode Description <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process>`_.
+  - `waiting for host` means the Boot is in SDIO mode, indicating that GPIO15 (MTDO) is pulled up (HIGH). Please refer to `ESP8266 Boot Mode Description <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process>`_.
   
 ----------------
 
 What are the Espressif module programming tools?
-------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 
-  - For Espressif programming software, please go to  `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_. Installation-free GUI tools for `Windows` environment only.
+  - For Espressif programming software, please go to  `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_. Installation-free GUI tools for ``Windows`` environment only.
   - Espressif programming tool `esptool <https://github.com/espressif/esptool>`_ is written based on `Python` with open-source code, supporting secondary development.
 
 -----------------------------------------------------------------------------------------------------
 
-What is the difference between the Factory and Developer modes of the flash download tool?
+What is the difference between the Factory mode and Developer mode of the flash download tool?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Factory mode supports multi-channel downloads, while Developer mode only supports single channel.
@@ -197,7 +197,7 @@ I'm using an ESP32-WROVER-B module to download the AT firmware via the `flash do
 
 ---------------
 
-The encrypted device cannot be re-flashed via the `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_, what is the reason?
+The encrypted device cannot be re-flashed via the `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_. What could be the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32 | ESP32-S2:
@@ -213,7 +213,7 @@ When updating ESP32 firmware through UART interface based on `esptool serial por
 
 ---------------------------
 
-I am using ESP8266 to download the firmware via `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_. After downloading the firmware, there is no programming output log, and the serial port printed the following messages. What is the reason?
+I am using ESP8266 to download the firmware via `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_. After downloading the firmware, there is no programming output log, and the serial port printed the following messages. What could be the reason?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: shell
@@ -234,7 +234,7 @@ Why does my USB driver failed to be recognized by the Windows7 system?
 
 ----------------------------
 
-After using the ESP32-WROVER-E module to download the program, the following log is printed after powered on.  What is the reason?
+After using the ESP32-WROVER-E module to download the program, the following log is printed after powered on. What could be the reason?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: shell

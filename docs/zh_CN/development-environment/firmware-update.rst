@@ -16,7 +16,7 @@
 --------------
 
 Host MCU 如何通过串口对 ESP32 进行烧录升级？
----------------------------------------------------------------------
+----------------------------------------------------------------------
 
   - 相关协议应用请参考：`ESP32 串口协议 <https://github.com/espressif/esptool>`_；对应文档说明参见 `串口协议 <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html#serial-protocol>`_。
   - 示例实现代码请参考：`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_。
@@ -108,8 +108,8 @@ ESP32 能否通过 OTA 开启 Security Boot 功能？
 如何使用 flash_download_tool 下载基于 ESP-IDF 编译的固件？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 以 hello-world 例程为例，初次编译 ESP-IDF 工程请参考 `get-started-guide <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/index.html>`_。
-  - 运行 ``idf.py build``（支持 ESP-IDF v4.0 及以后版本，v4.0 之前版本请使用 ``make``）。编译工程后，会生成如下的 bin 文件的烧录指令提示：
+  - 初次编译 ESP-IDF 工程请参考 `get-started-guide <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/index.html>`_。
+  - 以 hello-world 例程为例，运行 ``idf.py build``（支持 ESP-IDF v4.0 及以后版本，v4.0 之前版本请使用 ``make``）。编译工程后，会生成如下的 bin 文件的烧录指令提示：
 
   .. code:: shell 
 
@@ -141,7 +141,7 @@ ESP 芯片烧录通讯协议是什么？
 ESP32 如何设置 Flash SPI 为 QIO 模式？
 ---------------------------------------------------------------------------------------------
 
-  - 可通过 menuconfig -> Serial flasher config -> Flash SPI mode 配置端进行设置，对应 API 为 `esp_image_spi_mode_t() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/system/app_image_format.html?highlight=esp_image_spi_mode_t#_CPPv420esp_image_spi_mode_t>`_。
+  - 可前往 menuconfig，通过 ``Serial flasher config`` -> ``Flash SPI mode`` 配置端进行设置，对应 API 为 `esp_image_spi_mode_t() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/system/app_image_format.html?highlight=esp_image_spi_mode_t#_CPPv420esp_image_spi_mode_t>`_。
 
 ----------------------
 
@@ -160,7 +160,7 @@ ESP32 如何设置 Flash SPI 为 QIO 模式？
 乐鑫模组烧录工具有哪些？
 -----------------------------------------------------------
 
-  - 请前往 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 下载乐鑫烧录工具。免安装 GUI 工具，仅适用于 `Windows` 环境。
+  - 请前往 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 下载乐鑫烧录工具。免安装 GUI 工具，仅适用于 ``Windows`` 环境。
   - 乐鑫烧录工具 `esptool <https://github.com/espressif/esptool>`_ 基于 `python` 编写，开放源代码，并且支持用户二次开发。
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
