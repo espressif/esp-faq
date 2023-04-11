@@ -15,8 +15,12 @@ Process and ESD Protection
 
 ----------------------
 
-What should be paid attention in ESP32 ESD test?
-----------------------------------------------------------
+What should be paid attention to during the ESP32 ESD test?
+-------------------------------------------------------------------------------------
 
-  - Stable 3.3 V voltage is necessary in the ESD test. Too long EN trace may lead to reboot.
-  - Please check the voltages of air discharge and contact discharge if the module does not work.
+  - The Electrostatic Discharge (ESD) test for ESP32 is conducted to ensure that the device has sufficient tolerance to withstand electrostatic discharge. The precautions are as follows:
+    - ESD testing should be conducted in an ESD laboratory or ESD protection area, which should have good grounding protection and electrostatic discharge protection facilities.
+    - When conducting ESD testing, please use ESD testing equipment that meets international standards, including ESD generators and ESD grounding mats, to ensure the accuracy of the test results.
+    - When conducting ESD testing, please make sure you are using a stable 3.3 V voltage. If the EN trace is too long, it may cause a reboot.
+    - ESP32 devices should be tested multiple times to verify the reliability of their tolerance, and the test results should be recorded and analyzed.
+    - If the module does not respond, please check the voltage of the air discharge or contact discharge used in the test.
