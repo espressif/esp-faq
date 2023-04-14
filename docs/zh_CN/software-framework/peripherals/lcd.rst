@@ -125,13 +125,15 @@ ESP32-S3 系列的芯片支持哪些图片解码格式？
   - **应用方面**
 
     - 如果需要使用 Wi-Fi 和连续写 flash 的操作，请采用 `XIP PSRAM + RGB Bounce buffer` 的方法，设置步骤如下：
+
       - 确认 ESP-IDF 版本为较新（> 2022.12.12）的 release/v5.0 及以上，因为旧版本不支持 `XIP PSRAM` 的功能。
       - 确认 PSRAM 配置里面是否能开启 `SPIRAM_FETCH_INSTRUCTIONS` 和 `SPIRAM_RODATA` 这两项（如果 rodata 段数据过大，会导致 PSRAM 空间不够）。
       - 确认内存（SRAM）是否有余量，大概需要占用 [10 * screen_width * 4] 字节。
       - 需要将 `Data cache line size` 设置为 64 Byte（可设置 `Data cache size` 为 32 KB 以节省内存）。
-      - 如以上均符合条件，那么就可以参考`文档 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`_ 修改 RGB 驱动为 `Bounce buffer` 模式。
+      - 如以上均符合条件，那么就可以参考 `文档 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`_ 修改 RGB 驱动为 `Bounce buffer` 模式。
       - 如操作 Wi-Fi 仍存在屏幕漂移问题，可以尝试关闭 PSRAM 里 CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP 一项（会占用较大 SRAM）。
       - 设置后带来的影响包括：CPU 使用率升高、可能会造成中断看门狗复位、会造成较大内存开销。
+      
     - 短时操作 flash 导致漂移的情况，如 wifi 连接等操作前后，可以在操作前调用 `esp_lcd_rgb_panel_set_pclk()` 降低 PCLK（如 6 MHz）并延时大约 20 ms（RGB 刷完一帧的时间），然后在操作结束后提高 PCLK 至原始水平，期间可能会造成短暂的闪白屏现象。
     - 使能 `esp_lcd_rgb_panel_config_t` 中的 `flags.refresh_on_demand`，通过调用 `esp_lcd_rgb_panel_refresh()` 接口手动刷屏，在保证屏幕不闪白的情况下尽量降低刷屏频率。
     - 如果无法避免，可以调用 `esp_lcd_rgb_panel_restart()`  接口重置 RGB 时序，防止永久性漂移。
