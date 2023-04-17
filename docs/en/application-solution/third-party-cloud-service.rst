@@ -16,15 +16,15 @@ Third party cloud service
 --------------
 
 
-Are there any demo references for OTA upgrading?
----------------------------------------------------
+Are there any examples for OTA upgrading?
+----------------------------------------------------
 
   - For ESP8266, please refer to `ESP8266 OTA <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/system/ota>`_.
   - For ESP32 series, please refer to `ESP32 series OTA <https://github.com/espressif/esp-idf/tree/master/examples/system/ota>`_.
 
 --------------
 
-Does ESP Azure library support Azure IoT Central? Is there a demo?
+Does ESP Azure library support Azure IoT Central? Is there an example?
 ------------------------------------------------------------------------------------------------------
 
   - ESP Azure already supports Azure IoT Central. But there is no relevant example on the master.
