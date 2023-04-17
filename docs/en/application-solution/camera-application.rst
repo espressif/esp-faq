@@ -15,8 +15,8 @@ Camera application
 
 --------------
 
-What type of camera does the ESP32 series chip support?
--------------------------------------------------------------------------------
+What type of camera does the ESP32 series chips support?
+--------------------------------------------------------------------------------
 
    - Please refer to `Camera models supported by ESP32 series <https://github.com/espressif/esp32-camera/blob/master/README.md>`_.
 
@@ -83,8 +83,8 @@ It takes 5 seconds for ESP32-S2 to display the camera image from power-on. Can i
 
   Yes, please refer to the following:
 
-  - Try to remove some delay functions in `esp_camera_init() <https://github.com/espressif/esp32-camera/blob/master/examples/main/take_picture.c#L133>`.
-  - Change the clock frequency of sccb in `menuconfig` -> `component config` -> `camera configuration` to 400000.
+  - Try to remove some delay functions in ``esp_camera_init()``.
+  - Change the clock frequency of sccb in ``menuconfig`` -> ``component config`` -> ``camera configuration`` to 400000.
 
 --------------
 
@@ -98,7 +98,7 @@ Can ESP32 directly provide 24 MHz frequency to GC0308 camera?
 Does ESP32/ESP32-S3 support MMS streaming protocol?
 ---------------------------------------------------------------------------------------------
 
-  Currently, MMS is not supported. But SIP and RTSP are supported.
+  No, ESP32 and ESP32-S3 do not support the Microsoft Media Server (MMS) streaming protocol directly. The streaming media protocols supported by ESP32 and ESP32-S3 are RTSP and SIP. If you need to use ESP32 or ESP32-S3 for scenarios that require MMS protocol support, you can consider using middleware or converters that support the MMS protocol.
 
 --------------
 
