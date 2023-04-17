@@ -16,7 +16,7 @@ ESP Matter
 --------------
 
 Which ESP modules can be connected to Matter?
----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
 
   - Please refer to `Espressif Matter Platforms <https://docs.espressif.com/projects/esp-matter/en/main/esp32/introduction.html#espressif-matter-platforms>`_.
 
@@ -55,7 +55,7 @@ How to register an ESP Matter product?
 
 ---------------------
 
-When ESP32-C3 uses Ubuntu virtual machine to develop ESP Matter, it is found that according to `Matter official tutorial <https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/python_chip_controller_building.md>`_, the network provision is unsuccessful. What could be the reason?
+When using Ubuntu virtual machine to develop ESP Matter on ESP32-C3, network provisioning failed when I followed the `Matter official tutorial <https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/python_chip_controller_building.md>`_. What could be the reason?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   It is not recommended to use a virtual machine for ESP Matter development, as the Matter Controller will use Bluetooth hardware where unknown errors may occur with the virtual machine. It is recommended to use Ubuntu 20.04 LTS and above hosts directly.
@@ -68,7 +68,7 @@ How to apply for a Matter DAC?
   There are three ways to apply for a Matter DAC:
 
   - Cooperate with an established PKI provider: Many organizations already have a certificate authority that they rely on to obtain their public key infrastructure certificates. In some cases, a Device Attestation Certificate (DAC) can be obtained from such a PKI provider.
-  - Use your own PKI: Many organizations already have public key infrastructures for code signing, existing device authentication requirements, or other tasks that rely on asymmetric encryption, and public keys are distributed via digital certificates.
+  - Use your own PKI: Many organizations already have public key infrastructures for code signing, existing device authentication requirements, or other tasks that rely on asymmetric encryption. And public keys are distributed via digital certificates.
   - Cooperate with your platform vendor (Espressif): The platform vendor may embed a DAC in a chip or platform module using their VID/PID. CD is used to remap VID/PID using the dac_origin_vid/dac_origin_pid fields.
 
 ---------------------
@@ -91,7 +91,7 @@ Matter needs to use DCL in the network provision process. What is the specific f
 How to connect our Zigbee-based products with Matter through ESP chip?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The device based on ZigBee technology is not a Matter standard device. At this time, it is necessary to bridge the ZigBee device through the Matter Bridge device to access the Matter network.
+  - The device based on ZigBee technology is not a Matter standard device. At this time, you need to bridge the ZigBee device through the Matter Bridge device to access the Matter network.
   - Matter Bridge devices can be implemented using an Espressif Wi-Fi chip + 802.15.4 chip. Matter Bridge For BLE Mesh devices can be implemented with one Espressif Wi-Fi chip + BLE chip, or only one Wi-Fi + BLE combo chip.
 
 ---------------------
@@ -103,7 +103,7 @@ Does Matter work with Samsung's smartthings?
 
 ---------------------
 
-Can Matter-enabled ESP devices be remotely controlled using Amazon/Google/Apple voice devices? Do these voice devices need to support the Matter protocol? (For example: Voice "Turn off the light" can turn off the lights in the house)
+Can Matter-enabled ESP devices be remotely controlled using Amazon/Google/Apple voice devices? Do these voice devices need to support the Matter protocol? (For example: Saying "Turn off the light" to turn off the lights in the house)
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Using Amazon/Google/Apple voice devices that support Matter protocol, it is possible to remotely control Mattter ESP devices. In addition, if other ecosystems also support the ecosystem of the Matter protocol, then the home hub devices such as speakers in this ecosystem can also control the Matter devices remotely.
@@ -123,7 +123,7 @@ Does the product need to pass WiFi authentication and Bluetooth BQB authenticati
 Where is the DAC (Device Attestation Certificate) pre-imported by ESP Matter module stored?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The DAC (Device Attestation Certificate) pre-imported by the ESP Matter module is stored in flash. In the Matter Pre-Provisioning service, the Matter DAC certificate is pre-flashed in esp_secure_cert partition. An example of adding this partition to a partitioned table is as follows:
+  - The DAC (Device Attestation Certificate) pre-imported by the ESP Matter module is stored in flash. In the Matter Pre-Provisioning service, the Matter DAC certificate is pre-flashed in the esp_secure_cert partition. An example of adding this partition to a partition table is as follows:
 
   .. code-block:: text
 
@@ -136,4 +136,4 @@ Where is the DAC (Device Attestation Certificate) pre-imported by ESP Matter mod
 Can I configure Wi-Fi of ESP32 Matter devices by BLE？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes. For all the application examples in the `esp-matter <https://github.com/espressif/esp-matter>`_ SDK, Wi-Fi is configured by BLE. You can read the `"2.2 Commissioning and Control" <https://docs.espressif.com/projects/esp-matter/en/main/esp32c3/developing.html#commissioning-and-control>`_ guide.
+  - Yes. For all the application examples in the `esp-matter <https://github.com/espressif/esp-matter>`_ SDK, Wi-Fi is configured by BLE. You can refer to Section `2.2 Commissioning and Control <https://docs.espressif.com/projects/esp-matter/en/main/esp32c3/developing.html#commissioning-and-control>`_.
