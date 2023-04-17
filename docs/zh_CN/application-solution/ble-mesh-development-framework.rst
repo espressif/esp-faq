@@ -16,7 +16,7 @@ BLE Mesh 应用框架
 --------------
 
 被 Provisioner 配网到 ESP-BLE-MESH 网络中的第一个节点的单播地址是不是固定的？
------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 
   ``esp_ble_mesh_prov_t`` 中 ``prov_start_address`` 的值用于设置 Provisioner 配网未配网设备的起始地址，即其首先配网的节点的单播地址。单播地址只能在初始化期间设置一次，此后不能修改。
 
@@ -29,10 +29,10 @@ BLE Mesh 应用框架
 
 --------------
 
-配网过程中，认证设备共有多少种方法？提供的范例中 `provided examples <https://github.com/espressif/esp-idf/tree/7d75213/examples/bluetooth/esp_ble_mesh>`__ 使用了什么方法？
+配网过程中，认证设备共有多少种方法？`提供的示例 <https://github.com/espressif/esp-idf/tree/7d75213/examples/bluetooth/esp_ble_mesh>`__ 中使用了什么方法？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  共有四种设备认证方法，即 No OOB、Static OOB、Output OOB 和 Input OOB。提供的范例使用了 No OOB 的方式。
+  共有四种设备认证方法，即 No OOB、Static OOB、Output OOB 和 Input OOB。提供的示例里使用的是 No OOB。
 
 --------------
 
@@ -41,21 +41,21 @@ BLE Mesh 应用框架
 
   -  Device UUID
   -  OOB Info
-  -  URL Hash (可选的)
+  -  URL Hash（可选）
 
 --------------
 
 ESP-BLE-MESH 如何打印数据包？
 -----------------------------
 
-  示例使用如下函数 ``ESP_LOG_BUFFER_HEX()`` 打印信息语境，而 ESP-BLE-MESH 协议栈使用 ``bt_hex()`` 打印。
+  示例使用函数 ``ESP_LOG_BUFFER_HEX()`` 打印信息语境，而 ESP-BLE-MESH 协议栈则使用 ``bt_hex()`` 打印。
 
 --------------
 
 Device UUID 可以用于设备识别吗？
 --------------------------------
 
-  是的。每个设备都有独一无二的 Device UUID, 用户可以通过 Device UUID 识别设备。
+  可以。每个设备都有独一无二的 Device UUID，用户可以通过 Device UUID 识别设备。
 
 --------------
 
@@ -132,7 +132,7 @@ Provisioner 如何通过获取的 Composition Data 进一步配置节点？
         return ESP_OK;
     }
 
-   **注：** 使能了节点的 NVS 存储器后，通过该方式添加的组地址以及绑定的应用密钥在设备掉电的情况下不能保存。这些配置信息只有通过 Configuration Client Model 配置时才会保存。
+  注意：使能了节点的 NVS 存储器后，通过该方式添加的组地址以及绑定的应用密钥在设备掉电的情况下不能保存。这些配置信息只有通过 Configuration Client Model 配置时才会保存。
 
 --------------
 
@@ -175,7 +175,7 @@ Provisioner 如何将节点添加至多个子网？
 在 EspBleMesh App 中输入的 ``count`` 值有什么用途？
 ---------------------------------------------------------
 
-  此 count 值提供给 App 配置的代理节点，以决定何时提前开始 Proxy 广播信息。
+  ``count`` 值为 App 提供配置的代理节点，以决定何时提前开始 Proxy 广播信息。
 
 --------------
 
@@ -193,59 +193,64 @@ Temporary Provisioner 功能会一直处于使能的状态吗？
 
 --------------
 
-BLE MESH Log ``ran out of retransmit attempts`` 代表什么？
-----------------------------------------------------------
+BLE MESH 打印日志 ``ran out of retransmit attempts`` 代表什么？
+-------------------------------------------------------------------------------
 
-  节点发送分段消息时，由于某些原因，接收端未收到完整的消息。节点会重传消息。当重传次数达到最大重传数时，会出现该警告，当前最大重传数为 4。
-
---------------
-
-BLE Mesh log ``Duplicate found in Network Message Cache`` 代表什么？
---------------------------------------------------------------------
-
-  当节点收到一条消息时，它会把该消息与网络缓存中存储的消息进行比较。如果在缓存中找到相同的消息，这意味着之前已接受过该消息，则该消息会被丢弃。
+  节点发送分段消息时，由于某些原因，接收端未收到完整的消息。此时，节点会重传消息。当重传次数达到最大重传数时，会出现该警告。当前最大重传数为 4。
 
 --------------
 
-BLE Mesh log ``Incomplete timer expired`` 代表什么？
-----------------------------------------------------
+BLE Mesh 打印日志 ``Duplicate found in Network Message Cache`` 代表什么？
+-----------------------------------------------------------------------------------------
 
-  当节点在一定时间段（比如 10 秒）内未收到分段消息的所有段时，则 Incomplete 计时器到时，并且出现该警告。
+  当节点收到一条消息时，它会把该消息与网络缓存中存储的消息进行比较。如果在缓存中找到相同的消息，会出现该警告，这意味着之前已接受过该消息，则该消息会被丢弃。
 
 --------------
 
-BLE Mesh log ``No free slots for new incoming segmented messages`` 代表什么？
------------------------------------------------------------------------------
+BLE Mesh 打印日志 ``Incomplete timer expired`` 代表什么？
+-------------------------------------------------------------------------
+
+  表示 Mesh 网络中的节点接收到了一个不完整的消息，并且在规定时间内没有接收到该消息的剩余部分。这通常是因为消息被分成了多个段 (segment)，在传输过程中丢失了其中的一部分，导致节点无法完整地接收该消息。
+
+--------------
+
+BLE Mesh 打印日志 ``No free slots for new incoming segmented messages`` 代表什么？
+--------------------------------------------------------------------------------------------------
 
   当节点没有空间来接收新的分段消息时，会出现该警告。用户可以通过配置 `CONFIG_BLE_MESH_RX_SEG_MSG_COUNT <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/kconfig.html#config-ble-mesh-rx-seg-msg-count>`__ 扩大空间。
 
 --------------
 
-BLE Mesh log ``No matching TX context for ack`` 代表什么？
-----------------------------------------------------------
+BLE Mesh 打印日志 ``No matching TX context for ack`` 代表什么？
+-------------------------------------------------------------------------------
 
-  当节点收到一个分段 ack 且不能找到任何自己发送的与该 ack 相关的消息时，会出现该警告。
-
---------------
-
-BLE Mesh log ``Model not bound to AppKey 0x0000`` 代表什么？
-------------------------------------------------------------
-
-  当节点发送带有模型的消息且该模型尚未绑定到索引为 0x000 的应用密钥时，会出现该报错。
+  发送节点在收到一个分段 ACK 消息且没有匹配到对应的发送上下文（TX context）时，会出现该警告。这可能是因为网络中存在多个 ACK 消息。
 
 --------------
 
-BLE Mesh log ``Busy sending message to DST xxxx`` 代表什么？
----------------------------------------------------------------
+BLE Mesh 打印日志 ``Model not bound to AppKey 0x0000`` 代表什么？
+---------------------------------------------------------------------------------
 
-  该错误表示节点的客户端模型已将消息发送给目标节点，并且正在等待响应，用户无法将消息发送到单播地址相同的同一节点。接收到相应的响应或计时器到时后，可以发送另一条消息。
+  当节点发送带有模型的消息且该模型尚未绑定到索引为 0x000 的应用密钥时，会出现该警告。
+
+--------------
+
+BLE Mesh 打印日志 ``Busy sending message to DST xxxx`` 代表什么？
+------------------------------------------------------------------------------------
+
+  表示节点的客户端模型已将消息发送给目标节点，并且正在等待响应，用户无法将消息发送到单播地址相同的同一节点。接收到相应的响应或计时器到时后，可以发送另一条消息。
 
 --------------
 
 为什么会出现 EspBleMesh App 在快速配网期间长时间等待的情况？
 ------------------------------------------------------------
 
-  快速配网期间，代理节点在配置完一个节点后会断开与 APP 的连接，待所有节点配网完成后再与 APP 重新建立连接。
+  快速配网期间，代理节点在配置完一个节点后会断开与 APP 的连接，待所有节点配网完成后再与 APP 重新建立连接，快速配网期间长时间等待可能是由于：
+
+  - 网络拓扑结构复杂：如果网络中节点数量较多，且拓扑结构比较复杂，Provisioner 可能需要更长的时间来扫描网络和与节点进行通信。
+  - 网络信号不稳定：如果网络信号不稳定，通信可能会受到干扰或丢失，从而导致 APP 等待时间变长。
+  - 节点响应时间较长：如果节点响应时间较长，可能会导致 Provisioner 等待超时并重新发送消息，从而导致 APP 等待时间变长。
+  - App 与 Provisioner 通信故障：如果 APP 与 Provisioner 之间通信故障，可能会导致 App 等待时间变长。
 
 --------------
 
@@ -256,33 +261,33 @@ Provisoner 如何控制节点的服务器模型？
 
 -  Configuration Client Model
 
-   -  API ``esp_ble_mesh_config_client_get_state()`` 可用于获取 Configuration Server Model 的 ``esp_ble_mesh_cfg_client_get_state_t`` 值。
-   -  API ``esp_ble_mesh_config_client_set_state()`` 可用于获取 Configuration Server Model 的 ``esp_ble_mesh_cfg_client_set_state_t`` 值。
+   -  API `esp_ble_mesh_config_client_get_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv436esp_ble_mesh_config_client_get_stateP34esp_ble_mesh_client_common_param_tP35esp_ble_mesh_cfg_client_get_state_t>`_ 可用于获取 Configuration Server Model 的 ``esp_ble_mesh_cfg_client_get_state_t`` 值。
+   -  API `esp_ble_mesh_config_client_set_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv436esp_ble_mesh_config_client_set_stateP34esp_ble_mesh_client_common_param_tP35esp_ble_mesh_cfg_client_set_state_t>`_ 可用于获取 Configuration Server Model 的 ``esp_ble_mesh_cfg_client_set_state_t`` 值。
 
 -  Health Client Model
 
-   -  API ``esp_ble_mesh_health_client_get_state()`` 可用于获取 Health Server Model 的 ``esp_ble_mesh_health_client_get_state_t`` 值。
-   -  API ``esp_ble_mesh_health_client_set_state()`` 可用于获取 Health Server Model 的 ``esp_ble_mesh_health_client_set_state_t`` 值。
+   -  API `esp_ble_mesh_health_client_get_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv436esp_ble_mesh_health_client_get_stateP34esp_ble_mesh_client_common_param_tP38esp_ble_mesh_health_client_get_state_t>`_ 可用于获取 Health Server Model 的 ``esp_ble_mesh_health_client_get_state_t`` 值。
+   -  API `esp_ble_mesh_health_client_set_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv436esp_ble_mesh_health_client_set_stateP34esp_ble_mesh_client_common_param_tP38esp_ble_mesh_health_client_set_state_t>`_ 可用于获取 Health Server Model 的 ``esp_ble_mesh_health_client_set_state_t`` 值。
 
 -  Generic Client Models
 
-   -  API ``esp_ble_mesh_generic_client_get_state()`` 可用于获取 Generic Server Model 的 ``esp_ble_mesh_generic_client_get_state_t`` 值。
-   -  API ``esp_ble_mesh_generic_client_set_state()`` 可用于获取 Generic Server Model 的 ``esp_ble_mesh_generic_client_set_state_t`` 值。
+   -  API `esp_ble_mesh_generic_client_get_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv437esp_ble_mesh_generic_client_get_stateP34esp_ble_mesh_client_common_param_tP39esp_ble_mesh_generic_client_get_state_t>`_ 可用于获取 Generic Server Model 的 ``esp_ble_mesh_generic_client_get_state_t`` 值。
+   -  API `esp_ble_mesh_generic_client_set_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html#_CPPv437esp_ble_mesh_generic_client_set_stateP34esp_ble_mesh_client_common_param_tP39esp_ble_mesh_generic_client_set_state_t>`_ 可用于获取 Generic Server Model 的 ``esp_ble_mesh_generic_client_set_state_t`` 值。
 
 -  Lighting Client Models
 
-   -  API ``esp_ble_mesh_light_client_get_state()`` 可用于获取 Lighting Server Model 的 ``esp_ble_mesh_light_client_get_state_t`` 值。
-   -  API ``esp_ble_mesh_light_client_set_state()`` 可用于获取 Lighting Server Model 的 ``esp_ble_mesh_light_client_set_state_t`` 值。
+   -  API `esp_ble_mesh_light_client_get_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv435esp_ble_mesh_light_client_get_stateP34esp_ble_mesh_client_common_param_tP37esp_ble_mesh_light_client_get_state_t>`_ 可用于获取 Lighting Server Model 的 ``esp_ble_mesh_light_client_get_state_t`` 值。
+   -  API `esp_ble_mesh_light_client_set_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv435esp_ble_mesh_light_client_set_stateP34esp_ble_mesh_client_common_param_tP37esp_ble_mesh_light_client_set_state_t>`_ 可用于获取 Lighting Server Model 的 ``esp_ble_mesh_light_client_set_state_t`` 值。
 
 -  Sensor Client Models
 
-   -  API ``esp_ble_mesh_sensor_client_get_state()`` 可用于获取 Sensor Server Model 的 ``esp_ble_mesh_sensor_client_get_state_t`` 值。
-   -  API ``esp_ble_mesh_sensor_client_set_state()`` 可用于获取 Sensor Server Model 的 ``esp_ble_mesh_sensor_client_set_state_t`` 值。
+   -  API `esp_ble_mesh_sensor_client_get_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv436esp_ble_mesh_sensor_client_get_stateP34esp_ble_mesh_client_common_param_tP38esp_ble_mesh_sensor_client_get_state_t>`_ 可用于获取 Sensor Server Model 的 ``esp_ble_mesh_sensor_client_get_state_t`` 值。
+   -  API `esp_ble_mesh_sensor_client_set_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv436esp_ble_mesh_sensor_client_set_stateP34esp_ble_mesh_client_common_param_tP38esp_ble_mesh_sensor_client_set_state_t>`_ 可用于获取 Sensor Server Model 的 ``esp_ble_mesh_sensor_client_set_state_t`` 值。
 
 -  Time and Scenes Client Models
 
-   -  API ``esp_ble_mesh_time_scene_client_get_state()`` 可用于获取 Time and Scenes Server Model 的 ``esp_ble_mesh_time_scene_client_get_state_t`` 值。
-   -  API ``esp_ble_mesh_time_scene_client_set_state()`` 可用于获取 Time and Scenes Server Model 的 ``esp_ble_mesh_time_scene_client_set_state_t`` 值。
+   -  API `esp_ble_mesh_time_scene_client_get_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv440esp_ble_mesh_time_scene_client_get_stateP34esp_ble_mesh_client_common_param_tP42esp_ble_mesh_time_scene_client_get_state_t>`_ 可用于获取 Time and Scenes Server Model 的 ``esp_ble_mesh_time_scene_client_get_state_t`` 值。
+   -  API `esp_ble_mesh_time_scene_client_set_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv440esp_ble_mesh_time_scene_client_set_stateP34esp_ble_mesh_client_common_param_tP42esp_ble_mesh_time_scene_client_set_state_t>`_ 可用于获取 Time and Scenes Server Model 的 ``esp_ble_mesh_time_scene_client_set_state_t`` 值。
 
 --------------
 
@@ -308,7 +313,7 @@ Provisioner 删除网络中的节点时，需要进行哪些操作？
 在密钥更新的过程中，Provisioner 如何更新节点的网络密钥？
 --------------------------------------------------------
 
-  - 通过正确设置参数 ``esp_ble_mesh_cfg_client_set_state_t`` 中的 ``net_key_update``，使用 `Configuration Client Model <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-foundation-models>`_ API ``esp_ble_mesh_config_client_set_state()``，Provisioner 更新节点的网络密钥。
+  - 通过正确设置参数 `esp_ble_mesh_cfg_client_set_state_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv436esp_ble_mesh_config_client_set_stateP34esp_ble_mesh_client_common_param_tP35esp_ble_mesh_cfg_client_set_state_t>`_ 中的 ``net_key_update``，使用 `Configuration Client Model <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-foundation-models>`_ API `esp_ble_mesh_config_client_set_state() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv436esp_ble_mesh_config_client_set_stateP34esp_ble_mesh_client_common_param_tP35esp_ble_mesh_cfg_client_set_state_t>`_，Provisioner 更新节点的网络密钥。
   - 通过正确设置参数 ``esp_ble_mesh_cfg_client_set_state_t`` 中的 ``app_key_update``，使用 `Configuration Client Model <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/esp-ble-mesh/ble-mesh-terminology.html#ble-mesh-terminology-foundation-models>`_ API ``esp_ble_mesh_config_client_set_state()``，Provisioner 更新节点的应用密钥。
 
 --------------
@@ -317,7 +322,7 @@ Provisioner 如何管理 mesh 网络中的节点？
 ----------------------------------------
 
   - ESP-BLE-MESH 在示例中实现了一些基本的节点管理功能，比如 ``esp_ble_mesh_store_node_info()``。 
-  - ESP-BLE-MESH 还提供可用于设置节点本地名称的 API ``esp_ble_mesh_provisioner_set_node_name()`` 和可用于获取节点本地名称的 API ``esp_ble_mesh_provisioner_get_node_name()``。
+  - ESP-BLE-MESH 还提供可用于设置节点本地名称的 API `esp_ble_mesh_provisioner_set_node_name() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv438esp_ble_mesh_provisioner_set_node_name8uint16_tPKc>`_ 和可用于获取节点本地名称的 API `esp_ble_mesh_provisioner_get_node_name() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv438esp_ble_mesh_provisioner_get_node_name8uint16_t>`__。
 
 --------------
 
@@ -333,7 +338,7 @@ Provisioner 想要控制节点的服务器模型时需要什么？
 
   - Provisioner 应当配置自己的客户端模型。
 
-     - Provisioner 调用 API ``esp_ble_mesh_provisioner_bind_app_key_to_local_model()`` 以绑定应用密钥至自己的客户端模型。
+     - Provisioner 调用 API `esp_ble_mesh_provisioner_bind_app_key_to_local_model() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv452esp_ble_mesh_provisioner_bind_app_key_to_local_model8uint16_t8uint16_t8uint16_t8uint16_t>`_ 以绑定应用密钥至自己的客户端模型。
 
 --------------
 
@@ -366,9 +371,9 @@ Provisioner 想要控制节点的服务器模型时需要什么？
 节点的模型可以使用哪些函数发送消息？
 ------------------------------------
 
-  - 对于客户端模型，用户可以调用 API ``esp_ble_mesh_client_model_send_msg()`` 发送消息。
-  - 对于服务器模型，用户可以调用 API ``esp_ble_mesh_server_model_send_msg()`` 发送消息。
-  - 对于发布，用户可以调用 API ``esp_ble_mesh_model_publish()`` 发布消息。
+  - 对于客户端模型，用户可以调用 API `esp_ble_mesh_client_model_send_msg() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv434esp_ble_mesh_client_model_send_msgP20esp_ble_mesh_model_tP22esp_ble_mesh_msg_ctx_t8uint32_t8uint16_tP7uint8_t7int32_tb23esp_ble_mesh_dev_role_t>`_ 发送消息。
+  - 对于服务器模型，用户可以调用 API `esp_ble_mesh_server_model_send_msg() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv434esp_ble_mesh_server_model_send_msgP20esp_ble_mesh_model_tP22esp_ble_mesh_msg_ctx_t8uint32_t8uint16_tP7uint8_t>`_ 发送消息。
+  - 对于发布，用户可以调用 API `esp_ble_mesh_model_publish() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv426esp_ble_mesh_model_publishP20esp_ble_mesh_model_t8uint32_t8uint16_tP7uint8_t23esp_ble_mesh_dev_role_t>`_ 发布消息。
 
 --------------
 
@@ -386,7 +391,7 @@ Provisioner 想要控制节点的服务器模型时需要什么？
 
   - 对于客户端模型，用户可以调用 API ``esp_ble_mesh_client_model_send_msg()`` with the parameter ``need_rsp`` set to ``false`` 发送无应答消息。
 
-  - 对于服务器模型，调用 API ``esp_ble_mesh_server_model_send_msg()`` 发送的消息总是无应答的消息。
+  - 对于服务器模型，调用 API `esp_ble_mesh_server_model_send_msg() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv434esp_ble_mesh_server_model_send_msgP20esp_ble_mesh_model_tP22esp_ble_mesh_msg_ctx_t8uint32_t8uint16_tP7uint8_t>`_ 发送的消息总是无应答的消息。
 
 --------------
 
@@ -414,7 +419,7 @@ Provisioner 想要控制节点的服务器模型时需要什么？
 如何实现将节点自检的信息发送出来？
 ----------------------------------
 
-  推荐节点通过 Health Server Model 定期发布其自检结果。
+  推荐节点通过 `Health Server Model <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=health%20server%20model#health-client-server-models>`_ 定期发布其自检结果。
 
 --------------
 
@@ -455,7 +460,7 @@ Relay 节点什么时候可以中继消息？
 节点间如何传输消息？
 --------------------
 
-  节点间传输信息的可能应用场景是，一旦烟雾警报检测到高浓度的烟雾，就会触发喷淋设备。 有两种实现方法。
+  节点间传输信息的可能应用场景是，一旦烟雾警报检测到高浓度的烟雾，就会触发喷淋设备。有两种实现方法。
 
   -  方法 1：喷淋设备订阅组地址。当烟雾警报器检测到高浓度的烟雾时，它会发布一条消息，该消息的目标地址是喷淋设备已订阅的组地址。
   -  方法 2：Provisioner 可以配置喷淋设备的单播地址为烟雾报警器的地址。当检测到高浓度的烟雾时，烟雾警报器以喷淋设备的单播地址为目标地址，将消息发送到喷淋设备。
@@ -465,7 +470,8 @@ Relay 节点什么时候可以中继消息？
 何时使用 IV Update 更新程序？
 -----------------------------
 
-  一旦节点的底层检测到发送的消息的序列号达到临界值，IV Update 更新程序便会启用。
+  IV（Initialization Vector）是 BLE Mesh 网络中的一个重要参数，它用于在节点之间传递和解密消息，同时还用于识别网络中的重放攻击。当 IV 更新时，网络密钥的计算也会被更新，从而增强了网络的安全性。因此，当 IV 达到阈值时，需要更新 IV。
+  在 BLE Mesh 网络中，IV 阈值是一个在 0 到 0xFFFF 之间的数字，它在网络初始化时被分配，通常为 0。当网络中传输的消息数量超过 IV 阈值时，就需要进行 IV 更新，IV Update 更新程序便会启用。此时，Provisioner 会向网络中的所有节点广播 IV 更新消息，然后节点会更新其 IV 和网络密钥。
 
 --------------
 
@@ -486,16 +492,16 @@ Relay 节点什么时候可以中继消息？
 ESP-BLE-MESH 回调函数如何分类？
 -------------------------------
 
-  -  API ``esp_ble_mesh_register_prov_callback()`` 用于注册处理配网和入网相关事件的回调函数。
-  -  API ``esp_ble_mesh_register_config_client_callback()`` 用于注册处理 Configuration Client Model 相关事件的回调函数。
-  -  API ``esp_ble_mesh_register_config_server_callback()`` 用于注册处理 Configuration Server Model 相关事件的回调函数。
-  -  API ``esp_ble_mesh_register_health_client_callback()`` 用于注册处理 Health Client Model 相关事件的回调函数。
-  -  API ``esp_ble_mesh_register_health_server_callback()`` 用于注册处理 Health Server Model 相关事件的回调函数。
-  -  API ``esp_ble_mesh_register_generic_client_callback()`` 用于注册处理 Generic Client Models 相关事件的回调函数。
-  -  API ``esp_ble_mesh_register_light_client_callback()`` 用于注册处理 Lighting Client Models 相关事件的回调函数。
-  -  API ``esp_ble_mesh_register_sensor_client_callback()`` 用于注册处理 Sensor Client Model 相关事件的回调函数。
-  -  API ``esp_ble_mesh_register_time_scene_client_callback()`` 用于注册处理 Time and Scenes Client Models 相关事件的回调函数。
-  -  API ``esp_ble_mesh_register_custom_model_callback()`` 用于注册处理自定义模型和未实现服务器模型的相关事件的回调函数。
+  -  API `esp_ble_mesh_register_prov_callback() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv435esp_ble_mesh_register_prov_callback22esp_ble_mesh_prov_cb_t>`_ 用于注册处理配网和入网相关事件的回调函数。
+  -  API `esp_ble_mesh_register_config_client_callback() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv444esp_ble_mesh_register_config_client_callback28esp_ble_mesh_cfg_client_cb_t>`_ 用于注册处理 Configuration Client Model 相关事件的回调函数。
+  -  API `esp_ble_mesh_register_config_server_callback() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv444esp_ble_mesh_register_config_server_callback28esp_ble_mesh_cfg_server_cb_t>`_ 用于注册处理 Configuration Server Model 相关事件的回调函数。
+  -  API `esp_ble_mesh_register_health_client_callback() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv444esp_ble_mesh_register_health_client_callback31esp_ble_mesh_health_client_cb_t>`_ 用于注册处理 Health Client Model 相关事件的回调函数。
+  -  API `esp_ble_mesh_register_health_server_callback() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv444esp_ble_mesh_register_health_server_callback31esp_ble_mesh_health_server_cb_t>`_ 用于注册处理 Health Server Model 相关事件的回调函数。
+  -  API `esp_ble_mesh_register_generic_client_callback() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv445esp_ble_mesh_register_generic_client_callback32esp_ble_mesh_generic_client_cb_t>`_ 用于注册处理 Generic Client Models 相关事件的回调函数。
+  -  API `esp_ble_mesh_register_light_client_callback() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv443esp_ble_mesh_register_light_client_callback30esp_ble_mesh_light_client_cb_t>`_ 用于注册处理 Lighting Client Models 相关事件的回调函数。
+  -  API `esp_ble_mesh_register_sensor_client_callback() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv444esp_ble_mesh_register_sensor_client_callback31esp_ble_mesh_sensor_client_cb_t>`_ 用于注册处理 Sensor Client Model 相关事件的回调函数。
+  -  API `esp_ble_mesh_register_time_scene_client_callback() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv448esp_ble_mesh_register_time_scene_client_callback35esp_ble_mesh_time_scene_client_cb_t>`_ 用于注册处理 Time and Scenes Client Models 相关事件的回调函数。
+  -  API `esp_ble_mesh_register_custom_model_callback() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv443esp_ble_mesh_register_custom_model_callback23esp_ble_mesh_model_cb_t>`_ 用于注册处理自定义模型和未实现服务器模型的相关事件的回调函数。
 
 --------------
 
@@ -524,13 +530,6 @@ Provisioner 的地址是否可以作为节点上报状态消息的目的地址�
   -  需要有和节点的服务器模型相对应的客户端模型。
   -  需要和节点有相同的、可用于加密消息的网络密钥和应用密钥。
   -  需要知道节点的地址，可以是单播地址，也可以是订阅地址。
-
---------------
-
-Provisioner 的单播地址是不是固定的？
-------------------------------------
-
-  ``esp_ble_mesh_prov_t`` 中 ``prov_unicast_addr`` 的值用于设置 Provisioner 的单播地址，只能在初始化期间设置一次，此后不能更改。
                                                                                                                                                                                                                                                                         
 --------------
 
@@ -545,43 +544,43 @@ Provisioner 的单播地址是不是固定的？
 是否可以采用固定的网络密钥或应用密钥？
 --------------------------------------
 
-  -  API ``esp_ble_mesh_provisioner_add_local_net_key()`` 可以用来添加包含固定值或随机值的网络密钥。
-  -  API ``esp_ble_mesh_provisioner_add_local_app_key()`` 可以用来添加包含固定值或随机值的应用密钥。
+  -  API `esp_ble_mesh_provisioner_add_local_net_key() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv442esp_ble_mesh_provisioner_add_local_net_keyAL16E_K7uint8_t8uint16_t>` 可以用来添加包含固定值或随机值的网络密钥。
+  -  API `esp_ble_mesh_provisioner_add_local_app_key() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv442esp_ble_mesh_provisioner_add_local_app_keyAL16E_K7uint8_t8uint16_t8uint16_t>`_ 可以用来添加包含固定值或随机值的应用密钥。
 
 --------------
 
-如何清除 ESP32 BLE node 的组网信息？
+如何清除 ESP32 BLE 节点的组网信息？
 ---------------------------------------
 
-  清除 node 的组网信息可以调用 ``esp_ble_mesh_node_local_reset()``
+  清除节点的组网信息可以调用 `esp_ble_mesh_node_local_reset() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`_
 
 --------------
 
-如何删除某个 node 的组网信息？
+如何删除某个节点的组网信息？
 -------------------------------
 
-  删除某个节点的信息可以调用 ``esp_ble_mesh_provisioner_delete_node_with_uuid()`` 或 ``esp_ble_mesh_provisioner_delete_node_with_addr()``
+  删除某个节点的信息可以调用 `esp_ble_mesh_provisioner_delete_node_with_uuid() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv446esp_ble_mesh_provisioner_delete_node_with_uuidAL16E_K7uint8_t>`_ 或 `esp_ble_mesh_provisioner_delete_node_with_addr() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv446esp_ble_mesh_provisioner_delete_node_with_addr8uint16_t>`_。
 
 --------------
 
-如果 Node 断电了，下次上电是否还要用手机 APP 重新组网？
+如果节点断电了，下次上电是否还要用手机 APP 重新组网？
 -----------------------------------------------------------
 
-  可以通过配置 menuconfig 的选项保存配置信息，就不需要重新组网了。``Component config--》Bluetooth Mesh support--》Store Bluetooth Mesh key and configuration persistently``
+  可以前往 menuconfig，通过 ``Component config`` -> ``Bluetooth Mesh support`` -> ``Store Bluetooth Mesh key and configuration persistently`` 的选项保存配置信息，就不需要重新组网了。
 
 --------------
 
-1号板子做 provisioner，2,3,4号板子做 Node 。组网成功后，如果1号板子掉电了，重新上电后还能否加入到这个 mesh 网络中？
-----------------------------------------------------------------------------------------------------------------------
+1 号板子做 Provisioner，2、3、4 号板子做节点。组网成功后，如果 1 号板子掉电了，重新上电后还能否加入到这个 mesh 网络中？
+--------------------------------------------------------------------------------------------------------------------------------------
 
-  1号板子重新上电后，如果 net key，和 app key 没有变化，则可以直接访问这个网络，但是 mesh 网络中 node 的地址，如果不保存会丢失掉，不过你可以通过某种方式重新获取地址。
+  1 号板子重新上电后，如果 net key 和 app key 没有变化，即可直接访问该网络。但是如果没有保存 mesh 网络中节点的地址，则地址将会丢失。
 
 --------------
 
-BLE_MESH 中，某个 Node 如果掉线了，要如何知道？
+BLE_MESH 中，如果某个节点掉线了，要如何知道？
 -----------------------------------------------
 
-  Node 可以周期发布消息，你可以通过 Health model 周期发送 Heartbeat 消息，或者可以通过 vender model 周期发送自定义消息。
+  节点可以周期发布消息，你可以通过 Health model 周期发送 Heartbeat 消息，或者可以通过 vender model 周期发送自定义消息。
 
 --------------
 
@@ -602,53 +601,52 @@ BLE_MESH 节点间如何实现以字符串的形式通信？
 请问如何在 provisioner 的 demo 中 添加 health_mode？
 ------------------------------------------------------
 
-  进入 menuconfig，在 ``Component config ->ESP BLE Mesh Support -> Support for BLE Mesh Client Models`` 中勾选上 ``Health Client Model``
+  进入 menuconfig，在 ``Component config`` -> ``ESP BLE Mesh Support`` -> ``Support for BLE Mesh Client Models`` 中勾选上 ``Health Client Model``。
 
 --------------
 
 ble_mesh_fast_prov_client 当设备 provisioner 和手机当 provisioner 有什么不一样？
 ---------------------------------------------------------------------------------
 
-  - ble_mesh_fast_prov_server demo 在收到 ESP_BLE_MESH_MODEL_OP_APP_KEY_ADD opcode 时，一并把 model 的配置自己做好了，并没有像手机 provisioner 那样进行发送 ESP_BLE_MESH_MODEL_OP_MODEL_APP_BIND opcode 把 model APPkey 绑定，
-    发送 ``ESP_BLE_MESH_MODEL_OP_MODEL_PUB_SET`` 把 publication 配置好
-  - ``ble_mesh_fast_prov_client demo`` 与 ``ble_mesh_fast_prov_server demo`` 是我们提供的一个快速配网的方案，实现了100个节点配置设备入网时间在 60s 以内。为了实现这个功能，我们添加了一些自定义消息(用于设备间自定义信息的传递)
+  - ble_mesh_fast_prov_server demo 在收到 ESP_BLE_MESH_MODEL_OP_APP_KEY_ADD opcode 时，一并把 model 配置好了，而手机 Provisioner 则需要发送 ESP_BLE_MESH_MODEL_OP_MODEL_APP_BIND opcode 绑定 model APPkey，再发送 ``ESP_BLE_MESH_MODEL_OP_MODEL_PUB_SET`` 配置 publication。
+  - ``ble_mesh_fast_prov_client demo`` 与 ``ble_mesh_fast_prov_server demo`` 是我们提供的快速配网方案，实现了 100 个节点配置设备入网时间在 60 s 以内。为了实现这个功能，我们添加了一些自定义消息，用于设备间自定义信息的传递。
 
 --------------
 
-有什么工具和办法可以查看 ble_mesh node 之间的加密消息吗？
+有什么工具和办法可以查看 ble_mesh 节点之间的加密消息吗？
 ------------------------------------------------------------
 
-  - 数据包解密必须要配置 netkey， appkey， devkey， iv index 的，你可以找一下配置接口。
-  - 广播包需要 37，38, 39 三通道同时抓才行，我们一般使用的是专门的仪器。
+  - 数据包解密必须配置 netkey、appkey、devkey、iv index，用户可以尝试查看配置接口。
+  - 广播包需要 37、38、39 三通道同时抓，一般需要使用到专门的仪器。
 
 --------------
 
 app key 是否是厂家可以自己设置？ Unicast address 和 app key 是否有某种关联？
 ---------------------------------------------------------------------------------
 
-  app key 可以厂家自己设置，它和 Model 是绑定在一起的，和 Unicast address 没有什么关系。
+  app key 可以厂家自己设置，它和 Model 是绑定在一起的，和 Unicast address 没有关系。
 
 --------------
 
-如果一个 Node 突然掉线，那么通过 Health model 监测消息的机制，是整个 mesh 网络都要轮询的发送 Heartbeat 消息吗？
+如果一个节点突然掉线，那么通过 Health model 监测消息的机制，是整个 mesh 网络都要轮询的发送 Heartbeat 消息吗？
 ----------------------------------------------------------------------------------------------------------------
 
-  BLE MESH 网络是没有建立任何连接的，直接通过广播通道发送消息。你可以使用心跳包的方式去检查，心跳包往同一个 Node 发送。 
+  BLE MESH 网络没有建立任何连接，直接通过广播通道发送消息。用户可以向同一个节点发送心跳包进行检查。
 
 ---------------
 
-主 Node（代理节点） -> 从 Node互相发送消息，用 client-server 模型可以吗？是否有提供 demo 来完成？
+主节点（代理节点）与从节点互相发送消息，可以用 client-server 模型吗？是否有提供示例？
 -------------------------------------------------------------------------------------------------------------------------------
 
-  在我们的 V6.0 版本中有相关的 demo，``ble_mesh_fast_provision/ble_mesh_fast_prov_server`` 中有提供。
+  请参见 V6.0 版本中 ``ble_mesh_fast_provision/ble_mesh_fast_prov_server`` 中提供的示例。
 
 --------------
 
 在 NRF 的手机 app 里，右下角 “Setting” 里有个 “Network Key”，可以自由更改，这个修改的是指哪个 network key 呢？
 ---------------------------------------------------------------------------------------------------------------
 
-  - 在 NRF 的手机 app 里，右下角 “Setting” 里有个 “Network Key”，修改它就意味着修改了 provisioner 的 Netkey，provisioner 配置其它设备入网时会把这个 netkey 分配给入网的节点
-  - 如果 provisioner 拥有多个 Netkey ，provisioner 在配置设备时，可以选择使用哪个 NetKey 分配给设备。provisioner 可以使用不同的 Netkey 和网络中的节点进行通讯。每个节点的Netkey都是 provisioner 分配的。
+  - 在 NRF 的手机 app 里，右下角 “Setting” 里有个 “Network Key”，修改它就意味着修改了 provisioner 的 Netkey，provisioner 配置其它设备入网时会把这个 netkey 分配给入网的节点。
+  - 如果 provisioner 拥有多个 Netkey，provisioner 在配置设备时，可以选择使用哪个 NetKey 分配给设备。provisioner 可以使用不同的 Netkey 和网络中的节点进行通讯。每个节点的 Netkey 都是 provisioner 分配的。
 
 ----------------
 
@@ -662,7 +660,7 @@ app key 是否是厂家可以自己设置？ Unicast address 和 app key 是否�
 Bluetooth® LE (BLE) Mesh 数据传送最大的包是多少 Bytes？
 --------------------------------------------------------------------------------
 
-  - 应用层单包最大 384 bytes，底层不分包最大 11 bytes。
+  - 应用层单包最大 384 字节，底层不分包最大 11 字节。
 
 ----------------
 
@@ -688,10 +686,10 @@ ESP32 的 BLE-MESH 应用可以连接多少个节点设备？
   
 --------------------------------------------------------
 
-ESP32 如何手动重置 BLE mesh 设备（不通过 mobile provisioning app 或 provisioning device）？
+ESP32 如何手动重置 BLE mesh 设备（不通过手机配网应用程序或配网设备）？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 可以调用 `esp_ble_mesh_node_local_reset <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`__ 接口去重置 BLE Mesh Node，擦除所有的配网信息，还需要等到重置事件到达，确认重置成功，调用后，设备需要重新配网。
+  - 可以调用 `esp_ble_mesh_node_local_reset <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`__ 接口，重置 BLE Mesh 节点，擦除所有的配网信息，还需要等到重置事件到达，确认重置成功，调用后，设备需要重新配网。
 
 --------------------------------------------------------
 
