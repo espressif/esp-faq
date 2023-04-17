@@ -16,7 +16,7 @@ BLE Mesh development framework
 ----------------
 
 What is the maximum data transmission load for Bluetooth® LE (BLE) mesh?
---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 
   - Up to 384 bytes for the single packet in application layer, up to 11 bytes in the bottom layer with no sub-packages.
 
@@ -44,7 +44,7 @@ How many node devices can ESP32's BLE-MESH application connect to?
   
 --------------------------------------------------------
 
-How do I manually reset a BLE mesh device? (not via the mobile provisioning app or provisioning device)?
+How can I manually reset a BLE mesh device without the mobile provisioning app or provisioning device?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - You can call the `esp_ble_mesh_node_local_reset <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`__ interface to reset the BLE Mesh Node, erase all the provisioning information, and wait until the reset event arrives to confirm a successful reset. After the call, the device needs to be provisioned again.
