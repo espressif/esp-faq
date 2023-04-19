@@ -32,14 +32,14 @@
 请问你们芯片和模组通过了 REACH、ROHS 等环保认证吗？
 ---------------------------------------------------------
 
-  我司芯片和模组符合 REACH、RoHS、Prop65 等多项环保认证标准。您可以联络 `乐鑫商务支持 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ 获取并查看证书。
+  我司芯片和模组符合 REACH、RoHS、Prop65 等多项环保认证标准。您可以联络 `乐鑫商务 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ 获取并查看证书。
 
 --------------
 
 你们在国内、欧洲、美国或加拿大有代理商吗？
 ------------------------------------------------
   
-  请联系 `乐鑫商务支持 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ 获得您所需信息，我们的工作人员会尽快与您取得联系。
+  请联系 `乐鑫商务 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ 获得您所需信息，我们的工作人员会尽快与您取得联系。
 
 --------------
 
@@ -74,7 +74,7 @@
 如何购买你们的产品？
 -------------------------
 
-  若您需要批量采购，请联系 `乐鑫商务支持 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ ，我们的工作人员会尽快与您取得联系。
+  若您需要批量采购，请联系 `乐鑫商务 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ ，我们的工作人员会尽快与您取得联系。
   若您需要少量样品，请 `点此 <https://www.espressif.com/zh-hans/contact-us/get-sample>`__ 查看购买渠道。
 
 --------------
@@ -96,8 +96,8 @@
 贵司模组本身有固件吗？我需要定制模组/芯片烧录，请问可否在出厂时候完成？价格如何？交期多久？我应如何操作？
 -----------------------------------------------------------------------------------------------------------------------
 
-  乐鑫开发了一套 AT 指令集， 方便客户简单快速地使用 AT 指令来控制芯片。乐鑫大部分模组出厂时带有标准 AT 固件。具体更多信息请联系 `乐鑫商务支持 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ 。我们的工作人员会尽快与您取得联系。
-  此外，为简化和缩短客户的制造过程，乐鑫为您提供贴心的定制生产服务。您可以进入 `生产服务 <https://www.espressif.com/zh-hans/products/services/manufacturing-services>`__ 查看我司可完成的出厂烧录项目。具体更多信息请联系 `乐鑫商务支持 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ ，我们的商务支持将尽快协助处理并帮您完成定制。
+  乐鑫开发了一套 AT 指令集， 方便客户简单快速地使用 AT 指令来控制芯片。乐鑫大部分模组出厂时带有标准 AT 固件。具体更多信息请联系 `乐鑫商务 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ 。我们的工作人员会尽快与您取得联系。
+  此外，为简化和缩短客户的制造过程，乐鑫为您提供贴心的定制生产服务。您可以进入 `生产服务 <https://www.espressif.com/zh-hans/products/services/manufacturing-services>`__ 查看我司可完成的出厂烧录项目。具体更多信息请联系 `乐鑫商务 <https://www.espressif.com/zh-hans/contact-us/sales-questions>`__ ，我们的商务支持将尽快协助处理并帮您完成定制。
 
 --------------
 
@@ -111,7 +111,7 @@
 请问贵司的办公地点在哪里？
 -------------------------------
 
-  乐鑫科技（股票代码：688018）是一家全球化的无晶圆厂半导体公司，成立于 2008 年，总部位于中国上海，在大中华地区、新加坡、印度、捷克和巴西都设立了研发中心。点此查看 `乐鑫全球办公室 <https://www.espressif.com/zh-hans/join-us/people-at-espressif>`__ 。
+  乐鑫科技（股票代码：688018）是一家全球化的无晶圆厂半导体公司，成立于 2008 年，在中国、捷克、印度、新加坡和巴西均设有办公地，团队来自 30 多个国家和地区。点此查看 `乐鑫全球办公室 <https://www.espressif.com/zh-hans/join-us/people-at-espressif>`__ 。
 
 --------------
 
