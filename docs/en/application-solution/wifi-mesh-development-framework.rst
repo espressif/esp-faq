@@ -123,3 +123,16 @@ Is there any demo of ESP-Mesh root node sending messages to a service via ethern
 ------------------------------------------------------------------------------------------------------
 
   - Please see `root_on_ethnernet <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/root_on_ethernet/>`_ demo.
+
+-------------
+
+Does the `esp-mesh-lite <https://github.com/espressif/esp-mesh-lite/blob/master/components/mesh_lite/README.md#esp-wi-fi-mesh-lite>`_ solution support the applications without routers?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, it supports. For the applications supported by esp-mesh-lite, please refer to `esp-mesh-lite features <https://github.com/espressif/esp-mesh-lite/blob/master/components/mesh_lite/CHANGELOG.md#mesh>`_.
+  - You can conduct tests by enabling ``Component config`` > ``ESP Wi-Fi Mesh Lite`` > ``Enable Mesh-Lite`` > ``Mesh-Lite info configuration`` > ``[*] Join Mesh no matter whether the node is connected to router`` in the `esp-mesh-lite/examples/mesh_local_control <https://github.com/espressif/esp-mesh-lite/tree/master/examples/mesh_local_control>`_ example.
+  -  Please pay attention to the following tips if you want to use esp-mesh-lite without routers:
+
+    - Identify a root node if possible, which can be set via ``esp_mesh_lite_set_allow_level(1)``.
+    - It is recommended to use the ``esp_mesh_lite_set_disallow_level(1)`` function to prohibit the other nodes from being the root node.
+    - In the applications of Mesh-Lite, a mesh network should be established based on some factors such as the distance of devices and the quality of Wi-Fi signal. As a result, you should test and debug the meash network to ensure its performance and stability.

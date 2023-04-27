@@ -319,3 +319,16 @@ ESP-Mesh 根节点通过 ethernet 向服务发消息示例？
 ---------------------------------------------------------------------------------
 
   - 请参考 `root_on_ethnernet <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi/root_on_ethernet/>`_ 示例。
+
+-------------
+
+`esp-mesh-lite <https://github.com/espressif/esp-mesh-lite/blob/master/components/mesh_lite/README_CN.md#esp-mesh-lite>`_ 解决方案是否支持无路由器的应用场景？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 支持，esp-mesh-lite 解决方案支持的应用场景可参见 `esp-mesh-lite 特性 <https://github.com/espressif/esp-mesh-lite/blob/master/components/mesh_lite/CHANGELOG.md#mesh>`_ 说明。
+  - 可基于 `esp-mesh-lite/examples/mesh_local_control <https://github.com/espressif/esp-mesh-lite/tree/master/examples/mesh_local_control>`_ 例程使能 ``Component config`` > ``ESP Wi-Fi Mesh Lite`` > ``Enable Mesh-Lite`` > ``Mesh-Lite info configuration`` > ``[*] Join Mesh no matter whether the node is connected to router`` 配置选项来测试。
+  - 对于无路由器的方案需要注意如下：
+
+    - 尽量确定一个根节点，可通过 ``esp_mesh_lite_set_allow_level(1)`` 设置。
+    - 对于其他节点，建议使用 ``esp_mesh_lite_set_disallow_level(1)`` 函数来禁止它们成为根节点。
+    - Mesh-Lite 的应用场景下，Mesh 网络的建立需要依靠设备物理距离和 Wi-Fi 信号质量等因素，因此需要进行充分的实地测试和调试，以保证 Mesh 网络的性能和稳定性。
