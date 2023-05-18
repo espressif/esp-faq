@@ -252,3 +252,11 @@ Windows7 系统 USB 驱动无法识别是什么原因？
       invalrd header：0xffffffff
 
   - 出现如上报错日志一般情况为 GPIO12 拉高导致，ESP32-WROVER-E 模组 GPIO12 不能拉高，建议将 GPIO12 拉低测试一下。可参见 `ESP32 boot log 指南 <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html#select-bootloader-mode>`_。
+
+----------------
+
+使用 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 通过 USB 烧录 ESP32-C3 时，反复出现 8-download data fail，如何解决？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 请先完全擦除芯片，再进行烧录
+  - V3.9.4 及以上版本已修复该问题
