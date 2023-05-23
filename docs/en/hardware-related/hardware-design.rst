@@ -490,3 +490,12 @@ Do the ESP32-C2, ESP32-C3 and ESP32-C6 chips support external PSRAM chips?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 - ESP32-C2, ESP32-C3, and ESP32-C6 do not support external PSRAM chips.
+
+-------------
+
+When the ESP32-C3 is powered by a battery, it may fail to start if the supply voltage gradually decreases, for example, when the battery is fully discharged and then recharged. In such cases, the solution could only be disconnecting the battery from the ESP32-C3 and reconnect a fully charged battery, or to connect a voltage regulator diode between the 3.3 V pin and the EN pin to ensure the chip starts properly. What is the root cause of this situation? Is there an optimal solution?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Root cause: When powering up and resetting the ESP32-C3 chip, the CHIP_EN pin needs to meet the power-up timing specifications outlined in the `ESP32-C3 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf>`__ or `ESP32-C3 hardware design guidelines <https://www.espressif.com/sites/default/files/documentation/esp32-c3_hardware_design_guidelines_en.pdf>`__. If the battery discharge and power-up process are relatively slow, ESP32-C3 may not be fully reset, resulting in certain units of the chip being in an uncertain state.
+  - Solution: Currently, if using battery power or energy storage systems, this issue can be addressed by adjusting RC component values, using voltage divider circuits with two resistors, or using a reset IC, which is a more commonly used approach. For detailed information regarding RC component values and related resistors, please refer to `ESP32-C3 Family Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32-c3_hardware_design_guidelines_en.pdf>`__.
+  
