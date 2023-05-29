@@ -45,3 +45,14 @@ NVS 扇区是否会因写入时意外断电而损坏？
 
     - 如果想要实现掉电保存 Wi-Fi SSID 和 PSAAWORD，可通过调用 ``esp_wifi_set_storage(WIFI_STORAGE_FLASH)`` 将 Wi-Fi 信息存储在 flash 内。
     - 如果想要实现掉电不保存 Wi-Fi SSID 和 PASSWORD 的操作，可通过调用 ``esp_wifi_set_storage(WIFI_STORAGE_RAM)`` 将 Wi-Fi 信息存储在 RAM 内。
+
+-----------------
+
+如何实现存储的用户数据支持掉电保存，不被 OTA 擦除，且支持重写或改写？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 根据需求，需要使用非易失性存储，存储数据的区域只有 eFuse 或 flash。考虑到需要修改，只能使用 flash。推荐使用 NVS 或 MFG 机制。请参考：
+ 
+    - `MFG 量产程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/storage/mass_mfg.html#id1>`_ 
+    - `NVS 分区生成程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/storage/nvs_partition_gen.html#nvs>`_ 
+
