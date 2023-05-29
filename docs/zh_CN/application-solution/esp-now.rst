@@ -126,3 +126,11 @@ ESP-NOW 应用是否支持通过每个 Wi-Fi 信道发送数据包？
 - ESP-NOW 申请不需要任何特殊程序。
 - 技术文档请阅读 `ESP-NOW 用户指南 <https://www.espressif.com/sites/default/files/documentation/esp-now_user_guide_cn.pdf>`__，您可以使用 `ESP-NOW SDK <https://github.com/espressif/esp-now>`__ 示例进行测试。
 - 默认的 ESP-NOW 比特率是 1 Mbps。
+
+-----------------
+
+为什么使用 ESP32 测试 `esp-idf/examples/wifi/espnow <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/wifi/espnow>`_ 例程，最多仅支持连接 7 个加密设备？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 在 esp-now 应用中，ESP32 支持连接加密设备的数量不超过 17 个，默认值是 7 。请参见 `“添加配对设备” <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/network/esp_now.html#id5>`_ 说明。
+  - 如果想要修改加密设备的数量，在 WiFi menuconfig 设置 ``CONFIG_ESP_WIFI_ESPNOW_MAX_ENCRYPT_NUM``。
