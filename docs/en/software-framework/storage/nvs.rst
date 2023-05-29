@@ -45,3 +45,13 @@ Will the configured Wi-Fi SSID and PASSWORD disappear after the ESP series devel
 
      - If you want to save the Wi-Fi SSID and PSAAWORD when powered off, you can store the Wi-Fi information in flash by calling ``esp_wifi_set_storage(WIFI_STORAGE_FLASH)``.
      - If you want to achieve the operation of not saving the Wi-Fi SSID and PASSWORD when powered off, you can call ``esp_wifi_set_storage(WIFI_STORAGE_RAM)`` to store the Wi-Fi information in RAM.
+
+---------------
+
+How to realize that stored user data can be saved after power off, not erased by OTA, and can be re-written or modified?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Non-volatile storage can meet the above requirements, and only eFuse and flash can be used to store the data. Since the data should be modifiable, only flash is suitable. It is recommended to use NVS or MFG mechanism. For details, please refer to
+
+    - `Manufacturing Utility <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/storage/mass_mfg.html#manufacturing-utility>`_    
+    - `NVS Partition Generator Utility <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/storage/nvs_partition_gen.html#nvs-partition-generator-utility>`_ 
