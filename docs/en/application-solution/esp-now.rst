@@ -126,3 +126,11 @@ Are there any special procedures required if I intend to use ESP-NOW for commerc
 - The application for ESP-NOW does not require any special procedures.
 - For technical documentation, please refer to `ESP-NOW User Guide <https://www.espressif.com/sites/default/files/documentation/esp-now_user_guide_en.pdf>`__. You can use examples in `ESP-NOW SDK <https: //github.com/espressif/esp-now>`__ for testing.
 - The default bit rate of ESP-NOW is 1 Mbps.
+
+---------------
+
+I tested the application `esp-idf/examples/wifi/espnow <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/wifi/espnow>`_ using ESP32. Does it only support connecting to 7 encrypted devices at the maximum?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In the esp-now application, ESP32 supports connecting to no more than 17 encrypted devices, and the default value is 7. For more details, please refer to `"Add Paired Devices" <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/network/esp_now.html#add-paired-device>`_.
+  - If you want to change the number of paired encryption devices, set ``CONFIG_ESP_WIFI_ESPNOW_MAX_ENCRYPT_NUM`` in WiFi component configuration menu.
