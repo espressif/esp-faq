@@ -13,6 +13,10 @@ ESP-WIFI-MESH 应用框架
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
 
+.. note::
+
+  如您有新的 Wi-Fi Mesh 相关应用场景需求，我们推荐您直接使用我们新推出的 `ESP-Mesh-Lite 方案 <https://github.com/espressif/esp-mesh-lite>`__，而不是 Wi-Fi Mesh。
+
 --------------
 
 ESP-WIFI-MESH 占用多大内存？是否需要外部 PSRAM ？

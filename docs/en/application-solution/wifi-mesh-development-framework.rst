@@ -13,6 +13,10 @@ ESP-WIFI-MESH development framework
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
 
+.. note::
+
+  If you have new requirements for Wi-Fi Mesh related application scenarios, we recommend that you directly use our newly launched `ESP-Mesh-Lite solution <https://github.com/espressif/esp-mesh-lite>`__, instead of Wi-Fi Mesh.
+
 --------------
 
 What is the maximum data transmission load for Wi-Fi mesh?
