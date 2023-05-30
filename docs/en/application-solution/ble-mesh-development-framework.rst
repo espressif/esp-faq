@@ -55,3 +55,10 @@ After running the BLE MESH program for a long time on ESP32, it found that a seg
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
    - User can go to ``Component config`` -> ``ESP BLE Mesh Support`` -> ``Maximum number of simultaneous outgoing segmented messages`` and expand the space by configuring BLE_MESH_TX_SEG_MSG_COUNT.
+
+-------------
+
+Can I turn off network keys and IV updates when using the ESP32 BLE Mesh application?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - No, please don't. Network keys and IV updates are required for using the application.
