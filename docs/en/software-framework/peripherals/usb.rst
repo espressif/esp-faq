@@ -271,3 +271,10 @@ When I attempted to download and print log via the USB interface using the comma
      Failed to get PID of a device on com35, using standard reset sequence.
 
   - On Windows, the COM port must be configured in the upper case, not the lower case ``com``.
+
+--------------------
+
+How can I apply for USB VID/PID for ESP32-S series products?
+---------------------------------------------------------------------------------------------------------------------------
+
+  - You can use default TinyUSB PIDs if your software stack is based on TinyUSB. Otherwise, you need to apply for PID for each ESP32-S series product. For details, please refer to `"usb-pids <https://github.com/espressif/usb-pids>`_.
