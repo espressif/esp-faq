@@ -271,3 +271,10 @@ Windows 环境下使用 ``idf.py -p com35 flash monitor`` 命令，通过 USB �
      Failed to get PID of a device on com35, using standard reset sequence.
 
   - Windows 环境下配置 COM 口必须用大写，不可用小写 com。
+
+-----------------
+
+如何为 ESP32-S 系列的产品申请 USB VID/PID？
+----------------------------------------------------------------------------------------------------------------
+
+  - 如果你的软件是基于 TinyUSB 协议栈来实现的，可以使用默认的TinyUSB PID。否则，你需要为每个 ESP32-S 系列的产品申请 USB VID/PID。详细说明请参见`"usb-pids" <https://github.com/espressif/usb-pids>`_。
