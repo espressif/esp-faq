@@ -147,3 +147,10 @@ ESP32-S3 ADC 配置为 ``ADC_ATTEN_DB_11`` 时，为何测量电压无法达到�
    
    - 当使用 Wi-Fi 时，ESP32 ADC2 管脚不能同时使用。 因此，如果您在使用 Wi-Fi 时无法从 ADC2 GPIO 获取值，您可以考虑改用 ADC1 GPIO，这应该可以解决您的问题。有关详细信息，请参阅 `ADC 连续模式的硬件限制 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc_continuous.html>`__ 和 `ADC Oneshot 模式的硬件限制 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc_oneshot.html>`__。
    - GPIO0、GPIO2、GPIO5、GPIO12 (MTDI) 和 GPIO15 (MTDO) 是 strapping 管脚。 将 GPIO0 用于其他功能时，需要注意上电时的 GPIO 电平。 如果上电时 GPIO0 为低电平，则很容易进入下载模式。 有关更多信息，请参阅 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`__。
+
+---------------
+
+使用 ESP32-S3 的 GPIO19 和 GPIO20 基于 `"esp-idf/examples/peripherals/adc/oneshot_read" <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/peripherals/adc/oneshot_read>`_ 例程测试 ADC2 功能，ADC2 衰减参数设置为 11 dB，当输入电压为 0.6 V 时，测试结果却为 1.1 V 和 2.8 V，是什么原因？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 建议检查是否两个 ADC2 通道都进行了 `adc_oneshot_config_channel() <https://github.com/espressif/esp-idf/blob/886e98a2c1311556eb6be02775d49703d6050222/examples/peripherals/adc/oneshot_read/main/oneshot_read_main.c#L90>`_ 的配置。
