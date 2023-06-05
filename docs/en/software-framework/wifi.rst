@@ -1303,3 +1303,17 @@ Does ESP modules support WAPI (Wireless LAN Authentication and Privacy Infrastru
 ---------------------------------------------------------------------------------------------------------------------------------
 
   - Yes. Please refer to `WIFI_AUTH_WAPI_PSK <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_auth_wapi_psk#_CPPv4N16wifi_auth_mode_t18WIFI_AUTH_WAPI_PSKE>`_
+
+-----------
+
+How can I increase the time for scanning routers when using ESP32 as the Wi-Fi Station to connect routers?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In ESP32, by defualt, channels 1 ~ 11 are active scanning, while channels 12 ~ 13 are passive scanning. Active and passive scanning require different amounts of time. For more details, please refer to `Wi-Fi scan configuration <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#scan-configuration>`_. The default duration for active scanning is 120 ms per channel, while for passive scanning, it is 360 ms per channel. You can call the following function before calling ``esp_wifi_start()`` to increase the time for scanning routers:
+  
+  .. code-block:: c
+
+      extern void scan_set_act_duration(uint32_t min, uint32_t max);
+      extern void scan_set_pas_duration(uint32_t time);  
+      scan_set_act_duration(50, 500);
+      scan_set_pas_duration(500);
