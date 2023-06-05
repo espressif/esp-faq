@@ -110,3 +110,10 @@ Do you have relevant study materials for `ESP-DL <https://github.com/espressif/e
 -----------------------------------------------------------------------------------------------------
 
   Please refer to `How to deploy hand gesture recognition with ESP-DL <https://medium.com/the-esp-journal/hand-gesture-recognition-on-esp32-s3-with-esp-deep-learning-176d7e13fd37>`_.
+
+-------------
+
+How does ESP32-S3 customize English command words for recognition?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - For MultiNet6, you need to prepare ``commands_en.txt`` to customize English command words. For MultiNet5, you need to use the ``multinet_g2p.py`` script to convert English command words into phonemes that can be recognized by multinet. For details, please refer to `esp-sr/tool <https://github.com/espressif/esp-sr/tree/master/tool>`_.

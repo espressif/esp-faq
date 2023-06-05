@@ -110,3 +110,10 @@ AI 语音模型如何修改麦克风通道数量？
 ---------------------------------------------------------------------------------------------------
 
   请参考 `如何使用 ESP-DL 部署手势识别 <https://medium.com/the-esp-journal/hand-gesture-recognition-on-esp32-s3-with-esp-deep-learning-176d7e13fd37>`_。
+
+-------------
+
+ESP32-S3 如何自定义英文命令词进行识别？
+-----------------------------------------------------------------------------------------------------------------
+
+  - 对于 MultiNet6，需要准备 ``commands_en.txt`` 来自定义英文命令词。对于 MultiNet5，可使用 ``multinet_g2p.py`` 脚本将英文命令词转换为 multinet 可以识别的音素。具体请参考 `esp-sr/tool <https://github.com/espressif/esp-sr/tree/master/tool>`_。
