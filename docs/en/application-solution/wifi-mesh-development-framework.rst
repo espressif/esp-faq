@@ -147,3 +147,22 @@ When ``esp-wifi-mesh`` is already networked, does the root or node device can al
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The Wi-Fi Scan feature is not supported on any node device when ``esp-wifi-mesh`` is already networked.
+
+------------------
+
+How can I switch to a new router for networking when using the ``esp-wifi-mesh router`` solution?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can modify the following code after the ``MESH_EVENT_PARENT_DISCONNECTED`` event:
+
+    .. code:: text
+
+            mesh_router_t change_router = {
+            .ssid = "TP-LINK_CSW",
+            .password = "12345678",
+            .ssid_len = strlen("TP-LINK_CSW"),
+
+            };
+            esp_mesh_set_self_organized(false, false);
+            esp_mesh_set_router(&change_router);
+            esp_mesh_set_self_organized(true, true);
