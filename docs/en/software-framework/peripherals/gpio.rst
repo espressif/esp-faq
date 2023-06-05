@@ -120,3 +120,15 @@ When ESP32 uses `gpio_install_isr_service() <https://docs.espressif.com/projects
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Generally, this error means that ESP32 does not have enough available interrupt sources. In this case, there are multiple peripherals occupying the interrupt sources at the same time. You can try to reduce the interrupt sources used by other components to attach new GPIO interrupts.
+
+-----------
+
+How do I get the input level of the ESP32 RTC_GPIO?
+-------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can obtain the input level of RTC_GPIO by reading the macro of the register address corresponding to RTC GPIO. Please refer to `“esp-idf\components\soc\esp32\include\soc\rtc_io_reg.h” <https://github.com/espressif/esp-idf/blob/8a08cfe7d162bb9c07568b0635193bf922377123/components/soc/esp32/include/soc/rtc_io_reg.h#L91>`_. 
+  - The related code is as follows :
+
+  .. code-block:: c
+
+    uint8_t level = (uint8_t)((REG_GET_FIELD(RTC_GPIO_IN_REG, RTC_GPIO_IN_NEXT) & BIT(gpio_num)) ? 1 : 0);
