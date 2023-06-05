@@ -90,3 +90,10 @@ ESP32-S3 如何实现用 RMT TX 通道循环发送数据，比如进行无限循
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 将 `rmt_transmit_config_t::loop_count` 配置为 -1 即可无限循环传输，更多细节请参考 `Initiate TX Transaction <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/rmt.html#initiate-tx-transaction>`_。
+
+-------------------
+
+ESP32-S3 是否支持硬件 One-Wire？
+------------------------------------------------------------------------------
+
+  - ESP32-S3 可以通过 RMT 外设支持 `One-Wire 总线协议 <https://www.maximintegrated.com/en/design/technical-documents/tutorials/1/1796.html>`_。具体应用可参考 `"esp-idf/examples/peripherals/rmt/ onewire_ds18b20" <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/peripherals/rmt/onewire_ds18b20>`_ 例程。
