@@ -128,3 +128,10 @@ Where is the code example for `ESP-LED-Strip <https://www.espressif.com/en/news/
 ----------------------------------------------------------------------------------------------------------------------------------------
 
    - Code examples for ESP-LED-Strip are provided in the ESP-ADF repo, please refer to `led_pixels example <https://github.com/espressif/esp-adf/tree/master/examples/display/led_pixels>`_.
+
+------------
+
+Does ESP32 support online voice recognition?
+----------------------------------------------------------------------------------------------------
+
+  - Yes. Please refer to `esp-adf/examples/dueros <https://github.com/espressif/esp-adf/blob/master/examples/dueros/README_CN.md>`_.
