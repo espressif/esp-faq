@@ -116,3 +116,10 @@ When using ESP8266, I want to use UART0 exclusively for downloading, and then us
   - Since the RXD of UART1 is occupied, UART1 cannot be used to communicate with other chips, but the TXD pin of UART1 can be used to output logs.
   - ESP8266 can only communicate with other chips by swapping CTS and RTS pins of UART0. It will be invalid to configure GPIO4 and GPIO5.
   - ESP8266 can communicate with other chips by calling "uart_enable_swap()" to swap the CTS and RTS pins of UART0 to MTCK (IO13) and MTDO (IO15). After this, ESP8266 can communicate with other chips via GPIO13 (TXD) and GPIO15 (RXD).
+
+---------------------
+
+Can ESP32's UART0 be used for inputting from the computer console while it is being used for outputting logs?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes. Outputting logs only requires using the TXD0 pin, while receiving input from the computer console only requires using the RXD0 pin. You can use the `"esp-idf/examples/system/console/basic" <https://github.com/espressif/esp-idf/tree/master/examples/system/console/basic>`_ example for testing.
