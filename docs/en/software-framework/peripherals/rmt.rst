@@ -90,3 +90,10 @@ How can I achieve cyclic data transmission using the RMT TX channel on ESP32-S3,
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - You can realize infinite loop transmission by setting the `rmt_transmit_config_t::loop_count` to -1. For more details, please refer to `Initiate TX Transaction <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/rmt.html#initiate-tx-transaction>`_。
+
+---------------
+
+Does the ESP32-S3 support One-Wire?
+---------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-S3 supports `One-Wire bus protocol <https://www.maximintegrated.com/en/design/technical-documents/tutorials/1/1796.html>`_ with the RMT peripheral. For specific applications, please refer to `"esp-idf/examples/peripherals/rmt/ onewire_ds18b20" <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/peripherals/rmt/onewire_ds18b20>`_. 
