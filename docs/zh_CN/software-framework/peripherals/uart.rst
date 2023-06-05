@@ -116,3 +116,10 @@ ESP8266 的串⼝波特率范围是多大？
   - 由于 UART1 的 RXＤ 被占用了，所以 UART1 不能与其他芯片进行通讯，但 UART1 的 TXD 管脚可用作输出日志。
   - ESP8266 与其他芯片通信只能通过 UART0 的 CTS 和 RTS 管脚交换来实现，配置成 GPIO4 和 GPIO5 是无效的。
   - ESP8266 与其他芯片通信可通过调用 "uart_enable_swap()" 函数，通过 UART0 的 CTS 和 RTS 引脚进行交换，交换为 MTCK (IO13)、MTDO (IO15) 管脚。管脚交换后 ESP8266 可通过 GPIO13（TXD）和 GPIO15（RXD）来与其他芯片进行 UART 通信。
+
+--------------
+
+ESP32 的 UART0 是否可以在输出日志的同时又用作接收电脑控制台的输入？
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以。UART0 输出日志只需要使用 TXD0 管脚，接收电脑控制台的输入只需要使用 RXD0 管脚。可基于 `"esp-idf/examples/system/console/basic" <https://github.com/espressif/esp-idf/tree/master/examples/system/console/basic>`_ 例程来测试。
