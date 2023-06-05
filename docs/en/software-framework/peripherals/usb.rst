@@ -258,3 +258,16 @@ What should I pay attention to if I want to use the USB interface of ESP32-C3/ES
 
   - DO NOT use USB pins of ESP32-C3 (GPIO18 and GPIO19) / ESP32-S3 (GPIO19 and GPIO20) as other peripheral functions.
   - If the USB pins have to be reused as other functions in the application, the BOOT pin (GPIO9 in ESP32-C3, GPIO0 in ESP32-S3) must be wired to manually enter the chip into the download mode.
+
+---------------
+
+When I attempted to download and print log via the USB interface using the command ``idf.py -p com35 flash monitor`` on Windows, I encountered the following error. What's the reason for it?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  - The error is as follows:
+
+  .. code-block:: text
+  
+     Connecting...
+     Failed to get PID of a device on com35, using standard reset sequence.
+
+  - On Windows, the COM port must be configured in the upper case, not the lower case ``com``.
