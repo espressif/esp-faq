@@ -278,3 +278,14 @@ How can I apply for USB VID/PID for ESP32-S series products?
 ---------------------------------------------------------------------------------------------------------------------------
 
   - You can use default TinyUSB PIDs if your software stack is based on TinyUSB. Otherwise, you need to apply for PID for each ESP32-S series product. For details, please refer to `"usb-pids <https://github.com/espressif/usb-pids>`_.
+
+--------------
+
+Is it possible to fix the COM port when downloading firmware using the USB-Serial-JTAG interface on Windows?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please open the Windows CMD as the administrator and execute the following command to add a registry entry. In this way, you can prevent incremental numbering based on the Serial number. Then you need to restart the computer to enable the modification.
+
+  .. code-block:: text
+    
+    REG ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\303A10010101 /V IgnoreHWSerNum /t REG_BINARY /d 01
