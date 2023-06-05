@@ -140,3 +140,10 @@ Does the `esp-mesh-lite <https://github.com/espressif/esp-mesh-lite/blob/master/
     - Identify a root node if possible, which can be set via ``esp_mesh_lite_set_allow_level(1)``.
     - It is recommended to use the ``esp_mesh_lite_set_disallow_level(1)`` function to prohibit the other nodes from being the root node.
     - In the applications of Mesh-Lite, a mesh network should be established based on some factors such as the distance of devices and the quality of Wi-Fi signal. As a result, you should test and debug the meash network to ensure its performance and stability.
+
+-------------
+
+When ``esp-wifi-mesh`` is already networked, does the root or node device can also enable Wi-Fi Scan to scan surrounding available AP information?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The Wi-Fi Scan feature is not supported on any node device when ``esp-wifi-mesh`` is already networked.
