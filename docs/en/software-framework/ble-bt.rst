@@ -684,3 +684,11 @@ What is the maximum length of data in a BLE advertising packet supported by ESP3
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   -  The maximum length is 1650 bytes, which can be set via the `esp_ble_gap_config_ext_adv_data_raw() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32c3/api-reference/bluetooth/esp_gap_ble.html#_CPPv435esp_ble_gap_config_ext_adv_data_raw7uint8_t8uint16_tPK7uint8_t>`__ API.
+
+-----------------
+
+Does ESP32 have any API to check whether BLE advertising has started or stopped?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - For bluedroid stack, there is no such API currently.
+  - For Nimble stack (and using non-extended advertising of BLE 4.2), you can use the `ble_gap_adv_active <https://github.com/espressif/esp-nimble/blob/f8f02740acdf4d302d5c2f91ee2e34444d405671/nimble/host/include/host/ble_gap.h#L831>`_ API.

@@ -684,3 +684,11 @@ ESP32-C3 芯片使用 BLE5.0 特性支持的最大 BLE 广播数据包长是多�
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP32-C3 BLE5.0 支持的最大广播数据包长为 1650 字节，可通过 `esp_ble_gap_config_ext_adv_data_raw() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32c3/api-reference/bluetooth/esp_gap_ble.html#_CPPv435esp_ble_gap_config_ext_adv_data_raw7uint8_t8uint16_tPK7uint8_t>`__ API  进行设置。
+
+-------------------
+
+ESP32 是否有 API 可用于检查设备 BLE 广播是否开始或停止？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 如果使用的是 bluedroid 协议栈，目前没有 API 可用于检查。
+  - 如果使用的是 Nimble 协议栈（且使用的是 BLE 4.2 的非扩展广播），则可使用 `ble_gap_adv_active <https://github.com/espressif/esp-nimble/blob/f8f02740acdf4d302d5c2f91ee2e34444d405671/nimble/host/include/host/ble_gap.h#L831>`_ API 来检查。
