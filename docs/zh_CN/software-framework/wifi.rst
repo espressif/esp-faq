@@ -1303,3 +1303,17 @@ ESP 模组支持 WAPI (Wireless LAN Authentication and Privacy Infrastructure) �
 --------------------------------------------------------------------------------------------------------------------------------
 
   - 支持，请参考 `WIFI_AUTH_WAPI_PSK <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_auth_wapi_psk#_CPPv4N16wifi_auth_mode_t18WIFI_AUTH_WAPI_PSKE>`_。
+
+-------------
+
+使用 ESP32 作为 Wi-Fi Station 连接路由器，如何增加扫描路由器的时间？
+---------------------------------------------------------------------------------------------------------------
+
+  - 在 ESP32 中，默认情况下 1 ~ 11 信道为主动扫描，12 ~ 13 信道为被动扫描。主动扫描和被动扫描所需时间不同，详情可参考 `Wi-Fi 扫描配置 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#id19>`_。主动扫描的默认时间是每个信道 120 ms，被动扫描为每个信道 360 ms。如果希望增加扫描时间，可在 ``esp_wifi_start()`` 函数之前，调用如下函数来增加扫描路由器的时间：
+
+  .. code-block:: c
+
+      extern void scan_set_act_duration(uint32_t min, uint32_t max);
+      extern void scan_set_pas_duration(uint32_t time);  
+      scan_set_act_duration(50, 500);
+      scan_set_pas_duration(500);
