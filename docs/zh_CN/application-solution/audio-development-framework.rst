@@ -277,3 +277,10 @@ ESP32 芯片支持哪些音频格式？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
   -  对应的代码示例存放在 ESP-ADF 中，请参考 `led_pixels 例程 <https://github.com/espressif/esp-adf/tree/master/examples/display/led_pixels>`_。
+
+------------
+
+ESP32 是否支持在线语音识别？
+----------------------------------------------------------------------------------------------------
+
+支持。可参考例程: `esp-adf/examples/dueros <https://github.com/espressif/esp-adf/blob/master/examples/dueros/README_CN.md>`_。
