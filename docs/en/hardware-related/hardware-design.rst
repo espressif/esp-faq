@@ -71,7 +71,7 @@ What are the power supply specifications for ESP8266?
   - Analog working voltage range: 3.0 V ~ 3.6 V (the lowest possible value is 2.7 V)
   - Peak analog circuit current: 350 mA
   - Peak digital circuit current: 200 mA
-  
+
   .. note:: The operating voltage of SPI flash should be compatible with that of GPIO pins. The operating voltage of CHIP_EN ranges from 3.0 V to 3.6 V, so please use a level converter when GPIO pins operates at 1.8 V.
 
 --------------
@@ -280,7 +280,7 @@ What does the term ``NC`` mean in Espressif schematics?
 ------------------------------------------------------------------------------------
 
   - NC is the acronym of “No Component”. If you see a pull-up resistor is marked NC as shown in the figure below, it indicates that the component is not installed.
-  
+
   .. figure:: ../../_static/no-component.png
     :scale: 100%
     :alt: no-component
@@ -296,7 +296,7 @@ How can I use multiple antennas with ESP32-S2?
   - You can add an RF switch to select antennas.
 
 --------------
- 
+
 Does ESP32-C3F SPI CS0 pin need an external 10 kΩ pull-up resistor?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -312,7 +312,7 @@ Is there any hardware design reference for ESP-Skainet Speech Recognition?
 --------------------------------------------------------------------------------------------------------------------------------
 
   - Please refer to `ESP32-Korvo V1.1 User Guide <https://github.com/espressif/esp-skainet/blob/master/docs/en/hw-reference/esp32/user-guide-esp32-korvo-v1.1.md>`_.
-  
+
 ----------------------------------------------------------------------------------------
 
 Is it necessary to connect a 32 kHz RTC crystal?
@@ -365,7 +365,7 @@ When the VDD power supply of ESP32 slowly rises from 0 V to 3.3 V, why does the 
   - You may modify the RC circuit, for example, increase the capacitance, adjust the resistance, or use the Reset chip to control EN state.
   - When the voltage provided to ESP32 is detected to be less than 2.3 V, you are recommended to pull down the EN pin of ESP32.
   - For ESP32 power-on sequence description, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__.
-  
+
 ------------------
 
 When using the ESP32-WROOM-32D module, can I set GPIO12 for other uses?
@@ -381,17 +381,17 @@ When using the ESP32-WROOM-32D module, can I set GPIO12 for other uses?
 When connecting an external flash to ESP32-WROOM-32D module, is it possible if I do not use GPIO6 ~ GPIO11 pins?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 has 3 sets of SPIs (SPI, HSPI and VSPI), which can access the external flash through the SPI0/1(HSPI/VSPI) bus. The external flash connected to other pins (pins other than GPIO6 ~ GPIO11) can only receive data for storage, but not run code. If you need to run code from flash, please connect the flash to GPIO6 ~ GPIO11 pins only. 
+  - ESP32 has 3 sets of SPIs (SPI, HSPI and VSPI), which can access the external flash through the SPI0/1(HSPI/VSPI) bus. The external flash connected to other pins (pins other than GPIO6 ~ GPIO11) can only receive data for storage, but not run code. If you need to run code from flash, please connect the flash to GPIO6 ~ GPIO11 pins only.
 
 --------------
 
-Do I need to add a shield cover to the PCB of ESP32 modules?
+Do I need to add a shielding case to the PCB of ESP32 modules?
 --------------------------------------------------------------------------------------------------------
 
     - Whether a shield needs to be added depends on the specific application scenarios and requirements.
     - In some high-demand application scenarios, such as environments with severe wireless communication interference or high electromagnetic compatibility (EMC) testing requirements, adding a shield can effectively reduce external interference and mutual interference on the PCB board, improving system stability and reliability. At this time, the shield should be made of conductive material and grounded to ensure its effectiveness.
     - On the other hand, if the application scenario is relatively simple, such as low wireless communication interference and low EMC requirements, the effect of adding a shield may not be very obvious and may increase system cost and complexity.
-    - If the board has other signal interference, such as 2G, 3G, 4G, Wi-Fi, Bluetooth, Zigbee, etc., it is recommended to add a shield cover.
+    - If the board has other signal interference, such as 2G, 3G, 4G, Wi-Fi, Bluetooth, Zigbee, etc., it is recommended to add a shielding case.
 
 --------------
 
@@ -405,8 +405,8 @@ Do I must use GPIO0, GPIO1, or GPIO3 of ESP32 as the I2S CLK pin?
 Does the ESP32-U4WDH chip support external PSRAM chips?
 -----------------------------------------------------------------------------------------------------------------
 
-  - The ESP32-U4WDH chip supports external PSRAM chips. However, only the `ESP-PSRAMXXH <https://www.espressif.com/en/support/documents/technical-documents?keys=psram>`_ chip released by Espressif is supported. Third-party PSRAM chips are not supported. 
-  - For hardware design, all the PSRAM pins except for the CS pin can be multiplexed with Flash. For more information, please refer to the `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_. 
+  - The ESP32-U4WDH chip supports external PSRAM chips. However, only the `ESP-PSRAMXXH <https://www.espressif.com/en/support/documents/technical-documents?keys=psram>`_ chip released by Espressif is supported. Third-party PSRAM chips are not supported.
+  - For hardware design, all the PSRAM pins except for the CS pin can be multiplexed with Flash. For more information, please refer to the `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
   - Also, when designing the PCB, please make sure that the GND of the PSRAM to the GND of the ESP32-U4WDH is as short as possible; Otherwise, the signal quality may be affected.
 
 -----------------
@@ -424,7 +424,7 @@ Does it support to connect a second PSRAM chip externally based on the ESP32-S3R
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - No, it is not supported. The reasons are as follows:
-    
+
     - The PSRAM chip is connected to the MSPI bus. There are only two CS signals from the MSPI peripheral, one is connected to the flash, another is connected to the PSRAM.
     - CPU accesses external memory via cache and MSPI. A GPSPI peripheral is not accessible cache.
 
@@ -448,7 +448,7 @@ How can I improve the EMC performance?
 ------------------------------------------------------------------------------------------------------------------------------------
 
   - At the hardware level, the following measures can be taken to improve the EMC performance of the PCB board.
-  
+
     - The EMC performance with a four-layer board design will be better than a two-layer board hardware design.
     - Add filtering circuits to the power supply circuit.
     - Add ESD or magnetic beads to the antenna circuit.
@@ -462,7 +462,7 @@ Why do I need to connect a 499 Ω resistor to U0TXD for ESP32-S3?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The 499 Ω resistor is reserved for the U0TXD to suppress 80 MHz harmonics. For more information, please refer to `《ESP32­S3 Series Hardware Design Guidelines》 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_hardware_design_guidelines_en.pdf>`_.
-  
+
 --------------
 
 How to calibrate the ESP32-S3 ADC in hardware?
@@ -498,4 +498,3 @@ When the ESP32-C3 is powered by a battery, it may fail to start if the supply vo
 
   - Root cause: When powering up and resetting the ESP32-C3 chip, the CHIP_EN pin needs to meet the power-up timing specifications outlined in the `ESP32-C3 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf>`__ or `ESP32-C3 hardware design guidelines <https://www.espressif.com/sites/default/files/documentation/esp32-c3_hardware_design_guidelines_en.pdf>`__. If the battery discharge and power-up process are relatively slow, ESP32-C3 may not be fully reset, resulting in certain units of the chip being in an uncertain state.
   - Solution: Currently, if using battery power or energy storage systems, this issue can be addressed by adjusting RC component values, using voltage divider circuits with two resistors, or using a reset IC, which is a more commonly used approach. For detailed information regarding RC component values and related resistors, please refer to `ESP32-C3 Family Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32-c3_hardware_design_guidelines_en.pdf>`__.
-  
