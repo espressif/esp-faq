@@ -33,10 +33,10 @@ Taking ESP-WROOM-S2 as the slave device and STM32 as MCU, is it possible to down
 
 --------------
 
-What is the difference among SPI, HSPI and VSPI in ESP32?
+What is the difference among SPI0, SPI1, HSPI and VSPI in ESP32?
 -------------------------------------------------------------------------------------
 
-  - ESP32 has four SPIs. Among which, SPI0 is connected to flash that stores programs, and SPI1 is connected to PSRAM. SPI0 and SPI1 share one GPIO port and they are occupied by default. SPI2 and SPI3 are general-purpose SPIs that are available for customers to use.
+  - ESP32 has 4 SPIs, SPI0 and SPI1 are two peripherals, also known as MSPI. SPI0 and SPI1 share the same SPI bus (same signals and IOs). The difference is, MSPI CS0 is connected to the main flash for firmware storage, and MSPI CS1 is connected to PSRAM. SPI2 and SPI3 are general-purpose SPIs that are available for customers to use.
   - HSPI represents the above-mentioned SPI2, and VSPI represents the SPI3. The two sets of SPIs are general-purpose SPIs and support QSPI.
 
 -------------------------

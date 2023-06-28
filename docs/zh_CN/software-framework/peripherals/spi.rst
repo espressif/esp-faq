@@ -33,10 +33,10 @@ ESP-WROOM-S2 作为从机，STM32 作为 MCU ，可以使⽤ SPI 接⼝下载吗
 
 --------------
 
-ESP32 中 SPI/HSPI/VSPI 三者有什么区别呢？
+ESP32 中 SPI0/SPI1/HSPI/VSPI 三者有什么区别呢？
 -------------------------------------------------------------
 
-  - ESP32 有 4 组 SPI，其中 SPI0 连接储存程序的 flash， SPI1 连接 PSRAM，SPI0 和 SPI1 共用一组 GPIO 接口，默认被占用；剩下的两组 SPI2 和 SPI3 为可供客户自由使用的通用 SPI。
+  - ESP32 有 4 组 SPI，SPI0 和 SPI1 是两个外设，统称为 MSPI。其中 MSPI CS0 连接储存程序的 flash， MSPI CS1 连接 PSRAM，SPI0 和 SPI1 共用一组 GPIO 接口，默认被占用；剩下的两组 SPI2 和 SPI3 为可供客户自由使用的通用 SPI。
   - HSPI 代表上述 SPI2，VSPI 代表上述 SPI3，这两组 SPI 均为通用 SPI，并且都支持 QSPI。
 
 --------------
