@@ -448,10 +448,10 @@ When ESP32 acts as the sender, the initial retransmission interval of the TCP pr
 
 --------------
 
-[Sleep] Where to enable the automatic speedstep function for ESP32 in modem sleep mode?
-----------------------------------------------------------------------------------------
+[Sleep] How can I enable the dynamic frequency scaling function for ESP32 in Modem-sleep mode?
+---------------------------------------------------------------------------------------------------------------
 
-  Go to ``menuconfig`` > ``Component Config`` > ``Power Management`` > ``Enable dynamic frequency scaling (DFS) at startup``.
+  You can enable this function by selecting  ``menuconfig`` > ``Component Config`` > ``Power Management`` > ``Support for power management`` > ``Enable dynamic frequency scaling (DFS) at startup (NEW)``.
 
 --------------
 
@@ -992,15 +992,6 @@ What is the maximum PHY rate of Wi-Fi communication of ESP32-S2 chip?
   
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-What does such log mean: ``I (81447377) wifi:new:<7,0>, old:<7,2>, ap:<255,255>, sta:<7,0>, prof:1``?
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  :CHIP\: ESP32 :
-
-  - ``new`` represents the current primary and secondary channel; ``old`` represents the last primary and secondary channel; ``ap`` represents the current primary and secondary channel of ESP32 AP; ``<255,255>`` means SoftAP is disabled; ``sta`` represents the current primary and secondary channel of ESP32 STA; ``prof`` represents the channel of SP32 SoftAP stored in NVS.
-
-------------------------------------------------------------------------
-
 Does ESP modules support EAP-FAST?
 -------------------------------------------------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 :
@@ -1227,7 +1218,7 @@ Why is this log frequently printed when the phone connects to the ESP32-S3 that 
     พ (13964) wifi:<ba-del>idx
     ฟ (13964) wifi:<ba-add>idx:2 (ifx:1, 48:2c:a0:7b:4e:ba), tid:0, ssn:5, winSize:64
 
-  This is because A-MPDU is created and deleted all the time. The printing is only auxiliary and does not affect communication. If you need to remove this log, add the following code before the Wi-Fi initialization code.
+  This is because A-MPDU is created and deleted all the time. The printing is only auxiliary and does not affect communication. If you need to hide this log, add the following code before the Wi-Fi initialization code.
 
   .. code-block:: c
 
@@ -1257,13 +1248,6 @@ When ESP32/ESP32-S2/ESP32-S3 series chips work in SoftAP mode, they are suscepti
   It is recommended to turn off ``WiFi AMPDU RX`` and ``WiFi AMPDU TX`` options in menuconfig.
 
 ---------------
-
-Does ESP32 support WPA3-Enterprise applications?
-----------------------------------------------------------------------------------------------------------------------------
-
-  - ESP32 has supported WPA3-Enterprise applications on the SDK with esp-idf release/v5.0. You can use the `"esp-idf/examples/wifi/wifi_enterprise" <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/wifi/wifi_enterprise>`__ example for testing by setting ``idf.py menuconfig`` > ``Example Configuration`` > ``Enterprise configuration to be used`` to WPA3_ENT.
-
---------------
 
 What is the value range of ESP32 Wi-Fi TX power?
 ------------------------------------------------------------------------------------------------------------
