@@ -127,3 +127,47 @@ When adding the SD-card interface and camera interface for OV5640 sensor, we fou
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   `ESP-WROVER-KIT development board <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-wrover-kit-v3.html>`__ includes the camera and SD card circuits, so you can refer to pins configuration of `ESP-WROVER-KIT V3 Getting Started Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-wrover-kit-v3.html>`__.
+
+--------------
+
+Can a driver for a specific camera model be added if the currently supported camera sensors do not meet my requirements?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes. Please confirm your requirements and select the camera sensor model with our engineers through `technical support <https://www.espressif.com/en/contact-us/technical-inquiries>`__. We can then provide the corresponding driver for your camera sensor.
+
+--------------
+
+How to add a custom resolution?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Suppose you need a resolution of 640x240. You can add the custom resolution in two ways:
+
+  - Configure the sensor to work at the typical resolution of 640x480 and only use the upper half of the data (640x240).
+  - Add the identifier FRAMESIZE_640*240 in `esp32-camera/driver/include/sensor.h <https://github.com/espressif/esp32-camera/blob/master/driver/include/sensor.h#L92>`__, and define the length and width of that resolution in `esp32-camera/driver/sensor.c <https://github.com/espressif/esp32-camera/blob/master/driver/sensor.c#L31>`__` as {640, 240, ASPECT_RATIO_16X9}. This method requires support for custom resolutions in the sensor's driver to work properly.
+
+--------------
+
+How to modify the register configuration of a camera sensor?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Suppose you want to change the register configuration of the OV5640 sensor. This can be achieved in two ways:
+
+  - Directly configure the relevant registers using write_reg() in the reset() function of `esp32-camera/sensors/ov5640.c`.
+  - Configure the relevant registers using set_reg() at the application level:
+
+  .. code-block:: c  
+
+    //Initialize the camera
+    esp_err_t ret = esp_camera_init(&camera_config);
+    sensor_t *s = esp_camera_sensor_get();
+    s->set_reg(s, 0xFFFA, 0xFF, 0xA1);
+  
+--------------
+
+What triggers "cam_hal: EV-VSYNC-OVF" in esp32-camera?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This issue occurs when the frame synchronization signal triggered by the sensor is too fast. You can troubleshoot it following the steps below:
+
+  - Run the `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/pic_server>`__ example. If the example runs correctly, it indicates that the issue is not hardware-related.
+  - Check the XCLK and resolution specified during sensor initialization. A smaller resolution or a larger XCLK can cause the frame synchronization signal triggered by the sensor to be too fast. Note that the XCLK used by the sensor should match the specified resolution.
