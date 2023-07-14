@@ -27,9 +27,9 @@ ESP-IDF SDK USB 接口支持 HID、MSC 这些模式吗？
 -----------------------------------------------------------------------------------------------------------
 
   - ESP32S2/S3 可作为 MSC 主机，支持读写 U 盘等存储设备，可参考 `esp-idf <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/msc>`__。
-  - ESP32S2/S3 可作为 MSC 设备，模拟 U 盘存储，可参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__。
+  - ESP32S2/S3 可作为 MSC 设备，模拟 U 盘存储，可参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/device/usb_msc_wireless_disk>`__。
   - ESP32S2/S3 HID 主机可参考 `ESP-IDF Host HID <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/hid>`__。
-  - ESP32S2/S3 HID 设备类可参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__。
+  - ESP32S2/S3 HID 设备类可参考 `ESP-IDF Device HID <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device/tusb_hid>`__。
 
 ----------------
 
@@ -57,7 +57,7 @@ ESP32-C3 USB 支持 USB 串口功能和 USB JTAG 功能吗？
 ESP32-S2 和 ESP32-S3 USB 的特征是？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  ESP32-S3 和 ESP32-S2 具有相同的 USB 2.0 OTG 外设，可支持 USB 主机和 USB 设备功能。除此以外，ESP32-S3 还支持 USB-Serial-JTAG 专用外设，可用于固件下载和调试。
+  ESP32-S3 和 ESP32-S2 具有相同的 USB 2.0 OTG 外设，支持 full-speed 模式，可支持 USB 主机和 USB 设备功能。除此以外，ESP32-S3 还支持 USB-Serial-JTAG 专用外设，可用于固件下载和调试。
 
 ---------------
 
@@ -90,7 +90,7 @@ ESP32-S3 是否支持带有麦克风和扬声器的 USB 摄像头？
 是否有 ESP32-S2 做 U 盘 (MSC DEVICE) 的参考示例？
 ----------------------------------------------------------------------------------------------------------------
 
-  请参考 `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_msc_wireless_disk>`_。目前测试的平均读写速度为：读 540 KB/s，写 350 KB/s。
+  请参考 `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/device/usb_msc_wireless_disk>`_。目前测试的平均读写速度为：读 540 KB/s，写 350 KB/s。
 
 ---------------
 
@@ -104,7 +104,7 @@ ESP32-C3 有 USB，是否不需要 cp2102 芯片就可以直接通过 USB 下载
 ESP32-C3 是否支持 USB 主机？
 ------------------------------------------------------
 
-  不支持，ESP32-C3 仅支持 USB-Serial-JTAG 功能。
+  不支持，ESP32-C3 仅支持 USB-Serial-JTAG 功能，只能作为 USB 设备。
 
 -------------
 
@@ -118,11 +118,11 @@ ESP32-C3 芯片可以使用 USB 下载固件，但在 ESP-IDF v4.3 下不支持�
 ESP32-S2 是否支持 USB HID？
 -----------------------------------------------------------------------
 
-  支持，USB HID Device 请参考 `USB HID Device 例程 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_hid_device>`__。 USB HID Host 请参考 `ESP-IDF Host HID 例程 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/hid>`__。
+  支持，USB HID Device 请参考 `ESP-IDF Device HID <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device/tusb_hid>`__。 USB HID Host 请参考 `ESP-IDF Host HID 例程 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/hid>`__。
 
 --------------
 
-测试 `USB 摄像头 Wi-Fi 传输 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_camera_wifi_transfer>`_ 例程，日志打印如下报错，是什么原因?
+测试 `USB 摄像头 Wi-Fi 传输 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_camera_mic_spk>`_ 例程，日志打印如下报错，是什么原因?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: text
@@ -183,14 +183,14 @@ ESP32-S2/ESP32-S3 做 UVC Host 连接部分型号的 UVC 摄像头后提示 HID_
 ESP32-S2/ESP32-S3 是否有 USB 4G 上网方案？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  有，请参考 `USB CDC 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_4g_module>`_。
+  有，请参考 `USB CDC 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_4g_module>`_。
 
 ---------------------
 
 ESP32-S2/ESP32-S3 是否有 USB CDC Host 示例？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  有，请参考 `ESP-IDF USB CDC Host 示例 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/cdc>`__ 或 `esp-iot-solution USB CDC Host 示例 <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_basic>`__。
+  有，请参考 `ESP-IDF USB CDC Host 示例 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/cdc>`__ 或 `esp-iot-solution USB CDC Host 示例 <https://github.com/leeebo/esp-iot-solution/tree/master/components/usb/iot_usbh_cdc>`__。
 
 ---------------------
 
@@ -216,7 +216,7 @@ ESP32-S2/ESP32-S3 无法达到 USB full speed 提到的最大 12 Mbps，可能�
 如何判断 ESP32-S2/ESP32-S3 USB 有支持某款 USB 摄像头的可能性？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  可以先读出 USB 摄像头的描述符信息，比如在 Linux 终端下输入 `lsusb -v`, 然后查看接口描述符里 bInterfaceSubClass 为 `2 Video Streaming` 下的端点描述符的 wMaxPacketSize，ESP32-S2/ESP32-S3 USB 只支持包含不大于 512 字节的 wMaxPacketSize Video Streaming 端点对应的 USB 摄像头。
+  ESP32-S2/ESP32-S3 USB 只支持包含不大于 512 字节的 wMaxPacketSize Video Streaming 端点的 USB 摄像头，用户可直接使用 `USB 摄像头 Wi-Fi 传输 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_camera_mic_spk>`_ 例程测试，若摄像头无法支持，将会打印错误信息。
 
 ---------------------
 
@@ -231,7 +231,8 @@ ESP32-S2/ESP32-S3 能支持最大为多大分辨率的 USB 摄像头？
 ESP32-S2/ESP32-S3 USB 做 USB CDC Device 时是否能识别到 USB 的插拔动作？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  可以，USB device 采用 tinyusb 协议栈，包含 `mount 和 umount 回调函数 <https://github.com/espressif/esp-iot-solution/blob/usb/add_usb_solutions/examples/usb/device/usb_uart_bridge/main/usb_uart_bridge_main.c#L119>`_ 来反馈 USB 的插拔动作事件。
+  - 可以，USB device 采用 tinyusb 协议栈，包含 mount 和 umount 回调函数来反馈 USB 的插拔动作事件。
+  - 需要注意的是，如果该设备为自供电 USB 设备，若需要在不断电的情况检测到插拔动作，请注意预留 VBUS 检测引脚，请参考 `自供电 USB 设备解决方案 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/esp32/usb/usb_device_self_power.html>`_
 
 ---------------------
 
@@ -277,7 +278,7 @@ Windows 环境下使用 ``idf.py -p com35 flash monitor`` 命令，通过 USB �
 如何为 ESP32-S 系列的产品申请 USB VID/PID？
 ----------------------------------------------------------------------------------------------------------------
 
-  - 如果你的软件是基于 TinyUSB 协议栈来实现的，可以使用默认的TinyUSB PID。否则，你需要为每个 ESP32-S 系列的产品申请 USB VID/PID。详细说明请参见`"usb-pids" <https://github.com/espressif/usb-pids>`_。
+  - 如果你的软件是基于 TinyUSB 协议栈来实现的，可以使用默认的TinyUSB PID。否则，你需要为每个 ESP32-S 系列的产品申请 USB VID/PID。详细说明请参见 `"usb-pids" <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/esp32/usb/usb_vid_pid.html>`_。
 
 ---------------------
 
@@ -289,3 +290,5 @@ Windows 环境下使用 ``idf.py -p com35 flash monitor`` 命令，通过 USB �
   .. code-block:: text
     
     REG ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\303A10010101 /V IgnoreHWSerNum /t REG_BINARY /d 01
+
+  - 更多信息请参考 `阻止 Windows 依据 USB 设备序列号递增 COM 编号 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/esp32/usb/usb_device_const_COM.html>`_。

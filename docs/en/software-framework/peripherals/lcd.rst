@@ -23,7 +23,7 @@ Where are the LCD drivers and reference examples for ESP32 series chips?
    - You can find ESP's LCD driver in `components/esp_lcd <https://github.com/espressif/esp-idf/tree/master/components/esp_lcd>`__ in **ESP-IDF**. However, this document is only available in * *release/v4.4 and newer** versions. **esp_lcd** can drive LCD screens with four interfaces (**I2C**, **SPI**, **8080**, and **RGB**) supported by ESP series chips. For the LCD interfaces supported by ESP32 series chips, see `ESP32 series chip screen interface <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/display/screen.html#esp32>`__.
    - For the application examples of the LCD driver of each interface, please refer to `examples/peripherals/lcd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd>`__ in ESP-IDF. Currently, these examples are only available in **release/v5.0** and newer versions. As the API names of esp_lcd in **release/v4.4** are basically same as those of higher versions, you can also refer to the above examples (please note the API implementations are a little different).
    - **NOT RECOMMENDED** Use the LCD driver and examples in esp-iot-solution.
-   - ESP-IDF **release/v5.0** is recommended for RGB LCD applications as some features are not supported in release/v4.4.
+   - ESP-IDF **release/v5.1** is recommended for RGB LCD applications as some features are not supported in release/v4.4.
 
 ---------------
 
@@ -33,13 +33,13 @@ Which adapted ICs can be used by the LCD screen of ESP32 series chips?
   Currently, the adapted ICs for the `esp_lcd`-based LCD driver include:
 
   - `esp_lcd <https://github.com/espressif/esp-idf/blob/7f4bcc36959b1c483897d643036f847eb08d270e/components/esp_lcd/include/esp_lcd_panel_vendor.h>`__ : st7789, nt35510, ssd1306
-  - `Package Manager <https://components.espressif.com/>`__ : gc9a01, ili9341, ili9488, ra8875, sh1107 (continuously updated)
+  - `Package Manager <https://components.espressif.com/components?q=esp_lcd>`__ : gc9a01, ili9341, ili9488, ra8875, sh1107, st7796 (continuously updated)
 
   **Please note that even if driver ICs are same, different screens vary in register configuration parameters. In addition, screen manufacturers generally provide matched configuration parameters (code). Thus, it is recommended to use the above two methods to obtain code of similar driver ICs, and to update the code based on the parameters of your own screen.**
 
   Currently, the adapted ICs of `esp_lcd_touch` based touch driver include:
 
-  - `Package Manager <https://components.espressif.com/>`__: FT5x06, GT1151, GT911, STMPE610, TT21100, XPT2046 (continuously updated).
+  - `Package Manager <https://components.espressif.com/components?q=esp_lcd>`__: FT5x06, GT1151, GT911, STMPE610, TT21100, XPT2046, CST816 (continuously updated).
 
 --------------
 
@@ -80,7 +80,20 @@ Is there any example code for I2S driving LCD with ESP32?
 What is the maximum resolution supported by ESP32 LCD? What is the corresponding frame rate?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Over the RGB interface, the ESP32 LCD can support up to 800 × 480 of resolution. The upper limit of the interface frame rate is 59 (PCLK 30 MHz), and the average frame rate of LVGL is about 23. The average upper limit of the frame rate of LVGL is 26, and the corresponding interface frame rate is 41 (PCLK 21 MHz).
+  - There is no "maximum" limit on how much resolution can be supported. Due to the limited data transmission bandwidth of the interface, the interface frame reduces as the LCD resolution increases. Thus, you need confirm the LCD resolution based on this.
+  - Over the RGB interface, the maximum resolution of ESP32 LCD is 800 × 480; the maximum interface frame rate is 59 (PCLK 30 MHz); and the average frame rate of LVGL is about 23. The average upper limit of the frame rate of LVGL is 26, and the corresponding interface frame rate is 41 (PCLK 21 MHz).
+
+----------------
+
+How to enable PSRAM 120M Octal(DDR) on ESP32R8?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP-IDF v5.1 or later versions are required.
+  - For details, please refer to `SPI Flash and External SPI RAM Configuration <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-guides/flash_psram_config.html#all-supported-modes-and-speeds>`__.
+  - Note: This feature is an experimental and has the following temperature-related risks:
+
+    - The chip may not work properly even with ECC enabled when the temperature is above 65°C.
+    - Temperature changes may also cause program crashes when accessing PSRAM/flash. For more details, please refer to `SPI Flash and External SPI RAM Configuration <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-guides/flash_psram_config.html#all-supported-modes-and-speeds>`__.
 
 ----------------
 

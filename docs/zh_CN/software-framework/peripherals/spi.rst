@@ -126,7 +126,9 @@ ESP8266 RTOS SDK 是否支持 SPI 全双工？
 ESP32 能支持三线 SPI 的 9 位时钟模式（即用第 1 位表示后 8 位是命令还是数据的模式）吗？
 -----------------------------------------------------------------------------------------------------------
 
-  支持，可以参考使用 `SPI Transactions <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/spi_master.html#spi-transactions>`_ 里提到的命令或地址阶段，定义其中一个阶段大小为 1 位，然后给这个位赋值 0 或者 1 来区分后续 8 位是数据还是命令，这样即可实现三线 SPI 的 9 位时钟模式。
+  不支持，目前 ESP32 所有系列的芯片都不支持非字节对齐的数据传输，即只支持 8 位对齐的数据传输，该问题的具体说明见 `Github issue <https://github.com/espressif/esp-idf/issues/8487>`_。
+
+  后续新版本的 ESP32 芯片可能会支持非字节对齐的数据传输，但目前还没有具体的时间表。
 
 ---------------
 
