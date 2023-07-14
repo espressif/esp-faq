@@ -192,3 +192,25 @@ secure boot 和 flash 加密中涉及的存储在 eFuse 数据有哪些？
   - `flash_download_tool <https://www.espressif.com/zh-hans/support/download/other-tools>`__ 在使能 secure boot 或者 flash 加密时会自动预烧录 eFuse.
   - 通过使用 `espsecure.py <https://docs.espressif.com/projects/esptool/en/latest/esp32/espsecure/index.html>`__ 和 `espefuse.py <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html>`__ 来生成密钥以及烧录对应的 eFuse 存储块。
 
+------------
+
+启用 Secure Boot 后，使用 ``idf.py build`` 命令无法烧录新的 bootloader.bin？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  启用 Secure Boot 后，请使用 ``idf.py bootloader`` 命令编译新的 bootloader.bin。然后通过 ``idf.py -p (PORT) bootloader-flash`` 命令烧录新的 bootloader.bin。
+
+------------
+
+启用 Secure Boot 或者 flash 加密后，如何查看设备中关于安全特性的信息？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  请使用 ``esptool.py --no-stub get_security_info`` 命令查看设备的安全信息。
+
+------------
+
+启用 Secure Boot 或者 flash 加密后，OTA 时应该注意什么？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 启用 Secure Boot 后，你必须对 OTA 要使用的新固件进行签名，否则新固件无法被应用到设备上；
+  - 启用 flash 加密后，在生成新固件时，请保持使能 flash 加密的选项。
+  
