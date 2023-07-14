@@ -191,3 +191,25 @@ How can I enable secure boot or flash encryption by pre-burning eFuse?
   By default, you can enable secure boot or flash encryption by burning firmware with secure boot or flash encryption enabled. In addition, you can also enable secure boot or flash encryption by pre-burning eFuse in the following two methods:
   - With `flash_download_tool <https://www.espressif.com/zh-hans/support/download/other-tools>`__, eFuse will be pre-burned automatically if secure boot or flash encryption is enabled.
   - You can generate the key and burn corresponding eFuse blocks with `espsecure.py <https://docs.espressif.com/projects/esptool/en/latest/esp32/espsecure/index.html>`__ and `espefuse.py <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html>`__.
+
+------------
+
+After enabling Secure Boot, why can't I flash the new bootloader.bin using the `idf.py build` command?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  After enabling Secure Boot, please use the `idf.py bootloader` command to compile the new bootloader.bin. Then, flash the new bootloader.bin using the command `idf.py -p (PORT) bootloader-flash`.
+
+------------
+
+After enabling Secure Boot or flash encryption, how can I view the security-related information in the device?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Please use the command `esptool.py --no-stub get_security_info` to view the security information of the device.
+
+------------
+
+After enabling Secure Boot or flash encryption, what should I pay attention to during OTA (Over-The-Air) updates?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - After enabling Secure Boot, you must sign the new firmware to be used for OTA updates. Otherwise, the new firmware cannot be applied to the device.
+  - After enabling flash encryption, when generating a new firmware, please ensure that the flash encryption option is enabled.
