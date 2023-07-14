@@ -58,7 +58,7 @@ Can I disable the thread scheduling and use a single CPU for ESP32 to realize re
     - Use hardware signal outputs, and choose related digital protocols to realize SPI, I2C, I2S and etc. For special usage with SPI, you can generate waveform using signal output lines.
     - See if the hardware RMT can generate the desired waveform with enough length.
     - When the hardware interrupt generated corresponding waveform, all callbacks need to be put in IRAM.
-    - Use the co-processor in the chip as a single chip without an operation system. But it only supports assembly language for now.
+    - Use the co-processor in the chip as a single chip without an operation system.
 
 --------------
 
@@ -96,9 +96,9 @@ Using ESP-WROOM-02D module, can GPIO0, GPIO15, GPIO1 and GPIO3 be used as normal
 After configuring the GPIO19 for ESP32-C3 as pulled-down input, the level of this pin still stays high. However other pins in ESP32-C3 does not have this issue. What is the reason?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - In ESP32-C3, GPIO19 is a USB pin, whose pull-up resistor is controlled by the pin's pull-up value together with USB's pull-up value. If any of the two pull-up values is 1, the pin's pull-up resistor will be enabled.
+  - In ESP32-C3, GPIO19 is a USB D+ pin, whose pull-up resistor is controlled by the pin's pull-up value together with USB's pull-up value. If any of the two pull-up values is 1, the pin's pull-up resistor will be enabled.
   - The USB pull-up value of GPIO19 is 1 by default, so when the pin is pulled down, GPIO19 still keeps high level. 
-  - You can configure it via the register ``USB_SERIAL_JTAG_DP_PULLUP``.
+  - This issue has been fixed in the GPIO driver in ESP-IDF v4.4.3 and later versions. For other versions, please write the register ``USB_SERIAL_JTAG_DP_PULLUP`` to 0 for configuration.
 
 ------------------
 

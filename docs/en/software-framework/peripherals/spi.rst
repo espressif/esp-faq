@@ -126,7 +126,9 @@ Does ESP8266 RTOS SDK support full duplex for SPI?
 Can ESP32 support 9-bit clock mode for 3-wire SPI (i.e. a mode where the first bit indicates whether the next 8 bits are command or data)?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes, you can refer to the command or address phase mentioned in `SPI Transactions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#spi-transactions>`_, define one of the phases as 1-bit wide, and then assign 0 or 1 to it to distinguish whether the next 8 bits are data or command. In doing so, the 9-bit clock mode for 3-wire SPI is implemented.
+  No. Currently, all ESP32 series chips does not support non-byte-aligned data transfer, i.e., only support 8-bit-aligned data tranfer. For details, please refer to `Github issue <https://github.com/espressif/esp-idf/issues/8487>`_.
+
+  Newer versions of ESP32 series chips may support non-byte-aligned data transfer. However, there is no specific schedule for this functionality.
 
 ---------------
 

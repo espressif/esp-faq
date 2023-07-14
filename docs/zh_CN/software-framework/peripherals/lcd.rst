@@ -23,7 +23,7 @@ ESP32 系列芯片 LCD 驱动及参考例程在哪？
   - ESP 的 LCD 驱动位于 **ESP-IDF** 下的 `components/esp_lcd <https://github.com/espressif/esp-idf/tree/master/components/esp_lcd>`__，目前仅存在于 **release/v4.4 及以上** 版本中。**esp_lcd** 能够驱动 ESP 系列芯片所支持的 **I2C**、**SPI**、**8080** 以及 **RGB** 四种接口的 LCD 屏幕，各系列芯片所支持的 LCD 接口见 `ESP32 系列芯片的屏幕接口 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/display/screen.html#esp32>`__。
   - 各接口的 LCD 驱动应用示例参考 ESP-IDF 下的 `examples/peripherals/lcd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd>`__，这些示例目前仅存在于 **release/v5.0** 及以上版本中，因为 **release/v4.4** 中 esp_lcd 的 API 名称与高版本基本一致，所以同样可以参考上述示例（两者的 API 实现上有一些区别）。
   - **不推荐** 使用 esp-iot-solution 中的 LCD 驱动及例程。
-  - RGB LCD 应用推荐使用 ESP-IDF **release/v5.0**，因为 release/v4.4 中不支持部分特性。
+  - RGB LCD 应用推荐使用 ESP-IDF **release/v5.1**，因为 release/v4.4 中不支持部分特性。
 
 ---------------
 
@@ -33,13 +33,13 @@ ESP32 系列芯片 LCD 屏幕适配情况是怎样的？
   目前基于 `esp_lcd` 驱动适配过的 LCD 驱动 IC 如下：
 
   - `esp_lcd <https://github.com/espressif/esp-idf/blob/7f4bcc36959b1c483897d643036f847eb08d270e/components/esp_lcd/include/esp_lcd_panel_vendor.h>`__：st7789、nt35510、ssd1306
-  - `包管理器 <https://components.espressif.com/>`__：gc9a01、ili9341、ili9488、ra8875、sh1107（持续更新中）
+  - `包管理器 <https://components.espressif.com/components?q=esp_lcd>`__：gc9a01、ili9341、ili9488、ra8875、sh1107、st7796（持续更新中）
 
   **需注意，即使驱动 IC 相同，不同的屏幕往往需要不同的寄存器配置参数，而且屏幕厂商通常会给配套的配置参数（代码），因此推荐利用上面两种途径获取相似驱动 IC 的代码，根据自己屏幕的实际参数进行修改。**
 
   目前基于 `esp_lcd_touch` 驱动适配过的 Touch 驱动 IC 如下：
 
-  - `包管理器 <https://components.espressif.com/>`__：FT5x06、GT1151、GT911、STMPE610、TT21100、XPT2046（持续更新中）
+  - `包管理器 <https://components.espressif.com/components?q=esp_lcd_touch>`__：FT5x06、GT1151、GT911、STMPE610、TT21100、XPT2046、CST816（持续更新中）
 
 --------------
 
@@ -80,7 +80,19 @@ ESP32 是否有 I2S 驱动 LCD 的参考代码？
 ESP32 LCD 最大可以支持多大的分辨率？相应的帧率是多少？
 ----------------------------------------------------------------------------------------------------------
 
-  ESP32 LCD 在 RGB 接口下，分辨率最大能够支持 800 × 480，接口帧率上限为 59 (PCLK 30 MHz), 对应 LVGL 平均帧率为 23; LVGL 平均帧率上限为 26, 对应接口帧率为 41 (PCLK 21 MHz)。
+  - 可以支持多大的分辨率并没有一个“最大”的限制，由于外设接口的数据传输带宽有限，LCD 分辨率越高，接口帧率就会越低，因此需要结合两者共同进行判断。
+  - ESP32 LCD 在 RGB 接口下，目前测试过的最大分辨率为 800 × 480，接口帧率上限为 59 (PCLK 30 MHz), 对应 LVGL 平均帧率为 23; LVGL 平均帧率上限为 26, 对应接口帧率为 41 (PCLK 21 MHz)。
+
+---------------
+
+ESP32R8 如何开启 PSRAM 120M Octal(DDR)？
+----------------------------------------------------------------------------------------------------------
+
+  - ESP-IDF 需要使用 **release/v5.1** 及以上分支版本。
+  - 参考 `文档 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s3/api-guides/flash_psram_config.html#all-supported-modes-and-speeds>`__。
+  - **需注意**，该特性是一种实验功能并具有以下温度风险：
+    - 在温度高于 65°C 的情况下，即使开启 ECC 功能也无法保证正常工作。
+    - 温度变化也可能导致访问 PSRAM/flash 时程序崩溃，具体参考 `文档 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s3/api-guides/flash_psram_config.html#all-supported-modes-and-speeds>`__。
 
 ---------------
 
@@ -130,10 +142,10 @@ ESP32-S3 系列的芯片支持哪些图片解码格式？
       - 确认 PSRAM 配置里面是否能开启 `SPIRAM_FETCH_INSTRUCTIONS` 和 `SPIRAM_RODATA` 这两项（如果 rodata 段数据过大，会导致 PSRAM 空间不够）。
       - 确认内存（SRAM）是否有余量，大概需要占用 [10 * screen_width * 4] 字节。
       - 需要将 `Data cache line size` 设置为 64 Byte（可设置 `Data cache size` 为 32 KB 以节省内存）。
-      - 如以上均符合条件，那么就可以参考 `文档 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`_ 修改 RGB 驱动为 `Bounce buffer` 模式。
+      - 如以上均符合条件，那么就可以参考 `文档 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__ 修改 RGB 驱动为 `Bounce buffer` 模式。
       - 如操作 Wi-Fi 仍存在屏幕漂移问题，可以尝试关闭 PSRAM 里 CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP 一项（会占用较大 SRAM）。
       - 设置后带来的影响包括：CPU 使用率升高、可能会造成中断看门狗复位、会造成较大内存开销。
-      
+
     - 短时操作 flash 导致漂移的情况，如 wifi 连接等操作前后，可以在操作前调用 `esp_lcd_rgb_panel_set_pclk()` 降低 PCLK（如 6 MHz）并延时大约 20 ms（RGB 刷完一帧的时间），然后在操作结束后提高 PCLK 至原始水平，期间可能会造成短暂的闪白屏现象。
     - 使能 `esp_lcd_rgb_panel_config_t` 中的 `flags.refresh_on_demand`，通过调用 `esp_lcd_rgb_panel_refresh()` 接口手动刷屏，在保证屏幕不闪白的情况下尽量降低刷屏频率。
     - 如果无法避免，可以调用 `esp_lcd_rgb_panel_restart()`  接口重置 RGB 时序，防止永久性漂移。

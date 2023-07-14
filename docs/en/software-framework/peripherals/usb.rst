@@ -27,9 +27,9 @@ Does the ESP-IDF SDK USB interface support HID and MSC modes?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP32S2/S3 can be used as MSC Host to support reading from or writing to storage devices such as USB flash disks. For details, please refer to `esp-idf <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/msc>`__.
-  - ESP32S2/S3 can be used as MSC Device to simulate storage of USB flash disks. For details, please refer to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__.
+  - ESP32S2/S3 can be used as MSC Device to simulate storage of USB flash disks. For details, please refer to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/device/usb_msc_wireless_disk>`__.
   - ESP32S2/S3 can be used as HID Host. For details, please refer to `ESP-IDF Host HID <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/hid>`__.
-  - ESP32S2/S3 can be used as HID Device. For details, please refer to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb>`__.
+  - ESP32S2/S3 can be used as HID Device. For details, please refer to `ESP-IDF Device HID <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device/tusb_hid>`__.
 
 -------------------------
 
@@ -57,7 +57,7 @@ Does ESP32-C3 USB support USB serial port function and USB JTAG function?
 What are the USB features of ESP32-S2 and ESP32-S3? 
 --------------------------------------------------------------------------------------------------------------------------------
 
-  ESP32-S3 and ESP32-S2 support USB 2.0 OTG, and both support Host and Device functions. On top of that, ESP32-S3 also supports USB-Serial-JTAG peripheral, which can be used to download and debug firmware.
+  ESP32-S3 and ESP32-S2 support USB 2.0 OTG (supporting full-speed mode), and both support Host and Device functions. On top of that, ESP32-S3 also supports USB-Serial-JTAG peripheral, which can be used to download and debug firmware.
  
 ---------------
 
@@ -90,7 +90,7 @@ Does ESP32-S3 support USB cameras with microphones and speakers?
 Is there any reference for the example of using ESP32S2 as a USB flash drive (MSC DEVICE)?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Please refer to `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_msc_wireless_disk>`_. The average read and write speed currently tested is: read 540 KB/s, write 350 KB/s.
+  Please refer to `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/device/usb_msc_wireless_disk>`_. The average read and write speed currently tested is: read 540 KB/s, write 350 KB/s.
   
 ---------------
 
@@ -104,7 +104,7 @@ As ESP32-C3 already has USB function, can I download firmware directly via USB w
 Does ESP32-C3 support USB Host?
 ------------------------------------------------------
 
-  No, it only supports USB-Serial-JTAG function.
+  No, it only supports USB-Serial-JTAG function and can only be used as the USB device.
 
 ---------------
   
@@ -118,11 +118,11 @@ The ESP32-C3 chip can use USB to download firmware, but it is not supported unde
 Does the ESP32-S2 support USB HID?
 -----------------------------------------------------------------------
 
-  Yes. For the example of USB HID Device, please refer to `USB HID Device example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/device/usb_hid_device>`__. For the example of USB HID Host, please refer to `ESP-IDF Host HID example <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/hid>`__.
+  Yes. For the example of USB HID Device, please refer to `ESP-IDF Device HID <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device/tusb_hid>`__. For the example of USB HID Host, please refer to `ESP-IDF Host HID example <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/hid>`__.
 
 ---------------
 
-Why is this error log printed when I am testing the `USB Camera + Wi-Fi Transfer <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_camera_wifi_transfer>`_ example?
+Why is this error log printed when I am testing the `USB Camera + Wi-Fi Transfer <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_camera_mic_spk>`_ example?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: text
@@ -183,14 +183,14 @@ When ESP32-S2/ESP32-S3 serves as the UVC Host and connects some models of UVC ca
 Does ESP32-S2/ESP32-S3 have a USB 4G Internet access solution?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes, please refer to `USB CDC 4G Module Example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_4g_module>`_.
+  Yes, please refer to `USB CDC 4G Module Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_4g_module>`_.
 
 ---------------------
 
 Is there any USB CDC Host example for ESP32-S2/ESP32-S3?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes, please refer to `ESP-IDF USB CDC Host example <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/cdc>`__ or `esp-iot-solution USB CDC Host example <https://github.com/espressif/esp-iot-solution/tree/usb/add_usb_solutions/examples/usb/host/usb_cdc_basic>`__.
+  Yes, please refer to `ESP-IDF USB CDC Host example <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/cdc>`__ or `esp-iot-solution USB CDC Host example <https://github.com/leeebo/esp-iot-solution/tree/master/components/usb/iot_usbh_cdc>`__.
 
 ---------------------
 
@@ -216,7 +216,7 @@ Why does ESP32-S2/ESP32-S3 not reach the maximum USB full speed, 12 Mbps?
 How can I confirm if ESP32-S2/ESP32-S3 USB supports a certain USB camera or not?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  First, you need to acquire the descriptor information of the USB camera. For example, you need to enter `lsusb -v` in the Linux terminal, and then check the wMaxPacketSize of the endpoint descriptor in the interface descriptor where bInterfaceSubClass is `2 Video Streaming`. ESP32-S2/ESP32-S3 USB only supports USB cameras that correspond to wMaxPacketSize Video Streaming endpoints which include 512 bytes at the maximum.
+  ESP32-S2/ESP32-S3 USB only supports USB cameras that correspond to wMaxPacketSize Video Streaming endpoints which include 512 bytes at the maximum. You can use `USB Stream Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_camera_mic_spk>__` to test. An error log will be printed if the camera is not supported.
 
 ---------------------
 
@@ -231,7 +231,8 @@ What is the maximum resolution of USB cameras that ESP32-S2/ESP32-S3 support?
 Can the ESP32-S2/ESP32-S3 USB recognize the USB plugging and unplugging action when it is used as a USB CDC Device?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes, the USB device uses the tinyusb protocol stack, including `mount and umount callback functions <https://github.com/espressif/esp-iot-solution/blob/usb/add_usb_solutions/examples/usb/device/usb_uart_bridge/main/usb_uart_bridge_main.c#L119>`_ to response the USB plugging and unplugging events.
+  - Yes, the USB device uses the tinyusb protocol stack, including mount and umount callback functions to response the USB plugging and unplugging events.
+  - It should be noted that if this device is a self-powered USB device, please reserve a VBUS detection pin if you need to detect plugging and unplugging actions when it is powered on. For detail, please refer to `Solution of Self-Powered USB Device <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/esp32/usb/usb_device_self_power.html>__`.
 
 ---------------------
 
@@ -277,7 +278,7 @@ When I attempted to download and print log via the USB interface using the comma
 How can I apply for USB VID/PID for ESP32-S series products?
 ---------------------------------------------------------------------------------------------------------------------------
 
-  - You can use default TinyUSB PIDs if your software stack is based on TinyUSB. Otherwise, you need to apply for PID for each ESP32-S series product. For details, please refer to `"usb-pids <https://github.com/espressif/usb-pids>`_.
+  - You can use default TinyUSB PIDs if your software stack is based on TinyUSB. Otherwise, you need to apply for PID for each ESP32-S series product. For details, please refer to `"usb-pids <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/esp32/usb/usb_vid_pid.html>`_.
 
 --------------
 
@@ -289,3 +290,5 @@ Is it possible to fix the COM port when downloading firmware using the USB-Seria
   .. code-block:: text
     
     REG ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\303A10010101 /V IgnoreHWSerNum /t REG_BINARY /d 01
+
+  - For more information, please refer to `Prevent Windows from Increasing COM Number According to Serial Numbers of USB Devices <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/esp32/usb/usb_device_const_COM.html>__`.
