@@ -1180,7 +1180,7 @@ How to configure the Wi-Fi country code when the ESP end product needs to be sol
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Different Wi-Fi country codes need to be set for different countries.
-  - The default country code configuration can be used for most countries, but it is not compatible with some special cases. The default country code is ``CHINA {.cc="CN", .schan=1, .nchan=13, policy=WIFI_COUNTRY_POLICY_AUTO}``. Since channels 12 and 13 are passively scanned by default, they do not violate the regulations of most countries. Besides, the country code of the ESP product is automatically adapted to the router that it is connected to. When disconnected from the router, it automatically goes back to the default country code.
+  - The default country code configuration can be used for most countries, but it is not compatible with some special cases. The default country code is ``CHINA {.cc="CN", .schan=1, .nchan=13, policy=WIFI_COUNTRY_POLICY_AUTO}``. While in the ESP-IDF v5.0 or later version, the dafualt one has been changed to ``"01" (world safe mode) {.cc="01", .schan=1, .nchan=11, .policy=WIFI_COUNTRY_POLICY_AUTO}）``. Since channels 12 and 13 are passively scanned by default, they do not violate the regulations of most countries. Besides, the country code of the ESP product is automatically adapted to the router that it is connected to. When disconnected from the router, it automatically goes back to the default country code.
   
   .. note::
 
@@ -1301,3 +1301,10 @@ How can I increase the time for scanning routers when using ESP32 as the Wi-Fi S
       extern void scan_set_pas_duration(uint32_t time);  
       scan_set_act_duration(50, 500);
       scan_set_pas_duration(500);
+
+-------------
+
+Does ESP32 support LDPC？
+---------------------------------------------------------------------------------------------------------------
+
+  - Yes. No additional configuration or calling is required as it is already implemented in the driver.
