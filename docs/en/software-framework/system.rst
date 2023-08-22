@@ -391,3 +391,14 @@ Why do different ESP32 modules have different flash erase time?
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
   - This is caused by different type of flash models. Some module of flash don't have a mechanism for passing empty blocks when erasing, so it takes longer time.
+
+--------------
+
+Why I encountered the following error after I run the firmware based on the esp-idf SDK?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code:: text
+
+    ***ERROR*** A stack overflow in task sys_evt has been detected.
+
+  - The error is caused by insufficient system_event task stack. You can try to resolve it by increasing ``Component config`` > ``ESP System Setting`` > ``Event loop task stack size``. However, the overflow occurs because too much logic is being processed within system_event. It is not recommended as it might lead to delayed handling of subsequent events. We suggest forwarding this event to other tasks for processing, either through a queue or other operations.

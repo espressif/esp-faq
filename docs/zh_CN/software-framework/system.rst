@@ -929,3 +929,14 @@ ESP32-D0WDR2-V3 芯片支持的 esp-idf SDK 的版本有哪些？
 
   - ``espefuse.py burn_key`` 命令只能向类型为 KEY_DATA 的 eFuse 块烧录数据，但是默认情况下 ESP32-C3 的 BLOCK3 为 USR_DATA 类型。
   - 可以通过 ``espefuse.py burn_block_data`` 命令向 USR_DATA 类型的 eFuse 块烧录数据。
+
+-------------
+
+基于 esp-idf SDK 运行固件后打印如下报错是什么原因？
+------------------------------------------------------------------------------------------
+
+  .. code:: text
+
+    ***ERROR*** A stack overflow in task sys_evt has been detected.
+
+  - 当前报错是由于 system_event 任务堆栈不足导致的，可尝试增大 ``Component config`` > ``ESP System Setting`` > ``Event loop task stack size`` 设置来进行测试。不过出现溢出是在 system_event 事件中处理了太多的逻辑，这种行为本身是不提倡的，可能会导致后序事件无法及时抛出来。我们建议是通过队列或者其他操作将这个事件抛给其他任务处理。
