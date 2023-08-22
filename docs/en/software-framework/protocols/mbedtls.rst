@@ -46,3 +46,12 @@ When I connected an ESP32 module with the HTTPS Server, I got the following log.
   - The error is caused by low memory. The log shows that you use the `esp_get_free_heap_size() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/system/misc_system_api.html?highlight=get_free_heap_size#_CPPv422esp_get_free_heap_sizev>`_ API to get the remaining memory. However, the remaining memory includes the chip's internal RAM as well as external PSRAM.
   - By default, mbedTLS uses internal RAM memory, and you can use the `esp_get_free_internal_heap_size() <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/system/misc_system_api.html#_CPPv431esp_get_free_internal_heap_sizev>`_ API to obtain the remaining internal memory.
   - If the module has an external PSRAM, you can modify the configuration from ``menuconfig`` > ``Component config`` > ``mbedTLS`` > ``Memory allocation strategy`` > ``Internal memory`` to ``menuconfig`` > ``Component config`` > ``mbedTLS`` > ``Memory allocation strategy`` > ``External SPIRAM`` for testing.
+
+-------------
+
+When resolving a hostname on ESP32, I encountered the following error. What could be the reason?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The error is caused by DNS request timeout.
+  - You can enable DNS log with the debug level or capture wireless packets for further analysis.
+  - To enable the debug level DNS log, you can add ``#define DNS_DEBUG LWIP_DBG_ON`` code to the ``esp-idf/components/lwip/lwip/src/include/lwip/opt.h`` file, and then enable the ``Component config`` > ``LWIP`` > ``Enable LWIP Debug`` configuration.
