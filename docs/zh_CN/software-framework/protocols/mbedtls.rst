@@ -46,3 +46,16 @@ ESP32 使用 Mbed TLS 时如何优化内存？
   - 当前报错是由于内存不足导致。从日志信息来看，是使用了 `esp_get_free_heap_size() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/system/misc_system_api.html?highlight=get_free_heap_size#_CPPv422esp_get_free_heap_sizev>`_ API 打印了当前剩余内存，但此剩余内存包含了芯片内部 RAM 和外部 PSRAM 总容量的剩余内存。
   - mbedTLS 默认使用内部 RAM 内存，可使用 `esp_get_free_internal_heap_size() <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/system/misc_system_api.html#_CPPv431esp_get_free_internal_heap_sizev>`_ 获取内部剩余内存。
   - 如果模组带外部 PSRAM，可将 ``menuconfig`` > ``Component config`` > ``mbedTLS`` > ``Memory allocation strategy`` > ``Internal memory`` 配置改为 ``menuconfig`` > ``Component config`` > ``mbedTLS`` > ``Memory allocation strategy`` > ``External SPIRAM`` 进行测试。
+
+-----------
+
+基于 ESP32 解析主机名称时，出现如下报错，是什么原因？
+-----------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    getaddrinfo() returns 202, addrinfo=0x0
+
+  - 当前报错日志是因为 DNS 请求超时。
+  - 您可用开启 Debug 等级的 DNS 日志或捕捉无线包来进一步分析。
+  - 可在 ``esp-idf/components/lwip/lwip/src/include/lwip/opt.h`` 文件中增加 ``#define DNS_DEBUG LWIP_DBG_ON`` 代码，然后开启 ``Component config`` > ``LWIP`` > ``Enable LWIP Debug`` 配置来获取 Debug 等级的 DNS 日志。
