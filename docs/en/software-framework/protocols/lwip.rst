@@ -294,3 +294,10 @@ When ESP32 uses SNTP to synchronize the current time, I found that there is a ra
 
   - There is no way to avoid the random delay without modifying the IDF component. You need to manually add the code ``#define SNTP_STARTUP_DELAY 0`` to lwipopts.h in the lwip component. This code reduces the time that SNTP takes to send a request, so it can reduce the total time for ESP devices connecting to the cloud after they are powered up as a result.
   - The reason for enabling this random delay option by default is that it is mandated by the SNTP RFC protocol. A random delay can reduce the number of simultaneous accessing devices, so this can prevent the SNTP server from being overloaded.
+
+----------------
+
+Does IPv6 support setting static IP?
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+  IPv6's link-local address is generated automatically according to certain protocol rules, so there is no need to manually set it. Therefore, it cannot set static addresses as IPVv4.
