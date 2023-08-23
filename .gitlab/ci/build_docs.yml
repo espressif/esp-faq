@@ -1,0 +1,68 @@
+variables:
+  ESP_IDF_DOC_ENV_IMAGE: "$CI_DOCKER_REGISTRY/esp-idf-doc-env-v5.0:4-4"
+
+.before_script_install_requirements:
+  before_script:
+    # Use CI Tools
+    - source .gitlab/ci/utils.sh
+    - pip install -r docs/requirements.txt
+
+.build_docs_html_template:
+  image: $ESP_IDF_DOC_ENV_IMAGE
+  stage: build_docs
+  extends:
+    - .before_script_install_requirements
+  tags:
+    - build_docs
+  variables:
+    DOC_BUILDERS: "html"
+    DOCS_DIR: $CI_PROJECT_DIR/docs
+  dependencies: []
+  script:
+    - cd $DOCS_DIR
+    - build-docs -bs $DOC_BUILDERS -l $DOCLANG build
+    - ./check_lang_folder_sync.sh
+
+.build_docs_pdf_template:
+  image: $ESP_IDF_DOC_ENV_IMAGE
+  stage: build_docs
+  extends:
+    - .before_script_install_requirements
+  tags:
+    - build_docs
+  variables:
+    DOCS_DIR: $CI_PROJECT_DIR/docs
+  dependencies: []
+  script:
+    - cd $DOCS_DIR
+    - build-docs --skip-reqs-check -l $DOCLANG  -bs latex
+
+build_docs_html:
+  extends:
+    - .build_docs_html_template
+    - .rules:build:docs
+  artifacts:
+    when: always
+    paths:
+      - $DOCS_DIR/_build/*/*/*.txt
+      - $DOCS_DIR/_build/*/*/html/*
+    expire_in: 4 days
+  parallel:
+    matrix:
+      - DOCLANG: "en"
+      - DOCLANG: "zh_CN"
+
+build_docs_pdf:
+  extends:
+    - .build_docs_pdf_template
+    - .rules:build:docs
+  artifacts:
+    when: always
+    paths:
+      - $DOCS_DIR/_build/*/*/latex/*
+      - $DOCS_DIR/_build/*/*/*.txt
+    expire_in: 4 days
+  parallel:
+    matrix:
+      - DOCLANG: "en"
+      - DOCLANG: "zh_CN"

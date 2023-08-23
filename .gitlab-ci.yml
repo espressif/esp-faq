@@ -1,87 +1,12 @@
 stages:
-    - build
-    - test
+    - pre_check
+    - auto_trans
+    - build_docs
     - deploy
 
-check_en_doc_links:
-    stage: test
-    image: $CI_SPHINX_DOCKER
-    only:
-      - /^maintain.*$/
-    allow_failure: true
-    tags:
-      - build_docs
-    script:
-      - cd docs/en
-      # Todo : Due to the low version of sphinx, some links will be incorrectly recognized as broken, so add || True first to prevent undesired error reporting
-      - sphinx-build -b linkcheck -d _build/doctrees   -w sphinx-warning-log.txt . _build/linkcheck || true 
-
-check_cn_doc_links:
-    stage: test
-    image: $CI_SPHINX_DOCKER
-    only:
-      - /^maintain.*$/
-    allow_failure: true
-    tags:
-      - build_docs
-    script:
-      - cd docs/zh_CN
-      # Todo : Due to the low version of sphinx, some links will be incorrectly recognized as broken, so add || True first to prevent undesired error reporting
-      - sphinx-build -b linkcheck -d _build/doctrees   -w sphinx-warning-log.txt . _build/linkchecklinkcheck || true
-
-build_docs:
-    stage: build
-    image: $CI_SPHINX_DOCKER
-    tags:
-        - build_docs
-    artifacts:
-        when: always
-        paths:
-            # English version of documentation
-            - docs/en/sphinx-warning-log.txt
-            - docs/en/_build/html
-            # Chinese version of documentation
-            - docs/zh_CN/sphinx-warning-log.txt
-            - docs/zh_CN/_build/html
-        expire_in: 3 day
-    script:
-      - cd docs
-      # make English version of documentation
-      - cd en
-      - make html
-      - ../check_doc_warnings.sh
-      - cd ..
-      # make Chinese version of documentation
-      - cd zh_CN
-      - make html
-      - ../check_doc_warnings.sh
-      - cd ..
-  
-push_master_to_github:
-  stage: deploy
-  only:
-    - master
-    - /^release\/v/
-#  when: on_success
-  image: $CI_DEPLOY_DOCKER
-  variables:
-    GIT_STRATEGY: clone
-    GITHUB_PUSH_REFS: refs/remotes/origin/release refs/remotes/origin/master
-  before_script:
-    - echo "skip default before_script"
-  script:
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo -n $GH_PUSH_KEY >> ~/.ssh/id_rsa_base64
-    - base64 --decode --ignore-garbage ~/.ssh/id_rsa_base64 > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-    - git remote add github git@github.com:espressif/esp-faq.git
-    # What the next line of script does: goes through the list of refs for all branches we push to github,
-    # generates a snippet of shell which is evaluated. The snippet checks CI_BUILD_REF against the SHA
-    # (aka objectname) at tip of each branch, and if any SHAs match then it checks out the local branch
-    # and then pushes that ref to a corresponding github branch
-    #
-    # NB: In gitlab 9.x, CI_BUILD_REF was deprecated. New name is CI_COMMIT_REF. If below command suddenly
-    # generates bash syntax errors, this is probably why.
-    - eval $(git for-each-ref --shell bash --format 'if [ $CI_BUILD_REF == %(objectname) ]; then git checkout -B %(refname:strip=3); git push --follow-tags github %(refname:strip=3); fi;' $GITHUB_PUSH_REFS)
+include:
+  - '.gitlab/ci/rules.yml'
+  - '.gitlab/ci/pre_check.yml'
+  - '.gitlab/ci/build_docs.yml'
+  - '.gitlab/ci/deploy.yml'
+  - '.gitlab/ci/auto_trans.yml'

@@ -1,0 +1,12 @@
+translate:
+  extends:
+    - .rules:auto_trans:translate
+  image: $CI_SPHINX_DOCKER
+  stage: auto_trans
+  tags:
+    - build_docs
+  script:
+    # - git clone -b new_translation $TRY_OPENAI_REPO
+    # - pip3 install -r ./try-openai/requirements.txt
+    # - python3 ./try-openai/translate-rst-files.py $OPENAI_API_KEY $GITLAB_URL $TOKEN $PROJECT_ID $BRANCH_NAME -a
+    - echo "add the bot"
