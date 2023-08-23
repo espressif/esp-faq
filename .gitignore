@@ -70,6 +70,7 @@ dkms.conf
 .DS_Store
 
 # Doc build artifacts
+docs/_build/
 docs/*/_build/
 docs/*/sphinx-warning-log.txt
 docs/*/sphinx-warning-log-sanitized.txt

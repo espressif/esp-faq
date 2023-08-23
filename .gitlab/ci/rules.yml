@@ -1,0 +1,90 @@
+############
+# Patterns #
+############
+
+
+# examples folder, in the alphabetic order
+.patterns-docs: &patterns-docs
+  - "docs/**/*"
+
+
+##############
+# if anchors #
+##############
+.if-protected: &if-protected
+  if: '($CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_BRANCH =~ /^release\/v/ || $CI_COMMIT_TAG =~ /^v\d+\.\d+(\.\d+)?($|-)/)'
+
+.if-dev-push: &if-dev-push
+  if: '$CI_COMMIT_REF_NAME != "master" && $CI_COMMIT_BRANCH !~ /^release\/v/ && $CI_COMMIT_TAG !~ /^v\d+\.\d+(\.\d+)?($|-)/ && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event")'
+
+##################
+# Auto Generated #
+##################
+.if-trigger-job: &if-trigger-job
+  if: '$BOT_DYNAMIC_TEST_JOBS && $BOT_DYNAMIC_TEST_JOBS =~ $CI_JOB_NAME'
+
+
+.if-label-auto-trans: &if-label-auto_trans
+  if: '$BOT_LABEL_AUTO_TRANS || $CI_MERGE_REQUEST_LABELS =~ /^(?:[^,\n\r]+,)*auto_trans(?:,[^,\n\r]+)*$/i'
+
+.if-label-build_docs: &if-label-build_docs
+  if: '$BOT_LABEL_BUILD_DOCS || $CI_MERGE_REQUEST_LABELS =~ /^(?:[^,\n\r]+,)*build_docs(?:,[^,\n\r]+)*$/i'
+
+.if-label-pre_check: &if-label-pre_check
+  if: '$BOT_LABEL_PRE_CHECK || $CI_MERGE_REQUEST_LABELS =~ /^(?:[^,\n\r]+,)*pre_check(?:,[^,\n\r]+)*$/i'
+
+.if_label-deploy: &if-label-deploy
+  if: '$BOT_LABEL_DEPLOY || $CI_MERGE_REQUEST_LABELS =~ /^(?:[^,\n\r]+,)*deploy(?:,[^,\n\r]+)*$/i'
+
+# For docs
+
+.rules:pre_check:readme:
+  rules:
+    - <<: *if-protected
+    - <<: *if-label-pre_check
+    - <<: *if-trigger-job
+    - <<: *if-dev-push
+      changes: *patterns-docs
+    - <<: *if-dev-push
+      changes: *patterns-docs
+
+.rules:build:docs:
+  rules:
+    - <<: *if-protected
+    - <<: *if-label-build_docs
+    - <<: *if-trigger-job
+    - <<: *if-dev-push
+      changes: *patterns-docs
+    - <<: *if-dev-push
+      changes: *patterns-docs
+
+.rules:deploy:docs_preview:
+  rules:
+    - <<: *if-label-build_docs
+    - <<: *if-trigger-job
+    - <<: *if-dev-push
+      changes: *patterns-docs
+    - <<: *if-dev-push
+      changes: *patterns-docs
+
+
+.rules:deploy:docs_production:
+  rules:
+    - <<: *if-protected
+
+.rules:auto_trans:translate:
+  rules:
+    - <<: *if-label-auto_trans
+    - <<: *if-trigger-job
+
+
+.rules:deploy:docs_preview:
+  rules:
+    - <<: *if-label-build_docs
+    - <<: *if-dev-push
+      changes: *patterns-docs
+
+
+.rules:deploy:docs_production:
+  rules:
+    - <<: *if-protected
