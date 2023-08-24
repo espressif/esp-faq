@@ -1,6 +1,6 @@
 # ESP-FAQ Framework
 
-[![Documentation Status](https://readthedocs.com/projects/espressif-esp-faq/badge/?version=latest)](https://docs.espressif.com/projects/espressif-esp-faq/en/latest/?badge=latest)
+[![Documentation Status](https://dl.espressif.com/AE/docs/docs_latest.svg)](https://docs.espressif.com/projects/esp-faq/en/latest/)
 
 * [中文版](./README_CN.md)
 
