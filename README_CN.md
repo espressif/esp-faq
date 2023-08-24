@@ -1,6 +1,6 @@
 # Espressif FAQ 文档
 
-[![Documentation Status](https://readthedocs.com/projects/espressif-esp-faq-zh-cn/badge/?version=latest)](https://docs.espressif.com/projects/espressif-esp-faq/zh_CN/latest/?badge=latest)
+[![Documentation Status](https://dl.espressif.com/AE/docs/docs_latest.svg)](https://docs.espressif.com/projects/esp-faq/zh_CN/latest/)
 
 * [English Version](./README.md)
   
