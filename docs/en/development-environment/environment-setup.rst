@@ -133,3 +133,18 @@ Is there an esptool that can be used directly on Windows?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - You can go to `esptool --> Releases <https://github.com/espressif/esptool/releases>`_ and download the Windows version of the esptool from the Asset column on the drop-down page. 
+
+-------------------
+
+What could be the cause of the error `KeyError: 'idfSelectedId'` when running `. /install.sh`?
+---------------------------------------------------------------------------------------------------------------
+
+  - This is because ESP-IDF v5.0 or above is installed on your system. You can check the configuration in the `~/.espressif/idf-env.json` file.
+  - This error can be solved by running `rm -rf ~/.espressif/idf-env.json`.
+
+-----------------
+
+When running `demo`, the package manager component dependency cannot be pulled, with the failure information `Invaild manifest format`, `Invalid dependency format`, and `unknown keys in dependency details: override_path`. What could be the reason?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - This is due to missing component dependencies and can be solved after updating `component-manager`. The corresponding command is `pip install --upgrade idf-component-manager`.
