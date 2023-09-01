@@ -1308,3 +1308,11 @@ Does ESP32 support LDPC？
 ---------------------------------------------------------------------------------------------------------------
 
   - Yes. No additional configuration or calling is required as it is already implemented in the driver.
+
+-------------
+
+When encountering the error message ``Error occurred during sending: errno 12`` during UDP transmission testing, what should I do to resolve it?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - errno 12 indicates insufficient space. This issue occurs when there is a mismatch in processing speed between the upper and lower layers. The upper-layer application continuously generates a large amount of data and sends it to the UDP protocol for transmission. However, the underlying network or the receiving end cannot keep up with the sending speed, resulting in insufficient space.
+  - To address this problem, you can handle this return value by implementing appropriate measures. For example, upon receiving this return value, the upper layer can initiate a resend mechanism or introduce a delay to slow down the sending speed.
