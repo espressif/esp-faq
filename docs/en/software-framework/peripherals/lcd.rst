@@ -43,19 +43,27 @@ Which adapted ICs can be used by the LCD screen of ESP32 series chips?
 
 --------------
 
+Do ESP32 series development boards with screens support GUI development using the Arduino IDE?
+-----------------------------------------------------------------------------------------------------------------
+
+- Currently, an official LCD driver library `ESP32_Display_Panel <https://github.com/Lzw655/ESP32_Display_Panel>`_ has been released for Arduino development. It can be directly downloaded from the Arduino IDE. For details, please refer to `Supported Boards <https://github.com/Lzw655/ESP32_Display_Panel#supported-boards>`_.
+- Please note that since Arduino does not support making configurations through menuconfig like ESP-IDF, such as adjusting the compilation optimization level, it's recommended to develop GUI using ESP-IDF to achieve the optimal performance.
+
+--------------
+
 How can I improve the display frame rate of LCD screens?
 ----------------------------------------------------------
 
    - The actual display frame rate of LCD screens is determined by the "interface frame rate" and "rendering frame rate". Generally, the "interface frame rate" is much bigger than the "rendering frame rate". So this question actually is "how can I improve the rendering frame rate of the LCD".
 
-   - The following ESP configuration items can improve the frame rate (ESP-IDF release/v5.0):
+   - Taking ESP32-S3R8 as an example, the following ESP configuration items can improve the frame rate (ESP-IDF release/v5.1):
 
      - CONFIG_FREERTOS_HZ=1000
      - CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_240=y
      - CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
      - CONFIG_ESPTOOLPY_FLASHFREQ_120M=y [needs to be consistent with PSRAM]
      - CONFIG_SPIRAM_MODE_OCT=y
-     - CONFIG_SPIRAM_SPEED_120M=y [Need to be consistent with FLASH]
+     - CONFIG_IDF_EXPERIMENTAL_FEATURES=y && CONFIG_SPIRAM_SPEED_120M=y [Need to be consistent with FLASH]
      - CONFIG_SPIRAM_FETCH_INSTRUCTIONS=y
      - CONFIG_SPIRAM_RODATA=y
      - CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y
@@ -66,6 +74,8 @@ How can I improve the display frame rate of LCD screens?
      - #define LV_MEM_CUSTOM 1
      - #define LV_MEMCPY_MEMSET_STD 1
      - #define LV_ATTRIBUTE_FAST_MEM IRAM_ATTR
+
+  - For LCD and LVGL performance, please refer to `documentation <https://github.com/espressif/esp-bsp/blob/master/components/esp_lvgl_port/docs/performance.md#lcd--lvgl-performance>`__.
 
 ---------------
 
@@ -107,7 +117,23 @@ What models of display touch panels are supported for testing the `LVGL <https:/
 Does ESP32-S3 require an external PSRAM to use the RGB screen?
 ------------------------------------------------------------------------------------------------------
 
-  Yes, and it must be an Octal PSRAM at least and the clock must be set to 80 MHz or above. Otherwise, the PCLK of RGB LCD cannot be set to a higher PCLK frequency and the frame rate will be too low.
+- In general, yes. RGB screens require the ESP to provide at least one full-screen-sized frame buffer. However, the resolution of RGB screens is usually large, and ESP32-S3's SRAM might not meet this requirement.
+- It's not recommended to use a Quad PSRAM due to its relatively low bandwidth, as this could make the PCLK of the RGB LCD cannot be set to the required frequency.
+- It's recommended to use an Octal PSRAM and set the clock to 80 MHz or above.
+
+---------------------
+
+How can I increase the upper limit of PCLK settings on ESP32-S3 while ensuring normal RGB screen display?
+--------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------
+
+- Typically, the upper limit of PCLK settings is constrained by the bandwidth of the PSRAM. Therefore, you need to enhance the PSRAM bandwidth:
+
+  - Use a higher frequency PSRAM clock or a wider PSRAM bus (Octal).
+  - Reduce the PSRAM bandwidth occupied by other peripherals like Wi-Fi, flash, etc.
+  - Decrease the Data Cache Line Size to 32 Bytes (set to 64 Bytes when using RGB Bounce Buffer mode).
+
+- Enable the Bounce Buffer mode for RGB display, and a larger buffer size provides better performance. For usage, please refer to `documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__. Note that in this mode, PSRAM data is first moved to SRAM by the CPU and then transferred to the RGB peripheral via GDMA. Therefore, you need to enable `CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y` simultaneously, or it may lead to screen drifting.
+- Based on limited testing, for Quad PSRAM at 80 MHz, the highest PCLK setting is around 11 MHz; for Octal PSRAM at 80 MHz, the highest PCLK setting is around 22 MHz; for Octal PSRAM at 120 MHz, the highest PCLK setting is around 30 MHz.
 
 --------------------
 
@@ -120,43 +146,46 @@ Which image decoding formats are supported by the ESP32-S3 series of chips?
 --------------------------
 
 Why do I get drift (overall drift of the display) when driving an RGB LCD screen?
--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 
   - **Reasons**
 
     - PCLK is set to a too big number, and the PSRAM bandwidth is not applicable.
-    - PSRAM is disabled due to the write operation of flash.
+    - PSRAM is disabled due to the write operation of flash (like Wi-Fi, BLE, OTA).
 
   - **Solutions**
 
     - Improve bandwidths of PSRAM and flash. You can set flash to QIO 120 M and set PSRAM to Octal 120 M.
     - Enable `CONFIG_COMPILER_OPTIMIZATION_PERF`.
-    - Reduce data_cache_line_size to 32 bytes.
+    - Reduce the Data Cache Line Size to 32 Bytes (set it to 64 Bytes when using the RGB Bounce Buffer mode).
     - Enable `CONFIG_SPIRAM_FETCH_INSTRUCTIONS` and `CONFIG_SPIRAM_RODATA`.
-    - Enable `CONFIG_LCD_RGB_RESTART_IN_VSYNC`. But this operation may cause the screen to flash blurred and drop the frame rate, so we generally do not recommend this way. However, you can try it if you have interests.
+    - Enable `CONFIG_LCD_RGB_RESTART_IN_VSYNC` to automatically recover after screen drifting, but this cannot completely avoid the issue and may reduce the frame rate.
 
   - **Applications**
 
-    - If you need to use Wi-Fi and continuous write operation to flash, please use `XIP PSRAM + RGB Bounce buffer` method, and the settings are as follows:
+    - While ensuring the screen display is normal, try to reduce the frequency of PCLK and decrease the bandwidth utilization of PSRAM.
+    - If you need to use Wi-Fi, BLE and continuous write operation to flash, please use `XIP on PSRAM + RGB Bounce buffer` method, and the settings are as follows:
 
-      - Make sure the ESP-IDF version is (> 2022.12.12) release/v5.0 and above (released after 2022.12.12), as older versions do not support the `XIP PSRAM` function.
-      - Verify that whether `SPIRAM_FETCH_INSTRUCTIONS` and `SPIRAM_RODATA` can be enabled in the PSRAM configuration (too large rodata segment will cause insufficient space in the PSRAM).
+      - Make sure the ESP-IDF version is release/v5.0 or newer (released after 2022.12.12), as older versions do not support the `XIP on PSRAM` function. (release/v4.4 supports this function through patching, but it is not recommended)
+      - Verify that whether `CONFIG_SPIRAM_FETCH_INSTRUCTIONS` and `CONFIG_SPIRAM_RODATA` can be enabled in the PSRAM configuration (too large rodata segment will cause insufficient space in the PSRAM).
       - Check if there is any memory (SRAM) left, and it takes about [10 * screen_width * 4] bytes.
       - Set `Data cache line size` to 64 Bytes (you can set `Data cache size` to 32 KB to save memory).
-      - If all the above conditions are met, then you can refer to `Documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`_ to modify the RGB driver to `Bounce buffer` mode.
-      - If you still have the drift problem when dealing with Wi-Fi, you can try to turn off CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP in PSRAM, which takes up much SRAM space.
+      - Set `CONFIG_FREERTOS_HZ` to 1000。
+      - If all the above conditions are met, then you can refer to `Documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__ to modify the RGB driver to `Bounce buffer` mode.
+      - If you still have the drift problem when dealing with Wi-Fi, you can try to turn off `CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP` in PSRAM, which takes up much SRAM space.
       - The effects of this setting include higher CPU usage, possible interrupt watchdog reset, and higher memory overhead.
-      
+      - Since the Bounce Buffer transfers data from PSRAM to SRAM through the CPU in GDMA interrupts, the program should avoid performing operations that disable interrupts for an extended period (such as calling `portENTER_CRITICAL()`), as it can still result in screen drifting.
+
     - For the drift caused by short-term operations of flash, such as before and after Wi-Fi connection, you can call `esp_lcd_rgb_panel_set_pclk()` before the operation to reduce the PCLK (such as 6 MHz) and delay about 20 ms (the time for RGB to complete one frame), and then increase PCLK to the original level after the operation. This operation may cause the screen to flash blank in a short-term.
     - Enable `flags.refresh_on_demand` in `esp_lcd_rgb_panel_config_t`, and manually refresh the screen by calling the `esp_lcd_rgb_panel_refresh()` interface. In addition, you need to reduce the refreshing frequency as much as possible while ensuring that the screen does not flash blank.
-    - If unavoidable, you can call the `esp_lcd_rgb_panel_restart()` interface to reset the RGB timing to prevent permanent drift.
+    - If unavoidable, you can enable `CONFIG_LCD_RGB_RESTART_IN_VSYNC` or use the `esp_lcd_rgb_panel_restart()` to reset the RGB timing to prevent permanent drifting.
 
 -----------------------------
 
 Why is there vertical dislocation when I drive SPI/8080 LCD screen to display LVGL?
 ---------------------------------------------------------------------------------------------
 
-  If you use DMA interrupt to transfer data, ``lv_disp_flush_ready`` of LVGL should be called after DMA transfer instead of immediately after calling ``draw_bitmap``. 
+  If you use DMA interrupt to transfer data, ``lv_disp_flush_ready`` of LVGL should be called after DMA transfer instead of immediately after calling ``draw_bitmap``.
 
 ---------------------------
 
@@ -173,3 +202,11 @@ Are 9-bit bus and 18-bit color depth supported if I use the ILI9488 LCD screen t
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
    The ILI9488 driver chip can support 9-bit bus and 18-bit color depth. However, Espressif's driver can only support 8-bit bus and 16-bit color depth for now. You can modify the driver according to the ILI9488 datasheet to support 9-bit bus and 18-bit color depth.
+
+---------------------------
+
+When using ESP32-S3 to drive an RGB screen, why does it halt or reset (TG1WDT_SYS_RST) when running `esp_lcd_new_rgb_panel()` or `esp_lcd_panel_init()`?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please check if the pins occupied by PSRAM in ESP chips or modules conflict with the RGB pins. If there is a conflict, modify the RGB pin configuration.
+  - If using ESP32-S3R8, avoid using GPIO35, GPIO36, and GPIO37 pins.
