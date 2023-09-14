@@ -94,61 +94,11 @@ Do ESP products support Zephyr?
 How to identify the chip revision from the chip silk marking?
 -------------------------------------------------------------------------------------------
 
-You can do it by checking the second character of main die line on the chip silk marking.
+You can do it by checking the second character of Espressif Tracking Information line in the bottom of the chip silk marking.
 
 .. image:: ../../_static/chip-marking.png
   :width: 400
   :alt: Chip Marking Diagram
-
-The mapping between the chip revision of all our chips and the second character of main die lie can be found in the table below:
-
-+------------------+---------------+-------------------+
-| Chip Series      | Chip Revision | Marking Indicator |
-+==================+===============+===================+
-| ESP32            | v0.0          | A                 |
-|                  +---------------+-------------------+
-|                  | v1.0          | B                 |
-|                  +---------------+-------------------+
-|                  | v1.1          | F                 |
-|                  +---------------+-------------------+
-|                  | v3.0          | E                 |
-|                  +---------------+-------------------+
-|                  | v3.1          | G                 |
-+------------------+---------------+-------------------+
-| ESP32-S2         | v0.0          | A                 |
-|                  +---------------+-------------------+
-|                  | v1.0          | B                 |
-+------------------+---------------+-------------------+
-| ESP32-C3         | v0.0          | A                 |
-|                  +---------------+-------------------+
-|                  | v0.1          | B                 |
-|                  +---------------+-------------------+
-|                  | v0.2          | C                 |
-|                  +---------------+-------------------+
-|                  | v0.3          | D                 |
-|                  +---------------+-------------------+
-|                  | v0.4          | E                 |
-+------------------+---------------+-------------------+
-| ESP32-S3         | v0.0          | A                 |
-|                  +---------------+-------------------+
-|                  | v0.1          | B                 |
-|                  +---------------+-------------------+
-|                  | v0.2          | C                 |
-+------------------+---------------+-------------------+
-| ESP32-C2/ESP8684 | v0.0          | A                 |
-|                  +---------------+-------------------+
-|                  | v1.0          | AA                |
-|                  +---------------+-------------------+
-|                  | v1.1          | B                 |
-|                  +---------------+-------------------+
-|                  | v1.2          | C                 |
-+------------------+---------------+-------------------+
-| ESP32-C6         | v0.0          | A                 |
-+------------------+---------------+-------------------+
-| ESP32-H2         | v0.0          | A                 |
-|                  +---------------+-------------------+
-|                  | v0.1          | B                 |
-+------------------+---------------+-------------------+
 
 - For detailed differences between chip revisions, please refer to respective chip errata documents from Espressif's `documentation page <https://www.espressif.com/en/support/documents/technical-documents?keys=errata>`_.
 - For a complete explanation of the chip silk marking, please refer to `Espressif Chip Packaging Information <https://www.espressif.com/sites/default/files/documentation/espressif_chip_packaging_information_en.pdf>`_.
