@@ -102,3 +102,13 @@ ESP32 是否有至少在 HTTP/2 上实现 gRPC 客户端的示例？
 --------------------------------------------------------------------------------------------------------------------------------
 
   可以参考 `esp http client 示例 <https://github.com/espressif/esp-idf/tree/v4.4.1/examples/protocols/esp_http_client>`_ 里的 ``http_partial_download`` 函数。
+
+----------------
+
+ESP 模块作为本地 HTTP/HTTPS Server，浏览器端访问时会返回 `Header fields are too long for server to interpret` 错误如何解决？
+-----------------------------------------------------------------------------------------------------------------------------------
+
+  - 出现这个问题的原因是浏览器端 URL 过长，而底层 buffer 分配的长度不够，这部分可以通过修改 menuconfig 的配置来增大 HTTP 头部长度，默认是 512 字节，可以将其调整为更大的数据，比如 1024 字节，具体操作步骤如下：
+  
+    - ``idf.py menuconfig`` > ``Component config`` > ``HTTP Server`` > ``(1024)Max HTTP Request Header Length``
+    - ``idf.py menuconfig`` > ``Component config`` > ``HTTP Server`` > ``(1024)Max HTTP URI Length``
