@@ -102,3 +102,13 @@ How to download a specific segment of a file over HTTP in ESP-IDF (i.e., add ``R
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Please refer to the ``http_partial_download`` function in the `esp http client example <https://github.com/espressif/esp-idf/tree/v4.4.1/examples/protocols/esp_http_client>`_.
+
+----------------
+
+When the ESP module acts as a local HTTP/HTTPS Server, it returns the `Header fields are too long for server to interpret` error if it is accessed by the browser. Why?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The reason for this problem is that the URL is too long for the browser, and the underlying buffer is not big enough. You can increase the HTTP header length by modifying the menuconfig configuration. You can change the default value, which is 512 bytes, to a larger size, for example, 1024 bytes. The specific steps are as follows:
+  
+    - ``idf.py menuconfig`` > ``Component config`` > ``HTTP Server`` > ``(1024)Max HTTP Request Header Length``
+    - ``idf.py menuconfig`` > ``Component config`` > ``HTTP Server`` > ``(1024)Max HTTP URI Length``
