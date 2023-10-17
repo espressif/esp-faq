@@ -112,3 +112,10 @@ When the ESP module acts as a local HTTP/HTTPS Server, it returns the `Header fi
   
     - ``idf.py menuconfig`` > ``Component config`` > ``HTTP Server`` > ``(1024)Max HTTP Request Header Length``
     - ``idf.py menuconfig`` > ``Component config`` > ``HTTP Server`` > ``(1024)Max HTTP URI Length``
+
+----------------
+
+How can I resolve the error of `HTTP_HEADER: Buffer length is small to fit all the headers` returned by HTTP request?
+--------------------------------------------------------------------------------------------------------------------------------
+
+  - Please change the member ``buffer_size_tx`` of the structure ``esp_http_client_config_t`` in the file `esp-idf/components/esp_http_client/include/esp_http_client.h` to 1024 bytes or larger.
