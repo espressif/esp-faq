@@ -81,3 +81,16 @@ When Ethernet and Wi-Fi coexist, does Ethernet take precedence over Wi-Fi in dat
   :CHIP\: ESP32 :
 
   - Call `esp_netif_get_route_prio first <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_netif.html#_CPPv424esp_netif_get_route_prioP11esp_netif_t>`_ to check the priority of Ethernet and Wi-Fi. If Wi-Fi takes priority over Ethernet, you can prioritize them by modifying ``route_prio`` in the structure ``esp_netif_t``.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+When using SNTP, I encountered the error “ assert failed: sntp setoperatingmode IDF/components/lwip/lwip/src/apps/sntp/sntp.c:724 (Operating mode must not be set while SNTP client is running)？". How can I solve this issue?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can solve it by adding the following code snippet to the sntp_init() interface:
+
+  .. code-block:: c
+
+      if(sntp_enabled()){
+      sntp_stop(); 
+      } 
