@@ -81,4 +81,16 @@ ESP32 支持 SAVI 吗？
   :CHIP\: ESP32 :
 
   - 先调用 `esp_netif_get_route_prio <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_netif.html#_CPPv424esp_netif_get_route_prioP11esp_netif_t>`_ 查看以太网和 Wi-Fi 的优先级，如果 Wi-Fi 的优先级高于以太网， 可以通过修改 ``esp_netif_t`` 结构体里的 ``route_prio`` 来改变优先级。
-  
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+使用 SNTP 会报 “ assert failed: sntp setoperatingmode IDF/components/lwip/lwip/src/apps/sntp/sntp.c:724 (Operating mode must not be set while SNTP client is running)？“ 错误如何解决？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 在 sntp_init() 接口里面加上这段代码即可：
+
+  .. code-block:: c
+
+      if(sntp_enabled()){
+      sntp_stop(); 
+      } 
