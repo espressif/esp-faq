@@ -49,3 +49,13 @@ ESP-IDF 支持的 TLS 版本有哪些？
 
   - ESP-IDF 里推荐的 TLS 协议为 Mbed TLS 协议。
   - ESP-IDF v5.0 及以上版本不再支持 SSL 3.0，TLS 1.0 和 TLS 1.1，当前支持的 TLS 版本为 TLS 1.2 和 TLS 1.3。
+
+------------------------
+
+如何分析 SSL 握手会报 "mbedtls_ssl_handshake returned -0x7200" 错误？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 0x7200 的错误可能有以下几点：
+    - MBEDTLS_SSL_IN_CONTENT_LEN 过小，一般小于最大 16 K
+    - 内存不够
+    - 服务器拒绝 ESP 连接，发送的 SSL record 不完整，需要抓包看下, 详情请参考 `乐鑫 Wireshark 使用指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wireshark-user-guide.html#wireshark>`__。
