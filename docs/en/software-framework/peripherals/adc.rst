@@ -154,3 +154,13 @@ I tried to test the functionality of ADC2 using GPIO19 and GPIO20 of ESP32-S3 ba
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Please check whether both two ADC2 channels have been configured according to `adc_oneshot_config_channel() <https://github.com/espressif/esp-idf/blob/886e98a2c1311556eb6be02775d49703d6050222/examples/peripherals/adc/oneshot_read/main/oneshot_read_main.c#L90>`_.
+
+----------
+
+Can ESP32 support some ADC channels in DMA mode and the other ADC channels in oneshot mode under the same ADC controller?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - To use the DMA mode for ESP32 ADC, ESP-IDF v5.0 or later versions should be used.
+  - ADC2 of ESP32 does not support DMA mode.
+  - In the same ADC controller, it does not support that some ADC channels are in oneshot mode and other ADC channels are in DMA mode. Please refer to the `"ESP32 ADC hardware-limitations" <https://docs.espressif.com/projects/esp-idf/en/v5.1.1/esp32/api-reference/peripherals/adc_continuous.html#hardware-limitations>`__.
+  - In the software, it is recommended to use the `adc_continuous_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/peripherals/adc_continuous.html#_CPPv423adc_continuous_config_t>`_ API to set ADC1 as DMA mode and use the `adc_oneshot_config_channel <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/peripherals/adc_oneshot.html?highlight=adc_oneshot_config_channel#_CPPv426adc_oneshot_config_channel25adc_oneshot_unit_handle_t13adc_channel_tPK22adc_oneshot_chan_cfg_t>`_ API to set ADC2 as oneshot mode.

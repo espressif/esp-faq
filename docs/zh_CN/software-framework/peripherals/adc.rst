@@ -154,3 +154,13 @@ ESP32-S3 ADC 配置为 ``ADC_ATTEN_DB_11`` 时，为何测量电压无法达到�
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 建议检查是否两个 ADC2 通道都进行了 `adc_oneshot_config_channel() <https://github.com/espressif/esp-idf/blob/886e98a2c1311556eb6be02775d49703d6050222/examples/peripherals/adc/oneshot_read/main/oneshot_read_main.c#L90>`_ 的配置。
+
+---------------
+
+ESP32 在同一个 ADC 控制器下，能同时支持部分 ADC 通道是 DMA 模式，部分 ADC 通道是 one shot 模式吗？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 ADC 使用 DMA 模式，要求使用 esp-idf v5.0 及以上版本的 SDK。
+  - ESP32 的 ADC2 不支持 DMA 模式。
+  - 在同一个 ADC 控制器下，不支持部分 ADC 通道为 DMA 模式，部分 ADC 通道为 oneshot 模式。请参考 `ESP32 ADC hardware-limitations <https://docs.espressif.com/projects/esp-idf/en/v5.1.1/esp32/api-reference/peripherals/adc_continuous.html#hardware-limitations>`_ 说明。
+  - 在软件上，建议使用 `adc_continuous_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/peripherals/adc_continuous.html#_CPPv423adc_continuous_config_t>`_ 将 ADC1 设置为 DMA 通道; 使用 `adc_oneshot_config_channel <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/peripherals/adc_oneshot.html?highlight=adc_oneshot_config_channel#_CPPv426adc_oneshot_config_channel25adc_oneshot_unit_handle_t13adc_channel_tPK22adc_oneshot_chan_cfg_t>`_ 将 ADC2 设置为 oneshot 通道。
