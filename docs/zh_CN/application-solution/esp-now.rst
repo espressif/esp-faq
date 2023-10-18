@@ -134,3 +134,10 @@ ESP-NOW 应用是否支持通过每个 Wi-Fi 信道发送数据包？
 
   - 在 esp-now 应用中，ESP32 支持连接加密设备的数量不超过 17 个，默认值是 7 。请参见 `“添加配对设备” <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/network/esp_now.html#id5>`_ 说明。
   - 如果想要修改加密设备的数量，在 WiFi menuconfig 设置 ``CONFIG_ESP_WIFI_ESPNOW_MAX_ENCRYPT_NUM``。
+
+-----------
+
+使用 ESP-NOW 传输数据，如何获取对应的 RSSI？
+---------------------------------------------------------------------------------------------------------------------------
+
+  - 可以使用 `wifi_pkt_rx_ctrl_t <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.0.3/esp32/api-reference/network/esp_wifi.html#_CPPv418wifi_pkt_rx_ctrl_t>`__ 来获取对应的 RSSI。
