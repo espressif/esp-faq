@@ -134,3 +134,10 @@ I tested the application `esp-idf/examples/wifi/espnow <https://github.com/espre
 
   - In the esp-now application, ESP32 supports connecting to no more than 17 encrypted devices, and the default value is 7. For more details, please refer to `"Add Paired Devices" <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/network/esp_now.html#add-paired-device>`_.
   - If you want to change the number of paired encryption devices, set ``CONFIG_ESP_WIFI_ESPNOW_MAX_ENCRYPT_NUM`` in WiFi component configuration menu.
+
+---------------
+
+How do I obtain the corresponding RSSI when transferring data using ESP-NOW?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can use `wifi_pkt_rx_ctrl_t <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.0.3/esp32/api-reference/network/esp_wifi.html#_CPPv418wifi_pkt_rx_ctrl_t>`_ to get the corresponding RSSI.
