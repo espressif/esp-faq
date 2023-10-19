@@ -498,5 +498,3 @@ ESP32-C3 采用电池供电时，当供电电压逐渐下降，比如将电池�
 
   - 根本原因：ESP32-C3 芯片重新上电和复位时，CHIP_EN 管脚需要满足 `ESP32-C3 芯片规格书 <https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_cn.pdf>`__ 或 `ESP32-C3 硬件设计指南 <https://www.espressif.com/sites/default/files/documentation/esp32-c3_hardware_design_guidelines_cn.pdf>`__ 里的上电时序图要求和说明。如果电池放电和上电比较缓慢，ESP32-C3 可能无法充分复位，从而导致芯片部分单元处于不确定状态。
   - 解决办法：目前，若使用电池供电或储能类应用系统，可以通过调整不同 RC 器件值、使用两个电阻分压控制，或使用一颗较为常见的复位芯片来解决此问题。有关 RC 器件值、相关电阻的详细信息，请参见 `ESP32-C3 系列芯片硬件设计指南 <https://www.espressif.com/sites/default/files/documentation/esp32-c3_hardware_design_guidelines_cn.pdf>`__。
-
-

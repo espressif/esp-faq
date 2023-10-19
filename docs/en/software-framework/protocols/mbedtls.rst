@@ -52,6 +52,10 @@ When I connected an ESP32 module with the HTTPS Server, I got the following log.
 When resolving a hostname on ESP32, I encountered the following error. What could be the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+  .. code-block:: text
+
+    getaddrinfo() returns 202, addrinfo=0x0
+    
   - The error is caused by DNS request timeout.
   - You can enable DNS log with the debug level or capture wireless packets for further analysis.
   - To enable the debug level DNS log, you can add ``#define DNS_DEBUG LWIP_DBG_ON`` code to the ``esp-idf/components/lwip/lwip/src/include/lwip/opt.h`` file, and then enable the ``Component config`` > ``LWIP`` > ``Enable LWIP Debug`` configuration.

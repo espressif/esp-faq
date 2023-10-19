@@ -1,0 +1,105 @@
+
+
+specified_files:
+# application-solution
+#  - docs/zh_CN/application-solution/android-application.rst
+  - docs/zh_CN/application-solution/artificial-intelligence.rst
+  - docs/zh_CN/application-solution/at-application.rst
+#  - docs/zh_CN/application-solution/audio-development-framework.rst
+  - docs/zh_CN/application-solution/ble-mesh-development-framework.rst
+#  - docs/zh_CN/application-solution/camera-application.rst
+#  - docs/zh_CN/application-solution/community-sw-and-platforms.rst
+  - docs/zh_CN/application-solution/esp-matter.rst
+  - docs/zh_CN/application-solution/esp-now.rst
+#  - docs/zh_CN/application-solution/esp-rainmaker-cloud-service.rst
+  - docs/zh_CN/application-solution/index.rst
+#  - docs/zh_CN/application-solution/ios-application.rst
+#  - docs/zh_CN/application-solution/third-party-cloud-service.rst
+#  - docs/zh_CN/application-solution/wifi-mesh-development-framework.rst
+
+# commercial-faq
+  - docs/zh_CN/commercial-faq/index.rst
+
+# development-environment
+  - docs/zh_CN/development-environment/IDE-plugins.rst
+  - docs/zh_CN/development-environment/debugging.rst
+  - docs/zh_CN/development-environment/environment-setup.rst
+#  - docs/zh_CN/development-environment/firmware-update.rst
+  - docs/zh_CN/development-environment/index.rst
+
+# hardware-related
+  - docs/zh_CN/hardware-related/RF-related.rst
+  - docs/zh_CN/hardware-related/chip-comparison.rst
+#  - docs/zh_CN/hardware-related/development-board.rst
+  - docs/zh_CN/hardware-related/hardware-design.rst
+  - docs/zh_CN/hardware-related/index.rst
+  - docs/zh_CN/hardware-related/process-and-ESD.rst
+  - docs/zh_CN/hardware-related/production-test.rst
+
+# index
+  - docs/zh_CN/index.rst
+
+# instruction
+  - docs/zh_CN/instruction/document-contribution.rst
+  - docs/zh_CN/instruction/index.rst
+  - docs/zh_CN/instruction/question-search.rst
+
+# software-framework
+  - docs/zh_CN/software-framework/ble-bt.rst
+  - docs/zh_CN/software-framework/coexistence.rst
+  - docs/zh_CN/software-framework/ethernet.rst
+  - docs/zh_CN/software-framework/index.rst
+  - docs/zh_CN/software-framework/peripherals/adc.rst
+  - docs/zh_CN/software-framework/peripherals/dac.rst
+  - docs/zh_CN/software-framework/peripherals/gpio.rst
+  - docs/zh_CN/software-framework/peripherals/i2c.rst
+  - docs/zh_CN/software-framework/peripherals/i2s.rst
+  - docs/zh_CN/software-framework/peripherals/index.rst
+  - docs/zh_CN/software-framework/peripherals/lcd.rst
+  - docs/zh_CN/software-framework/peripherals/ledc.rst
+  - docs/zh_CN/software-framework/peripherals/mcpwm.rst
+  - docs/zh_CN/software-framework/peripherals/other-peripherals.rst
+  - docs/zh_CN/software-framework/peripherals/pcnt.rst
+  - docs/zh_CN/software-framework/peripherals/rmt.rst
+  - docs/zh_CN/software-framework/peripherals/sdio.rst
+  - docs/zh_CN/software-framework/peripherals/spi.rst
+  - docs/zh_CN/software-framework/peripherals/timer.rst
+  - docs/zh_CN/software-framework/peripherals/touch.rst
+  - docs/zh_CN/software-framework/peripherals/twai.rst
+  - docs/zh_CN/software-framework/peripherals/uart.rst
+  - docs/zh_CN/software-framework/peripherals/usb.rst
+  - docs/zh_CN/software-framework/protocols/esp-tls.rst
+  - docs/zh_CN/software-framework/protocols/http.rst
+  - docs/zh_CN/software-framework/protocols/index.rst
+  - docs/zh_CN/software-framework/protocols/lwip.rst
+  - docs/zh_CN/software-framework/protocols/mbedtls.rst
+  - docs/zh_CN/software-framework/protocols/mqtt.rst
+  - docs/zh_CN/software-framework/protocols/other-protocols.rst
+  - docs/zh_CN/software-framework/provisioning.rst
+  - docs/zh_CN/software-framework/security.rst
+  - docs/zh_CN/software-framework/storage/fatfs.rst
+  - docs/zh_CN/software-framework/storage/index.rst
+  - docs/zh_CN/software-framework/storage/nvs.rst
+  - docs/zh_CN/software-framework/storage/other-storages.rst
+  - docs/zh_CN/software-framework/storage/psram.rst
+  - docs/zh_CN/software-framework/storage/sd-sdio-mmc.rst
+  - docs/zh_CN/software-framework/storage/spi-flash.rst
+  - docs/zh_CN/software-framework/storage/spiffs.rst
+#  - docs/zh_CN/software-framework/system.rst
+  - docs/zh_CN/software-framework/wifi.rst
+
+# test-verification
+  - docs/zh_CN/test-verification/index.rst
+  - docs/zh_CN/test-verification/power-consumption-verification.rst
+
+target_language: EN-CN
+
+trans_dict:
+  pin: 管脚
+  example: 例程
+  provision: 配网
+  unicast address: 单播地址
+  node: 节点
+  datasheet: 技术规格书
+
+target_language_folder: ./

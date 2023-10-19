@@ -56,6 +56,7 @@ ESP-IDF 支持的 TLS 版本有哪些？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 0x7200 的错误可能有以下几点：
+
     - MBEDTLS_SSL_IN_CONTENT_LEN 过小，一般小于最大 16 K
     - 内存不够
     - 服务器拒绝 ESP 连接，发送的 SSL record 不完整，需要抓包看下, 详情请参考 `乐鑫 Wireshark 使用指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wireshark-user-guide.html#wireshark>`__。

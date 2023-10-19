@@ -213,4 +213,3 @@ secure boot 和 flash 加密中涉及的存储在 eFuse 数据有哪些？
 
   - 启用 Secure Boot 后，你必须对 OTA 要使用的新固件进行签名，否则新固件无法被应用到设备上；
   - 启用 flash 加密后，在生成新固件时，请保持使能 flash 加密的选项。
-  

@@ -72,4 +72,3 @@ ESP32 支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存吗？
 ----------------------------------------------------------------------------------
 
   ESP32 可以支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存使用。
-  

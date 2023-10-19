@@ -1,0 +1,15 @@
+
+
+print_rst_file_path.py :
+
+python3 print_rst_file_path.py source_folder_path reference_path
+
+For example : python3 print_rst_file_path.py ../../docs/zh_CN ../../
+
+-------------------------------
+
+detect_inconsistent_line_num.py :
+
+python3 detect_inconsistent_line_num.py source_folder_path
+
+For example : python3 detect_inconsistent_line_num.py ../../docs/zh_CN

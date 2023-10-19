@@ -5,8 +5,6 @@ ESP-FAQ
 .. role:: bolditalics
    :class: bolditalics
 
-| [**Coming Soon ...**]
-
 | ESP-FAQ is a summary document of frequently asked questions released by Espressif. This repository aims to help our users to quickly locate those questions and get answers through simple explanations. The current categories of FAQ cover: development environment, application solution, software framework, hardware related and test verification.
 
 =======================  ===========================  =========================

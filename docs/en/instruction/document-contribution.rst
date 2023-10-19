@@ -22,8 +22,6 @@ Add new items
 5. If all the abovementioned steps are finished following requirements, then you can `Submit a merge request`_;
 6. After all the review comments resolved and new pull requests updated, then this process is fully completed.
 
-
-
 Modify contents
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -88,7 +86,6 @@ Please add new Q&A items and do updates according to the guidelines as follows:
 - Follow list punctuation rules described in `Espressif Manual of Style <https://espressifsystems.sharepoint.com/sites/Documentation/Lists/Internal%20Document/DispForm.aspx?ID=1&e=eApbSw>`_, Section Punctuation in Lists.
 
 For additional guidance regarding list please refer to `Bulleted and Numbered Lists <https://www.prismnet.com/~hcexres/textbook/lists.html>`_. Please see the example template for text and figures below.
-
 
 Q&A example
 ~~~~~~~~~~~~~~~~~~~~~~~
