@@ -141,3 +141,10 @@ How do I obtain the corresponding RSSI when transferring data using ESP-NOW?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - You can use `wifi_pkt_rx_ctrl_t <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.0.3/esp32/api-reference/network/esp_wifi.html#_CPPv418wifi_pkt_rx_ctrl_t>`_ to get the corresponding RSSI.
+
+-----------------
+
+How do I use RSSI in ESP-NOW to achieve selective range control?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can achieve it by modifying the `espnow_frame_head_t g_initiator_frame() <https://github.com/espressif/esp-now/blob/ba4f43539d42d5652aad18aa6b88d60a54585de8/src/control/src/espnow_ctrl.c#L87>`_ function with .forward_ttl and .forward_rssi parameters. For corresponding parameter descriptions, please see `esp-now/src/espnow/include/espnow.h <https://github.com/espressif/esp-now/blob/ba4f43539d42d5652aad18aa6b88d60a54585de8/src/espnow/include/espnow.h#L170>`__.
