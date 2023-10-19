@@ -141,3 +141,10 @@ ESP-NOW 应用是否支持通过每个 Wi-Fi 信道发送数据包？
 ---------------------------------------------------------------------------------------------------------------------------
 
   - 可以使用 `wifi_pkt_rx_ctrl_t <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.0.3/esp32/api-reference/network/esp_wifi.html#_CPPv418wifi_pkt_rx_ctrl_t>`__ 来获取对应的 RSSI。
+
+-------------
+
+如何在 ESP-NOW 中使用 RSSI 实现选择性范围控制?
+--------------------------------------------------------------------------------------------------------------
+
+  - 可以通过修改 `espnow_frame_head_t g_initiator_frame() <https://github.com/espressif/esp-now/blob/ba4f43539d42d5652aad18aa6b88d60a54585de8/src/control/src/espnow_ctrl.c#L87>`_ 中的 .forward_ttl 和 .forward_rssi 参数来实现。对应参数说明参见 `esp-now/src/espnow/include/espnow.h <https://github.com/espressif/esp-now/blob/ba4f43539d42d5652aad18aa6b88d60a54585de8/src/espnow/include/espnow.h#L170>`__。
