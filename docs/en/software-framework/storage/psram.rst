@@ -42,6 +42,7 @@ When ESP32 connected to a PSRAM externally, how to change its clock source?
 When a 8 MB PSRAM mounted on ESP32, why only 4 MB of it is actually mapped?
 -----------------------------------------------------------------------------------------------------------------------
 
+  - It is recommended to use the official ESP-PSRAM chip in conjunction with the ESP32 chip.
   - Up to 4 MB (0x3F80_0000 ~ 0x3FBF_FFFF) of external RAM can be mapped into data address space, please refer to the specifications of Section 3.1.4 Memory Map in `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
   - For a 8 MB PSRAM, you can access the other 4 MB following example `himem <https://github.com/espressif/esp-idf/tree/master/examples/system/himem>`_.
 
@@ -52,7 +53,6 @@ I'm using an ESP32 development board with the official PSRAM chip PSRAM64H embed
 
   - If you need to change the PSRAM chip, please update configuration options in  "menuconfig -> Component config -> ESP32-specific -> Support for external, SPI-connected RAM -> SPI RAM config -> Type of SPI RAM chip in use".
   - If you cannot find the corresponding type options of the new PSRAM chip you are about to use, please add the chip driver manually.
-  - It is recommended to use Espressif's official ESP-PSRAM chip for ESP32 series.
 
 ----------------------
 
@@ -72,4 +72,3 @@ Does ESP32 support coexistence between 16 MB External Flash and 8 MB External PS
 -------------------------------------------------------------------------------------------------
 
   Yes, ESP32 supports coexistence between 16 MB External Flash and 8 MB External PSRAM.
-  

@@ -1,12 +1,33 @@
-translate:
+check_line_num:
   extends:
     - .rules:auto_trans:translate
-  image: $CI_SPHINX_DOCKER
+  image: python:3.8
   stage: auto_trans
   tags:
     - build_docs
   script:
-    # - git clone -b new_translation $TRY_OPENAI_REPO
-    # - pip3 install -r ./try-openai/requirements.txt
-    # - python3 ./try-openai/translate-rst-files.py $OPENAI_API_KEY $GITLAB_URL $TOKEN $PROJECT_ID $BRANCH_NAME -a
-    - echo "add the bot"
+    - echo "Begin Check"
+    - python3 --version
+    - /usr/local/bin/python -m pip install --upgrade pip
+    - git clone -b new_translation $TRY_OPENAI_REPO
+    - pip3 install -r ./try-openai/requirements.txt
+    - python3 ./try-openai/check_line_num.py
+    - echo "Check Completed"
+
+translate:
+  extends:
+    - .rules:auto_trans:translate
+  image: python:3.8
+  stage: auto_trans
+  tags:
+    - build_docs
+  script:
+    - echo "Begin Translation"
+    - python3 --version
+    - /usr/local/bin/python -m pip install --upgrade pip
+    - git clone -b new_translation $TRY_OPENAI_REPO
+    - pip3 install -r ./try-openai/requirements.txt
+    - python3 ./try-openai/translate_rst_files.py $OPENAI_API_KEY $GITLAB_URL $CHATGPT_BOT_TOKEN $PROJECT_ID test/chatgpt_script_auto_trans
+    - echo "Translation Completed"
+  needs:
+    - check_line_num

@@ -28,4 +28,3 @@ Does ESP32 support PCI-E protocol?
 -----------------------------------------------------
 
   No, it doesn't.
-

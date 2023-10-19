@@ -15,7 +15,6 @@ Third party cloud service
 
 --------------
 
-
 Are there any examples for OTA upgrading?
 ----------------------------------------------------
 

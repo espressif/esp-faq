@@ -8,7 +8,6 @@ This instruction includes the following two parts：
 - Question search techniques
 - Question classification framework
 
-
 Question Search Techniques
 -----------------------------
 

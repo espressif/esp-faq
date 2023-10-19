@@ -55,4 +55,3 @@ NVS 扇区是否会因写入时意外断电而损坏？
  
     - `MFG 量产程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/storage/mass_mfg.html#id1>`_ 
     - `NVS 分区生成程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/storage/nvs_partition_gen.html#nvs>`_ 
-

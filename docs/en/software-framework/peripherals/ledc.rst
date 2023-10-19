@@ -71,6 +71,8 @@ I'm using v3.3.3 version of ESP-IDF to test the ledc example on ESP32. The LED P
             .clk_cfg = LEDC_USE_RTC8M_CLK,
         };
 
+-------------------------
+
 Does ESP32 PWM support complementary outputs with dead bands on two channels?
 ------------------------------------------------------------------------------------------------------------
 

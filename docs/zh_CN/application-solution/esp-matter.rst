@@ -26,12 +26,12 @@ ESP 哪些模组可以接入 Matter？
 -------------------------------------------
 
   可以参考：
+  
   - `ESP Matter Github <https://github.com/espressif/esp-matter>`_
   - `Espressif Matter 系列博客 <https://zhuanlan.zhihu.com/p/469263457>`_
   - `Espressif Matter 方案视频 <https://www.bilibili.com/video/BV1sV4y1x74U>`_
   - `Espressif Matter 示例视频 <https://www.bilibili.com/video/BV1ha411K7p2>`_
   
-
 ------------------
 
 `ESP Matter <https://github.com/espressif/esp-matter>`_ 是否能在 Windows 上编译开发？
