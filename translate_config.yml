@@ -5,7 +5,7 @@ specified_files:
 #  - docs/zh_CN/application-solution/android-application.rst
   - docs/zh_CN/application-solution/artificial-intelligence.rst
   - docs/zh_CN/application-solution/at-application.rst
-#  - docs/zh_CN/application-solution/audio-development-framework.rst
+  - docs/zh_CN/application-solution/audio-development-framework.rst
   - docs/zh_CN/application-solution/ble-mesh-development-framework.rst
 #  - docs/zh_CN/application-solution/camera-application.rst
 #  - docs/zh_CN/application-solution/community-sw-and-platforms.rst
@@ -24,7 +24,7 @@ specified_files:
   - docs/zh_CN/development-environment/IDE-plugins.rst
   - docs/zh_CN/development-environment/debugging.rst
   - docs/zh_CN/development-environment/environment-setup.rst
-#  - docs/zh_CN/development-environment/firmware-update.rst
+  - docs/zh_CN/development-environment/firmware-update.rst
   - docs/zh_CN/development-environment/index.rst
 
 # hardware-related
