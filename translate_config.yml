@@ -2,7 +2,7 @@
 
 specified_files:
 # application-solution
-#  - docs/zh_CN/application-solution/android-application.rst
+  - docs/zh_CN/application-solution/android-application.rst
   - docs/zh_CN/application-solution/artificial-intelligence.rst
   - docs/zh_CN/application-solution/at-application.rst
   - docs/zh_CN/application-solution/audio-development-framework.rst
