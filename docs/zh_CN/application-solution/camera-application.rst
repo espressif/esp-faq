@@ -18,21 +18,21 @@
 ESP32 系列芯片支持哪种类型的摄像头？
 ---------------------------------------
 
-  - 请参考 `ESP32 系列支持的摄像头型号 <https://github.com/espressif/esp32-camera/blob/master/README.md>`_。
+  请参考 `ESP32 系列支持的摄像头型号 <https://github.com/espressif/esp32-camera/blob/master/README.md>`_。
 
 --------------
 
 摄像头输出图像都有什么格式？
 ------------------------------
 
-  - 图像格式主要由摄像头决定，如果某个摄像头支持多个图像格式，如 RGB565、RGB888、YUV422、JPEG 等，需要通过配置摄像头的寄存器来选择输出格式。
+  图像格式主要由摄像头决定，如果某个摄像头支持多个图像格式，如 RGB565、RGB888、YUV422、JPEG 等，需要通过配置摄像头的寄存器来选择输出格式。
 
 --------------
 
 摄像头支持哪些参数调整？
 -------------------------
 
-  - 图像数据传输速度 (PCLK)、摄像头输出格式、分辨率、输出图像大小、白平衡、GAMMA 校正等摄像头自带的图像模式参数调整。
+  图像数据传输速度 (PCLK)、摄像头输出格式、分辨率、输出图像大小、白平衡、GAMMA 校正等摄像头自带的图像模式参数调整。
 
 --------------
 
@@ -49,19 +49,19 @@ ESP32 系列芯片支持哪种类型的摄像头？
 ------------------------------
 
   - 理论上，PCLK 速度越高，数据传输越快，但实际使用中，PCLK 越高也意味着对芯片的处理速度要求越高。
-  - 当前 ESP32 和 ESP32S2 芯片并口通信是通过 I2S 接口实现的，过高的 PCLK 会导致并口数据无法同步，出现图像抖动甚至花屏的现象。
-  - ESP32S3 使用独立的 LCD—CAM 接口，可以支持更高的 PCLK 频率。
+  - 当前 ESP32 和 ESP32-S2 芯片并口通信是通过 I2S 接口实现的，过高的 PCLK 会导致并口数据无法同步，出现图像抖动甚至花屏的现象。
+  - ESP32-S3 使用独立的 LCD—CAM 接口，可以支持更高的 PCLK 频率。
 
    - ESP32 的 PCLK 上限为 8 MHz。
-   - ESP32S2 的 PCLK 上限为 32 MHz。
-   - ESP32S3 的 PCLK 上限为 40 MHz。
+   - ESP32-S2 的 PCLK 上限为 32 MHz。
+   - ESP32-S3 的 PCLK 上限为 40 MHz。
 
 --------------
 
 ESP32 系列芯片支持 MIPI 接口吗？
 --------------------------------
 
-  - ESP32、ESP32S2 和 ESP32S3 均不支持，后续的芯片会支持。
+  - ESP32、ESP32-S2 和 ESP32-S3 均不支持，后续的芯片会支持。
   - 当前 ESP32 系列的芯片支持的摄像头接口有 DVP、SPI、USB。
 
 --------------
@@ -69,7 +69,7 @@ ESP32 系列芯片支持 MIPI 接口吗？
 ESP32 系列芯片支持 USB2.0 接口吗？
 ----------------------------------
 
-  - ESP32 和 ESP32S2 均不支持，后续的芯片会支持。
+  - ESP32 和 ESP32-S2 均不支持，后续的芯片会支持。
 
 --------------
 
@@ -87,7 +87,7 @@ ESP32 系列芯片支持 USB2.0 接口吗？
   在摄像头应用中，影响帧率的因素主要包括：
 
   - 分辨率：分辨率越高，每帧需要采集和传输的像素数据就越多，因此帧率就会下降。
-  - 图像格式：常见的图像格式包括 RGB565、RGB888、YUV422、JPEG 等，不同的图像格式在图像质量和数据压缩方面存在差异，这些差异会直接影响帧率。  
+  - 图像格式：常见的图像格式包括 RGB565、RGB888、YUV422、JPEG 等，不同的图像格式在图像质量和数据压缩方面存在差异，这些差异会直接影响帧率。
   - 图像处理：如果需要对每帧图像进行处理，如降噪、增强、压缩等操作，会占用更多的处理时间，降低帧率。
   - 传输带宽：传输带宽越窄，每帧需要传输的数据就越少，因此帧率就会下降。
   - 处理器性能：处理器性能越低，每帧需要处理的数据量就越难以承受，因此帧率就会下降。
@@ -105,12 +105,12 @@ ESP32 系列芯片支持 USB2.0 接口吗？
    - XCLK 输入的时钟频率太低或摄像头供电不正常，导致摄像头无法正常运行。
    - SIOC 和 SIOD 上挂载太多设备，导致轮询读到率先返回的地址 ID 不是摄像头而是其他设备。此情况建议固定摄像头 ID，以去除轮询步骤。
 
-  - 摄像头识别到了型号，没有图像显示:
+  - 摄像头识别到了型号，没有图像显示：
 
    - 检查摄像头数据管脚是否有信号，MCLK 是否正常输入。
    - 摄像头寄存器参数配置正确。
 
-  - 摄像头图像显示不正常:
+  - 摄像头图像显示不正常：
 
    - 检查代码，查看输出格式是 RGB、YUV 还是 JPEG，是否符合接收端需要的格式。
    - 尝试降低 PCLK 频率。
@@ -130,7 +130,7 @@ ESP32 支持传输视频流吗？
 ESP-EYE 的出厂固件在哪里？
 ------------------------------------------------------------------------
 
-  - 请参考 `ESP-EYE 的出厂固件 <https://github.com/espressif/esp-who/tree/master/default_bin>`_。
+  请参考 `ESP-EYE 的出厂固件 <https://github.com/espressif/esp-who/tree/master/default_bin>`_。
 
 --------------
 
@@ -153,7 +153,7 @@ ESP32 支持 12 位 DVP 接口的摄像头吗？
 ESP32 是否支持使用不带 JEPG 编码的摄像头来获取 JPEG 图像？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 如果摄像头本身不支持 JPEG 编码，可以参考我们提供的 `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/pic_server>`_ 例程，在 ESP32 设备上实现软件 JPEG 编码。该方法通过软件对 YUV422 或 RGB565 数据进行编码，得到 JPEG 图像。
+  如果摄像头本身不支持 JPEG 编码，可以参考我们提供的 `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/pic_server>`_ 例程，在 ESP32 设备上实现软件 JPEG 编码。该方法通过软件对 YUV422 或 RGB565 数据进行编码，得到 JPEG 图像。
 
 --------------
 
@@ -198,7 +198,7 @@ ESP32-S2 从上电到显示摄像头图像需要 5 秒，是否有改善的空�
   有改善的空间，参考如下：
 
   - 尝试去掉 ``esp_camera_init()`` 里的一些延时函数。
-  - 更改 ``menuconfig`` -> ``component config`` -> ``camera configuration`` 里的 sccb 的时钟频率为 400000。
+  - 更改 ``menuconfig`` > ``component config`` > ``camera configuration`` 里的 sccb 的时钟频率为 400000。
 
 --------------
 
@@ -212,7 +212,7 @@ ESP32 可以直接给 GC0308 摄像头提供 24 MHz 频率吗？
 ESP32/ESP32-S3 是否支持 MMS 串流协议？
 -----------------------------------------------------------------
 
-  ESP32 和 ESP32-S3 本身并不直接支持 MMS 协议。MMS（Microsoft Media Server）是一种由微软开发的流媒体传输协议，主要用于 Windows Media Player 的网络流媒体播放。ESP32 和 ESP32-S3 支持的流媒体协议有 RTSP 和 SIP。如果需要将 ESP32 或 ESP32-S3 用于支持 MMS 协议的场景，可以考虑使用支持 MMS 协议的中间件或转换器。
+  ESP32 和 ESP32-S3 本身并不直接支持 MMS 协议。MMS (Microsoft Media Server) 是一种由微软开发的流媒体传输协议，主要用于 Windows Media Player 的网络流媒体播放。ESP32 和 ESP32-S3 支持的流媒体协议有 RTSP 和 SIP。如果需要将 ESP32 或 ESP32-S3 用于支持 MMS 协议的场景，可以考虑使用支持 MMS 协议的中间件或转换器。
 
 --------------
 
@@ -247,7 +247,7 @@ ESP32/ESP32-S2/ESP32-S3 是否有通过摄像头识别二维码的参考？
 当前适配的摄像头传感器没有适合我的需求的，能否增加一个指定型号的摄像头驱动？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  可以。请先通过 `技术支持 <https://www.espressif.com/en/contact-us/technical-inquiries>`__ 渠道与乐鑫的工程师确认需求，选定摄像头传感器的型号后，我们可以为您提供对应的摄像头传感器的驱动程序。
+  可以。请先通过 `技术支持 <https://www.espressif.com/en/contact-us/technical-inquiries>`__ 渠道与乐鑫的工程师确认需求，选定摄像头传感器的型号后，我们将为您提供对应的摄像头传感器的驱动程序。
 
 --------------
 
@@ -256,7 +256,7 @@ ESP32/ESP32-S2/ESP32-S3 是否有通过摄像头识别二维码的参考？
 
   假设您需要的分辨率为 640x240，可以通过下述两种方法使用自定义分辨率：
   - 配置 sensor 工作在典型的分辨率 640x480 上，然后只使用其中的上半部分数据 (640x240)。
-  - 在 `esp32-camera/driver/include/sensor.h <https://github.com/espressif/esp32-camera/blob/master/driver/include/sensor.h#L92>`__ 中增加标识 FRAMESIZE_640*240，然后在 `esp32-camera/driver/sensor.c <https://github.com/espressif/esp32-camera/blob/master/driver/sensor.c#L31>`__ 中增加该分辨率的长度与宽度的定义 {640, 240， ASPECT_RATIO_16X9}。这种方式需要 sensor 的驱动支持自定义分辨率才能正常工作。
+  - 在 `esp32-camera/driver/include/sensor.h <https://github.com/espressif/esp32-camera/blob/master/driver/include/sensor.h#L92>`__ 中增加标识 FRAMESIZE_640*240，然后在 `esp32-camera/driver/sensor.c <https://github.com/espressif/esp32-camera/blob/master/driver/sensor.c#L31>`__ 中增加该分辨率的长度与宽度的定义 {640, 240，ASPECT_RATIO_16X9}。这种方式需要 sensor 的驱动支持自定义分辨率才能正常工作。
 
 
 --------------
@@ -268,16 +268,16 @@ ESP32/ESP32-S2/ESP32-S3 是否有通过摄像头识别二维码的参考？
   - 直接在 esp32-camera/sensors/ov5640.c 的 reset() 函数中使用 write_reg() 配置相关的寄存器。
   - 在应用层通过 set_reg() 函数配置相关的寄存器：
 
-  .. code-block:: c  
+  .. code-block:: c
 
     //初始化摄像头
     esp_err_t ret = esp_camera_init(&camera_config);
     sensor_t *s = esp_camera_sensor_get();
     s->set_reg(s, 0xFFFA, 0xFF, 0xA1);
-  
+
 --------------
 
-esp32-camera 中触发 “cam_hal: EV-VSYNC-OVF" 是什么原因？
+esp32-camera 中触发 “cam_hal: EV-VSYNC-OVF” 是什么原因？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   这是传感器触发的帧同步信号过快导致的问题。可以按照下面的步骤进行排查：
