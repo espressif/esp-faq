@@ -7,7 +7,7 @@ specified_files:
   - docs/zh_CN/application-solution/at-application.rst
   - docs/zh_CN/application-solution/audio-development-framework.rst
   - docs/zh_CN/application-solution/ble-mesh-development-framework.rst
-#  - docs/zh_CN/application-solution/camera-application.rst
+  - docs/zh_CN/application-solution/camera-application.rst
 #  - docs/zh_CN/application-solution/community-sw-and-platforms.rst
   - docs/zh_CN/application-solution/esp-matter.rst
   - docs/zh_CN/application-solution/esp-now.rst
