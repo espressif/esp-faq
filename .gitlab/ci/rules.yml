@@ -11,18 +11,20 @@
 ##############
 # if anchors #
 ##############
-.if-protected: &if-protected
-  if: '($CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_BRANCH =~ /^release\/v/ || $CI_COMMIT_TAG =~ /^v\d+\.\d+(\.\d+)?($|-)/)'
-
 .if-dev-push: &if-dev-push
   if: '$CI_COMMIT_REF_NAME != "master" && $CI_COMMIT_BRANCH !~ /^release\/v/ && $CI_COMMIT_TAG !~ /^v\d+\.\d+(\.\d+)?($|-)/ && ($CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event")'
+
+.if-linkcheck: &if-linkcheck
+  if: '$CI_COMMIT_REF_NAME =~ /^maintain.*/ || $CI_COMMIT_BRANCH =~ /^linkcheck.*/'
+
+.if-protected: &if-protected
+  if: '($CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_BRANCH =~ /^release\/v/ || $CI_COMMIT_TAG =~ /^v\d+\.\d+(\.\d+)?($|-)/)'
 
 ##################
 # Auto Generated #
 ##################
 .if-trigger-job: &if-trigger-job
   if: '$BOT_DYNAMIC_TEST_JOBS && $BOT_DYNAMIC_TEST_JOBS =~ $CI_JOB_NAME'
-
 
 .if-label-auto-trans: &if-label-auto_trans
   if: '$BOT_LABEL_AUTO_TRANS || $CI_MERGE_REQUEST_LABELS =~ /^(?:[^,\n\r]+,)*auto_trans(?:,[^,\n\r]+)*$/i'
@@ -37,6 +39,12 @@
   if: '$BOT_LABEL_DEPLOY || $CI_MERGE_REQUEST_LABELS =~ /^(?:[^,\n\r]+,)*deploy(?:,[^,\n\r]+)*$/i'
 
 # For docs
+
+.rules:pre_check:linkcheck:
+  rules:
+    - <<: *if-linkcheck
+    - <<: *if-label-pre_check
+    - <<: *if-trigger-job
 
 .rules:pre_check:readme:
   rules:
