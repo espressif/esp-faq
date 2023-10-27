@@ -1,3 +1,4 @@
+
 check_line_num:
   extends:
     - .rules:auto_trans:translate
@@ -9,9 +10,9 @@ check_line_num:
     - echo "Begin Check"
     - python3 --version
     - /usr/local/bin/python -m pip install --upgrade pip
-    - git clone -b new_translation $TRY_OPENAI_REPO
-    - pip3 install -r ./try-openai/requirements.txt
-    - python3 ./try-openai/check_line_num.py
+    - git clone $TRY_OPENAI_REPO
+    - pip3 install -r ./auto-translate/requirements.txt
+    - python3 ./auto-translate/check_line_num.py
     - echo "Check Completed"
 
 translate:
@@ -25,9 +26,10 @@ translate:
     - echo "Begin Translation"
     - python3 --version
     - /usr/local/bin/python -m pip install --upgrade pip
-    - git clone -b new_translation $TRY_OPENAI_REPO
-    - pip3 install -r ./try-openai/requirements.txt
-    - python3 ./try-openai/translate_rst_files.py $OPENAI_API_KEY $GITLAB_URL $CHATGPT_BOT_TOKEN $PROJECT_ID test/chatgpt_script_auto_trans
+    - git clone $TRY_OPENAI_REPO
+    - pip3 install -r ./auto-translate/requirements.txt
+    - echo $CI_COMMIT_REF_NAME
+    - python3 ./auto-translate/translate_rst_files.py $OPENAI_API_KEY $GITLAB_URL $CHATGPT_BOT_TOKEN $PROJECT_ID $CI_COMMIT_REF_NAME
     - echo "Translation Completed"
   needs:
     - check_line_num
