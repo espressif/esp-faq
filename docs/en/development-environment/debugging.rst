@@ -251,3 +251,23 @@ When using ESP8266 NonOS v3.0 SDK, the following error occurred. What could be t
     E:M 536    E:M 1528
 
   Any error logs beginning with ``E:M`` indicates insufficient memory.
+
+--------------
+
+When using flash_download_tool to flash firmware to the ESP8266 module, how to solve the following error?
+--------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: text
+
+    ESP8266 Chip efuse check error esp_check_mac_and_efuse
+
+  - Potential reasons:
+    
+    - ``efuse check error`` indicates that the internal eFuse parameter area of the chip has been unintentionally modified. Typically, eFuse stores critical information, such as chip configuration and MAC address. If the eFuse is damaged, it will disable the chip.
+    - Generally, eFuse damage would be caused by overvoltage or static electricity.
+
+  - Suggestions:
+    
+    - Monitor voltage fluctuations during power-up and power-down processes.
+    - The eFuse functionality has been enhanced in ESP32-C3/ESP32-C2 chips. You may consider replacing with the relevant products in the future.
+  
