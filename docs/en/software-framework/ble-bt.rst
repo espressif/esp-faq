@@ -692,3 +692,12 @@ Does ESP32 have any API to check whether BLE advertising has started or stopped?
 
   - For bluedroid stack, there is no such API currently.
   - For Nimble stack (and using non-extended advertising of BLE 4.2), you can use the `ble_gap_adv_active <https://github.com/espressif/esp-nimble/blob/f8f02740acdf4d302d5c2f91ee2e34444d405671/nimble/host/include/host/ble_gap.h#L831>`_ API.
+
+-------------------
+
+Does ESP32 support multiple clients connecting at the same time when used as a BLE server? How to realize it?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 can be used as a BLE server to support multiple BLE clients to access simultaneously. Meanwhile, it can also be used as a BLE client to connect to multiple BLE servers simultaneously. The supported number of BLE stable connections is 3.
+  - When used as a BLE server, you can simply enable advertising again after a client connects. Take `gatt_server_service_table <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server_service_table>`_ as an example, after receiving the ``ESP_GATTS_CONNECT_EVT`` event, please call ``esp_ble_gap_start_advertising()`` to enable advertising.
+  - When used as a BLE client, please refer to `gattc_multi_connect <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gattc_multi_connect>`_.
