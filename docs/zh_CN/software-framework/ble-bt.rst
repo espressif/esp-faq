@@ -692,3 +692,12 @@ ESP32 是否有 API 可用于检查设备 BLE 广播是否开始或停止？
 
   - 如果使用的是 bluedroid 协议栈，目前没有 API 可用于检查。
   - 如果使用的是 Nimble 协议栈（且使用的是 BLE 4.2 的非扩展广播），则可使用 `ble_gap_adv_active <https://github.com/espressif/esp-nimble/blob/f8f02740acdf4d302d5c2f91ee2e34444d405671/nimble/host/include/host/ble_gap.h#L831>`_ API 来检查。
+
+-------------------
+
+ESP32 用作 BLE server 时支持多个 client 同时连接吗？如何实现呢？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32 可以作为 BLE server 支持多个 BLE client 同时接入，也可以作为 BLE client 同时连接多个 BLE server。支持的 BLE 稳定连接数为 3 个。
+  - 用作 BLE server 时，只要在 client 连接之后，再次开启广播即可。以 `gatt_server_service_table <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server_service_table>`_ 为例，在收到 ``ESP_GATTS_CONNECT_EVT`` 事件后，调用 ``esp_ble_gap_start_advertising`` 重新广播。
+  - 用作 BLE client 时，可以参考 `gattc_multi_connect <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gattc_multi_connect>`_ 例程。
