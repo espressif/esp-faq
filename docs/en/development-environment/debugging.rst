@@ -270,4 +270,3 @@ When using flash_download_tool to flash firmware to the ESP8266 module, how to s
     
     - Monitor voltage fluctuations during power-up and power-down processes.
     - The eFuse functionality has been enhanced in ESP32-C3/ESP32-C2 chips. You may consider replacing with the relevant products in the future.
-  
