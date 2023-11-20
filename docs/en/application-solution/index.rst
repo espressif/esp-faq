@@ -6,7 +6,6 @@ application solution
 .. toctree::
    :maxdepth: 1
 
-   Android application  <android-application>
    Artificial intelligence <artificial-intelligence>
    AT application <at-application>
    Audio development framework <audio-development-framework>
@@ -16,6 +15,5 @@ application solution
    ESP Matter <esp-matter>
    ESP-NOW <esp-now>
    ESP RainMaker cloud service <esp-rainmaker-cloud-service>
-   iOS application  <ios-application>
    Third party cloud service <third-party-cloud-service>
    Wi-Fi Mesh development framework <wifi-mesh-development-framework>
