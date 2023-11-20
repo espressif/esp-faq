@@ -426,14 +426,14 @@ Does ESP32 perform domain name resolution each time it connects to the server?
 [LWIP] What is the retransmission interval of TCP？
 --------------------------------------------------------
 
-When ESP32 acts as the sender, the initial retransmission interval of the TCP protocol is usually set to 3 seconds. If the receiver does not send an ACK message, the next retransmission interval will be determined based on the Jacobson algorithm. The retransmission interval will be exponentially increased. Specially, it will be increased by 2, 4, 8, 16, 32 seconds gradually. This retransmission interval is not fixed and you can adjust it by changing some parameters such as timeout time and the size of sliding window.
+  When ESP32 acts as the sender, the initial retransmission interval of the TCP protocol is usually set to 3 seconds. If the receiver does not send an ACK message, the next retransmission interval will be determined based on the Jacobson algorithm. The retransmission interval will be exponentially increased. Specially, it will be increased by 2, 4, 8, 16, 32 seconds gradually. This retransmission interval is not fixed and you can adjust it by changing some parameters such as timeout time and the size of sliding window.
 
 --------------
 
 [LWIP] What is the maximum number of sockets that can be created?
 -------------------------------------------------------------------------
 
-  32 for most, and the default number is 10.
+  Up to 16, default is 10.
 
 --------------
 
