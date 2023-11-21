@@ -24,7 +24,7 @@
 # Auto Generated #
 ##################
 .if-trigger-job: &if-trigger-job
-  if: '$BOT_DYNAMIC_TEST_JOBS && $BOT_DYNAMIC_TEST_JOBS =~ $CI_JOB_NAME'
+  if: '$CI_JOB_NAME =~ $BOT_DYNAMIC_TEST_JOBS && $BOT_DYNAMIC_TEST_JOBS'
 
 .if-label-auto-trans: &if-label-auto_trans
   if: '$BOT_LABEL_AUTO_TRANS || $CI_MERGE_REQUEST_LABELS =~ /^(?:[^,\n\r]+,)*auto_trans(?:,[^,\n\r]+)*$/i'
