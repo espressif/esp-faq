@@ -902,7 +902,7 @@ ESP32 支持 FTM(Fine Timing Measurement) 吗？
 
   **问题背景：**
 
-  ESP32 作为 AP 默认的网段是 192.168.4.x，作为 STA 连接的路由器网段也在 192.168.4.x，PC 连接到该路由器并创建 tcp server，此时 ESP32 作 tcp client 无法建立到 PC 的 tcp 连接。
+  ESP32 作为 AP 默认的网段是 192.168.4.x，作为 STA 连接的路由器网段也在 192.168.4.x，PC 连接到该 ESP32 AP 并创建 tcp server，此时 ESP32 作 tcp client 无法建立到 PC 的 tcp 连接。
   
   **解决方案：**
 
