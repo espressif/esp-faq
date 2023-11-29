@@ -12,7 +12,7 @@ specified_files:
   - docs/zh_CN/application-solution/esp-now.rst
 #  - docs/zh_CN/application-solution/esp-rainmaker-cloud-service.rst
   - docs/zh_CN/application-solution/index.rst
-#  - docs/zh_CN/application-solution/third-party-cloud-service.rst
+  - docs/zh_CN/application-solution/third-party-cloud-service.rst
 #  - docs/zh_CN/application-solution/wifi-mesh-development-framework.rst
 
 # commercial-faq
