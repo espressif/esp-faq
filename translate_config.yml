@@ -28,7 +28,7 @@ specified_files:
 # hardware-related
   - docs/zh_CN/hardware-related/RF-related.rst
   - docs/zh_CN/hardware-related/chip-comparison.rst
-#  - docs/zh_CN/hardware-related/development-board.rst
+  - docs/zh_CN/hardware-related/development-board.rst
   - docs/zh_CN/hardware-related/hardware-design.rst
   - docs/zh_CN/hardware-related/index.rst
   - docs/zh_CN/hardware-related/process-and-ESD.rst
