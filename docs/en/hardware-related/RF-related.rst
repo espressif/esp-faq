@@ -97,3 +97,11 @@ What is the default duty cycle for the "default" level when using the "RF Test T
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The default duty cycle for the "default" level is 98% or higher, and cannot be modified.
+
+-----------
+
+Does the `ESP RF Test Tool <https://www.espressif.com/en/support/download/other-tools?keys=RF>`_ support single carrier testing?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes. To do the single carrier testing, you can set the ``Test mode`` to ``TX tone`` in the test interface.
+  - Before using the ESP RF Test Tool, it is recommended to read the instructions in the ``help`` folder.
