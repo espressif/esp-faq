@@ -110,17 +110,17 @@ Could ESP32 realize bridging between Wi-Fi and Bluetooth® LE?
 What is the operating current of ESP32 Bluetooth® LE?
 ------------------------------------------------------------------
 
-+---------------------------------------------------------------+---------------+---------------+----------------+
-| Current                                                       | MAX (mA)      | Min (mA)      | Average (mA)   |
-+===============================================================+===============+===============+================+
-| Advertising: Adv Interval = 40 ms                             | 142.1         | 32            | 42.67          |
-+---------------------------------------------------------------+---------------+---------------+----------------+
-| Scanning: Scan Interval = 160 ms, Window = 20 ms              | 142.1         | 32            | 44.4           |
-+---------------------------------------------------------------+---------------+---------------+----------------+
-| Connection(Slave): Connection Interval = 20 ms, latency = 0   | 142.1         | 32            | 42.75          |
-+---------------------------------------------------------------+---------------+---------------+----------------+
-| Connection(Slave): Connection Interval = 80 ms, latency = 0   | 142.1         | 32            | 35.33          |
-+---------------------------------------------------------------+---------------+---------------+----------------+
+  +---------------------------------------------------------------+---------------+---------------+----------------+
+  | Current                                                       | MAX (mA)      | Min (mA)      | Average (mA)   |
+  +===============================================================+===============+===============+================+
+  | Advertising: Adv Interval = 40 ms                             | 142.1         | 32            | 42.67          |
+  +---------------------------------------------------------------+---------------+---------------+----------------+
+  | Scanning: Scan Interval = 160 ms, Window = 20 ms              | 142.1         | 32            | 44.4           |
+  +---------------------------------------------------------------+---------------+---------------+----------------+
+  | Connection(Slave): Connection Interval = 20 ms, latency = 0   | 142.1         | 32            | 42.75          |
+  +---------------------------------------------------------------+---------------+---------------+----------------+
+  | Connection(Slave): Connection Interval = 80 ms, latency = 0   | 142.1         | 32            | 35.33          |
+  +---------------------------------------------------------------+---------------+---------------+----------------+
 
 --------------
 
@@ -701,3 +701,10 @@ Does ESP32 support multiple clients connecting at the same time when used as a B
   - ESP32 can be used as a BLE server to support multiple BLE clients to access simultaneously. Meanwhile, it can also be used as a BLE client to connect to multiple BLE servers simultaneously. The supported number of BLE stable connections is 3.
   - When used as a BLE server, you can simply enable advertising again after a client connects. Take `gatt_server_service_table <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server_service_table>`_ as an example, after receiving the ``ESP_GATTS_CONNECT_EVT`` event, please call ``esp_ble_gap_start_advertising()`` to enable advertising.
   - When used as a BLE client, please refer to `gattc_multi_connect <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gattc_multi_connect>`_.
+
+-------------
+
+How to set the continuous scanning time for BLE5.0?
+---------------------------------------------------------------------------------------------------
+
+  - You can use the `esp_err_t esp_ble_gap_start_ext_scan(uint32_t duration, uint16_t period); <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/bluetooth/esp_gap_ble.html?highlight=esp_ble_gap_start_ext_scan#_CPPv426esp_ble_gap_start_ext_scan8uint32_t8uint16_t>`__ API for configuration. When the period is set to 0, the duration time is the continuous scanning time.

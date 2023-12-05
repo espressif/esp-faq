@@ -701,3 +701,10 @@ ESP32 用作 BLE server 时支持多个 client 同时连接吗？如何实现呢
   - ESP32 可以作为 BLE server 支持多个 BLE client 同时接入，也可以作为 BLE client 同时连接多个 BLE server。支持的 BLE 稳定连接数为 3 个。
   - 用作 BLE server 时，只要在 client 连接之后，再次开启广播即可。以 `gatt_server_service_table <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server_service_table>`_ 为例，在收到 ``ESP_GATTS_CONNECT_EVT`` 事件后，调用 ``esp_ble_gap_start_advertising`` 重新广播。
   - 用作 BLE client 时，可以参考 `gattc_multi_connect <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gattc_multi_connect>`_ 例程。
+
+-------------
+
+如何设置 BLE5.0 的持续扫描时间？
+---------------------------------------------------------------------------------------------------
+
+  - 使用 `esp_err_t esp_ble_gap_start_ext_scan(uint32_t duration, uint16_t period); <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s3/api-reference/bluetooth/esp_gap_ble.html?highlight=esp_ble_gap_start_ext_scan#_CPPv426esp_ble_gap_start_ext_scan8uint32_t8uint16_t>`__ API 进行设置，当 period 设置为 0 时，duration 的时间就是持续扫描时间。
