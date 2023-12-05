@@ -213,3 +213,11 @@ After enabling Secure Boot or flash encryption, what should I pay attention to d
 
   - After enabling Secure Boot, you must sign the new firmware to be used for OTA updates. Otherwise, the new firmware cannot be applied to the device.
   - After enabling flash encryption, when generating a new firmware, please ensure that the flash encryption option is enabled.
+
+---------------
+
+Which USB functions will be disabled after the ESP32-S3 enables flash encryption or `Secure Boot <https://docs.espressif.com/projects/esp-idf/en/release-v5.1/esp32s3/security/secure-boot-v2.html#restrictions-after-secure-boot-is-enabled>`__?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - After enabling flash encryption or secure boot on ESP32-S3, the `USB-JTAG debugging <https://docs.espressif.com/projects/esp-idf/en/release-v5.1/esp32s3/api-guides/jtag-debugging/index.html#jtag-debugging>`__ function will be disabled, and it does not support burning firmware with the `idf.py dfu-flash <https://docs.espressif.com/projects/esp-idf/en/release-v5.1/esp32s3/api-guides/dfu.html#api-guide-dfu-flash>`__ command via the USB interface.
+  - After enabling flash encryption or secure boot on ESP32-S3, it supports `USB Host <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host>`__ and `USB Device <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device>`__ features; it also supports downloading firmware through the USB interface using the ``idf.py flash`` command.

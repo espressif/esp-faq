@@ -213,3 +213,11 @@ secure boot 和 flash 加密中涉及的存储在 eFuse 数据有哪些？
 
   - 启用 Secure Boot 后，你必须对 OTA 要使用的新固件进行签名，否则新固件无法被应用到设备上；
   - 启用 flash 加密后，在生成新固件时，请保持使能 flash 加密的选项。
+
+---------------
+
+ESP32-S3 开启 flash 加密或 `安全启动 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.1/esp32s3/security/secure-boot-v2.html#restrictions-after-secure-boot-is-enabled>`__ 后，会禁用哪些 USB 功能呢？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-S3 开启 flash 加密或安全启动后，会禁用 `USB-JTAG 调试 <https://docs.espressif.com/projects/esp-idf/en/release-v5.1/esp32s3/api-guides/jtag-debugging/index.html#jtag-debugging>`__ 功能，且不支持使用 USB 接口通过 `idf.py dfu-flash <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.1/esp32s3/api-guides/dfu.html#api-guide-dfu-flash>`__ 指令烧录固件的功能。
+  - ESP32-S3 开启 flash 加密或安全启动后，支持 `USB Host <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host>`__ 和 `USB Device <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device>`__ 功能；支持使用 USB 接口通过 ``idf.py flash`` 指令下载固件的功能。
