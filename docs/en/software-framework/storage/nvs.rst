@@ -55,3 +55,10 @@ How to realize that stored user data can be saved after power off, not erased by
 
     - `Manufacturing Utility <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/storage/mass_mfg.html#manufacturing-utility>`_    
     - `NVS Partition Generator Utility <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/storage/nvs_partition_gen.html#nvs-partition-generator-utility>`_ 
+
+--------------
+
+Is the API provided by the NVS library thread-safe?
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The NVS initialization and de-initialization functions are not thread-safe, but other NVS functions (open/get/set/commit/close) are thread-safe.

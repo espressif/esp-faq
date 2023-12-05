@@ -55,3 +55,10 @@ NVS 扇区是否会因写入时意外断电而损坏？
  
     - `MFG 量产程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/storage/mass_mfg.html#id1>`_ 
     - `NVS 分区生成程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/storage/nvs_partition_gen.html#nvs>`_ 
+
+--------------
+
+NVS 库提供的 API 是否线程安全？
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 初始化和去初始化的 NVS 函数不是线程安全的，但是其它 NVS 函数 (open/get/set/commit/close) 是线程安全的。
