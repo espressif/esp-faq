@@ -59,3 +59,19 @@ ESP32 使用 Mbed TLS 时如何优化内存？
   - 当前报错日志是因为 DNS 请求超时。
   - 您可用开启 Debug 等级的 DNS 日志或捕捉无线包来进一步分析。
   - 可在 ``esp-idf/components/lwip/lwip/src/include/lwip/opt.h`` 文件中增加 ``#define DNS_DEBUG LWIP_DBG_ON`` 代码，然后开启 ``Component config`` > ``LWIP`` > ``Enable LWIP Debug`` 配置来获取 Debug 等级的 DNS 日志。
+
+-------------
+
+基于 esp-idf SDK 开发，出现如下 mbedtls 软件报错是什么原因？
+----------------------------------------------------------------------------------------------------------------------------------
+
+    .. code-block:: c
+
+      E: esp-tls-mbedtls: mbedtls_ssl_handshake returned -0x4290 
+      E: esp-tls: Failed to open new connection
+      E: transport_base: Failed to open a new connection
+      E: HTTP_CLIENT: Connection failed, sock < 0
+      E: HTTP_CLIENT: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT
+
+  - mbedtls 错误码为 0x4290，0x4290 错误码一般是 0x4280 + 0x10。0x4280 代表错误阶段为 MBEDTLS_ERR_RSA_PUBLIC_FAILED, 0x10 说明此错误阶段的原因为 MBEDTLS_ERR_MPI_ALLOC_FAILED, 代表此错误阶段是内存分配失败导致的。
+  - mbedtls 错误码对应原因参见 `Mbed TLS error codes <https://gist.github.com/erikcorry/b25bdcacf3e0086f8a2afb688420678e>`__。
