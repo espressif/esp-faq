@@ -59,3 +59,19 @@ When resolving a hostname on ESP32, I encountered the following error. What coul
   - The error is caused by DNS request timeout.
   - You can enable DNS log with the debug level or capture wireless packets for further analysis.
   - To enable the debug level DNS log, you can add ``#define DNS_DEBUG LWIP_DBG_ON`` code to the ``esp-idf/components/lwip/lwip/src/include/lwip/opt.h`` file, and then enable the ``Component config`` > ``LWIP`` > ``Enable LWIP Debug`` configuration.
+
+-------------
+
+Why does the following mbedtls software error occur when I develop applications based on the esp-idf SDK?
+----------------------------------------------------------------------------------------------------------------------------------
+
+    .. code-block:: c
+
+      E: esp-tls-mbedtls: mbedtls_ssl_handshake returned -0x4290 
+      E: esp-tls: Failed to open new connection
+      E: transport_base: Failed to open a new connection
+      E: HTTP_CLIENT: Connection failed, sock < 0
+      E: HTTP_CLIENT: Failed to open HTTP connection: ESP_ERR_HTTP_CONNECT
+
+  - The mbedtls error code is 0x4290, which is generally 0x4280 + 0x10. 0x4280 represents the error stage MBEDTLS_ERR_RSA_PUBLIC_FAILED, and 0x10 indicates that the cause of this error stage is MBEDTLS_ERR_MPI_ALLOC_FAILED, which means that this error stage is caused by a failure in memory allocation.
+  - For the meanings for mbedtls error codes, refer to `Mbed TLS error codes <https://gist.github.com/erikcorry/b25bdcacf3e0086f8a2afb688420678e>`__.
