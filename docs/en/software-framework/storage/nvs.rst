@@ -62,3 +62,10 @@ Is the API provided by the NVS library thread-safe?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The NVS initialization and de-initialization functions are not thread-safe, but other NVS functions (open/get/set/commit/close) are thread-safe.
+
+----------------
+
+What are the meanings of NVS error codes in the ESP-IDF SDK?
+----------------------------------------------------------------------------------------------------------------------
+
+  - For the meanings of NVS error codes in the ESP-IDF SDK, refer to `esp-idf/components/nvs_flash/include/nvs.h <https://github.com/espressif/esp-idf/blob/v5.1.2/components/nvs_flash/include/nvs.h#L29>`__.
