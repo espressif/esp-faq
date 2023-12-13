@@ -71,3 +71,14 @@ What are the requirements for CPU frequency to ensure normal operation of the RF
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   CPU frequency should be 80 Mhz at least.
+
+-----------
+
+When I run the `light-sleep example <https://github.com/espressif/esp-idf/tree/v5.1.1/examples/system/light_sleep>`__ on ESP32-S3 modules, if I only use the GPIO wake-up source and do not enable the timer to wake up, the power consumption is 3 mA, which is significantly different from that on the datasheet. Why? 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - When using the RTC GPIO wake-up source, please add the following code for testing before the module enters light-sleep mode. **However, please do not wake up the module immediately after the it falls asleep when only using the GPIO as the wake-up source. This is because flash may cause a failure when the duration between power-up and power-down is too short under the situation without configuring the timer.**
+
+  .. code:: c
+
+    esp_sleep_pd_config(ESP_PD_DOMAIN_VDDSDIO,ESP_PD_OPTION_OFF);
