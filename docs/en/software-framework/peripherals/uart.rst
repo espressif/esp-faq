@@ -123,3 +123,10 @@ Can ESP32's UART0 be used for inputting from the computer console while it is be
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes. Outputting logs only requires using the TXD0 pin, while receiving input from the computer console only requires using the RXD0 pin. You can use the `"esp-idf/examples/system/console/basic" <https://github.com/espressif/esp-idf/tree/master/examples/system/console/basic>`_ example for testing.
+
+--------------
+
+How to realize UART signal inversion?
+--------------------------------------------------------------------------------------------------------------------------------
+
+  You can use the `uart_set_line_inverse <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html#_CPPv421uart_set_line_inverse11uart_port_t8uint32_t>`_ interface to set it. The inverse pin parameter can be obtained from the `uart_signal_inv_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html#_CPPv417uart_signal_inv_t>`_ variable.
