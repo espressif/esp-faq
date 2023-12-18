@@ -105,3 +105,10 @@ Does the `ESP RF Test Tool <https://www.espressif.com/en/support/download/other-
 
   - Yes. To do the single carrier testing, you can set the ``Test mode`` to ``TX tone`` in the test interface.
   - Before using the ESP RF Test Tool, it is recommended to read the instructions in the ``help`` folder.
+
+------------
+
+Is there a corresponding software API for the `ESP RF Test Tool <https://www.espressif.com/en/support/download/other-tools?keys=RF>`_ to implement the relevant RF test functions in the application firmware?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Please refer to the `esp-idf/examples/phy/cert_test <https://github.com/espressif/esp-idf/tree/v5.1.1/examples/phy/cert_test>`_ example, which demonstrates how to use the API for certification testing.

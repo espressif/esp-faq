@@ -105,3 +105,10 @@ ESP `射频测试工具 <https://www.espressif.com/zh-hans/support/download/othe
 
   - 支持。在测试界面将 Test mode 设置为 TX tone 模式即可。
   - 在使用 ESP 射频测试工具之前，建议先阅读 help 文件夹中的说明。
+
+------------
+
+`ESP RF 测试固件 <https://www.espressif.com/zh-hans/support/download/other-tools?keys=%E5%B0%84%E9%A2%91>`_ 是否有对应的软件 API 用于在应用固件中实现相应的 RF 测试功能？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  可参考 `esp-idf/examples/phy/cert_test <https://github.com/espressif/esp-idf/tree/v5.1.1/examples/phy/cert_test>`_ 例程，此例程演示了如何使用认证测试的 API。
