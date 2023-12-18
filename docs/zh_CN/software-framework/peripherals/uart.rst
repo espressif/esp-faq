@@ -123,3 +123,10 @@ ESP32 的 UART0 是否可以在输出日志的同时又用作接收电脑控制�
 --------------------------------------------------------------------------------------------------------------------------------
 
   - 可以。UART0 输出日志只需要使用 TXD0 管脚，接收电脑控制台的输入只需要使用 RXD0 管脚。可基于 `"esp-idf/examples/system/console/basic" <https://github.com/espressif/esp-idf/tree/master/examples/system/console/basic>`_ 例程来测试。
+
+--------------
+
+如何实现 UART 信号反转呢？
+--------------------------------------------------------------------------------------------------------------------------------
+
+  可以使用 `uart_set_line_inverse <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html#_CPPv421uart_set_line_inverse11uart_port_t8uint32_t>`_ 接口来设置。反转引脚参数可以从 `uart_signal_inv_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html#_CPPv417uart_signal_inv_t>`_ 变量中获取。
