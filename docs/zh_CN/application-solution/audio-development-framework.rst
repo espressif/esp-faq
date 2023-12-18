@@ -277,3 +277,10 @@ ESP32 是否支持在线语音识别？
 ----------------------------------------------------------------------------------------------------
 
   支持。可参考例程 `esp-adf/examples/dueros <https://github.com/espressif/esp-adf/blob/master/examples/dueros/README_CN.md>`_。
+
+-------------
+
+ESP32 能否实现蓝牙耳机的音量调节功能？
+---------------------------------------------------------------------------------------------------------------
+
+  - 可以。ESP32 使用的是蓝牙的 AVRCP 调音协议，可基于 `esp-adf/examples/player/pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_ 例程测试。
