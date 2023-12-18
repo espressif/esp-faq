@@ -277,3 +277,10 @@ Does ESP32 support online voice recognition?
 ---------------------------------------------
 
   Yes, it does. Please refer to the `esp-adf/examples/dueros <https://github.com/espressif/esp-adf/blob/master/examples/dueros/README.md>`_ example.
+
+-------------
+
+Does ESP32 support volume adjustment of Bluetooth headphones?
+---------------------------------------------------------------------------------------------------------------
+
+  - Yes. ESP32 uses the Bluetooth AVRCP tuning protocol. You can test the function with the `esp-adf/examples/player/pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_ example.
