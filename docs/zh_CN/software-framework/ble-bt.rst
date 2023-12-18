@@ -708,3 +708,42 @@ ESP32 用作 BLE server 时支持多个 client 同时连接吗？如何实现呢
 ---------------------------------------------------------------------------------------------------
 
   - 使用 `esp_err_t esp_ble_gap_start_ext_scan(uint32_t duration, uint16_t period); <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s3/api-reference/bluetooth/esp_gap_ble.html?highlight=esp_ble_gap_start_ext_scan#_CPPv426esp_ble_gap_start_ext_scan8uint32_t8uint16_t>`__ API 进行设置，当 period 设置为 0 时，duration 的时间就是持续扫描时间。
+
+-------------
+
+如何基于 `GATT Server <https://github.com/espressif/esp-idf/tree/v5.1/examples/bluetooth/bluedroid/ble/gatt_server>`_ 例程设置一个 128 位 UUID 的 GATT 服务？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  可参考如下代码：
+
+    .. code:: c
+
+      static const uint8_t pctool_service_uuid[16] = {
+          0x00, 0x03, 0xcd, 0xd0, 0x00, 0x00, 0x10, 0x00, 0x80, 0x00, 0x00, 0x80, 0x5f, 0x9b, 0x01, 0x31
+      };
+      static const uint8_t pctool_write_uuid[16] = {
+          0x00, 0x03, 0xcd, 0xd2, 0x00, 0x00, 0x10, 0x00, 0x80, 0x00, 0x00, 0x80, 0x5f, 0x9b, 0x01, 0x31
+      };
+      /* Full Database Description - Used to add attributes into the database */
+      static const esp_gatts_attr_db_t gatt_db[HRS_IDX_NB] =
+      {
+          // Service Declaration
+          [IDX_SVC]        =
+          {
+      {ESP_GATT_AUTO_RSP}, {ESP_UUID_LEN_16, (uint8_t *)&primary_service_uuid, ESP_GATT_PERM_READ,
+            sizeof(pctool_service_uuid), sizeof(pctool_service_uuid), (uint8_t *)&pctool_service_uuid}
+      },
+          /* Characteristic Declaration */
+          [IDX_CHAR_A]     =
+          {
+      {ESP_GATT_AUTO_RSP}, {ESP_UUID_LEN_16, (uint8_t *)&character_declaration_uuid, ESP_GATT_PERM_READ,
+            CHAR_DECLARATION_SIZE, CHAR_DECLARATION_SIZE, (uint8_t *)&char_prop_read_write_notify}
+      },
+          /* Characteristic Value */
+          [IDX_CHAR_VAL_A] =
+          {
+      {ESP_GATT_AUTO_RSP}, {ESP_UUID_LEN_128, (uint8_t *)&pctool_write_uuid, ESP_GATT_PERM_READ | ESP_GATT_PERM_WRITE,
+            GATTS_DEMO_CHAR_VAL_LEN_MAX, sizeof(char_value), (uint8_t *)char_value}
+      },
+      }
+
