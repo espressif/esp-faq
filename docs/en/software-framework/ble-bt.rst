@@ -747,3 +747,10 @@ How to set up the GATT service with a 128-bit UUID based on the `GATT Server <ht
       },
       }
 
+------------
+
+When testing based on the `GATT Server <https://github.com/espressif/esp-idf/tree/v5.1/examples/bluetooth/bluedroid/ble/gatt_server>`_ example, is it possible to delete the default 1800 and 1801 service attributes?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The 1800 and 1801 service attributes are two standard GATT service attributes in the BLE protocol, which cannot be deleted or disabled. They are part of the BLE protocol specifications, providing basic device information and general access capabilities, and maintaining compatibility with the standard BLE protocol.
+  - 0x1800 refers to generic access, defining the general attributes of the device, while 0x1801 refers to generic attribute, a simple GATT service used to provide basic information about the device.
