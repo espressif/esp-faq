@@ -1323,3 +1323,10 @@ When encountering the error message ``Error occurred during sending: errno 12`` 
 
   - errno 12 indicates insufficient space. This issue occurs when there is a mismatch in processing speed between the upper and lower layers. The upper-layer application continuously generates a large amount of data and sends it to the UDP protocol for transmission. However, the underlying network or the receiving end cannot keep up with the sending speed, resulting in insufficient space.
   - To address this problem, you can handle this return value by implementing appropriate measures. For example, upon receiving this return value, the upper layer can initiate a resend mechanism or introduce a delay to slow down the sending speed.
+
+---------------
+
+Does the ESP module support Wi-Fi HaLow functionality?
+------------------------------------------------------------------------------------------------------------------
+
+  No, as Wi-Fi HaLow operates based on the 802.11ah protocol.
