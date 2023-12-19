@@ -70,7 +70,7 @@ What is the definition for Wi-Fi channel? Can I select any channel of my choice?
 [LWIP] With ESP-IDF v4.1, how to configure ESP32's IP address when it is in SoftAP mode?
 ------------------------------------------------------------------------------------------------
 
-  Since ESP-IDF v4.1 and later versions do not have TCP/IP interfaces anymore, it is recommended to use the `ESP-NETIF <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_netif.html>`_ interface instead. 
+  Since ESP-IDF v4.1 and later versions do not have TCP/IP interfaces anymore, it is recommended to use the `ESP-NETIF <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_netif.html>`_ interface instead.
 
   Code example：
 
@@ -136,7 +136,7 @@ What is the definition for Wi-Fi channel? Can I select any channel of my choice?
     ESP_ERROR_CHECK(esp_netif_dhcps_option(ap_netif,ESP_NETIF_OP_SET,ESP_NETIF_IP_ADDRESS_LEASE_TIME,&dhcps_lease_time,sizeof(dhcps_lease_time)));
 
     // ESP_NETIF_DOMAIN_NAME_SERVER , DHCP Option 6, Set DNS SERVER
-    // Set the local domain DNS first 
+    // Set the local domain DNS first
     esp_netif_dns_info_t dns_info = {0};
     dns_info.ip.u_addr.ip4.addr = ESP_IP4TOADDR(8,8,8,8);
     ESP_ERROR_CHECK(esp_netif_set_dns_info(ap_netif,ESP_NETIF_DNS_MAIN,&dns_info));
@@ -165,7 +165,7 @@ What is the definition for Wi-Fi channel? Can I select any channel of my choice?
 
   Why do I have problem connecting to router with IP 192.168.4.X in SoftAP + Station mode?
 
-  - The default network segment used by ESP8266 SoftAP is 192.168.4.\*, and its IP address is 192.168.4.1. When connecting ESP8266 to the router of 192.168.4.X, it cannot distinguish whether this address indicates its own SoftAP or the external router. 
+  - The default network segment used by ESP8266 SoftAP is 192.168.4.\*, and its IP address is 192.168.4.1. When connecting ESP8266 to the router of 192.168.4.X, it cannot distinguish whether this address indicates its own SoftAP or the external router.
 
 --------------
 
@@ -207,7 +207,7 @@ Do ESP8266/ESP32/ESP32-S2/S3/C2/C3 support web/SoftAP provisioning?
         },
       };
       esp_wifi_set_config(WIFI_IF_AP, &config);
-      
+
   Then use `esp_wifi_start() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv>`_ function to starts Wi-Fi.
 
 
@@ -238,7 +238,7 @@ What is the maximum value of ESP32 Wi-Fi RF power？
 How does ESP32 adjust Wi-Fi TX power?
 --------------------------------------------
 
-  - Configure ``Component config`` > ``PHY`` > ``Max Wi-Fi TX power(dBm)`` via menuconfig, and the max value is 20 dBm.
+  - Configure ``Component config`` > ``PHY`` > ``Max Wi-Fi TX power(dBm)`` via menuconfig, and the max value is 20 dBm.
   - Use API `esp_err_t esp_wifi_set_max_tx_power(int8_t power);`.
 
 --------------
@@ -264,15 +264,15 @@ How does ESP32 adjust Wi-Fi TX power?
     @UnsupportedAppUsage
     private static final int MAX_RSSI = -55;
 
-    public static int calculateSignalLevel(int rssi, int numLevels) { 
-      if(rssi <= MIN_RSSI) { 
-        return 0; 
+    public static int calculateSignalLevel(int rssi, int numLevels) {
+      if(rssi <= MIN_RSSI) {
+        return 0;
       } else if (rssi >= MAX_RSSI) {
-        return numLevels - 1; 
-      } else { 
-        float inputRange = (MAX_RSSI -MIN_RSSI); 
-        float outputRange = (numLevels - 1); 
-        return (int)((float)(rssi - MIN_RSSI) * outputRange / inputRange); 
+        return numLevels - 1;
+      } else {
+        float inputRange = (MAX_RSSI -MIN_RSSI);
+        float outputRange = (numLevels - 1);
+        return (int)((float)(rssi - MIN_RSSI) * outputRange / inputRange);
       }
     }
 
@@ -300,7 +300,7 @@ How does ESP32 adjust Wi-Fi TX power?
 
   .. code-block:: c
 
-    if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) { 
+    if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {
       wifi_event_sta_disconnected_t *sta_disconnect_evt = (wifi_event_sta_disconnected_t*)event_data;
       ESP_LOGI(TAG, "wifi disconnect reason:%d", sta_disconnect_evt->reason);
       esp_wifi_connect();
@@ -309,15 +309,15 @@ How does ESP32 adjust Wi-Fi TX power?
 
   When the callback function received ``WIFI_EVENT_STA_DISCONNECTED`` event, you can get the reason through the ``reason`` variable from `wifi_event_sta_disconnected_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429wifi_event_sta_disconnected_t>`_.
 
-  - ``WIFI_REASON_AUTH_EXPIRE``: This code is returned during the auth phase when the STA sends an auth but do not received any auth reply from the AP within the specified time. The possibility of this code occurrence is low. 
+  - ``WIFI_REASON_AUTH_EXPIRE``: This code is returned during the auth phase when the STA sends an auth but do not received any auth reply from the AP within the specified time. The possibility of this code occurrence is low.
 
   - ``WIFI_REASON_AUTH_LEAVE``: This code is sent by AP, normally because the AP is disconnected from the STA for some reason.
 
-  -  ``WIFI_REASON_4WAY_HANDSHAKE_TIMEOUT`` or ``WIFI_REASON_HANDSHAKE_TIMEOUT``: Wrong password. 
+  -  ``WIFI_REASON_4WAY_HANDSHAKE_TIMEOUT`` or ``WIFI_REASON_HANDSHAKE_TIMEOUT``: Wrong password.
 
      ``WIFI_REASON_4WAY_HANDSHAKE_TIMEOUT`` is the standard generalized error code, while ``WIFI_REASON_HANDSHAKE_TIMEOUT`` is a customized error code. The main difference is: ``WIFI_REASON_4WAY_HANDSHAKE_TIMEOUT`` occurs when the router tells the device the password is wrong; ``WIFI_REASON_HANDSHAKE_TIMEOUT`` occurs when the device itself performs a timeout mechanism without being informed about the wrong password by the router.
 
-  - ``WIFI_REASON_CONNECTION_FAIL``: This code is returned during the scan phase when the STA scanned a matched AP while the AP is in the blacklist. This is probably because that the AP has actively disconnected from the STA last time or something wrong happened when the STA connecting the AP. 
+  - ``WIFI_REASON_CONNECTION_FAIL``: This code is returned during the scan phase when the STA scanned a matched AP while the AP is in the blacklist. This is probably because that the AP has actively disconnected from the STA last time or something wrong happened when the STA connecting the AP.
 
 --------------
 
@@ -346,10 +346,10 @@ Does ESP32 perform domain name resolution each time it connects to the server?
   The STA does not receive the Beacon frame within the specified time (6 s by default for ESP32, equals to 60 Beacon Intervals).
   - The reason could be:
 
-    - Insufficient memory. "ESP32_WIFI_MGMT_SBUF_NUM" is not enough (there will be errors like "esf_buf: t=8, l=beacon_len, ..." in the log). You can check this by typing the heap size when received a Disconnect event. 
+    - Insufficient memory. "ESP32_WIFI_MGMT_SBUF_NUM" is not enough (there will be errors like "esf_buf: t=8, l=beacon_len, ..." in the log). You can check this by typing the heap size when received a Disconnect event.
     - The AP did not send a beacon. This can be checked by capturing beacons from AP.
-    - Rssi too low. When the Rssi value is too low in complex environments, the STA may not receive the beacon. This can be checked by retrieving Rssi values via ``esp_wifi_sta_get_ap_info``. 
-    - Hardware related issues. Bad package capturing performance. 
+    - Rssi too low. When the Rssi value is too low in complex environments, the STA may not receive the beacon. This can be checked by retrieving Rssi values via ``esp_wifi_sta_get_ap_info``.
+    - Hardware related issues. Bad package capturing performance.
 
   When there is a bcn_timeout, the STA will try to send Probe Request for five times. If a Probe Response is received from the AP, the connection will be kept, otherwise, the STA will send a Disconnect event and the connection will fail.
 
@@ -379,7 +379,7 @@ Does ESP32 perform domain name resolution each time it connects to the server?
   - The AP is overloaded or malfunctioning. If the AP is overloaded or malfunctioning, it may not be able to handle new connection requests, and thus ESP32 and ESP8266 cannot connect to the AP. You can try to wait for a while and then scan the AP again.
   - ESP32 or ESP8266 has some software issues. Sometimes, software issues of ESP32 or ESP8266 may cause problems with scanning for APs. In this case, you can try to reset ESP32 or ESP8266 and restart Wi-Fi. If this method does not work, you may need to update the firmware of ESP32 or ESP8266.
   - Other reasons include wireless interference, security settings, and network configuration. These reasons may also affect Wi-Fi of ESP32 or ESP8266. In this case, you need to carefully check the Wi-Fi environment and implement corresponding settings.
-   
+
 --------------
 
 [Scan] What is the maximum number of APs that can be scanned？
@@ -555,7 +555,7 @@ How does ESP32 receive and transmit Wi-Fi 802.11 packets?
 [Connect] What kind of networking methods does ESP8266 have？
 -----------------------------------------------------------------------
 
-  - SmartConfig mode: using SmartConfig. The device scans feature pack in sniffer mode. 
+  - SmartConfig mode: using SmartConfig. The device scans feature pack in sniffer mode.
   - SoftAP mode: the device enables SoftAP and sends SSID and password after the phone connects to SoftAP and set up a stable TCP/UDP connection.
   - WPS mode: an additional button should be added on the device; or using the phone to enable WPS after it connected to SoftAP.
 
@@ -647,14 +647,14 @@ Does ESP32 Wi-Fi support PMF (Protected Management Frames) and PFS (Perfect Forw
 Why does ESP8266 print out an AES PN error log when using esptouch v2?
 ------------------------------------------------------------------------------
 
-  - This occurs when ESP8266 has received retransmitted packets from the router for multiple times. However, this will not affect your usage.
+  This occurs when ESP8266 has received retransmitted packets from the router for multiple times. However, this will not affect your usage.
 
 ----------------------
 
 Does ESP32 WFA certification support multicast?
 --------------------------------------------------------------------------------------------
 
-  - No. It is recommended to refer to the ASD-1148 method of testing.
+  No. It is recommended to refer to the ASD-1148 method of testing.
 
 ---------------
 
@@ -669,7 +669,7 @@ When using ESP32 to establish a hotspot, can I scan all APs and the occupied cha
 I'm scanning Wi-Fi on an ESP32 device using release/v3.3 version of ESP-IDF. When there are some identical SSIDs, same SSID names will show in the Wi-Fi list repeatedly. Is there an API to filter such repeated names?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - No, same SSID names cannot be filtered out since identical SSID names may not mean identical servers. Their BSSID may not be the same.
+  No, same SSID names cannot be filtered out since identical SSID names may not mean identical servers. Their BSSID may not be the same.
 
 -----------------------
 
@@ -683,21 +683,21 @@ Does ESP8266 support EDCF (AC) scheme?
 I'm using the master version of ESP8266-RTOS-SDK to open the WiFi Qos application to get EDCF support. How does ESP8266 decide which data packet should be allocated to the EDCF AC category?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - It can be determined by setting ``IPH_TOS_SET(iphdr, tos)``.
+  It can be determined by setting ``IPH_TOS_SET(iphdr, tos)``.
 
 -----------------
 
 Using ESP32, how to configure the maximum Wi-Fi transmission speed and stability without considering memory and power consumption?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - To configure the maximum Wi-Fi transmission speed and stability, please refer to `How to improve Wi-Fi performance <https://docs.espressif.com/projects/esp-idf/en/release-v4.3/esp32/api-guides/wifi.html#how-to-improve-wi-fi-performance>`_ in ESP-IDF programming guide and set the relevant configuration parameters in ``menuconfig``. The option path can be found by searching "/" in the ``menuconfig`` interface. The optimal configuration parameters need to be tested according to the actual environment.
+  To configure the maximum Wi-Fi transmission speed and stability, please refer to `How to improve Wi-Fi performance <https://docs.espressif.com/projects/esp-idf/en/release-v4.3/esp32/api-guides/wifi.html#how-to-improve-wi-fi-performance>`_ in ESP-IDF programming guide and set the relevant configuration parameters in ``menuconfig``. The option path can be found by searching "/" in the ``menuconfig`` interface. The optimal configuration parameters need to be tested according to the actual environment.
 
 ------------------------
 
 In Wi-Fi SoftAP mode, how many Station devices can ESP8266 be connected at most?
 -------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP8266 supports up to 8 Station device connections.
+  ESP8266 supports up to 8 Station device connections.
 
 ---------------------
 
@@ -712,13 +712,13 @@ How to get CSI data when using ESP32 device in Station mode?
 In AP + STA mode, after an ESP32 is connected to Wi-Fi, will the Wi-Fi connection be affected if I enable or disable its AP mode?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - After an ESP32 is connected to Wi-Fi in AP + STA dual mode, AP mode can be enabled or disabled at will without affecting Wi-Fi connection.
+  After an ESP32 is connected to Wi-Fi in AP + STA dual mode, AP mode can be enabled or disabled at will without affecting Wi-Fi connection.
 
 -------------------
 
 I'm using ESP-IDF release/v3.3 for ESP32 development, but only bluetooth function is needed, how to disable Wi-Fi function through software?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
+
   - Please call ``esp_wifi_stop()`` to disable the Wi-Fi function. For API description, please see `esp_err_t esp_wifi_stop(void) <https://docs.espressif.com/projects/esp-idf/en/release-v3.3/api-reference/network/esp_wifi.html?highlight=wifi_stop#_CPPv413esp_wifi_stopv>`_.
   - If you need to reclaim the resources occupied by Wi-Fi, call ``esp_wifi_deinit()``. For API description, please see `esp_err_t esp_wifi_deinit(void) <https://docs.espressif.com/projects/esp-idf/en/release-v3.3/api-reference/ network/esp_wifi.html?highlight=wifi_deinit#_CPPv415esp_wifi_deinitv>`_.
   - Here is a simple example:
@@ -743,7 +743,7 @@ I'm using ESP-IDF release/v3.3 for ESP32 development, but only bluetooth functio
 
   In this example, the esp_wifi_stop() function is called to turn off Wi-Fi and then to initialize Bluetooth. It should be noted that once Wi-Fi is stopped, Wi-Fi related APIs cannot be used.
 
-  
+
 ----------------------
 
 In ESP-IDF, the ``esp_wifi_80211_tx()`` interface can only be used to send data packets, is there a corresponding function to receive packets?
@@ -755,7 +755,7 @@ In ESP-IDF, the ``esp_wifi_80211_tx()`` interface can only be used to send data 
 
     esp_wifi_set_promiscuous_rx_cb(wifi_sniffer_cb);
     esp_wifi_set_promiscuous(true);
-    
+
   - The above data receive method is also used in another open-sourced project, please see `esp-mdf <https://github.com/espressif/esp-mdf/blob/master/components/mconfig/mconfig_chain.c>`_.
 
 ---------------
@@ -775,21 +775,21 @@ What are the reasons for the high failure rate of esptouch networking?
 How to optimize the IRAM when ESP32 uses Wi-Fi?
 -----------------------------------------------------------------------------------
 
-  - You can disable ``WIFI_IRAM_OPT``, ``WIFI_RX_IRAM_OPT`` and ``LWIP_IRAM_OPTIMIZATION`` in menuconfig to optimize IRAM space, but this will degrade Wi-Fi performance.
+  You can disable ``WIFI_IRAM_OPT``, ``WIFI_RX_IRAM_OPT`` and ``LWIP_IRAM_OPTIMIZATION`` in menuconfig to optimize IRAM space, but this will degrade Wi-Fi performance.
 
 --------------
 
 How to test ESP32's Wi-Fi transmission distance?
 -----------------------------------------------------------------------------------------------
 
-  - You can use the `iperf example <https://github.com/espressif/esp-idf/tree/master/examples/wifi/iperf>`_ and configure the ESP32 device to iperf UDP mode. Then, you can distance the device continuously to see at which point the Wi-Fi data transmission rate will drop to 0.
+  You can use the `iperf example <https://github.com/espressif/esp-idf/tree/master/examples/wifi/iperf>`_ and configure the ESP32 device to iperf UDP mode. Then, you can distance the device continuously to see at which point the Wi-Fi data transmission rate will drop to 0.
 
 ---------------------
 
 What is the maximum length of Wi-Fi MTU for an ESP32 and how to change it?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The maximum Wi-Fi MTU length for ESP32 is 1500. You can change this value in the LwIP component by ``netif`` > ``mtu``. However, it is not recommended to change this value.
+  The maximum Wi-Fi MTU length for ESP32 is 1500. You can change this value in the LwIP component by ``netif`` > ``mtu``. However, it is not recommended to change this value.
 
 ---------------
 
@@ -808,7 +808,7 @@ During the on-hook test for an ESP32 device, the following log shows. What does 
   - The value after ``new`` represents the current primary and secondary channel; the value after ``old`` represents the last primary and secondary channel; and the value after ``ap`` represents the primary and secondary channel of the current ESP32 AP, which will be 255 if softAP is not enabled; the value after ``sta`` represents primary and secondary channel of the current ESP32 sta; and ``prof`` is the channel of ESP32's softAP stored in NVS.
   - For the meaning of secondary channel values, please refer to `wifi_second_chan_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_second_chan_t#_CPPv418wifi_second_chan_t>`_.
   - The above log indicates that router is switching between HT20 and HT40 minus. You can check the Wi-Fi bandwidth setting of the router.
-  
+
 -----------------
 
 How to disable AP mode when ESP32 is in AP + STA mode?
@@ -816,14 +816,14 @@ How to disable AP mode when ESP32 is in AP + STA mode?
 
   - This can be done through the configuration of ``esp_wifi_set_mode(wifi_mode_t mode);`` function.
   - Just call ``esp_wifi_set_mode(WIFI_MODE_STA);``.
-  
+
 ----------------
 
 After ESP32 used the Wi-Fi function, are all ADC2 channels unavailable?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - When an ESP32 device is using Wi-Fi function, the ADC2 pins that are not occupied by Wi-Fi can be used as normal GPIOs. You can refer to the official `ADC Description <https://docs.espressif.com/projects/esp-idf/en/v4.4.2/esp32/api-reference/peripherals/adc.html#analog-to-digital-converter-adc>`_.
-  
+  When an ESP32 device is using Wi-Fi function, the ADC2 pins that are not occupied by Wi-Fi can be used as normal GPIOs. You can refer to the official `ADC Description <https://docs.espressif.com/projects/esp-idf/en/v4.4.2/esp32/api-reference/peripherals/adc.html#analog-to-digital-converter-adc>`_.
+
 -----------------------------------------------------------------------------------------------------
 
 How do I set the country code for a Wi-Fi module ?
@@ -831,13 +831,13 @@ How do I set the country code for a Wi-Fi module ?
 
   :CHIP\: ESP8266 | ESP32 | ESP32 | ESP32-C3:
 
-  - Please call `esp_wifi_set_country <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html? highlight=esp_wifi_set_country#_CPPv420esp_wifi_set_countryPK14wifi_country_t>`_ to set the country code.
+  Please call `esp_wifi_set_country <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html? highlight=esp_wifi_set_country#_CPPv420esp_wifi_set_countryPK14wifi_country_t>`_ to set the country code.
 
 ---------------
 
 When using ESP32 as a SoftAP and have it connected to an Iphone, a warning prompts as "low security WPA/WPA2(TKIP) is not secure. If this is your wireless LAN, please configure the router to use WPA2(AES) or WPA3 security type", how to solve it?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  
+
   :IDF\: release/v4.0 and above:
 
   - You can refer to the following code snippet:
@@ -863,7 +863,7 @@ When using ESP32 as a SoftAP and have it connected to an Iphone, a warning promp
 Since ESP32's Wi-Fi module only supports 2.4 GHz of bandwidth, can Wi-Fi networking succeed when using a multi-frequency router with both 2.4 GHz and 5 GHz of bandwidth？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Please set your router to multi-frequency mode (can support 2.4 GHz and 5 GHz for one Wi-Fi account), and the ESP32 device can connect to Wi-Fi normally.
+  Please set your router to multi-frequency mode (can support 2.4 GHz and 5 GHz for one Wi-Fi account), and the ESP32 device can connect to Wi-Fi normally.
 
 ---------------
 
@@ -882,7 +882,7 @@ How to obtain the RSSI of the station connected when ESP32 is used in AP mode?
                         wifi_sta_list.sta[i].mac[3],wifi_sta_list.sta[i].mac[4],wifi_sta_list.sta[i].mac[5],wifi_sta_list.sta[i].rssi);
           }
       }
-      
+
   - The RSSI obtained by ``esp_wifi_ap_get_sta_list`` is the average value over a period of time, not real-time RSSI. The previous RSSI has a weight of 13, and the new RSSI has a weight of 3. The RSSI is updated when it is or larger than 100ms, the old rssi_arg is used when updating as: ``rssi_avg = rssi_avg*13/16 + new_rssi * 3/16``.
 
 ---------------
@@ -894,7 +894,7 @@ Does ESP32 support FTM(Fine Timing Measurement)?
   - ESP32-S2 and ESP32-C3 can support FTM in hardware.
   - ESP-IDF can support FTM from v4.3-beta1.
   - For more information and examples of FTM, please refer to `FTM <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/wifi.html#fine-timing-measurement-ftm>`_.
-  
+
 ---------------
 
 When ESP32 is in STA+AP mode, how to specify whether using STA or AP interface to send data?
@@ -922,7 +922,7 @@ When ESP32 is in STA+AP mode, how to specify whether using STA or AP interface t
 ESP8266 `wpa2_enterprise <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/wifi/wpa2_enterprise>`_ How to enable Wi-Fi debugging function?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Open menuconfig via ``idf.py menuconfig`` and configure the following parameters:
+  Open menuconfig via ``idf.py menuconfig`` and configure the following parameters:
 
     .. code-block:: c
 
@@ -933,10 +933,10 @@ ESP8266 `wpa2_enterprise <https://github.com/espressif/ESP8266_RTOS_SDK/tree/mas
       [*] NET80211
       [*] wpa
       [*] wpa2_enterprise
-      
+
       menuconfig==>Component config ==>Supplicant ==>
       [*] Print debug messages from WPA Supplicant
-    
+
 -----------------------------------------------------------------------------------------------------
 
 Is there a standard for the number of Wi-Fi signal frames?
@@ -944,16 +944,16 @@ Is there a standard for the number of Wi-Fi signal frames?
 
   :CHIP\: ESP8266 | ESP32 | ESP32 | ESP32-C3:
 
- - There is no such standard for now. You can do the calculation by yourself based on the received RSSI. For example, if the received RSSI range is [0,-96], and the required signal strength is 5, then [0~-20] is the full signal, and so on.
- 
+ There is no such standard for now. You can do the calculation by yourself based on the received RSSI. For example, if the received RSSI range is [0,-96], and the required signal strength is 5, then [0~-20] is the full signal, and so on.
+
 --------------
 
 What is the current progress of WFA bugs fixing?
 --------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 |  ESP8266:
 
-  - Please refer to ` Security Advisory for WFA vulnerability <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability.pdf>`_ for more details.
-  
+  Please refer to ` Security Advisory for WFA vulnerability <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability.pdf>`_ for more details.
+
 -----------------------------------------------------------------------------------------------------
 
 When Wi-Fi connection failed, what does the error code mean?
@@ -961,9 +961,9 @@ When Wi-Fi connection failed, what does the error code mean?
 
   :CHIP\: ESP32:
 
-  - Any error occurred during the Wi-Fi connection will cause it coming to init status, and there will be a hexadecimal number in the log, e.g., ``wifi:state, auth-> init(200)``. The first two digits indicate error reasons while the last two digits indicate the type code of the received or transmitted management frame. Common frame type codes are 00 (received nothing, timeout), A0 (disassoc), B0 (auth) and C0 (deauth).     
+  - Any error occurred during the Wi-Fi connection will cause it coming to init status, and there will be a hexadecimal number in the log, e.g., ``wifi:state, auth-> init(200)``. The first two digits indicate error reasons while the last two digits indicate the type code of the received or transmitted management frame. Common frame type codes are 00 (received nothing, timeout), A0 (disassoc), B0 (auth) and C0 (deauth).
   - Error reasons indicated by the first two digits can be found in `Wi-Fi Reason Code <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#wi-fi-reason-code>`__. The last two digits can be checked in frame management code directly.
-  
+
 ---------------------
 
 When using ESP32's Release/v3.3 of SDK to download the Station example, the device cannot be connected to an unencrypted Wi-Fi. What is the reason?
@@ -973,7 +973,7 @@ When using ESP32's Release/v3.3 of SDK to download the Station example, the devi
 
       .. code-block:: c
 
-        .threshold.authmode = WIFI_AUTH_WPA2_PSK,
+        .threshold.authmode = WIFI_AUTH_WPA2_PSK,
 
   - If you need connect to an unencrypted AP, please set the following parameter to 0:
 
@@ -988,15 +988,15 @@ When using ESP32's Release/v3.3 of SDK to download the Station example, the devi
 What is the maximum PHY rate of Wi-Fi communication of ESP32-S2 chip?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The theoretical maximum PHY rate of ESP32-S2 Wi-Fi communication is 150 Mbps.
-  
+  The theoretical maximum PHY rate of ESP32-S2 Wi-Fi communication is 150 Mbps.
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Does ESP modules support EAP-FAST?
 -------------------------------------------------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 :
 
-  - Yes, please refer to `wifi_eap_fast <https://github.com/espressif/esp-idf/tree/master/examples/wifi/wifi_eap_fast>`_ demo.
+  Yes, please refer to `wifi_eap_fast <https://github.com/espressif/esp-idf/tree/master/examples/wifi/wifi_eap_fast>`_ demo.
 
 ---------------
 
@@ -1004,14 +1004,14 @@ Does ESP modules support the WiFi NAN (Neighbor Awareness Networking) protocol?
 ---------------------------------------------------------------------------------------------
   :CHIP\: ESP8266 | ESP32 | ESP32-C3 | ESP32-S2 | ESP32-S3:
 
-  - No.
+  No.
 
 ---------------------
 
 When using ESP32 with release/v3.3 version of ESP-IDF. When configuring the router, is there an API to directly tell that the entered password is wrong?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - There is no such API. According to the Wi-Fi protocol standard, when the password is wrong, the router will not clearly tell the Station that the 4-way handshake is due to the password error. Under normal circumstances, the password is obtained in 4 packets (1/4 frame, 2/4 frame, 3/4 frame, 4/4 frame). When the password is correct, the AP will send 3/4 frames, but when the password is wrong, the AP will not send 3/4 frame but send 1/4 frame instead. However, when the AP sends 3/4 frame which is lost in the air for some reason, the AP will also re-send 1/4 frame. Therefore, for Station, it is impossible to accurately distinguish between these two situations. In the end, it will report a 204 error or a 14 error. 
+  - There is no such API. According to the Wi-Fi protocol standard, when the password is wrong, the router will not clearly tell the Station that the 4-way handshake is due to the password error. Under normal circumstances, the password is obtained in 4 packets (1/4 frame, 2/4 frame, 3/4 frame, 4/4 frame). When the password is correct, the AP will send 3/4 frames, but when the password is wrong, the AP will not send 3/4 frame but send 1/4 frame instead. However, when the AP sends 3/4 frame which is lost in the air for some reason, the AP will also re-send 1/4 frame. Therefore, for Station, it is impossible to accurately distinguish between these two situations. In the end, it will report a 204 error or a 14 error.
   - Please refer to `Wi-Fi reason code <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#wi-fi-reason-code>`__.
 
 -----------------------
@@ -1030,7 +1030,7 @@ How does ESP32 speed up the Wi-Fi connection?
 
   You can try the following approaches:
 
-  - Set the CPU frequency to the maximum to speed up the key calculation speed. In addition, you can also set the flash parameters to ``QIO, 80MHz``, which will increase power consumption. 
+  - Set the CPU frequency to the maximum to speed up the key calculation speed. In addition, you can also set the flash parameters to ``QIO, 80MHz``, which will increase power consumption.
   - Disable ``CONFIG_LWIP_DHCP_DOES_ARP_CHECK`` to greatly reduce the time of getting IP. But there will be no checking on whether there is an IP address conflict in the LAN.
   - Open ``CONFIG_LWIP_DHCP_RESTORE_LAST_IP``, and save the IP address obtained last time. When DHCP starts, send DHCP requests directly without performing DHCP discover.
   - Use fixed scanning channel.
@@ -1040,28 +1040,28 @@ How does ESP32 speed up the Wi-Fi connection?
 Does ESP32 WPA2 Enterprise Authentication support Cisco CCKM mode?
 -----------------------------------------------------------------------------------------------------
 
-  - This mode is currently not supported, even though the enumeration in esp_wifi_driver.h has WPA2_AUTH_CCKM.
-  
+  This mode is currently not supported, even though the enumeration in esp_wifi_driver.h has WPA2_AUTH_CCKM.
+
 --------------------------------------------------------------------------------------------------
 
 Using wpa2_enterprise (EAP-TLS method), what is the maximum length supported for client certificates?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Up to 4 KB.
+  Up to 4 KB.
 
 ------------------------
 
 Does ESP8089 support Wi-Fi Direct mode?
 ------------------------------------------------------------------------------------------------------------
 
-  - Yes, but ESP8089 can only use the default fixed firmware and cannot be used for secondary development.
+  Yes, but ESP8089 can only use the default fixed firmware and cannot be used for secondary development.
 
 --------------
 
 How does ESP32 connect to an AP whose RSSI does not fall below the configured threshold when there are multiple APs in the environment?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - In ESP32 staion mode, there is a `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N13wifi_config_t3staE>`_ structure with 2 variables underneath, i.e., `sort_method <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11sort_methodE>`_ and `threshold <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE>`_. The RSSI threshold is configured by assigning values to these two variables.
+  In ESP32 staion mode, there is a `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N13wifi_config_t3staE>`_ structure with 2 variables underneath, i.e., `sort_method <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11sort_methodE>`_ and `threshold <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE>`_. The RSSI threshold is configured by assigning values to these two variables.
 
 --------------
 
@@ -1075,7 +1075,7 @@ ESP32 Wi-Fi has a beacon lost and sends 5 probe requests to the AP after 6 secon
 Does ESP32 Wi-Fi work with PSRAM?
 ------------------------------------------------------------------------------------------------------
 
-  - For information on using Wi-Fi with PSRAM, please refer to `Using PSRAM <https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/api-guides/wifi.html#psram>`_.
+  For information on using Wi-Fi with PSRAM, please refer to `Using PSRAM <https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/api-guides/wifi.html#psram>`_.
 
 -----------------
 
@@ -1109,7 +1109,7 @@ Does ESP32 Wi-Fi work with PSRAM?
       - Check whether the configured SSID and PASSWORD are consistent with those of the router.
       - Check whether ESP32 can connect to the router when the router is configured in OPEN mode.
       - Check whether ESP32 can connect to Wi-Fi after calling the API ``esp_wifi_set_ps(WIFI_PS_NONE)`` additionally before executing the code for connecting to Wi-Fi.
-      
+
   - If all the above steps still fail to locate the issue, please capture Wi-Fi packets for further analysis by referring to `Espressif Wireshark User Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html>`_.
 
 -----------------
@@ -1119,7 +1119,7 @@ After being connected to the router, ESP32 prints ``W (798209) wifi:<ba-add>idx:
 
   - This log does not indicate any issue. It is related to the Wi-Fi block acknowledgment mechanism. ``ba-add`` means the ESP32 received an add block acknowledgment request frame from the router. ``ba-del`` means the ESP32 received a delete block acknowledgment request frame from the router. Frequent printing of this log suggests that the router has been sending packets.
   - If this log is printed periodically every five minutes, it may indicate that the router is updating the group secret key. You could double-check it according to the following steps:
-    
+
     - Print log in `wpa_supplicant_process_1_of_2() <https://github.com/espressif/esp-idf/blob/v4.4.1/components/wpa_supplicant/src/rsn_supp/wpa.c#L1519>`_ to check if this function is called every 5 minutes when the group key is updated every 5 minutes.
     - In the router's Wi-Fi configuration interface, check if there is the ``Group Key Update Time`` option and it is set to 5 minutes.
 
@@ -1172,7 +1172,7 @@ After connecting to the router, ESP32 consumes much power in an idle state, with
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Please capture Wi-Fi packets for further analysis. See `espressif Wireshark User Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html>`_. After the packets are captured, check whether the NULL data packet sent by the device contains ``NULL(1)``. If ``NULL(1)`` is sent every 10 seconds, it means that ESP32 is interacting with the router in keepalive mode.
-  - You can also check the ``TIM(Traffic Indication Map)`` field of the beacon packet in the captured packets. If ``Traffic Indication`` is equal to 1, it means Group Frames Buffered. In this case, ESP32 will turn on RF, resulting in higher power consumption. 
+  - You can also check the ``TIM(Traffic Indication Map)`` field of the beacon packet in the captured packets. If ``Traffic Indication`` is equal to 1, it means Group Frames Buffered. In this case, ESP32 will turn on RF, resulting in higher power consumption.
 
 -----------------
 
@@ -1181,11 +1181,11 @@ How to configure the Wi-Fi country code when the ESP end product needs to be sol
 
   - Different Wi-Fi country codes need to be set for different countries.
   - The default country code configuration can be used for most countries, but it is not compatible with some special cases. The default country code is ``CHINA {.cc="CN", .schan=1, .nchan=13, policy=WIFI_COUNTRY_POLICY_AUTO}``. While in the ESP-IDF v5.0 or later version, the dafualt one has been changed to ``"01" (world safe mode) {.cc="01", .schan=1, .nchan=11, .policy=WIFI_COUNTRY_POLICY_AUTO}）``. Since channels 12 and 13 are passively scanned by default, they do not violate the regulations of most countries. Besides, the country code of the ESP product is automatically adapted to the router that it is connected to. When disconnected from the router, it automatically goes back to the default country code.
-  
+
   .. note::
 
     - There is a potential issue. If the router hides the SSID and is on channel 12 or 13, the ESP end product can not scan the router. In this case, you need to set ``policy=WIFI_COUNTRY_POLICY_MANUAL`` to enable ESP end products to actively scan on channels 12 and 13.
-    - Some countries, such as Japan, support channels 1-14, and channel 14 only supports 802.11b. ESP end products cannot connect to routers on channel 14 by default.  
+    - Some countries, such as Japan, support channels 1-14, and channel 14 only supports 802.11b. ESP end products cannot connect to routers on channel 14 by default.
 
 -----------------
 
@@ -1196,7 +1196,7 @@ Sometimes the rate drops or even a disconnection occurs after a period of iperf 
 
     - Bad network environment.
     - Incompatibility between the computer or mobile phone and the ESP32-S2 or ESP32-S3 softAP.
-  
+
   - Solutions:
 
     - In the case of a bad network environment, change the network environment or test in a shielded box.
@@ -1222,7 +1222,7 @@ Why is this log frequently printed when the phone connects to the ESP32-S3 that 
 
   .. code-block:: c
 
-    esp_log_level_set("wifi", ESP_LOG_ERROR); 
+    esp_log_level_set("wifi", ESP_LOG_ERROR);
 
 --------------
 
@@ -1278,7 +1278,7 @@ How do I get Wi-Fi RSSI when using ESP32?
 Does ESP32 support WPA3-Enterprise?
 ------------------------------------------------------------------------------------------------------------
 
-  - ESP32 supports WPA/WPA2/WPA3/WPA2-Enterprise/WPA3-Enterprise/WAPI/WPS and DPP. For more details, please refer to `ESP32 Wi-Fi Feature List <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#esp32-wi-fi-feature-list>`__. 
+  - ESP32 supports WPA/WPA2/WPA3/WPA2-Enterprise/WPA3-Enterprise/WAPI/WPS and DPP. For more details, please refer to `ESP32 Wi-Fi Feature List <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#esp32-wi-fi-feature-list>`__.
   - esp-idf release/v5.0 has provided `wifi_enterprise example <https://github.com/espressif/esp-idf/tree/v5.0/examples/wifi/wifi_enterprise>`__, which supports setting WPA3-Enterprise mode for testing. You can configure it as following: ``idf.py menuconfig`` > ``Example Configuration`` > ``Enterprise configuration to be used`` > ``WPA3_ENT``.
 
 ---------------
@@ -1286,7 +1286,7 @@ Does ESP32 support WPA3-Enterprise?
 Does ESP modules support WAPI (Wireless LAN Authentication and Privacy Infrastructure)?
 ---------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes. Please refer to `WIFI_AUTH_WAPI_PSK <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_auth_wapi_psk#_CPPv4N16wifi_auth_mode_t18WIFI_AUTH_WAPI_PSKE>`_
+  Yes. Please refer to `WIFI_AUTH_WAPI_PSK <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_auth_wapi_psk#_CPPv4N16wifi_auth_mode_t18WIFI_AUTH_WAPI_PSKE>`_
 
 -----------
 
@@ -1294,20 +1294,27 @@ How can I increase the time for scanning routers when using ESP32 as the Wi-Fi S
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - In ESP32, by defualt, channels 1 ~ 11 are active scanning, while channels 12 ~ 13 are passive scanning. Active and passive scanning require different amounts of time. For more details, please refer to `Wi-Fi scan configuration <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#scan-configuration>`_. The default duration for active scanning is 120 ms per channel, while for passive scanning, it is 360 ms per channel. You can call the following function before calling ``esp_wifi_start()`` to increase the time for scanning routers:
-  
+
   .. code-block:: c
 
       extern void scan_set_act_duration(uint32_t min, uint32_t max);
-      extern void scan_set_pas_duration(uint32_t time);  
+      extern void scan_set_pas_duration(uint32_t time);
       scan_set_act_duration(50, 500);
       scan_set_pas_duration(500);
 
 -------------
 
-Does ESP32 support LDPC？
+Does ESP32 support LDPC?
 ---------------------------------------------------------------------------------------------------------------
 
-  - Yes. No additional configuration or calling is required as it is already implemented in the driver.
+  Yes. No additional configuration or calling is required as it is already implemented in the driver.
+
+-------------
+
+Does the ESP module support WAPI AS?
+---------------------------------------------------------------------------------------------------------------
+
+   Not supported. WAPI has two authentication methods, i.e., certificate authentication and pre-shared key authentication. Currently, the ESP module only supports pre-shared key authentication (WAPI-PSK), while WAPI AS is used for certificate authentication.
 
 -------------
 
