@@ -82,3 +82,26 @@ When I run the `light-sleep example <https://github.com/espressif/esp-idf/tree/v
   .. code:: c
 
     esp_sleep_pd_config(ESP_PD_DOMAIN_VDDSDIO,ESP_PD_OPTION_OFF);
+
+-----------
+
+When using Timer for wake-up based on the `esp-idf/examples/system/deep_sleep <https://github.com/espressif/esp-idf/tree/v5.1.1/examples/system/deep_sleep>`_ example, although the wake-up time is set to 2.5 hours, it wakes up around 1 hour. What could be the reason?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ The code block is as follows:
+
+    .. code:: c
+
+      const int wakeup_time_sec = 9000;
+      printf("Enabling timer wakeup, %ds\n", wakeup_time_sec);
+      ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(wakeup_time_sec * 1000000));
+
+  - An overflow may occur during the ``ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(wakeup_time_sec * 1000000));`` calculation. You may modify the code as follows:
+    
+    .. code:: c
+
+      const uint64_t wakeup_time_sec = 9000;
+      printf("Enabling timer wakeup, %lld\n", wakeup_time_sec);
+      ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(wakeup_time_sec * 1000000));
+
+  - Or directly write it as ``esp_sleep_enable_timer_wakeup(9000 * 1000000ULL);``.

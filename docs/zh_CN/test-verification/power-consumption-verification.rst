@@ -82,3 +82,26 @@ ESP32 进入 Light-sleep 时，仅配置 GPIO 唤醒而不配置定时器唤醒�
   .. code:: c
 
     esp_sleep_pd_config(ESP_PD_DOMAIN_VDDSDIO,ESP_PD_OPTION_OFF);
+
+-----------
+
+基于 `esp-idf/examples/system/deep_sleep <https://github.com/espressif/esp-idf/tree/v5.1.1/examples/system/deep_sleep>`_ 例程使用 Timer 唤醒时，将唤醒时间设置为 2.5 小时，却会在 1 小时左右的时间就唤醒，是什么原因？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ 代码如下：
+
+    .. code:: c
+
+      const int wakeup_time_sec = 9000;
+      printf("Enabling timer wakeup, %ds\n", wakeup_time_sec);
+      ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(wakeup_time_sec * 1000000));
+
+  - ``ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(wakeup_time_sec * 1000000));`` 在运算过程会溢出，可修改代码如下：
+    
+    .. code:: c
+
+      const uint64_t wakeup_time_sec = 9000;
+      printf("Enabling timer wakeup, %lld\n", wakeup_time_sec);
+      ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(wakeup_time_sec * 1000000));
+
+  - 或者直接写为 ``esp_sleep_enable_timer_wakeup(9000 * 1000000ULL);``。
