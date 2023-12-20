@@ -9,7 +9,7 @@ python3.8 -m venv ~/.pyenv3_8
 # Activate the virtual environment
 source ~/.pyenv3_8/bin/activate
 
-# update pip
+# Update pip
 pip install --upgrade pip
 
 # Install the pip package

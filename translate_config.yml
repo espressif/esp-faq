@@ -83,7 +83,7 @@ specified_files:
   - docs/zh_CN/software-framework/storage/sd-sdio-mmc.rst
   - docs/zh_CN/software-framework/storage/spi-flash.rst
   - docs/zh_CN/software-framework/storage/spiffs.rst
-#  - docs/zh_CN/software-framework/system.rst
+  - docs/zh_CN/software-framework/system.rst
   - docs/zh_CN/software-framework/wifi.rst
 
 # test-verification
