@@ -761,3 +761,15 @@ Is there an explanation for the BLE error codes in the ESP-IDF SDK?
 ----------------------------------------------------------------------------------------------
 
   - The BLE error codes in the ESP-IDF SDK refer to the BLE standard protocol. The corresponding error code descriptions can be found in `LIST OF BLE ERROR CODES <https://github.com/chegewara/esp32-ble-wiki/issues/5>`_.
+
+------------
+
+The error below occurred when setting the Bluetooth mode to ``Component config`` > ``Bluetooth`` > ``Controller Options`` > ``Bluetooth controller mode (BR/EDR/BLE/DUALMODE)`` dual mode based on the `BLE SPP Server <https://github.com/espressif/esp-idf/tree/v5.1/examples/bluetooth/bluedroid/ble/ble_spp_server>`_ example. What could be the reason for this?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    .. code:: text
+
+      E (2906) GATTS_SPP_DEMO: spp_gatt_init enable controller failed: ESP_ERR_INVALID_ARG
+
+  - The current reported error is due to the BLE SPP Server example releases the memory of Class Bluetooth controller by default. Please refer to the API description for `esp_bt_controller_mem_release() <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/bluetooth/controller_vhci.html#_CPPv429esp_bt_controller_mem_release13esp_bt_mode_t>`_.
+  - After setting the Bluetooth Dual Mode, you need to delete `ESP_ERROR_CHECK(esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT)); <https://github.com/espressif/esp-idf/blob/cbce221e88d52665523093b2b6dd0ebe3f1243f1/examples/bluetooth/bluedroid/ble/ble_spp_server/main/ble_spp_server_demo.c#L666>`_, then modify `ret = esp_bt_controller_enable(ESP_BT_MODE_BLE); <https://github.com/espressif/esp-idf/blob/cbce221e88d52665523093b2b6dd0ebe3f1243f1/examples/bluetooth/bluedroid/ble/ble_spp_server/main/ble_spp_server_demo.c#L674>`_ to ``ret = esp_bt_controller_enable(ESP_BT_MODE_BTDM);``.

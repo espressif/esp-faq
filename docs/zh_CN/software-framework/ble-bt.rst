@@ -761,3 +761,15 @@ ESP32 用作 BLE server 时支持多个 client 同时连接吗？如何实现呢
 ----------------------------------------------------------------------------------------------
 
   - ESP-IDF SDK 中的 BLE 错误码参考的是 BLE 标准协议，对应的错误码说明可参见 `LIST OF BLE ERROR CODES <https://github.com/chegewara/esp32-ble-wiki/issues/5>`_。
+
+------------
+
+基于 `BLE SPP Server <https://github.com/espressif/esp-idf/tree/v5.1/examples/bluetooth/bluedroid/ble/ble_spp_server>`_ 例程将蓝牙模式设置为 ``Component config`` > ``Bluetooth`` > ``Controller Options`` > ``Bluetooth controller mode (BR/EDR/BLE/DUALMODE)`` 双模式后进行测试，出现如下报错，是什么原因？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    .. code:: text
+
+      E (2906) GATTS_SPP_DEMO: spp_gatt_init enable controller failed: ESP_ERR_INVALID_ARG
+
+  - 当前报告的错误是由于 BLE SPP Server 示例默认为 Class Bluetooth 控制器释放了内存。请参考 `esp_bt_controller_mem_release() <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/bluetooth/controller_vhci.html#_CPPv429esp_bt_controller_mem_release13esp_bt_mode_t>`_ API 说明。
+  - 设置 Bluetooth Dual Mode 模式后，需要删除 `ESP_ERROR_CHECK(esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT)); <https://github.com/espressif/esp-idf/blob/cbce221e88d52665523093b2b6dd0ebe3f1243f1/examples/bluetooth/bluedroid/ble/ble_spp_server/main/ble_spp_server_demo.c#L666>`_，然后修改 `ret = esp_bt_controller_enable(ESP_BT_MODE_BLE); <https://github.com/espressif/esp-idf/blob/cbce221e88d52665523093b2b6dd0ebe3f1243f1/examples/bluetooth/bluedroid/ble/ble_spp_server/main/ble_spp_server_demo.c#L674>`_  为 ``ret = esp_bt_controller_enable(ESP_BT_MODE_BTDM);``。
