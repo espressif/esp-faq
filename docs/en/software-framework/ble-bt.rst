@@ -754,3 +754,10 @@ When testing based on the `GATT Server <https://github.com/espressif/esp-idf/tre
 
   - The 1800 and 1801 service attributes are two standard GATT service attributes in the BLE protocol, which cannot be deleted or disabled. They are part of the BLE protocol specifications, providing basic device information and general access capabilities, and maintaining compatibility with the standard BLE protocol.
   - 0x1800 refers to generic access, defining the general attributes of the device, while 0x1801 refers to generic attribute, a simple GATT service used to provide basic information about the device.
+
+-----------
+
+Is there an explanation for the BLE error codes in the ESP-IDF SDK?
+----------------------------------------------------------------------------------------------
+
+  - The BLE error codes in the ESP-IDF SDK refer to the BLE standard protocol. The corresponding error code descriptions can be found in `LIST OF BLE ERROR CODES <https://github.com/chegewara/esp32-ble-wiki/issues/5>`_.
