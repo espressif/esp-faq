@@ -951,3 +951,10 @@ Why I encountered the following error after I run the firmware based on the ESP-
     ***ERROR*** A stack overflow in task sys_evt has been detected.
 
   The error is caused by insufficient system_event task stack. You can try to resolve it by increasing ``Component config`` > ``ESP System Setting`` > ``Event loop task stack size``. However, the overflow occurs because too much logic is being processed within system_event. It is not recommended as it might lead to delayed handling of subsequent events. We suggest forwarding this event to other tasks for processing, either through a queue or other operations.
+
+----------------------------
+
+How to solve the issue of being unable to parse due to spaces in the specified url during Wi-Fi OTA?
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Spaces can be replaced with ``+`` or ``%20`` to solve this issue.
