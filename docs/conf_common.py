@@ -25,6 +25,9 @@ html_static_path = ['../_static']
 # add Tracking ID for Google Analytics
 google_analytics_id = 'G-1SP3XY5NKQ'
 
+# add html js files ID for Baidu Analytics
+html_js_files = ['baidu_analytics.js',]
+
 # Extra options required by sphinx_idf_theme
 project_slug = 'esp-faq'
 
