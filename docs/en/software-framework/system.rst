@@ -958,3 +958,13 @@ How to solve the issue of being unable to parse due to spaces in the specified u
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Spaces can be replaced with ``+`` or ``%20`` to solve this issue.
+
+------------------------
+
+How to get the version number of newlib of ESP-IDF?
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  - There are two ways to obtain the version number:
+
+    - 1. Run `xtensa-esp32-elf-gcc -dM -E -x c - <<< "#include <_newlib_version.h>" | grep NEWLIB_VERSION` command to obtain the newlib version number. The printed log should be similar to the following: `#define _NEWLIB_VERSION "4.1.0"`.
+    - 2. Search for the newlib version in the toolchain version and find the toolchain version used by ESP-IDF. For example, for ESP-IDF v5.0, you can get the version of the toolchain is esp2021-r1 from `xtensa esp32 elf <https://docs.espressif.com/projects/esp-idf/en/v5.0/esp32/api-guides/tools/idf-tools.html#xtensa -Esp32 elf>`__. Go to the release note page of `this toolchain version <https://github.com/espressif/crosstool-NG/releases/tag/esp-2022r1>`__, it can be seen from the link that the newlib version is v4.1.0.
