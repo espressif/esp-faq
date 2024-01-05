@@ -958,3 +958,13 @@ Wi-Fi OTA 时，指定 url 中有空格导致无法解析，如何解决？
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
   可以将空格替换成 ``+`` 或者 ``%20`` 来解决。
+
+----------------------------
+
+如何查看 ESP-IDF 中 newlib 的版本号？
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可使用以下两种方式可以获取版本号：
+
+    - 1. 在 ESP-IDF 环境中运行 `xtensa-esp32-elf-gcc -dM -E -x c - <<< "#include <_newlib_version.h>" | grep NEWLIB_VERSION` 命令去获取 newlib 版本号，将打印类似以下内容： `#define _NEWLIB_VERSION "4.1.0"`。         
+    - 2. 在工具链版本中查找 newlib 版本，查找 ESP-IDF 使用的工具链版本。例如，对于 ESP-IDF v5.0，从 `xtensa-esp32-elf <https://docs.espressif.com/projects/esp-idf/en/v5.0/esp32/api-guides/tools/idf-tools.html#xtensa-esp32-elf>`_ 可以得知工具链版本为 esp2021-r1，转到 `该工具链版本 <https://github.com/espressif/crosstool-NG/releases/tag/esp-2022r1>`_ 的发行说明页面，从链接中可以获知 newlib 版本为 v4.1.0。
