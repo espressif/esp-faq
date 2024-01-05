@@ -75,3 +75,18 @@ ESP32 使用 Mbed TLS 时如何优化内存？
 
   - mbedtls 错误码为 0x4290，0x4290 错误码一般是 0x4280 + 0x10。0x4280 代表错误阶段为 MBEDTLS_ERR_RSA_PUBLIC_FAILED, 0x10 说明此错误阶段的原因为 MBEDTLS_ERR_MPI_ALLOC_FAILED, 代表此错误阶段是内存分配失败导致的。
   - mbedtls 错误码对应原因参见 `Mbed TLS error codes <https://gist.github.com/erikcorry/b25bdcacf3e0086f8a2afb688420678e>`__。
+
+-------------
+
+使用 ESP32 在 ESP-IDF v5.1.2 版本的 SDK 上基于 `esp-idf/examples/protocols/https_mbedtls <https://github.com/espressif/esp-idf/blob/482a8fb2d78e3b58eb21b26da8a5bedf90623213/examples/protocols/https_mbedtls/main/https_mbedtls_example_main.c#L125>`_ 例程连接 TLS v1.3 服务器出现如下报错，是什么原因？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    .. code-block:: c
+
+      E(53769) example: mbedtls_ssl_handshake returned -0x6c00
+      I(53779) mbedtls: ssl_tls.c:355 Reallocating in_buf to 4429
+      I(53779) mbedtls: ssl_tls.c:355 Reallocating in_buf to 16717
+      E(53769) example: Last error was: -0x6c00 - SSL - Internal error (eg, unexpected failure in lower-level module)
+   
+  - ESP-IDF v5.1.2 版本还不支持使用 TLS v1.3，如果需要连接 TLS v1.3 服务器，请基于 ESP-IDF v5.2-beta1 及以上版本 SDK 进行测试。参见: `esp_tls: add initial support for TLS 1.3 connection <https://github.com/espressif/esp-idf/commit/7fd1378fbb0b81231a83f91f8227f8fb083635a5>`__。
