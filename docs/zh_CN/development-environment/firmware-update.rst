@@ -260,3 +260,10 @@ Windows 7 系统 USB 驱动无法识别是什么原因？
 
   - 请先完全擦除芯片，再进行烧录
   - V3.9.4 及以上版本已修复该问题
+
+--------------
+
+ESP32 使用 ESP-IDF v3.0 版本的 bootloader.bin 无法正常启动 ESP-IDF v5.0 版本的 app.bin，是什么原因？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 当使用 ESP-IDF v3.0 版本的 bootloader.bin 启动 ESP-IDF v5.0 版本的 app.bin 时，需要在 ESP-IDF v5.0 上开启 ``idf.py menuconfig`` > ``Build type`` > ``[*] App compatible with bootloader and partition table before ESP-IDF v3.1`` 配置选项。
