@@ -260,3 +260,10 @@ When using the `Flash Download Tools <https://www.espressif.com/en/support/downl
 
   - Please erase the chip completely first before flashing.
   - This problem has been solved in V3.9.4 and above versions.
+
+--------------
+
+On ESP32, the bootloader.bin of ESP-IDF v3.0 can not start app.bin of ESP-IDF v5.0. Why?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - When booting the app.bin of ESP-IDF v5.0 with the bootloader.bin of ESP-IDF v3.0, it is necessary to enable the configuration option ``idf.py menuconfig`` > ``Build type`` > ``[*] App compatible with bootloader and partition table before ESP-IDF v3.1`` on ESP-IDF v5.0.
