@@ -1330,3 +1330,10 @@ ESP 模组支持 Wi-Fi HaLow 功能吗？
 ------------------------------------------------------------------------------------------------------------------
 
   不支持，Wi-Fi HaLow 基于 802.11ah 协议。
+
+--------------
+
+在 ESP32 Wi-Fi Scan 模式下如何实现不发送任何射频波？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 使用 `esp_wifi_scan_start() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv419esp_wifi_scan_startPK18wifi_scan_config_tb>`_ API 将 ESP32 设置为被动扫描模式（ `WIFI_SCAN_TYPE_PASSIVE <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv4N16wifi_scan_type_t22WIFI_SCAN_TYPE_PASSIVEE>`_ ）即可。

@@ -1329,4 +1329,11 @@ When encountering the error message ``Error occurred during sending: errno 12`` 
 Does the ESP module support Wi-Fi HaLow functionality?
 ------------------------------------------------------------------------------------------------------------------
 
-  No, as Wi-Fi HaLow operates based on the 802.11ah protocol.
+  No, Wi-Fi HaLow is based on the 802.11ah protocol.
+
+--------------
+
+How to prevent any radio frequency waves from being sent in ESP32 Wi-Fi Scan mode?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Use the `esp_wifi_scan_start() <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv419esp_wifi_scan_startPK18wifi_scan_config_tb>`_ API to set ESP32 to passive scan mode (`WIFI_SCAN_TYPE_PASSIVE <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv4N16wifi_scan_type_t22WIFI_SCAN_TYPE_PASSIVEE>`_).
