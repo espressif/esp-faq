@@ -12,7 +12,7 @@ source ~/.pyenv3_8/bin/activate
 # Update pip
 pip install --upgrade pip
 
-# Install the pip package
+# Install the pip package in requirements.txt
 pip install -r requirements.txt
 
 # Compile the document
