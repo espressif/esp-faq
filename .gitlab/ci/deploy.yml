@@ -22,12 +22,7 @@ push_master_to_github:
     - chmod 600 ~/.ssh/id_rsa
     - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
     - git remote add github git@github.com:espressif/esp-faq.git
-    # What the next line of script does: goes through the list of refs for all branches we push to github,
-    # generates a snippet of shell which is evaluated. The snippet checks CI_BUILD_REF against the SHA
-    # (aka objectname) at tip of each branch, and if any SHAs match then it checks out the local branch
-    # and then pushes that ref to a corresponding github branch
-
-    - eval $(git for-each-ref --shell bash --format 'if [ $CI_COMMIT_REF == %(objectname) ]; then git checkout -B %(refname:strip=3); git push --follow-tags github %(refname:strip=3); fi;' $GITHUB_PUSH_REFS)
+    - ${CI_PROJECT_DIR}/.gitlab/ci/push_to_github.sh
 
 .deploy_docs_template:
   stage: deploy
