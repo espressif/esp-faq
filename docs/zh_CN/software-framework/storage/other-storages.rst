@@ -18,7 +18,7 @@
 ESP32 是否可以使用 LittleFS 文件系统？
 ---------------------------------------------------
 
-  目前 ESP-IDF 未包含 LittleFS，存在第三方移植组件 `esp_littlefs <https://github.com/joltwallet/esp_littlefs>`_，可直接在 ESP-IDF 中使用。匹配 LittleFS 文件系统镜像的工具为 `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_。
+  LittleFS 为第三方移植组件 `esp_littlefs <https://github.com/joltwallet/esp_littlefs>`_，可直接在 ESP-IDF 中使用。匹配 LittleFS 文件系统镜像的工具为 `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_。
 
 ----------------
 
@@ -32,7 +32,7 @@ ESP32 如何查看芯片内存（例如：DRAM、IRAM、rodata）使用情况？
 ESP8266 用户可用的 RTC RAM 是多大？
 ----------------------------------------------------------------------------------------------
 
-  - ESP8266 用户可用的 RTC RAM 为 0x200。可参见 `esp8266.ld <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/ld/esp8266.ld>`_ 文件说明。
+  - ESP8266 用户可用的 RTC RAM 为 512 字节（0x200）。可参见 `esp8266.ld <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/ld/esp8266.ld>`_ 文件说明。
 
 ----------------
 
@@ -48,7 +48,7 @@ ESP8266 用户可用的 RTC RAM 是多大？
 ESP32 分区表中的分区数量有限制吗？
 -----------------------------------------------
 
-  - 分区表的长度为 0xC00 字节（最多可以保存 95 条分区表条目）。参考链接 `分区表 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/partition-tables.html>`_ 的说明。
+  - 有限制，分区表的长度为 0xC00 字节（最多可以保存 95 条分区表条目）。参考链接 `分区表 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/partition-tables.html>`_ 的说明。
 
 ----------------
 
