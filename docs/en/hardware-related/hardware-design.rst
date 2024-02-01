@@ -18,7 +18,7 @@ Hardware design
 The I2S pins of ESP32 are scattered. Can I route I2S signals to adjacent pins? For example, to ``GPIO5, GPIO18, GPIO23, GPIO19, and GPIO22``, or to ``GPIO25, GPIO26, GPIO32, and GPIO33``.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - All I2S signals can be routed to different I/Os freely. Please note that some I/Os can only be set as input. For details, please refer to Section *Peripheral Pin Configurations* and Appendix *IO_MUX* in the `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
+  All I2S signals can be routed to different I/Os freely. Please note that some I/Os can only be set as input. For details, please refer to Section *Peripheral Pin Configurations* and Appendix *IO_MUX* in the `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
 --------------------
 
@@ -60,7 +60,7 @@ What should be noted when I configure the pins of ESP32?
 What is the voltage tolerance of GPIOs of ESP chips?
 ----------------------------------------------------------------
 
-  - The voltage tolerance of GPIO is 3.6 V. If the voltage exceeds 3.6 V, please add a voltage divider to protect GPIO pins from damage.
+  The voltage tolerance of GPIO is 3.6 V. If the voltage exceeds 3.6 V, please add a voltage divider to protect GPIO pins from damage.
 
 -------------
 
@@ -202,7 +202,7 @@ For modules housing ESP32, which pins cannot be set by users?
 Which is the reset pin of ESP32?
 ---------------------------------
 
-  - CHIP_PU serves as the reset pin of ESP32. The input level (VIL_nRST) for resetting the chip should be low enough and remain so for a period of time. Please refer to Section *Reset* in the `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
+  CHIP_PU serves as the reset pin of ESP32. The input level (VIL_nRST) for resetting the chip should be low enough and remain so for a period of time. Please refer to Section *Reset* in the `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
 
 --------------
 
@@ -238,14 +238,14 @@ For modules with PCB antennas, what should be noted when I design the PCB and th
 Can GPIO 34 ~ GPIO39 of ESP32 be used as UART RX pins?
 --------------------------------------------------------
 
-  - GPIO 34 ~ GPIO39 can be used as UART RX pins.
+  GPIO 34 ~ GPIO39 can be used as UART RX pins.
 
 ---------------------
 
 Where can I find the design reference for the external 32 kHz crystal of ESP32 modules?
 -------------------------------------------------------------------------------------------------------
 
-  - Please refer to Section *RTC (optional)* in the `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
+  Please refer to Section *RTC (optional)* in the `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
 
 ----------------
 
@@ -279,7 +279,7 @@ How can I hard reset ESP8266? Is hard reset active low or active high? What are 
 What does the term ``NC`` mean in Espressif schematics?
 ------------------------------------------------------------------------------------
 
-  - NC is the acronym of “No Component”. If you see a pull-up resistor is marked NC as shown in the figure below, it indicates that the component is not installed.
+  NC is the acronym of “No Component”. If you see a pull-up resistor is marked NC as shown in the figure below, it indicates that the component is not installed.
 
   .. figure:: ../../_static/no-component.png
     :scale: 100%
@@ -300,8 +300,6 @@ How can I use multiple antennas with ESP32-S2?
 Does ESP32-C3F SPI CS0 pin need an external 10 kΩ pull-up resistor?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  :CHIP\: ESP32-C3F:
-
   - The SPI controller of ESP32-C3F supports software-programmable CS (Chip Select) pin without external 10 kΩ pull-up resistor.
     - In ESP32-C3F, the CS pin can be set to any GPIO pin via SPI controller configuration. The GPIO state can be set in the code to control the level of the CS pin. When the SPI bus is idle, the CS pin is automatically pulled up to the default state of the GPIO pin without an external pull-up resistor.
   - Please note that when using a software-programmable CS pin, to select the target device, the pin should be manually pulled down before the SPI bus transmission. After the transmission is completed, pull the CS pin high to release the device. Additionally, the level and status of the CS pin should be adjusted according to the actual situation to ensure the stability and reliability of the SPI bus.
@@ -311,15 +309,14 @@ Does ESP32-C3F SPI CS0 pin need an external 10 kΩ pull-up resistor?
 Is there any hardware design reference for ESP-Skainet Speech Recognition?
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - Please refer to `ESP32-Korvo V1.1 User Guide <https://github.com/espressif/esp-skainet/blob/master/docs/en/hw-reference/esp32/user-guide-esp32-korvo-v1.1.md>`_.
+  Please refer to `ESP32-Korvo V1.1 User Guide <https://github.com/espressif/esp-skainet/blob/master/docs/en/hw-reference/esp32/user-guide-esp32-korvo-v1.1.md>`_.
 
 ----------------------------------------------------------------------------------------
 
 Is it necessary to connect a 32 kHz RTC crystal?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  :CHIP\: ESP32 | ESP32-C3 | ESP32-S3:
 
-  - The external 32 kHz crystal is often used for Bluetooth Light-sleep timing. Therefore, when Bluetooth LE Light-sleep mode is not necessary, there is no need to do so.
+  The external 32 kHz crystal is often used for Bluetooth Light-sleep timing. Therefore, when Bluetooth LE Light-sleep mode is not necessary, there is no need to do so.
 
 ---------------
 
@@ -334,14 +331,14 @@ For the ESP32-MINI-1 module, is there a component library for Altium Designer?
 Can I change the input voltage of UART0 of ESP8266 from 3.3 V to 1.8 V?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes. VDDPST is the power domain for UART0, the input voltage of which can be 1.8 V theoretically.
+  Yes. VDDPST is the power domain for UART0, the input voltage of which can be 1.8 V theoretically.
 
 ------------------
 
 Is the level of UART0 of ESP8266 determined by VDD (VCC_WIFI) or VDDPST (VCC_CODEC_IO)?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The digital power voltage is determined by VDDPST, so the level of UART0 of ESP8266 is determined by VDDPST (hardware power domain).
+  The digital power voltage is determined by VDDPST, so the level of UART0 of ESP8266 is determined by VDDPST (hardware power domain).
 
 --------------
 
@@ -381,7 +378,7 @@ When using the ESP32-WROOM-32D module, can I set GPIO12 for other uses?
 When connecting an external flash to ESP32-WROOM-32D module, is it possible if I do not use GPIO6 ~ GPIO11 pins?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 has 3 sets of SPIs (SPI, HSPI and VSPI), which can access the external flash through the SPI0/1(HSPI/VSPI) bus. The external flash connected to other pins (pins other than GPIO6 ~ GPIO11) can only receive data for storage, but not run code. If you need to run code from flash, please connect the flash to GPIO6 ~ GPIO11 pins only.
+  ESP32 has three sets of SPIs (SPI, HSPI, and VSPI), which can access the external flash through the SPI0/1(HSPI/VSPI) bus. The external flash connected to other pins (pins other than GPIO6 ~ GPIO11) can only receive data for storage, but not run code. If you need to run code from flash, please connect the flash to GPIO6 ~ GPIO11 pins only.
 
 --------------
 
@@ -398,7 +395,7 @@ Do I need to add a shielding case to the PCB of ESP32 modules?
 Do I must use GPIO0, GPIO1, or GPIO3 of ESP32 as the I2S CLK pin?
 ------------------------------------------------------------------------------------------------------------
 
-  - The MCLK pin must use GPIO0, GPIO1, or GPIO3. The other clock pins can use any GPIOs. Note that GPIO0 is generally not recommended for other functions because it is a strapping pin.
+  The MCLK pin must use GPIO0, GPIO1, or GPIO3. The other clock pins can use any GPIOs. Note that GPIO0 is generally not recommended for other functions because it is a strapping pin.
 
 ----------------
 
@@ -433,7 +430,7 @@ Does it support to connect a second PSRAM chip externally based on the ESP32-S3R
 Could you please provide the 3D model and Footprint files of the ESP32-S3-WROOM-1 module?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The 3D models and Footprint files for the modules are available under the `espressif/kicad-libraries <https://github.com/espressif/kicad-libraries>`_ library.
+  The 3D models and Footprint files for the modules are available under the `espressif/kicad-libraries <https://github.com/espressif/kicad-libraries>`_ library.
 
 ----------------
 
@@ -461,35 +458,35 @@ How can I improve the EMC performance?
 Why do I need to connect a 499 Ω resistor to U0TXD for ESP32-S3?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The 499 Ω resistor is reserved for the U0TXD to suppress 80 MHz harmonics. For more information, please refer to `《ESP32­S3 Series Hardware Design Guidelines》 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_hardware_design_guidelines_en.pdf>`_.
+  The 499 Ω resistor is reserved for the U0TXD to suppress 80 MHz harmonics. For more information, please refer to `《ESP32­S3 Series Hardware Design Guidelines》 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_hardware_design_guidelines_en.pdf>`_.
 
 --------------
 
 How to calibrate the ESP32-S3 ADC in hardware?
 -------------------------------------------------------------------------------------------------------------------------------
 
-  - The ESP32-S3 already has the ADC calibrated in hardware on the chip. ESP32-S3 ADCs can be sensitive to noise, resulting in large differences in ADC readings. Depending on the usage scenario, you may need to connect a bypass capacitor (e.g. 100 nF ceramic capacitor) to the ADC input pads for minimising noise. In addition, multi-sampling can be used to further mitigate the effects of noise.
+  ESP32-S3 already has the ADC calibrated in hardware on the chip. ESP32-S3 ADCs can be sensitive to noise, resulting in large differences in ADC readings. Depending on the usage scenario, you may need to connect a bypass capacitor (e.g. 100 nF ceramic capacitor) to the ADC input pads for minimising noise. In addition, multi-sampling can be used to further mitigate the effects of noise.
 
 --------------
 
 How to design an automatic download circuit based on the ESP32 series chip?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - You can refer to the hardware design of the automatic download circuit in the `ESP32-DevKitC V4 schematic <https://dl.espressif.com/dl/schematics/esp32_devkitc_v4-sch.pdf>`_.
+  You can refer to the hardware design of the automatic download circuit in the `ESP32-DevKitC V4 schematic <https://dl.espressif.com/dl/schematics/esp32_devkitc_v4-sch.pdf>`_.
 
 ---------------
 
 Which crystal oscillator should be used on the ESP8266 chip?
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The ESP8266 chip requires the 26 MHz crystal oscillators to start the chip. The crystal precision should be ±10 PPM. For details, please refer to `《ESP8266 Hardware Design Guidelines》 <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_en.pdf>`_.
+  The ESP8266 chip requires the 26 MHz crystal oscillators to start the chip. The crystal precision should be ±10 PPM. For details, please refer to `《ESP8266 Hardware Design Guidelines》 <https://www.espressif.com/sites/default/files/documentation/esp8266_hardware_design_guidelines_en.pdf>`_.
 
 -------------
 
 Do the ESP32-C2, ESP32-C3 and ESP32-C6 chips support external PSRAM chips?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32-C2, ESP32-C3, and ESP32-C6 do not support external PSRAM chips.
+  ESP32-C2, ESP32-C3, and ESP32-C6 do not support external PSRAM chips.
 
 -------------
 
@@ -504,4 +501,4 @@ When the ESP32-C3 is powered by a battery, it may fail to start if the supply vo
 Does the 3x3 GND grid on the ESP32 series module need to be copper-plated?
 -----------------------------------------------------------------------------------------------------------
 
-  - It is recommended to plate copper on the 3x3 GND grid of the module.
+  It is recommended to plate copper on the 3x3 GND grid of the module.
