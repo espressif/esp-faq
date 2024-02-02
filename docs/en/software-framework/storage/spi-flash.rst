@@ -18,7 +18,7 @@ SPI Flash
 What is the requirement for the storage and usage of ESP32 flash?
 -------------------------------------------------------------------------------------------
 
-  The external flash can be simultaneously mapped to the CPU instruction and read-only data space. The ESP32 external flash can support up to 16 MB.
+  The external flash can be mapped into CPU instruction space and RO data space simultaneously. ESP32 can support up to 16 MB of external flash.
 
   - When it is mapped into CPU instruction space, up to 11 MB + 248 KB of data can be mapped at a time. If more than 3 MB + 248 KB is mapped at a time, the cache performance may be degraded due to speculative CPU reads.
   - When it is mapped into RO data space, up to 4 MB of data can be mapped at a time, and 8-bit, 16-bit and 32-bit reads are supported.
