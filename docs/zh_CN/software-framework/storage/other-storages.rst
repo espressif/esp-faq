@@ -32,7 +32,7 @@ ESP32 如何查看芯片内存（例如：DRAM、IRAM、rodata）使用情况？
 ESP8266 用户可用的 RTC RAM 是多大？
 ----------------------------------------------------------------------------------------------
 
-  - ESP8266 用户可用的 RTC RAM 为 512 字节（0x200）。可参见 `esp8266.ld <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/ld/esp8266.ld>`_ 文件说明。
+  - ESP8266 用户可用的 RTC RAM 为 512 字节 (0x200)。可参见 `esp8266.ld <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/ld/esp8266.ld>`_ 文件说明。
 
 ----------------
 
