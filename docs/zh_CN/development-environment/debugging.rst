@@ -20,9 +20,11 @@ ESP 设备的串口名称是什么？
 
   串口名称通常是由操作系统指定的，不同的操作系统和设备可能会有不同的串口名称。常见如下：
 
-  - Windows 系统中串口设备名称格式是：COM*
-  - Linux 系统中串口设备名称格式是：/dev/ttyUSB*
-  - macOS 系统中串口设备名称格式是：/dev/cu.usbserial-*
+  - Windows 系统中串口设备名称格式是 COM*
+  - Linux 系统中：
+    - UART 接口设备名称格式是 /dev/ttyUSB*
+    - USB 接口设备名称是 /dev/ttyACM*
+  - macOS 系统中串口设备名称格式是 /dev/cu.usbserial-*
 
 --------------
 
@@ -75,11 +77,11 @@ ESP32 Boot 启动模式不正常如何排查？
   - 其余模组使用 3.3 V flash 与 PSRAM，启动状态默认为 ``0x13``，下载模式 ``0x03``。
   - 详情请参考 `ESP32 系列芯片技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中的 Strapping 管脚部分。示例 ``0x13`` 对应如下：
 
-  +--------+--------+-------+-------+-------+--------+-------+
-  | 管脚   | GPIO12 | GPIO0 | GPIO2 | GPIO4 | GPIO15 | GPIO5 |
-  +========+========+=======+=======+=======+========+=======+
-  | 电平   |    0   |   1   |   0   |   0   |    1   |   1   |
-  +--------+--------+-------+-------+-------+--------+-------+
+    +--------+--------+-------+-------+-------+--------+-------+
+    | 管脚   | GPIO12 | GPIO0 | GPIO2 | GPIO4 | GPIO15 | GPIO5 |
+    +========+========+=======+=======+=======+========+=======+
+    | 电平   |    0   |   1   |   0   |   0   |    1   |   1   |
+    +--------+--------+-------+-------+-------+--------+-------+
 
   您也可以直接参考 `Boot 模式选择文档 <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html>`__。  
 
@@ -150,15 +152,15 @@ ESP32 如何获取与解析 coredump？
 
   - 从完整的固件中提取出 64 KB 大小的 coredump，需要先从分区表中确认 coredump 的偏移量。假设当前偏移量为 ``0x3F0000``，运行如下命令读取固件：
 
-  .. code-block:: text
+    .. code-block:: text
 
-    python esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyUSB* read_flash 0x3f0000 0x10000  coredump.bin
+      python esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyUSB* read_flash 0x3f0000 0x10000  coredump.bin
 
   - 使用 coredump 读取脚本将二进制的 coredump 文件转变成可读的信息。假设第一步获得的 coredump 文件为 coredump.bin，此固件对应的 elf 文件为 hello_world.elf，运行如下命令转换文件：
 
-  .. code-block:: text
+    .. code-block:: text
 
-    python esp-idf/components/espcoredump/espcoredump.py info_corefile -t raw -c coredump.bin hello_world.elf
+      python esp-idf/components/espcoredump/espcoredump.py info_corefile -t raw -c coredump.bin hello_world.elf
 
   也可以参考 `Core Dump 文档 <https://docs.espressif.com/projects/esp-idf/en/v4.4.4/esp32/api-guides/core_dump.html>`__ 了解更多信息。
 
@@ -167,13 +169,13 @@ ESP32 如何获取与解析 coredump？
 ESP32、ESP8266、ESP32S2 如何做射频性能测试？
 -----------------------------------------------------------------
 
-  - 参见 `ESP 射频测试指南 <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_CN.zip>`_。
+  请参见 `ESP 射频测试指南 <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_CN.zip>`_ 中 ``help`` 文件夹下的文档说明。
 
 --------------
 
-Win 10 系统下识别不到设备有哪些原因？
-----------------------------------------
-
+Win 10 系统下识别不到 ESP 设备有哪些原因？
+----------------------------------------------------------------------------------------
+  - 请检查是否开启了任何安全防护软件。
   - 请检查是否是在 Win10 Linux 虚拟子系统下识别设备。
   - 如果只是在 Win10 下识别不到设备，应前往设备管理器，查看是否有对应设备，如 COM x。若没有识别到任何设备，请查看设备接线以及驱动是否正常。
   - 如果是在 Linux 虚拟子系统下识别不到设备，在完成设备接线以及驱动检查后，以 VMWare 为例，前往虚拟机设置窗口里的 “USB 控制器”，勾选 “显示所有 USB 输入设备”。
@@ -202,10 +204,18 @@ ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region access
 ----------------------------------
 
   - 乐鑫模组或芯片可通过 python 脚本 `esptool <https://github.com/espressif/esptool>`_ 读取。
+  - Windows 环境：
 
-  .. code-block:: text
+    .. code-block:: text
 
-    esptool.py --port /dev/ttyUSB* flash_id
+      esptool.py -p COM* flash_id
+
+  - Linux 环境：
+
+    .. code-block:: text
+
+      esptool.py -p /dev/ttyUSB* flash_id
+
 
 --------------
 
@@ -227,16 +237,15 @@ ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region access
 --------------------------------------------------------------------------------------------------------------------------
 
   - ESP32 内置有掉电探测器，当其探测到芯片电压低于一定的预设阈值时，将重置芯片以防出现意外情况。
-  - 该报错信息可能会在不同场景内出现，但根本原因都在于芯片的供电电压暂时或永久性地低于掉电阈值。可通过替换电源、USB 电缆，或在模组内增加电容来解决。
+  - 该报错信息可能会在不同场景内出现，但根本原因都在于芯片的供电电压暂时或永久性地低于掉电阈值。可通过替换稳定的电源、USB 电缆，或在模组内增加电容来解决。
+  - 对于使用电池供电的产品，可以检查一下上电时序，或者更换能提供大电流的电池，或者尝试增加电源的电容。
   - 除此之外，也可以通过配置重置掉电阈值，或禁用掉电探测功能。详细信息请参考 `config-esp32-brownout-det <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/kconfig.html#brownout-detector>`_。
   - 关于 ESP32 上电、复位时序说明，详见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
 
 ---------------
 
-导入头文件 protocol_examples_common.h 后，为什么编译时提示找不到该文件?
+ESP32 导入头文件 protocol_examples_common.h 后，为什么编译时提示找不到该文件?
 --------------------------------------------------------------------------------------------------------------
-
-  :CHIP\: ESP32:
 
   - 在工程下的 CMakeLists.txt 中添加语句 “set(EXTRA_COMPONENT_DIRS $ENV{IDF_PATH}/examples/common_components/protocol_examples_common)” 即可。
   - 您也可以参考 `构建系统文档 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/build-system.html>`__ 来获取更多信息。

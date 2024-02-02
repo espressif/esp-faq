@@ -20,9 +20,11 @@ What is the serial port name of ESP devices？
 
   The serial port name is usually assigned by the operating system, and different operating systems and devices may have different serial port names. Common ones are as follows:
 
- - In Windows system: COM\*
- - In Linux system: /dev/ttyUSB\*
- - In macOS system: /dev/cu.usbserial-\*
+  - In Windows system: COM\*
+  - In Linux system:
+    - UART: /dev/ttyUSB\*
+    - USB: /dev/ttyACM*
+  - In macOS system: /dev/cu.usbserial-\*
 
 --------------
 
@@ -75,11 +77,11 @@ How to troubleshoot in ESP32 Boot mode？
   - Other modules use 3.3 V flash and PSRAM, which are ``0x13`` by default in boot status and ``0x03`` in download mode.
   - For detailed information, please refer to Section Strapping Pins in `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_. Taking ``0x13`` as an example, the pins are as follows:
 
-  +--------+--------+-------+-------+-------+--------+-------+
-  | Pins   | GPIO12 | GPIO0 | GPIO2 | GPIO4 | GPIO15 | GPIO5 |
-  +========+========+=======+=======+=======+========+=======+
-  | Level  |    0   |   1   |   0   |   0   |    1   |   1   |
-  +--------+--------+-------+-------+-------+--------+-------+
+    +--------+--------+-------+-------+-------+--------+-------+
+    | Pins   | GPIO12 | GPIO0 | GPIO2 | GPIO4 | GPIO15 | GPIO5 |
+    +========+========+=======+=======+=======+========+=======+
+    | Level  |    0   |   1   |   0   |   0   |    1   |   1   |
+    +--------+--------+-------+-------+-------+--------+-------+
 
   You can also refer to the `Boot Mode Selection documentation <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html>`__ directly.
 
@@ -150,15 +152,15 @@ How to obtain and parse coredump with ESP32?
 
   - To obtain the 64 KB coredump file from the firmware, you need to know its offset from the partition table. Assuming the offset is ``0x3F0000``, run the following command to read the firmware:
 
-  .. code-block:: text
+    .. code-block:: text
 
-    python esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyUSB* read_flash 0x3f0000 0x10000  coredump.bin
+      python esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyUSB* read_flash 0x3f0000 0x10000  coredump.bin
 
   - Use the coredump reading script to convert the file obtained at the first step into readable messages. Assuming the coredump file is coredump.bin and the elf file is hello_wolrd.elf, run the following command to convert the file:
 
-  .. code-block:: text
+    .. code-block:: text
 
-    python esp-idf/components/espcoredump/espcoredump.py info_corefile -t raw -c coredump.bin hello_world.elf
+      python esp-idf/components/espcoredump/espcoredump.py info_corefile -t raw -c coredump.bin hello_world.elf
 
   For more information, please refer to the `Core Dump documentation <https://docs.espressif.com/projects/esp-idf/en/v4.4.4/esp32/api-guides/core_dump.html>`__.
 
@@ -167,13 +169,13 @@ How to obtain and parse coredump with ESP32?
 How to do RF performance test with ESP32, ESP8266, and ESP32S2?
 --------------------------------------------------------------------------------------------
 
-- Please refer to `ESP RF Test Guide <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_EN.zip>`_.
+  Please refer to the documentation in the ``help`` folder of the `ESP RF Test Guide <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_EN.zip>`_.
 
 --------------
 
-My PC cannot recognize the device connected in Win10 system. What could be the reason?
-------------------------------------------------------------------------------------------------
-
+What are the reasons for not being able to recognize ESP devices under the Win10 system?
+-----------------------------------------------------------------------------------------
+  - Check if any security protection software has been activated.
   - Check if the device is identified in the Linux virtual subsystem of Win10.
   - If the device cannot be identified only in Win10 system, go to Device Manager to see whether such device exists (e.g., COM x). If the answer is still no, please check your cable and driver.
   - If the device cannot be identified only in Linux virtual subsystem, taken VMWare as an example, please go to ``Settings`` > ``USB Controller`` and select ``Show all USB input devices``.
@@ -202,10 +204,18 @@ How to read the flash model information of the modules?
 -----------------------------------------------------------
 
   - Please use the python script `esptool <https://github.com/espressif/esptool>`_ to read information of Espressif's chips and modules.
+  - For Windows:
 
-  .. code-block:: text
+    .. code-block:: text
 
-    esptool.py --port /dev/ttyUSB* flash_id
+      esptool.py -p COM* flash_id
+
+  - For Linux:
+
+    .. code-block:: text
+
+      esptool.py -p /dev/ttyUSB* flash_id
+
 
 --------------
 
@@ -227,16 +237,15 @@ I found a "Brownout detector was triggered" failure on my ESP32. How to resolve 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP32 has a built-in brownout detector which can detect if the voltage is lower than a specific value. If it happens, the detector will reset the chip to prevent unintended behavior.
-  - This message may be reported in various scenarios, while the root cause should always be that the chip with a power supply has momentarily or permanently dropped below the brownout threshold. Please try replacing power supply, USB cable, or installing capacitor on power supply terminals of your module.
+  - This message may be reported in various scenarios, while the root cause should always be that the chip with a power supply has momentarily or permanently dropped below the brownout threshold. Please try replacing stable power supply and USB cable, or installing capacitor on power supply terminals of your module.
+  - For products powered by batteries, please check the power-on sequence, replace a battery with a higher current, or try to increase the capacitance of the power supply.
   - Apart from the above solution, you can also try to configure the reset threshold value or disable the brownout detector. For more information, please refer to `config-esp32-brownout-det <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig.html#brownout-detector>`_.
   - For ESP32 power-up and reset timing descriptions, see `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
 ---------------
 
-After imported the protocol_examples_common.h header file, how come it cannot be found while compling?
+After ESP32 imported the protocol_examples_common.h header file, the file cannot be found while compiling. What could be the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  :CHIP\: ESP32:
 
   - Please add "set(EXTRA_COMPONENT_DIRS $ENV{IDF_PATH}/examples/common_components/protocol_examples_common)" in CMakeLists.txt under the project.
   - For more information, please refer to the `Build system documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/build-system.html>`__.
