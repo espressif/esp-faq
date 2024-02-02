@@ -51,7 +51,7 @@ When a 8 MB PSRAM mounted on ESP32, why only 4 MB of it is actually mapped?
 I'm using an ESP32 development board with the official PSRAM chip PSRAM64H embedded. But after replacing another type of PSRAM chip to PSRAM64H, it failed to recognize when I ran an ESP-IDF example and enabled the PSRAM configuration. What is the reason?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - To change the model of the PSRAM chip, you need to modify the corresponding configuration options in ``menuconfig -> Component config -> ESP32-specific -> Support for external, SPI-connected RAM -> SPI RAM config -> Type of SPI RAM chip in use``.
+  - To change the model of the PSRAM chip, you need to modify the configuration option in ``menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``Type of SPI RAM chip in use``.
   - If you cannot find the corresponding type options of the new PSRAM chip you are about to use, please add the chip driver manually.
 
 ----------------------
