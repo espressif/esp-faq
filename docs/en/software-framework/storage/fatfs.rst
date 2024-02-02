@@ -33,7 +33,7 @@ How to make and flash the image of a FatFs file system?
 
     ./mkfatfs -c file_image -s 1048576 ./fat_img.bin
 
-  - Step 2: Burn the image, for example, burn to the 0x110000 address:
+  - Step 2: Flash the image, for example, flash it to 0x110000:
 
   .. code-block:: text
 
