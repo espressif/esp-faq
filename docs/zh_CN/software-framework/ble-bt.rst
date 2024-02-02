@@ -243,10 +243,12 @@ ESP32 的经典蓝牙工作电流是多少？
 
 ------------
 
-ESP32 如何修改蓝牙的发射功率？
+ESP32 系列如何修改蓝牙的发射功率？
 ---------------------------------------------------
 
-  蓝牙发射功率可通过 esp_ble_tx_power_set(); 函数进行设置，可参见 `esp_bt.h <https://github.com/espressif/esp-idf/blob/c77c4ccf6c43ab09fd89e7c907bf5cf2a3499e3b/components/bt/include/esp_bt.h>`_。
+  - ESP32/ESP32-S3/ESP32-C3 蓝牙发射功率可通过 `esp_ble_tx_power_set()` 函数进行设置，可参见 `esp_bt.h <https://github.com/espressif/esp-idf/blob/c77c4ccf6c43ab09fd89e7c907bf5cf2a3499e3b/components/bt/include/esp_bt.h>`_。
+  - 对于ESP32-C6/ESP32-C2/ESP32-H2 可以通过调用 `esp_ble_tx_power_set_enhanced() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/include/esp32h4/include/esp_bt.h#L139>`__ API设置发射功率。
+  - 对于经典蓝牙可以使用 `esp_bredr_tx_power_set() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/include/esp32/include/esp_bt.h#L336>`__ 进行设置。
 
 --------------
 
