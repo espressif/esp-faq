@@ -79,7 +79,7 @@ FatFs 支持的最大容量是多少?
 使用 FAT 文件系统时，文件名稍微长一点的文件无法打开，该如何处理？
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 可以在 ``menuconfig`` -> ``Component config`` -> ``FAT Filesystem support`` -> ``Long filename support`` 中进行修改，选择 ``Long filename buffer in heap`` 或 ``Long filename buffer on stack`` 配置项。然后可以在 ``Component config`` -> ``FAT Filesystem support`` -> ``Max long filename length`` 中修改最大的文件名长度。
+  - 可以在 ``menuconfig`` > ``Component config`` > ``FAT Filesystem support`` > ``Long filename support`` 中进行修改，选择 ``Long filename buffer in heap`` 或 ``Long filename buffer on stack`` 配置项。然后可以在 ``Component config`` > ``FAT Filesystem support`` > ``Max long filename length`` 中修改最大的文件名长度。
 
 ----------------------------------------------------------------------
 
