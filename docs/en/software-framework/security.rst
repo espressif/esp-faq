@@ -194,10 +194,11 @@ How can I enable secure boot or flash encryption by pre-burning eFuse?
 
 ------------
 
-After enabling Secure Boot, why can't I flash the new bootloader.bin using the `idf.py build` command?
+After enabling Secure Boot, why can't the new bootloader.bin be flashed using the ``idf.py flash`` command?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  After enabling Secure Boot, please use the `idf.py bootloader` command to compile the new bootloader.bin. Then, flash the new bootloader.bin using the command `idf.py -p (PORT) bootloader-flash`.
+  - After enabling Secure Boot, compile the new bootloader.bin using the ``idf.py bootloader`` command. Then, flash the new bootloader.bin using the ``idf.py -p (PORT) bootloader-flash`` command.
+  - In ESP-IDF v5.2 and later versions, you can also solve this problem by enabling the ``CONFIG_SECURE_BOOT_FLASH_BOOTLOADER_DEFAULT`` option. For details, please refer to `CONFIG_SECURE_BOOT_FLASH_BOOTLOADER_DEFAULT <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/kconfig.html?highlight=secure_boot_flash#config-secure-boot-flash-bootloader-default>`_.
 
 ------------
 
@@ -221,3 +222,17 @@ Which USB functions will be disabled after the ESP32-S3 enables flash encryption
 
   - After enabling flash encryption or secure boot on ESP32-S3, the `USB-JTAG debugging <https://docs.espressif.com/projects/esp-idf/en/release-v5.1/esp32s3/api-guides/jtag-debugging/index.html#jtag-debugging>`__ function will be disabled, and it does not support burning firmware with the `idf.py dfu-flash <https://docs.espressif.com/projects/esp-idf/en/release-v5.1/esp32s3/api-guides/dfu.html#api-guide-dfu-flash>`__ command via the USB interface.
   - After enabling flash encryption or secure boot on ESP32-S3, it supports `USB Host <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host>`__ and `USB Device <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device>`__ features; it also supports downloading firmware through the USB interface using the ``idf.py flash`` command.
+
+------------
+
+After enabling flash encryption, if there are multiple flash encryption keys for ``XTS_AES_128_KEY`` in the device's eFuse, how will the device select the key?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The device will always choose the key with the smallest ``Key ID``.
+
+------------
+
+When Secure Boot V2 is enabled, how can I store the public key used for signature verification on the device?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The information of public key is stored in the device's signature block. When Secure Boot V2 is initially enabled, the device will automatically read the public key information from the signature block and write it into the device.
