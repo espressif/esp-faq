@@ -66,26 +66,17 @@ I want to use a sensor on the I2C of ESP32-LyraT. Is there an example on how to 
 How to output 32-bit I2S audio data?
 -------------------------------------
 
-  Rewrite a my_i2s_write function to call i2s_write_expand, then replace the write function of the i2s_stream element with my_i2s_write in the form of audio_element_set_write_cb.
+  Please refer to the following code:
 
   .. code:: c
 
-    int my_i2s_write(audio_element_handle_t self, char *buffer, int len, TickType_t ticks_to_wait, void *context)
-    {
-      i2s_stream_t *i2s = (i2s_stream_t *)audio_element_getdata(self);
-      size_t bytes_written = 0;
-      i2s_write_expand(i2s->config.i2s_port, buffer, len, 16, 32, &bytes_written, ticks_to_wait);
-      return bytes_written;
-    }
-
-      i2s_stream_cfg_t i2s_writer = I2S_STREAM_CFG_DEFAULT();
-      i2s_writer.type = AUDIO_STREAM_WRITER;
-      i2s_writer.stack_in_ext = true;
-      i2s_writer.i2s_config.sample_rate = 48000;
-      i2s_writer.i2s_config.mode = I2S_MODE_MASTER | I2S_MODE_TX;
-      i2s_writer.i2s_config.bits_per_sample = 32; //for cupid digital loopback
-      audio_element_handle_t my_i2s = i2s_stream_init(&i2s_writer);
-      audio_element_set_write_cb(my_i2s, my_i2s_write, NULL);
+    i2s_stream_cfg_t i2s_writer_cfg = I2S_STREAM_CFG_DEFAULT();
+    i2s_writer_cfg.type = AUDIO_STREAM_WRITER;
+    i2s_writer_cfg.stack_in_ext = true;
+    i2s_writer_cfg.task_core = 1;
+    i2s_writer_cfg.need_expand = true;
+    i2s_writer_cfg.expand_src_bits = 16;
+    i2s_writer = i2s_stream_init(&i2s_writer_cfg);
 
 --------------
 
@@ -98,19 +89,19 @@ Why do I always get an error when compiling example/get-started/play-mp3 with ES
   - To detect ESP-ADF v2.4, please follow the steps described in `Updating to Stable Release <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/versions.html#updating-to-stable-release>`_.
   - Try executing the following commands and recompile.
 
-  .. code:: shell
+    .. code:: shell
 
-    cd $ADF_PATH
-    git fetch
-    git checkout v2.4
-    git submodule update --init --recursive
+      cd $ADF_PATH
+      git fetch
+      git checkout v2.4
+      git submodule update --init --recursive
 
 --------------
 
-Is there an official version of ESP-ADF that supports ESP-IDF v4.4?
---------------------------------------------------------------------
+Where can I check the ESP-IDF version supported by ESP-ADF?
+-----------------------------------------------------------------------
 
-  `ESP-ADF Release v2.4 <https://github.com/espressif/esp-adf/releases/tag/v2.4>`_ supports ESP-IDF v3.3, v4.1, v4.2, V4.3, and v4.4.
+  Please refer to the `ESP-IDF version supported by ESP-ADF <https://github.com/espressif/esp-adf?tab=readme-ov-file#idf-version>`_.
 
 --------------
 
@@ -177,21 +168,21 @@ If there is an AUX input on the ESP32's AI development board, can the MIC still 
   - The ESP-ADF development framework can choose various ways to pick up sound, including MIC input and Line-in.
   - The pickup method selection is as follows:
 
-  .. code-block:: text
+    .. code-block:: text
 
-    typedef enum {
-      AUDIO_HAL_CODEC_MODE_ENCODE = 1, /*! <select adc */      // MIC pickup
-      AUDIO_HAL_CODEC_MODE_DECODE, /*! <select dac*/
-      AUDIO_HAL_CODEC_MODE_BOTH, /*! <select both adc and dac */   //  MIC + speaker
-      AUDIO_HAL_CODEC_MODE_LINE_IN, /*! <set adc channel */,             // microphone pickup
-    } Audio_hal_codec_mode_t;
+      typedef enum {
+        AUDIO_HAL_CODEC_MODE_ENCODE = 1, /*! <select adc */      // MIC pickup
+        AUDIO_HAL_CODEC_MODE_DECODE, /*! <select dac*/
+        AUDIO_HAL_CODEC_MODE_BOTH, /*! <select both adc and dac */   //  MIC + speaker
+        AUDIO_HAL_CODEC_MODE_LINE_IN, /*! <set adc channel */,             // microphone pickup
+      } Audio_hal_codec_mode_t;
 
   - The pickup method configuration is as follows:
 
-  .. code-block:: text
+    .. code-block:: text
 
-    audio_board_handle_t board_handle = audio_board_init();
-    audio_hal_ctrl_codec(board_handle->audio_hal, AUDIO_HAL_CODEC_MODE_DECODE, AUDIO_HAL_CTRL_START);     //If you want to pick up sound with MIC, modify this configuration option.
+      audio_board_handle_t board_handle = audio_board_init();
+      audio_hal_ctrl_codec(board_handle->audio_hal, AUDIO_HAL_CODEC_MODE_DECODE, AUDIO_HAL_CTRL_START);   // If you want to pick up sound from the MIC, modify this configuration option.
 
 ---------------------
 
@@ -283,4 +274,4 @@ Does ESP32 support online voice recognition?
 Does ESP32 support volume adjustment of Bluetooth headphones?
 ---------------------------------------------------------------------------------------------------------------
 
-  - Yes. ESP32 uses the Bluetooth AVRCP tuning protocol. You can test the function with the `esp-adf/examples/player/pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_ example.
+  Yes. ESP32 uses the Bluetooth AVRCP tuning protocol. You can test the function with the `esp-adf/examples/player/pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_ example.

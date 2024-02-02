@@ -66,26 +66,17 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？
 如何输出 32 位的 I2S 音频数据？
 ---------------------------------
 
-  重新写一个 my_i2s_write 函数调用 i2s_write_expand，然后把 my_i2s_write 以 audio_element_set_write_cb 的形式替换 i2s_stream element 的 write 函数。
+  参考以下代码即可：
 
   .. code:: c
 
-    int my_i2s_write(audio_element_handle_t self, char *buffer, int len, TickType_t ticks_to_wait, void *context)
-    {
-      i2s_stream_t *i2s = (i2s_stream_t *)audio_element_getdata(self);
-      size_t bytes_written = 0;
-      i2s_write_expand(i2s->config.i2s_port, buffer, len, 16, 32, &bytes_written, ticks_to_wait);
-      return bytes_written;
-    }
-
-      i2s_stream_cfg_t i2s_writer = I2S_STREAM_CFG_DEFAULT();
-      i2s_writer.type = AUDIO_STREAM_WRITER;
-      i2s_writer.stack_in_ext = true;
-      i2s_writer.i2s_config.sample_rate = 48000;
-      i2s_writer.i2s_config.mode = I2S_MODE_MASTER | I2S_MODE_TX;
-      i2s_writer.i2s_config.bits_per_sample = 32; //for cupid digital loopback
-      audio_element_handle_t my_i2s = i2s_stream_init(&i2s_writer);
-      audio_element_set_write_cb(my_i2s, my_i2s_write, NULL);
+    i2s_stream_cfg_t i2s_writer_cfg = I2S_STREAM_CFG_DEFAULT();
+    i2s_writer_cfg.type = AUDIO_STREAM_WRITER;
+    i2s_writer_cfg.stack_in_ext = true;
+    i2s_writer_cfg.task_core = 1;
+    i2s_writer_cfg.need_expand = true;
+    i2s_writer_cfg.expand_src_bits = 16;
+    i2s_writer = i2s_stream_init(&i2s_writer_cfg);
 
 --------------
 
@@ -98,19 +89,19 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？
   - 要正确检测 ESP-ADF v2.4，请按照 `更新至一个稳定发布版本 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/versions.html#id7>`_ 中所述的步骤进行操作。
   - 尝试执行以下命令并重复编译。
 
-  .. code:: shell
+    .. code:: shell
 
-    cd $ADF_PATH
-    git fetch
-    git checkout v2.4
-    git submodule update --init --recursive
+      cd $ADF_PATH
+      git fetch
+      git checkout v2.4
+      git submodule update --init --recursive
 
 --------------
 
-请问官方有没有可以支持 ESP-IDF v4.4 的 ESP-ADF 版本？
+请问在哪里可以查看 ESP-ADF 版本支持的 ESP-IDF 版本情况？
 ---------------------------------------------------------------------
 
-  `ESP-ADF Release v2.4 <https://github.com/espressif/esp-adf/releases/tag/v2.4>`_ 支持 ESP-IDF v3.3、v4.1、v4.2、V4.3 和 v4.4。
+  请参考 `ESP-ADF 下支持的 ESP-IDF 版本 <https://github.com/espressif/esp-adf?tab=readme-ov-file#idf-version>`_。
 
 --------------
 
@@ -177,21 +168,21 @@ ESP32 的 AI 开发板上有 AUX 输入，MIC 就无法拾音了吗？
   - ESP-ADF 开发框架可以选择多种方式拾音，有 MIC 输入和 Line-in。
   - 拾音方式选择如下：
 
-  .. code-block:: text
+    .. code-block:: text
 
-    typedef enum {
-      AUDIO_HAL_CODEC_MODE_ENCODE = 1, /*! <select adc */      // MIC pickup
-      AUDIO_HAL_CODEC_MODE_DECODE, /*! <select dac*/
-      AUDIO_HAL_CODEC_MODE_BOTH, /*! <select both adc and dac */   //  MIC + speaker
-      AUDIO_HAL_CODEC_MODE_LINE_IN, /*! <set adc channel */,             // microphone pickup
-    } Audio_hal_codec_mode_t;
+      typedef enum {
+        AUDIO_HAL_CODEC_MODE_ENCODE = 1, /*! <select adc */      // MIC pickup
+        AUDIO_HAL_CODEC_MODE_DECODE, /*! <select dac*/
+        AUDIO_HAL_CODEC_MODE_BOTH, /*! <select both adc and dac */   //  MIC + speaker
+        AUDIO_HAL_CODEC_MODE_LINE_IN, /*! <set adc channel */,             // microphone pickup
+      } Audio_hal_codec_mode_t;
 
   - 拾音方式配置如下：
 
-  .. code-block:: text
+    .. code-block:: text
 
-    audio_board_handle_t board_handle = audio_board_init();
-    audio_hal_ctrl_codec(board_handle->audio_hal, AUDIO_HAL_CODEC_MODE_DECODE, AUDIO_HAL_CTRL_START);     //若要 MIC 拾音，修改这个配置选项。
+      audio_board_handle_t board_handle = audio_board_init();
+      audio_hal_ctrl_codec(board_handle->audio_hal, AUDIO_HAL_CODEC_MODE_DECODE, AUDIO_HAL_CTRL_START);     //若要 MIC 拾音，修改这个配置选项。
 
 ---------------------
 
@@ -283,4 +274,4 @@ ESP32 是否支持在线语音识别？
 ESP32 能否实现蓝牙耳机的音量调节功能？
 ---------------------------------------------------------------------------------------------------------------
 
-  - 可以。ESP32 使用的是蓝牙的 AVRCP 调音协议，可基于 `esp-adf/examples/player/pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_ 例程测试。
+  可以。ESP32 使用的是蓝牙的 AVRCP 调音协议，可基于 `esp-adf/examples/player/pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_ 例程测试。
