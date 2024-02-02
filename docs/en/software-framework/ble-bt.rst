@@ -243,10 +243,12 @@ What is the operating current for ESP32 Classic Bluetooth®？
 
 ------------
 
-How can I modify the transmit power for ESP32 Bluetooth®？
--------------------------------------------------------------------
+How can I modify the transmit power of Bluetooth® for ESP32 series chips？
+--------------------------------------------------------------------------------
 
-  The Bluetooth transmit power can be configured via function esp_ble_tx_power_set();. Please refer to `esp_bt.h <https://github.com/espressif/esp-idf/blob/c77c4ccf6c43ab09fd89e7c907bf5cf2a3499e3b/components/bt/include/esp_bt.h>`_.
+  For ESP32/ESP32-S3/ESP32-C3, the Bluetooth transmit power can be configured via function esp_ble_tx_power_set(). For details, please refer to `esp_bt.h <https://github.com/espressif/esp-idf/blob/c77c4ccf6c43ab09fd89e7c907bf5cf2a3499e3b/components/bt/include/esp_bt.h>`_.
+  For ESP32-C6/ESP32-C2/ESP32-H2, you can set the transmit power by calling the `esp_ble_tx_power_set_enhanced() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/include/esp32h4/include/esp_bt.h#L139>`__ API.
+  For Classic Bluetooth, use `esp_bredr_tx_power_set() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/include/esp32/include/esp_bt.h#L336>`__ for setting the transmit power.
 
 --------------
 
