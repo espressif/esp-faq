@@ -82,13 +82,6 @@ ESP32 模组 flash 使用 80 MHz 有什么注意事项吗？
 
 --------------
 
-ESP32 系统软件复位 API？
-------------------------
-
-  软件复位 API：``esp_restart()``。
-
---------------
-
 使用 ESP-IDF 测试程序，如何设置可在单核模组上下载程序？
 -------------------------------------------------------------------
 
@@ -147,7 +140,7 @@ ESP32 的 flash 和 PSRAM 的时钟频率如何修改？
 ESP-IDF 是否可以配置 time_t 为 64 bit ？（现在是 32 bit）
 --------------------------------------------------------------
 
-  当前暂时不支持，预计在 release/v4.2 或更高版本中支持。如果配置支持 time_t 64-bit 自定义工具链，可以使能 ``make menuconfig`` 中 ``SDK tool configuration`` > ``SDK_TOOLCHAIN_SUPPORTS_TIME_WIDE_64_BITS``。
+  ESP-IDF 从 v5.0 版本起开始使用有符号的 64 bit 来表示 time_t，详情参见 `Unix 时间 2038 年溢出问题 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/system_time.html#id5>`_。
 
 --------------
 
@@ -507,83 +500,6 @@ ESP32 CPU 使⽤ cache 访问外部 SRAM 时，如果这些操作需要 CPU 同�
   - 这个问题⽆法使⽤软件⾃动绕过。
   - 对于版本 0 ESP32，CPU 使⽤ cache 访问外部 SRAM 时，只能够进⾏单向操作，即只能够单纯的进⾏写 SRAM 操作，或者单纯的进⾏读 SRAM 操作，不能交替操作。
   - 使⽤ MEMW 指令：在读操作之后，加上 ``__asm__("MEMW")`` 指令，然后在 CPU 流⽔线被清空前再发起写操作。
-
---------------
-
-ESP32 CPU 访问外设时，如果连续不间断地通过 DPORT 写同⼀个地址，为何会出现数据丢失的现象？
-----------------------------------------------------------------------------------------------------
-
-  - 此问题在 ESP-IDF v1.0 及更⾼版本中⾃动绕过。
-  - 当连续写同⼀个地址（即类似 FIFO 的地址）时，使⽤ AHB 地址⽽不是 DPORT 地址。（对于其他类型的寄存器写⼊，使⽤ DPORT 地址可能写性能更好。）
-
-  .. list-table::
-      :header-rows: 1
-      :widths: 30 30 30
-      :align: center
-
-      * - 寄存器名称
-        - DPORT 地址
-        - AHB（安全）地址
-
-      * - UART_FIFO_REG
-        - 0x3FF40000
-        - 0x60000000
-
-      * - UART1_FIFO_REG
-        - 0x3FF50000
-        - 0x60010000
-
-      * - UART2_FIFO_REG
-        - 0x3FF6E000
-        - 0x6002E000
-
-      * - I2S0_FIFO_RD_REG
-        - 0x3FF4F004
-        - 0x6000F004
-
-      * - I2S1_FIFO_RD_REG
-        - 0x3FF6D004
-        - 0x6002D004
-
-      * - GPIO_OUT_REG
-        - 0x3FF44004
-        - 0x60004004
-
-      * - GPIO_OUT_W1TC_REG
-        - 0x3FF4400c
-        - 0x6000400c
-
-      * - GPIO_OUT1_REG
-        - 0x3FF44010
-        - 0x60004010
-
-      * - GPIO_OUT1_W1TS_REG
-        - 0x3FF44014
-        - 0x60004014
-
-      * - GPIO_OUT1_W1TC_REG
-        - 0x3FF44018
-        - 0x60004018
-
-      * - GPIO_ENABLE_REG
-        - 0x3FF44020
-        - 0x60004020
-
-      * - GPIO_ENABLE_W1TS_REG
-        - 0x3FF44024
-        - 0x60004024
-
-      * - GPIO_ENABLE_W1TC_REG
-        - 0x3FF44028
-        - 0x60004028
-
-      * - GPIO_ENABLE1_REG
-        - 0x3FF4402c
-        - 0x6000402c
-
-      * - GPIO_ENABLE1_W1TS_REG
-        - 0x3FF44030
-        - 0x60004030
 
 --------------
 

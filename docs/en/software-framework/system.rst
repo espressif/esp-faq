@@ -82,13 +82,6 @@ What should I pay attention to when using flash of ESP32 module at 80 MHz?
 
 --------------
 
-What is the system software reset API of ESP32?
-------------------------------------------------
-
-  Software reset API: ``esp_restart()``.
-
---------------
-
 How can I download programs into a single-core module using ESP-IDF?
 --------------------------------------------------------------------
 
@@ -147,7 +140,7 @@ When using ESP32-SOLO-1 modules, what settings should I make to run ESP-IDF on a
 Can time_t be configured to be 64 bits in ESP-IDF? (It is currently 32 bits)
 ----------------------------------------------------------------------------
 
-  Currently, it is not supported. However, it is expected to be supported in release/v4.2 or higher versions. If the configuration supports the 64-bit custom toolchain of time_t, you can enable the option ``SDK tool configuration`` > ``SDK_TOOLCHAIN_SUPPORTS_TIME_WIDE_64_BITS`` in ``make menuconfig``.
+  ESP-IDF uses a 64-bit signed integer to represent time_t starting from release v5.0. For details, please see `Unix Time 2038 Overflow <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/system_time.html#unix-time-2038-overflow>`_.
 
 --------------
 
@@ -507,83 +500,6 @@ When the ESP32 CPU uses cache to access external SRAM, if these operations need 
   - This problem cannot be automatically bypassed by software.
   - For ESP32 version 0, when CPU uses cache to access external SRAM, it can only perform unidirectional operations, that is, it can only perform write operations or read operations to SRAM. These two operations cannot be realized alternatively.
   - Use the MEMW instruction: after the read operation, add the ``__asm__("MEMW")`` instruction, and then initiate the write operation before the CPU pipeline is cleared.
-
---------------
-
-Why does data lose when the ESP32 CPU accesses peripherals and continuously writes to the same address via DPORT?
----------------------------------------------------------------------------------------------------------------------------------------------
-
-  - This issue is automatically bypassed in ESP-IDF v1.0 and higher versions.
-  - When continuously writing to the same address (i.e., an address similar to FIFO), use the AHB address instead of the DPORT address. (For other types of register writing operations, using the DPORT address may have better performance.)
-
-  .. list-table::
-      :header-rows: 1
-      :widths: 30 30 30
-      :align: center
-
-      * - Register Name
-        - DPORT Address
-        - AHB (Safe) Address
-
-      * - UART_FIFO_REG
-        - 0x3FF40000
-        - 0x60000000
-
-      * - UART1_FIFO_REG
-        - 0x3FF50000
-        - 0x60010000
-
-      * - UART2_FIFO_REG
-        - 0x3FF6E000
-        - 0x6002E000
-
-      * - I2S0_FIFO_RD_REG
-        - 0x3FF4F004
-        - 0x6000F004
-
-      * - I2S1_FIFO_RD_REG
-        - 0x3FF6D004
-        - 0x6002D004
-
-      * - GPIO_OUT_REG
-        - 0x3FF44004
-        - 0x60004004
-
-      * - GPIO_OUT_W1TC_REG
-        - 0x3FF4400c
-        - 0x6000400c
-
-      * - GPIO_OUT1_REG
-        - 0x3FF44010
-        - 0x60004010
-
-      * - GPIO_OUT1_W1TS_REG
-        - 0x3FF44014
-        - 0x60004014
-
-      * - GPIO_OUT1_W1TC_REG
-        - 0x3FF44018
-        - 0x60004018
-
-      * - GPIO_ENABLE_REG
-        - 0x3FF44020
-        - 0x60004020
-
-      * - GPIO_ENABLE_W1TS_REG
-        - 0x3FF44024
-        - 0x60004024
-
-      * - GPIO_ENABLE_W1TC_REG
-        - 0x3FF44028
-        - 0x60004028
-
-      * - GPIO_ENABLE1_REG
-        - 0x3FF4402c
-        - 0x6000402c
-
-      * - GPIO_ENABLE1_W1TS_REG
-        - 0x3FF44030
-        - 0x60004030
 
 --------------
 
