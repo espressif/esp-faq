@@ -21,7 +21,7 @@ Is it possible to use ESP8266 together with TF card?
   It is not recommended to use ESP8266 together with TF card.
 
   - Although ESP8266 can be connected to TF card in hardware level (communicate through SPI), the chip may run out of memory in different application scenarios due to its limited resources. Thus, it is not recommended to use ESP8266 with TF card.
-  - If all you need is a Wi-Fi-only module that can be connected to a TF card, it is recommended to use the `ESP32-S2 <https://www.espressif.com/sites/default/files/documentation/esp32-s2_datasheet_en.pdf>`_ chip instead.
+  - If all you need is a Wi-Fi-only module that can be connected to a TF card, we recommend using chips like `ESP32-S2 <https://www.espressif.com/sites/default/files/documentation/esp32-s2_datasheet_en.pdf>`_.
 
 ----------------
 

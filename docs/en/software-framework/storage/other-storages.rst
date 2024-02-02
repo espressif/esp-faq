@@ -18,7 +18,7 @@ Other Storages
 Can ESP32 use LittleFS file system?
 ------------------------------------------------------
 
-  Currently, LittleFS is not included in ESP-IDF, but there is a third-party porting component `esp_littlefs <https://github.com/joltwallet/esp_littlefs>`_ that can be used directly in ESP-IDF. You can use the `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_ tool for the image of LittleFS file system.
+  LittleFS is a third-party port component `esp_littlefs <https://github.com/joltwallet/esp_littlefs>`_, which can be used directly in ESP-IDF. You can use the `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_ tool for the image of LittleFS file system.
 
 ----------------
 
@@ -32,7 +32,7 @@ How to check the memory usage (e.g., DRAM, IRAM, rodata) of ESP32 chips?
 What is the available size of RTC RAM in ESP8266 for users?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The available RTC RAM in ESP8266 for users is '0x200'. Please see descriptions in `esp8266.ld <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/ld/esp8266.ld>`_.
+  - The available RTC RAM in ESP8266 for users is 512 bytes (0x200). Please see descriptions in`esp8266.ld <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/ld/esp8266.ld>`_.
 
 ----------------
 
@@ -48,7 +48,7 @@ How to enable exFAT?
 Is there a limit to the number of partitions in the partition table of ESP32?
 ---------------------------------------------------------------------------------------
 
-  - The length of partition table is 0xC00 bytes (can store up to 95 partition table entries). Please refer to the description in `partition table <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/partition-tables.html>`_.
+  - Yes. The length of partition table is 0xC00 bytes (can store up to 95 partition table entries). Please refer to the description in `partition table <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/partition-tables.html>`_.
 
 ----------------
 

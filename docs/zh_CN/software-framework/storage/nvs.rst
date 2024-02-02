@@ -20,7 +20,7 @@
 
   根据 `NVS 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/storage/nvs_flash.html>`_，NVS 库在其操作中主要使用两个实体：页面和条目。逻辑页面对应 flash 的一个物理扇区。假设 flash 扇区大小为 4096 字节，每个页面可容纳 126 个条目（每个条目大小为 32 字节），页面的其余部分用于页头部（32 字节）和条目状态位图（32 字节）。每个扇区的典型 flash 寿命为 100 k 个擦除周期。假设期待设备的运行时间为 10 年，每分钟写入 flash 的数据大小为 4 字节，并且不使用 flash 加密，计算 flash 写操作的次数为：60×24×365×10=5256000。这样，在 NVS 中会导致不超过 42 k 个擦除周期 (5256000/126)，而 42 k < 100 k，因此，即使在没有多扇区影响的情况下也可以支持。在实际使用中，分配给 NVS 的大小一般为多个扇区，NVS 会在多扇区之间分配擦除周期，那么每个扇区的擦除周期的次数必然小于 42 k。
 
-  因此，NVS 可以满足该擦写需求。
+  因此，理论上 NVS 可以满足该擦写需求，实际不同 flash 型号的寿命可能会有差异，需要根据实际情况进行评估。
 
 --------------
 
@@ -52,7 +52,7 @@ NVS 扇区是否会因写入时意外断电而损坏？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 根据需求，需要使用非易失性存储，存储数据的区域只有 eFuse 或 flash。考虑到需要修改，只能使用 flash。推荐使用 NVS 或 MFG 机制。请参考：
- 
+
     - `MFG 量产程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/storage/mass_mfg.html#id1>`_ 
     - `NVS 分区生成程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/storage/nvs_partition_gen.html#nvs>`_ 
 

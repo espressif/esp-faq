@@ -27,13 +27,13 @@ How to make and flash the image of a FatFs file system?
 
   Here we will use a third-party tool, since there is no such tool provided in ESP-IDF now. The entire process shows as below:
 
-  - Step 1: use the `mkfatfs <https://github.com/jkearins/ESP32_mkfatfs>`_ tool to create image in a specified folder. Here we create a 1048576-byte image named fat_img.bin in the file_image folder.
+  - Step 1: Use the `mkfatfs <https://github.com/jkearins/ESP32_mkfatfs>`_ tool to create an image from a specified folder, for example, create an image named fat_img.bin with a size of 1048576 Bytes from the file_image folder:
   
   .. code-block:: text
 
     ./mkfatfs -c file_image -s 1048576 ./fat_img.bin
 
-  - Step 2: flash the image to address 0x110000:
+  - Step 2: Flash the image, for example, flash it to 0x110000:
 
   .. code-block:: text
 
@@ -58,7 +58,7 @@ How to make and flash the image of a FatFs file system?
 
 
 .. Note::
-    The address to be flashed in step 2 must be the corresponding partition address in the partition table where FatFs is mounted, and the image created must be the same size as the one set in the partition table. Please remember to go to menuconfig and set ``Component config -> Wear Levelling -> Wear Levelling library sector size`` to 512, or the mounting would fail.
+    The address to be flashed in step 2 must be the corresponding partition address in the partition table, and the created image must be the same size as the one set in the partition table. Please remember to go to menuconfig and set ``Component config`` > ``Wear Levelling`` > ``Wear Levelling library sector size`` to 512, otherwise it will cause a mounting failure.
 
 --------------
 
@@ -72,14 +72,14 @@ What are the differences between the two file systems, FatFs and SPIFFS, and how
 What is the maximum size supported by FatFs?
 --------------------------------------------------------------------------
 
-  Due to the limitations of the Windows system, FatFs is currently generally only available on storage devices up to 32 GB. Storage devices larger than 32 GB use other file systems, such as exFAT.
+  The FAT32 file system supports a maximum capacity of 2 TB. However, due to the limitations of some operating systems (such as Windows), FatFs is generally only used on storage devices up to 32 GB. For storage devices larger than 32 GB, file systems like exFAT are typically used by default.
 
 ---------------
 
 I cannot open the files with long names when I use the FAT file system. How can I fix this issue?
 ------------------------------------------------------------------------------------------------------
 
-  You can change the configuration in ``menuconfig`` > ``Component config`` > ``FAT Filesystem support`` > ``Long filename support`` by selecting the option ``Long filename buffer in heap`` or ``Long filename buffer on stack``. Then you can update the maximum lengh in ``Component config`` > ``FAT Filesystem support`` > ``Max long filename length``.
+  - You can modify this in ``menuconfig`` > ``Component config`` > ``FAT Filesystem support`` > ``Long filename support``, and choose either the ``Long filename buffer in heap`` or ``Long filename buffer on stack``. Then, you can change the maximum filename length in ``Component config`` > ``FAT Filesystem support`` > ``Max long filename length``.
 
 -----------------------------------------------------------------------
 

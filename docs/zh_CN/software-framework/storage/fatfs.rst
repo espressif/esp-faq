@@ -27,13 +27,13 @@ FAT 文件系统
 
   ESP-IDF 中未提供相关工具，需要借助第三方工具，完整示例过程如下：
 
-  - 第一步：使用 `mkfatfs <https://github.com/jkearins/ESP32_mkfatfs>`_ 工具从一个指定文件夹创建镜像，从 file_image 文件夹创建大小为 1048576 Byte、名为 fat_img.bin 的镜像：
+  - 第一步：使用 `mkfatfs <https://github.com/jkearins/ESP32_mkfatfs>`_ 工具从一个指定文件夹创建镜像，例如从 file_image 文件夹创建大小为 1048576 Byte、名为 fat_img.bin 的镜像：
   
   .. code-block:: text
 
     ./mkfatfs -c file_image -s 1048576 ./fat_img.bin
 
-  - 第二步：烧录镜像到 0x110000 地址：
+  - 第二步：烧录镜像，例如烧录到 0x110000 地址：
 
   .. code-block:: text
 
@@ -58,7 +58,7 @@ FAT 文件系统
 
 
 .. Note::
-    这里烧录的地址一定要是分区表里 FatFs 挂载时对应分区的地址，创建的镜像需要与分区表中设置的大小一致。menuconfig 中的 ``Component config -> Wear Levelling -> Wear Levelling library sector size`` 需要设置为 512，否则将导致挂载失败。
+    这里烧录的地址一定要是分区表里 FatFs 对应分区的地址，创建的镜像需要与分区表中设置的大小一致。menuconfig 中的 ``Component config`` > ``Wear Levelling`` > ``Wear Levelling library sector size`` 需要设置为 512，否则将导致挂载失败。
 
 --------------
 
@@ -72,14 +72,14 @@ FATFS 与 SPIFFS 这两种文件系统有何差异，我们怎么选择?
 FatFs 支持的最大容量是多少?
 ----------------------------------------------------------------
 
-  由于 Windows 系统的限制，目前 FatFs 普遍最大只在 32 GB 的存储设备上使用。大于 32 GB 的存储设备默认会使用 exFAT 等文件系统。
+  FAT32 文件系统最大支持 2 TB 的容量，但是由于部分操作系统的限制（例如 Windows），目前 FatFs 普遍最大只在 32 GB 的存储设备上使用。大于 32 GB 的存储设备，一般默认会使用 exFAT 等文件系统。
 
 --------------
 
 使用 FAT 文件系统时，文件名稍微长一点的文件无法打开，该如何处理？
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 可以在 ``menuconfig`` -> ``Component config`` -> ``FAT Filesystem support`` -> ``Long filename support 中进行修改，选择 ``Long filename buffer in heap`` 或 ``Long filename buffer on stack`` 配置项。然后可以在 ``Component config`` -> ``FAT Filesystem support`` -> ``Max long filename length`` 中修改最大的文件名长度。
+  - 可以在 ``menuconfig`` > ``Component config`` > ``FAT Filesystem support`` > ``Long filename support`` 中进行修改，选择 ``Long filename buffer in heap`` 或 ``Long filename buffer on stack`` 配置项。然后可以在 ``Component config`` > ``FAT Filesystem support`` > ``Max long filename length`` 中修改最大的文件名长度。
 
 ----------------------------------------------------------------------
 
