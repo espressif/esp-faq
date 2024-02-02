@@ -51,7 +51,7 @@ ESP32 模组挂载 8 MB PSRAM, 为何实际映射的只有 4 MB？
 使用 ESP32 开发板，上面用了官方 PSRAM 芯片 PSRAM64H，当更换了另一个型号的 PSRAM 芯片后，运行 ESP-IDF 的例程并开启 PSRAM 配置，却无法正常识别，是什么原因？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 更换 PSRAM 芯片的型号，需要在 ``menuconfig -> Component config -> ESP32-specific -> Support for external, SPI-connected RAM -> SPI RAM config -> Type of SPI RAM chip in use`` 中修改相应配置选项。
+  - 更换 PSRAM 芯片的型号，需要在 ``menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``Type of SPI RAM chip in use`` 中修改相应配置选项。
   - 若更换的 PSRAM 芯片型号在 menuconfig 中没有相应的配置选项，则需要自行加入 PSRAM 芯片的驱动。
 
 -----------------------
