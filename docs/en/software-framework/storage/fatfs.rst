@@ -72,7 +72,7 @@ What are the differences between the two file systems, FatFs and SPIFFS, and how
 What is the maximum size supported by FatFs?
 --------------------------------------------------------------------------
 
-  The FAT32 file system supports a maximum capacity of 2 TB, but due to the limitations of some operating systems (such as Windows), FatFs is generally only used on storage devices up to 32 GB. For storage devices larger than 32 GB, file systems like exFAT are typically used by default.
+  The FAT32 file system supports a maximum capacity of 2 TB. However, due to the limitations of some operating systems (such as Windows), FatFs is generally only used on storage devices up to 32 GB. For storage devices larger than 32 GB, file systems like exFAT are typically used by default.
 
 ---------------
 
