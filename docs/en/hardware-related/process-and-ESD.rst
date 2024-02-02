@@ -19,6 +19,7 @@ What should be paid attention to during the ESP32 ESD test?
 -------------------------------------------------------------------------------------
 
   - The Electrostatic Discharge (ESD) test for ESP32 is conducted to ensure that the device has sufficient tolerance to withstand electrostatic discharge. The precautions are as follows:
+  
     - ESD testing should be conducted in an ESD laboratory or ESD protection area, which should have good grounding protection and electrostatic discharge protection facilities.
     - When conducting ESD testing, please use ESD testing equipment that meets international standards, including ESD generators and ESD grounding mats, to ensure the accuracy of the test results.
     - When conducting ESD testing, please make sure you are using a stable 3.3 V voltage. If the EN trace is too long, it may cause a reboot.
