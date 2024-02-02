@@ -58,7 +58,7 @@ FAT 文件系统
 
 
 .. Note::
-    这里烧录的地址一定要是分区表里 FatFs 对应分区的地址，创建的镜像需要与分区表中设置的大小一致。menuconfig 中的 ``Component config -> Wear Levelling -> Wear Levelling library sector size`` 需要设置为 512，否则将导致挂载失败。
+    这里烧录的地址一定要是分区表里 FatFs 对应分区的地址，创建的镜像需要与分区表中设置的大小一致。menuconfig 中的 ``Component config`` > ``Wear Levelling`` > ``Wear Levelling library sector size`` 需要设置为 512，否则将导致挂载失败。
 
 --------------
 
