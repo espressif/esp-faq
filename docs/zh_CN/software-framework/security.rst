@@ -194,10 +194,11 @@ secure boot 和 flash 加密中涉及的存储在 eFuse 数据有哪些？
 
 ------------
 
-启用 Secure Boot 后，使用 ``idf.py build`` 命令无法烧录新的 bootloader.bin？
+启用 Secure Boot 后，使用 ``idf.py flash`` 命令无法烧录新的 bootloader.bin？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  启用 Secure Boot 后，请使用 ``idf.py bootloader`` 命令编译新的 bootloader.bin。然后通过 ``idf.py -p (PORT) bootloader-flash`` 命令烧录新的 bootloader.bin。
+  - 启用 Secure Boot 后，请使用 ``idf.py bootloader`` 命令编译新的 bootloader.bin。然后通过 ``idf.py -p (PORT) bootloader-flash`` 命令烧录新的 bootloader.bin。
+  - 在 ESP-IDF v5.2 及以上版本，你还可以通过使能 ``CONFIG_SECURE_BOOT_FLASH_BOOTLOADER_DEFAULT`` 选项来解决该问题。关于该选项的说明，请参考 `CONFIG_SECURE_BOOT_FLASH_BOOTLOADER_DEFAULT <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.2/esp32/api-reference/kconfig.html?highlight=secure_boot_flash#config-secure-boot-flash-bootloader-default>`_。 
 
 ------------
 
@@ -221,3 +222,17 @@ ESP32-S3 开启 flash 加密或 `安全启动 <https://docs.espressif.com/projec
 
   - ESP32-S3 开启 flash 加密或安全启动后，会禁用 `USB-JTAG 调试 <https://docs.espressif.com/projects/esp-idf/en/release-v5.1/esp32s3/api-guides/jtag-debugging/index.html#jtag-debugging>`__ 功能，且不支持使用 USB 接口通过 `idf.py dfu-flash <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.1/esp32s3/api-guides/dfu.html#api-guide-dfu-flash>`__ 指令烧录固件的功能。
   - ESP32-S3 开启 flash 加密或安全启动后，支持 `USB Host <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host>`__ 和 `USB Device <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device>`__ 功能；支持使用 USB 接口通过 ``idf.py flash`` 指令下载固件的功能。
+
+------------
+
+启用 flash 加密后，若设备的 eFuse 中存在多个用途为 ``XTS_AES_128_KEY`` 的 flash 加密密钥，设备将如何选择密钥？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 设备将始终选择拥有最小的 ``Key ID`` 的密钥。
+
+------------
+
+启用 Secure Boot V2 时，如何将用于校验签名的公钥存储到设备上？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 公钥信息存储在设备的签名块中，当初次启用 Secure Boot V2 时，设备将自动从签名块中读取公钥信息并写入设备。
