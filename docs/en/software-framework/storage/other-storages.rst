@@ -32,7 +32,7 @@ How to check the memory usage (e.g., DRAM, IRAM, rodata) of ESP32 chips?
 What is the available size of RTC RAM in ESP8266 for users?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP8266 users have 512 bytes (0x200) of RTC RAM available. Refer to the `esp8266.ld <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/ld/esp8266.ld>`_ file for details.
+  - The available RTC RAM in ESP8266 for users is 512 bytes (0x200). Please see descriptions in`esp8266.ld <https://github.com/espressif/ESP8266_RTOS_SDK/blob/release/v3.4/components/esp8266/ld/esp8266.ld>`_.
 
 ----------------
 
