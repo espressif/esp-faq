@@ -29,15 +29,15 @@ Why does the ESP-BLE-MESH application wait for a long time during fast provision
 
 --------------
 
-How to clear the network information of the ESP32 ESP-BLE-MESH node?
---------------------------------------------------------------------------
+How to clear the network information of the ESP32 ESP-BLE-MESH node? / How to manually reset the ESP-BLE-MESH device?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  To clear the network information of a node, you can call `esp_ble_mesh_node_local_reset() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`_.
+  You can call `esp_ble_mesh_node_local_reset() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`_.
 
 --------------
 
-How to delete the network information of a node?
---------------------------------------------------------------
+How to delete the network information of a node from the provisioning device?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   To delete the information of a node, you can call `esp_ble_mesh_provisioner_delete_node_with_uuid() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv446esp_ble_mesh_provisioner_delete_node_with_uuidAL16E_K7uint8_t>`_ or `esp_ble_mesh_provisioner_delete_node_with_addr() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv446esp_ble_mesh_provisioner_delete_node_with_addr8uint16_t>`_.
 
@@ -46,7 +46,7 @@ How to delete the network information of a node?
 When a node is powered off and then powered on again, do I need to re-provision it?
 ----------------------------------------------------------------------------------------------------------------------
 
-  To save yourself from re-provisioning, go to ``menuconfig`` -> ``Component config`` -> ``Bluetooth Mesh support`` and enable ``Store Bluetooth Mesh key and configuration persistently`` to save the configuration information.
+  To save yourself from re-provisioning, go to ``menuconfig`` > ``Component config`` > ``Bluetooth Mesh support`` and enable ``Store Bluetooth Mesh key and configuration persistently`` to save the configuration information.
 
 --------------
 
@@ -81,7 +81,7 @@ Failed in initializing the partition when configuring ESP-BLE-MESH to save node 
 How to add Health Model to the Provisioner's example?
 ----------------------------------------------------------
 
-  In menuconfig, go to ``Component config`` -> ``ESP BLE Mesh Support`` -> ``Support for BLE Mesh Client Models`` and enable ``Health Client Model``.
+  In menuconfig, go to ``Component config`` > ``ESP BLE Mesh Support`` > ``Support for BLE Mesh Client Models`` and enable ``Health Client Model``.
 
 --------------
 
@@ -166,17 +166,10 @@ How many node devices can the ESP32 ESP-BLE-MESH application connect to?
 
 --------------------------------------------------------
 
-How to manually reset the ESP32 ESP-BLE-MESH device (not through the mobile provisioning application or provisioning device)?
------------------------------------------------------------------------------------------------------------------------------------
-
-  You can call the `esp_ble_mesh_node_local_reset <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`__ API to reset the ESP-BLE-MESH node, erase all provisioning information, and wait for the reset event to arrive to confirm the reset is successful. After the API is called, the device needs to be provisioned again.
-
---------------------------------------------------------
-
 After ESP32 runs the ESP-BLE-MESH program for a long time, a segmentation error occurs when the client sends a message to the server, and the ESP-BLE-MESH prints ``NO multi-segment messsage contexts available``. How to solve the issue?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  You can go to ``Component config`` -> ``ESP BLE Mesh Support`` -> ``Maximum number of simultaneous outgoing segmented messages``, and expand the space by configuring ``BLE_MESH_TX_SEG_MSG_COUNT``.
+  You can go to ``Component config`` > ``ESP BLE Mesh Support`` > ``Maximum number of simultaneous outgoing segmented messages``, and expand the space by configuring ``BLE_MESH_TX_SEG_MSG_COUNT``.
 
 -----------
 
@@ -184,3 +177,10 @@ Can I disable NetKey and IV Update when using the ESP32 ESP-BLE-MESH application
 ----------------------------------------------------------------------------------------------
 
   No. NetKey and IV Update must stay enabled.
+
+-----------
+
+How to receive other ADV broadcast packets while BLE MESH is enabled?
+--------------------------------------------------------------------------------------------------------------------------
+
+  Enable ``BLE_MESH_BLE_COEX_SUPPORT`` in menuconfig, register callbacks through `esp_ble_mesh_register_ble_callback() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/esp_ble_mesh/api/core/include/esp_ble_mesh_ble_api.h#L84>`__, and then start scanning with `esp_ble_mesh_start_ble_scanning() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/esp_ble_mesh/api/core/include/esp_ble_mesh_ble_api.h#L167>`__ to receive other broadcast packets.

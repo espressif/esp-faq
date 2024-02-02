@@ -29,15 +29,15 @@ ESP-BLE-MESH 应用框架
 
 --------------
 
-如何清除 ESP32 ESP-BLE-MESH 节点的组网信息？
----------------------------------------------
+如何清除 ESP-BLE-MESH 节点的组网信息？/ 如何手动重置 ESP-BLE-MESH 设备？
+------------------------------------------------------------------------------------------------------------
 
-  清除节点的组网信息可以调用 `esp_ble_mesh_node_local_reset() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`_。
+  可以调用 `esp_ble_mesh_node_local_reset() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`_。
 
 --------------
 
-如何删除某个节点的组网信息？
--------------------------------
+配网器如何删除某个节点的组网信息？
+---------------------------------------------------------
 
   删除某个节点的信息可以调用 `esp_ble_mesh_provisioner_delete_node_with_uuid() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv446esp_ble_mesh_provisioner_delete_node_with_uuidAL16E_K7uint8_t>`_ 或 `esp_ble_mesh_provisioner_delete_node_with_addr() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_provisioner_delete_node_with_uuid#_CPPv446esp_ble_mesh_provisioner_delete_node_with_addr8uint16_t>`_。
 
@@ -46,7 +46,7 @@ ESP-BLE-MESH 应用框架
 如果节点断电了，下次上电是否还要用手机应用程序重新组网？
 -----------------------------------------------------------
 
-  可以前往 menuconfig，通过 ``Component config`` -> ``Bluetooth Mesh support`` -> ``Store Bluetooth Mesh key and configuration persistently`` 的选项保存配置信息，就不需要重新组网了。
+  可以前往 menuconfig，通过 ``Component config`` > ``Bluetooth Mesh support`` > ``Store Bluetooth Mesh key and configuration persistently`` 的选项保存配置信息，不需要重新组网。
 
 --------------
 
@@ -166,17 +166,10 @@ ESP32 的 ESP-BLE-MESH 应用可以连接多少个节点设备？
 
 --------------------------------------------------------
 
-ESP32 如何手动重置 ESP-BLE-MESH 设备（不通过手机配网应用程序或配网设备）？
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  可以调用 `esp_ble_mesh_node_local_reset <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/bluetooth/esp-ble-mesh.html?highlight=esp_ble_mesh_node_local_reset#_CPPv429esp_ble_mesh_node_local_resetv>`__ 接口，重置 ESP-BLE-MESH 节点，擦除所有的配网信息，还需要等到重置事件到达，确认重置成功，调用后，设备需要重新配网。
-
---------------------------------------------------------
-
 ESP32 长时间运行 ESP-BLE-MESH 程序后，发现客户端向服务器发送消息时出现分段错误，ESP-BLE-MESH 打印日志 ``NO multi-segment messsage contexts available``。如何解决？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  您可以前往 ``Component config`` -> ``ESP BLE Mesh Support`` -> ``Maximum number of simultaneous outgoing segmented messages``，通过配置 ``BLE_MESH_TX_SEG_MSG_COUNT`` 来扩展空间。
+  您可以前往 ``Component config`` > ``ESP BLE Mesh Support`` > ``Maximum number of simultaneous outgoing segmented messages``，通过配置 ``BLE_MESH_TX_SEG_MSG_COUNT`` 来扩展空间。
 
 -----------
 
@@ -184,3 +177,10 @@ ESP32 长时间运行 ESP-BLE-MESH 程序后，发现客户端向服务器发送
 ----------------------------------------------------------------------------------------------------------------------
 
   不可以。NetKey 和 IV Update 必须保持开启。
+
+--------------
+
+如何在开启 BLE MESH 情况下接收其它 ADV 广播包？
+-----------------------------------------------------------------------------------------------------------------------
+
+  在 menuconfig 中开启 BLE_MESH_BLE_COEX_SUPPORT，通过调用 `esp_ble_mesh_register_ble_callback() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/esp_ble_mesh/api/core/include/esp_ble_mesh_ble_api.h#L84>`__ 注册回调，然后通过 `esp_ble_mesh_start_ble_scanning() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/esp_ble_mesh/api/core/include/esp_ble_mesh_ble_api.h#L167>`__ 开启扫描，即可收到其他广播包。
