@@ -1302,6 +1302,12 @@ How can I increase the time for scanning routers when using ESP32 as the Wi-Fi S
       scan_set_act_duration(50, 500);
       scan_set_pas_duration(500);
 
+  - Or you can modify the active scanning time and passive scanning time by changing related parameters in the structure ``wifi_ap_record_t``.
+
+  .. note::
+
+    - A typical beacon interval is 102.4 ms, so it is recommended to set the active scanning time bigger than this value, which should be at least 120 ms.
+    
 -------------
 
 Does ESP32 support LDPC?

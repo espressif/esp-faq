@@ -1301,6 +1301,12 @@ ESP 模组支持 WAPI (Wireless LAN Authentication and Privacy Infrastructure) �
       extern void scan_set_pas_duration(uint32_t time);
       scan_set_act_duration(50, 500);
       scan_set_pas_duration(500);
+  
+  - 或者可以直接通过修改 ``wifi_ap_record_t`` 结构体里的值修改主动扫描和被动扫描的时间
+
+  .. note::
+
+    - 由于一个 beacon 的时间间隔一般在 102.4 ms，主动扫描的时间不宜小于这个时间，尽量在 120 ms 及以上。
 
 -------------
 
