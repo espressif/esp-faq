@@ -79,7 +79,7 @@ What is the maximum size supported by FatFs?
 I cannot open the files with long names when I use the FAT file system. How can I fix this issue?
 ------------------------------------------------------------------------------------------------------
 
-  - You can modify this in ``menuconfig`` -> ``Component config`` -> ``FAT Filesystem support`` -> ``Long filename support``, choose either the ``Long filename buffer in heap`` or ``Long filename buffer on stack`` configuration. Then, you can change the maximum filename length in ``Component config`` -> ``FAT Filesystem support`` -> ``Max long filename length``.
+  - You can modify this in ``menuconfig`` > ``Component config`` > ``FAT Filesystem support`` > ``Long filename support``, and choose either the ``Long filename buffer in heap`` or ``Long filename buffer on stack``. Then, you can change the maximum filename length in ``Component config`` > ``FAT Filesystem support`` > ``Max long filename length``.
 
 -----------------------------------------------------------------------
 
