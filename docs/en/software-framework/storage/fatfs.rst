@@ -58,7 +58,7 @@ How to make and flash the image of a FatFs file system?
 
 
 .. Note::
-    The address to be burned here must be the address of the FatFs corresponding partition in the partition table, and the created image needs to be consistent with the size set in the partition table. In menuconfig, ``Component config -> Wear Levelling -> Wear Levelling library sector size`` needs to be set to 512, otherwise it will cause a mounting failure.
+    The address to be flashed in step 2 must be the corresponding partition address in the partition table, and the created image must be the same size as the one set in the partition table. Please remember to go to menuconfig and set ``Component config`` > ``Wear Levelling`` > ``Wear Levelling library sector size`` to 512, otherwise it will cause a mounting failure.
 
 --------------
 
