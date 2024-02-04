@@ -20,66 +20,14 @@ LCD
 Where are the LCD drivers and reference examples for ESP series chips?
 --------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP's LCD drivers are located in `components/esp_lcd <https://github.com/espressif/esp-idf/tree/master/components/esp_lcd>`__ within **ESP-IDF**. **esp_lcd** can drive screens with multiple interfaces supported by ESP series chips, including **I2C**, **SPI(QSPI)**, **8080**, and **RGB**. The interface types supported by each chip series are as follows:
-
-    .. list-table::
-        :header-rows: 1
-
-        * - SoCs 
-          - I2C
-          - SPI (QSPI)
-          - I80
-          - RGB
-
-        * - ESP32
-          - Yes
-          - Yes
-          - Yes
-          - No      
-  
-        * - ESP32-S2
-          - Yes
-          - Yes
-          - Yes
-          - No
-
-        * - ESP32-S3
-          - Yes
-          - Yes
-          - Yes
-          - Yes
-
-        * - ESP32-C3
-          - Yes
-          - Yes
-          - No
-          - No
-
-        * - ESP32-C6
-          - Yes
-          - Yes
-          - No
-          - No
-
-  - The LCD examples can be found in **ESP-IDF** at `examples/peripherals/lcd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd>`__ and in **esp-iot-solution** at `examples/display/lcd <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/lcd>`__.
-  - It's recommended to develop applications based on ESP-IDF **release/v5.1** or higher versions, as lower versions do not support some important new features, especially for the RGB interface.
-  - **Do not use** the screen `driver <https://github.com/espressif/esp-iot-solution/tree/master/components/display/screen>`__ and `examples <https://github.com/espressif/esp-iot-solution/tree/master/examples/screen>`__ in esp-iot-solution.
+  Please refer to the `ESP-IoT-Solution Programming Guide - LCD Development Guide <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_development_guide.html#id2>`__.
 
 ---------------
 
 Which adapted ICs can be used by the LCD screen of ESP32 series chips?
 -------------------------------------------------------------------------------------------------
 
-  Currently, the adapted ICs for the `esp_lcd`-based LCD driver include:
-
-  - `ESP-IDF <https://github.com/espressif/esp-idf/blob/master/components/esp_lcd/include/esp_lcd_panel_vendor.h>`__：st7789, nt35510, ssd1306.
-  - `ESP Registry <https://components.espressif.com/components?q=esp_lcd>`__：gc9a01, ili9341, ili9488, ra8875, sh1107, st7796, st7701, gc9503, gc9b71, spd2010, ... (continuously updated)
-
-  **Please note that even if driver ICs are same, different screens vary in register configuration parameters. In addition, screen manufacturers generally provide matched configuration parameters (code). Thus, it is recommended to use the above two methods to obtain code of similar driver ICs, and to update the code based on the parameters of your own screen.**
-
-  Currently, the adapted ICs of `esp_lcd_touch` based touch driver include:
-
-  - `ESP Registry <https://components.espressif.com/components?q=esp_lcd>`__: FT5x06, GT1151, GT911, STMPE610, TT21100, XPT2046, CST816, ... (continuously updated).
+  Please refer to the `ESP-IoT-Solution Programming Guide - LCD Development Guide <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_development_guide.html#id2>`__.
 
 --------------
 
@@ -98,7 +46,11 @@ Do ESP series development boards with screens support GUI development using the 
 How can I improve the display frame rate of LCD screens?
 ----------------------------------------------------------
 
-  - The actual display frame rate of LCD screens is determined by the "interface frame rate" and "rendering frame rate". Generally, the "interface frame rate" is much bigger than the "rendering frame rate". So this question actually is "how can I improve the rendering frame rate of the LCD".
+  - For a detailed introduction to frame rates, please refer to the `ESP-IoT-Solution Programming Guide - LCD Overview <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_guide.html#id9>`__. Generally speaking, due to the computational performance of the ESP, the "interface frame rate" is often much higher than the "rendering frame rate", so this issue can be described as "how to improve the rendering frame rate of the LCD". This issue can be considered from the following three aspects:
+
+    - Improve the performance of ESP. When developing with ESP-IDF, ESP can be configured through menuconfig, but it is not configured to the best performance by default. Here, taking ``ESP32-S3`` as an example, we can increase the CPU frequency to the highest ``240 MHz``, increase the frequency of FreeRTOS tick to 1000, and increase the bandwidth of Flash or PSRAM. In addition, we can also increase the data cache line size, set the compilation optimization level to ``-O2``, and so on.
+    - Improve the performance of LVGL. LVGL itself can also be configured through menuconfig or the *lv_conf.h* file, such as setting LVGL to use the ``malloc`` and ``memcpy`` memory operation functions in ESP-IDF, enabling the ``fast memory`` compilation option, etc.
+    - Optimize application design. You can make full use of CPU resources by adjusting the priority of tasks or specifying CPU cores for LVGL and other tasks, especially for ESPs with dual cores. Besides, you can also optimize the design of the GUI, such as avoiding the use of complex animations and layers with transparency overlay effects as much as possible.
 
   - Taking ESP32-S3R8 as an example, the following ESP configuration items can improve the frame rate (ESP-IDF release/v5.1):
 
@@ -134,7 +86,7 @@ Is there any example code for I2S driving LCD with ESP32?
 What is the maximum resolution supported by ESP LCD? What is the corresponding frame rate?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - For the RGB peripheral interface of ESP32-S3, due to its hardware limitations, it theoretically supports a maximum resolution of 4096 x 1024 (maximum 4096 in the horizontal direction and 1024 in the vertical direction). As for other peripheral interfaces on ESP series chips, there isn't a specific "maximum" hardware limitation on the supported resolution.
+  - For the RGB peripheral interfaces of ESP32-S3 and ESP32-P4, due to their hardware limitations, they theoretically support a maximum resolution of ``4096 x 1024`` (with a maximum of ``4096`` horizontally and ``1024`` vertically); for the other peripheral interfaces of the ESP series chips, there is no "maximum" hardware limitation on how much resolution they can support.
   - Because chip storage, computing performance, and peripheral interface bandwidth are limited, and different types of LCDs usually have specific resolution ranges, it is recommended to use the following resolutions for ESP32-C3 and ESP32-S3 chips:
 
     .. list-table::
@@ -166,7 +118,8 @@ How can I enable PSRAM 120M Octal (DDR) on ESP32-S3R8?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP-IDF v5.1 or later versions are required.
-  - Enable the configuration options through menuconfig: IDF_EXPERIMENTAL_FEATURES, SPIRAM_SPEED_120M, SPIRAM_MODE_OCT.
+  - Enable configuration items through menuconfig: ``IDF_EXPERIMENTAL_FEATURES``, ``SPIRAM_SPEED_120M``, ``SPIRAM_MODE_OCT``.
+  - The ``ESP32-S3-WROOM-1-N16R16V`` module currently does not support this feature. If enabled, the chip may freeze upon power-up and then reset.
   - **Please note** it is an experimental feature still in testing and may come with the following temperature risks:
 
     - The chip may not work properly even with ECC enabled when the temperature is above 65°C.
@@ -219,12 +172,13 @@ Why do I get drift (overall drift of the display) when ESP32-S3 is driving an RG
 
   - **Reasons**
 
-    - PCLK is set to a too big number, and the PSRAM bandwidth is not applicable.
-    - PSRAM is disabled due to the write operation of flash (like Wi-Fi, BLE, OTA).
+    - The PCLK setting of the RGB peripheral is too high, and the bandwidth of PSRAM or GDMA cannot be satisfied.
+    - PSRAM and flash share a set of SPI interfaces. PSRAM is disabled during writes to flash (such as via Wi-Fi, OTA, Bluetooth LE).
+    - Reading a large amount of flash/PSRAM data results in insufficient PSRAM bandwidth.
 
   - **Solutions**
 
-    - Improve bandwidths of PSRAM and flash. You can set flash to QIO 120 M and set PSRAM to Octal 120 M.
+    - Improve PSRAM and flash bandwidth. For example, use a higher frequency or larger bit width under the conditions allowed by the hardware.
     - Enable ``CONFIG_COMPILER_OPTIMIZATION_PERF``.
     - Reduce the Data Cache Line Size to 32 Bytes (set to 64 Bytes when using the RGB ``Bounce Buffer`` mode).
     - Enable ``CONFIG_SPIRAM_FETCH_INSTRUCTIONS`` and ``CONFIG_SPIRAM_RODATA``.
@@ -233,20 +187,19 @@ Why do I get drift (overall drift of the display) when ESP32-S3 is driving an RG
   - **Applications**
 
     - While ensuring the screen display is normal, try to reduce the frequency of PCLK and decrease the bandwidth utilization of PSRAM.
-    - If you need to use Wi-Fi, BLE and continuous write operation to flash, please use ``XIP on PSRAM + RGB Bounce buffer`` method, and the settings are as follows:
+    - If you need to use Wi-Fi, Bluetooth LE, and continuous flash writing operations, please adopt the ``XIP on PSRAM + RGB Bounce buffer`` method. Here, ``XIP on PSRAM`` is used to load the code segment and read-only segment data into PSRAM, and the flash writing operation will not disable PSRAM after it is turned on. ``RGB Bounce buffer`` is used to block the frame buffer data and transfer it from PSRAM to SRAM through the CPU, and then use GDMA to transfer data to the RGB peripheral. Compared with directly using PSRAM GDMA, it can achieve higher transmission bandwidth. The setup steps are as follows:
 
       - Make sure the ESP-IDF version is release/v5.0 or newer (released after 2022.12.12), as older versions do not support the ``XIP on PSRAM`` function. (release/v4.4 supports this function through patching, but it is not recommended)
-      - Verify that whether ``CONFIG_SPIRAM_FETCH_INSTRUCTIONS`` and ``CONFIG_SPIRAM_RODATA`` can be enabled in the PSRAM configuration (too large rodata segment will cause insufficient space in the PSRAM).
+      - Confirm whether ``CONFIG_SPIRAM_FETCH_INSTRUCTIONS`` and ``CONFIG_SPIRAM_RODATA`` can be enabled in the PSRAM configuration. If the read-only data segment is too large (such as a large number of images), it may cause insufficient PSRAM space. At this time, you can use the file system or make the images into a bin to load into the designated partition.
       - Check if there is any memory (SRAM) left, and it takes about [10 * screen_width * 4] bytes.
       - Set ``Data cache line size`` to 64 Bytes (you can set ``Data cache size`` to 32 KB to save memory).
       - Set ``CONFIG_FREERTOS_HZ`` to 1000。
-      - If all the above conditions are met, then you can refer to `Documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__ to modify the RGB driver to ``Bounce buffer`` mode.
+      - If all the above conditions are met, you can refer to the `documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__ to modify the RGB driver to ``Bounce buffer`` mode. The ``Bounce buffer`` mode allocates a block of SRAM memory as an intermediate cache, then quickly transfers the frame buffer data in blocks to SRAM via the CPU, and then transfers the data to the RGB peripheral via GDMA, thus avoiding the issue of PSRAM being disabled. If drift still occurs after enabling, you can try to increase the buffer, but this will consume more SRAM memory.
       - If you still have the drift problem when dealing with Wi-Fi, you can try to turn off ``CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP`` in PSRAM, which takes up much SRAM space.
       - The effects of this setting include higher CPU usage, possible interrupt watchdog reset, and higher memory overhead.
       - Since the Bounce Buffer transfers data from PSRAM to SRAM through the CPU in GDMA interrupts, the program should avoid performing operations that disable interrupts for an extended period (such as calling ``portENTER_CRITICAL()``), as it can still result in screen drifting.
 
     - For the drift caused by short-term operations of flash, such as before and after Wi-Fi connection, you can call ``esp_lcd_rgb_panel_set_pclk()`` before the operation to reduce the PCLK (such as 6 MHz) and delay about 20 ms (the time for RGB to complete one frame), and then increase PCLK to the original level after the operation. This operation may cause the screen to flash blank in a short-term.
-    - Enable ``flags.refresh_on_demand`` in ``esp_lcd_rgb_panel_config_t``, and manually refresh the screen by calling the ``esp_lcd_rgb_panel_refresh()`` interface. In addition, you need to reduce the refreshing frequency as much as possible while ensuring that the screen does not flash blank.
     - If unavoidable, you can enable ``CONFIG_LCD_RGB_RESTART_IN_VSYNC`` or use the ``esp_lcd_rgb_panel_restart()`` to reset the RGB timing to prevent permanent drifting.
 
 -----------------------------

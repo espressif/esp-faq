@@ -36,8 +36,8 @@ When using ESP8266 RTOS SDK v3.0 and later versions, how to set log to UART1?
 How to enable UART Flow Control in ESP32 IDF?
 ---------------------------------------------------------------------------
 
-  - Hardware enable: `uart-flow-control <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#multiple-steps>`_.
-  - Software enable: `software-flow-control <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#software-flow-control>`_.
+  - To enable hardware flow control, please refer to `uart-flow-control <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#multiple-steps>`_.
+  - To enable software flow control, please refer to `software-flow-control <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#software-flow-control>`_.
 
 --------------
 
@@ -49,8 +49,8 @@ When using UART0 as a serial communication port for ESP32, what should I pay att
 
   **Software**: You need to protect the serial communication port from being affected by printing. The UART0 mainly has three print settings in the default program:
 
-    - First, power-on ROM print. You can set the MTDO pin as low level when powered on to block the power-on ROM print.
-    - Second, bootloader log output. You can set ``menuconfig`` -> ``Bootloader config`` -> ``Bootloader log verbosity`` as ``Not output`` to block bootloader log output.
+    - The first instance is the Level 1 bootloader (ROM firmware) printout. When powered on, the MTDO pin can be set to a low level to block the ROM firmware printout.
+    - The second part is the secondary bootloader log output. You can set ``menuconfig`` -> ``Bootloader config`` -> ``Bootloader log verbosity`` to ``No output`` to block the bootloader log output.
     - Third, app log output. You can set ``menuconfig`` -> ``Component config`` -> ``Log output`` -> ``Default log verbosity`` as ``Not output`` to block app log output.
 
   **Hardware**:
@@ -69,7 +69,7 @@ Is it possible to use GPIO34 ～ GPIO39 from ESP32-SOLO-1 as the RX signal pin f
 How to dynamically change the serial baud rate and make it take effect immediately with ESP32?
 ------------------------------------------------------------------------------------------------------------------------------
 
-  Please use the API ``uart_set_baudrate()`` to change the baud rate of UART. Please see `API Reference <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_set_baudrate11uart_port_t8uint32_t>`_.
+  You can use the ``uart_set_baudrate()`` API to dynamically change the UART baud rate. See `API Description <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_set_baudrate11uart_port_t8uint32_t>`_.
 
 --------------
 
@@ -115,7 +115,7 @@ When using ESP8266, I want to use UART0 exclusively for downloading, and then us
 
   - Since the RXD of UART1 is occupied, UART1 cannot be used to communicate with other chips, but the TXD pin of UART1 can be used to output logs.
   - ESP8266 can only communicate with other chips by swapping CTS and RTS pins of UART0. It will be invalid to configure GPIO4 and GPIO5.
-  - ESP8266 can communicate with other chips by calling "uart_enable_swap()" to swap the CTS and RTS pins of UART0 to MTCK (IO13) and MTDO (IO15). After this, ESP8266 can communicate with other chips via GPIO13 (TXD) and GPIO15 (RXD).
+  - ESP8266 can communicate with other chips by calling the ``uart_enable_swap()`` function, swapping the CTS and RTS pins of UART0 for MTCK (IO13) and MTDO (IO15) pins. After the pin swap, ESP8266 can use GPIO13 (TXD) and GPIO15 (RXD) to communicate with other chips via UART.
 
 ---------------------
 

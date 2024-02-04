@@ -169,7 +169,7 @@ When testing the `esp-idf/examples/peripherals/usb/device/tusb_serial_device <ht
 Can ESP32-S3 use an external USB hub chip with two of its USB ports connecting to a USB 4G module and a dongle at the same time?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  The ESP32-S3 USB does not support connection to an external USB hub chip currently because there is no driver support.
+  Supported. The driver is under development.
 
 ---------------------
 
@@ -201,7 +201,7 @@ When burning firmware through the ESP32-C3/ESP32-S3 USB Serial/JTAG Controller f
 
   - You need to boot the chip to enter the download mode manually before the first download or after flash is erased, so that the chip can be connected stably.
   - You can also burn the firmware that can run stably through UART in advance to solve this issue. If there is firmware that can run stably in the chip, the USB serial port of the chip can be connected stably in subsequent programming.
-  
+
   If there is no strap pin test point reserved for booting manually, you may need to try several times in the initial USB download.
 
 ---------------------
@@ -267,7 +267,7 @@ When I attempted to download and print log via the USB interface using the comma
   - The error is as follows:
 
   .. code-block:: text
-  
+
      Connecting...
      Failed to get PID of a device on com35, using standard reset sequence.
 
@@ -288,7 +288,19 @@ Is it possible to fix the COM port when downloading firmware using the USB-Seria
   - Please open the Windows CMD as the administrator and execute the following command to add a registry entry. In this way, you can prevent incremental numbering based on the Serial number. Then you need to restart the computer to enable the modification.
 
   .. code-block:: text
-    
+
     REG ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\303A10010101 /V IgnoreHWSerNum /t REG_BINARY /d 01
 
   - For more information, please refer to `Prevent Windows from Increasing COM Number According to Serial Numbers of USB Devices <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/esp32/usb/usb_device_const_COM.html>__`.
+
+---------------------
+
+Can a USB drive be used for OTA upgrades?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, it can be done using the component `esp_msc_ota <https://components.espressif.com/components/espressif/esp_msc_ota>`_.
+
+Does the ESP32 series chip support USB 2.0 high speed?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Currently, only ESP32-P4 supports USB 2.0 high speed.

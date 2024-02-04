@@ -47,7 +47,7 @@ ESP32 ADC 有⼏个通道？采样率和有效位数是多少？
   - 调用 ``adc_read_fast()`` API 前需要将 Wi-Fi 和中断关闭，可参见此 API 的 `使用说明 <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/peripherals/adc.html?highlight=adc_read#_CPPv413adc_read_fastP8uint16_t8uint16_t>`_。
   - 由于 ``adc_read_fast()`` API 会进行连续采集，ADC 内部与 Wi-Fi RF 存在耦合部分，无法在 Wi-Fi 开启的状态下调用该函数。
   - 在 Wi-Fi 开启的时候请使用 ``adc_read()`` API 进行 ADC 采集。为保证数据稳定，需要使用 ``esp_wifi_set_ps(WIFI_PS_NONE)`` 函数关闭 Wi-Fi Modem-sleep 休眠模式。
- 
+
 .. note::
 
     ADC 采样率：在停⽌ Wi-Fi 的情况下，能达到每秒 100000 次。Wi-Fi 正常⼯作的情况下，能达到每秒 1000 次。
@@ -79,7 +79,7 @@ ESP32 芯片 ADC DMA 模式最高支持多大的采样频率？
 -------------------------------------------------------------------------------------------------------------------------------------------
 
   理论最高支持 2 MHz 的采样频率。
-  
+
 ---------------------
 
 使用 ESP32，在 ``esp_wifi_start()`` 和 ``esp_wifi_stop()`` 之间读取 ``adc2_get_raw()`` 操作失败，是什么原因？
@@ -132,10 +132,10 @@ ESP32 能同时用两个 ADC 通道来测量不同的数据吗？比如电流和
 
 -------------
 
-ESP32-S3 ADC 配置为 ``ADC_ATTEN_DB_11`` 时，为何测量电压无法达到标称 3100 mV？
+ESP32-S3 ADC 配置为 ``ADC_ATTEN_DB_12`` 时，为何测量电压无法达到标称 3100 mV？
 -----------------------------------------------------------------------------------------------
 
-  ESP32-S3 ADC1 或 ADC2 配置为 ``ADC_ATTEN_DB_11`` 时，测量电压范围为 ``0 ~ 3100 mV``，但部分芯片最大电压测量值小于 ``3100 mV``，可使用以下两种方法来解决这个问题：
+  ESP32-S3 ADC1 或 ADC2 配置为 ``ADC_ATTEN_DB_12`` 时，测量电压范围为 ``0 ~ 3100 mV``，但部分芯片最大电压测量值小于 ``3100 mV``，可使用以下两种方法来解决这个问题：
 
 - 方案 1：避开使用边界电压值，可通过外部分压电路将输入电压维持在中间电压值附近，以获得更高的精度和一致性。
 - 方案 2：使用软件 `ADC 扩展量程方案 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/others/adc_range.html>`_ ，将最大测量电压扩展到 ``3300 mV``。
@@ -144,7 +144,7 @@ ESP32-S3 ADC 配置为 ``ADC_ATTEN_DB_11`` 时，为何测量电压无法达到�
 
 我们可以使用 GPIO0 作为 ADC 管脚，同时将 ESP32 作为 Wi-Fi 热点吗？
 -----------------------------------------------------------------------------------------------------------------------------------------
-   
+
    - 当使用 Wi-Fi 时，ESP32 ADC2 管脚不能同时使用。 因此，如果您在使用 Wi-Fi 时无法从 ADC2 GPIO 获取值，您可以考虑改用 ADC1 GPIO，这应该可以解决您的问题。有关详细信息，请参阅 `ADC 连续模式的硬件限制 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc_continuous.html>`__ 和 `ADC Oneshot 模式的硬件限制 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc_oneshot.html>`__。
    - GPIO0、GPIO2、GPIO5、GPIO12 (MTDI) 和 GPIO15 (MTDO) 是 strapping 管脚。 将 GPIO0 用于其他功能时，需要注意上电时的 GPIO 电平。 如果上电时 GPIO0 为低电平，则很容易进入下载模式。 有关更多信息，请参阅 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`__。
 

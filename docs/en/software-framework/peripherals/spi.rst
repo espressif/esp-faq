@@ -41,20 +41,19 @@ What is the difference among SPI0, SPI1, HSPI and VSPI in ESP32?
 
 -------------------------
 
-The maximum data transmission of ESP32 SPI DMA is 4095 bytes. Is it because of hardware limitation?
+The maximum data transmission of SPI DMA on ESP series chips is 4095 bytes. Is it because of hardware limitation?
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes, this is a hardware limitation.
-  - A single node in the DMA table can only mount 4095 bytes of data, but it is possible to send more data through several nodes.
-  - The maximum number of bytes that the SPI can send through the DMA table is also limited by the hardware register `SPI_LL_DATA_MAX_BIT_LEN` (the value varies by chip family and can be obtained in the ESP-IDF), i.e. `max_transfer_sz <= (SPI_LL_DATA_MAX_BIT_LEN >> 3)`.
+  - Yes, this is a hardware limitation. A single node in the DMA table can only mount 4095 bytes of data.
+  - However, a single SPI DMA transmission can mount more data through several nodes. At this time the maximum data transfer byte number is limited by the hardware register ``SPI_LL_DATA_MAX_BIT_LEN`` (whose value varies with different chip series and can be found in ESP-IDF), i.e., ``max_transfer_sz <= (SPI_LL_DATA_MAX_BIT_LEN / 8)``.
 
 --------------------
 
-The SPI of ESP32-S2 accesses three SPI Slave devices at the same time, do I need to synchronize the semaphore to access it?
+Does the SPI of the ESP series chip need to perform semaphore synchronization to access three SPI slave devices simultaneously?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The same SPI peripheral, as the master, can only communicate with one slave at a time, and CS decides which slave to communicate with. If you connect 3 slave devices to the SPI driver and communicate with them separately, it is okay and recommended.
-  - It is recommended to share one SPI device in one task. Otherwise, the threads are not safe, and they communicate through semaphore synchronization. For details, please refer to `SPI Master driver-feature <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/spi_master.html#driver-features>`_.
+  - It is recommended to operate devices sharing the same SPI in only one task. Otherwise, it is not thread-safe. Communication needs to be synchronized through semaphores. For specific issues, see `SPI Master Driver > Driver Features <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#driver-features>`_.
 
 ---------------------------
 
@@ -77,13 +76,12 @@ What is the maximum transmission speed supported by SPI slave?
 
 ------------------------------
 
-When using ESP32 as an SPI Master device, how many bytes of data can be transfered at one time in non-DMA mode?
+How many bytes of data can be transferred at once using the ESP series chip as an SPI host device in non-DMA mode?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Up to 64 Bytes of data can be transferred at one time in such condition.
-  - When the transmitted data does not exceed 32 bits, you can use the 4-byte array in the SPI Master driver as the buffer for data transmission. For details, please refer to `Transactions with Data Not Exceeding 32 Bits <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-reference/peripherals/spi_master.html?highlight=spi#transactions-with-data-not-exceeding-32-bits>`_.
-  - But when the transmitted data exceeds 32 bits, you need to set the buffer for SPI data transmission by yourself. For details, please refer to `SPI Master Transactions <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-reference/peripherals/spi_master.html?highlight=spi#spi-transactions>`_.
-  - When using ESP32 as an SPI Master device to transmit more than 32 bits of SPI data in non-DMA mode, please refer to the example `lcd <https://github.com/espressif/esp- idf/tree/release/v4.4/examples/peripherals/spi_master/lcd>`_.
+  - Due to the limitations of the SPI hardware FIFO, a maximum of 64 bytes can be transferred at once in non-DMA mode. Refer to `SPI Master Driver > Transaction Duration <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#transaction-duration>`__.
+  - When transmitting no more than 32 bits, the 4-byte array inside the SPI Master driver can be used as the buffer for sending data. Refer to `SPI Master Driver > Transactions with Data Not Exceeding 32 Bits <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#transactions-with-data-not-exceeding-32-bits>`_ for details.
+  - When transmitting more than 32 bits, you need to create an SPI data transmission buffer yourself. You can refer to the `SPI Master Driver > SPI Transactions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#spi-transactions>`_ for instructions.
 
 --------------------------------
 
@@ -123,16 +121,16 @@ Does ESP8266 RTOS SDK support full duplex for SPI?
 
 ---------------
 
-Can ESP32 support 9-bit clock mode for 3-wire SPI (i.e. a mode where the first bit indicates whether the next 8 bits are command or data)?
+Can the ESP series chips support the 9-bit clock mode of three-wire SPI (i.e., the mode where the first bit indicates whether the following 8 bits are command or data)?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  No. Currently, all ESP32 series chips does not support non-byte-aligned data transfer, i.e., only support 8-bit-aligned data tranfer. For details, please refer to `Github issue <https://github.com/espressif/esp-idf/issues/8487>`_.
-
-  Newer versions of ESP32 series chips may support non-byte-aligned data transfer. However, there is no specific schedule for this functionality.
+  - Currently, the ESP32, ESP32-S, ESP32-C series chips do not support non-byte aligned data transmission, i.e., they only support 8-bit aligned data transmission. For a detailed explanation of this issue, see `Github issue <https://github.com/espressif/esp-idf/issues/8487>`_ and `documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#transactions-with-integers-other-than-uint8-t>`__.
+  - Subsequent new versions of the ESP chip may support non-byte aligned data transmission, but there is currently no specific timetable.
 
 ---------------
 
-After routing the SDA signal of the SPI screen to GPIO35 of ESP32-S2, I expect that the SDA signal is low when idle and high when writing data. But why does this pin turn out to be high when idle and low when writing data on power-up? How to achieve my expected result? 
+After setting a pin of the ESP series chip as the SDA data line, the expected result is that the SDA line should be low when idle, and high when writing data. But why is this pin high when idle upon power-up, and low when writing data? How can I achieve the expected result?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Please modify the ``mode`` member variable in the `spi_device_interface_config_t <https://github.com/espressif/esp-idf/blob/master/components/driver/include/driver/spi_master.h#L58>`_ structure.
+  - In SPI, the idle levels of the MOSI (SDA) and SCK signal lines are controlled by the SPI mode.
+  - This can be achieved by modifying the `mode` member variable in the `spi_device_interface_config_t` structure `<https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#_CPPv4N29spi_device_interface_config_t4modeE>`_.

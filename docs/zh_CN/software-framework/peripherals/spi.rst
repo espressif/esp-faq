@@ -41,20 +41,19 @@ ESP32 中 SPI0/SPI1/HSPI/VSPI 三者有什么区别呢？
 
 --------------
 
-ESP32 使用 SPI DMA 时最大的数据传输量是 4095 字节，是因为硬件限制吗？
+ESP 系列芯片使用 SPI DMA 时最大的数据传输量是 4095 字节，是因为硬件限制吗？
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 是的，这属于硬件限制。
-  - DMA 链表中单个节点只能挂载 4095 字节的数据，但可以通过若干节点来发送更多的数据。
-  - SPI 通过 DMA 链表发送数据的最大字节数还受限于硬件寄存器 `SPI_LL_DATA_MAX_BIT_LEN`（不同系列芯片的数值不同，可在 ESP-IDF 中搜索到），即 `max_transfer_sz <= (SPI_LL_DATA_MAX_BIT_LEN >> 3)`。
+  - 是的，这属于硬件限制，DMA 链表中单个节点只能挂载 4095 字节的数据。
+  - 但是 SPI DMA 单次发送可以通过若干节点来挂载更多的数据，此时最大的数据传输字节数受限于硬件寄存器 ``SPI_LL_DATA_MAX_BIT_LEN``（不同系列芯片的数值不同，可在 ESP-IDF 中搜索到），即 ``max_transfer_sz <= (SPI_LL_DATA_MAX_BIT_LEN / 8)``。
 
 -----------------
 
-ESP32-S2 的 SPI 同时访问三个 SPI 从机设备，是否需要做信号量同步才能访问？
+ESP 系列芯片的 SPI 同时访问三个 SPI 从机设备，是否需要做信号量同步才能访问？
 ------------------------------------------------------------------------------------------------------------------------------
 
   - 同一个 SPI 外设作为主机，一次只能与一个从机进行通信，由 CS 决定与哪个从机进行通信。如果是给 SPI 驱动挂 3 个 从机设备，并与它们分别通信的话是可以的，推荐这种用法。
-  - 推荐只在一个任务中操作共用同一个 SPI 的设备，否则是线程不安全的，需要通过信号量同步进行通信，具体问题见 `SPI Master driver-feature <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/spi_master.html#driver-features>`_。
+  - 推荐只在一个任务中操作共用同一个 SPI 的设备，否则是线程不安全的，需要通过信号量同步进行通信，具体问题见 `SPI 主机驱动程序 - 主机驱动特性 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/spi_master.html#id2>`_。
 
 ---------------------
 
@@ -77,13 +76,12 @@ SPI 从机支持最大速度是多少？
 
 -------------------------
 
-使用 ESP32 作为 SPI 主机设备，在非 DMA 模式下最大可一次性传输多少字节的数据？
+使用 ESP 系列芯片作为 SPI 主机设备，在非 DMA 模式下最大可一次性传输多少字节的数据？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 使用 ESP32 作为 SPI 主机设备，在非 DMA 模式下最大可一次性传输 64 字节的数据。
-  - 当传输不超过 32 比特时，可以使用 SPI Master 驱动内部的 4 字节数组作为发送数据的缓冲区，可参考 `Transactions with Data Not Exceeding 32 Bits <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/peripherals/spi_master.html?highlight=spi#transactions-with-data-not-exceeding-32-bits>`_ 说明。
-  - 当传输超过 32 比特时，需要自行创建 SPI 发送数据的缓冲区，可参考 `SPI Master Transactions <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/peripherals/spi_master.html?highlight=spi#spi-transactions>`_ 说明。
-  - 使用 ESP32 作为 SPI 主机设备在非 DMA 模式下传输超过 32 比特的 SPI 数据，可参考例程 `esp-idf/examples/peripherals/spi_slave/sender <https://github.com/espressif/esp-idf/tree/release/v4.4/examples/peripherals/spi_master/lcd>`_。
+  - 受 SPI 硬件 FIFO 的限制，在非 DMA 模式下最大可一次性传输 64 字节，可参考 `SPI 主机驱动程序 - 传输事务持续时间 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/spi_master.html#id18>`__。
+  - 当传输不超过 32 比特时，可以使用 SPI Master 驱动内部的 4 字节数组作为发送数据的缓冲区，可参考 `SPI 主机驱动程序 - 传输数据小于 32 位的传输事务 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/spi_master.html#id13>`_ 说明。
+  - 当传输超过 32 比特时，需要自行创建 SPI 发送数据的缓冲区，可参考 `SPI 主机驱动程序 - SPI 传输事务 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/spi_master.html#id3>`_ 说明。
 
 ---------------------------
 
@@ -123,16 +121,16 @@ ESP8266 RTOS SDK 是否支持 SPI 全双工？
 
 ---------------
 
-ESP32 能支持三线 SPI 的 9 位时钟模式（即用第 1 位表示后 8 位是命令还是数据的模式）吗？
+ESP 系列芯片能支持三线 SPI 的 9 位时钟模式（即用第 1 位表示后 8 位是命令还是数据的模式）吗？
 -----------------------------------------------------------------------------------------------------------
 
-  不支持，目前 ESP32 所有系列的芯片都不支持非字节对齐的数据传输，即只支持 8 位对齐的数据传输，该问题的具体说明见 `Github issue <https://github.com/espressif/esp-idf/issues/8487>`_。
-
-  后续新版本的 ESP32 芯片可能会支持非字节对齐的数据传输，但目前还没有具体的时间表。
+  - 目前 ESP32, ESP32-S, ESP32-C 系列的芯片都不支持非字节对齐的数据传输，即只支持 8 位对齐的数据传输，该问题的具体说明见 `Github issue <https://github.com/espressif/esp-idf/issues/8487>`_ 和 `文档 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/spi_master.html#uint8-t>`__。
+  - 后续新版本的 ESP 芯片可能会支持非字节对齐的数据传输，但目前还没有具体的时间表。
 
 ---------------
 
-将 ESP32-S2 的 GPIO35 管脚设置为 SPI 屏的 SDA 数据线后，期望的结果是空闲时 SDA 线应为低电平，写数据时应为高电平。但此时为什么一上电空闲时此管脚为高电平，写数据是低电平？如何实现我期望的结果？
+将 ESP 系列芯片的某一管脚设置为 SDA 数据线后，期望的结果是空闲时 SDA 线应为低电平，写数据时应为高电平。但此时为什么一上电空闲时此管脚为高电平，写数据是低电平？如何实现我期望的结果？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  请修改 `spi_device_interface_config_t 结构体里的 mode 成员变量  <https://github.com/espressif/esp-idf/blob/master/components/driver/include/driver/spi_master.h#L58>`_。
+  - SPI 中 MOSI (SDA) 和 SCK 信号线的空闲电平是由 SPI 模式控制的。
+  - 可以通过修改 `spi_device_interface_config_t 结构体里的 mode 成员变量  <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/spi_master.html#_CPPv4N29spi_device_interface_config_t4modeE>`_ 来实现。

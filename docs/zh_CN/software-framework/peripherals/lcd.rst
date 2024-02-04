@@ -20,66 +20,14 @@ LCD
 ESP 系列芯片 LCD 驱动及参考例程在哪？
 ------------------------------------------------------------------
 
-  - ESP 的 LCD 驱动位于 **ESP-IDF** 下的 `components/esp_lcd <https://github.com/espressif/esp-idf/tree/master/components/esp_lcd>`__。**esp_lcd** 能够驱动 ESP 系列芯片所支持的 **I2C**、**SPI(QSPI)**、**8080** 以及 **RGB** 多种接口的屏幕，各系列芯片支持的接口类型如下：
-
-    .. list-table::
-        :header-rows: 1
-
-        * - SoCs 
-          - I2C
-          - SPI (QSPI)
-          - I80
-          - RGB
-
-        * - ESP32
-          - 是
-          - 是
-          - 是
-          - 否      
-  
-        * - ESP32-S2
-          - 是
-          - 是
-          - 是
-          - 否
-
-        * - ESP32-S3
-          - 是
-          - 是
-          - 是
-          - 是
-
-        * - ESP32-C3
-          - 是
-          - 是
-          - 否
-          - 否
-
-        * - ESP32-C6
-          - 是
-          - 是
-          - 否
-          - 否
-
-  - ESP 的 LCD 例程位于 **ESP-IDF** 下的 `examples/peripherals/lcd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd>`__ 和 **esp-iot-solution** 下的 `examples/display/lcd <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/lcd>`__。
-  - 推荐基于 ESP-IDF **release/v5.1** 及以上版本分支进行开发，因为低版本不支持部分重要的新特性，尤其是对于 RGB 接口。
-  - **请勿使用** esp-iot-solution 中的 screen `驱动 <https://github.com/espressif/esp-iot-solution/tree/master/components/display/screen>`__ 及 `例程 <https://github.com/espressif/esp-iot-solution/tree/master/examples/screen>`__。
+  请参考 `ESP-IoT-Solution 编程指南 - LCD 开发指南 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/display/lcd/lcd_development_guide.html#id2>`__。
 
 ---------------
 
 ESP 系列芯片 LCD 屏幕适配情况是怎样的？
 -------------------------------------------------------------------
 
-  目前基于 `esp_lcd` 驱动适配过的 LCD 驱动 IC 如下：
-
-  - `ESP-IDF <https://github.com/espressif/esp-idf/blob/master/components/esp_lcd/include/esp_lcd_panel_vendor.h>`__：st7789、nt35510、ssd1306。
-  - `ESP 包管理器 <https://components.espressif.com/components?q=esp_lcd>`__：gc9a01、ili9341、ili9488、ra8875、sh1107、st7796、st7701、gc9503、gc9b71、spd2010、...（持续更新中）
-
-  **需注意，即使驱动 IC 相同，不同的屏幕往往需要不同的寄存器配置参数，而且屏幕厂商通常会给配套的配置参数（代码），因此推荐利用上面两种途径获取相似驱动 IC 的代码，根据自己屏幕的实际参数进行修改。**
-
-  目前基于 `esp_lcd_touch` 驱动适配过的 Touch 驱动 IC 如下：
-
-  - `ESP 包管理器 <https://components.espressif.com/components?q=esp_lcd_touch>`__：FT5x06、GT1151、GT911、STMPE610、TT21100、XPT2046、CST816、...（持续更新中）
+  请参考 `ESP-IoT-Solution 编程指南 - LCD 开发指南 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/display/lcd/lcd_development_guide.html#id2>`__。
 
 --------------
 
@@ -98,7 +46,11 @@ ESP 系列芯片的带屏开发板是否支持使用 Arduino IDE 开发 GUI？
 如何提高 LCD 的显示帧率？
 -----------------------------------------------------
 
-  - LCD 的实际显示帧率由“接口帧率”和“渲染帧率”共同决定，一般来说，受限于 ESP 的计算性能，“接口帧率”往往远大于“渲染帧率”，因此该问题可以表述为“如何提高 LCD 的渲染帧率”。
+  - 关于帧率的详细介绍请参考 `ESP-IoT-Solution 编程指南 - LCD 概述 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/display/lcd/lcd_guide.html#id9>`__。一般来说，受限于 ESP 的计算性能，“接口帧率”往往远大于“渲染帧率”，因此该问题可以表述为“如何提高 LCD 的渲染帧率”。针对这个问题，可以从以下三个方面进行考虑：
+
+    - 提高 ESP 的性能。在使用 ESP-IDF 开发时可以通过 menuconfig 来配置 ESP，而默认并没有配置到最佳性能，这里以 ``ESP32-S3`` 为例，我们可以提高 CPU 频率到最高 ``240 MHz``，提高 FreeRTOS tick 的频率到 1000，增大 flash 或 PSRAM 的带宽。除此之外，还有增大 data cache line size，设置编译优化等级为 ``-O2`` 等等。
+    - 提高 LVGL 的性能。LVGL 本身也是可以通过 menuconfig 或者 *lv_conf.h* 文件进行配置的，例如设置 LVGL 使用 ESP-IDF 中的 ``malloc`` 和 ``memcpy`` 等内存操作函数，开启 ``fast memory`` 编译选项等。
+    - 优化应用设计。一方面可以通过调整任务的优先级或指定 CPU 核使得 LVGL 和其他任务充分利用 CPU 资源，尤其是对具有双核的 ESP；另一方面也可以优化 GUI 的设计，比如尽量避免使用复杂的动画以及具有透明度的图层混叠效果。
 
   - 以 ESP32-S3R8 为例，以下 ESP 配置项对帧率提升有帮助 (IDF release/v5.1):
 
@@ -134,7 +86,7 @@ ESP32 是否有 I2S 驱动 LCD 的参考代码？
 ESP 系列芯片最大可以支持多少分辨率的 LCD？相应的帧率是多少？
 ----------------------------------------------------------------------------------------------------------
 
-  - 对于 ESP32-S3 的 RGB 外设接口，由于受其硬件限制，理论上最大支持 4096 x 1024 分辨率（水平最大为 4096，垂直最大为 1024）；对于 ESP 系列芯片的其他外设接口，可以支持多大的分辨率并没有一个“最大”的硬件限制，
+  - 对于 ESP32-S3 和 ESP32-P4 的 RGB 外设接口，由于受其硬件限制，理论上最大支持 ``4096 x 1024`` 分辨率（水平最大为 ``4096``，垂直最大为 ``1024``）；对于 ESP 系列芯片的其他外设接口，可以支持多大的分辨率并没有一个“最大”的硬件限制，
   - 由于芯片的存储大小、计算性能和外设接口的传输带宽有限，而且不同接口类型的 LCD 通常具有特定范围内的分辨率，因此针对 ESP32-C3 和 ESP32-S3 这两款芯片推荐使用 LCD 的分辨率如下：
 
     .. list-table::
@@ -166,7 +118,8 @@ ESP32-S3R8 如何开启 PSRAM 120M Octal (DDR)？
 ----------------------------------------------------------------------------------------------------------
 
   - ESP-IDF 需要使用 **release/v5.1** 及以上分支版本。
-  - 通过 menuconfig 开启配置项：IDF_EXPERIMENTAL_FEATURES, SPIRAM_SPEED_120M, SPIRAM_MODE_OCT。
+  - 通过 menuconfig 开启配置项： ``IDF_EXPERIMENTAL_FEATURES``, ``SPIRAM_SPEED_120M``, ``SPIRAM_MODE_OCT``。
+  - ``ESP32-S3-WROOM-1-N16R16V`` 模组目前不支持此功能，如果启用，可能会出现芯片在上电时卡死然后复位的问题。
   - **需注意**，该特性是一种仍在测试完善中的实验功能，并具有以下温度风险：
 
     - 在温度高于 65°C 的情况下，即使开启 ECC 功能也无法保证正常工作。
@@ -219,12 +172,13 @@ ESP32-S3 系列的芯片支持哪些图片解码格式？
 
   - **原因**
 
-    - RGB 外设的 PCLK 设置过高，PSRAM 的带宽无法满足。
-    - 受写 flash 操作（如 Wi-Fi、OTA、BLE）影响，期间 PSRAM 被禁用。
+    - RGB 外设的 PCLK 设置过高，PSRAM 或 GDMA 的带宽无法满足。
+    - PSRAM 和 flash 共用一组 SPI 接口，受写 flash 操作（如 Wi-Fi、OTA、低功耗蓝牙）影响，期间 PSRAM 被禁用。
+    - 读取大量的 flash/PSRAM 数据，导致 PSRAM 带宽不足。
 
   - **配置方面**
 
-    - 提高 PSRAM 和 flash 带宽，设置 flash 为  QIO 120 M，PSRAM 为 Octal 120 M。
+    - 提高 PSRAM 和 flash 带宽，比如在硬件允许的条件下，采用更高的频率或更大的位宽。
     - 开启 ``CONFIG_COMPILER_OPTIMIZATION_PERF``。
     - 降低 Data Cache Line Size 到 32 Byte（使用 RGB ``Bounce Buffer`` 模式时需要设置到 64 Byte）。
     - 开启 ``CONFIG_SPIRAM_FETCH_INSTRUCTIONS`` 和 ``CONFIG_SPIRAM_RODATA``。
@@ -233,20 +187,19 @@ ESP32-S3 系列的芯片支持哪些图片解码格式？
   - **应用方面**
 
     - 在保证屏幕正常工作的前提下，尽量减小 PCLK 的频率，降低 PSRAM 的带宽占用。
-    - 如果需要使用 Wi-Fi、BLE 和连续写 flash 的操作，请采用 ``XIP on PSRAM + RGB Bounce buffer`` 的方法，设置步骤如下：
+    - 如果需要使用 Wi-Fi、低功耗蓝牙和连续写 flash 的操作，请采用 ``XIP on PSRAM + RGB Bounce buffer`` 的方法，其中， ``XIP on PSRAM`` 用于将代码段和只读段的数据加载到 PSRAM，开启后执行写 flash 操作不会禁用 PSRAM。 ``RGB Bounce buffer`` 用于将帧缓存的数据分块通过 CPU 从 PSRAM 搬运到 SRAM，然后再使用 GDMA 传输数据到 RGB 外设，相较于直接采用 PSRAM GDMA 的方式能够实现更高的传输带宽。设置步骤如下：
 
       - 确认 ESP-IDF 版本为较新（> 2022.12.12）的 release/v5.0 及以上，因为旧版本不支持 ``XIP on PSRAM`` 的功能（release/v4.4 可以通过打补丁的方式实现，但不推荐）。
-      - 确认 PSRAM 配置里面是否能开启 ``CONFIG_SPIRAM_FETCH_INSTRUCTIONS`` 和 ``CONFIG_SPIRAM_RODATA`` 这两项（如果 rodata 段数据过大，会导致 PSRAM 空间不够）。
+      - 确认 PSRAM 配置里面是否能开启 ``CONFIG_SPIRAM_FETCH_INSTRUCTIONS`` 和 ``CONFIG_SPIRAM_RODATA`` 这两项。如果只读段数据过大（如大量图片），会导致 PSRAM 空间不够，此时可以采用文件系统或将图片制作成 bin 加载到指定分区。
       - 确认内存（SRAM）是否有余量，大概需要占用 [10 * screen_width * 4] 字节。
       - 设置 ``Data cache line size`` 为 64 Byte（可设置 ``Data cache size`` 为 32 KB 以节省内存）。
       - 设置 ``CONFIG_FREERTOS_HZ`` 为 1000。
-      - 如以上均符合条件，那么就可以参考 `文档 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__ 修改 RGB 驱动为 ``Bounce buffer`` 模式。
+      - 如以上均符合条件，那么就可以参考 `文档 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__ 修改 RGB 驱动为 ``Bounce buffer`` 模式。 ``Bounce buffer`` 模式会分配一块 SRAM 内存作为中间缓存，然后通过 CPU 分块搬运帧缓存的数据到 SRAM，再通过 GDMA 传输数据到 RGB 外设，这样就可以避免 PSRAM 被禁用的问题。如果开启后仍存在漂移现象，可以尝试增大 buffer，但是会占用更多的 SRAM 内存。
       - 如操作 Wi-Fi 仍存在屏幕漂移问题，可以尝试关闭 PSRAM 里 ``CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP`` 一项（会占用较大 SRAM）。
       - 设置后带来的影响包括：CPU 使用率升高、可能会造成中断看门狗复位、会造成较大内存开销。
       - 由于 Boucne Buffer 是在 GDMA 中断里通过 CPU 搬运 PSRAM 的数据到 SRAM，程序需要避免长时间执行关中断的操作（如调用 ``portENTER_CRITICAL()``），否则仍会造成屏幕漂移。
 
     - 短时操作 flash 导致漂移的情况，如 wifi 连接等操作前后，可以在操作前调用 ``esp_lcd_rgb_panel_set_pclk()`` 降低 PCLK（如 6 MHz）并延时大约 20 ms（RGB 刷完一帧的时间），然后在操作结束后提高 PCLK 至原始水平，期间可能会造成短暂的闪白屏现象。
-    - 使能 ``esp_lcd_rgb_panel_config_t`` 中的 ``flags.refresh_on_demand``，通过调用 ``esp_lcd_rgb_panel_refresh()`` 接口手动刷屏，在保证屏幕不闪白的情况下尽量降低刷屏频率。
     - 如果无法避免，可以开启 ``CONFIG_LCD_RGB_RESTART_IN_VSYNC`` 或调用 ``esp_lcd_rgb_panel_restart()`` 接口重置 RGB 时序，防止永久性漂移。
 
 ---------------------------

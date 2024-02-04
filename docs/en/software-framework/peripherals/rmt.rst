@@ -54,7 +54,8 @@ When ESP32 RMT controls the WS2812 light strip with Wi-Fi or Bluetooth enabled, 
 How can I quickly adapt other infrared protocols based on the `IR NEC example <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/rmt/ir_nec_transceiver>`_ in ESP-IDF？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  You can utilize `RMT Encoder <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/rmt.html#rmt-encoder>`_ based on the `IR NEC example <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/rmt/ir_nec_transceiver>`_ to expedite the adaptation of other infrared protocols.
+  - You can accelerate the adaptation of other infrared protocols based on the `IR NEC <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/rmt/ir_nec_transceiver>`_ example by using the `RMT Encoder <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/rmt.html#rmt-encoder>`_.
+  - If you need the infrared learning function, you can use the `ir_learn <https://github.com/espressif/esp-iot-solution/tree/master/components/ir/ir_learn>`_ component.
 
 --------------
 

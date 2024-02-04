@@ -132,3 +132,8 @@ How do I get the input level of the ESP32 RTC_GPIO?
   .. code-block:: c
 
     uint8_t level = (uint8_t)((REG_GET_FIELD(RTC_GPIO_IN_REG, RTC_GPIO_IN_NEXT) & BIT(gpio_num)) ? 1 : 0);
+
+How to use GPIO buttons in Light-sleep mode?
+----------------------------------------------------------------
+
+  The wake-up function of the button can be enabled. Please note that non-RTC GPIO cannot enable GPIO edge triggering and level triggering at the same time. You can use the existing functions of the `Button <https://components.espressif.com/components/espressif/button>`_ component to implement this.

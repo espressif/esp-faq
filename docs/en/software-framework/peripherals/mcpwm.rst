@@ -18,7 +18,7 @@ Motor Control Pulse Width Modulator (MCPWM)
 Does ESP32 support using the MCPWM Timer to trigger AD sampling?
 --------------------------------------------------------------------------------------
 
-  No, it does not.
+  AD sampling can be triggered in the callback of the MCPWM timer events ``on_ful```, ``on_empty``, ``on_stop``. Additionally, AD sampling can also be triggered in the callback of the MCPWM comparator event ``on_reach``.
 
 ---------------
 
