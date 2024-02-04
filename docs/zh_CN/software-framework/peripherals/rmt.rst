@@ -46,7 +46,7 @@ RMT 中如何将时钟修改为 REF_TICK?
     - 对于 esp-idf release/v4.4 及之前版本，可以增大 `mem_block_num <https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/api-reference/peripherals/rmt.html#_CPPv4N12rmt_config_t13mem_block_numE>`_，在 release/v5.0 中有进行修改，参考 `Breaking Changes in Usage <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/migration-guides/release-5.x/5.0/peripherals.html#id13>`_。
     - 将 RMT 的中断安装在特定的 CPU 核上，可以在一个 pin to core 的 task 中调用 driver install 函数，避开 Wi-Fi 或蓝牙使用的核。
     - 您也可以使用 SPI DMA 来代替 RMT 解决此问题，具体请参考 `SPI DMA LED 灯带示例 <https://github.com/espressif/esp-iot-solution/blob/master/components/led/lightbulb_driver/drivers/ws2812/ws2812.c#L99>`_。
-  
+
   - 如果您还处于前期技术选型阶段，推荐使用 ESP32-S3 的 RMT。
 
 --------------
@@ -54,7 +54,8 @@ RMT 中如何将时钟修改为 REF_TICK?
 ESP-IDF 里只有一个 `IR NEC <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/rmt/ir_nec_transceiver>`_ 示例,如何快速实现其他红外协议的适配？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  可以在参考 `IR NEC <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/rmt/ir_nec_transceiver>`_ 示例的基础上利用 `RMT Encoder <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/rmt.html#rmt-encoder>`_ 来加速适配其他红外协议。
+  - 可以在参考 `IR NEC <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/rmt/ir_nec_transceiver>`_ 示例的基础上利用 `RMT Encoder <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/rmt.html#rmt-encoder>`_ 来加速适配其他红外协议。
+  - 如果需要红外学习功能，可以使用 `ir_learn <https://github.com/espressif/esp-iot-solution/tree/master/components/ir/ir_learn>`_ 组件。
 
 --------------
 

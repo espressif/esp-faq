@@ -58,7 +58,7 @@ Does ESP-WROOM-S2 module support using SDIO as a slave?
 Since ESP32-S2 has removed the SDIO interface, does it still support external TF card?
 --------------------------------------------------------------------------------------------------------------------------------
 
-  You can use the interface of SPI2/SPI3 to connect an external TF card. When doing so, please use the SPI mode of the TF card.
+  You can use the SPI2 or SPI3 interface to connect to an external TF card. When doing so, please use the SPI mode of the TF card.
 
 ----------------
 

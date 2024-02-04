@@ -36,8 +36,8 @@ UART 控制器
 ESP32 IDF 中如何使能 UART 流控？
 ----------------------------------------------
 
-  - 硬件流控使能： `uart-flow-control <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#multiple-steps>`_。
-  - 软件流控使能： `software-flow-control <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart%20flow%20control#software-flow-control>`_。
+  - 使能硬件流控，请参考 `uart-flow-control <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html#id5>`_。
+  - 使能软件流控，请参考 `software-flow-control <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html#id11>`_。
 
 --------------
 
@@ -49,8 +49,8 @@ ESP32 使用 UART0 作为通信串口，有哪些需要注意的地方？
 
   **软件方面**：防止打印影响串口通信，默认程序中 UART0 主要有三处打印设置。
 
-    - 第一处是上电 ROM 打印，上电时可将 MTDO 管脚设为低电平屏蔽上电 ROM 打印。
-    - 第二处是引导加载程序日志信息输出，您可以将 ``menuconfig`` -> ``Bootloader config`` -> ``Bootloader log verbosity`` 设置为 ``No output`` 来屏蔽引导加载程序日志输出。
+    - 第一处是一级引导程序（ROM 固件） 打印，上电时可将 MTDO 管脚设为低电平屏蔽 ROM 固件打印。
+    - 第二处是二级引导加载程序日志信息输出，您可以将 ``menuconfig`` -> ``Bootloader config`` -> ``Bootloader log verbosity`` 设置为 ``No output`` 来屏蔽引导加载程序日志输出。
     - 第三处是应用日志输出，您可以将 ``menuconfig`` -> ``Component config`` -> ``Log output`` -> ``Default log verbosity`` 设置为 ``No output`` 来屏蔽应用日志输出。
 
   **硬件方面**：
@@ -69,7 +69,7 @@ ESP32-SOLO-1 的 GPIO34 ～ GPIO39 是否可作为 UART 的 RX 及 TWAI® 的 RX
 使用 ESP32 如何动态修改串口波特率并立即生效？
 ---------------------------------------------------------------
 
-  请使用 ``uart_set_baudrate()`` API 来修改 UART 波特率。参见 `API 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_set_baudrate11uart_port_t8uint32_t>`_。
+  可以使用 ``uart_set_baudrate()`` API 来动态修改 UART 波特率。参见 `API 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/uart.html?highlight=uart_set_baud#_CPPv417uart_set_baudrate11uart_port_t8uint32_t>`_。
 
 -------------------------------
 
@@ -115,7 +115,7 @@ ESP8266 的串⼝波特率范围是多大？
 
   - 由于 UART1 的 RXＤ 被占用了，所以 UART1 不能与其他芯片进行通讯，但 UART1 的 TXD 管脚可用作输出日志。
   - ESP8266 与其他芯片通信只能通过 UART0 的 CTS 和 RTS 管脚交换来实现，配置成 GPIO4 和 GPIO5 是无效的。
-  - ESP8266 与其他芯片通信可通过调用 "uart_enable_swap()" 函数，通过 UART0 的 CTS 和 RTS 引脚进行交换，交换为 MTCK (IO13)、MTDO (IO15) 管脚。管脚交换后 ESP8266 可通过 GPIO13（TXD）和 GPIO15（RXD）来与其他芯片进行 UART 通信。
+  - ESP8266 与其他芯片通信可通过调用 ``uart_enable_swap()`` 函数，通过 UART0 的 CTS 和 RTS 引脚进行交换，交换为 MTCK (IO13)、MTDO (IO15) 管脚。管脚交换后 ESP8266 可通过 GPIO13（TXD）和 GPIO15（RXD）来与其他芯片进行 UART 通信。
 
 --------------
 

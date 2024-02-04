@@ -28,3 +28,17 @@ Can ESP32-S3 realize low-level pulse counting with a frequency of 200 k?
 ------------------------------------------------------------------------------
 
   Yes.
+
+--------------------------
+
+Can PCNT generate an interrupt when the count changes?
+--------------------------------------------------------------
+
+  PCNT will only generate an interrupt when it reaches the set threshold. Other count values can only be read by polling.
+
+--------------------------
+
+What should I do if ESP32-C3 doesn't support PCNT?
+--------------------------------------------------------------
+
+  The `knob <https://components.espressif.com/components/espressif/knob>`_ software can be used for PCNT counting. Please note that this software can only be used for counting in quadrature decoding related application scenarios, and the counting frequency should not be too high.

@@ -47,7 +47,7 @@ When calling the API ``adc_read_fast()`` with ESP8266, will it cause a Wi-Fi dis
   - Please turn off Wi-Fi and interrupts first before calling ``adc_read_fast()``. Please refer to the `Specification <https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/api-reference/peripherals/adc.html?highlight=adc_read#_CPPv413adc_read_fastP8uint16_t8uint16_t>`_ of this API.
   - Since the ``API adc_read_fast()`` performs continuous acquisition and the ADC is partially coupled internally with Wi-Fi RF, so it is not possible to call this function with Wi-Fi turned on.
   - Please use ``adc_read()`` for ADC acquisition when Wi-Fi is on. To ensure data stability, you need to use function ``esp_wifi_set_ps(WIFI_PS_NONE)`` to turn off Wi-Fi Modem-sleep mode.
- 
+
 .. note::
 
     ADC sampling rate: can reach 100000 times per second with Wi-Fi turned off, and 1000 times per second with Wi-Fi turned on.
@@ -79,7 +79,7 @@ What is ESP32's highest sampling rate in ADC DMA mode?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   ESP32 supports up to 2 MHz of sampling rate theoretically.
-  
+
 -----------------
 
 When an ESP32 calling ``adc2_get_raw()`` between ``esp_wifi_start()`` and ``esp_wifi_stop()``, the read operation fails. What is the reason?
@@ -132,10 +132,10 @@ Can ESP32 measure different data from two ADC channels at the same time, such as
 
 -------------
 
-When ESP32-S3 ADC is configured as ``ADC_ATTEN_DB_11``, why does the measured voltage not reach ``3100 mV``?
--------------------------------------------------------------------------------------------------------------------
+Why can't the measured voltage reach the nominal 3100 mV when the ESP32-S3 ADC is configured as ``ADC_ATTEN_DB_12``?
+--------------------------------------------------------------------------------------------------------------------
 
-  When ESP32-S3 ADC1 or ADC2 is configured as ``ADC_ATTEN_DB_11``, the voltage measurement should be in the range of ``0 ~ 3100 mV``. However, the maximum voltage measurement of some chips may be less than ``3100 mV`` due to consistency issues. You may use the following two solutions to fix this issue:
+  When ESP32-S3 ADC1 or ADC2 is configured as ``ADC_ATTEN_DB_12``, the voltage measurement range is ``0 ~ 3100 mV``. However, the maximum voltage measurement value of some chips is less than ``3100 mV``. The following two methods can be used to solve this problem:
 
 - Solution 1: Try to avoid using the boundary voltage values. You can use a divider circuit to reduce the input voltage to an intermediate value for higher accuracy and consistency. 
 - Solution 2: Use the software `ADC Range Extension Solution <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/others/adc_range.html>`_ to increase the maximum voltage measurement to ``3300 mV``.
@@ -144,7 +144,7 @@ When ESP32-S3 ADC is configured as ``ADC_ATTEN_DB_11``, why does the measured vo
 
 Can we use GPIO0 as the ADC pin when using ESP32 as a Wi-Fi access point?
 ---------------------------------------------------------------------------------------------------------------------------------------------------
-   
+
   - The ESP32 ADC2 pins cannot be used when you are using Wi-Fi. So, if you are having trouble getting the value from an ADC2 GPIO while using Wi-Fi, you may consider using an ADC1 GPIO instead. For more details, please refer to `Hardware Limitations of ADC Continuous Mode <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc_continuous.html>`__ and `Hardware Limitations of ADC Oneshot Mode <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc_oneshot.html>`__.
   - The GPIO0, GPIO2, GPIO5, GPIO12 (MTDI), and GPIO15 (MTDO) are strapping pins. When using GPIO0 for other functions, you need to pay attention to the GPIO level during power-up. If the GPIO0 level is low during power-up, the chip can enter the download mode. For more infomation, please refer to `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__. 
 

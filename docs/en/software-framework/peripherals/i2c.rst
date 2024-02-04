@@ -29,14 +29,14 @@ Is ESP8266 I2C realized via software programming?
 
 --------------
 
-When the I2C of the ESP32 series chip is operating (especially in fast mode), spikes often occur on the data lines, especially after the falling edge of the 8th/9th clock. Is this normal?
+Is it normal for some spikes to frequently appear on the data line when the ESP32 chip I2C is working (especially in fast mode), often after the falling edge of the 8th/9th clock?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The spike on the data line at the 8th/9th clocks is caused by the I2C master-slave control handover. It is a normal phenomenon and is mentioned in the I2C protocol.
 
 ------------------------
 
-How can I realize data are received by ESP32 series chips, which are used as the I2C master, only after these data are processed by the slave? For example, when ESP32 chips read data through ``i2c_master_read_to_device``, the slave should return data immediately after receiving the command. However, some slave devices wait for a while to return data after receiving the command.
+How can the ESP32 chip, as an I2C master, wait for the slave to process the data before receiving it? For example, when reading data through ``i2c_master_read_to_device``, the slave needs to return data immediately after accepting the command, but in reality, some slave devices need to wait for a while after receiving the command before they can return data.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   This can be realized by dividing ``i2c_master_read_device`` into the following three steps:
@@ -47,7 +47,7 @@ How can I realize data are received by ESP32 series chips, which are used as the
 
 --------------
 
-When using ESP32 series chip, can we configure GPIO32 and GPIO33 as I2C_SDA and I2C_SCL respectively?
+When using the ESP32 chip, can GPIO32 and GPIO33 be configured as I2C_SDA and I2C_SCL respectively?
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Yes. I2C pins of the ESP32 chip can be remapped by any available GPIOs. Please refer to "4.2 Peripheral Pin Configurations" of `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__. If you do not need an external 32.768 KHz crystal, you can use GPIO32 and GPIO33 as I2C pins.

@@ -15,6 +15,11 @@ Touch Sensor
 
 --------------
 
+Can the ESP32/ESP32-S2/ESP32-S3 Touch pass the EMS conduction interference test?
+-----------------------------------------------------------------------------------
+
+  The EMS conduction interference test is a whole machine test, which is jointly affected by internal and external power supplies, circuits, and external environments. Since the ESP32/ESP32-S2/ESP32-S3 Touch has poor anti-interference ability, if users have this test requirement, it is recommended to externally connect a dedicated Touch IC.
+
 When using ESP32 to develop Touch Sensor applications, where can I find references?
 ------------------------------------------------------------------------------------------------------------
 
