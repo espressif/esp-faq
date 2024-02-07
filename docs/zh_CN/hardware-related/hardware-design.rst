@@ -151,7 +151,7 @@ ESP32 是否可以用 PWM 或 DAC 来播放音乐？
   - 因为它们的工作环境和使用方式不同。
     - ESP32 芯片是一颗裸片，需要在电路板上加上外围电路才能正常工作。ESP32 芯片的建议工作电压范围为 2.3 V 至 3.6 V，是根据 ESP32 芯片本身的电气参数来决定的。在这个电压范围内，ESP32 芯片能够正常工作，并且可以提供最佳的性能和功耗表现。
     - ESP32 模组则是已经封装好的整个电路模块，通常会加上稳压电路、外部晶振、外部天线等外围电路，以及其他外设芯片（如 flash、RAM）等，可以直接使用。由于模组上的电路已经经过优化和调试，因此建议工作电压范围会更窄一些。例如，ESP32-WROOM-32 模组的建议工作电压范围就为 3.0 V 至 3.6 V。此外，由于模组要考虑 flash 的电压，所以 ESP32 模组的建议工作电压会更高一些。
-  
+
   - 在使用这些芯片和模组时，需要根据具体情况选择合适的电源和外围电路，以确保它们能够正常工作。
   - 更多信息，请对比模组和芯片的 `技术规格书 <https://www.espressif.com/zh-hans/support/documents/technical-documents>`_。
 
@@ -179,7 +179,7 @@ ESP32 以太网 RMII 时钟选择有哪些？
 -------------------------------------
 
   - 硬件设计上建议使用 GPIO0 作为 RMII 时钟输入的管脚，请注意 GPIO0 在芯片上电时不可为低电平。
-  - 详细说明请阅读 `配置 MAC 与 PHY <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`_ 指南。 
+  - 详细说明请阅读 `配置 MAC 与 PHY <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html#configure-mac-and-phy>`_ 指南。
 
 --------------
 
@@ -228,7 +228,7 @@ ESP8266 使用 TOUT 管脚做 ADC 采样时，超过 0 V ~ 1.0 V 是否会损坏
 使用板载天线的模组，对 PCB 和外壳设计有哪些要求？
 -----------------------------------------------------------------------------
 
-  - 如产品采⽤模组进⾏ on-board 设计，则需注意考虑模组在底板的布局，应尽可能地减⼩底板对模组 PCB 天线性能的影响。 
+  - 如产品采⽤模组进⾏ on-board 设计，则需注意考虑模组在底板的布局，应尽可能地减⼩底板对模组 PCB 天线性能的影响。
   - 条件允许的情况下，建议将模组 PCB 天线区域延伸出底板板框外，并将模组尽可能地靠近底板板边放置，使天线的馈点距离板边最近。
   - 请确保模块不被任何⾦属的外壳包裹，模块 PCB 天线区域及外扩 15 mm 区域需净空（严禁铺铜、⾛线、摆放元件）。
   - 具体说明请阅读对应模组的 `硬件设计指南 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=&field_download_document_type_tid%5B%5D=513>`__。
@@ -262,7 +262,7 @@ ESP32 模组 flash 是否支持 80 MHz 的 QIO 模式？
 
   - 请下载 `esp-idf/examples/ethernet/basic <https://github.com/espressif/esp-idf/tree/release/v4.4/examples/ethernet/basic>`_ 例程进行测试。
   - IP101 PHY 芯片在 GPIO0 输出 CLK 时会出现网络不稳定的现象，所以推荐 PHY 外接 50 MHz 晶振，GPIO0 作为输入。
-  - 由于 GPIO0 的特殊性，所以需要配置 IO 控制 PHY 的使能管脚。 
+  - 由于 GPIO0 的特殊性，所以需要配置 IO 控制 PHY 的使能管脚。
   - 请阅读 `以太网文档 <https://docs.espressif.com/projects/esp-idf/zh_CN/v4.4.2/esp32/api-reference/network/esp_eth.html>`__。
   - 可参考 `SCH_ESP32-ETHERNET-KIT 原理图设计 <https://dl.espressif.com/dl/schematics/SCH_ESP32-ETHERNET-KIT_A_V1.1_20190711.pdf>`_。
 
@@ -327,7 +327,7 @@ ESP-Skainet 有语音识别硬件设计参考吗？
   - 更多型号的模组的硬件设计资料可在 `技术文档 <https://www.espressif.com/zh-hans/support/documents/technical-documents?keys=mini>`_ 中获取。
 
 ----------------------
-  
+
 ESP8266 的 UART0 的输入电压能由 3.3 V 改为 1.8 V 吗？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -346,12 +346,12 @@ ESP32-D2WD 芯片外接 PSRAM 软件配置注意事项是什么？
 ------------------------------------------------------------------------
 
   - 需要在 menuconfig 中使能 ``CPU frequece 240 Mhz`` 和 ``RTC clock 80 Mhz``，具体配置如下：
-  
+
     - ``menuconfig`` > ``Serial flasher config`` > ``Flash SPI Speed (80 Mhz)``
     - ``Component config`` > ``CPU frequency (240 Mhz)``
     - ``Component config`` > ``ESP32 specific`` > ``[*]Support for external, SPI-connected RAM``
     - ``Component config`` > ``ESP32 specific`` > ``SPI RAM config`` > ``Set RAM clock speed (80 Mhz clock speed)``
-    
+
 ----------------
 
 ESP32 芯片当 VDD 供电从 0 V 慢慢升到 3.3 V 时，芯片为何无法正常启动？
@@ -386,6 +386,7 @@ ESP32 芯片设计模组，PCB 板是否需要加屏蔽盖？
 ---------------------------------------------------------------------
 
   - 是否需要加屏蔽盖取决于具体的应用场景和要求。
+
     - 在一些高要求的应用场景，例如无线通讯干扰环境较严峻、电磁兼容性（EMC）测试要求较高等情况下，加装屏蔽盖可以有效地减少外界干扰和 PCB 板上的互相干扰，提高系统的稳定性和可靠性。此时，屏蔽盖应该采用导电材料，并接地处理，以确保其有效性。
     - 另一方面，如果应用场景较为简单，如无线通讯干扰较小，EMC 要求不高等情况下，加装屏蔽盖的效果可能不是很明显，且可能增加系统成本和复杂度。
     - 如果板子还有其他信号干扰，比如 2G、3G、4G 或者 Wi-Fi、Bluetooth、Zigbee 等等建议加上屏蔽盖。
@@ -405,7 +406,7 @@ ESP32-U4WDH 芯片是否支持外接 PSRAM 芯片？
   - ESP32-U4WDH 芯片支持外接 PSRAM 芯片，但仅支持乐鑫发布的 `ESP-PSRAMXXH <https://www.espressif.com/en/support/documents/technical-documents?keys=PSRAM>`_ 芯片，不支持使用第三方 PSRAM 芯片。
   - 硬件设计上，除了 CS 管脚外，其他所有管脚都可以与 Flash 复用，更多指南请参考 `《ESP32 硬件设计指南》 <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf>`_。
   - 另外，PCB 设计时请注意 PSRAM 的 GND 到 ESP32-U4WDH 的 GND 要尽量短，否则可能会影响信号质量。
-  
+
 ------------
 
 ESP32 芯片是否支持使用 SPI0/SPI1 接口外接 SD NAND flash 来存储程序固件（而不是使用默认的 NOR flash）？

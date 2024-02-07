@@ -137,23 +137,23 @@ What models of display touch panels are supported for testing the `LVGL <https:/
 Does ESP32-S3 require an external PSRAM to use the RGB screen?
 ------------------------------------------------------------------------------------------------------
 
-- In general, yes. RGB screens require the ESP to provide at least one full-screen-sized frame buffer. However, the resolution of RGB screens is usually large, and ESP32-S3's SRAM might not meet this requirement.
-- It's not recommended to use a Quad PSRAM due to its relatively low bandwidth, as this could make the PCLK of the RGB LCD cannot be set to the required frequency.
-- It's recommended to use an Octal PSRAM and set the clock to 80 MHz or above.
+  - In general, yes. RGB screens require the ESP to provide at least one full-screen-sized frame buffer. However, the resolution of RGB screens is usually large, and ESP32-S3's SRAM might not meet this requirement.
+  - It's not recommended to use a Quad PSRAM due to its relatively low bandwidth, as this could make the PCLK of the RGB LCD cannot be set to the required frequency.
+  - It's recommended to use an Octal PSRAM and set the clock to 80 MHz or above.
 
 ---------------------
 
 How can I increase the upper limit of PCLK settings on ESP32-S3 while ensuring normal RGB screen display?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-- Typically, the upper limit of PCLK settings is constrained by the bandwidth of the PSRAM. Therefore, you need to enhance the PSRAM bandwidth:
+  - Typically, the upper limit of PCLK settings is constrained by the bandwidth of the PSRAM. Therefore, you need to enhance the PSRAM bandwidth:
 
-  - Use a higher frequency PSRAM clock or a wider PSRAM bus (Octal).
-  - Reduce the PSRAM bandwidth occupied by other peripherals like Wi-Fi, flash, etc.
-  - Decrease the Data Cache Line Size to 32 Bytes (set to 64 Bytes when using RGB Bounce Buffer mode).
+    - Use a higher frequency PSRAM clock or a wider PSRAM bus (Octal).
+    - Reduce the PSRAM bandwidth occupied by other peripherals like Wi-Fi, flash, etc.
+    - Decrease the Data Cache Line Size to 32 Bytes (set to 64 Bytes when using RGB Bounce Buffer mode).
 
-- Enable the Bounce Buffer mode for RGB display, and a larger buffer size provides better performance. For usage, please refer to `documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__. Note that in this mode, PSRAM data is first moved to SRAM by the CPU and then transferred to the RGB peripheral via GDMA. Therefore, you need to enable `CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y` simultaneously, or it may lead to screen drifting.
-- Based on limited testing, for Quad PSRAM at 80 MHz, the highest PCLK setting is around 11 MHz; for Octal PSRAM at 80 MHz, the highest PCLK setting is around 22 MHz; for Octal PSRAM at 120 MHz, the highest PCLK setting is around 30 MHz.
+  - Enable the Bounce Buffer mode for RGB display, and a larger buffer size provides better performance. For usage, please refer to `documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__. Note that in this mode, PSRAM data is first moved to SRAM by the CPU and then transferred to the RGB peripheral via GDMA. Therefore, you need to enable `CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y` simultaneously, or it may lead to screen drifting.
+  - Based on limited testing, for Quad PSRAM at 80 MHz, the highest PCLK setting is around 11 MHz; for Octal PSRAM at 80 MHz, the highest PCLK setting is around 22 MHz; for Octal PSRAM at 120 MHz, the highest PCLK setting is around 30 MHz.
 
 --------------------
 

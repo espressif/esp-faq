@@ -43,7 +43,7 @@ How to make and flash the image of a FatFs file system?
 
   .. code-block:: c
 
-    static void initialize_filesystem() { 
+    static void initialize_filesystem() {
       static wl_handle_t
       wl_handle = WL_INVALID_HANDLE;
       const esp_vfs_fat_mount_config_t
@@ -54,7 +54,7 @@ How to make and flash the image of a FatFs file system?
           ESP_LOGE(TAG, "Failed to mount FATFS (%s)", esp_err_to_name(err));
           return;
       }
-    } 
+    }
 
 
 .. Note::
@@ -86,4 +86,4 @@ I cannot open the files with long names when I use the FAT file system. How can 
 When I used the `ext_flash_fatfs <https://github.com/espressif/esp-idf/tree/master/examples/storage/ext_flash_fatfs>`_ example to test, I encountered an error ``vfs_fat_spiflash :f_mks failed(14),config:Failed to mount FATFS(ESP_FAIL)`` if I set the fatffs partition to less than 512 KB. How can I solve it?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-   - A FAT partition has 128 sectors at the minimum, so the minimum size of the file system should be 128*4+4*4=528 KB. The extra four sectors are used for wear leveling information. As a result, the size of the fatffs partition must not be less than 528 KB.
+  A FAT partition has 128 sectors at the minimum, so the minimum size of the file system should be 128*4+4*4=528 KB. The extra four sectors are used for wear leveling information. As a result, the size of the fatffs partition must not be less than 528 KB.

@@ -33,7 +33,7 @@ Does the ESP-IDF SDK USB interface support HID and MSC modes?
 
 -------------------------
 
-What is the stable current output for ESP32-S2's USB interface? 
+What is the stable current output for ESP32-S2's USB interface?
 -------------------------------------------------------------------------------------------------------------------
 
   The current output capability of the VBUS power line is determined by the power supply, not by the ESP32-S2 chip.  If the chip is self-powered, please refer to `Self-Powered Device <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/usb_device.html#self-powered-device>`__.
@@ -47,21 +47,21 @@ Does ESP32-S3's USB peripheral supports USB Host?
 
 -------------------------
 
-Does ESP32-C3 USB support USB serial port function and USB JTAG function? 
+Does ESP32-C3 USB support USB serial port function and USB JTAG function?
 ---------------------------------------------------------------------------------------------------------------------
 
   Yes, but you cannot define the descriptor by yourself.
 
 ---------------
 
-What are the USB features of ESP32-S2 and ESP32-S3? 
+What are the USB features of ESP32-S2 and ESP32-S3?
 --------------------------------------------------------------------------------------------------------------------------------
 
   ESP32-S3 and ESP32-S2 support USB 2.0 OTG (supporting full-speed mode), and both support Host and Device functions. On top of that, ESP32-S3 also supports USB-Serial-JTAG peripheral, which can be used to download and debug firmware.
- 
+
 ---------------
 
-Are there any references to the library and demo of ESP32-S2 USB Host? 
+Are there any references to the library and demo of ESP32-S2 USB Host?
 --------------------------------------------------------------------------------------------------------------------------
 
   Please refer to `USB Host <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/api-reference/peripherals/usb_host.html>`_ in ESP-IDF.
@@ -72,7 +72,7 @@ The USB protocol supported by ESP32-S2 is OTG 1.1, with the maximum speed of 12 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   In the full speed mode, USB 2.0 devices are compatible with USB 1.1 devices, so they can communicate with each other.
-  
+
 ---------------
 
 Does ESP32-S2 support USB camera?
@@ -91,14 +91,14 @@ Is there any reference for the example of using ESP32S2 as a USB flash drive (MS
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Please refer to `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/device/usb_msc_wireless_disk>`_. The average read and write speed currently tested is: read 540 KB/s, write 350 KB/s.
-  
+
 ---------------
 
 As ESP32-C3 already has USB function, can I download firmware directly via USB without using the cp2102 chip?
 -------------------------------------------------------------------------------------------------------------------------------
 
   Yes, ESP32-C3 can download firmware via USB, The USB serial port number should be displayed as COMx on Windows devices and ttyACMx on Linux devices.
-  
+
 ---------------
 
 Does ESP32-C3 support USB Host?
@@ -107,7 +107,7 @@ Does ESP32-C3 support USB Host?
   No, it only supports USB-Serial-JTAG function and can only be used as the USB device.
 
 ---------------
-  
+
 The ESP32-C3 chip can use USB to download firmware, but it is not supported under ESP-IDF v4.3. How to use USB to download firmware?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -156,7 +156,7 @@ Can the ESP32-S3's USB OTG interface be used in both USB Host and USB Device mod
 
   - The ESP32-S3's USB OTG interface can not be used as USB Host and USB Device at the same time. However, it is possible to switch between the USB Host mode and the USB Device mode by software.
   - If you need the standard negotiation function of USB OTG, please note that currently ESP32-S3 only supports this function on the hardware, and does not support it in software protocol.
-  
+
 ----------------
 
 When testing the `esp-idf/examples/peripherals/usb/device/tusb_serial_device <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/peripherals/usb/device/tusb_serial_device>`_ example to send data using TinyUSB, do I have to use the `tinyusb_cdcacm_write_flush() <https://github.com/espressif/esp-idf/blob/203c3e6e1cdb1861cecaed4834fb09b0e097b10d/examples/peripherals/usb/device/tusb_serial_device/main/tusb_serial_device_main.c#L34>`_ function?
@@ -239,8 +239,8 @@ Can the ESP32-S2/ESP32-S3 USB recognize the USB plugging and unplugging action w
 After enabling the RNDIS and CDC functions on the ESP32-S3 USB, I found that the PC can recognize the COM port. However, the automatic programming function of the COM port is invalid. Is it expected?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-   - Yes. The USB auto-programming function is implemented through the USB-Seial-JTAG peripheral, and the USB RNDIS function is implemented through the USB-OTG peripheral. However, only one of the two peripherals can work at a moment.
-   - If the USB-OTG peripheral is used in the application, the automatic programming function implemented by the USB-Seial-JTAG peripheral will not be available. But you can manually enter the download mode for USB burning.
+  - Yes. The USB auto-programming function is implemented through the USB-Seial-JTAG peripheral, and the USB RNDIS function is implemented through the USB-OTG peripheral. However, only one of the two peripherals can work at a moment.
+  - If the USB-OTG peripheral is used in the application, the automatic programming function implemented by the USB-Seial-JTAG peripheral will not be available. But you can manually enter the download mode for USB burning.
 
 -------------
 
@@ -252,7 +252,7 @@ Does the ESP32-S2/ESP32-S3 support the USB CDC NCM protocol?
 After I initialize the USB pins of ESP32-C3/ESP32-S3 to GPIO or other peripheral pins, why cannot I burn firmware through USB?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  -The USB pin of the ESP32-C3/ESP32-S3 can be initialized to GPIO or other peripheral pins. However, please note that after the initialization, the original USB download function will be disconnected, and the download mode cannot be entered automatically through USB. But you can manually pull down the Boot pin (GPIO9 in ESP32-C3 and GPIO0 in ESP32-S3) to make ESP32-C3/ESP32-S3 enter the download mode. Then you can download firmware through USB.
+  - The USB pin of the ESP32-C3/ESP32-S3 can be initialized to GPIO or other peripheral pins. However, please note that after the initialization, the original USB download function will be disconnected, and the download mode cannot be entered automatically through USB. But you can manually pull down the Boot pin (GPIO9 in ESP32-C3 and GPIO0 in ESP32-S3) to make ESP32-C3/ESP32-S3 enter the download mode. Then you can download firmware through USB.
 
 What should I pay attention to if I want to use the USB interface of ESP32-C3/ESP32-S3 as the unique download interface of firmware?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

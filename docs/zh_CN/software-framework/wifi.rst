@@ -38,7 +38,7 @@ ESP32 和 ESP8266 是否支持中文 SSID？
 [Scan] ESP32 扫描⼀次需要花多长时间？
 ----------------------------------------
 
-  扫描花费的总时间取决于:
+  扫描花费的总时间取决于：
 
   - 是被动扫描还是主动扫描，默认为主动扫描。
   - 每个信道停留的时间，默认主动扫描为 120 ms，被动扫描为 360 ms。
@@ -46,17 +46,17 @@ ESP32 和 ESP8266 是否支持中文 SSID？
   - 是快速扫描还是全信道扫描，默认为快速扫描。
   - Station 模式还是 Station-AP 模式，当前是否有连接。
 
-  - 默认情况下，1~11 信道为主动扫描，12〜13 信道为被动扫描。
+  默认情况下，1~11 信道为主动扫描，12〜13 信道为被动扫描。
 
-    - 在 Station 模式没有连接的情况下，全信道扫描总时间为：11*120 + 2*360 = 2040 ms；
-    - 在 Station 模式有连接，或者 Station-AP 模式下，全信道扫描总时间为：11*120 + 2*360 + 13*30 = 2430 ms。
+  - 在 Station 模式没有连接的情况下，全信道扫描总时间为：11*120 + 2*360 = 2040 ms；
+  - 在 Station 模式有连接，或者 Station-AP 模式下，全信道扫描总时间为：11*120 + 2*360 + 13*30 = 2430 ms。
 
 --------------
 
 [Scan] 乐鑫是否支持 boundary scans(边界扫描)？
 --------------------------------------------------
 
-    ESP32 不⽀持 boundary scan。
+  ESP32 不⽀持 boundary scan。
 
 --------------
 
@@ -163,9 +163,14 @@ Wi-Fi 信道是什么？可以自行选择信道吗？
 [LWIP] ESP8266 SoftAP 默认使用哪个网段？
 ---------------------------------------------
 
-  ESP8266 SoftAP + Station 模式下, 连接的 192.168.4.X ⽹段时，为什么会失败 ？
+  ESP8266 SoftAP 默认使用网段 192.168.4.*。
 
-  - ESP8266 SoftAP 默认使用网段 192.168.4.*，IP 地址是 192.168.4.1。ESP8266 如果要连接 192.168.4.X 的路由时，不能分辨是要连接⾃⼰本身的 SoftAp 还是外部路由，所以会造成错误。
+--------------
+
+ESP8266 SoftAP + Station 模式下，连接的 192.168.4.X ⽹段时，为什么会失败？
+----------------------------------------------------------------------------------------------
+
+  ESP8266 SoftAP 默认使用网段 192.168.4.*，IP 地址是 192.168.4.1。ESP8266 如果要连接 192.168.4.X 的路由时，不能分辨是要连接⾃⼰本身的 SoftAp 还是外部路由，所以会造成错误。
 
 --------------
 
@@ -192,24 +197,23 @@ ESP8266/ESP32/ESP32-S2/S3/C2/C3 是否支持 web/softAP 配网？
 
   要隐藏 ESP8266 或 ESP32 作为 SoftAP 模式下的 SSID，可以通过以下方法实现：
 
-    - 调用 `esp_wifi_set_config() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv419esp_wifi_set_config16wifi_interface_tP13wifi_config_t>`_ 来配置 SoftAP 模式下的 SSID，密码以及是否隐藏。例如，以下代码设置 SSID 为 "MySoftAP"，密码为 "MyPassword"，函数中使用 .ssid_hidden = 1 选项来隐藏 SSID：
+  调用 `esp_wifi_set_config() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv419esp_wifi_set_config16wifi_interface_tP13wifi_config_t>`_ 来配置 SoftAP 模式下的 SSID，密码以及是否隐藏。例如，以下代码设置 SSID 为 "MySoftAP"，密码为 "MyPassword"，函数中使用 .ssid_hidden = 1 选项来隐藏 SSID：
 
-    .. code-block:: c
+  .. code-block:: c
 
-      wifi_config_t config = {
-        .ap = {
-          .ssid = "MySoftAP",
-          .ssid_len = strlen("MySoftAP"),
-          .password = "MyPassword",
-          .max_connection = 4,
-          .authmode = WIFI_AUTH_WPA_WPA2_PSK
-          .ssid_hidden = 1
-        },
-      };
-      esp_wifi_set_config(WIFI_IF_AP, &config);
+    wifi_config_t config = {
+      .ap = {
+        .ssid = "MySoftAP",
+        .ssid_len = strlen("MySoftAP"),
+        .password = "MyPassword",
+        .max_connection = 4,
+        .authmode = WIFI_AUTH_WPA_WPA2_PSK
+        .ssid_hidden = 1
+      },
+    };
+    esp_wifi_set_config(WIFI_IF_AP, &config);
 
-    配置完后调用 `esp_wifi_start() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv>`_ 启动 Wi-Fi。
-
+  配置完后调用 `esp_wifi_start() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv>`_ 启动 Wi-Fi。
 
 --------------
 
@@ -831,7 +835,7 @@ Wi-Fi 模块如何设置国家码？
 
   :CHIP\: ESP8266 | ESP32 | ESP32 | ESP32-C3:
 
- 可以通过调用 `esp_wifi_set_country <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=esp_wifi_set_country#_CPPv420esp_wifi_set_countryPK14wifi_country_t>`_  接口设置国家码。
+  可以通过调用 `esp_wifi_set_country <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=esp_wifi_set_country#_CPPv420esp_wifi_set_countryPK14wifi_country_t>`_  接口设置国家码。
 
 ---------------
 
@@ -1278,8 +1282,8 @@ ESP32 Wi-Fi TX power 的取值范围是多少？
 ESP32 支持 WPA3 企业版吗？
 --------------------------------------------------------------------------------------------------------
 
-   - ESP32 支持 WPA/WPA2/WPA3/WPA2-Enterprise/WPA3-Enterprise/WAPI/WPS 和 DPP Wi-Fi 功能。有关信息，请参考`ESP32 Wi-Fi 功能列表 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#esp32-wi-fi-feature-list>`__。
-   - 在 esp-idf release/v5.0 版本 SDK 中，我们提供了 `wifi_enterprise 示例 <https://github.com/espressif/esp-idf/tree/v5.0/examples/wifi/wifi_enterprise>`__。 在 ESP-IDF 中，支持设置 WPA3-Enterprise 模式进行测试。可通过如下步骤进行配置 ``idf.py menuconfig`` > ``Example Configuration`` > ``Enterprise configuration to be used`` > ``WPA3_ENT``。
+  - ESP32 支持 WPA/WPA2/WPA3/WPA2-Enterprise/WPA3-Enterprise/WAPI/WPS 和 DPP Wi-Fi 功能。有关信息，请参考`ESP32 Wi-Fi 功能列表 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#esp32-wi-fi-feature-list>`__。
+  - 在 esp-idf release/v5.0 版本 SDK 中，我们提供了 `wifi_enterprise 示例 <https://github.com/espressif/esp-idf/tree/v5.0/examples/wifi/wifi_enterprise>`__。 在 ESP-IDF 中，支持设置 WPA3-Enterprise 模式进行测试。可通过如下步骤进行配置 ``idf.py menuconfig`` > ``Example Configuration`` > ``Enterprise configuration to be used`` > ``WPA3_ENT``。
 
 ---------------
 

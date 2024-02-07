@@ -83,7 +83,7 @@ ESP32 Boot 启动模式不正常如何排查？
     | 电平   |    0   |   1   |   0   |   0   |    1   |   1   |
     +--------+--------+-------+-------+-------+--------+-------+
 
-  您也可以直接参考 `Boot 模式选择文档 <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html>`__。  
+  您也可以直接参考 `Boot 模式选择文档 <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html>`__。
 
 --------------
 
@@ -263,7 +263,7 @@ ESP32 导入头文件 protocol_examples_common.h 后，为什么编译时提示�
 
 --------------
 
-使用 flash_download_tool 给 ESP8266 模组烧录固件时，出现如下错误如何解决？ 
+使用 flash_download_tool 给 ESP8266 模组烧录固件时，出现如下错误如何解决？
 ---------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: text
@@ -271,11 +271,11 @@ ESP32 导入头文件 protocol_examples_common.h 后，为什么编译时提示�
     ESP8266 Chip efuse check error esp_check_mac_and_efuse
 
   - 原因：
-    
+
     - 出现 ``efuse check error`` 说明芯片内部的 eFuse 参数区域遭到意外修改。eFuse 中通常存储着一些重要信息，比如芯片的配置以及 MAC 地址。如果 eFuse 损坏，将导致芯片不可用。
     - eFuse 损坏通常由过压或者静电导致。
 
   - 建议：
-    
+
     - 检测电源部分上下电过程中的波动情况。
     - ESP32-C3/ESP32-C2 芯片的 eFuse 功能有所加强，后续可以考虑替换相关产品。

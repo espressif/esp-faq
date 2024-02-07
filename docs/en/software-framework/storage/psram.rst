@@ -20,7 +20,7 @@ When using ESP32 modules, how to check the size of their PSRAM?
 
   For ESP32 modules, the `esp_spiram_get_size() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/migration-guides/release-5.x/5.0/system.html?highlight=esp_spiram_get_size#psram>`_ function in ESP-IDF can be used to obtain the size of a module's PSRAM. This function returns the total size of the PSRAM in bytes and can be used for memory allocation and management.
 
-The following is an example for obtaining the size of PSRAM:
+  The following is an example for obtaining the size of PSRAM:
 
   .. code-block:: c
 

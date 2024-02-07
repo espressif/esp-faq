@@ -11,7 +11,7 @@ This instruction includes the following two parts：
 Question Search Techniques
 -----------------------------
 
-Currently, there are mainly two searching techniques: 
+Currently, there are mainly two searching techniques:
 
 - Search keywords
 - Exclude a specific keyword

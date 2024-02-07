@@ -71,8 +71,8 @@ When the flash SPI mode is set to QIO mode on the ESP32-S3-WROOM-2-32R8V module,
 How can I confirm whether ESP-IDF supports a certain flash?
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
-   - You can refer to `Optional features for flash <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/spi_flash_optional_feature.html#bit-address-flash-chips>`_ to learn more about the flash information supported by ESP-IDF. It should be noted that this document only indicates that the ESP-IDF code has supported these flash, but this flash list is not fully certified by Espressif.
-   - For further support on flash selection, please contact `Espressif <https://www.espressif.com/en/contact-us/sales-questions>`_.
+  - You can refer to `Optional features for flash <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/spi_flash_optional_feature.html#bit-address-flash-chips>`_ to learn more about the flash information supported by ESP-IDF. It should be noted that this document only indicates that the ESP-IDF code has supported these flash, but this flash list is not fully certified by Espressif.
+  - For further support on flash selection, please contact `Espressif <https://www.espressif.com/en/contact-us/sales-questions>`_.
    
 
 -------------

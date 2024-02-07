@@ -41,10 +41,10 @@ Can NVS sectors be corrupted by accidental power loss during writing?
 Will the configured Wi-Fi SSID and PASSWORD disappear after the ESP series development board is powered on again and need to be reconfigured?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-   - It will be stored in NVS by default and will not disappear due to power failure. You can also set it through ``esp_wifi_set_storage()``, which can be divided into two situations:
+  - It will be stored in NVS by default and will not disappear due to power failure. You can also set it through ``esp_wifi_set_storage()``, which can be divided into two situations:
 
-     - If you want to save the Wi-Fi SSID and PSAAWORD when powered off, you can store the Wi-Fi information in flash by calling ``esp_wifi_set_storage(WIFI_STORAGE_FLASH)``.
-     - If you want to achieve the operation of not saving the Wi-Fi SSID and PASSWORD when powered off, you can call ``esp_wifi_set_storage(WIFI_STORAGE_RAM)`` to store the Wi-Fi information in RAM.
+    - If you want to save the Wi-Fi SSID and PSAAWORD when powered off, you can store the Wi-Fi information in flash by calling ``esp_wifi_set_storage(WIFI_STORAGE_FLASH)``.
+    - If you want to achieve the operation of not saving the Wi-Fi SSID and PASSWORD when powered off, you can call ``esp_wifi_set_storage(WIFI_STORAGE_RAM)`` to store the Wi-Fi information in RAM.
 
 ---------------
 

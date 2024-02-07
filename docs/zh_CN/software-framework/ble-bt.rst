@@ -47,7 +47,7 @@ ESP32 能否使用蓝牙进行 OTA？
 ----------------------------------
 
   可以使用蓝牙进行 OTA。如果是用 Bluetooth®，可以基于 `bt_spp_acceptor <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_acceptor>`_ 和 `bt_spp_initiator <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_initiator>`_ 修改。
-  
+
   如果是用 Bluetooth LE，可以基于 `ble_spp_server <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_spp_server>`_ 和 `ble_spp_client <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_spp_client>`_ 修改。
 
 --------------
@@ -81,7 +81,7 @@ ESP32 的蓝⽛和 Wi-Fi 如何共存？
 
   在 ``menuconfig`` 中，有个特殊选项 ``Software controls WiFi/Bluetooth coexistence``，⽤于通过软件来控制 ESP32 的蓝⽛和 Wi-Fi 共存，可以平衡 Wi-Fi、蓝⽛控制 RF 的共存需求。
 
-  - 如果使能 ``Software controls WiFi/Bluetooth coexistence`` 选项，Bluetooth® LE scan 间隔不应超过 ``0x100 slots`` （约 160 ms）。若只是 Bluetooth LE 与 Wi-Fi 共存，则开启这个选项和不开启均可正常使⽤。但不开启的时候需要注意 Bluetooth LE scan window 应大于 150 ms，并且 Bluetooth LE scan interval 尽量⼩于 500 ms。 
+  - 如果使能 ``Software controls WiFi/Bluetooth coexistence`` 选项，Bluetooth® LE scan 间隔不应超过 ``0x100 slots`` （约 160 ms）。若只是 Bluetooth LE 与 Wi-Fi 共存，则开启这个选项和不开启均可正常使⽤。但不开启的时候需要注意 Bluetooth LE scan window 应大于 150 ms，并且 Bluetooth LE scan interval 尽量⼩于 500 ms。
   - 若经典蓝⽛与 Wi-Fi 共存，则建议开启这个选项。
 
 --------------
@@ -220,7 +220,7 @@ ESP32 Wi-Fi Smartconfig 配网和 Bluetooth® LE Mesh 可以同时使用吗？
 -------------------------------------------------------------------
 
   不推荐同时打开。
-  
+
   - Smartconfig 需要一直收配网数据，所以会一直占用天线，如果和 Bluetooth LE Mesh 共同使用，会导致失败率非常高。
   - Bluetooth LE Mesh 可以和 BluFi 同时使用，所以推荐配网方式选择 BluFi 配网。
 
@@ -347,7 +347,7 @@ ESP32 下载 BluFi 例程进行配网，若使用 EspBluFi APP 在配网过程�
 
   - BluFi 例程规定在 Wi-Fi 连接时不可以发送 Wi-Fi 扫描命令。
   - 但可在 blufi_example_main.c 文件下的  case ESP_BLUFI_EVENT_GET_WIFI_LIST:{}; 函数的首行增加 ESP_ERROR_CHECK(esp_wifi_disconnect()); 函数来解决此问题。
- 
+
 ----------------
 
 使用 ESP32，如何指定 BLE 连接/发送在 core 0 上运行？
@@ -362,7 +362,7 @@ ESP32 设置中文蓝牙设备名称会异常显示乱码，原因是什么？
 -------------------------------------------------------------------------------------------------------
 
   - 这是因为此时编辑器的中文编码格式不是 UTF-8，需要把编辑器的编码格式改成 UTF-8。
-  
+
 ----------------
 
 使用 ESP32 在蓝牙通道上传分包时，一包最大传输数据长度为 253（MTU 设置为 263），导致在传输大量数据包进行多包读取时传输较慢。请问是否有 BluFi 扩展协议，可支持一包传输较大长度的数据，或者有其他解决方案可提高传输速率吗？
@@ -399,7 +399,7 @@ BLE 中如何修改广播的时间间隔？
   - 通过修改广播结构体中的 ``adv_int_min`` 和 ``adv_int_max`` 两个参数来设置。这两个分别对应了广播时间间隔的最小值和最大值。
   - 广播时间间隔参数的取值范围为 0x0020 to 0x4000，默认值为 0x0800。对应的广播时间为参数值 * 0.625 ms，即广播时间间隔为 20 ms 到 10.24 s。
   - 当 ``adv_int_min`` 和 ``adv_int_max`` 不同时，广播的时间间隔在两者区间内产生，当最小值和最大值设置成同一个值时，时间间隔固定为该值。
-  
+
 ----------------
 
 ESP32 经典蓝牙配对时如何使手机端输入 PIN 码？
@@ -427,8 +427,8 @@ ESP32 蓝牙占用多少内存？
     - BLE GATT Server（GATT Server 演示）：23 KB (.bss+.data) + 23 KB (heap) = 46 KB
     - BLE GATT Client & GATT Server: 24 KB (.bss+.data) + 24 KB (heap) = 48 KB
     - SMP: 5 KB
-    - 经典蓝牙（经典蓝牙 A2DP_SINK 演示，包含 SMP/SDP/A2DP/AVRCP）：48 KB (.bss+.data) + 24 KB (heap) = 72 KB（示例运行时额外增加 13 KB） 
-  
+    - 经典蓝牙（经典蓝牙 A2DP_SINK 演示，包含 SMP/SDP/A2DP/AVRCP）：48 KB (.bss+.data) + 24 KB (heap) = 72 KB（示例运行时额外增加 13 KB）
+
   .. note:: 以上堆 (Heap) 均包含任务栈 (Task Stack)，因为任务栈是从堆里分配出来的，算为堆。
 
   - 优化 PSRAM 版本：
@@ -440,14 +440,14 @@ ESP32 蓝牙占用多少内存？
 ESP32 使用 gattc_gatts_coex.c 例程测试 BLE 多连接，在 ``menuconfi`` 中将 ``BLE Max connection`` 配置选项设置为 "5" ，但实际只能连 4 个设备，连接第 5 个设备的时候会报错，是什么原因？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 请在 ``menuconfig`` 中将 ``BT/BLE MAX ACL CONNECTIONS`` 配置选项设置为 “5”。 
-  
+  - 请在 ``menuconfig`` 中将 ``BT/BLE MAX ACL CONNECTIONS`` 配置选项设置为 “5”。
+
 ----------------
 
 ESP32-C3 BLE 同时支持主从模式吗？主、从模式连接数分别是多少？
 --------------------------------------------------------------------------------------
 
-   :IDF\: release/v4.3, master:
+  :IDF\: release/v4.3, master:
 
   - ESP32-C3 同时支持主从模式，共用 8 个连接。例如，ESP32-C3 连接了 4 个 slave 设备，那么可被 8 - 4 = 4 个 master 设备连接。
   - 另外，ESP32-C3 用作 slave 时，可被 8 个 master 设备连接；用作 master 时，可连接 8 个 slave 设备。
@@ -506,27 +506,27 @@ BLE 如何抓包？
 
   - 要修改的结构体如下：
 
-  .. code-block:: text
+    .. code-block:: text
 
-    static uint8_t raw_adv_data[] = {
+      static uint8_t raw_adv_data[] = {
 
-            /* flags*/
+              /* flags*/
 
-            0x02, 0x01, 0x06,
+              0x02, 0x01, 0x06,
 
-            /* tx power*/
+              Tx power*/
 
-            0x02, 0x0a, 0xeb,
+              0x02, 0x0a, 0xeb,
 
-            /* service uuid*/
+              /* service uuid*/
 
-            0x03, 0x03, 0xFF, 0x00,
+              0x03, 0x03, 0xFF, 0x00,
 
-            /* device name*/
+              /* device name*/
 
-            0x0f, 0x09, 'E', 'S', 'P', '_', 'G', 'A', 'T', 'T', 'S', '_', 'D','E', 'M', 'O'
+              0x0f, 0x09,'E','S','P','_','G','A','T','T','S','_','D','E ','M','O'
 
-    };
+      };
 
   - 上述 ``/* device name*/`` 为修改项。其中 0x0f 为此字段类型加具体内容的总长度，0x09 表示此类型代指设备名。后续的 'E', 'S', 'P', '_', 'G', 'A', 'T', 'T', 'S', '_', 'D','E', 'M', 'O' 为广播设备名的 ASCII 码表达。
 
@@ -543,7 +543,7 @@ BLE 广播包如何设置为不可连接包?
 ---------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32:
-  
+
   - 可参考 `gatt_server demo <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server>`_， 将广播包类型 adv_type 变量修改为 ADV_TYPE_NONCONN_IND。
 
     .. code:: text
@@ -641,7 +641,7 @@ ESP32 蓝牙设备名称长度是否有限制？
         .own_addr_type = BLE_ADDR_TYPE_RANDOM,
         .tx_power = 18,
       };
-  
+
   - BLE5.0 例程参见 ESP-IDF 里的 `ble_50 示例 <https://github.com/espressif/esp-idf/tree/v4.4.4/examples/bluetooth/bluedroid/ble_50>`__。
 
 ------------------
@@ -671,7 +671,7 @@ ESP32 蓝牙设备名称长度是否有限制？
 
     .. code:: text
 
-      esp_ble_passkey_reply(param->ble_security.ble_req.bd_addr, true, 123457); 
+      esp_ble_passkey_reply(param->ble_security.ble_req.bd_addr, true, 123457);
 
 ------------------
 

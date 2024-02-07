@@ -282,9 +282,9 @@ What does the term ``NC`` mean in Espressif schematics?
   NC is the acronym of “No Component”. If you see a pull-up resistor is marked NC as shown in the figure below, it indicates that the component is not installed.
 
   .. figure:: ../../_static/no-component.png
-    :scale: 100%
-    :alt: no-component
-    :figclass: align-center
+      :scale: 100%
+      :alt: no-component
+      :figclass: align-center
 
 --------------
 
@@ -385,7 +385,8 @@ When connecting an external flash to ESP32-WROOM-32D module, is it possible if I
 Do I need to add a shielding case to the PCB of ESP32 modules?
 --------------------------------------------------------------------------------------------------------
 
-    - Whether a shield needs to be added depends on the specific application scenarios and requirements.
+  - Whether a shield needs to be added depends on the specific application scenarios and requirements.
+
     - In some high-demand application scenarios, such as environments with severe wireless communication interference or high electromagnetic compatibility (EMC) testing requirements, adding a shield can effectively reduce external interference and mutual interference on the PCB board, improving system stability and reliability. At this time, the shield should be made of conductive material and grounded to ensure its effectiveness.
     - On the other hand, if the application scenario is relatively simple, such as low wireless communication interference and low EMC requirements, the effect of adding a shield may not be very obvious and may increase system cost and complexity.
     - If the board has other signal interference, such as 2G, 3G, 4G, Wi-Fi, Bluetooth, Zigbee, etc., it is recommended to add a shielding case.
@@ -437,7 +438,7 @@ Could you please provide the 3D model and Footprint files of the ESP32-S3-WROOM-
 Does ESP32/ESP32-S2/ESP32-C3/ESP32-S3 support powering the RTC power domain only to keep the chip working with low power consumption?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-   No, it is not supported. Take ESP32 as an example, detailed information will be updated to the RTC chapter in `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
+  No, it is not supported. Take ESP32 as an example, detailed information will be updated to the RTC chapter in `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
 
 ----------------
 

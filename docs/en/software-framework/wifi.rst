@@ -106,7 +106,7 @@ What is the definition for Wi-Fi channel? Can I select any channel of my choice?
 
   .. code-block:: c
 
-   esp_netif_t *sta_netif = esp_netif_create_default_wifi_sta();
+    esp_netif_t *sta_netif = esp_netif_create_default_wifi_sta();
     if (sta_netif)
     {
         esp_netif_ip_info_t info_t = {0};
@@ -163,9 +163,14 @@ What is the definition for Wi-Fi channel? Can I select any channel of my choice?
 [LWIP] What is the default IP address of ESP8266 SoftAP?
 ---------------------------------------------------------------------------
 
-  Why do I have problem connecting to router with IP 192.168.4.X in SoftAP + Station mode?
+  The default network segment used by ESP8266 SoftAP is 192.168.4.\*.
 
-  - The default network segment used by ESP8266 SoftAP is 192.168.4.\*, and its IP address is 192.168.4.1. When connecting ESP8266 to the router of 192.168.4.X, it cannot distinguish whether this address indicates its own SoftAP or the external router.
+--------------
+
+Why do I have problem connecting to router with IP 192.168.4.X in SoftAP + Station mode?
+----------------------------------------------------------------------------------------------
+
+  The default network segment used by ESP8266 SoftAP is 192.168.4.\*, and its IP address is 192.168.4.1. When connecting ESP8266 to the router of 192.168.4.X, it cannot distinguish whether this address indicates its own SoftAP or the external router.
 
 --------------
 
@@ -192,24 +197,23 @@ Do ESP8266/ESP32/ESP32-S2/S3/C2/C3 support web/SoftAP provisioning?
 
   To hide ESP8266 or ESP32 as SSID in SoftAP mode, you can use the following methods:
 
-  - Use the `esp_wifi_set_config() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv419esp_wifi_set_config16wifi_interface_tP13wifi_config_t>`_ function to configure the SSID and password in SoftAP mode and whether to hiding them. For example, the following code sets the SSID to "MySoftAP", the password to "MyPassword", and set .ssid_hidden = 1 to hide the SSID:
+  Use the `esp_wifi_set_config() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv419esp_wifi_set_config16wifi_interface_tP13wifi_config_t>`_ function to configure the SSID and password in SoftAP mode and whether to hiding them. For example, the following code sets the SSID to "MySoftAP", the password to "MyPassword", and set .ssid_hidden = 1 to hide the SSID:
 
-    .. code-block:: c
+  .. code-block:: c
 
-      wifi_config_t config = {
-        .ap = {
-          .ssid = "MySoftAP",
-          .ssid_len = strlen("MySoftAP"),
-          .password = "MyPassword",
-          .max_connection = 4,
-          .authmode = WIFI_AUTH_WPA_WPA2_PSK
-          .ssid_hidden = 1
-        },
-      };
-      esp_wifi_set_config(WIFI_IF_AP, &config);
+    wifi_config_t config = {
+      .ap = {
+        .ssid = "MySoftAP",
+        .ssid_len = strlen("MySoftAP"),
+        .password = "MyPassword",
+        .max_connection = 4,
+        .authmode = WIFI_AUTH_WPA_WPA2_PSK
+        .ssid_hidden = 1
+      },
+    };
+    esp_wifi_set_config(WIFI_IF_AP, &config);
 
   Then use `esp_wifi_start() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv>`_ function to starts Wi-Fi.
-
 
 --------------
 
@@ -944,7 +948,7 @@ Is there a standard for the number of Wi-Fi signal frames?
 
   :CHIP\: ESP8266 | ESP32 | ESP32 | ESP32-C3:
 
- There is no such standard for now. You can do the calculation by yourself based on the received RSSI. For example, if the received RSSI range is [0,-96], and the required signal strength is 5, then [0~-20] is the full signal, and so on.
+  There is no such standard for now. You can do the calculation by yourself based on the received RSSI. For example, if the received RSSI range is [0,-96], and the required signal strength is 5, then [0~-20] is the full signal, and so on.
 
 --------------
 
@@ -971,15 +975,15 @@ When using ESP32's Release/v3.3 of SDK to download the Station example, the devi
 
   - In the example, it is by default to connect to an encrypted AP as:
 
-      .. code-block:: c
+    .. code-block:: c
 
-        .threshold.authmode = WIFI_AUTH_WPA2_PSK,
+      .threshold.authmode = WIFI_AUTH_WPA2_PSK,
 
   - If you need connect to an unencrypted AP, please set the following parameter to 0:
 
-        .. code-block:: c
+    .. code-block:: c
 
-          .threshold.authmode = 0,
+      .threshold.authmode = 0,
 
   - For AP mode selection instructions, please refer to `esp_wifi_types <https://github.com/espressif/esp-idf/blob/release/v3.3/components/esp32/include/esp_wifi_types.h>`_.
 
@@ -1252,8 +1256,8 @@ When ESP32/ESP32-S2/ESP32-S3 series chips work in SoftAP mode, they are suscepti
 What is the value range of ESP32 Wi-Fi TX power?
 ------------------------------------------------------------------------------------------------------------
 
-   - It ranges from 2 to 20 dBm. In ESP-IDF, you can use ``esp_wifi_set_max_tx_power()`` to set the maximum of TX power, and use ``esp_wifi_get_max_tx_power()`` to the get the maximal TX power supported by the system.
-   - It should be noted that setting TX power too high may affect system stability and battery life, and may also violate wireless regulations in some countries and regions, so it should be used with caution. For more details, please refer to `esp_wifi_set_max_tx_power() API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`__.
+  - It ranges from 2 to 20 dBm. In ESP-IDF, you can use ``esp_wifi_set_max_tx_power()`` to set the maximum of TX power, and use ``esp_wifi_get_max_tx_power()`` to the get the maximal TX power supported by the system.
+  - It should be noted that setting TX power too high may affect system stability and battery life, and may also violate wireless regulations in some countries and regions, so it should be used with caution. For more details, please refer to `esp_wifi_set_max_tx_power() API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_max_tx_power6int8_t>`__.
 
 --------------
 
@@ -1320,7 +1324,7 @@ Does ESP32 support LDPC?
 Does the ESP module support WAPI AS?
 ---------------------------------------------------------------------------------------------------------------
 
-   Not supported. WAPI has two authentication methods, i.e., certificate authentication and pre-shared key authentication. Currently, the ESP module only supports pre-shared key authentication (WAPI-PSK), while WAPI AS is used for certificate authentication.
+  Not supported. WAPI has two authentication methods, i.e., certificate authentication and pre-shared key authentication. Currently, the ESP module only supports pre-shared key authentication (WAPI-PSK), while WAPI AS is used for certificate authentication.
 
 -------------
 

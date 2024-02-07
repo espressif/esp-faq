@@ -123,9 +123,9 @@ ESP-NOW 应用是否支持通过每个 Wi-Fi 信道发送数据包？
 将 ESP-NOW 技术用于商业用途是否需要任何特殊程序？可以提供关于 ESP-NOW 技术的详细技术文档吗？为了评估无线通信质量，我想了解以下内容，例如 CSMA/CA、调制方式、比特率等。
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-- ESP-NOW 申请不需要任何特殊程序。
-- 技术文档请阅读 `ESP-NOW 用户指南 <https://www.espressif.com/sites/default/files/documentation/esp-now_user_guide_cn.pdf>`__，您可以使用 `ESP-NOW SDK <https://github.com/espressif/esp-now>`__ 示例进行测试。
-- 默认的 ESP-NOW 比特率是 1 Mbps。
+  - ESP-NOW 申请不需要任何特殊程序。
+  - 技术文档请阅读 `ESP-NOW 用户指南 <https://www.espressif.com/sites/default/files/documentation/esp-now_user_guide_cn.pdf>`__，您可以使用 `ESP-NOW SDK <https://github.com/espressif/esp-now>`__ 示例进行测试。
+  - 默认的 ESP-NOW 比特率是 1 Mbps。
 
 -----------------
 
