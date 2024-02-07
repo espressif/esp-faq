@@ -53,8 +53,8 @@ NVS 扇区是否会因写入时意外断电而损坏？
 
   - 根据需求，需要使用非易失性存储，存储数据的区域只有 eFuse 或 flash。考虑到需要修改，只能使用 flash。推荐使用 NVS 或 MFG 机制。请参考：
 
-    - `MFG 量产程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/storage/mass_mfg.html#id1>`_ 
-    - `NVS 分区生成程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/storage/nvs_partition_gen.html#nvs>`_ 
+    - `MFG 量产程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/storage/mass_mfg.html#id1>`_
+    - `NVS 分区生成程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/storage/nvs_partition_gen.html#nvs>`_
 
 --------------
 

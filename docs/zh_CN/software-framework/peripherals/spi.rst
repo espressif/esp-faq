@@ -64,7 +64,7 @@ ESP 系列芯片的 SPI 同时访问三个 SPI 从机设备，是否需要做信
 
     spi_flash:Detected size(8192K) smaller than the size in the binary image header(16384K).Probe failed.
 
-  - 原因是配置的 flash 大小比实际使用的 flash 大小要大，为避免误用更大的地址空间而对实际使用的 flash 大小进行检测。
+  原因是配置的 flash 大小比实际使用的 flash 大小要大，为避免误用更大的地址空间而对实际使用的 flash 大小进行检测。
 
 ----------------
 
@@ -94,7 +94,7 @@ SPI 从机支持最大速度是多少？
 
   ESP32-S3R2 芯片集成了 4 线的 2 MB PSRAM，请在 menuconfig 中将 PSRAM 模式设置为 **Quad** 模式。如下：
 
-    ``menuconfig → Component config → ESP32S3 Specific → Support for external, SPI connected RAM → SPI RAM config → Mode (QUAD/OCT) of SPI RAM chip in use (Quad Mode PSRAM)``
+  ``menuconfig → Component config → ESP32S3 Specific → Support for external, SPI connected RAM → SPI RAM config → Mode (QUAD/OCT) of SPI RAM chip in use (Quad Mode PSRAM)``
 
 -------------------------
 

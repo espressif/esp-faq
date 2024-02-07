@@ -133,8 +133,8 @@ What is the communication protocol for flashing ESP chips?
 How to program ESP32-C3's firmware offline?
 -----------------------------------------------------------------------------------------------------------
 
-   - Currently, no tool supports the offline programming of ESP32-C3's firmware. However, the official `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_ can directly download binary firmware and support mass production download mode for up to eight ESP32-C3 devices at the same time.
-   - In addition, we also provide `Test Fixture <https://www.espressif.com/en/products/equipment/production-testing-equipment/overview>`_ for mass production, which supports up to four ESP32-C3 modules to download firmware simultaneously.
+  - Currently, no tool supports the offline programming of ESP32-C3's firmware. However, the official `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_ can directly download binary firmware and support mass production download mode for up to eight ESP32-C3 devices at the same time.
+  - In addition, we also provide `Test Fixture <https://www.espressif.com/en/products/equipment/production-testing-equipment/overview>`_ for mass production, which supports up to four ESP32-C3 modules to download firmware simultaneously.
 
 ----------------------
 
@@ -185,7 +185,7 @@ Why does the programming fail for the jig with a 4-port hub in factory mode?
 
   :CHIP\: ESP32 | ESP8266  :
 
- - It is because Espressif products complete the calibration operation by transmitting some packets when starting up. This operation requires a 3.3 V voltage and a guaranteed peak current of 500 mA. Therefore, when it comes to more than one port, there will be situations where the computer cannot program or the programming is interrupted due to the insufficient power supply of the computer's USB when programming via connecting to a computer's USB. It is recommended to use the hub for programming and supply power to the hub in the meantime.
+  - It is because Espressif products complete the calibration operation by transmitting some packets when starting up. This operation requires a 3.3 V voltage and a guaranteed peak current of 500 mA. Therefore, when it comes to more than one port, there will be situations where the computer cannot program or the programming is interrupted due to the insufficient power supply of the computer's USB when programming via connecting to a computer's USB. It is recommended to use the hub for programming and supply power to the hub in the meantime.
 
 -------------------
 

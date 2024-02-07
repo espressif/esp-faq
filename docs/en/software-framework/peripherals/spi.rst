@@ -88,13 +88,13 @@ How many bytes of data can be transferred at once using the ESP series chip as a
 When using the ESP32-S3-WROOM-1 (ESP32-S3R2) module to enable its PSRAM configuration based on the "hello-world" example in ESP-IDF v4.4, the following error is printed. What is the reason?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    .. code-block:: text
+  .. code-block:: text
 
       E (232) spiram: Virtual address not enough for PSRAM!
 
-  - ESP32-S3R2 chip integrates a 4-wire 2 MB PSRAM, please set PSRAM Mode to **Quad** mode in menuconfig before your action as follows:
+  ESP32-S3R2 chip integrates a 4-wire 2 MB PSRAM, please set PSRAM Mode to **Quad** mode in menuconfig before your action as follows:
 
-    ``menuconfig`` > ``Component config`` > ``ESP32S3 Specific`` > ``Support for external, SPI connected RAM`` > ``SPI RAM config`` > ``Mode (QUAD/OCT) of SPI RAM chip in use (Ouad Mode PSRAM)``
+  ``menuconfig`` > ``Component config`` > ``ESP32S3 Specific`` > ``Support for external, SPI connected RAM`` > ``SPI RAM config`` > ``Mode (QUAD/OCT) of SPI RAM chip in use (Ouad Mode PSRAM)``
 
 -------------------------
 
@@ -102,7 +102,7 @@ When using the ESP32-S3-WROOM-2 (ESP32-S3R8V) module to enable the PSRAM configu
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: text
-    
+
       E (453) psrm: psrm ID read error: 0x00ffff
       E (454) cpu start: Failed to init external RAM!
 

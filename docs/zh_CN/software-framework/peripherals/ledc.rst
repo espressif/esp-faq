@@ -43,9 +43,9 @@ ESP32 LEDC 递减渐变，Duty 值溢出错误，如何解决？
 
   使⽤ LEDC 的过程中，应避免以下三个条件同时成⽴：
 
-    - LEDC 启动递减渐变功能；
-    - LEDC 渐变过程中 Scale 寄存器设置为 1；
-    - LEDC 递减渐变开始时刻或者过程中的某⼀时刻，Duty 值为 2 :sup:`LEDC_HSTIMERx_DUTY_RES` 或 2 :sup:`LEDC_LSTIMERx_DUTY_RES`。
+  - LEDC 启动递减渐变功能；
+  - LEDC 渐变过程中 Scale 寄存器设置为 1；
+  - LEDC 递减渐变开始时刻或者过程中的某⼀时刻，Duty 值为 2 :sup:`LEDC_HSTIMERx_DUTY_RES` 或 2 :sup:`LEDC_LSTIMERx_DUTY_RES`。
 
 ---------------------
 
@@ -59,7 +59,7 @@ ESP8266 通过直接写硬件定时器 FRC1 的寄存器产⽣ PWM，发现初�
 使用 v3.3.3 版本 ESP-IDF 在 ESP32 设备上测试 ledc 例程，当启用了 auto light sleep，LED PWM 无输出；但不启用 auto light sleep，LED PWM 有输出。ESP-IDF 编程指南里关于 `LED PWM <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/ledc.html?highlight=pwm#id1>`_  的说明表示 LED PWM 在 Sleep 模式下是能工作的，请问是什么原因？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-- esp-idf v3.3.3 版本的 SDK 不支持 LED PWM 在 Sleep 模式下工作。请使用新版的 esp-idf（v4.0 以上版本）下的 LEDC 例程来测试，例如 esp-idf release/v4.2 版本的 SDK，且需要将 LED PWM 时钟源改为内部 RTC8M 时钟源。如下：
+  esp-idf v3.3.3 版本的 SDK 不支持 LED PWM 在 Sleep 模式下工作。请使用新版的 esp-idf（v4.0 以上版本）下的 LEDC 例程来测试，例如 esp-idf release/v4.2 版本的 SDK，且需要将 LED PWM 时钟源改为内部 RTC8M 时钟源。如下：
 
   .. code-block:: c
 

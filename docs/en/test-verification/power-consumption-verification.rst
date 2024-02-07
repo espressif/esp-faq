@@ -46,8 +46,8 @@ Can ESP32 in Deep-sleep mode be woken up by any RTC_GPIO?
 What is the power consumption of ESP8266 when the CHIP_PU pin is at the low level?
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
-   - CHIP_PU pin is the module EN pin. When the pin is set to the low level, the power consumption of the chip is about 0.5 μA.
-   - In Table Power Consumption by Power Modes of `ESP8266 Datasheet <https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf>`_ > *Functional Description* > *Power Management*> *Table 3-4. Power Consumption by Power Modes*, shut down power mode means CHIP_PU is pulled down and the chip is disabled.
+  - CHIP_PU pin is the module EN pin. When the pin is set to the low level, the power consumption of the chip is about 0.5 μA.
+  - In Table Power Consumption by Power Modes of `ESP8266 Datasheet <https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf>`_ > *Functional Description* > *Power Management*> *Table 3-4. Power Consumption by Power Modes*, shut down power mode means CHIP_PU is pulled down and the chip is disabled.
 
 --------------
 

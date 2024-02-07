@@ -3,9 +3,9 @@
 
 :link_to_translation:`en:[English]`
 
-此指南目前有以下两个部分： 
+此指南目前有以下两个部分：
 
-- 搜索问题技巧 
+- 搜索问题技巧
 - 问题分类框架
 
 搜索问题技巧
@@ -13,7 +13,7 @@
 
 目前可以归纳出以下 2 种搜索问题的技巧：
 
-- 搜索关键词 
+- 搜索关键词
 - 排除某个关键词
 
 搜索关键词
@@ -35,11 +35,11 @@
 问题分类框架
 ------------
 
-在掌握上述 ``搜索问题技巧`` 后，可以利用 ESP-FAQ 已经做好的分类来提取想搜索问题里的关键词并搜索。以下是此网站的框架： 
+在掌握上述 ``搜索问题技巧`` 后，可以利用 ESP-FAQ 已经做好的分类来提取想搜索问题里的关键词并搜索。以下是此网站的框架：
 
-   - :doc:`开发环境 <../development-environment/index>`
-   - :doc:`应用方案 <../application-solution/index>`
-   - :doc:`软件平台 <../software-framework/index>`
-   - :doc:`硬件相关 <../hardware-related/index>`
-   - :doc:`测试校验 <../test-verification/index>`
-   - :doc:`商务问题 <../commercial-faq/index>`
+- :doc:`开发环境 <../development-environment/index>`
+- :doc:`应用方案 <../application-solution/index>`
+- :doc:`软件平台 <../software-framework/index>`
+- :doc:`硬件相关 <../hardware-related/index>`
+- :doc:`测试校验 <../test-verification/index>`
+- :doc:`商务问题 <../commercial-faq/index>`

@@ -118,7 +118,7 @@ How to modify the log output without changing the output level of menuconfig？
   .. code-block:: c
 
     esp_log_level_set("network", ESP_LOG_DEBUG);
-  
+
   For more information about this functinality, please refer to `Logging library <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/log.html>`_.
 
 --------------
@@ -271,11 +271,11 @@ When using flash_download_tool to flash firmware to the ESP8266 module, how to s
     ESP8266 Chip efuse check error esp_check_mac_and_efuse
 
   - Potential reasons:
-    
+
     - ``efuse check error`` indicates that the internal eFuse parameter area of the chip has been unintentionally modified. Typically, eFuse stores critical information, such as chip configuration and MAC address. If the eFuse is damaged, it will disable the chip.
     - Generally, eFuse damage would be caused by overvoltage or static electricity.
 
   - Suggestions:
-    
+
     - Monitor voltage fluctuations during power-up and power-down processes.
     - The eFuse functionality has been enhanced in ESP32-C3/ESP32-C2 chips. You may consider replacing with the relevant products in the future.

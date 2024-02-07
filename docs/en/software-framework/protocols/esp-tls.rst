@@ -53,10 +53,10 @@ What are the TLS versions supported by ESP-IDF?
 --------------------------
 
 Why does the "mbedtls_ssl_handshake returned -0x7200" error occur during the SSL handshake?
--------------------------------------------------- -------------------------------------------------- -------------------------------------------------- -----
+----------------------------------------------------------------------------------------------------
 
-   - The 0x7200 error is caused by the following reasons:
+  - The 0x7200 error is caused by the following reasons:
 
-     - MBEDTLS_SSL_IN_CONTENT_LEN is too small, generally less than the maximum 16 K
-     - Insufficient memory
-     - The server refuses the ESP connection and the sent SSL record is incomplete. You need to capture the packet and check it. For details, please refer to `Espressif Systems Wireshark User Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html#wireshark>`__.
+    - MBEDTLS_SSL_IN_CONTENT_LEN is too small, generally less than the maximum 16 K
+    - Insufficient memory
+    - The server refuses the ESP connection and the sent SSL record is incomplete. You need to capture the packet and check it. For details, please refer to `Espressif Systems Wireshark User Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html#wireshark>`__.

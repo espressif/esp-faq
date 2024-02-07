@@ -41,11 +41,11 @@ The PWM of ESP8266 NonOS SDK changes slow. What could be the reasons?
 When the LEDC is in decremental fade mode, a duty overflow error can occur. How to solve the issue?
 ----------------------------------------------------------------------------------------------------------------
 
-  When using LEDC, avoid the concurrence of following three cases: 
+  When using LEDC, avoid the concurrence of following three cases:
 
   - The LEDC is in decremental fade mode;
   - The scale register is set to 1;
-  - The duty is 2 :sup:`LEDC_HSTIMERx_DUTY_RES` or 2 :sup:`LEDC_LSTIMERx_DUTY_RES`. 
+  - The duty is 2 :sup:`LEDC_HSTIMERx_DUTY_RES` or 2 :sup:`LEDC_LSTIMERx_DUTY_RES`.
 
 -----------------
 

@@ -43,7 +43,7 @@ FAT 文件系统
 
   .. code-block:: c
 
-    static void initialize_filesystem() { 
+    static void initialize_filesystem() {
       static wl_handle_t
       wl_handle = WL_INVALID_HANDLE;
       const esp_vfs_fat_mount_config_t
@@ -54,7 +54,7 @@ FAT 文件系统
           ESP_LOGE(TAG, "Failed to mount FATFS (%s)", esp_err_to_name(err));
           return;
       }
-    } 
+    }
 
 
 .. Note::
@@ -79,11 +79,11 @@ FatFs 支持的最大容量是多少?
 使用 FAT 文件系统时，文件名稍微长一点的文件无法打开，该如何处理？
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 可以在 ``menuconfig`` > ``Component config`` > ``FAT Filesystem support`` > ``Long filename support`` 中进行修改，选择 ``Long filename buffer in heap`` 或 ``Long filename buffer on stack`` 配置项。然后可以在 ``Component config`` > ``FAT Filesystem support`` > ``Max long filename length`` 中修改最大的文件名长度。
+  可以在 ``menuconfig`` -> ``Component config`` -> ``FAT Filesystem support`` -> ``Long filename support 中进行修改，选择 ``Long filename buffer in heap`` 或 ``Long filename buffer on stack`` 配置项。然后可以在 ``Component config`` -> ``FAT Filesystem support`` -> ``Max long filename length`` 中修改最大的文件名长度。
 
 ----------------------------------------------------------------------
 
 使用 `ext_flash_fatfs <https://github.com/espressif/esp-idf/tree/master/examples/storage/ext_flash_fatfs>`_ 示例测试，分区表中将 fatffs 分区设置小于 512 KB 时，会报 ``vfs_fat_spiflash:f_mks failed(14),config:Failed to mount FATFS(ESP_FAIL)`` 错误，如何解决？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - FAT 分区的最小扇区数是 128，所以文件系统的最小尺寸是 128*4+4*4=528 KB，额外的 4 个扇区需要用于磨损均衡信息，所以至少需要保证 fatffs 分区 size 不小于 528 KB。
+  FAT 分区的最小扇区数是 128，所以文件系统的最小尺寸是 128*4+4*4=528 KB，额外的 4 个扇区需要用于磨损均衡信息，所以至少需要保证 fatffs 分区 size 不小于 528 KB。
