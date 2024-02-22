@@ -65,7 +65,7 @@ Can ESP-WIFI-MESH of ESP32 automatically repair the network?
 When using ESP-WIFI-MESH of ESP32 without connecting to Wi-Fi, how can I realize a self-organizing network?
 --------------------------------------------------------------------------------------------------------------------------------------------
 
-  To designate a device as the root node, please refer to the Mwifi `description <https://github.com/espressif/esp-mdf/blob/master/examples/function_demo/mwifi/README_en.md>`_ and `example <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi>`_.
+  To designate a device as the root node, please refer to the Mwifi `description <https://github.com/espressif/esp-mdf/blob/master/examples/function_demo/mwifi/README.md>`_ and `example <https://github.com/espressif/esp-mdf/tree/master/examples/function_demo/mwifi>`_.
 
 --------------
 

@@ -1,3 +1,6 @@
+variables:
+  ESP_IDF_DOC_ENV_IMAGE: "$CI_DOCKER_REGISTRY/esp-idf-doc-env-v5.0:4-4"
+
 .before_script_install_requirements:
   before_script:
     # Use CI Tools
@@ -6,7 +9,7 @@
 
 .doc_linkcheck_template:
     stage: pre_check
-    image: $CI_SPHINX_DOCKER
+    image: $ESP_DOCS_ENV_IMAGE
     allow_failure: true
     tags:
       - build_docs

@@ -30,16 +30,6 @@ ESP RainMaker 有哪些资料可供方案评估与验证？
 
 --------------
 
-ESP RainMaker 对接了哪些语音平台? 支持哪些语音指令？
------------------------------------------------------
-
-  - 目前 ESP RainMaker 通过云云对接的形式完成了对 Alexa App 和 Google Home App 的支持，通过 `ESP HomeKit SDK <https://github.com/espressif/esp-homekit-sdk>`_ 对接了苹果的家庭 App。在上述 App 中添加设备后，即可使用对应的语音助手完成语音控制。建议使用 `homekit_switch <https://github.com/espressif/esp-rainmaker/tree/master/examples/homekit_switch>`_ 进行测试，该 Demo 将已开关的产品形态出现在上述所有 App 中。
-  - Alexa 部分请参考 `Alexa 所支持的语音指令 <https://www.amazon.com/Espressif-Systems-ESP-RainMaker/dp/B0881W7RPV/>`_。
-  - Google Assistant 部分请参考 `Google Assistant 所支持的语音指令 <https://assistant.google.com/services/a/uid/0000001421a84610?hl=en_us&source=web>`_。
-  - Siri 部分请参考 `Siri 所支持的语音指令 <https://support.apple.com/zh-cn/HT208280>`_。
-
---------------
-
 RainMaker 设备的证书如何获取？是否有管理后台？
 ------------------------------------------------
 

@@ -48,7 +48,7 @@ secure boot v1 和 secure boot v2 有什么区别？
   错误日志：/Makefile.projbuild:7：/f/ESP32Root/secure_boot_signing_key.pem。
 
   报错原因：security boot 是固件签名校验的功能，该功能需要生成密钥对。
-  - 启用 secure boot v1 时生成密钥对的方法请参考 `secure boot v1 生成密钥 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html#generating-secure-boot-signing-key>`_。
+  - 启用 secure boot v1 时生成密钥对的方法请参考 `secure boot v1 生成密钥 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html#secure-boot-generate-key>`_。
   - 启用 secure boot v2 时生成密钥对的方法请参考 `secure boot v2 生成密钥 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html#generating-secure-boot-signing-key>`_。
 
 --------------
@@ -133,7 +133,7 @@ secure boot 和 flash 加密的使用场景有哪些？
 secure boot 和 flash 加密中涉及的存储在 eFuse 数据有哪些？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - secure boot v1 中使用的存储在 eFuse 数据请参考 `secure boot v1 efuses <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html#background>`_。
+  - secure boot v1 中使用的存储在 eFuse 数据请参考 `secure boot v1 efuses <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v1.html#id2>`_。
   - secure boot v2 中使用的存储在 eFuse 数据请参考 `secure boot v2 efuses <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/secure-boot-v2.html#efuse-usage>`_。
   - flash 加密中使用的存储在 eFuse 数据请参考 `flash 加密 efuses <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/security/flash-encryption.html#efuses>`_。
 

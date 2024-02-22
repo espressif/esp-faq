@@ -86,7 +86,7 @@ Why do I always get an error when compiling example/get-started/play-mp3 with ES
   Error log: ``fatal error: audio_type_def.h: No such file or directory``
 
   - The file audio_type_def.h is located in the esp-adf-libs of ESP-ADF. If this file cannot be found during the compilation process, it indicates that ESP-ADF v2.4 may not have been correctly detected, especially the submodules may not have been updated.
-  - To detect ESP-ADF v2.4, please follow the steps described in `Updating to Stable Release <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/versions.html#updating-to-stable-release>`_.
+  - To correctly detect ESP-ADF v2.4, please follow the steps described in `Update to a stable release version <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/versions.html#updating-to-stable-release>`_.
   - Try executing the following commands and recompile.
 
     .. code:: shell
@@ -101,7 +101,7 @@ Why do I always get an error when compiling example/get-started/play-mp3 with ES
 Where can I check the ESP-IDF version supported by ESP-ADF?
 -----------------------------------------------------------------------
 
-  Please refer to the `ESP-IDF version supported by ESP-ADF <https://github.com/espressif/esp-adf?tab=readme-ov-file#idf-version>`_.
+  Please refer to the `ESP-IDF version supported under ESP-ADF <https://github.com/espressif/esp-adf/blob/master/README.md#idf-version>`__.
 
 --------------
 
@@ -143,7 +143,7 @@ Does ESP32 have a development board that supports both MIC and AUX pickup?
 How to implement call function using the ESP32-LyraT development board?
 ------------------------------------------------------------------------------------------
 
-  Please refer to the voice call example `VoIP <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/voip>`__.
+  You can refer to the VoIP example `VoIP <https://github.com/espressif/esp-adf/tree/master/examples/protocols/voip>`__.
 
 ---------------
 

@@ -18,7 +18,7 @@ ESP Matter
 ESP 哪些模组可以接入 Matter？
 --------------------------------------------
 
-  - 请参考 `Espressif Matter 平台 <https://docs.espressif.com/projects/esp-matter/en/main/esp32/introduction.html#espressif-matter-platforms>`_。
+  - 请参考 `Espressif Matter 平台 <https://docs.espressif.com/projects/esp-matter/en/latest/esp32/introduction.html#espressif-matter-platforms>`_。
 
 ------------------
 
@@ -76,7 +76,7 @@ ESP32-C3 使用 Ubuntu 虚拟机进行 ESP Matter 开发时，发现按照 `Matt
 ESP Matter 是否有测试工具/测试应用程序?
 ----------------------------------------------------------------------------------------------------------------------
 
-  - 有，推荐使用 `chip-tool <https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/chip_tool_guide.md>`_。使用示例见 `配置测试 chip tool <https://docs.espressif.com/projects/esp-matter/en/main/esp32/developing.html#test-setup-chip-tool>`_。
+  - 有，推荐使用 `chip-tool <https://github.com/espressif/connectedhomeip/tree/v1.0.0.2/examples/chip-tool>`__。
 
 ---------------------
 
@@ -136,4 +136,4 @@ Matter 是否可以对接三星的 smartthings？
 ESP32 Matter 设备可以通过 BLE 来配置 Wi-Fi 吗？
 ------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 Matter 设备可以通过 BLE 来配置 Wi-Fi ，我们 `esp-matter <https://github.com/espressif/esp-matter>`_  SDK 下的所有应用测试例程都是通过 BLE 进行配置的。可参考章节 `2.2 Commissioning and Control <https://docs.espressif.com/projects/esp-matter/en/main/esp32c3/developing.html#commissioning-and-control>`_ 说明。
+  - ESP32 Matter 设备可以通过 BLE 来配置 Wi-Fi ，我们 `esp-matter <https://github.com/espressif/esp-matter>`_  SDK 下的所有应用测试例程都是通过 BLE 进行配置的。可参考章节 `2.2 Commissioning and Control <https://docs.espressif.com/projects/esp-matter/en/latest/esp32/developing.html#commissioning-and-control>`__ 说明。

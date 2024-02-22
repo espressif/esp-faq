@@ -232,7 +232,7 @@ ESP32-S2/ESP32-S3 USB 做 USB CDC Device 时是否能识别到 USB 的插拔动�
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 可以，USB device 采用 tinyusb 协议栈，包含 mount 和 umount 回调函数来反馈 USB 的插拔动作事件。
-  - 需要注意的是，如果该设备为自供电 USB 设备，若需要在不断电的情况检测到插拔动作，请注意预留 VBUS 检测引脚，请参考 `自供电 USB 设备解决方案 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/esp32/usb/usb_device_self_power.html>`_
+  - 需要注意的是，如果该设备为自供电 USB 设备，若需要在不断电的情况检测到插拔动作，请注意预留 VBUS 检测引脚，请参考 `自供电 USB 设备解决方案 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/usb/usb_overview/usb_device_self_power.html>`_
 
 ---------------------
 
@@ -278,7 +278,7 @@ Windows 环境下使用 ``idf.py -p com35 flash monitor`` 命令，通过 USB �
 如何为 ESP32-S 系列的产品申请 USB VID/PID？
 ----------------------------------------------------------------------------------------------------------------
 
-  - 如果你的软件是基于 TinyUSB 协议栈来实现的，可以使用默认的TinyUSB PID。否则，你需要为每个 ESP32-S 系列的产品申请 USB VID/PID。详细说明请参见 `"usb-pids" <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/esp32/usb/usb_vid_pid.html>`_。
+  - 如果你的软件是基于 TinyUSB 协议栈来实现的，可以使用默认的TinyUSB PID。否则，你需要为每个 ESP32-S 系列的产品申请 USB VID/PID。详细说明请参见 `"usb-pids" <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/usb/usb_overview/usb_vid_pid.html>`__。
 
 ---------------------
 
@@ -291,7 +291,7 @@ Windows 环境下使用 ``idf.py -p com35 flash monitor`` 命令，通过 USB �
 
     REG ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\303A10010101 /V IgnoreHWSerNum /t REG_BINARY /d 01
 
-  - 更多信息请参考 `阻止 Windows 依据 USB 设备序列号递增 COM 编号 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/esp32/usb/usb_device_const_COM.html>`_。
+  - 更多信息请参考 `阻止 Windows 依据 USB 设备序列号递增 COM 编号 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/usb/usb_overview/usb_device_const_COM.html>`_。
 
 ---------------------
 

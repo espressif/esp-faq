@@ -354,7 +354,7 @@ How can I specify a BLE connection/transmit operation to run on core 0 when I us
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Currently, ESP32's BLE connection/transmit operation only can be run on core 1. You can enable this via ``menuconfig`` > ``Component config`` > ``FreeRTOS`` > ``Run FreeRTOS only on first core`` .
-  - According to this application requirement, you can distribute tasks to a certain core using the "xTaskCreatePinnedToCore()" or "xTaskCreateStaticPinnedToCore()" API. For specific instructions, please see `core assignment <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/freertos-smp.html?highlight=run%20freertos%20only%20first%20core #overview>`_.
+  - Based on the application requirements, you can use the `xTaskCreatePinnedToCore()` or `xTaskCreateStaticPinnedToCore()` API to create and allocate tasks. For detailed instructions, refer to `Creating Tasks <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos_idf.html#creation>`__.
 
 --------------
 

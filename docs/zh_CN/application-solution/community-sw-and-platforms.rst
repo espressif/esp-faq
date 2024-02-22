@@ -19,4 +19,4 @@ ESP32-SOLO-1 是否可以在 Arduino 软件上进行开发？
 -------------------------------------------------
 
   - 目前 ESP32-SOLO-1 尚不支持在 Arduino 软件上进行开发。
-  - 如果您仍倾向于使用 Arduino 构建代码，可以将 Arduino-esp32 用作 `ESP-IDF 的组件 <https://github.com/espressif/arduino-esp32/blob/master/docs/source/esp-idf_component.rst>`_ 进行开发测试。
+  - 如果您仍倾向于使用 Arduino 构建代码，可以将 Arduino-esp32 用作 `ESP-IDF 的组件 <https://docs.espressif.com/projects/arduino-esp32/en/latest/esp-idf_component.html>`_ 进行开发测试。

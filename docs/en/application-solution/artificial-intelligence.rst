@@ -67,7 +67,7 @@ Can the model files of `ESP-SKAINET <https://github.com/espressif/esp-skainet>`_
 How to customize command words in `ESP-SKAINET <https://github.com/espressif/esp-skainet>`_?
 ------------------------------------------------------------------------------------------------------------------------------------------
 
-  To customize command words, please see `ESP-SR GitHub <https://github.com/espressif/esp-sr/blob/master/docs/speech_command_recognition/README.md>`__. 
+  For custom command words, please refer to the `Custom Command Word Method <https://docs.espressif.com/projects/esp-sr/en/latest/esp32s3/speech_command_recognition/README.html#speech-commands-customization-methods>`__.
 
 ----------------------
 

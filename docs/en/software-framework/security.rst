@@ -48,7 +48,7 @@ After enabling secure boot, there is a build error indicating missing files. Wha
   Error log: /Makefile.projbuild:7/f/ESP32Root/secure_boot_signing_key.pem
 
   Reason: security boot is a function for firmware signature verification, which requires generating key pairs.
-  - For the method of generating a key pair when secure boot v1 is enabled, please refer to `secure boot v1 key generation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html#generating-secure-boot-signing-key>`_.
+  - For the method of generating key pairs when enabling secure boot v1, please refer to `secure boot v1 generate key <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html#secure-boot-generate-key>`_.
   - For the method of generating a key pair when secure boot v2 is enabled, please refer to `secure boot v2 key generation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html#generating-secure-boot-signing-key>`_.
 
 --------------
@@ -65,7 +65,7 @@ After enabling secure boot, is it possible for modules to be flashed again?
 With flash encryption enabled, a module reports an error as ``flash read error`` after reflashed. How to resolve such issue?
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
-  With flash encryption enabled, the module will not support plaintext firmware flash. For common failures, please refer to `Possible Failures <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html#id9>`_. You can use the `espefuse <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html>`_ script to disable the encryption and then reflash the plaintext firmware, or directly flash the encrypted firmware to devices referring to the `flash encryption example <https://github.com/espressif/esp-idf/tree/master/examples/security/flash_encryption>`_.
+  With flash encryption enabled, the module will not support plaintext firmware flash. For common failures, please refer to `Possible Failures <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html#possible-failures>`_. You can use the `espefuse <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/index.html>`_ script to disable the encryption and then reflash the plaintext firmware, or directly flash the encrypted firmware to devices referring to the `flash encryption example <https://github.com/espressif/esp-idf/tree/master/examples/security/flash_encryption>`_.
   
   .. note::
       
@@ -103,7 +103,7 @@ How to enable flash encryption for ESP32?
 ----------------------------------------------------------------------------------------------------------------------------------------
 
   - It can be enabled via menuconfig or idf.py menuconfig by configuring ``Security features`` -> ``Enable flash encryption on boot (READ DOCS FIRST)``.
-  - Please refer to `Flash encryption instructions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html#flash>`_.
+  - Please refer to `Flash encryption instructions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html#flash-encryption-process>`_.
   
 ------------------
 
@@ -133,7 +133,7 @@ What are the use scenarios for secure boot and flash encryption?
 What are the data stored in eFuse involved in secure boot and flash encryption?
 ----------------------------------------------------------------------------------
 
-  - For the data stored in eFuse used in secure boot v1, please refer to `secure boot v1 efuses <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html#background>`_。
+  - For the storage used in secure boot v1, please refer to `secure boot v1 efuses <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v1.html#background>`_.
   - For the data stored in eFuse used in secure boot v2, please refer to `secure boot v2 efuses <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html#efuse-usage>`_。
   - For the data stored in eFuse used in flash encryption, please refer to `flash encryption efuses <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/flash-encryption.html#relevant-efuses>`_。
 

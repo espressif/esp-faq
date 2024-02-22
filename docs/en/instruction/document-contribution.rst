@@ -85,7 +85,7 @@ Please add new Q&A items and do updates according to the guidelines as follows:
 - When a separate notice or explanatory paragraph follows a item, indent that separate material to the text of the parent list item.
 - Follow list punctuation rules described in `Espressif Manual of Style <https://espressifsystems.sharepoint.com/sites/Documentation/Lists/Internal%20Document/DispForm.aspx?ID=1&e=eApbSw>`_, Section Punctuation in Lists.
 
-For additional guidance regarding list please refer to `Bulleted and Numbered Lists <https://www.prismnet.com/~hcexres/textbook/lists.html>`_. Please see the example template for text and figures below.
+For more guidance on the rules of list formatting, please refer to `ESP-Docs > Writing Documentation <https://docs.espressif.com/projects/esp-docs/en/latest/writing-documentation/index.html>`__. Please refer to the text and image example templates below.
 
 Q&A example
 ~~~~~~~~~~~~~~~~~~~~~~~

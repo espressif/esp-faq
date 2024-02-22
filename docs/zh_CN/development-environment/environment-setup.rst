@@ -19,7 +19,7 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 因为 ESP-IDF 是从 release/v4.2 版本开始适配 ESP32-S2 的，所以如果在之前的 ESP-IDF 版本上搭建 ESP32-S2 环境，就会出现错误。例如使用指令 ``idf.py set-target esp32s2`` 时，会报错 "Error: No such command 'set-target'"。建议使用 ESP-IDF release/v4.2 及以后版本进行 ESP32-S2 的测试开发。更多请参考 `ESP32-S2 入门指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/get-started/>`_。
-  - 不同 ESP-IDF 版本的 ESP 芯片支持情况，请查阅 `ESP-IDF Release and SoC Compatibility <https://github.com/espressif/esp-idf#esp-idf-release-and-soc-compatibility>`_
+  - 不同 ESP-IDF 版本的 ESP 芯片支持情况，请查阅 `ESP-IDF Release and SoC Compatibility <https://github.com/espressif/esp-idf/blob/master/README_CN.md#esp-idf-%E4%B8%8E%E4%B9%90%E9%91%AB%E8%8A%AF%E7%89%87>`__。
 
 --------------
 
@@ -30,7 +30,7 @@ Windows 下使用 ESP-IDF Tools 2.3 工具安装 master 版本的 ESP-IDF 出现
 
 --------------
 
-Windows 下使用 `esp-idf-tools-setup-2.3.exe <link:https://dl.espressif.com/dl/esp-idf-tools-setup-2.3.exe>`_ 搭建环境，运行 ``make menuconfig`` 出现如下错误：
+Windows 下使用 `esp-idf-tools <https://dl.espressif.com/dl/esp-idf/?idf=4.4>`_ 搭建环境，运行 ``make menuconfig`` 出现如下错误：
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code:: shell
@@ -42,15 +42,15 @@ Windows 下使用 `esp-idf-tools-setup-2.3.exe <link:https://dl.espressif.com/dl
 
 --------------
 
-Windows 下使用 `esp-idf-tools-setup-2.2.exe <link:https://dl.espressif.com/dl/esp-idf-tools-setup-2.2.exe>`_ 安装过程中，出现 python 工具异常：
+Windows 下使用 `esp-idf-tools <https://dl.espressif.com/dl/esp-idf/?idf=4.4>`_ 安装过程中，出现 python 工具异常：
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code:: text
 
     Installation has failed with exit code 1
 
-  1. 更新一下工具链：https://dl.espressif.com/dl/esp-idf-tools-setup-2.3.exe
-  2. 并且删除 idf_tools.py 中过时的选项 "--no-site-packages"
+    
+  此错误由网络环境不适合导致，请在使用工具时勾选 "通过 gitee 下载"。
 
 --------------
 
@@ -78,7 +78,7 @@ Windows 下执行 export.bat，提示 CMake、gdbgui 版本错误：
 将版本从 v3.3 更新至最新版本后，使用 idf.menuconfig 及 idf.build 报错：
 -------------------------------------------------------------------------
 
-  - 请参照 `快速入门 <link:https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/index.html>`_ 重新搭建一下环境。
+  - 请参照 `快速入门 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/index.html>`_ 重新搭建一下环境。
   - 删除 hello_world 项目文件夹下的编译目录 ``build`` 和配置文件 ``sdkconfig``。
 
 --------------

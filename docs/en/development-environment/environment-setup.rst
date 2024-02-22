@@ -19,7 +19,7 @@ When setting up ESP32-S2 environment using command ``idf.py set-target esp32s2``
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The ESP-IDF is adapted to ESP32-S2 from release/v4.2, thus setting up ESP32-S2 environment in previous versions will cause errors. In this case, when using command ``idf.py set-target esp32s2``, there will be error as "Error: No such command 'set-target'". It is recommended to perform tests and development on ESP32-S2 using ESP-IDF release/v4.2 and later versions. For more information, please refer to `ESP32-S2 Get Started <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/>`_.
-  - To check which ESP chips are supported by different ESP-IDF versions, please refer to `ESP-IDF Release and SoC Compatibility <https://github.com/espressif/esp-idf#esp-idf-release-and-soc-compatibility>`_.
+  - For information on the support of different ESP chips by different ESP-IDF versions, please refer to `ESP-IDF Release and SoC Compatibility <https://github.com/espressif/esp-idf/blob/master/README.md#esp-idf-release-and-soc-compatibility>`__.
 
 --------------
 
@@ -30,7 +30,7 @@ When installing ESP-IDF version master using ESP-IDF Tools 2.3 in Windows system
 
 --------------
 
-When setting up environment using `esp-idf-tools-setup-2.3.exe <link:https://dl.espressif.com/dl/esp-idf-tools-setup-2.3.exe>`_ on Windows, errors occurred when ``make menuconfig`` is executed: 
+On Windows, when setting up the environment using `esp-idf-tools <https://dl.espressif.com/dl/esp-idf/?idf=4.4>`_, the following error occurs when running ``make menuconfig``:
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code:: shell
@@ -42,15 +42,15 @@ When setting up environment using `esp-idf-tools-setup-2.3.exe <link:https://dl.
 
 --------------
 
-When using `esp-idf-tools-setup-2.2.exe <link:https://dl.espressif.com/dl/esp-idf-tools-setup-2.2.exe>`_ in Windows system, a python error occurred during the installation:
+During the installation process of `esp-idf-tools <https://dl.espressif.com/dl/esp-idf/?idf=4.4>`_ on Windows, an exception occurs with the Python tool:
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code:: text
 
     Installation has failed with exit code 1
 
-  1. Update your tool chain: https://dl.espressif.com/dl/esp-idf-tools-setup-2.3.exe
-  2. Remove the obsolete option "--no-site-packages" from idf_tools.py
+    
+  This error is caused by an unsuitable network environment. Please check the "Download via gitee" option when using the tool.
 
 --------------
 
@@ -78,7 +78,7 @@ When executing export.bat in Windows system, what should I do if I get CMake and
 Errors occurred when using idf.menuconfig and idf.build after updating the ESP-IDF version from v3.3 to the latest one:
 -----------------------------------------------------------------------------------------------------------------------------------
 
-  - Rebuild the environment following `Get Started <link:https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html>`_.
+  - Please refer to the `Quick Start Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html>`_ to set up the environment again.
   - Remove build directory ``build`` and configuration file ``sdkconfig`` under the hello_world directory.
 
 --------------
