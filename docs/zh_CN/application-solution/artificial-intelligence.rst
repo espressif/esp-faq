@@ -67,7 +67,7 @@ ESP-WHO 支持使用 ESP-IDF 哪些版本？
 `ESP-SKAINET <https://github.com/espressif/esp-skainet>`_ 如何定制命令词？
 ------------------------------------------------------------------------------------
 
-  定制命令词，请查看 `ESP-SR GitHub <https://github.com/espressif/esp-sr/blob/master/docs/speech_command_recognition/README_cn.md>`__。 
+  定制命令词，请查看 `自定义命令词方法 <https://docs.espressif.com/projects/esp-sr/zh_CN/latest/esp32s3/speech_command_recognition/README.html#id4>`__。 
 
 ----------------------
 

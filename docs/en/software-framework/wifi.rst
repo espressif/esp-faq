@@ -311,7 +311,7 @@ How does ESP32 adjust Wi-Fi TX power?
       xEventGroupClearBits(s_wifi_event_group, CONNECTED_BIT);
     }
 
-  When the callback function received ``WIFI_EVENT_STA_DISCONNECTED`` event, you can get the reason through the ``reason`` variable from `wifi_event_sta_disconnected_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429wifi_event_sta_disconnected_t>`_.
+  When the callback function receives the ``WIFI_EVENT_STA_DISCONNECTED`` event, the failure reason can be obtained through the ``reason`` variable of the structure `wifi_event_sta_disconnected_t <https://github.com/espressif/esp-idf/blob/5454d37d496a8c58542eb450467471404c606501/components/esp_wifi/include/esp_wifi_types_generic.h#L815>`__.
 
   - ``WIFI_REASON_AUTH_EXPIRE``: This code is returned during the auth phase when the STA sends an auth but do not received any auth reply from the AP within the specified time. The possibility of this code occurrence is low.
 
@@ -810,7 +810,7 @@ During the on-hook test for an ESP32 device, the following log shows. What does 
     [21-01-27_14:53:59]I (81450337) wifi:new:<7,2>, old:<7,0>, ap:<255,255>, sta:<7,2>, prof:1
 
   - The value after ``new`` represents the current primary and secondary channel; the value after ``old`` represents the last primary and secondary channel; and the value after ``ap`` represents the primary and secondary channel of the current ESP32 AP, which will be 255 if softAP is not enabled; the value after ``sta`` represents primary and secondary channel of the current ESP32 sta; and ``prof`` is the channel of ESP32's softAP stored in NVS.
-  - For the meaning of secondary channel values, please refer to `wifi_second_chan_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_second_chan_t#_CPPv418wifi_second_chan_t>`_.
+  - For the numerical values represented by the secondary channel, please refer to `wifi_second_chan_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv420esp_wifi_set_channel7uint8_t18wifi_second_chan_t>`__.
   - The above log indicates that router is switching between HT20 and HT40 minus. You can check the Wi-Fi bandwidth setting of the router.
 
 -----------------
@@ -956,7 +956,7 @@ What is the current progress of WFA bugs fixing?
 --------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 |  ESP8266:
 
-  Please refer to ` Security Advisory for WFA vulnerability <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability.pdf>`_ for more details.
+  For more details, please refer to the `Wi-Fi Security Notice <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability%20EN_0.pdf>`_ on the Espressif official website.
 
 -----------------------------------------------------------------------------------------------------
 
@@ -1079,7 +1079,7 @@ ESP32 Wi-Fi has a beacon lost and sends 5 probe requests to the AP after 6 secon
 Does ESP32 Wi-Fi work with PSRAM?
 ------------------------------------------------------------------------------------------------------
 
-  For information on using Wi-Fi with PSRAM, please refer to `Using PSRAM <https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/api-guides/wifi.html#psram>`_.
+  For information on using Wi-Fi with PSRAM, please refer to `Using PSRAM <https://docs.espressif.com/projects/esp-idf/en/v4.4.1/esp32/api-guides/wifi.html#using-psram>`_.
 
 -----------------
 
@@ -1290,7 +1290,7 @@ Does ESP32 support WPA3-Enterprise?
 Does ESP modules support WAPI (Wireless LAN Authentication and Privacy Infrastructure)?
 ---------------------------------------------------------------------------------------------------------------------------------
 
-  Yes. Please refer to `WIFI_AUTH_WAPI_PSK <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_auth_wapi_psk#_CPPv4N16wifi_auth_mode_t18WIFI_AUTH_WAPI_PSKE>`_
+  Supported, please refer to the `Wi-Fi Feature List <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#esp32-wi-fi-feature-list>`__.
 
 -----------
 

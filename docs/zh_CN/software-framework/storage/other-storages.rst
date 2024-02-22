@@ -62,4 +62,4 @@ ESP32 如何读取芯片剩余内存？
 在 ESP-IDF 下使用 xTaskCreateStatic() 需要注意什么？
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 可以参考 `xTaskCreateStatic() 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/freertos.html#_CPPv417xTaskCreateStatic14TaskFunction_tPCKcK8uint32_tPCv11UBaseType_tPC11StackType_tPC12StaticTask_t>`_。
+  - 可以参考 `xTaskCreateStatic() 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/freertos_idf.html#_CPPv417xTaskCreateStatic14TaskFunction_tPCKcK8uint32_tPCv11UBaseType_tPC11StackType_tPC12StaticTask_t>`__。

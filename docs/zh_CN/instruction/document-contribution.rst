@@ -85,7 +85,7 @@
 - 如某项条目后需跟注释或说明性文字，应缩进该注释，使其成为子条目。
 - 关于列表中标点符号的使用，请参考 `Espressif Manual of Style <https://espressifsystems.sharepoint.com/sites/Documentation/Lists/Internal%20Document/DispForm.aspx?ID=1&e=eApbSw>`_ 中的章节 “Punctuation in Lists”。
 
-更多关于列表格式的规则指导，请参考 `Bulleted and Numbered Lists <https://www.prismnet.com/~hcexres/textbook/lists.html>`_。请参阅下文文字与图片示例模版。
+更多关于列表格式的规则指导，请参考 `ESP-Docs > Writing Documentation <https://docs.espressif.com/projects/esp-docs/en/latest/writing-documentation/index.html>`__。请参阅下文文字与图片示例模版。
 
 问题模块示例
 ~~~~~~~~~~~~~~~~

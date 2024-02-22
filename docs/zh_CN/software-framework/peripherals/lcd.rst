@@ -34,7 +34,7 @@ ESP 系列芯片 LCD 屏幕适配情况是怎样的？
 ESP 系列芯片的带屏开发板是否支持使用 Arduino IDE 开发 GUI？
 -----------------------------------------------------------------------------------------------------------------
 
-  - 目前官方已推出用于 Arduino 开发的 LCD 驱动库 `ESP32_Display_Panel <https://github.com/esp-arduino-libs/ESP32_Display_Panel>`__，可以直接在 Arduino IDE 上下载，支持的开发板请参考 `文档 <https://github.com/esp-arduino-libs/ESP32_Display_Panel#espressif-development-boards>`__。
+  - 目前官方已推出用于 Arduino 开发的 LCD 驱动库 `ESP32_Display_Panel <https://github.com/esp-arduino-libs/ESP32_Display_Panel>`__，可以直接在 Arduino IDE 上下载，支持的开发板请参考 `文档 <https://github.com/esp-arduino-libs/ESP32_Display_Panel/blob/master/README_CN.md#%E4%B9%90%E9%91%AB%E5%BC%80%E5%8F%91%E6%9D%BF>`__。
   - 需要注意以下几点：
 
     - ESP32_Display_Panel 依赖于 `arduino-esp32 <https://github.com/espressif/arduino-esp32>`__。
@@ -71,7 +71,7 @@ ESP 系列芯片的带屏开发板是否支持使用 Arduino IDE 开发 GUI？
     - ``#define LV_MEMCPY_MEMSET_STD 1`` or ``CONFIG_LV_MEMCPY_MEMSET_STD=y``
     - ``#define LV_ATTRIBUTE_FAST_MEM IRAM_ATTR`` or ``CONFIG_LV_ATTRIBUTE_FAST_MEM=y``
 
-  - 详细 LCD 及 LVGL 性能说明，请参考 `文档 <https://github.com/espressif/esp-bsp/blob/master/components/esp_lvgl_port/docs/performance.md#lcd--lvgl-performance>`__。
+  - 详细 LCD 及 LVGL 性能说明，请参考 `文档 <https://github.com/espressif/esp-bsp/blob/master/components/esp_lvgl_port/docs/performance.md>`__。
 
 ---------------
 

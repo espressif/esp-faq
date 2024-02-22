@@ -20,7 +20,7 @@ LCD
 Where are the LCD drivers and reference examples for ESP series chips?
 --------------------------------------------------------------------------------------------------------------------------------------
 
-  Please refer to the `ESP-IoT-Solution Programming Guide - LCD Development Guide <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_development_guide.html#id2>`__.
+  Please refer to the `ESP-IoT-Solution Programming Guide - LCD Development Guide <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_development_guide.html#lcd-development-guide>`__.
 
 ---------------
 
@@ -34,7 +34,7 @@ Which adapted ICs can be used by the LCD screen of ESP32 series chips?
 Do ESP series development boards with screens support GUI development using the Arduino IDE?
 -----------------------------------------------------------------------------------------------------------------
 
-  - Currently, the official LCD driver library for Arduino development, `ESP32_Display_Panel <https://github.com/esp-arduino-libs/ESP32_Display_Panel>`__, has been released. It can be downloaded directly in the Arduino IDE. For supported development boards, please refer to the `documentation <https://github.com/esp-arduino-libs/ESP32_Display_Panel#espressif-development-boards>`__.
+  - The official LCD driver library for Arduino development, `ESP32_Display_Panel <https://github.com/esp-arduino-libs/ESP32_Display_Panel>`__, has been released. It can be directly downloaded on the Arduino IDE. For supported development boards, please refer to the `documentation <https://github.com/esp-arduino-libs/ESP32_Display_Panel/blob/master/README.md#espressif-development-boards>`__.
   - Several points to note:
 
     - ESP32_Display_Panel relies on `arduino-esp32 <https://github.com/espressif/arduino-esp32>`__.
@@ -71,7 +71,7 @@ How can I improve the display frame rate of LCD screens?
     - ``#define LV_MEMCPY_MEMSET_STD 1`` or ``CONFIG_LV_MEMCPY_MEMSET_STD=y``
     - ``#define LV_ATTRIBUTE_FAST_MEM IRAM_ATTR`` or ``CONFIG_LV_ATTRIBUTE_FAST_MEM=y``
 
-  - For LCD and LVGL performance, please refer to `documentation <https://github.com/espressif/esp-bsp/blob/master/components/esp_lvgl_port/docs/performance.md#lcd--lvgl-performance>`__.
+  - For detailed LCD and LVGL performance specifications, please refer to the `document <https://github.com/espressif/esp-bsp/blob/master/components/esp_lvgl_port/docs/performance.md>`__.
 
 ---------------
 

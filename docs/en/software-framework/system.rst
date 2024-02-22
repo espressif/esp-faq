@@ -263,7 +263,7 @@ Can ESP32 permanently change the MAC address?
 
   - The MAC address that comes with the chip cannot be modified. The eFuse supports users to write their own MAC address.
   - The customized MAC address can be obtained by calling API in the firmware, and it can be set to replace the default address in the system.
-  - For detailed configuration, please refer to `mac-address <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/system/misc_system_api.html#mac>`_.
+  - For detailed configuration, please refer to `mac-address <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/system/misc_system_api.html#mac-address>`_.
   - In addition, Espressif provides a service to burn the MAC address provided by the user before the chip leaves the factory. If you have such requirements, please email sales@espressif.com.
 
 --------------
@@ -411,7 +411,7 @@ How can I optimize the size of binary files compiled by ESP32?
 Does ESP32 have an API for rebooting the system?
 -------------------------------------------------
 
-  - You can use the API ``esp_restart()`` to reboot the system. For related instructions, please refer to `documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/ota.html?highlight=esp_restart#id5>`__.
+  - You can use the API ``esp_restart()`` to reboot the system. For related instructions, please refer to `documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/misc_system_api.html#_CPPv411esp_restartv>`__.
 
 --------------
 
@@ -772,7 +772,7 @@ When ESP32 uses esp_timer, network communication or Bluetooth communication is a
 ---------------------------------------------------------------------------------------------------------------------
 
   - esp_timer is a high-precision hardware timer component, and some background components also use it to complete some system tasks. When using esp_timer, please do not call delay and blocking APIs in the callback function of the timer, and try to ensure that the function is executed as quickly as possible, so as not to affect the performance of other system components.
-  - If you do not need very high time precision, please use the timer component `xTimer <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos.html#timer-api>`_ in FreeRTOS.
+  - If you do not require high timing accuracy, please use the timer component `xTimer <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos_idf.html#timer-api>`__ in FreeRTOS.
 
 --------------
 
@@ -883,4 +883,4 @@ How to get the version number of newlib of ESP-IDF?
   - There are two ways to obtain the version number:
 
     - 1. Run `xtensa-esp32-elf-gcc -dM -E -x c - <<< "#include <_newlib_version.h>" | grep NEWLIB_VERSION` command to obtain the newlib version number. The printed log should be similar to the following: `#define _NEWLIB_VERSION "4.1.0"`.
-    - 2. Search for the newlib version in the toolchain version and find the toolchain version used by ESP-IDF. For example, for ESP-IDF v5.0, you can get the version of the toolchain is esp2021-r1 from `xtensa esp32 elf <https://docs.espressif.com/projects/esp-idf/en/v5.0/esp32/api-guides/tools/idf-tools.html#xtensa -Esp32 elf>`__. Go to the release note page of `this toolchain version <https://github.com/espressif/crosstool-NG/releases/tag/esp-2022r1>`__, it can be seen from the link that the newlib version is v4.1.0.
+    - 2. Search for the newlib version in the toolchain version and find the toolchain version used by ESP-IDF. For example, for ESP-IDF v5.0, you can get the version of the toolchain is esp2021-r1 from `xtensa esp32 elf <https://docs.espressif.com/projects/esp-idf/en/v5.0/esp32/api-guides/tools/idf-tools.html#xtensa-esp32-elf>`__. Go to the release note page of `this toolchain version <https://github.com/espressif/crosstool-NG/releases/tag/esp-2022r1>`__, it can be seen from the link that the newlib version is v4.1.0.

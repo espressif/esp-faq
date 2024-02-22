@@ -18,7 +18,7 @@ ESP Matter
 Which ESP modules can be connected to Matter?
 ----------------------------------------------------------------------------------
 
-  - Please refer to `Espressif Matter Platforms <https://docs.espressif.com/projects/esp-matter/en/main/esp32/introduction.html#espressif-matter-platforms>`_.
+  - Please refer to the `Espressif Matter Platform <https://docs.espressif.com/projects/esp-matter/en/latest/esp32/introduction.html#espressif-matter-platforms>`_.
 
 ------------------
 
@@ -76,7 +76,7 @@ How to apply for a Matter DAC?
 Does ESP Matter have a test tool/test app?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes, it is recommended to use `chip-tool <https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/chip_tool_guide.md>`_. You can also refer to `Configuration test chip tool <https ://docs.espressif.com/projects/esp-matter/en/main/esp32/developing.html#test-setup-chip-tool>`_.
+  - Yes, it is recommended to use `chip-tool <https://github.com/espressif/connectedhomeip/tree/v1.0.0.2/examples/chip-tool>`__.
 
 ---------------------
 
@@ -136,4 +136,4 @@ Where is the DAC (Device Attestation Certificate) pre-imported by ESP Matter mod
 Can I configure Wi-Fi of ESP32 Matter devices by BLE？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes. For all the application examples in the `esp-matter <https://github.com/espressif/esp-matter>`_ SDK, Wi-Fi is configured by BLE. You can refer to Section `2.2 Commissioning and Control <https://docs.espressif.com/projects/esp-matter/en/main/esp32c3/developing.html#commissioning-and-control>`_.
+  - ESP32 Matter devices can be provisioned via BLE, all application test examples under our `esp-matter <https://github.com/espressif/esp-matter>`_ SDK are configured through BLE. Please refer to section `2.2 Commissioning and Control <https://docs.espressif.com/projects/esp-matter/en/latest/esp32/developing.html#commissioning-and-control>`__ for instructions.

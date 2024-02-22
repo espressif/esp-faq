@@ -97,4 +97,4 @@ How can I achieve cyclic data transmission using the RMT TX channel on ESP32-S3,
 Does the ESP32-S3 support One-Wire?
 ---------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32-S3 supports `One-Wire bus protocol <https://www.maximintegrated.com/en/design/technical-documents/tutorials/1/1796.html>`_ with the RMT peripheral. For specific applications, please refer to `"esp-idf/examples/peripherals/rmt/ onewire_ds18b20" <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/peripherals/rmt/onewire_ds18b20>`_. 
+  - ESP32-S3 can support the `One-Wire bus protocol <https://www.maximintegrated.com/en/design/technical-documents/tutorials/1/1796.html>`_ through the RMT peripheral. For specific applications, refer to the `"esp-idf/examples/peripherals/rmt/onewire" <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/peripherals/rmt/onewire>`_ example.

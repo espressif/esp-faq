@@ -232,7 +232,7 @@ Can the ESP32-S2/ESP32-S3 USB recognize the USB plugging and unplugging action w
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes, the USB device uses the tinyusb protocol stack, including mount and umount callback functions to response the USB plugging and unplugging events.
-  - It should be noted that if this device is a self-powered USB device, please reserve a VBUS detection pin if you need to detect plugging and unplugging actions when it is powered on. For detail, please refer to `Solution of Self-Powered USB Device <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/esp32/usb/usb_device_self_power.html>__`.
+  - Please note that if the device is a self-powered USB device and you need to detect the plug and unplug action without power off, please reserve the VBUS detection pin. Refer to the `Self-Powered USB Device Solution <https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_overview/usb_device_self_power.html>`_.
 
 ---------------------
 
@@ -278,7 +278,7 @@ When I attempted to download and print log via the USB interface using the comma
 How can I apply for USB VID/PID for ESP32-S series products?
 ---------------------------------------------------------------------------------------------------------------------------
 
-  - You can use default TinyUSB PIDs if your software stack is based on TinyUSB. Otherwise, you need to apply for PID for each ESP32-S series product. For details, please refer to `"usb-pids <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/esp32/usb/usb_vid_pid.html>`_.
+  - If your software is based on the TinyUSB protocol stack, you can use the default TinyUSB PID. Otherwise, you need to apply for a USB VID/PID for each ESP32-S series product. For detailed instructions, please refer to `"usb-pids" <https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_overview/usb_vid_pid.html>`__.
 
 --------------
 
@@ -291,7 +291,7 @@ Is it possible to fix the COM port when downloading firmware using the USB-Seria
 
     REG ADD HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\usbflags\303A10010101 /V IgnoreHWSerNum /t REG_BINARY /d 01
 
-  - For more information, please refer to `Prevent Windows from Increasing COM Number According to Serial Numbers of USB Devices <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/esp32/usb/usb_device_const_COM.html>__`.
+  - For more information, please refer to `Preventing Windows from incrementing COM numbers based on USB device serial numbers <https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_overview/usb_device_const_COM.html>`_.
 
 ---------------------
 

@@ -311,7 +311,7 @@ ESP32 如何调整 Wi-Fi 的发射功率？
       xEventGroupClearBits(s_wifi_event_group, CONNECTED_BIT);
     }
 
-  当回调函数接收到 ``WIFI_EVENT_STA_DISCONNECTED`` 事件时，可以通过结构体 `wifi_event_sta_disconnected_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv429wifi_event_sta_disconnected_t>`_ 的变量 ``reason`` 获取到失败原因。
+  当回调函数接收到 ``WIFI_EVENT_STA_DISCONNECTED`` 事件时，可以通过结构体 `wifi_event_sta_disconnected_t <https://github.com/espressif/esp-idf/blob/5454d37d496a8c58542eb450467471404c606501/components/esp_wifi/include/esp_wifi_types_generic.h#L815>`__ 的变量 ``reason`` 获取到失败原因。
 
   - ``WIFI_REASON_AUTH_EXPIRE`` 在连接的 auth 阶段，STA 发送了 auth，但在规定时间内未收到 AP 的 auth 回复，有较低概率会出现。
 
@@ -810,7 +810,7 @@ ESP32 模组挂机测试有时会打印类似如下 log，代表什么含义？
     [21-01-27_14:53:59]I (81450337) wifi:new:<7,2>, old:<7,0>, ap:<255,255>, sta:<7,2>, prof:1
 
   - 其中，``new`` 后的数值表示当前主次信道；``old`` 后的数值表示上次主次信道；``ap`` 后的数值表示当前 ESP32 AP 的主次信道，若没有使能 softAP 对应的值就是 255；``sta`` 后的数值表示当前 ESP32 sta 的主次信道；``prof`` 是 nvs 里面存储的 ESP32 softAP 的信道。
-  - 有关次信道代表的数值，请参考 `wifi_second_chan_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_second_chan_t#_CPPv418wifi_second_chan_t>`_。
+  - 有关次信道代表的数值，请参考 `wifi_second_chan_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv420esp_wifi_set_channel7uint8_t18wifi_second_chan_t>`__。
   - 上述 log 信息表示路由器在 HT20 和 HT40 minus 之间切换，可以检查下路由器的 Wi-Fi 频宽设置。
 
 ---------------
@@ -956,7 +956,7 @@ WFA 漏洞修复最新情况？
 --------------------------------------------------------------------------------------------
   :CHIP\: ESP32 | ESP32-S2 | ESP32-C3 |  ESP8266:
 
-  详情请参考乐鑫官网上  `Wi-Fi 安全公告 <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability.pdf>`_。
+  详情请参考乐鑫官网上  `Wi-Fi 安全公告 <https://www.espressif.com/sites/default/files/advisory_downloads/AR2021-003%20Security%20Advisory%20for%20WFA%20vulnerability%20EN_0.pdf>`_。
 
 -----------------------------------------------------------------------------------------------------
 
@@ -1290,7 +1290,7 @@ ESP32 支持 WPA3 企业版吗？
 ESP 模组支持 WAPI (Wireless LAN Authentication and Privacy Infrastructure) 功能吗？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  支持，请参考 `WIFI_AUTH_WAPI_PSK <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html?highlight=wifi_auth_wapi_psk#_CPPv4N16wifi_auth_mode_t18WIFI_AUTH_WAPI_PSKE>`_。
+  支持，请参考 `Wi-Fi 功能列表 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#esp32-wi-fi>`__。
 
 -------------
 

@@ -411,7 +411,7 @@ ESP32 编译生成的 bin 文件大小如何优化？
 ESP32 是否有系统重新启动的 API？
 ------------------------------------------------------------------------------
 
-  - 系统重新启动的 API 可使用 ``esp_restart()``，相关说明可 `参见 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/ota.html?highlight=esp_restart#id5>`__ 。
+  - 系统重新启动的 API 可使用 ``esp_restart()``，相关说明可 `参见 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/misc_system_api.html#_CPPv411esp_restartv>`__ 。
 
 --------------
 
@@ -772,7 +772,7 @@ ESP32 在使用 esp_timer 时，出现网络通信或者蓝牙通信异常，是
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - esp_timer 是高精度的硬件定时器组件，后台一些组件也使用 esp_timer 完成一些系统任务。在使用 esp_timer 时，请不要在该定时器的回调函数中使用延时、阻塞类的 API，应尽可能地保证回调函数能够快速地被执行结束，以免影响系统其他组件的功能。
-  - 如您需要的定时精度不是太高，请使用 FreeRTOS 中的定时器组件 `xTimer <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/freertos.html#timer-api>`_。
+  - 如您需要的定时精度不是太高，请使用 FreeRTOS 中的定时器组件 `xTimer <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/freertos_idf.html#id33>`_。
 
 --------------
 

@@ -86,7 +86,7 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？
   错误日志：``fatal error: audio_type_def.h: No such file or directory``
 
   - 文件 audio_type_def.h 位于 ESP-ADF 的 esp-adf-libs 中。如果在编译过程中找不到该文件，则说明 ESP-ADF v2.4 可能未被正确检测出，特别是子模块可能尚未更新。
-  - 要正确检测 ESP-ADF v2.4，请按照 `更新至一个稳定发布版本 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/versions.html#id7>`_ 中所述的步骤进行操作。
+  - 要正确检测 ESP-ADF v2.4，请按照 `更新至一个稳定发布版本 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/versions.html#id10>`_ 中所述的步骤进行操作。
   - 尝试执行以下命令并重复编译。
 
     .. code:: shell
@@ -101,7 +101,7 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？
 请问在哪里可以查看 ESP-ADF 版本支持的 ESP-IDF 版本情况？
 ---------------------------------------------------------------------
 
-  请参考 `ESP-ADF 下支持的 ESP-IDF 版本 <https://github.com/espressif/esp-adf?tab=readme-ov-file#idf-version>`_。
+  请参考 `ESP-ADF 下支持的 ESP-IDF 版本 <https://github.com/espressif/esp-adf/blob/master/README.md#idf-version>`__。
 
 --------------
 
@@ -143,7 +143,7 @@ ESP32 是否有同时支持 MIC 和 AUX 拾音的开发板？
 如何利用 ESP32-LyraT 开发板实现通话功能？
 -------------------------------------------------------
 
-  可参考语音通话例程 `VoIP <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/voip>`__。
+  可参考语音通话例程 `VoIP <https://github.com/espressif/esp-adf/tree/master/examples/protocols/voip>`__。
 
 ---------------
 
