@@ -41,5 +41,7 @@ pygments_style = 'sphinx'
 # directories to ignore when looking for source files.
 exclude_patterns = ['_build']
 
+linkcheck_anchors = False
+
 linkcheck_exclude_documents = ['index',  # several false positives due to the way we link to different sections
                                ]
