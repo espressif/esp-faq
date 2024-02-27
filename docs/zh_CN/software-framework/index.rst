@@ -15,4 +15,6 @@
    安全 <security>
    储存 <storage/index>
    系统 <system>
+   Thread <thread>
    Wi-Fi <wifi>
+   Zigbee <zigbee>

@@ -84,7 +84,9 @@ specified_files:
   - docs/zh_CN/software-framework/storage/spi-flash.rst
   - docs/zh_CN/software-framework/storage/spiffs.rst
   - docs/zh_CN/software-framework/system.rst
+  - docs/zh_CN/software-framework/thread.rst  
   - docs/zh_CN/software-framework/wifi.rst
+  - docs/zh_CN/software-framework/zigbee.rst  
 
 # test-verification
   - docs/zh_CN/test-verification/index.rst
