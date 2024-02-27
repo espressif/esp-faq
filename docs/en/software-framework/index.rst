@@ -15,4 +15,6 @@ Software framework
    Security <security>
    Storage <storage/index>
    System <system>
+   Thread <thread>
    Wi-Fi <wifi>
+   Zigbee <zigbee>
