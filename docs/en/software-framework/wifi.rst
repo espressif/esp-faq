@@ -1348,6 +1348,13 @@ How to prevent any radio frequency waves from being sent in ESP32 Wi-Fi Scan mod
 
   - Use the `esp_wifi_scan_start() <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv419esp_wifi_scan_startPK18wifi_scan_config_tb>`_ API to set ESP32 to passive scan mode `WIFI_SCAN_TYPE_PASSIVE <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv4N16wifi_scan_type_t22WIFI_SCAN_TYPE_PASSIVEE>`_.
 
+-------------
+
+What is the default 802.11 Wi-Fi protocol when the ESP32-C6 is in Wi-Fi AP mode?
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  - When ESP32-C6 enables Wi-Fi AP mode, it uses the mixed mode of 802.11b/g/n by default. The protocol can be set via `esp_wifi_set_protocol() <https://docs.espressif.com/projects/esp-idf/en/v5.1.2/esp32c6/api-reference/network/esp_wifi.html#_CPPv421esp_wifi_set_protocol16wifi_interface_t7uint8_t>`_.
+
 -------------------
 
 Why can't the ESP32 Wi-Fi Station connect to a Wi-Fi hotspot in 2.4 GHz Enhanced Open mode?
