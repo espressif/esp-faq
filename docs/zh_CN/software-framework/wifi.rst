@@ -1348,6 +1348,13 @@ ESP 模组支持 Wi-Fi HaLow 功能吗？
 
   - 使用 `esp_wifi_scan_start() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv419esp_wifi_scan_startPK18wifi_scan_config_tb>`_ API 将 ESP32 设置为被动扫描模式 `WIFI_SCAN_TYPE_PASSIVE <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv4N16wifi_scan_type_t22WIFI_SCAN_TYPE_PASSIVEE>`_ 即可。
 
+-------------
+
+ESP32-C6 开启 Wi-Fi AP 模式时，默认使用的 802.11 Wi-Fi 协议类型是什么？
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-C6 开启 Wi-Fi AP 模式时，默认使用 802.11b/g/n 混合模式。可通过 `esp_wifi_set_protocol() <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.1.2/esp32c6/api-reference/network/esp_wifi.html#_CPPv421esp_wifi_set_protocol16wifi_interface_t7uint8_t>`_ 设置协议类型。
+
 -------------------
 
 ESP32 Wi-Fi Station 无法连接上 2.4 GHz Enhanced Open mode 模式的 Wi-Fi 热点，是什么原因？
