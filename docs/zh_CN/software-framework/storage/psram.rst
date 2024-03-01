@@ -72,3 +72,18 @@ ESP32 支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存吗？
 ----------------------------------------------------------------------------------
 
   ESP32 可以支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存使用。
+
+--------------
+
+基于 ESP32-S3-WROOM-N4R2 开启 ``BT/BLE will first malloc the memory form the PARAM`` 配置选项后，软件运行报错如下日志，但关闭 Bluetooth LE 5.0 配置后，运行正常。是什么原因？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: c
+
+    E(36997)BLE_INIT:Mallocfailed
+    E(37307)BLE_INIT:Mallocfailed
+    E(38307)BLE_INIT:Mallocfailed
+    E(39307)BLE_INIT:Mallocfailed
+    E(40307)BLE_INIT:Mallocfailed
+
+  - 当前报错是因为 Malloc 内存不足，当应用内存小于 ``idf.py menuconfig > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``(16384) Maximum malloc() zise , in bytes , to always put in internal memory`` 配置时，会默认使用芯片内部内存。可以将此配置调小，或者将 ``idf.py menuconfig`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``SPI RAM access method`` 配置改为 ``Make RAM allocatable using heap_caps_malloc(...... MALLOC_CAP_SPIRAM)`` 的配置。 
