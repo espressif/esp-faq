@@ -898,3 +898,10 @@ What are the ESP-IDF versions supported by different series of ESP32 chip versio
 -------------------------------------------------------------------------------------------------------------------
 
   - Please refer to the `ESP-IDF version compatibility with Espressif chip versions <https://github.com/espressif/esp-idf/blob/master/COMPATIBILITY_EN.md>`_ description.
+
+------------
+
+How to check the descriptions of error codes defined in ESP-IDF?
+------------------------------------------------------------------------------------------------------------------------------------
+
+  - See: `Error Code Reference <https://docs.espressif.com/projects/esp-idf/en/v5.0.3/esp32c3/api-reference/error-codes.html#error-codes-reference>`__.
