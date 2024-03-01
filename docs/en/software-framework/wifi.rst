@@ -1346,4 +1346,11 @@ Does the ESP module support Wi-Fi HaLow functionality?
 How to prevent any radio frequency waves from being sent in ESP32 Wi-Fi Scan mode?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Use the `esp_wifi_scan_start() <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv419esp_wifi_scan_startPK18wifi_scan_config_tb>`_ API to set ESP32 to passive scan mode (`WIFI_SCAN_TYPE_PASSIVE <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv4N16wifi_scan_type_t22WIFI_SCAN_TYPE_PASSIVEE>`_).
+  - Use the `esp_wifi_scan_start() <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv419esp_wifi_scan_startPK18wifi_scan_config_tb>`_ API to set ESP32 to passive scan mode `WIFI_SCAN_TYPE_PASSIVE <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv4N16wifi_scan_type_t22WIFI_SCAN_TYPE_PASSIVEE>`_.
+
+-------------------
+
+Why can't the ESP32 Wi-Fi Station connect to a Wi-Fi hotspot in 2.4 GHz Enhanced Open mode?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Connection to 2.4 GHz Wi-Fi hotspots in Enhanced Open mode is only supported on ESP-IDF  release/v5.2 and above. Additionally, the ``Component config > ``Wi-Fi`` > ``Enable OWE STA`` configuration option should be enabled. For more information, please refer to the `Wi-Fi Enhanced Open <https://github.com/espressif/esp-idf/blob/release/v5.2/docs/en/api-guides/wifi-security.rst#wi-fi-enhanced-open>`_ guide.

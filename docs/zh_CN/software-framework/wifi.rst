@@ -1346,4 +1346,11 @@ ESP 模组支持 Wi-Fi HaLow 功能吗？
 在 ESP32 Wi-Fi Scan 模式下如何实现不发送任何射频波？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 使用 `esp_wifi_scan_start() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv419esp_wifi_scan_startPK18wifi_scan_config_tb>`_ API 将 ESP32 设置为被动扫描模式（ `WIFI_SCAN_TYPE_PASSIVE <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv4N16wifi_scan_type_t22WIFI_SCAN_TYPE_PASSIVEE>`_ ）即可。
+  - 使用 `esp_wifi_scan_start() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv419esp_wifi_scan_startPK18wifi_scan_config_tb>`_ API 将 ESP32 设置为被动扫描模式 `WIFI_SCAN_TYPE_PASSIVE <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv4N16wifi_scan_type_t22WIFI_SCAN_TYPE_PASSIVEE>`_ 即可。
+
+-------------------
+
+ESP32 Wi-Fi Station 无法连接上 2.4 GHz Enhanced Open mode 模式的 Wi-Fi 热点，是什么原因？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 仅在 release/v5.2 及以上版本的 ESP-IDF SDK 上支持连接 2.4 GHz 的 Enhanced Open mode 模式的 Wi-Fi 热点。并且在软件上需要开启 ``Component config > ``Wi-Fi`` > ``Enable OWE STA`` 配置选项，请参见 `Wi-Fi Enhanced Open <https://github.com/espressif/esp-idf/blob/release/v5.2/docs/en/api-guides/wifi-security.rst#wi-fi-enhanced-open>`_ 说明。
