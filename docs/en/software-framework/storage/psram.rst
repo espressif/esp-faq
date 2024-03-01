@@ -72,3 +72,18 @@ Does ESP32 support coexistence between 16 MB External Flash and 8 MB External PS
 -------------------------------------------------------------------------------------------------
 
   Yes, ESP32 supports coexistence between 16 MB External Flash and 8 MB External PSRAM.
+
+--------------
+
+After enabling the ``BT/BLE will first malloc the memory form the PARAM`` configuration option on ESP32-S3-WROOM-N4R2, the software prints the following error log. However, it runs normally after disabling the Bluetooth LE 5.0 configuration. Why?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: c
+
+    E(36997)BLE_INIT:Mallocfailed
+    E(37307)BLE_INIT:Mallocfailed
+    E(38307)BLE_INIT:Mallocfailed
+    E(39307)BLE_INIT:Mallocfailed
+    E(40307)BLE_INIT:Mallocfailed
+
+  - The error is caused by insufficient Malloc memory. When the application memory is less than the configuration of ``idf.py menuconfig > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``(16384) Maximum malloc() size, in bytes, to always put in internal memory``, it will use the chip's internal memory by default. You can reduce this configuration option, or change ``idf.py menuconfig`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``SPI RAM access method`` to ``Make RAM allocatable using heap_caps_malloc(...... MALLOC_CAP_SPIRAM)``.
