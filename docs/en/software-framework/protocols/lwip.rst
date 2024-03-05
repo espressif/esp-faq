@@ -297,10 +297,11 @@ When ESP32 uses SNTP to synchronize the current time, I found that there is a ra
 
 ----------------
 
-Does IPv6 support setting static IP?
+Do IPv4 and IPv6 support setting a static IP?
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-  IPv6's link-local address is generated automatically according to certain protocol rules, so there is no need to manually set it. Therefore, it cannot set static addresses as IPVv4.
+  - If it is a local static IP, IPv4 supports manual configuration, but the local IP for IPv6 is automatically generated according to protocol rules and does not require manual configuration.
+  - If it is a global static IP, both IPv6 and IPv4 support manual configuration.
 
 ------------------------
 
