@@ -775,3 +775,11 @@ ESP32 用作 BLE server 时支持多个 client 同时连接吗？如何实现呢
 
   - 当前报告的错误是由于 BLE SPP Server 示例默认为 Class Bluetooth 控制器释放了内存。请参考 `esp_bt_controller_mem_release() <https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32/api-reference/bluetooth/controller_vhci.html#_CPPv429esp_bt_controller_mem_release13esp_bt_mode_t>`_ API 说明。
   - 设置 Bluetooth Dual Mode 模式后，需要删除 `ESP_ERROR_CHECK(esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT)); <https://github.com/espressif/esp-idf/blob/cbce221e88d52665523093b2b6dd0ebe3f1243f1/examples/bluetooth/bluedroid/ble/ble_spp_server/main/ble_spp_server_demo.c#L666>`_，然后修改 `ret = esp_bt_controller_enable(ESP_BT_MODE_BLE); <https://github.com/espressif/esp-idf/blob/cbce221e88d52665523093b2b6dd0ebe3f1243f1/examples/bluetooth/bluedroid/ble/ble_spp_server/main/ble_spp_server_demo.c#L674>`_  为 ``ret = esp_bt_controller_enable(ESP_BT_MODE_BTDM);``。
+
+-------------
+
+是否有基于 ESP32 实现的发送 Bluetooth LE Eddystone beacon 例程？
+---------------------------------------------------------------------------------------------------------------------------------
+
+  - 目前没有基于 ESP32 的发送 Bluetooth LE Eddystone beacon 例程，可参考 `Eddystone Protocol Specification <https://github.com/google/eddystone/blob/master/protocol-specification.md>`_ 说明，基于 `esp-idf/examples/bluetooth/bluedroid/ble/ble_eddystone <https://github.com/espressif/esp-idf/tree/v5.1.2/examples/bluetooth/bluedroid/ble/ble_eddystone/main>`_ 例程修改代码，自行实现发送 Bluetooth LE Eddystone beacon 的应用。
+  
