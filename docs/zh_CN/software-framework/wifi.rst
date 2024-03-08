@@ -1361,3 +1361,18 @@ ESP32 Wi-Fi Station 无法连接上 2.4 GHz Enhanced Open mode 模式的 Wi-Fi �
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 仅在 release/v5.2 及以上版本的 ESP-IDF SDK 上支持连接 2.4 GHz 的 Enhanced Open mode 模式的 Wi-Fi 热点。并且在软件上需要开启 ``Component config > ``Wi-Fi`` > ``Enable OWE STA`` 配置选项，请参见 `Wi-Fi Enhanced Open <https://github.com/espressif/esp-idf/blob/release/v5.2/docs/en/api-guides/wifi-security.rst#wi-fi-enhanced-open>`_ 说明。
+
+--------------
+
+如何判断连上的 Wi-Fi 是 Wi-Fi 4 还是 Wi-Fi 6？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------  
+
+  - 可以使用 `esp_wifi_sta_get_negotiated_phymode(wifi_phy_mode_t *phymode) <https://github.com/espressif/esp-idf/blob/5f4249357372f209fdd57288265741aaba21a2b1/components/esp_wifi/include/esp_wifi.h#L1454>`__ API 来得到当前连接的 station 的模式。以下是使用示例：
+    
+  .. code-block:: c
+
+      wifi_phy_mode_t phymode;
+      esp_wifi_sta_get_negotiated_phymode(&phymode);
+      printf("111=%d\n",phymode);
+  
+  - 如果打印的值是 3，则表明用 Wi-Fi 4 和 station 建立了连接，如果打印的值为 5，则表明用 Wi-Fi 6 和 station 建立了连接。
