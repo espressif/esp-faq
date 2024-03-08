@@ -133,7 +133,20 @@ How do I get the input level of the ESP32 RTC_GPIO?
 
     uint8_t level = (uint8_t)((REG_GET_FIELD(RTC_GPIO_IN_REG, RTC_GPIO_IN_NEXT) & BIT(gpio_num)) ? 1 : 0);
 
+----------
+
 How to use GPIO buttons in Light-sleep mode?
 ----------------------------------------------------------------
 
   The wake-up function of the button can be enabled. Please note that non-RTC GPIO cannot enable GPIO edge triggering and level triggering at the same time. You can use the existing functions of the `Button <https://components.espressif.com/components/espressif/button>`_ component to implement this.
+
+----------
+
+The default state of GPIO20 on ESP32-C6 is initially set as SDIO. How can it be changed to the regular GPIO mode?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  You can refer to the following code to change the initial SDIO state of ESP32-C6's GPIO20 to the regular GPIO mode:
+
+    .. code:: c
+
+      gpio_hal_iomux_func_sel(GPIO_PIN_MUX_REG[20], PIN_FUNC_GPIO);
