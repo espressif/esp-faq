@@ -133,7 +133,20 @@ ESP32 使用 `gpio_install_isr_service() <https://docs.espressif.com/projects/es
 
     uint8_t level = (uint8_t)((REG_GET_FIELD(RTC_GPIO_IN_REG, RTC_GPIO_IN_NEXT) & BIT(gpio_num)) ? 1 : 0);
 
+----------
+
 如何在 Light-sleep 模式下使用 GPIO 按键？
 ----------------------------------------------------------------
 
   可以启用按键的唤醒功能，注意，非 RTC GPIO 无法同时启用 GPIO 边沿触发和电平触发。可以使用 `Button <https://components.espressif.com/components/espressif/button>`_ 组件现有的功能来实现。
+
+----------
+
+ESP32-C6 的 GPIO20 初始状态默认为 SDIO 管脚，如何改为普通 GPIO 模式？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  可使用如下代码将 ESP32-C6 GPIO20 的初始 SDIO 状态改为普通 GPIO 模式：
+
+    .. code:: c
+
+      gpio_hal_iomux_func_sel(GPIO_PIN_MUX_REG[20], PIN_FUNC_GPIO);
