@@ -134,3 +134,11 @@ ESP 系列芯片能支持三线 SPI 的 9 位时钟模式（即用第 1 位表�
 
   - SPI 中 MOSI (SDA) 和 SCK 信号线的空闲电平是由 SPI 模式控制的。
   - 可以通过修改 `spi_device_interface_config_t 结构体里的 mode 成员变量  <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/peripherals/spi_master.html#_CPPv4N29spi_device_interface_config_t4modeE>`_ 来实现。
+
+----------------
+
+ESP32-C6 使用 SPI DMA 模式时，单个 DMA Buffer 最大支持多少字节？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-C6 使用 SPI DMA 模式时，单个 DMA Buffer 最大支持 4092 字节。
+

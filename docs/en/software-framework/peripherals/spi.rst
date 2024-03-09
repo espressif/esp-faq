@@ -134,3 +134,11 @@ After setting a pin of the ESP series chip as the SDA data line, the expected re
 
   - In SPI, the idle levels of the MOSI (SDA) and SCK signal lines are controlled by the SPI mode.
   - This can be achieved by modifying the `mode` member variable in the `spi_device_interface_config_t` structure `<https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/spi_master.html#_CPPv4N29spi_device_interface_config_t4modeE>`_.
+
+----------------
+
+How many bytes can a single DMA Buffer support when the ESP32-C6 is in SPI DMA mode?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - For ESP32-C6 in SPI DMA mode, a single DMA Buffer supports 4092 bytes at the maximum.
+
