@@ -905,3 +905,17 @@ ESP32-P4 是否支持浮点运算？
 ------------------------------------------------------------------------------------------------------------------------------------
 
   - 参见: `错误代码参考说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.0.3/esp32c3/api-reference/error-codes.html#error-codes-reference>`__。
+
+------------
+
+固件运行出现如下日志报错，通常是什么原因？
+----------------------------------------------------------------------------------------------
+
+  .. code:: text
+
+    Guru Meditation Error: Core  1 panic'ed (Unhandled debug exception).
+    Debug exception reason: Stack canary watchpoint triggered (zcr_task)
+
+  - 上述日志报错通常是由于固件代码耗尽所有堆栈内存。可以尝试增大 zcr_task 任务的缓冲区大小 (Buffer Size)，并使用 `esp_get_free_heap_size() <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2/esp32/api-guides/performance/ram-usage.html#id1>`_ 来检查芯片剩余可用堆内存。
+  - 如果芯片剩余内存不足，可增加 PSRAM 以扩展内存, 或参考 `内存优化 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2/esp32/api-guides/performance/ram-usage.html#id1>`_ 说明来尽可能减少堆内存分配。
+  - 更多软件异常说明参见 `严重错误 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2/esp32/api-guides/fatal-errors.html#id1>`__。
