@@ -783,3 +783,10 @@ Is there an example of implementing a Bluetooth LE Eddystone beacon based on ESP
 
   - Currently, there is no such example. You can implement such an application by modifying the `esp-idf/examples/bluetooth/bluedroid/ble/ble_eddystone <https://github.com/espressif/esp-idf/tree/v5.1.2/examples/bluetooth/bluedroid/ble/ble_eddystone/main>`_ example and referring to `Eddystone Protocol Specification <https://github.com/google/eddystone/blob/master/protocol-specification.md>`_.
   
+------------
+
+Is there an official Bluetooth LE OTA example?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes, see `esp-iot-solution/examples/bluetooth/ble_ota <https://github.com/espressif/esp-iot-solution/tree/master/examples/bluetooth/ble_ota>`_.
+  - In addition, the source code of the Bluetooth LE OTA APP for the Android and IOS versions is now public on GitHub. See `Android source code <https://github.com/EspressifApps/esp-ble-ota-android>`_ and `IOS source code <https://github.com/EspressifApps/esp-ble-ota-ios>`_. You need to manually put the bin file to be upgraded into a specific APP path. The README of the corresponding GitHub project provides instructions on where to put the file.
