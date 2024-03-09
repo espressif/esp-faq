@@ -783,3 +783,10 @@ ESP32 用作 BLE server 时支持多个 client 同时连接吗？如何实现呢
 
   - 目前没有基于 ESP32 的发送 Bluetooth LE Eddystone beacon 例程，可参考 `Eddystone Protocol Specification <https://github.com/google/eddystone/blob/master/protocol-specification.md>`_ 说明，基于 `esp-idf/examples/bluetooth/bluedroid/ble/ble_eddystone <https://github.com/espressif/esp-idf/tree/v5.1.2/examples/bluetooth/bluedroid/ble/ble_eddystone/main>`_ 例程修改代码，自行实现发送 Bluetooth LE Eddystone beacon 的应用。
   
+------------
+
+有官方的 Bluetooth LE OTA 例程吗？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 有的，见 `esp-iot-solution/examples/bluetooth/ble_ota <https://github.com/espressif/esp-iot-solution/tree/master/examples/bluetooth/ble_ota>`_。
+  - 此外，Android 和 IOS 版本的 Bluetooth LE OTA APP 源码均已在 GitHub 开放，见 `Android 源码 <https://github.com/EspressifApps/esp-ble-ota-android>`_ 和 `IOS 源码 <https://github.com/EspressifApps/esp-ble-ota-ios>`_，需要手动将待升级的 bin 文件放入特定的 APP 路径下，对应 GitHub 工程的 README 对放置路径有进行说明。
