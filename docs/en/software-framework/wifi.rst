@@ -1365,7 +1365,7 @@ Why can't the ESP32 Wi-Fi Station connect to a Wi-Fi hotspot in 2.4 GHz Enhanced
 --------------
 
 How to determine whether the connected Wi-Fi applies Wi-Fi 4 or Wi-Fi 6？
----------------------------------------------------------------------------------------------------------------------------------------------------------------------  
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - You can use `esp_wifi_sta_get_negotiated_phymode(wifi_phy_mode_t *phymode) <https://github.com/espressif/esp-idf/blob/5f4249357372f209fdd57288265741aaba21a2b1/components/esp_wifi/include/esp_wifi.h#L1454>`__ to obtian the mode of the current connected station. Here is an example:
     
@@ -1376,3 +1376,10 @@ How to determine whether the connected Wi-Fi applies Wi-Fi 4 or Wi-Fi 6？
       printf("111=%d\n",phymode);
   
   - If the printed value is 3, it indicates the connection with the station applies Wi-Fi 4. If the printed value is 5, it indicates the connection is based on Wi-Fi 6.
+
+--------------
+
+Does ESP32-S3 support AP and STA working simultaneously?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  
+  - Yes. Please refer to the example `softap_sta <https://github.com/espressif/esp-idf/tree/v5.2/examples/wifi/softap_sta>`_.
