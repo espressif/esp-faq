@@ -279,3 +279,11 @@ When using flash_download_tool to flash firmware to the ESP8266 module, how to s
 
     - Monitor voltage fluctuations during power-up and power-down processes.
     - The eFuse functionality has been enhanced in ESP32-C3/ESP32-C2 chips. You may consider replacing with the relevant products in the future.
+  
+--------------
+
+When upgrading from ESP-IDF v4.4 to v5.0 and above, the error `esp_log.h:265:27: error: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Werror=format=]265 | #define LOG_COLOR(COLOR)  "\033[0;" COLOR "m"` is reported. How can this be resolved?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - This error is caused by Espressif toolchain changes. For specific reasons and solutions, please refer to the `Migration Guide: From 4.4 to 5.0 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/migration-guides/release-5.x/5.0/gcc.html#int32-t-and-uint32-t-for-xtensa-compiler>`__.
+  - If you decide to ignore this error (not recommended), you can add ``target_compile_options(${COMPONENT_LIB} PRIVATE -Wno-pointer-sign -Wno-format)`` in the corresponding cmake of the file where the compilation error occurred.
