@@ -37,3 +37,10 @@ Arduino IDE 如何添加 ESP32 开发板？
 
   - 请前往 ``File`` -> ``Preferences`` -> ``Show verbose output during`` 勾选 ``compilation``，编译成功后，会打印一条 Python 烧录命令，其中包含待烧录的 bin 文件以及对应的烧录地址。
   - 在乐鑫官网的 `工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 页面下载 Flash 下载工具，使用 Flash 下载工具烧录时选择 bin 文件，输入对应的烧录地址即可。
+
+------------
+
+如何更新 esp32-arduino 库版本？
+---------------------------------------------------------------------------------------------
+
+  - 在 ``Tool`` > ``Board`` > ``BoardManager`` 路径下搜索 ``ESP32`` 来选择安装 `esp32-arduino <https://github.com/espressif/arduino-esp32>`_ 库的版本。
