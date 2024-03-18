@@ -94,3 +94,10 @@ When using SNTP, I encountered the error “ assert failed: sntp setoperatingmod
       if(sntp_enabled()){
       sntp_stop(); 
       } 
+
+----------------
+
+Have the ESP modules been IPv6 certified?
+-----------------------------------------------------------------------------------------------------------
+
+ - Currently not.
