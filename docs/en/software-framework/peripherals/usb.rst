@@ -300,7 +300,9 @@ Can a USB drive be used for OTA upgrades?
 
   Yes, it can be done using the component `esp_msc_ota <https://components.espressif.com/components/espressif/esp_msc_ota>`_.
 
-Does the ESP32 series chip support USB 2.0 high speed?
+------------
+
+Does the ESP32 series chip support USB 2.0 High-Speed mode (480 Mbps)?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Currently, only ESP32-P4 supports USB 2.0 high speed.
+  Currently, only ESP32-P4 supports USB 2.0 High-Speed mode.
