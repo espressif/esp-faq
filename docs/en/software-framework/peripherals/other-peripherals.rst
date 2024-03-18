@@ -28,3 +28,10 @@ Does ESP32 support PCI-E protocol?
 -----------------------------------------------------
 
   No, it doesn't.
+
+-----------------
+
+Does ESP32-P4 support video encoding and decoding?
+-----------------------------------------------------------------------------------------
+
+  Yes. ESP32-P4 Supports JPEG hardware encoding/decoding, H.264 hardware encoding, and H.264 software decoding.
