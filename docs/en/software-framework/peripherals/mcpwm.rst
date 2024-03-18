@@ -26,3 +26,10 @@ Can ESP32-S3 generate fully complementary PWM with accurate clock and duty cycle
 ---------------------------------------------------------------------------------------------------------------------
 
   By measurement, ESP32-S3 can generate complementary output waveforms with the frequency of 10 k, the duty cycle accuracy of 1 us and the dead band accuracy of 100 ns by MCPWM.
+
+-------------
+
+Does the ESP32-S3 support driving eight servos?
+--------------------------------------------------------------------------------------------------------------------------
+
+  Yes. As ESP32-S3 supports two MCPWM controllers, which includes three operators each, and each operator has two generators and two comparators. So, if each generator independently uses a comparator, it can produce a total of 2*3*2=12 PWM outputs with independently adjustable duty cycles, which can naturally meet the needs of eight servos.
