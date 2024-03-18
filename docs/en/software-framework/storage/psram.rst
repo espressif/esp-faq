@@ -94,3 +94,11 @@ Does ESP32-C6 support external PSRAM?
 -------------------------------------------------------------------------------------------------------------------
 
   - ESP32-C6 does not support external PSRAM, but ESP32-C61 supports.
+
+---------
+
+When developing with the ESP32-PICO-V3-02 chip on ESP-IDF v5.1.2, does the PSRAM speed only support 40 MHz?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - PSRAM speed also supports 80 MHz. To set it to 80 MHz, please update the configuration ``idf.py menuconfig`` > ``Serial flasher config`` > ``Flash SPI speed`` to 80 MHz.
+  - Typically, we recommend the software settings of 80 MHz flash speed + 80 MHz PSRAM speed.
