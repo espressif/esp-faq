@@ -137,3 +137,10 @@ Does the ESP module UART support LIN mode?
 --------------------------------------------------------------------------------------------------------------------------------
 
   LIN mode is not supported at the hardware level. You may conduct simulation on the software side to realize this feature, and there is currently no reference material available from the official source.
+
+------------
+
+Does ESP32 support the UART IRDA working mode?
+---------------------------------------------------------------------------------------------------------------------
+
+  ESP32 supports the UART IRDA working mode at the hardware level, but there is no corresponding driver implementation in software yet.
