@@ -130,3 +130,10 @@ How to realize UART signal inversion?
 --------------------------------------------------------------------------------------------------------------------------------
 
   You can use the `uart_set_line_inverse <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html#_CPPv421uart_set_line_inverse11uart_port_t8uint32_t>`_ interface to set it. The inverse pin parameter can be obtained from the `uart_signal_inv_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html#_CPPv417uart_signal_inv_t>`_ variable.
+
+--------------
+
+Does the ESP module UART support LIN mode?
+--------------------------------------------------------------------------------------------------------------------------------
+
+  LIN mode is not supported at the hardware level. You may conduct simulation on the software side to realize this feature, and there is currently no reference material available from the official source.
