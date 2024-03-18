@@ -164,3 +164,18 @@ ESP32 在同一个 ADC 控制器下，能同时支持部分 ADC 通道是 DMA �
   - ESP32 的 ADC2 不支持 DMA 模式。
   - 在同一个 ADC 控制器下，不支持部分 ADC 通道为 DMA 模式，部分 ADC 通道为 oneshot 模式。请参考 `ESP32 ADC hardware-limitations <https://docs.espressif.com/projects/esp-idf/en/v5.1.1/esp32/api-reference/peripherals/adc_continuous.html#hardware-limitations>`_ 说明。
   - 在软件上，建议使用 `adc_continuous_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/peripherals/adc_continuous.html#_CPPv423adc_continuous_config_t>`_ 将 ADC1 设置为 DMA 通道; 使用 `adc_oneshot_config_channel <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/peripherals/adc_oneshot.html?highlight=adc_oneshot_config_channel#_CPPv426adc_oneshot_config_channel25adc_oneshot_unit_handle_t13adc_channel_tPK22adc_oneshot_chan_cfg_t>`_ 将 ADC2 设置为 oneshot 通道。
+
+------------
+
+使用 ESP-IDF v5.1 基于 ESP32-S3-WROOM-1 模组测试 ADC2，当 GPIO12 输入 3.3 V 电压时，读出的电压为 5 V，为什么？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: c
+
+    I (455346) EXAMPLE: ADC2 Channel[1] Raw Data: 4095
+    I (455346) EXAMPLE: ADC2 Channel[1] Cali Voltage: 4985 mV
+    I (456346) EXAMPLE: ADC2 Channel[1] Raw Data: 4095
+    I (456346) EXAMPLE: ADC2 Channel[1] Cali Voltage: 4985 mV
+
+  - ADC Raw Data 读数正常，ADC 转换值变成 5 V 是因为 ESP32-S3 ADC 有效测量范围是 2900 mV，参见 `ESP32-S3 ADC 衰减等级对应有效测量范围 <https://docs.espressif.com/projects/esp-hardware-design-guidelines/zh_CN/latest/esp32s3/schematic-checklist.html#adc>`_。
+  - 超过 2900 mV 的输入电压是未定义的输入电压，因此会出现这种情况。如果要测量大于 2900 mV 的输入电压建议分压或采用 `ESP32-S3 ADC 扩展量程方案 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/others/adc_range.html#esp32-s3-adc>`_。

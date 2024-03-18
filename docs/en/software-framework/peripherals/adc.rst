@@ -164,3 +164,18 @@ Can ESP32 support some ADC channels in DMA mode and the other ADC channels in on
   - ADC2 of ESP32 does not support DMA mode.
   - In the same ADC controller, it does not support that some ADC channels are in oneshot mode and other ADC channels are in DMA mode. Please refer to the `"ESP32 ADC hardware-limitations" <https://docs.espressif.com/projects/esp-idf/en/v5.1.1/esp32/api-reference/peripherals/adc_continuous.html#hardware-limitations>`__.
   - In the software, it is recommended to use the `adc_continuous_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/peripherals/adc_continuous.html#_CPPv423adc_continuous_config_t>`_ API to set ADC1 as DMA mode and use the `adc_oneshot_config_channel <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/peripherals/adc_oneshot.html?highlight=adc_oneshot_config_channel#_CPPv426adc_oneshot_config_channel25adc_oneshot_unit_handle_t13adc_channel_tPK22adc_oneshot_chan_cfg_t>`_ API to set ADC2 as oneshot mode.
+
+------------
+
+When using ESP-IDF v5.1 to test ADC2 based on the ESP32-S3-WROOM-1 module, inputting 3.3 V via GPIO12 yet getting a read voltage of 5 V. What could be the reason?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: c
+
+    I (455346) EXAMPLE: ADC2 Channel[1] Raw Data: 4095
+    I (455346) EXAMPLE: ADC2 Channel[1] Cali Voltage: 4985 mV
+    I (456346) EXAMPLE: ADC2 Channel[1] Raw Data: 4095
+    I (456346) EXAMPLE: ADC2 Channel[1] Cali Voltage: 4985 mV
+
+  - With normal ADC raw data readings, the reason why ADC conversion value becomes 5 V is because that the effective measurement range of ESP32-S3 ADC is 2900 mV. Please refer to the `ESP32-S3 ADC attenuation level corresponding effective measurement range <https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32s3/schematic-checklist.html#adc>`_.
+  - An input voltage exceeding 2900 mV is undefined, which would lead to this situation. If you need to measure an input voltage greater than 2900 mV, it is recommended to use voltage division or adopt the `ESP32-S3 ADC Range Extension Solution <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/others/adc_range.html#esp32-s3-adc>`.
