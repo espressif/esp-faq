@@ -130,3 +130,10 @@ ESP32 的 UART0 是否可以在输出日志的同时又用作接收电脑控制�
 --------------------------------------------------------------------------------------------------------------------------------
 
   可以使用 `uart_set_line_inverse <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html#_CPPv421uart_set_line_inverse11uart_port_t8uint32_t>`_ 接口来设置。反转引脚参数可以从 `uart_signal_inv_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/uart.html#_CPPv417uart_signal_inv_t>`_ 变量中获取。
+
+--------------
+
+ESP 模组 UART 支持 LIN 模式吗?
+--------------------------------------------------------------------------------------------------------------------------------
+
+  硬件上不支持，需要软件上进行模拟，官方暂时没有参考资料。
