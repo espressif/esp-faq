@@ -19,3 +19,10 @@ What are the considerations when using the ESP32 TWAI® controller?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Please refer to the `ESP32 Series SoC Errata <https://www.espressif.com/sites/default/files/documentation/esp32_errata_en.pdf>`_ > Section *ESP32 TWAI Errata*.
+
+--------------
+
+Does ESP32-S3 support CAN-FD?
+----------------------------------------------------------------------
+
+  ESP32-S3 does not integrate a CAN-FD controller, but you can connect a CAN-FD controller with an SPI interface, such as MCP2518FD.
