@@ -137,3 +137,18 @@ ESP32 Matter 设备可以通过 BLE 来配置 Wi-Fi 吗？
 ------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP32 Matter 设备可以通过 BLE 来配置 Wi-Fi ，我们 `esp-matter <https://github.com/espressif/esp-matter>`_  SDK 下的所有应用测试例程都是通过 BLE 进行配置的。可参考章节 `2.2 Commissioning and Control <https://docs.espressif.com/projects/esp-matter/en/latest/esp32/developing.html#commissioning-and-control>`__ 说明。
+
+---------------
+
+使用 esp-matter 下的 light 例程，通过 chiptool 用指令 ``pairing ble-wifi`` 或者 ``pairing code-wifi`` 给设备配网时，遇到如下错误怎么解决？
+------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 错误日志如下：
+
+    .. code-block:: text
+
+      [1707138771.417762][46462:46464] CHIP:TOO: Pairing Failure: src/platform/Linux/BLEManagerImpl.cpp:664: CHIP Error 0x00000003: Incorrect state
+      [1707138771.417789][46462:46464] CHIP:TOO: Run command failure: src/platform/Linux/BLEManagerImpl.cpp:664: CHIP Error 0x00000003: Incorrect state
+      [1707138771.417820][46462:46464] CHIP:BLE: No adapter available for new connection establishment
+
+  - 上述错误时因为电脑没有蓝牙适配器，请使用带蓝牙适配器的电脑。笔记本一般自带蓝牙适配器，如果使用台式电脑，需要借助蓝牙 dongle 提供蓝牙功能。
