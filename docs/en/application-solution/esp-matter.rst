@@ -137,3 +137,18 @@ Can I configure Wi-Fi of ESP32 Matter devices by BLE？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP32 Matter devices can be provisioned via BLE, all application test examples under our `esp-matter <https://github.com/espressif/esp-matter>`_ SDK are configured through BLE. Please refer to section `2.2 Commissioning and Control <https://docs.espressif.com/projects/esp-matter/en/latest/esp32/developing.html#commissioning-and-control>`__ for instructions.
+
+---------------
+
+How to solve the following error when provisioning the device with the command ``pairing ble-wifi`` or ``pairing code-wifi`` using the light example in esp-matter via chiptool?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The error log is as follows:
+
+    .. code-block:: text
+
+      [1707138771.417762][46462:46464] CHIP:TOO: Pairing Failure: src/platform/Linux/BLEManagerImpl.cpp:664: CHIP Error 0x00000003: Incorrect state
+      [1707138771.417789][46462:46464] CHIP:TOO: Run command failure: src/platform/Linux/BLEManagerImpl.cpp:664: CHIP Error 0x00000003: Incorrect state
+      [1707138771.417820][46462:46464] CHIP:BLE: No adapter available for new connection establishment
+
+  - The above error is due to the computer not having a Bluetooth adapter. Please use a computer with a Bluetooth adapter. Laptops generally come with a Bluetooth adapter. If you are using a desktop computer, you will need a Bluetooth dongle to provide Bluetooth functionality.
