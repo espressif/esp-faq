@@ -142,3 +142,10 @@ How many bytes can a single DMA Buffer support when the ESP32-C6 is in SPI DMA m
 
   - For ESP32-C6 in SPI DMA mode, a single DMA Buffer supports 4092 bytes at the maximum.
 
+---------------
+
+Does ESP32, as an SPI host, support a 30 MHz clock?
+------------------------------------------------------------------------------------------------------------------------------
+
+  - Not supported. When ESP32 acts as an SPI host, it can support up to 80 MHz CLK when using SPI IO_MUX pins, and supports integer division at 80 MHz.
+  - When using GPIO matrix pins, it can support up to 40 MHz CLK. If using the full-duplex transmission mode of GPIO matrix pins, it only supports up to 26 MHz CLK. For detailed instructions, refer to the `SPI Master Driver <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/peripherals/spi_master.html#spi>`_ software usage instructions.
