@@ -306,3 +306,10 @@ Does the ESP32 series chip support USB 2.0 High-Speed mode (480 Mbps)?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Currently, only ESP32-P4 supports USB 2.0 High-Speed mode.
+
+------------
+
+How to improve the transmission rate of ESP32-S3 USB?
+---------------------------------------------------------------------------------------------------
+
+  - To enhance the transmission performance of USB, you can use USB bulk transfer mode, as well as increase the amount of data transferred per packet.
