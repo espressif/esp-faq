@@ -142,3 +142,10 @@ ESP32-C6 使用 SPI DMA 模式时，单个 DMA Buffer 最大支持多少字节�
 
   - ESP32-C6 使用 SPI DMA 模式时，单个 DMA Buffer 最大支持 4092 字节。
 
+---------------
+
+ESP32 作为 SPI 主机，是否支持 30 MHz 时钟？
+------------------------------------------------------------------------------------------------------------------------------
+
+  - 不支持。ESP32 作为 SPI 主机时，当使用 SPI IO_MUX 管脚，最高可支持 80 MHz CLK，支持 80 MHz 进行整数分频。
+  - 当使用 GPIO 矩阵管脚，最高可支持 40 MHz CLK；如果使用 GPIO 矩阵管脚的全双工传输模式，仅支持高达 26 MHz CLK。详细说明参见 `SPI 主机驱动程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.2/esp32/api-reference/peripherals/spi_master.html#spi>`_ 软件使用说明。
