@@ -790,3 +790,13 @@ ESP32 用作 BLE server 时支持多个 client 同时连接吗？如何实现呢
 
   - 有的，见 `esp-iot-solution/examples/bluetooth/ble_ota <https://github.com/espressif/esp-iot-solution/tree/master/examples/bluetooth/ble_ota>`_。
   - 此外，Android 和 IOS 版本的 Bluetooth LE OTA APP 源码均已在 GitHub 开放，见 `Android 源码 <https://github.com/EspressifApps/esp-ble-ota-android>`_ 和 `IOS 源码 <https://github.com/EspressifApps/esp-ble-ota-ios>`_，需要手动将待升级的 bin 文件放入特定的 APP 路径下，对应 GitHub 工程的 README 对放置路径有进行说明。
+
+------------
+
+使用官方的 esp-iot-solution 下的 ble_ota 例程，蓝牙协议栈默认为 Bluedroid，使用 Android EspBleOTA APP 扫描不到设备名称 ``ESP&C919``，而 IOS EspBleOTA APP 可以扫描到，是什么原因？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 对于 `ble_ota <https://github.com/espressif/esp-iot-solution/tree/master/examples/bluetooth/ble_ota>`_ 例程，蓝牙协议栈默认为 Bluedroid，Bluetooth LE 5.0 features 默认是使能的，配置路径为：``menucofnig`` > ``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` > ``Enable BLE 5.0 features``，而目前 Android EspBleOTA APP 不能支持扫描 Bluetooth LE 5.0 设备，所以扫描不到设备名称。
+  - Android 系统蓝牙 4.0 和 5.0 的蓝牙扫描是两套 API，而 IOS 是同一套，所以 IOS APP 可以扫描到设备。
+  - Android APP 需要做兼容处理才能扫描到设备，不过目前没有开发计划。如果希望 Android APP 可以扫描到设备，可以关闭 Bluetooth LE 5.0 features。
+  - 此外，当配置为 Nimble 协议栈时，可以发现 Android APP 可以扫描到设备名称 ``nimble-ble-ota``，这是因为使用 Nimble 时，Bluetooth LE 5.0 扩展广播默认是关闭的，配置路径为：``menuconfig`` > ``Example Configuration`` > ``Enable Extended Adv``。

@@ -790,3 +790,13 @@ Is there an official Bluetooth LE OTA example?
 
   - Yes, see `esp-iot-solution/examples/bluetooth/ble_ota <https://github.com/espressif/esp-iot-solution/tree/master/examples/bluetooth/ble_ota>`_.
   - In addition, the source code of the Bluetooth LE OTA APP for the Android and IOS versions is now public on GitHub. See `Android source code <https://github.com/EspressifApps/esp-ble-ota-android>`_ and `IOS source code <https://github.com/EspressifApps/esp-ble-ota-ios>`_. You need to manually put the bin file to be upgraded into a specific APP path. The README of the corresponding GitHub project provides instructions on where to put the file.
+
+------------
+
+For the ble_ota example in the esp-iot-solution repo, the default Bluetooth protocol stack is Bluedroid. The Android EspBleOTA APP cannot detect the device name ``ESP&C919``, while the IOS EspBleOTA APP can. Why?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - For the `ble_ota <https://github.com/espressif/esp-iot-solution/tree/master/examples/bluetooth/ble_ota>`_ example, the default Bluetooth protocol stack is Bluedroid, and Bluetooth LE 5.0 features are enabled by default. The configuration path is: ``menuconfig`` > ``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` > ``Enable BLE 5.0 features``. However, the current Android EspBleOTA APP does not support scanning Bluetooth LE 5.0 devices, so the device name cannot be scanned by this Android APP.
+  - Bluetooth 4.0 and 5.0 protocols in the Android system use two APIs to realize the Bluetooth scanning functionality, while the two protocols in the IOS system apply the same API. Thus, the IOS APP can scan the device.
+  - Some compatible adjustments should be made to scan devices with the Android APP. However, we do not have such development plans currently. If you want to scan the device with the Android APP, please turn off Bluetooth LE 5.0 features.
+  - Additionally, when the protocol stack is set to Nimble, the Android APP can scan the device name ``nimble-ble-ota``. This is because when using Nimble, the Bluetooth LE 5.0 extended broadcast is turned off by default. This can be configured in ``menuconfig`` > ``Example Configuration`` > ``Enable Extended Adv``.
