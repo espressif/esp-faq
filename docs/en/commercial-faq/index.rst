@@ -133,3 +133,7 @@ How can I tell if an Espressif module is in mass production or an NPI product?
   On each Espressif module, you can find a specification identifier (4 digits to 9 digits) in the lower left corner of the module marking. All Espressif mass production modules have a specification identifier starting with XX or Mn (n can be 0, 1, 2, …. for example, M0). The rest of them are NPI products. Find more information about `Espressif Module Packing Information <https://www.espressif.com/sites/default/files/documentation/Espressif_Module_Packing_Information_EN.pdf>`_ here. 
 
   Also please note that NPI product can be different from the final mass production product and may experience hardware or software issues. Thank you for your interests in our new products and helping us providing better products. Please contact our `technical support team <sales@espressif.com>`__ if you have any questions using our NPI products. 
+-----------------------------
+
+Are your products free from conflict-minerals (3TG) or do you have a certification or policy document in that regard? 
+----------------------------------------------------------------------------------------------------------------------
