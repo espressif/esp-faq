@@ -57,7 +57,7 @@ How do ESP32 Bluetooth® and Bluetooth® LE dual-mode coexist and how can I use 
 
   The ESP32 Bluetooth and Bluetooth LE dual-mode does not require complex configurations. For developers, it is simple as calling Bluetooth LE API for Bluetooth LE, and calling Classic Bluetooth API for Classic Bluetooth.
 
-  For specifications on Classic Bluetooth and Bluetooth LE coexistence, please refer to `ESP32 BT&BLE Dual-mode Bluetooth <https://www.espressif.com/sites/default/files/documentation/btble_coexistence_demo_en.pdf>`_.
+  For Classic Bluetooth and Bluetooth LE coexistence, please refer to `a2dp_gatts_coex example <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/coex/a2dp_gatts_coex>`_.
 
 --------------
 
