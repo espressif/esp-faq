@@ -57,7 +57,7 @@ ESP32 的蓝牙双模如何共存及使用？
 
   ESP32 支持的双模蓝牙并没有特殊的地方，不需要做复杂的配置或调用即可使用。从开发者的⻆度来看，Bluetooth® LE 调用 Bluetooth LE 的 API，经典蓝牙调用经典蓝牙的 API。
 
-  经典蓝牙与 Bluetooth LE 共存说明可参考文档 `ESP32 Bluetooth & Bluetooth LE 双模蓝牙共存说明 <https://www.espressif.com/sites/default/files/documentation/btble_coexistence_demo_cn.pdf>`_。
+  经典蓝牙与 Bluetooth LE 共存示例可参考 `a2dp_gatts_coex 示例 <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/coex/a2dp_gatts_coex>`_。
 
 --------------
 
