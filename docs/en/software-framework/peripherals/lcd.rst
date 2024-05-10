@@ -214,7 +214,7 @@ Why is there vertical dislocation when I drive SPI/8080 LCD screen to display LV
 When I use ESP32-C3 to drive the LCD display through the SPI interface, is it possible to use RTC_CLK as the SPI clock, so that the LCD display can normally display static pictures in Deep-sleep mode?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Deep-sleep mode: CPU and most peripherals are powered down, and only the RTC memory is active. For details, please refer to "Low Power Management" in `ESP32-C3 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf>`__.
+  - Deep-sleep mode: The CPU and most peripherals are powered down, only the RTC memory is operational. For more details, please refer to the "Low Power Management" section in the `ESP32-C3 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf>`__.
   - The SPI of ESP32-C3 only supports two clock sources, APB_CLK and XTAL_CLK, and does not support RTC_CLK. Therefore, the LCD screen cannot display static pictures in Deep-sleep mode. For details, please refer to *ESP32-C3 Technical Reference Manual* > *Reset and Clock* [`PDF <https://www.espressif.com/sites/default/files/documentation/esp32-c3_technical_reference_manual_en.pdf#resclk>`__].
   - For the LCD screen driven by the SPI interface, the driver IC generally has built-in GRAM. Thus, the static pictures can be displayed normally without the ESP continuously outputting the SPI clock, but the pictures cannot be updated during this period.
 
@@ -232,3 +232,182 @@ When using ESP32-S3 to drive an RGB screen, why does it halt or reset (TG1WDT_SY
 
   - Please check if the pins occupied by PSRAM in ESP chips or modules conflict with the RGB pins. If there is a conflict, modify the RGB pin configuration.
   - If using ESP32-S3R8, avoid using GPIO35, GPIO36, and GPIO37 pins.
+
+---------------------------
+
+When using ESP32-S3 to drive an RGB screen, an abnormal color inversion is observed, i.e., black turns into white, and white turns into black. How to handle this?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Please check whether the initialization register of the screen driver IC has set the invert_color function. For example, in ST7789, this can be corrected by configuring the Inversion register:
+
+  - INVOFF (20h): Display Inversion Off
+  - INVON (21h): Display Inversion On
+
+---------------------------
+
+How to handle color inaccuracies, such as missing colors, when driving an RGB screen with ESP32-S3?
+----------------------------------------------------------------------------------------------------------------------------
+
+  It's likely that the RGB configuration is incorrect. This problem can be troubleshot in the following ways:
+
+  - Check for RGB/BGR setting errors: For example, if the screen is set to red (0xC0, 0x0, 0x0), but the screen actually displays black.
+  - Check whether the RGB and BGR registers are set: For example, in ST7789, it can be corrected through the MADCTL (36h) register (when MADCTL (36h) = 1, it is BGR; when MADCTL (36h) = 0, it is RGB).
+  - Check for LVGL SWAP16 setting errors: If the screen is configured to red (0xC0, 0x0, 0x0), but the screen actually displays blue, please go to menuconfig → Component config → LVGL configuration → Color settings.
+  - If there's missing colors in the RGB TTL screen display, it is necessary to set R, G, B displays separately, and check whether the channel with waveform and RGB data line design are compliant.
+
+---------------------------
+
+The spaces in the LVGL's label are correctly inputted, for example "Indoor temperature 25.5℃", but the spaces are not displayed on the screen. What could be the reason and how to troubleshoot this?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This pertains to the missing display of the LVGL label. Enable the following debug items and missing characters will be filled with squares to prevent map loss:
+
+    - ``Component config`` → ``LVGL configuration`` → ``Font usage`` → ``Enable drawing placeholders when glyph dsc is not found``
+
+---------------------------
+
+When LVGL continuously loads different images stored on flash, the speed is too slow. For example, how to avoid the slow speed issue when cycling through three images on the home screen?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The reason for the slow speed is that the corresponding image caching mechanism is not turned on, so each images need to be parsed by the parser each time it is used.
+  - Enable the corresponding image caching mechanism via the ``#define LV_IMG_CACHE_DEF_SIZE 1`` macro, where 1 represents the number of cached images. Please note that this operation will consume more memory.
+
+---------------------------
+
+LVGL fails to load PNG, JPEG images from flash. What's the reason for a blank screen?
+---------------------------------------------------------------------------------------------------------------------------
+
+  - First, it is necessary to check the status of the remaining memory. LVGL needs to perform two steps to load images: loadpng_get_raw_size and loadpng_convert. If the memory is not enough, it will directly return error code 83.
+  - The memory requirements should also be estimated in advance: ``loadpng_get_raw_size`` needs memory equivalent to the image size, ``loadpng_convert`` requires memory of image length * width * 3 bytes. Enabling the image caching mechanism will cause large ``image_cache``, which will simultaneously lead to memory strain.
+
+---------------------------
+
+How to convert a GIF animation into C language code?
+---------------------------------------------------------------------------------------------------------------------------
+
+  Convert the GIF to Map option, with the Color format set to CF_RAW.
+
+---------------------------
+
+Can the screen be set to transparent when displaying GIF animations?
+---------------------------------------------------------------------------------------------------------------------------
+
+  Yes. But GIF only has a 1 bit Alpha descriptor, so it can only be fully transparent or opaque, and there is no semi-transparency.
+
+---------------------------
+
+Which image format is better for the LVGL interface? Is there any reference?
+---------------------------------------------------------------------------------------------------------------------------
+
+  You can refer to the table below:
+
+    .. list-table::
+      :header-rows: 1
+
+      * - Image format
+        - Transparent support
+        - Size
+        - Decoding speed
+      * - PNG
+        - Perfectly supported
+        - Moderate
+        - Moderate
+      * - BMP
+        - Limited support
+        - Large
+        - Fastest, no decoding required
+      * - JPG
+        - Not supported
+        - Small
+        - Fast
+
+  When converting images to MAP format via imageconverter, if using non-RAW formats such as CF_TRUE_COLOR for conversion, subsequent LVGL loading will not require re-decoding, but it will occupy a larger code segment.
+
+---------------------------
+
+When using some third-party libraries such as FreeType and Lottie with LVGL, why does the screen go blank despite the program loading normally?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  First, consider whether the task stack settings are incorrect. Generally, more than 30 KB of task stack needs to be allocated. Please refer to the following demos:
+
+  - `freetype demo <https://github.com/espressif/esp-iot-solution/tree/master/examples/hmi/lvgl_freetype>`__
+  - `lottie porting <https://docs.lvgl.io/master/libs/rlottie.html>`__
+
+---------------------------
+
+What are some good solutions if the internal RAM of ESP32-S3, driving an SPI screen, is insufficient to allocate space for the entire screen buffer?
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Use PSRAM as a framebuffer, and then use a small SRAM buffer to transfer data to the framebuffer in multiple batches (SPI DMA can't directly transfer PSRAM data). After completing the transfer, use the framebuffer to render directly. Compared to rendering directly with a small buffer and then sending data, this can prevent tearing and speed up rendering. For specific implementation, please refer to `esp_lvgl_port <https://components.espressif.com/components/espressif/esp_lvgl_port/versions/1.4.0?language=en>`__.
+
+---------------------------
+
+How to deal with diagonal tearing on the SPI screen after the hardware is rotated 90 or 270 degrees?
+---------------------------------------------------------------------------------------------------------------------------
+
+  It is recommended to enable the LVGL sw_rotate flag in normal mode to use LVGL's sw_rotate function for software rotation. However, please note that this function conflicts with full_refresh and direct_mode, so do not use them together. For example, calling sw_rotate under full_refresh will directly return without any effect.
+
+---------------------------
+
+Using the ESP32-S2 USB camera and I80 LCD simultaneously may result in the LCD display showing missing images or behaving abnormally. How can this be resolved?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Please refer to `this code <https://github.com/espressif/esp-iot-solution/blob/aefbcb52210e2fbaac7e8a8efcc68645ecd21e7a/components/bus/i2s_lcd_esp32s2_driver.c#L130>`__ to increase the startup delay time of I2S.
+
+---------------------------
+
+How to solve the unexpected crash when operating LVGL controls through non-LVGL tasks?
+---------------------------------------------------------------------------------------------------------------------------
+
+  When operating LVGL controls, use ``bsp_display_lock()`` and ``bsp_display_unlock()`` to protect operation variables, thereby ensuring thread safety.
+
+---------------------------
+
+Does ESP32-S3 support RGB888?
+---------------------------------------------------------------------------------------------------------------------------
+
+  Parallel RGB888 is not supported. Only RGB565 is supported. You can set up serial RGB888 output as follows:
+
+  .. code-block:: c
+
+    esp_lcd_rgb_panel_config_t panel_conf = {
+    ...
+    .data_width = 8,
+    .bits_per_pixel = 24,
+    ...
+    }
+
+---------------------------
+
+How can I disable the left and right swipe functionality when operating the LVGL tabview?
+---------------------------------------------------------------------------------------------------------------------------
+
+  Please add the following code: ``lv_obj_clear_flag(lv_tabview_get_content(tabview), LV_OBJ_FLAG_SCROLLABLE);``.
+
+---------------------------
+
+Does LVGL support multiple indev inputs?
+---------------------------------------------------------------------------------------------------------------------------
+
+  Yes. All input devices are managed in a linked list, supporting multiple input devices of the same and different types. For application examples, please refer to the component `espressif/esp_lvgl_port <https://components.espressif.com/components/espressif/esp_lvgl_port>`__, the current component supports inputs such as touch, button, knob, and hid_host.
+
+---------------------------
+
+Does a high CPU usage rate reported by LVGL have any impact?
+---------------------------------------------------------------------------------------------------------------------------
+
+  The CPU usage calculated by LVGL statistics is the duration of the LVGL rendering task within 500 ms, and it does not represent the real CPU usage. Please use FreeRTOS's `vTaskGetRunTimeStats <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos_idf.html#_CPPv420vTaskGetRunTimeStatsPc>`__ to calculate the real usage.
+
+---------------------------
+
+Can ESP32-S3 enter Light-sleep mode after enabling the RGB screen driver?
+---------------------------------------------------------------------------------------------------------------------------
+
+  No, it can't. When initializing the RGB interface, if ``CONFIG_PM_ENABLE`` is enabled, ``ESP_PM_NO_LIGHT_SLEEP`` will be automatically locked, preventing the system from entering Light-sleep mode. At this time, please execute ``lcd_rgb_panel_destory`` to disable the RGB screen driver before entering Light-sleep mode.
+
+---------------------------
+
+Is it supported to drive segment LCD screens?
+-------------------------------------------------------------------------------
+
+  ESP chips can't directly drive the segment LCD screen through the GPIO pin, because this fuction requires cycling between high and low voltage levels, with an AC voltage from 2.7 V to 5.0 V and typical values of 3.0 V, 3.3 V, 4.5 V, and 5.0 V. However, the chips do not support voltage range adjustment.
