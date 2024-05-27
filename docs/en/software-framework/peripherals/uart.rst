@@ -59,7 +59,7 @@ When using UART0 as a serial communication port for ESP32, what should I pay att
 
 -----------------
 
-Is it possible to use GPIO34 ～ GPIO39 from ESP32-SOLO-1 as the RX signal pin for UART and TWAI®?
+Is it possible to use GPIO34 ～ GPIO39 from ESP32 as the RX signal pin for UART and TWAI®?
 -----------------------------------------------------------------------------------------------------------------------------
 
   Yes, GPIO34 ～ GPIO39 are for receive only and can be used as the RX signal pins for UART and TWAI®.
