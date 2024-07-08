@@ -1419,3 +1419,10 @@ In WiFi AP mode, how many WiFi Station devices can ESP32-C2 series products supp
 
   - Due to hardware limitations, ESP32-C2 can support up to four WiFi Station connections in WiFi AP mode.
   - The maximum number of connections supported in WiFi AP mode varies between different chips. For details, please refer to `esp-idf/components/esp_wifi/include/esp_wifi_types.h <https://github.com/espressif/esp-idf/blob/a322e6bdad4b6675d4597fb2722eea2851ba88cb/components/esp_wifi/include/esp_wifi_types.h#L379>`_.
+
+---------------
+
+Does ESP32 support WPA3 WiFi AP mode?
+-----------------------------------------------------------------------------------------------------------------------
+
+  Yes. ESP-IDF v5.1 and above support WPA3 WiFi AP mode. Please refer to the description in `ESP-IDF v5.1 Release <https://github.com/espressif/esp-idf/releases/tag/v5.1>`_.
