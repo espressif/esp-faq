@@ -503,3 +503,32 @@ Does the 3x3 GND grid on the ESP32 series module need to be copper-plated?
 -----------------------------------------------------------------------------------------------------------
 
   It is recommended to plate copper on the 3x3 GND grid of the module.
+
+---------------
+
+Why does ESP32 fail to start upon first power-up, and it requires a reset to start normally?
+-----------------------------------------------------------------------------------------------------------
+
+  Please check if the Boot pin is connected to a capacitor that is too large.
+
+---------------
+
+What could be the possible hardware-level reasons for the failure of Ethernet PHY initialization?
+-----------------------------------------------------------------------------------------------------------
+
+  It is suggested to try to use a 0 Ω series resistor.
+
+---------------
+
+Ethernet PHY initialization is successful, but unable to obtain an IP, what could be the possible reasons at the hardware level?
+--------------------------------------------------------------------------------------------------------------------------------
+
+  Please check if there is a significant load on GPIO0, you can remove the additional circuit and test again.
+
+---------------
+
+What could be the reason that a PCB designed with the ESP32 chip can not connect to the router properly?
+-----------------------------------------------------------------------------------------------------------
+
+  - Please connect a 24 nH inductor in series on XTAL_P.
+  - Please adjust the capacitors on both sides of the crystal oscillator according to `these steps <https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32s3/schematic-checklist.html#id9>`__.
