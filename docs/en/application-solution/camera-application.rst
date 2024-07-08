@@ -283,3 +283,21 @@ What triggers “cam_hal: EV-VSYNC-OVF” in esp32-camera?
   This issue occurs when the frame synchronization signal triggered by the sensor is too fast. You can troubleshoot it following the steps below:
   - Run the `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/pic_server>`_ example. If this example runs normally, it indicates that the issue is not hardware-related.
   - Check the XCLK and resolution specified during sensor initialization. A smaller resolution or a larger XCLK can cause the frame synchronization signal triggered by the sensor to be too fast. Note that the XCLK used by the sensor should match the specified resolution.
+
+-------------------
+
+What could be the reason for the following warning log appearing in the Camera application based on ESP32-S3?
+------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: c
+
+    W (7232) cam_haL:FB-OVF
+    W (7242) cam_haL:FB-OVF
+    W (7492) cam_haL:FB-OVF
+    W (7512) cam_haL:FB-OVF
+    W (7762) cam_haL:FB-OVF
+    W (7772) cam_haL:FB-OVF
+    W (8022) cam_haL:FB-OVF
+    W (8042) cam_haL:FB-OVF
+
+  The above warning log represents a frame buffer overflow, which is caused by too fast a frame rate. Please try to reduce XCLK.
