@@ -287,3 +287,10 @@ ESP32 导入头文件 protocol_examples_common.h 后，为什么编译时提示�
 
   - 这是乐鑫工具链更新导致的错误，具体原因和解决方法可参考 `迁移指南：从 4.4 迁移到 5.0 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/migration-guides/release-5.x/5.0/gcc.html#xtensa-int32-t-uint32-t>`__。
   - 如想有意忽视这个错误（不推荐），也可以在编译报错文件对应的 cmake 里添加 ``target_compile_options(${COMPONENT_LIB} PRIVATE -Wno-pointer-sign -Wno-format)``。
+
+------------
+
+ESP32 系列产品是否支持在 `边界扫描 <https://www.jtag.com/boundary-scan/>`_ 环境中使用 JTAG 功能？从哪里可以下载 BSDL 文件？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  由于硬件限制，目前 ESP32 系列产品都不支持边界扫描功能，因此不支持在边界扫描环境中使用 JTAG，也没有 BSDL 文件。

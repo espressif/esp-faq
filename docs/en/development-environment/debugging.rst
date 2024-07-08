@@ -287,3 +287,10 @@ When upgrading from ESP-IDF v4.4 to v5.0 and above, the error `esp_log.h:265:27:
 
   - This error is caused by Espressif toolchain changes. For specific reasons and solutions, please refer to the `Migration Guide: From 4.4 to 5.0 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/migration-guides/release-5.x/5.0/gcc.html#int32-t-and-uint32-t-for-xtensa-compiler>`__.
   - If you decide to ignore this error (not recommended), you can add ``target_compile_options(${COMPONENT_LIB} PRIVATE -Wno-pointer-sign -Wno-format)`` in the corresponding cmake of the file where the compilation error occurred.
+
+------------
+
+Do ESP32 series products support the use of JTAG functionality in a `boundary scan <https://www.jtag.com/boundary-scan/>`_ environment? Where can I download the BSDL files?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Due to hardware limitations, currently ESP32 series products do not support boundary scan functions, therefore JTAG can not be used in a boundary scan environment, and there are no BSDL files.
