@@ -267,3 +267,10 @@ On ESP32, the bootloader.bin of ESP-IDF v3.0 can not start app.bin of ESP-IDF v5
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - When booting the app.bin of ESP-IDF v5.0 with the bootloader.bin of ESP-IDF v3.0, it is necessary to enable the configuration option ``idf.py menuconfig`` > ``Build type`` > ``[*] App compatible with bootloader and partition table before ESP-IDF v3.1`` on ESP-IDF v5.0.
+
+------------
+
+Does ESP32-C3 support disabling ROM code logs via OTA?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes. You can disable the ROM code log by enabling the `Boot ROM Behavior → Permanently change Boot ROM output → (X) Permanently disable logging` configuration in the software, and then update the firmware via OTA.

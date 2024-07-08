@@ -267,3 +267,10 @@ ESP32 使用 ESP-IDF v3.0 版本的 bootloader.bin 无法正常启动 ESP-IDF v5
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 当使用 ESP-IDF v3.0 版本的 bootloader.bin 启动 ESP-IDF v5.0 版本的 app.bin 时，需要在 ESP-IDF v5.0 上开启 ``idf.py menuconfig`` > ``Build type`` > ``[*] App compatible with bootloader and partition table before ESP-IDF v3.1`` 配置选项。
+
+------------
+
+ESP32-C3 是否支持通过 OTA 来关闭 ROM 代码日志？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  支持。通过在软件上开启 `Boot ROM Behavior → Permanently change Boot ROM output → (X) Permanently disable logging` 配置来关闭 ROM 代码日志，然后 OTA 新的固件即可。
