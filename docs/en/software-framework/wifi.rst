@@ -1387,6 +1387,13 @@ Does ESP32-S3 support AP and STA working simultaneously?
 --------------
 
 Does the ESP Wi-Fi module support power save mode in SoftAp mode?
------------------------------------------------------------------------------------------------------------------------------------- 
+------------------------------------------------------------------------------------------------------------------------------------
  
   This feature is currently not supported.
+
+--------------
+
+What is the maximum ranging bandwidth supported by ESP32S3 FTM?
+----------------------------------------------------------------------------------------------------------------------------------------
+  
+  ESP32S3 FTM supports maximum ranging bandwidth up to 40 MHz.
