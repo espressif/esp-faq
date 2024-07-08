@@ -532,3 +532,20 @@ ESP32 系列模组上的九宫格 GND 网格是否需要铺铜？
 
   - 请在 XTAL_P 上串联 24 nH 电感。
   - 请按照 `此步骤 <https://docs.espressif.com/projects/esp-hardware-design-guidelines/zh_CN/latest/esp32s3/schematic-checklist.html#id9>`__ 调节晶振两边的电容。
+
+------------------
+
+ESP32-C6 的 GPIO6（JTAG 管脚 MTCK）默认上电复位初始状态是输入使能和内部弱上拉电阻使能 (IE & WPU)，是否可以通过烧写 eFuse 将其改为仅输入使能 (IE)？
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以。将 EFUSE DIS_PAD_JTAG 写为 1 后，GPIO6（JTAG 管脚 MTCK）的上电复位初始状态即改为输入使能 (IE)，可参见 *`《ESP32-C6 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32-c6_datasheet_cn.pdf>`_* > *2.2 管脚概述* 中的说明。
+  - 可通过 espefuse.py burn_efuse DIS_PAD_JTAG 指令来将 EFUSE DIS_PAD_JTAG 写为 1。
+  - 也可以在应用代码中添加如下代码来将 EFUSE DIS_PAD_JTAG 写为 1：
+
+    .. code-block:: c
+
+      #include "esp_efuse.h"
+      #include "esp_efuse_table.h"
+
+      esp_efuse_write_field_bit(ESP_EFUSE_DIS_PAD_JTAG);

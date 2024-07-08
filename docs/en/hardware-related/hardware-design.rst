@@ -532,3 +532,20 @@ What could be the reason that a PCB designed with the ESP32 chip can not connect
 
   - Please connect a 24 nH inductor in series on XTAL_P.
   - Please adjust the capacitors on both sides of the crystal oscillator according to `these steps <https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32s3/schematic-checklist.html#id9>`__.
+
+------------------
+
+Is it possible to change the default power-up reset initial state of GPIO6 (JTAG pin MTCK) of ESP32-C6, which is input enabled and internal weak pull-up resistor enabled (IE & WPU), to input enable only (IE) by burning eFuse?
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Yes. After setting EFUSE DIS_PAD_JTAG to 1, the power-up reset initial state of GPIO6 (JTAG pin MTCK) is changed to input enabled (IE). Please refer to *`ESP32-C6 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-c6_datasheet_en.pdf>`_* > *Section 2.2 Pin Overview*.
+  - The EFUSE DIS_PAD_JTAG can be set to 1 using the espefuse.py burn_efuse DIS_PAD_JTAG command.
+  - You can also add the following code to the application code to set EFUSE DIS_PAD_JTAG to 1:
+
+    .. code-block:: c
+
+      #include "esp_efuse.h"
+      #include "esp_efuse_table.h"
+
+      esp_efuse_write_field_bit(ESP_EFUSE_DIS_PAD_JTAG);
