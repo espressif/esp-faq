@@ -144,3 +144,10 @@ ESP8266 连接手机热点，出现如下报错，有哪些原因？
   - `ESP32-S3-DevKitC-1 v1.0 <https://dl.espressif.com/dl/SCH_ESP32-S3-DEVKITC-1_V1_20210312C.pdf>`_ 版本开发板的 RGB LED 连接的是 GPIO48。
   - `ESP32-S3-DevKitC-1 v1.1 <https://dl.espressif.com/dl/schematics/SCH_ESP32-S3-DevKitC-1_V1.1_20221130.pdf>`_ 版本开发板的 RGB LED 连接的是 GPIO38。
   - `ESP32-S3-DevKitC-1 v1.1 <https://dl.espressif.com/dl/schematics/SCH_ESP32-S3-DevKitC-1_V1.1_20221130.pdf>`_ 版本开发板将 RGB LED 管脚改为 GPIO38 是因为 `ESP32-S3R8V 芯片 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_cn.pdf>`_ 的 VDD_SPI 电压已设置为 1.8 V。所以，不同于其他 GPIO，该芯片在 VDD_SPI 电源域中的 GPIO47 和 GPIO48 的工作电压也为 1.8 V。
+
+----------------
+
+以 ESP32-S3-DevKitC-1 开发板为电源板，给其他设备提供 3.3 V 电源时，输出电流有多大？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  `ESP32-S3-DevKitC-1 开发板 <https://dl.espressif.com/dl/schematics/SCH_ESP32-S3-DevKitC-1_V1.1_20221130.pdf>`_ 使用的电源芯片为 SGM2212-3.3XKC3G，最大可以提供 800 mA 的输出电流。
