@@ -1426,3 +1426,10 @@ Does ESP32 support WPA3 WiFi AP mode?
 -----------------------------------------------------------------------------------------------------------------------
 
   Yes. ESP-IDF v5.1 and above support WPA3 WiFi AP mode. Please refer to the description in `ESP-IDF v5.1 Release <https://github.com/espressif/esp-idf/releases/tag/v5.1>`_.
+
+---------------
+
+Do ESP chips support Short GI in SoftAP mode?
+------------------------------------------------------------------------------------------------------------------------------------
+ 
+  This feature is currently not supported.
