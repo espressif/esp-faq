@@ -1397,3 +1397,10 @@ What is the maximum ranging bandwidth supported by ESP32S3 FTM?
 ----------------------------------------------------------------------------------------------------------------------------------------
   
   ESP32S3 FTM supports maximum ranging bandwidth up to 40 MHz.
+
+--------------
+
+Do ESP chips support one STA conducting FTM with multiple APs at the same time?
+------------------------------------------------------------------------------------------------------------------------------------
+ 
+  Not supported. STA can only perform FTM with one AP at a time.
