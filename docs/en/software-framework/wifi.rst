@@ -1383,3 +1383,10 @@ Does ESP32-S3 support AP and STA working simultaneously?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
   
   - Yes. Please refer to the example `softap_sta <https://github.com/espressif/esp-idf/tree/v5.2/examples/wifi/softap_sta>`_.
+
+--------------
+
+Does the ESP Wi-Fi module support power save mode in SoftAp mode?
+------------------------------------------------------------------------------------------------------------------------------------ 
+ 
+  This feature is currently not supported.
