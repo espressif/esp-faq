@@ -1419,3 +1419,10 @@ ESP 芯片支持一个 STA 同时和多个 AP 进行 FTM 吗？
 
   - 由于硬件限制，ESP32-C2 在 WiFi AP 模式下最多支持四个 WiFi Station 连接。
   - 不同型号的芯片在 WiFi AP 模式下支持的最大连接数不一样，详情请参阅 `esp-idf/components/esp_wifi/include/esp_wifi_types.h <https://github.com/espressif/esp-idf/blob/a322e6bdad4b6675d4597fb2722eea2851ba88cb/components/esp_wifi/include/esp_wifi_types.h#L379>`_。
+
+---------------
+
+ESP32 支持 WPA3 WiFi AP 模式吗？
+-----------------------------------------------------------------------------------------------------------------------
+
+ 支持。ESP-IDF v5.1 及以上版本支持 WPA3 WiFi AP 模式，参见 `ESP-IDF v5.1 Release <https://github.com/espressif/esp-idf/releases/tag/v5.1>`_ 中的说明。
