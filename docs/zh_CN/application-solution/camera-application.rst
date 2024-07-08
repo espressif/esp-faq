@@ -283,3 +283,21 @@ esp32-camera 中触发 “cam_hal: EV-VSYNC-OVF” 是什么原因？
   这是传感器触发的帧同步信号过快导致的问题。可以按照下面的步骤进行排查：
   - 运行 `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/pic_server>`_ 示例。如果该示例能够正常运行，则说明该问题不是硬件问题。
   - 检查初始化传感器时指定的 XCLK 和分辨率的大小。分辨率变小或是 XCLK 变大，均可能导致传感器触发的帧同步信号过快。请注意，传感器使用的 XCLK 应该和当前指定的分辨率大小匹配。
+
+-------------------
+
+基于 ESP32-S3 的 Camera 应用出现如下警告日志，是什么原因？
+------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: c
+
+    W (7232) cam_haL:FB-OVF
+    W (7242) cam_haL:FB-OVF
+    W (7492) cam_haL:FB-OVF
+    W (7512) cam_haL:FB-OVF
+    W (7762) cam_haL:FB-OVF
+    W (7772) cam_haL:FB-OVF
+    W (8022) cam_haL:FB-OVF
+    W (8042) cam_haL:FB-OVF
+
+  如上警告日志代表帧 buffer 溢出，是由于帧率太快导致，可以尝试降低 XCLK 。
