@@ -1411,3 +1411,11 @@ In WiFi Station mode, which WiFi mode will ESP32-C6 use to establish a connectio
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   ESP32-C6 will prioritize establishing a connection with the router using WiFi 6.
+
+-----------------
+
+In WiFi AP mode, how many WiFi Station devices can ESP32-C2 series products support at most?
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Due to hardware limitations, ESP32-C2 can support up to four WiFi Station connections in WiFi AP mode.
+  - The maximum number of connections supported in WiFi AP mode varies between different chips. For details, please refer to `esp-idf/components/esp_wifi/include/esp_wifi_types.h <https://github.com/espressif/esp-idf/blob/a322e6bdad4b6675d4597fb2722eea2851ba88cb/components/esp_wifi/include/esp_wifi_types.h#L379>`_.
