@@ -1440,3 +1440,10 @@ Do STA and AP need to establish a connection first before executing FTM?
 -----------------------------------------------------------------------------------------------------------------
 
   No connection establishment is required, and the STA can directly initiate FTM through the AP. It is recommended to scan the AP first to confirm whether it supports FTM Responder mode. For specific operations, you can refer to the `FTM example <https://github.com/espressif/esp-idf/tree/master/examples/wifi/ftm>`_ in the esp-idf/wifi directory.
+
+---------------
+
+Do ESP chips support uAPSD in SoftAP mode?
+------------------------------------------------------------------------------------------------------------------------------------
+ 
+  uAPSD is a Wi-Fi capability that provides more power consumption savings on the client, in low periodic latency-sensitive traffic modes (such as VoIP). ESP chips currently do not support this feature.
