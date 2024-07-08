@@ -1433,3 +1433,10 @@ Do ESP chips support Short GI in SoftAP mode?
 ------------------------------------------------------------------------------------------------------------------------------------
  
   This feature is currently not supported.
+
+---------------
+
+Do STA and AP need to establish a connection first before executing FTM?
+-----------------------------------------------------------------------------------------------------------------
+
+  No connection establishment is required, and the STA can directly initiate FTM through the AP. It is recommended to scan the AP first to confirm whether it supports FTM Responder mode. For specific operations, you can refer to the `FTM example <https://github.com/espressif/esp-idf/tree/master/examples/wifi/ftm>`_ in the esp-idf/wifi directory.
