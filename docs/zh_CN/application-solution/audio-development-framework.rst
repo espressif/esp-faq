@@ -275,3 +275,10 @@ ESP32 能否实现蓝牙耳机的音量调节功能？
 ---------------------------------------------------------------------------------------------------------------
 
   可以。ESP32 使用的是蓝牙的 AVRCP 调音协议，可基于 `esp-adf/examples/player/pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_ 例程测试。
+
+---------------
+
+Wi-Fi 和 FFT 可以同时使用吗？
+-----------------------------------------------------------------------------------------------------------------
+
+  Wi-Fi 和 FFT 可同时使用。例如，可以在包含 FFT 功能的 `律动灯示例 <https://github.com/espressif/esp-adf/tree/master/examples/display/led_pixels>`__ 上直接添加 Wi-Fi 功能。

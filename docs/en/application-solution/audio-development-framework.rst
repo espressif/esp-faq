@@ -275,3 +275,10 @@ Does ESP32 support volume adjustment of Bluetooth headphones?
 ---------------------------------------------------------------------------------------------------------------
 
   Yes. ESP32 uses the Bluetooth AVRCP tuning protocol. You can test the function with the `esp-adf/examples/player/pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_ example.
+
+---------------
+
+Can Wi-Fi and FFT be used simultaneously?
+-----------------------------------------------------------------------------------------------------------------
+
+  Wi-Fi and FFT can be used simultaneously. For example, Wi-Fi functionality can be directly added to the `rhythm light example <https://github.com/espressif/esp-adf/tree/master/examples/display/led_pixels>`__ with FFT functionality.
