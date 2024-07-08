@@ -1404,3 +1404,10 @@ Do ESP chips support one STA conducting FTM with multiple APs at the same time?
 ------------------------------------------------------------------------------------------------------------------------------------
  
   Not supported. STA can only perform FTM with one AP at a time.
+
+-------------
+
+In WiFi Station mode, which WiFi mode will ESP32-C6 use to establish a connection with the router when both WiFi 4 and WiFi 6 modes are enabled on the router?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  ESP32-C6 will prioritize establishing a connection with the router using WiFi 6.
