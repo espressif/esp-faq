@@ -310,3 +310,10 @@ After connecting an Android phone to ESP SoftAP, the phone will prompt "No Inter
 
   - Reason: The DHCP ACK returned by the ESP DHCP Server includes the option3 (router) field. Therefore, after the mobile phone parses this option, it will set the default route to 192.168.4.1, causing the Apple mobile phone to access external web pages through ESP Wi-Fi instead of cellular data.
   - Solution: You can comment out the `dhcpserver.c code snippet <https://github.com/espressif/esp-idf/blob/master/components/lwip/apps/dhcpserver/dhcpserver.c#L434-L441>`__.
+
+----------------------------
+
+TCP or UDP transmission fails with the error code 12(ENOMEM). How to solve it?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  12 indicates insufficient memory. First, print the remaining internal memory. If the memory is sufficient, the error is caused by a full Wi-Fi TX buffer. In this case, please send data on the application layer more slowly or increase the Wi-Fi TX buffer in sdkconfig.
