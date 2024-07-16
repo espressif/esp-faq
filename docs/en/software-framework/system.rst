@@ -919,3 +919,11 @@ Why does the following error occur during firmware operation? What could be the 
   - The above error is usually due to the firmware code occupying all stack memory. You can try increasing the buffer size of the zcr_task task, and use `esp_get_free_heap_size() <https://docs.espressif.com/projects/esp-idf/en/v5.2/esp32/api-guides/performance/ram-usage.html#id1>`_ to check the remaining available heap memory of the chip.
   - If the remaining memory of the chip is insufficient, you can add PSRAM to expand the memory, or refer to `Memory Optimization <https://docs.espressif.com/projects/esp-idf/en/v5.2/esp32/api-guides/performance/ram-usage.html#id1>`_ for instructions on how to minimize heap memory allocation as much as possible.
   - For more information on software exception explanations, refer to `Severe Errors <https://docs.espressif.com/projects/esp-idf/en/v5.2/esp32/api-guides/fatal-errors.html#id1>`__.
+
+---------------------------------------------
+
+Does the ESP chip support using the `esp-bootloader-plus <https://github.com/espressif/esp-bootloader-plus>`__ compression upgrade scheme to upgrade other MCUs?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  No, it's not possible. Compression update for other MCUs is something the user needs to consider. In the compression update of ESP32, the decompression occurs during the bootloader stage, instead of the app stage, so it cannot directly decompress data for other MCUs. However, you can first decompress the data in ESP32 apps, and then send the decompressed data to other MCUs. You can implement this process by yourself. For details, please refer to `xz_decompress_file <https://github.com/espressif/esp-iot-solution/tree/master/examples/utilities/xz_decompress_file>`__ decompression example.
+
