@@ -236,3 +236,20 @@ ESP32-S3 开启 flash 加密或 `安全启动 <https://docs.espressif.com/projec
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 公钥信息存储在设备的签名块中，当初次启用 Secure Boot V2 时，设备将自动从签名块中读取公钥信息并写入设备。
+
+------------
+
+ESP 系列的产品开启 Secure Boot V2 功能后，是否还支持重烧固件？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP 系列的产品开启 Secure Boot V2 功能后，若没有禁用下载模式，则支持重烧固件。
+  - 注意：ESP 系列的芯片在开启 Secure Boot V2 功能后，Flash 下载工具的默认配置不支持重烧固件，需要修改 Flash 下载工具里的默认配置来支持重烧固件。以 ESP32-C3 为例：
+
+    - 修改 `esp32c3 > security.conf` 文件里的默认配置，将 ``flash_force_write_enable = False`` 改为 ``flash_force_write_enable = True``。
+    - 修改 ``esp32c3 > spi_download.conf`` 文件里的默认配置，将 ``no_stub = False`` 改为 ``no_stub = True``。
+    - 若使用 esptool，则使用如下指令重烧固件：
+  
+      .. code-block:: c
+
+        esptool.py --chip esp32c3 -p COM68 -b 460800 --before=default_reset --after=no_reset --no-stub write_flash --force --flash_mode dio --flash_freq 80m --flash_size keep 0x0 bootloader.bin 0xF000 partition-table.bin 0x20000 blink.bin 
+

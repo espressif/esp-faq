@@ -236,3 +236,20 @@ When Secure Boot V2 is enabled, how can I store the public key used for signatur
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The information of public key is stored in the device's signature block. When Secure Boot V2 is initially enabled, the device will automatically read the public key information from the signature block and write it into the device.
+
+------------
+
+After enabling the Secure Boot V2 feature on ESP series products, is it still possible to reflash the firmware?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - After enabling the Secure Boot V2 feature on ESP series products, if the download mode is not disabled, re-flashing of firmware is supported.
+  - Note: For the ESP series chips, when the Secure Boot V2 function is enabled, the default configuration of the Flash Download Tool does not support firmware reflashing. You need to modify the default configuration in the tool to support firmware reflashing. Take ESP32-C3 as an example:
+
+    - Modify the default configuration in the ``esp32c3 > security.conf`` file: Change ``flash_force_write_enable = False`` to ``flash_force_write_enable = True``.
+    - Modify the default configuration in the ``esp32c3 > spi_download.conf`` file: Change ``no_stub = False` to `no_stub = True``.
+    - If using esptool, run the following command to reflash the firmware:
+  
+      .. code-block:: c
+
+        esptool.py --chip esp32c3 -p COM68 -b 460800 --before=default_reset --after=no_reset --no-stub write_flash --force --flash_mode dio --flash_freq 80m --flash_size keep 0x0 bootloader.bin 0xF000 partition-table.bin 0x20000 blink.bin 
+
