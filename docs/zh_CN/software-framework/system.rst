@@ -919,3 +919,11 @@ ESP32-P4 是否支持浮点运算？
   - 上述日志报错通常是由于固件代码耗尽所有堆栈内存。可以尝试增大 zcr_task 任务的缓冲区大小 (Buffer Size)，并使用 `esp_get_free_heap_size() <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2/esp32/api-guides/performance/ram-usage.html#id1>`_ 来检查芯片剩余可用堆内存。
   - 如果芯片剩余内存不足，可增加 PSRAM 以扩展内存, 或参考 `内存优化 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2/esp32/api-guides/performance/ram-usage.html#id1>`_ 说明来尽可能减少堆内存分配。
   - 更多软件异常说明参见 `严重错误 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2/esp32/api-guides/fatal-errors.html#id1>`__。
+
+---------------------------------------------
+
+ESP 芯片是否支持用 `esp-bootloader-plus <https://github.com/espressif/esp-bootloader-plus>`__ 压缩升级方案给其他 MCU 升级呢？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  不可以。对其他 MCU 进行压缩更新是用户需要考虑的事情。在 ESP32 的压缩更新中，其解压过程发生在引导启动程序阶段，而不是应用程序阶段，自然无法直接对其他 MCU 的数据进行解压。但是，可以先在 ESP32 上的应用程序中解压数据，再将解压后的数据发送到其他 MCU。用户可以自行实现这一过程，详情请参考 `xz_decompress_file <https://github.com/espressif/esp-iot-solution/tree/master/examples/utilities/xz_decompress_file>`__ 解压示例。
+
