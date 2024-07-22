@@ -933,3 +933,10 @@ When developing applications based on ESP32, how can I obtain information such a
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - You can use the `vTaskList() <https://docs.espressif.com/projects/esp-idf/en/v5.2.1/esp32s3/api-reference/system/freertos_idf.html#_CPPv49vTaskListPc>`_ function based on FreeRTOS to get relevant information.
+
+------------------
+
+How to obtain the CPU usage of a task when developing applications with ESP32?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can use `vTaskGetRunTimeStats() <https://docs.espressif.com/projects/esp-idf/en/v5.2.1/esp32s3/api-reference/system/freertos_idf.html#_CPPv420vTaskGetRunTimeStatsPc>`__ based on FreeRTOS to get the CPU usage of system tasks.
