@@ -933,3 +933,10 @@ ESP 芯片是否支持用 `esp-bootloader-plus <https://github.com/espressif/esp
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 可以基于 FreeRTOS 使用 `vTaskList() <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2.1/esp32s3/api-reference/system/freertos_idf.html#_CPPv49vTaskListPc>`_ 函数来获取任务的相关信息。
+
+------------------
+
+使用 ESP32 进行软件开发，如何获取任务的 CPU 使用率？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以基于 FreeRTOS 使用 `vTaskGetRunTimeStats() <https://docs.espressif.com/projects/esp-idf/en/v5.2.1/esp32s3/api-reference/system/freertos_idf.html#_CPPv420vTaskGetRunTimeStatsPc>`__ 获取系统任务的 CPU 使用率。
