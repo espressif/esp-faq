@@ -818,3 +818,10 @@ ESP32-S3 支持同时在 125 Kbps Coded PHY 和 1 Mbps PHY 下进行广播\扫�
     - `esp-idf/examples/bluetooth/bluedroid/ble_50/multi-adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/bluedroid/ble_50/multi-adv>`_ 
     - `esp-idf/examples/bluetooth/nimble/ble_multi_adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_adv>`_ 
     - `esp-idf/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent>`_ 
+
+------------------
+
+蓝牙运行过程中打印 ``A stack overflow in stack BTC_TASK has been detected`` 错误，如何解决？
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+  这是由于蓝牙控制器的任务堆栈外溢导致的，可以在 menuconfig 调大蓝牙控制器的任务堆栈大小：``idf.py menuconfig`` --> ``Component config`` --> ``Bluetooth`` --> ``Bluedriod options`` --> ``(3072)Bluetooth event(callback to application) task stack size``。
