@@ -800,3 +800,10 @@ ESP32 用作 BLE server 时支持多个 client 同时连接吗？如何实现呢
   - Android 系统蓝牙 4.0 和 5.0 的蓝牙扫描是两套 API，而 IOS 是同一套，所以 IOS APP 可以扫描到设备。
   - Android APP 需要做兼容处理才能扫描到设备，不过目前没有开发计划。如果希望 Android APP 可以扫描到设备，可以关闭 Bluetooth LE 5.0 features。
   - 此外，当配置为 Nimble 协议栈时，可以发现 Android APP 可以扫描到设备名称 ``nimble-ble-ota``，这是因为使用 Nimble 时，Bluetooth LE 5.0 扩展广播默认是关闭的，配置路径为：``menuconfig`` > ``Example Configuration`` > ``Enable Extended Adv``。
+
+--------------
+
+ESP32-C3 的 nimble 是否支持 Coded PHY 模式？
+-----------------------------------------------------------------------------------------------------------------------------
+
+ 支持，但仅在 v5.0 及以上版本的 esp-idf SDK 中支持 nimble 的 Coded PHY 模式，可参考 `esp-idf/examples/bluetooth/nimble/ble_phy <https://github.com/espressif/esp-idf/tree/v5.0/examples/bluetooth/nimble/ble_phy>`_ 例程，支持在 1 Mbps PHY、2 Mbps PHY 和 Coded PHY（125 Kbps 与 500 Kbps）之间切换。
