@@ -320,3 +320,11 @@ Does the USB interface of ESP32-S3 support USB charging function?
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 No, ESP32-S3 does not support the USB PD (USB-PowerDelivery) protocol currently.
+
+------------
+
+A USB disk application is implemented based on the ESP32-S3 USB interface. Can the ESP32-S3 USB disk always appear as the Z: drive when plugged into a PC?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The drive letter is automatically assigned by the operating system and cannot be fixed by the software on ESP32-S3.
+  - Drive Letter Assignment: The operating system will assign an unused drive letter to the USB disk based on the existing drive letters in the current system. In Windows systems, common drive letters are English letters from A to Z. Generally, A and B are traditionally reserved for floppy disk drives, C is usually the system disk, and the remaining letters are sequentially assigned to other storage devices (including hard disk partitions, optical drives, and external USB drives, etc.).
