@@ -313,3 +313,10 @@ How to improve the transmission rate of ESP32-S3 USB?
 ---------------------------------------------------------------------------------------------------
 
   - To enhance the transmission performance of USB, you can use USB bulk transfer mode, as well as increase the amount of data transferred per packet.
+
+-------------
+
+Does the USB interface of ESP32-S3 support USB charging function?
+---------------------------------------------------------------------------------------------------------------------------------------
+
+No, ESP32-S3 does not support the USB PD (USB-PowerDelivery) protocol currently.
