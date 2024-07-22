@@ -940,3 +940,17 @@ ESP 芯片是否支持用 `esp-bootloader-plus <https://github.com/espressif/esp
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 可以基于 FreeRTOS 使用 `vTaskGetRunTimeStats() <https://docs.espressif.com/projects/esp-idf/en/v5.2.1/esp32s3/api-reference/system/freertos_idf.html#_CPPv420vTaskGetRunTimeStatsPc>`__ 获取系统任务的 CPU 使用率。
+
+------------------
+
+基于 ESP32 下载固件后无法正常启动，出现如下报错是什么原因？
+-----------------------------------------------------------------------------------------------------------
+  
+  .. code:: text
+
+   E(88)flash parts: partition 0 invalid magic number 0x5e9
+   E(95)boot: Failed to verify partition table
+   E(100)boot: load partition table error!
+
+  - 上述日志报错通常是由于下载的 ``partition-table.bin`` 的地址与实际软件上的 ``Partition Table`` > ``Offset of partition table`` 设置不匹配导致的，即 ``partition-table.bin`` 的下载地址错误。
+  - 工程编译完成后会生成 ``build`` 文件夹，在 ``build`` 文件夹下有一个 ``flash_project_args`` 文件，此文件将存储工程编译生成的 ``bin`` 文件和对应的下载地址信息。
