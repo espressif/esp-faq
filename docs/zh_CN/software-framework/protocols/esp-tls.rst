@@ -60,3 +60,10 @@ ESP-IDF 支持的 TLS 版本有哪些？
     - MBEDTLS_SSL_IN_CONTENT_LEN 过小，一般小于最大 16 K
     - 内存不够
     - 服务器拒绝 ESP 连接，发送的 SSL record 不完整，需要抓包看下, 详情请参考 `乐鑫 Wireshark 使用指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wireshark-user-guide.html#wireshark>`__。
+
+----------------
+
+使用 IP 访问 MQTTS Broker 时出现 ``MBEDTLS_ERR_X509_CERT_VERIFY_FAILED`` 错误，但是用同样的条件在 MQTTX 等测试工具中就能成功进行通信，可能是什么原因？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  可能是 CN 字段不匹配，可以通过配置成员变量 `skip_cert_common_name_check <https://github.com/espressif/esp-mqtt/blob/e6afdb4025fe018ae0add44e3c45249ea1974774/include/mqtt_client.h#L260>`__ 为 True 来跳过 CN 检查。

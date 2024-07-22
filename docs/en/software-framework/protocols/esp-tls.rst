@@ -60,3 +60,10 @@ Why does the "mbedtls_ssl_handshake returned -0x7200" error occur during the SSL
     - MBEDTLS_SSL_IN_CONTENT_LEN is too small, generally less than the maximum 16 K
     - Insufficient memory
     - The server refuses the ESP connection and the sent SSL record is incomplete. You need to capture the packet and check it. For details, please refer to `Espressif Systems Wireshark User Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wireshark-user-guide.html#espressif-wireshark-user-guide>`__.
+
+----------------
+
+When accessing the MQTTS Broker using IP, the error ``MBEDTLS_ERR_X509_CERT_VERIFY_FAILED`` occurs, but communication can be successfully carried out under the same conditions in testing tools like MQTTX. What could be the reason?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The issue might be due to a mismatch in the CN field. This can be bypassed by setting the member variable `skip_cert_common_name_check <https://github.com/espressif/esp-mqtt/blob/e6afdb4025fe018ae0add44e3c45249ea1974774/include/mqtt_client.h#L260>`__ to True to skip the CN check.
