@@ -800,3 +800,10 @@ For the ble_ota example in the esp-iot-solution repo, the default Bluetooth prot
   - Bluetooth 4.0 and 5.0 protocols in the Android system use two APIs to realize the Bluetooth scanning functionality, while the two protocols in the IOS system apply the same API. Thus, the IOS APP can scan the device.
   - Some compatible adjustments should be made to scan devices with the Android APP. However, we do not have such development plans currently. If you want to scan the device with the Android APP, please turn off Bluetooth LE 5.0 features.
   - Additionally, when the protocol stack is set to Nimble, the Android APP can scan the device name ``nimble-ble-ota``. This is because when using Nimble, the Bluetooth LE 5.0 extended broadcast is turned off by default. This can be configured in ``menuconfig`` > ``Example Configuration`` > ``Enable Extended Adv``.
+
+--------------
+
+Does the NimBLE on ESP32-C3 support the Coded PHY mode?
+-----------------------------------------------------------------------------------------------------------------------------
+
+ Yes, but only in the ESP-IDF v5.0 and above versions. You can refer to the `esp-idf/examples/bluetooth/nimble/ble_phy <https://github.com/espressif/esp-idf/tree/v5.0/examples/bluetooth/nimble/ble_phy>`_ example, which supports switching between 1 Mbps PHY, 2 Mbps PHY, and Coded PHY (125 Kbps and 500 Kbps).
