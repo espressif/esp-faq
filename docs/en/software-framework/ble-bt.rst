@@ -807,3 +807,14 @@ Does the NimBLE on ESP32-C3 support the Coded PHY mode?
 -----------------------------------------------------------------------------------------------------------------------------
 
  Yes, but only in the ESP-IDF v5.0 and above versions. You can refer to the `esp-idf/examples/bluetooth/nimble/ble_phy <https://github.com/espressif/esp-idf/tree/v5.0/examples/bluetooth/nimble/ble_phy>`_ example, which supports switching between 1 Mbps PHY, 2 Mbps PHY, and Coded PHY (125 Kbps and 500 Kbps).
+
+-------------
+
+Does ESP32-S3 support simultaneous broadcasting\scanning\connecting under both 125 Kbps Coded PHY and 1 Mbps PHY?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, please refer to the following examples:
+  
+    - `esp-idf/examples/bluetooth/bluedroid/ble_50/multi-adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/bluedroid/ble_50/multi-adv>`_ 
+    - `esp-idf/examples/bluetooth/nimble/ble_multi_adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_adv>`_ 
+    - `esp-idf/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent>`_ 

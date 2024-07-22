@@ -807,3 +807,14 @@ ESP32-C3 的 nimble 是否支持 Coded PHY 模式？
 -----------------------------------------------------------------------------------------------------------------------------
 
  支持，但仅在 v5.0 及以上版本的 esp-idf SDK 中支持 nimble 的 Coded PHY 模式，可参考 `esp-idf/examples/bluetooth/nimble/ble_phy <https://github.com/espressif/esp-idf/tree/v5.0/examples/bluetooth/nimble/ble_phy>`_ 例程，支持在 1 Mbps PHY、2 Mbps PHY 和 Coded PHY（125 Kbps 与 500 Kbps）之间切换。
+
+-------------
+
+ESP32-S3 支持同时在 125 Kbps Coded PHY 和 1 Mbps PHY 下进行广播\扫描\连接吗？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  支持，可参考例程:
+  
+    - `esp-idf/examples/bluetooth/bluedroid/ble_50/multi-adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/bluedroid/ble_50/multi-adv>`_ 
+    - `esp-idf/examples/bluetooth/nimble/ble_multi_adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_adv>`_ 
+    - `esp-idf/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent>`_ 
