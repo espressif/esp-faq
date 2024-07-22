@@ -102,3 +102,14 @@ ESP32-C6 支持外挂 PSRAM 芯片吗？
 
   - PSRAM speed 还支持 80 MHz。将 ``idf.py menuconfig`` > ``Serial flasher config`` > ``Flash SPI speed`` 设置为 80 MHz 之后，PSRAM speed 即可支持 80 MHz。
   - 通常，我们更推荐使用 80 MHz flash speed + 80 MHz PSRAM speed 的软件设置。
+
+-------------
+
+当使用 `xTaskCreateWithCaps() <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2.1/esp32/api-reference/system/freertos_additions.html#_CPPv419xTaskCreateWithCaps14TaskFunction_tPCKc22configSTACK_DEPTH_TYPEPCv11UBaseType_tP12TaskHandle_t11UBaseType_t>`_ API 分配外部 PSRAM 时，软件编译报错如下，是什么原因？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: c
+
+    assert failed: xTaskCreateStaticPinnedToCore freertos_tasks_c_additions.h:314 (xPortcheckValidStackMem(puxStackBuffer))
+
+当使用 ``xTaskCreateWithCaps()`` 分配 PSRAM 时，menuconfig 中需要启用 ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` 配置，然后将 ``SPI RAM config`` > ``SPI RAM access method`` 设置为 ``(X) Make RAM allocatable using malloc() as well`` 模式，最后需要启用 ``[*] Allow external memory as an argument to xTaskCreateStatic`` 配置选项。
