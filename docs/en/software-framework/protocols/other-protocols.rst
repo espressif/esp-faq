@@ -101,3 +101,10 @@ Have the ESP modules been IPv6 certified?
 -----------------------------------------------------------------------------------------------------------
 
  - Currently not.
+
+----------------
+
+Does the ESP module support the IPP protocol for printers?
+-----------------------------------------------------------------------------------------------------------
+
+ Currently not supported.
