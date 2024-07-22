@@ -927,3 +927,9 @@ ESP 芯片是否支持用 `esp-bootloader-plus <https://github.com/espressif/esp
 
   不可以。对其他 MCU 进行压缩更新是用户需要考虑的事情。在 ESP32 的压缩更新中，其解压过程发生在引导启动程序阶段，而不是应用程序阶段，自然无法直接对其他 MCU 的数据进行解压。但是，可以先在 ESP32 上的应用程序中解压数据，再将解压后的数据发送到其他 MCU。用户可以自行实现这一过程，详情请参考 `xz_decompress_file <https://github.com/espressif/esp-iot-solution/tree/master/examples/utilities/xz_decompress_file>`__ 解压示例。
 
+------------
+
+基于 ESP32 进行软件开发，如何获取任务状态、任务优先级、任务剩余栈以及任务使用的核心等信息？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 可以基于 FreeRTOS 使用 `vTaskList() <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2.1/esp32s3/api-reference/system/freertos_idf.html#_CPPv49vTaskListPc>`_ 函数来获取任务的相关信息。
