@@ -102,3 +102,14 @@ When developing with the ESP32-PICO-V3-02 chip on ESP-IDF v5.1.2, does the PSRAM
 
   - PSRAM speed also supports 80 MHz. To set it to 80 MHz, please update the configuration ``idf.py menuconfig`` > ``Serial flasher config`` > ``Flash SPI speed`` to 80 MHz.
   - Typically, we recommend the software settings of 80 MHz flash speed + 80 MHz PSRAM speed.
+
+-------------
+
+When using the `xTaskCreateWithCaps() <https://docs.espressif.com/projects/esp-idf/en/v5.2.1/esp32/api-reference/system/freertos_additions.html#_CPPv419xTaskCreateWithCaps14TaskFunction_tPCKc22configSTACK_DEPTH_TYPEPCv11UBaseType_tP12TaskHandle_t11UBaseType_t>`_ API to allocate external PSRAM, I encountered the following error. Why?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: c
+
+    assert failed: xTaskCreateStaticPinnedToCore freertos_tasks_c_additions.h:314 (xPortcheckValidStackMem(puxStackBuffer))
+
+When using ``xTaskCreateWithCaps()`` to allocate PSRAM, you need to enable the ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` configuration in menuconfig. Then, set the ``SPI RAM config`` > ``SPI RAM access method`` to ``(X) Make RAM allocatable using malloc() as well`` mode. Finally, you need to enable the ``[*] Allow external memory as an argument to xTaskCreateStatic`` configuration option.
