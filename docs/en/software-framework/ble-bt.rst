@@ -825,3 +825,10 @@ How to resolve the error ``A stack overflow in stack BTC_TASK has been detected`
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
   This is due to a stack overflow in the Bluetooth controller task. You can increase the stack size in menuconfig: ``idf.py menuconfig`` --> ``Component config`` --> ``Bluetooth`` --> ``Bluedriod options`` --> ``(3072)Bluetooth event(callback to application) task stack size``.
+
+----------------
+
+Does ESP32 Classic Bluetooth support AVRCP 1.5 or AVRCP 1.6?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  AVRCP 1.5 is now supported on esp-idf v5.0.4 and later versions, while AVRCP 1.6 (deprecated) is not supported. For more details, please refer to `esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c <https://github.com/espressif/esp-idf/blob/8fbf4ba6058bcf736317d8a7aa75d0578563c38b/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c#L55C35-L55C40>`__.
