@@ -927,3 +927,9 @@ Does the ESP chip support using the `esp-bootloader-plus <https://github.com/esp
 
   No, it's not possible. Compression update for other MCUs is something the user needs to consider. In the compression update of ESP32, the decompression occurs during the bootloader stage, instead of the app stage, so it cannot directly decompress data for other MCUs. However, you can first decompress the data in ESP32 apps, and then send the decompressed data to other MCUs. You can implement this process by yourself. For details, please refer to `xz_decompress_file <https://github.com/espressif/esp-iot-solution/tree/master/examples/utilities/xz_decompress_file>`__ decompression example.
 
+------------
+
+When developing applications based on ESP32, how can I obtain information such as task status, task priority, remaining task stack, and the core used by the task?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - You can use the `vTaskList() <https://docs.espressif.com/projects/esp-idf/en/v5.2.1/esp32s3/api-reference/system/freertos_idf.html#_CPPv49vTaskListPc>`_ function based on FreeRTOS to get relevant information.
