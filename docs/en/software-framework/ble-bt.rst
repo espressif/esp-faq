@@ -818,3 +818,10 @@ Does ESP32-S3 support simultaneous broadcasting\scanning\connecting under both 1
     - `esp-idf/examples/bluetooth/bluedroid/ble_50/multi-adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/bluedroid/ble_50/multi-adv>`_ 
     - `esp-idf/examples/bluetooth/nimble/ble_multi_adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_adv>`_ 
     - `esp-idf/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent>`_ 
+
+------------------
+
+How to resolve the error ``A stack overflow in stack BTC_TASK has been detected`` printed during Bluetooth operation?
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This is due to a stack overflow in the Bluetooth controller task. You can increase the stack size in menuconfig: ``idf.py menuconfig`` --> ``Component config`` --> ``Bluetooth`` --> ``Bluedriod options`` --> ``(3072)Bluetooth event(callback to application) task stack size``.
