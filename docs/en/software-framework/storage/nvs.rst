@@ -69,3 +69,10 @@ What are the meanings of NVS error codes in the ESP-IDF SDK?
 ----------------------------------------------------------------------------------------------------------------------
 
   - For the meanings of NVS error codes in the ESP-IDF SDK, refer to `esp-idf/components/nvs_flash/include/nvs.h <https://github.com/espressif/esp-idf/blob/v5.1.2/components/nvs_flash/include/nvs.h#L29>`__.
+
+----------------
+
+Is the cache disabled when writing data to NVS?
+-------------------------------------------------------------------------------------------------------
+
+  - When writing data to NVS, the cache will be disabled, and no functions that operate flash can be called within the interrupt function.
