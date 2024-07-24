@@ -1200,11 +1200,13 @@ Sometimes the rate drops or even a disconnection occurs after a period of iperf 
 
     - Bad network environment.
     - Incompatibility between the computer or mobile phone and the ESP32-S2 or ESP32-S3 softAP.
+    - Modem-sleep affects throughput. In earlier IDF version before v5.1, it is recommended to manually disable Modem-sleep when conducting iperf testing.
 
   - Solutions:
 
     - In the case of a bad network environment, change the network environment or test in a shielded box.
     - In the case of incompatibility, disable ``menuconfig`` > ``Component config`` > ``Wi-Fi`` > ``WiFi AMPDU RX``. If disconnections occur again, disable ``menuconfig`` > ``Component config`` > ``Wi-Fi`` > ``WiFi AMPDU TX``.
+    - In the case of Modem-sleep, disable Modem-sleep by ``esp_wifi_set_ps(WIFI_PS_NONE)``.
 
   .. note::
 
@@ -1249,7 +1251,8 @@ How can I optimize ESP32's slow IP address acquisition after Wi-Fi is connected 
 When ESP32/ESP32-S2/ESP32-S3 series chips work in SoftAP mode, they are susceptible to disconnect from mobile phones and PCs of other manufacturers when they are communicating with each other. How can I optimize this situation?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  It is recommended to turn off ``WiFi AMPDU RX`` and ``WiFi AMPDU TX`` options in menuconfig.
+  - It is recommended to turn off ``WiFi AMPDU RX`` and ``WiFi AMPDU TX`` options in menuconfig.
+  - You can further confirm the cause by packet capture.
 
 ---------------
 
