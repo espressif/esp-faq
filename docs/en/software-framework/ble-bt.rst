@@ -30,7 +30,7 @@ Does ESP32 support Bluetooth 5.0?
 
   No, the ESP32 hardware only supports Bluetooth LE 4.2.
 
-  The ESP32 has passed the Bluetooth LE 5.0 certification, but some of its functions are still not supported on ESP32 (there will be a future chip which supports all functions in Bluetooth LE 5.0).
+  ESP32 has passed Bluetooth LE 5.0 certification, but does not support the new functions of Bluetooth LE 5.0. If you need to use the features of Bluetooth LE 5.0, please choose other ESP32 series chips.
 
 --------------
 
@@ -48,7 +48,7 @@ Can I process OTA through Bluetooth® on ESP32?
 
   Yes, please operate basing on `bt\_spp\_acceptor <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_acceptor>`_ and `bt\_spp\_initiator <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_initiator>`_.
 
-  If using Bluetooth LE, please operate basing on `ble\_spp\_server <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_spp_server>`_ and `ble\_spp\_client <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_spp_client>`_.
+  If using Bluetooth LE, please refer to the instance `BLE_OTA <https://github.com/espressif/esp-iot-solution/tree/master/examples/bluetooth/ble_ota>`_.
 
 --------------
 
@@ -72,7 +72,7 @@ What is the throughput of ESP32 Bluetooth® LE?
 Does ESP32 support Bluetooth® 4.2 DLE (Data Length Extension)？
 ----------------------------------------------------------------------------
 
-  Yes, Bluetooth 4.2 DLE is supported in all versions of ESP-IDF. There is no sample code provided currently. You can implement this by calling corresponding APIs directly. Please refer to `esp_ble_gap_set_pkt_data_len <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp_gap_ble.html?highlight=esp_ble_gap_set_pkt_data_len#_CPPv428esp_ble_gap_set_pkt_data_len13esp_bd_addr_t8uint16_t>`_.
+  Yes. Bluetooth® 4.2 DLE is supported in all versions of ESP-IDF, and can be implemented by calling corresponding APIs directly. Please refer to `esp_ble_gap_set_pkt_data_len <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp_gap_ble.html?highlight=esp_ble_gap_set_pkt_data_len#_CPPv428esp_ble_gap_set_pkt_data_len13esp_bd_addr_t8uint16_t>`_.
 
 --------------
 
@@ -176,7 +176,7 @@ How does ESP32 Bluetooth® LE enter Light-sleep mode?
 Are there any documentation references for ESP32 BluFi networking?
 ---------------------------------------------------------------------------------
 
-  For BluFi networking, please refer to `ESP32 Blufi <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/blufi.html?highlight=blufi>`_. For BluFi networking examples, please refer to `Blufi <https://github.com/espressif/esp-idf/tree/v4.4.2/examples/bluetooth/blufi>`_.
+  For BluFi networking, please refer to `ESP32 Blufi <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/blufi.html?highlight=blufi>`_. For BluFi networking examples, please refer to `Blufi <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/blufi>`_.
 
 --------------
 
@@ -208,13 +208,6 @@ How can I get the MAC address of Bluetooth® devices for ESP32?
 
 --------------
 
-What is the default Bluetooth® transmit power for ESP32 SDK?
-------------------------------------------------------------------------
-
-  - By default, the power level of ESP32 SDK is 5, and the corresponding transmit power is +3 dBm.
-  - The power level of ESP32 Bluetooth ranges from 0 to 7, with the corresponding transmit power ranges from -12 dBm to 9 dBm. Each time the power level increases by 1, the corresponding transmit power will increase by 3 dBm.
-
---------------
 
 Is it possible to use Wi-Fi Smartconfig and Bluetooth® LE Mesh for ESP32 simultaneously?
 --------------------------------------------------------------------------------------------------
@@ -284,14 +277,6 @@ How can I confirm the MTU size of ESP32 Bluetooth® LE?
 
 --------------
 
-When advertising in ESP32 Bluetooth® LE mode, an error occurred as "W (17370) BT_BTM: data exceed max adv packet length". How can I resolve such issue?
-----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  - This is because the advertising data has exceeded the maximum advertising packet length.
-  - The maximum data length of advertising payload is 31 bytes. If the actual data length exceeds 31 bytes, the Bluetooth protocol stack will drop some data and generate an error warning.
-  - If the data to be advertised exceeds the maximum packet length, the extra data can be put in the scan response packet.
-
---------------
 
 Does ESP32 Bluetooth® LE support Client-Server mode, in which gatt server and gatt client can coexist?
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -326,21 +311,6 @@ How can I send files via Bluetooth® BR/EDR for ESP32?
 
 ---------------
 
-When I download example ESP_SPP_SERVER for ESP32, how can I modify the name of the Bluetooth® device?
-------------------------------------------------------------------------------------------------------------------
-
-  - The name of the Bluetooth device can be modified via ``adv`` parameter:
-
-  .. code-block:: text
-
-    static const uint8_t spp_adv_data[23] = {
-      0x02,0x01,0x06,
-      0x03,0x03,0xF0,0xAB,
-      0x0F,0x09,0x45,0x53,0x50,0x5f,0x53,0x50,0x50,0x5f,0x53,0x45,0x52,0x56,0x45,0x52};
-
-  - The "0x0F" in the third line means the length of the following data is 15, "0x09" stands for data type (fixed) and data from "0x45" indicates the corresponding ASCII code of the device names (BLE_SPP_SERVER by default).
-
-----------------------
 
 When I use the "BluFi" example to configure network for ESP32, the Wi-Fi cannot be connected during the distribution process via the EspBluFi application since a wrong Wi-Fi has been configured. Then the device is restarted after sending a SCAN command from the application. What is the reason?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -349,14 +319,6 @@ When I use the "BluFi" example to configure network for ESP32, the Wi-Fi cannot 
   - To solve this issue, you can add ``ESP_ERROR_CHECK(esp_wifi_disconnect());`` to the first line of the ``ESP_BLUFI_EVENT_GET_WIFI_LIST:{};`` function under the ``blufi_example_main.c`` file.
 
 -------------------
-
-How can I specify a BLE connection/transmit operation to run on core 0 when I use ESP32?
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  - Currently, ESP32's BLE connection/transmit operation only can be run on core 1. You can enable this via ``menuconfig`` > ``Component config`` > ``FreeRTOS`` > ``Run FreeRTOS only on first core`` .
-  - Based on the application requirements, you can use the `xTaskCreatePinnedToCore()` or `xTaskCreateStaticPinnedToCore()` API to create and allocate tasks. For detailed instructions, refer to `Creating Tasks <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos_idf.html#creation>`__.
-
---------------
 
 When I set name for the bluetooth of an ESP32 device using Chinese characters, messy code shows instead. What is the reason？
 ----------------------------------------------------------------------------------------------------------------------------------------
@@ -389,7 +351,7 @@ What profile does ESP32's classic Bluetooth® support?
 How many stable connections can be reached for ESP32-C3's Bluetooth® LE (BLE)?
 ------------------------------------------------------------------------------------------------
 
-  - We recommend the connection number does not exceed four.
+  Depending on the connection parameters, no more than eight are allowed. For better multi-connection performance, please choose ESP32-C6 series.
 
 ----------------
 
@@ -678,7 +640,7 @@ After setting `gatt_security_server <https://github.com/espressif/esp-idf/tree/v
 Does ESP32-C3/ESP32-C6/ESP32-S3 support Bluetooth AOA/AOD?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32-C3/ESP32-C6/ESP32-S3 does not support Bluetooth AOA/AOD. Currently, none of Espressif products support Bluetooth AOA/AOD.
+  ESP32-C3/ESP32-C6/ESP32-S3 do not support Bluetooth AOA/AOD.
 
 ------------------
 
@@ -700,7 +662,7 @@ Does ESP32 have any API to check whether BLE advertising has started or stopped?
 Does ESP32 support multiple clients connecting at the same time when used as a BLE server? How to realize it?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 can be used as a BLE server to support multiple BLE clients to access simultaneously. Meanwhile, it can also be used as a BLE client to connect to multiple BLE servers simultaneously. The supported number of BLE stable connections is 3.
+  - ESP32 can be used as a BLE server supporting multiple BLE clients to access simultaneously. Meanwhile, it can also be used as a BLE client connecting to multiple BLE servers simultaneously.
   - When used as a BLE server, you can simply enable advertising again after a client connects. Take `gatt_server_service_table <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server_service_table>`_ as an example, after receiving the ``ESP_GATTS_CONNECT_EVT`` event, please call ``esp_ble_gap_start_advertising()`` to enable advertising.
   - When used as a BLE client, please refer to `gattc_multi_connect <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gattc_multi_connect>`_.
 
@@ -782,7 +744,7 @@ Is there an example of implementing a Bluetooth LE Eddystone beacon based on ESP
 ---------------------------------------------------------------------------------------------------------------------------------
 
   - Currently, there is no such example. You can implement such an application by modifying the `esp-idf/examples/bluetooth/bluedroid/ble/ble_eddystone <https://github.com/espressif/esp-idf/tree/v5.1.2/examples/bluetooth/bluedroid/ble/ble_eddystone/main>`_ example and referring to `Eddystone Protocol Specification <https://github.com/google/eddystone/blob/master/protocol-specification.md>`_.
-  
+
 ------------
 
 Is there an official Bluetooth LE OTA example?
@@ -814,10 +776,10 @@ Does ESP32-S3 support simultaneous broadcasting\scanning\connecting under both 1
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Yes, please refer to the following examples:
-  
-    - `esp-idf/examples/bluetooth/bluedroid/ble_50/multi-adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/bluedroid/ble_50/multi-adv>`_ 
-    - `esp-idf/examples/bluetooth/nimble/ble_multi_adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_adv>`_ 
-    - `esp-idf/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent>`_ 
+
+    - `esp-idf/examples/bluetooth/bluedroid/ble_50/multi-adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/bluedroid/ble_50/multi-adv>`_
+    - `esp-idf/examples/bluetooth/nimble/ble_multi_adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_adv>`_
+    - `esp-idf/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent>`_
 
 ------------------
 

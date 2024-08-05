@@ -30,7 +30,7 @@ ESP32 可以支持 Bluetooth LE 5.0 吗？
 
   ESP32 硬件不支持 Bluetooth LE 5.0，支持 Bluetooth LE 4.2。
 
-  ESP32 目前通过了 Bluetooth LE 5.0 的认证，但 Bluetooth LE 5.0 的新功能 ESP32 不支持（未来会有其它芯片支持 Bluetooth LE 5.0 全部新功能）。
+  ESP32 目前通过了 Bluetooth LE 5.0 的认证，但不支持 Bluetooth LE 5.0 的新功能。如需使用 Bluetooth LE 5.0 的功能，请选择其它 ESP32 系列芯片。
 
 --------------
 
@@ -48,7 +48,7 @@ ESP32 能否使用蓝牙进行 OTA？
 
   可以使用蓝牙进行 OTA。如果是用 Bluetooth®，可以基于 `bt_spp_acceptor <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_acceptor>`_ 和 `bt_spp_initiator <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_initiator>`_ 修改。
 
-  如果是用 Bluetooth LE，可以基于 `ble_spp_server <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_spp_server>`_ 和 `ble_spp_client <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_spp_client>`_ 修改。
+  如果是用 Bluetooth LE，请参考例程 `BLE_OTA <https://github.com/espressif/esp-iot-solution/tree/master/examples/bluetooth/ble_ota>`_。
 
 --------------
 
@@ -72,7 +72,7 @@ ESP32 的 Bluetooth® LE 吞吐量是多少？
 ESP32 是否支持 BT4.2 DLE (Data Length Extension)？
 ---------------------------------------------------------
 
-  支持。ESP-IDF 所有版本都支持 Bluetooth® 4.2 DLE，暂无对应的 sample code，可直接调相关接口实现，参见：`esp_ble_gap_set_pkt_data_len <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/esp_gap_ble.html?highlight=esp_ble_gap_set_pkt_data_len#_CPPv428esp_ble_gap_set_pkt_data_len13esp_bd_addr_t8uint16_t>`_。
+  支持。ESP-IDF 所有版本都支持 Bluetooth® 4.2 DLE，可直接调相关接口实现，参见 `esp_ble_gap_set_pkt_data_len <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/bluetooth/esp_gap_ble.html?highlight=esp_ble_gap_set_pkt_data_len#_CPPv428esp_ble_gap_set_pkt_data_len13esp_bd_addr_t8uint16_t>`_。
 
 --------------
 
@@ -176,7 +176,7 @@ ESP32 Bluetooth® LE 如何进入 Light-sleep 模式呢？
 选择 ESP32 芯片实现蓝牙配网的方式，是否有文档可以提供参考？
 -----------------------------------------------------------
 
-  蓝牙配网说明可参考 `ESP32 Blufi <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/blufi.html?highlight=blufi>`_。蓝牙配网示例可以参考 `Blufi <https://github.com/espressif/esp-idf/tree/v4.4.2/examples/bluetooth/blufi>`_。
+  蓝牙配网说明可参考 `ESP32 Blufi <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/blufi.html?highlight=blufi>`_。蓝牙配网示例可以参考 `Blufi <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/blufi>`_。
 
 --------------
 
@@ -208,13 +208,6 @@ ESP32 如何获取蓝牙设备的 MAC 地址？
 
 --------------
 
-ESP32 SDK 中默认的蓝牙的发射功率是多少？
--------------------------------------------------
-
-  - ESP32 SDK 中默认情况下使用功率级别 5，相应的发射功率为 +3 dBm。
-  - ESP32 蓝牙的发射功率从 0 到 7，共有 8 个功率级别，发射功率范围从 –12 dBm 到 9 dBm。功率电平每增加 1 时，发射功率增加 3 dBm。
-
---------------
 
 ESP32 Wi-Fi Smartconfig 配网和 Bluetooth® LE Mesh 可以同时使用吗？
 -------------------------------------------------------------------
@@ -284,14 +277,6 @@ ESP32 Bluetooth® LE MTU 大小如何确定？
 
 --------------
 
-ESP32 Bluetooth® LE 模式下广播数据时遇到 "W (17370) BT_BTM: data exceed max adv packet length" 如何解决？
---------------------------------------------------------------------------------------------------------------------------
-
-  - 出现该警告的原因是广播的数据长度超出最大广播数据包长度限制。
-  - 广播有效载荷数据长度最大为 31 字节。如果超过 31 字节，那么蓝牙协议栈会丢弃一些数据，并且给出警告。
-  - 如果需要广播的数据长度超出最大限制，超出的数据可以放在扫描响应数据包 (scan response data) 中。
-
---------------
 
 ESP32 Bluetooth® LE 能否同时支持主从模式，作 gatt server 的同时，也可作为 gatt client 接收其他设备的广播数据？
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -326,21 +311,6 @@ ESP32 如何通过 Bluetooth® BR/EDR 传文件？
 
 ---------------
 
-ESP32 下载 ESP_SPP_SERVER 例程，如何修改蓝牙设备名称？
------------------------------------------------------------------
-
-  - 蓝牙设备名称可以通过修改 ``adv`` 参数实现：
-
-  .. code-block:: text
-
-    static const uint8_t spp_adv_data[23] = {
-      0x02,0x01,0x06,
-      0x03,0x03,0xF0,0xAB,
-      0x0F,0x09,0x45,0x53,0x50,0x5f,0x53,0x50,0x50,0x5f,0x53,0x45,0x52,0x56,0x45,0x52};
-
-  - 第三行 0x0F 表示后续数据长度为 15，0x09 表示数据类型（固定不变），0x45 开始后续数据代表设备名称对应的 ASCII 码（默认为：BLE_SPP_SERVER)。
-
--------------
 
 ESP32 下载 BluFi 例程进行配网，若使用 EspBluFi APP 在配网过程配置了一个错误的 Wi-Fi 从而无法连接，此时从 APP 端向设备端发送“扫描”命令后就会导致设备重启，是什么原因？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -349,14 +319,6 @@ ESP32 下载 BluFi 例程进行配网，若使用 EspBluFi APP 在配网过程�
   - 但可在 blufi_example_main.c 文件下的  case ESP_BLUFI_EVENT_GET_WIFI_LIST:{}; 函数的首行增加 ESP_ERROR_CHECK(esp_wifi_disconnect()); 函数来解决此问题。
 
 ----------------
-
-使用 ESP32，如何指定 BLE 连接/发送在 core 0 上运行？
-------------------------------------------------------------------------------
-
-  - ESP32 的 BLE 连接/发送目前仅支持指定在 core 1 上运行。可通过使能 ``menuconfig`` > ``Component config`` > ``FreeRTOS`` > ``Run FreeRTOS only on first core`` 进行设置。
-  - 根据此应用需求，可使用 xTaskCreatePinnedToCore() 或 xTaskCreateStaticPinnedToCore() API 来创建任务核分配。具体说明参见 `创建任务 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/freertos_idf.html#id6>`__。
-
----------------
 
 ESP32 设置中文蓝牙设备名称会异常显示乱码，原因是什么？
 -------------------------------------------------------------------------------------------------------
@@ -389,7 +351,7 @@ ESP32 经典蓝牙支持哪些 Profile？
 ESP32-C3 Bluetooth® LE (BLE) 稳定连接的数目可以达到多少个？
 ------------------------------------------------------------
 
-  - 建议 4 个以内。
+  视连接参数而定，最多不超过八个。如需优化多连接性能，可选用 ESP32-C6 系列。
 
 ----------------
 
@@ -678,7 +640,7 @@ ESP32 蓝牙设备名称长度是否有限制？
 ESP32-C3/ESP32-C6/ESP32-S3 是否支持蓝牙 AOA/AOD?
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32-C3/ESP32-C6/ESP32-S3 均不支持蓝牙 AOA/AOD。目前，我们发布的产品都不支持蓝牙 AOA/AOD。
+  ESP32-C3/ESP32-C6/ESP32-S3 均不支持蓝牙 AOA/AOD。
 
 --------------
 
@@ -700,9 +662,9 @@ ESP32 是否有 API 可用于检查设备 BLE 广播是否开始或停止？
 ESP32 用作 BLE server 时支持多个 client 同时连接吗？如何实现呢？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 可以作为 BLE server 支持多个 BLE client 同时接入，也可以作为 BLE client 同时连接多个 BLE server。支持的 BLE 稳定连接数为 3 个。
-  - 用作 BLE server 时，只要在 client 连接之后，再次开启广播即可。以 `gatt_server_service_table <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server_service_table>`_ 为例，在收到 ``ESP_GATTS_CONNECT_EVT`` 事件后，调用 ``esp_ble_gap_start_advertising`` 重新广播。
-  - 用作 BLE client 时，可以参考 `gattc_multi_connect <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gattc_multi_connect>`_ 例程。
+  - ESP32 可以作为 BLE 服务器支持多个 BLE 客户端同时接入，也可以作为 BLE 客户端同时连接多个 BLE 服务器。
+  - 用作 BLE 服务器时，只要在客户端连接之后，再次开启广播即可。以 `gatt_server_service_table <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server_service_table>`_ 为例，在收到 ``ESP_GATTS_CONNECT_EVT`` 事件后，调用 ``esp_ble_gap_start_advertising`` 重新广播。
+  - 用作 BLE 客户端时，可以参考 `gattc_multi_connect <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gattc_multi_connect>`_ 例程。
 
 -------------
 
@@ -782,7 +744,7 @@ ESP32 用作 BLE server 时支持多个 client 同时连接吗？如何实现呢
 ---------------------------------------------------------------------------------------------------------------------------------
 
   - 目前没有基于 ESP32 的发送 Bluetooth LE Eddystone beacon 例程，可参考 `Eddystone Protocol Specification <https://github.com/google/eddystone/blob/master/protocol-specification.md>`_ 说明，基于 `esp-idf/examples/bluetooth/bluedroid/ble/ble_eddystone <https://github.com/espressif/esp-idf/tree/v5.1.2/examples/bluetooth/bluedroid/ble/ble_eddystone/main>`_ 例程修改代码，自行实现发送 Bluetooth LE Eddystone beacon 的应用。
-  
+
 ------------
 
 有官方的 Bluetooth LE OTA 例程吗？
@@ -814,10 +776,10 @@ ESP32-S3 支持同时在 125 Kbps Coded PHY 和 1 Mbps PHY 下进行广播\扫�
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   支持，可参考例程:
-  
-    - `esp-idf/examples/bluetooth/bluedroid/ble_50/multi-adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/bluedroid/ble_50/multi-adv>`_ 
-    - `esp-idf/examples/bluetooth/nimble/ble_multi_adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_adv>`_ 
-    - `esp-idf/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent>`_ 
+
+    - `esp-idf/examples/bluetooth/bluedroid/ble_50/multi-adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/bluedroid/ble_50/multi-adv>`_
+    - `esp-idf/examples/bluetooth/nimble/ble_multi_adv <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_adv>`_
+    - `esp-idf/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent <https://github.com/espressif/esp-idf/tree/v5.2.1/examples/bluetooth/nimble/ble_multi_conn/ble_multi_conn_cent>`_
 
 ------------------
 
