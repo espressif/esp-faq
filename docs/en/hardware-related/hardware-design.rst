@@ -487,7 +487,7 @@ Which crystal oscillator should be used on the ESP8266 chip?
 Do the ESP32-C2, ESP32-C3 and ESP32-C6 chips support external PSRAM chips?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  ESP32-C2, ESP32-C3, and ESP32-C6 do not support external PSRAM chips.
+  ESP32-C2, ESP32-C3, and ESP32-C6 do not support external PSRAM chips. However, ESP32-C61 will support 2 MB PSRAM.
 
 -------------
 
@@ -539,7 +539,7 @@ Is it possible to change the default power-up reset initial state of GPIO6 (JTAG
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes. After setting EFUSE DIS_PAD_JTAG to 1, the power-up reset initial state of GPIO6 (JTAG pin MTCK) is changed to input enabled (IE). Please refer to *`ESP32-C6 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-c6_datasheet_en.pdf>`_* > *Section 2.2 Pin Overview*.
+  - Yes. After setting EFUSE DIS_PAD_JTAG to 1, the power-up reset initial state of GPIO6 (JTAG pin MTCK) is changed to input enabled (IE). Please refer to `Section 2.2 Pin Overview` in `ESP32-C6 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-c6_datasheet_en.pdf>`_.
   - The EFUSE DIS_PAD_JTAG can be set to 1 using the espefuse.py burn_efuse DIS_PAD_JTAG command.
   - You can also add the following code to the application code to set EFUSE DIS_PAD_JTAG to 1:
 
