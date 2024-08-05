@@ -204,12 +204,17 @@ ESP32-C3 芯片可以使用 USB 进行固件下载，但在 ESP-IDF v4.3 下使�
 
 ---------------
 
-为什么使用 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 无法重新烧录已加密设备？
----------------------------------------------------------------------------------------------------------------------------------
+为什么使用 `flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 无法对已开启 flash 加密但未禁用下载模式的设备重新烧录固件？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32 | ESP32-S2:
 
-  - 当前 `Flash 下载工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 不支持对已加密的设备重复加密，仅支持明文一次性加密操作。
+  - flash 下载工具的默认配置开启了 eFuse 校验，若希望对已经开启 flash 加密的设备重烧固件，需要修改如下配置：
+
+    - 修改 `esp32 > security.conf` 文件里的默认配置，将 `flash_force_write_enable = False` 改为 `flash_force_write_enable = True`。
+    - 修改 `esp32 > spi_download.conf` 文件里的默认配置，将 `no_stub = False` 改为 `no_stub = True`。
+  
+  - 注意：对已开启 flash 加密的设备重烧固件，要求重烧的固件使用相同的 flash 加密密钥。若 flash 加密密钥不匹配，将无法正常运行新固件。
 
 --------------
 

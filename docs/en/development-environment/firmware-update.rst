@@ -204,12 +204,17 @@ I'm using an ESP32-WROVER-B module to download the AT firmware via the `flash do
 
 ---------------
 
-The encrypted device cannot be re-flashed via the `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_. What could be the reason?
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Why can't the `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_ be used to reflash the firmware on a device that has enabled flash encryption but not disabled the download mode?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32 | ESP32-S2:
 
-  - Currently, an encrypted device cannot be flashed again using the `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_. It only supports one-time encryption of plaintext.
+  - The default configuration of the flash download tool has enabled eFuse verification. If you want to reflash the firmware of a device that has already enabled flash encryption, please modify the following configuration:
+
+    - Modify the default configuration in the `esp32 > security.conf` file, change `flash_force_write_enable = False` to `flash_force_write_enable = True`.
+    - Modify the default configuration in the `esp32 > spi_download.conf` file, change `no_stub = False` to `no_stub = True`.
+  
+  - Note: When reflashing the firmware on devices with flash encryption enabled, the reflashed firmware must use the same flash encryption key. If the keys do not match, the new firmware will not function properly.
 
 -----------------
 
