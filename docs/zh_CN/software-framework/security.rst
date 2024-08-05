@@ -253,3 +253,18 @@ ESP 系列的产品开启 Secure Boot V2 功能后，是否还支持重烧固件
 
         esptool.py --chip esp32c3 -p COM68 -b 460800 --before=default_reset --after=no_reset --no-stub write_flash --force --flash_mode dio --flash_freq 80m --flash_size keep 0x0 bootloader.bin 0xF000 partition-table.bin 0x20000 blink.bin 
 
+------------
+
+flash 加密方案是否支持对文件系统的加密？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  支持对 fatfs 文件系统执行加密，不支持对 spiffs 文件系统进行加密。
+
+------------
+
+使用 NVS 加密时，如何制作加密的 ``nvs_data.bin``？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 使能 NVS 加密方案时，设备不会在烧录的时候加密 NVS 数据，因此需要在 PC 端使用 `脚本工具 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/storage/nvs_partition_gen.html#generate-encrypted-nvs-partition>`__ 来加密 ``nvs_data.bin``。
+  - 使能 NVS 加密方案后，设备执行 ``nvs_set_*`` 类型的 API 时，会自动进行 NVS 数据的加密；执行 ``nvs_get_*`` 类型的 API 时，会自动进行 NVS 数据的解密。
+
