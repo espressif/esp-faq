@@ -51,7 +51,13 @@ Does ESP32 support coexistence between Bluetooth® and Wi-Fi?
 
   Yes, but time-sharing control is required for ESP32's coexistence between Wi-Fi and Bluetooth. Please go to menuconfig to enable the Wi-Fi/Bluetooth coexistence, shown as follows:
 
+  :IDF\: release/v5.0:
+
   ``menuconfig -> Component config -> Wi-Fi -> Software controls WiFi/Bluetooth coexistence (Enable)``
+
+  :IDF\: release/v5.1 and later versions:
+
+  ``menuconfig -> Component config -> Wireless Coexistence -> Software controls WiFi/Bluetooth coexistence (Enable)``
 
 --------------
 
