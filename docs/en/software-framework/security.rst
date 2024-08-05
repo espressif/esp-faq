@@ -253,3 +253,18 @@ After enabling the Secure Boot V2 feature on ESP series products, is it still po
 
         esptool.py --chip esp32c3 -p COM68 -b 460800 --before=default_reset --after=no_reset --no-stub write_flash --force --flash_mode dio --flash_freq 80m --flash_size keep 0x0 bootloader.bin 0xF000 partition-table.bin 0x20000 blink.bin 
 
+------------
+
+Does the flash encryption scheme support encryption for the file system?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  It supports encryption on the fatfs file system, but does not support encryption on the spiffs file system.
+
+------------
+
+How to create an encrypted ``nvs_data.bin`` when using NVS encryption?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - When enabling the NVS encryption scheme, the device will not encrypt the NVS data during flashing, so it is necessary to use the `script tool <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/nvs_partition_gen.html#generate-encrypted-nvs-partition>`__ on the PC side to encrypt ``nvs_data.bin``.
+  - After enabling the NVS encryption scheme, the device will automatically encrypt NVS data when executing APIs of the ``nvs_set_*`` type; it will automatically decrypt NVS data when executing APIs of the ``nvs_get_*`` type.
+
