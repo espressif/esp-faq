@@ -51,7 +51,13 @@ ESP32 蓝牙和 Wi-Fi 能否同时使用？
 
   ESP32 的 Wi-Fi 和蓝牙可共存，但需要分时控制，可在 menuconfig 中使能 Wi-Fi 和蓝牙共存设置。如下：
 
+  :IDF\: release/v5.0:
+
   ``menuconfig -> Component config -> Wi-Fi -> Software controls WiFi/Bluetooth coexistence (Enable)``
+
+  :IDF\: release/v5.1 以及以上版本:
+
+  ``menuconfig -> Component config -> Wireless Coexistence -> Software controls WiFi/Bluetooth coexistence (Enable)``
 
 --------------
 
