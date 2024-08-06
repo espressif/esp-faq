@@ -23,11 +23,10 @@ When using the VoIP feature of ESP-ADF, how to eliminate echo during calls betwe
 
 --------------
 
-Does the use of the ESP32-Korvo-DU1906 development board require the use of Baidu Cloud?
+Is there a reference example for accessing the big language model provided by Baidu?
 --------------------------------------------------------------------------------------------
 
-  - The ESP32-Korvo-DU1906 development board example is only for testing with Baidu Cloud, and a Profile is required.
-  - Please contact Baidu Cloud to check the relevant business access terms, see `Preparation for using voice services <https://cloud.baidu.com/doc/SHC/s/wk7bl9g8i>`_.
+  Please refer to the `dueros example <https://github.com/espressif/esp-adf/tree/master/examples/dueros>`_.
 
 --------------
 
@@ -231,6 +230,7 @@ How to connect a microphone to ESP32?
 
   - You can connect I2S peripheral if it is a digital microphone.
   - You can connect ADC peripheral if it is an analog microphone.
+  - Considering the recording quality, it is more recommended to use an external AD.
 
 --------------
 
@@ -274,7 +274,7 @@ Does ESP32 support online voice recognition?
 Does ESP32 support volume adjustment of Bluetooth headphones?
 ---------------------------------------------------------------------------------------------------------------
 
-  Yes. ESP32 uses the Bluetooth AVRCP tuning protocol. You can test the function with the `esp-adf/examples/player/pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_ example.
+  Yes. ESP32 uses the Bluetooth AVRCP tuning protocol. You can test the function with the `pipeline_a2dp_sink_stream <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_a2dp_sink_stream>`_ example.
 
 ---------------
 
