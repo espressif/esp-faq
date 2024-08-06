@@ -300,4 +300,24 @@ esp32-camera 中触发 “cam_hal: EV-VSYNC-OVF” 是什么原因？
     W (8022) cam_haL:FB-OVF
     W (8042) cam_haL:FB-OVF
 
-  如上警告日志代表帧 buffer 溢出，是由于帧率太快导致，可以尝试降低 XCLK 。
+  如上警告日志代表帧 buffer 溢出，可能是由于帧率太快导致，可以尝试降低 XCLK（注意 ESP32S3 的 XCLK 默认从 80 MHz 的时钟上分频得到，因此 XCLK 的大小必须可以被 80 MHz 整除）。
+  特别地，如果 sensor 在 JPEG 模式工作，可以尝试在 menuconfig 中增大 `Custom JPEG mode frame size (bytes)` 选项的值来增大 jpeg recv buffer 的大小。
+
+-------------------
+
+ESP32-Camera 的两种 capture 模式的区别是什么？
+------------------------------------------------------------------------------------------------------------------------------
+
+  Camera sensor 在初始化后将图像数据推送到 ESP32 的接收器上。
+
+  - 当配置的接收模式为 CAMERA_GRAB_WHEN_EMPTY 时，只要有空闲的 frame_buffer，后台的驱动程序就将图像数据写入到 frame_buffer 中。当所有的 frame_buffer 用尽时，Camera sensor 推送的新的图像数据将因为没有可用的 frame_buffer 而被迫地丢弃。
+  - 当配置的接收模式为 CAMERA_GRAB_LATEST 时，应用层能获取的 frame_buffer 的个数是 fb_count - 1，这是因为后台的驱动程序会占用一个 frame_buffer，并且尝试刷新最新的数据到这个 frame_buffer 中。
+
+  注意，拍摄的行为并不是发生在调用 "esp_camera_fb_get" 时。拍摄的动作是持续进行的，我们只能控制后台使用的 frame_buffer 来获取新的数据，因此如果想要立即获取一个新的图像，可以尝试执行下面的代码：
+
+  .. code-block:: c
+
+    //向后台驱动程序返回一个 frame_buffer
+    esp_err_t ret = esp_camera_fb_return(esp_camera_fb_get());
+    //后台程序自动将新的图像数据刷新到 frame_buffer，然后应用层可以获取到 frame_buffer 中的数据
+    fb = esp_camera_fb_get();

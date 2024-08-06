@@ -300,4 +300,24 @@ What could be the reason for the following warning log appearing in the Camera a
     W (8022) cam_haL:FB-OVF
     W (8042) cam_haL:FB-OVF
 
-  The above warning log represents a frame buffer overflow, which is caused by too fast a frame rate. Please try to reduce XCLK.
+  The above warning log indicates a frame buffer overflow, which is caused by too fast a frame rate. You can try to reduce the XCLK (Note that the XCLK of ESP32S3 is devided from the 80 MHz clock by default, so the size of XCLK must be divisible by 80 MHz).
+  Specifically, if the sensor is operating in JPEG mode, you can try to increase the size of the jpeg recv buffer by increasing the value of the `Custom JPEG mode frame size (bytes)` option in menuconfig.
+
+-------------------
+
+What is the difference between the two capture modes of the ESP32-Camera?
+------------------------------------------------------------------------------------------------------------------------------
+
+  After initialization, the camera sensor pushes image data to the receiver on the ESP32.
+
+  - When the configured receive mode is CAMERA_GRAB_WHEN_EMPTY, the background driver writes image data to the frame_buffer as long as there is an idle frame_buffer. When all the frame_buffers are exhausted, the new image data pushed by the camera sensor will be forcibly discarded due to the lack of available frame_buffer.
+  - When the configured receive mode is CAMERA_GRAB_LATEST, the number of frame_buffers that the application layer can obtain is fb_count - 1. This is because the background driver occupies one frame_buffer and tries to refresh the latest data into this frame_buffer.
+
+Note that the capturing does not occur when calling `esp_camera_fb_get`. The capturing is an ongoing process, and we can only control the frame_buffer used by the backend to obtain new data. Therefore, if you want to immediately obtain a new image, try executing the following code:
+
+  .. code-block:: c
+
+    // Returns a frame_buffer to the backend driver
+    esp_err_t ret = esp_camera_fb_return(esp_camera_fb_get());
+    // The background program automatically refreshes the new image data to frame_buffer, then the application layer can access the data in frame_buffer.
+    fb = esp_camera_fb_get();
