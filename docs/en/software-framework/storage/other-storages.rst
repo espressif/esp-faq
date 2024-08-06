@@ -18,7 +18,7 @@ Other Storages
 Can ESP32 use LittleFS file system?
 ------------------------------------------------------
 
-  LittleFS is a third-party port component `esp_littlefs <https://github.com/joltwallet/esp_littlefs>`_, which can be used directly in ESP-IDF. You can use the `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_ tool for the image of LittleFS file system.
+  LittleFS is a third-party component `esp_littlefs <https://components.espressif.com/components/joltwallet/littlefs>`_, which can be used directly in ESP-IDF. You can use the `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_ tool for the image of LittleFS file system.
 
 ----------------
 

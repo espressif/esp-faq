@@ -18,7 +18,7 @@
 ESP32 是否可以使用 LittleFS 文件系统？
 ---------------------------------------------------
 
-  LittleFS 为第三方移植组件 `esp_littlefs <https://github.com/joltwallet/esp_littlefs>`_，可直接在 ESP-IDF 中使用。匹配 LittleFS 文件系统镜像的工具为 `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_。
+  LittleFS 为第三方移植组件 `esp_littlefs <https://components.espressif.com/components/joltwallet/littlefs>`_，可直接在 ESP-IDF 中使用。匹配 LittleFS 文件系统镜像的工具为 `mklittlefs <https://github.com/earlephilhower/mklittlefs>`_。
 
 ----------------
 
@@ -36,7 +36,7 @@ ESP8266 用户可用的 RTC RAM 是多大？
 
 ----------------
 
-如何使能 exFAT？ 
+如何使能 exFAT？
 --------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32:
