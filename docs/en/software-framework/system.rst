@@ -916,8 +916,7 @@ Why does the following error occur during firmware operation? What could be the 
     Guru Meditation Error: Core  1 panic'ed (Unhandled debug exception).
     Debug exception reason: Stack canary watchpoint triggered (zcr_task)
 
-  - The above error is usually due to the firmware code occupying all stack memory. You can try increasing the buffer size of the zcr_task task, and use `esp_get_free_heap_size() <https://docs.espressif.com/projects/esp-idf/en/v5.2/esp32/api-guides/performance/ram-usage.html#id1>`_ to check the remaining available heap memory of the chip.
-  - If the remaining memory of the chip is insufficient, you can add PSRAM to expand the memory, or refer to `Memory Optimization <https://docs.espressif.com/projects/esp-idf/en/v5.2/esp32/api-guides/performance/ram-usage.html#id1>`_ for instructions on how to minimize heap memory allocation as much as possible.
+  - The aforementioned log error is usually caused by a stack overflow. You can try increasing the stack size of the zcr_task task.
   - For more information on software exception explanations, refer to `Severe Errors <https://docs.espressif.com/projects/esp-idf/en/v5.2/esp32/api-guides/fatal-errors.html#id1>`__.
 
 ---------------------------------------------
