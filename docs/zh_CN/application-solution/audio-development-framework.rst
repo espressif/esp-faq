@@ -23,11 +23,10 @@
 
 --------------
 
-使用 ESP32-Korvo-DU1906 开发板必须用百度云吗？
+有接入百度语音或大模型的参考例程吗？
 ----------------------------------------------
 
-  - ESP32-Korvo-DU1906 开发板例程只限于使用百度云进行测试，并且需要 Profile。
-  - 请联系百度云，了解相关商务接入条款，见 `语音服务使用准备 <https://cloud.baidu.com/doc/SHC/s/wk7bl9g8i>`_。
+  请参考 `dueros 例程 <https://github.com/espressif/esp-adf/tree/master/examples/dueros>`_。
 
 --------------
 
@@ -231,6 +230,7 @@ ESP32 如何连接麦克风？
 
   - 如果连接数字麦克风，可以连接 I2S 外设。
   - 如果连接模拟麦克风，可以连接 ADC 外设。
+  - 考虑到录音质量，更建议使用外扩 AD。
 
 --------------
 
@@ -274,7 +274,7 @@ ESP32 是否支持在线语音识别？
 ESP32 能否实现蓝牙耳机的音量调节功能？
 ---------------------------------------------------------------------------------------------------------------
 
-  可以。ESP32 使用的是蓝牙的 AVRCP 调音协议，可基于 `esp-adf/examples/player/pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_ 例程测试。
+  可以。ESP32 使用的是蓝牙的 AVRCP 调音协议，可基于 `pipeline_a2dp_sink_stream <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_a2dp_sink_stream>`_ 例程测试。
 
 ---------------
 
