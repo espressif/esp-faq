@@ -31,6 +31,15 @@ Which adapted ICs can be used by the LCD screen of ESP32 series chips?
 
 --------------
 
+Notes for Driving MIPI-DSI LCD with ESP32-P4
+-------------------------------------------------------------------
+
+  - ESP32-P4 supports MIPI-DSI LCD with up to 2 lanes. Each supports a maximum rate of 1.5 Gbps, totaling 3 Gbps. It also supports color formats ``RGB565``, ``RGB666``, and ``RGB888``.
+  - Some MIPI-DSI LCDs, such as ``ILI9881`` and ``JD9365``, are configured as 4-lane by default through hardware (IM[0:3]). However, they can be configured to 2-lane by modifying the LCD's initialization commands (e.g., the ``B6h-B7h`` command of ILI9881). Therefore, it is necessary to consult the datasheet of the LCD driver IC to confirm if it is supported.
+  - The MIPI-DSI driver has the communication response mechanism enabled by default. If there is a communication anomaly between the ESP and the LCD, the ESP may freeze and trigger the watchdog. At this point, please check whether the hardware connection is correct, or use a logic analyzer to check if the communication works well.
+
+--------------
+
 Do ESP series development boards with screens support GUI development using the Arduino IDE?
 -----------------------------------------------------------------------------------------------------------------
 
@@ -38,7 +47,7 @@ Do ESP series development boards with screens support GUI development using the 
   - Several points to note:
 
     - ESP32_Display_Panel relies on `arduino-esp32 <https://github.com/espressif/arduino-esp32>`__.
-    - The RGB interface of ESP32-S3 exhibits the :ref:`screen drift issue <lcd-rgb-screen-drift>`, an issue that can be solved by features available in ESP-IDF release/v5.1 and later versions. However, arduino-esp32 (v2.x.x) is based on ESP-IDF version v4.4.x and thus unable to resolve this issue. Fortunately, the upcoming arduino-esp32 (v3.x.x) will use ESP-IDF v5.1.
+    - Due to the :ref:`screen drift <lcd-rgb-screen-drift>` issue with the RGB interface of ESP32-S3, it is necessary to use features from ESP-IDF release/v5.1 or later to solve the problem. However, the ESP-IDF version used in arduino-esp32 v2.x.x is v4.4.x, which cannot solve this problem. Therefore, you should use arduino-esp32 v3.x.x. For detailed instructions, please refer to `Document <https://github.com/esp-arduino-libs/ESP32_Display_Panel/blob/master/README.md#how-to-fix-screen-drift-issue-when-driving-rgb-lcd-with-esp32-s3>`_.
     - Given that Arduino cannot adjust various parameter configurations, such as compile optimization levels, through menuconfig like ESP-IDF, it is recommended to develop a GUI based on ESP-IDF to achieve optimal performance.
 
 --------------
@@ -97,20 +106,31 @@ What is the maximum resolution supported by ESP LCD? What is the corresponding f
           - QSPI
           - I80
           - RGB
+          - MIPI-DSI
 
         * - ESP32-C3
           - 240 x 240
           - Not_recommended
           - Not_supported
           - Not_supported
+          - Not supported
 
         * - ESP32-S3
           - 320 x 240
           - 400 x 400
           - 480 x 320
           - 480 x 480, 800 x 480  
+          - Not supported
 
-  - For the RGB interface of ESP32-S3, the maximum tested resolution is 800 x 480 currently, and the interface frame rate is limited to 59 (PCLK is 30 MHz). The corresponding average LVGL frame rate is 23. The upper limit of the average LVGL frame rate is 26, corresponding to an interface frame rate of 41 (PCLK is 21 MHz).
+        * - ESP32-P4
+          - 320 x 240
+          - 400 x 400
+          - 480 x 320
+          - 480 x 480，800 x 480
+          - 1024 x 600，1280 x 720
+
+  - For the RGB interface of ESP32-S3, the maximum resolution tested in LVGL (v8) application scenarios is currently 800 x 480, with an interface frame rate limit of 59 (PCLK 30 MHz), corresponding to an average LVGL frame rate of 23; The maximum average LVGL frame rate is 26, corresponding to an interface frame rate of 41 (PCLK 21 MHz).
+  - For the MIPI-DSI interface of ESP32-P4, the maximum resolution tested in LVGL (v8) application scenarios is currently 1080 x 1920, with an interface frame rate limit of 31 (DPI_CLK 80 MHz, 2-lane bit rate 2.8 Gbps), corresponding to an average LVGL frame rate of 4;
 
 ----------------
 
@@ -152,8 +172,9 @@ How can I increase the upper limit of PCLK settings on ESP32-S3 while ensuring n
     - Reduce the PSRAM bandwidth occupied by other peripherals like Wi-Fi, flash, etc.
     - Decrease the Data Cache Line Size to 32 Bytes (set to 64 Bytes when using RGB Bounce Buffer mode).
 
-  - Enable the Bounce Buffer mode for RGB display, and a larger buffer size provides better performance. For usage, please refer to `documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__. Note that in this mode, PSRAM data is first moved to SRAM by the CPU and then transferred to the RGB peripheral via GDMA. Therefore, you need to enable `CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y` simultaneously, or it may lead to screen drifting.
+  - Enable the Bounce Buffer mode of the RGB driver. The larger the buffer, the better the effect. For usage, please refer to the `documentation <https://docs.espressif.com/projects/esp-idf/en/v5.1.4/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`_. Please note that in this mode, the CPU first moves PSRAM data to SRAM, and then the GDMA transfers data to the RGB peripheral. Therefore, it is necessary to enable ``CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y``. Otherwise, it may cause the screen to drift.
   - Based on limited testing, for Quad PSRAM at 80 MHz, the highest PCLK setting is around 11 MHz; for Octal PSRAM at 80 MHz, the highest PCLK setting is around 22 MHz; for Octal PSRAM at 120 MHz, the highest PCLK setting is around 30 MHz.
+  - For applications using LVGL, the task of RGB peripheral initialization can be assigned to the same core as the task of LVGL ``lv_timer_handler()``. This significantly increases the upper limit of PCLK settings.
 
 --------------------
 

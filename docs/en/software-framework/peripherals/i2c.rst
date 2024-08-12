@@ -50,4 +50,4 @@ How can the ESP32 chip, as an I2C master, wait for the slave to process the data
 When using the ESP32 chip, can GPIO32 and GPIO33 be configured as I2C_SDA and I2C_SCL respectively?
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes. I2C pins of the ESP32 chip can be remapped by any available GPIOs. Please refer to "4.2 Peripheral Pin Configurations" of `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__. If you do not need an external 32.768 KHz crystal, you can use GPIO32 and GPIO33 as I2C pins.
+  Yes. The I2C pins of the ESP32 chip can be remapped by any available GPIO. Please refer to Section 2.2, Pin Overview of `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_. If an external 32.768 kHz crystal is not required, GPIO32 and GPIO33 can be used as I2C pins.

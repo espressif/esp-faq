@@ -144,3 +144,10 @@ Does ESP32 support the UART IRDA working mode?
 ---------------------------------------------------------------------------------------------------------------------
 
   ESP32 supports the UART IRDA working mode at the hardware level, but there is no corresponding driver implementation in software yet.
+
+------------
+
+In situations where serial port resources are limited, is GPIO-based UART simulation supported?
+---------------------------------------------------------------------------------------------------------------------
+  
+  You can test this using the `soft_uart <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/dedicated_gpio/soft_uart>`_ example.

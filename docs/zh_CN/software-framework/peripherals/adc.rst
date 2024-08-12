@@ -179,3 +179,9 @@ ESP32 在同一个 ADC 控制器下，能同时支持部分 ADC 通道是 DMA �
 
   - ADC Raw Data 读数正常，ADC 转换值变成 5 V 是因为 ESP32-S3 ADC 有效测量范围是 2900 mV，参见 `ESP32-S3 ADC 衰减等级对应有效测量范围 <https://docs.espressif.com/projects/esp-hardware-design-guidelines/zh_CN/latest/esp32s3/schematic-checklist.html#adc>`_。
   - 超过 2900 mV 的输入电压是未定义的输入电压，因此会出现这种情况。如果要测量大于 2900 mV 的输入电压建议分压或采用 `ESP32-S3 ADC 扩展量程方案 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/others/adc_range.html#esp32-s3-adc>`_。
+
+ADC 的参考基准源能否从外部加？如果可以加，应该加在哪个引脚？ADC 的内部基准电压是多少？
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 不支持外部参考电压，只能使用内部参考电压。
+  - 内部基准电压 1.1 V。

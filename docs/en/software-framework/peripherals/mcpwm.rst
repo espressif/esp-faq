@@ -33,3 +33,9 @@ Does the ESP32-S3 support driving eight servos?
 --------------------------------------------------------------------------------------------------------------------------
 
   Yes. As ESP32-S3 supports two MCPWM controllers, which includes three operators each, and each operator has two generators and two comparators. So, if each generator independently uses a comparator, it can produce a total of 2*3*2=12 PWM outputs with independently adjustable duty cycles, which can naturally meet the needs of eight servos.
+
+
+What are the advantages of MCPWM compared to LEDC?
+--------------------------------------------------------------------------------------------------------------------------
+
+  MCPWM supports complementary PWM output, center alignment, dead time insertion, carrier modulation, fault, capture events, etc., which are more advantageous in digital motor control, digital power supply, and FOC scenarios.

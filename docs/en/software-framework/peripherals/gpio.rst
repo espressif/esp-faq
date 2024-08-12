@@ -20,22 +20,27 @@ What should I pay attention to for ESP32 pin configurations?
 
   The ESP32 has ESP32-WROOM and ESP32-WROVER series modules. Please pay attention to the following configurations with GPIOs.
 
-  The WROOM-32/32D/32U series have 26 pins available for customers. Please note:
+  The WROOM-32/32D/32U/32E/32UE series has 26 pins available for customer use, with the following considerations:
 
-  - GPIO6 ~ GPIO11 are used by the internal flash and cannot be used elsewhere;
+  - GPIO6-GPIO11 of the WROOM-32/32D/32U series are occupied by the internal flash and cannot be used for other purposes;
+  - GPIO6-GPIO11 of the WROOM-32E/32UE series are occupied by the internal flash and are no longer pulled out to the module pins;
   - GPIO34, 35, 36 and 39 are input-only pins and cannot be used for outputs;
-  - The ESP32 has a built-in GPIO Matrix, and some peripheral interfaces can be connected to any free pins. That is, for hardware designs, there is no need to strictly distribute some functions on certain pins.
+  - ESP32 has a built-in GPIO matrix, and some peripheral interfaces can be connected to any free pin. That is, during hardware design, there is no need to strictly fix certain functions on certain pins;
+  - WROOM-32/32D/32U are not recommended for new designs. It is suggested to use the WROOM-32E/32UE series instead.
+  - In the WROOM-32E/32UE series with QSPI PSRAM, GPIO16 is used to connect to the embedded PSRAM and cannot be used for other functions.
 
-  For detailed information, please refer to Table 9 in `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
+  Detailed information can be found in Table 6-2 GPIO_Matrix of `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
-  The WROVER／WROVER-I／WROVER-B／WROVER-IB series have 24 pins available for customers. Please note:
+  The WROVER/WROVER-I/WROVER-B/WROVER-IB/WROVER-E/WROVER-IE all have 24 pins available for customer use, with the following considerations:
 
-  - GPIO6 ~ GPIO11 are used by the internal flash and cannot be used elsewhere;
+  - GPIO6-GPIO11 of the WROVER/WROVER-I/WROVER-B/WROVER-IB series are occupied by the built-in flash and cannot be used for other purposes;
+  - GPIO6-GPIO11 of the WROVER-E/WROVER-IE series are occupied by the built-in flash and are no longer pulled out to the module pins;
   - GPIO34, 35, 36 and 39 are input-only pins and cannot be used for outputs;
   - For WROVER series, it is not recommended to use GPIO12 for Touch Sensor functions since it has been pulled up in the module;
-  - The ESP32 has a built-in Matrix, and some peripheral interfaces can be connected to any free pins. That is, for hardware designs, there is no need to strictly distribute some functions on certain pins.
+  - ESP32 has a built-in GPIO matrix, and some peripheral interfaces can be connected to any free pin. That is, during hardware design, there is no need to strictly fix certain functions on certain pins;
+  - WROVER/WROVER-I/WROVER-B/WROVER-IB are not recommended for new designs. It is suggested to use the WROVER-E/WROVER-IE series instead.
 
-  For detailed information, please refer to Table 9 in `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
+  Detailed information can be found in Table 6-2 GPIO_Matrix of `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
   There are three sets of UARTs in ESP32, but only UART0 can be used for downloading with fixed pins.
 
