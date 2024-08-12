@@ -328,3 +328,19 @@ A USB disk application is implemented based on the ESP32-S3 USB interface. Can t
 
   - The drive letter is automatically assigned by the operating system and cannot be fixed by the software on ESP32-S3.
   - Drive Letter Assignment: The operating system will assign an unused drive letter to the USB disk based on the existing drive letters in the current system. In Windows systems, common drive letters are English letters from A to Z. Generally, A and B are traditionally reserved for floppy disk drives, C is usually the system disk, and the remaining letters are sequentially assigned to other storage devices (including hard disk partitions, optical drives, and external USB drives, etc.).
+
+------------
+
+How does a USB UAC device synchronize with the host's audio?
+--------------------------------------------------------------------
+
+Since the USB bus is not a clock bus, the interval between each transmission is not fixed. Therefore, UAC devices may experience audio-visual desynchronization and noise, etc. It is recommended to synchronize with the host using the feedback endpoint, allowing the host to send more or less data through the feedback endpoint to achieve audio synchronization.
+
+The `usb_device_uac <https://components.espressif.com/components/espressif/usb_device_uac/versions/0.1.1>`_ component now supports the Feed Back endpoint. You can refer to the example code of this component to implement audio synchronization for the USB UAC device.
+
+------------
+
+Does ESP32-P4 support USB?
+---------------------------------
+
+Yes. ESP32-P4 has USB HS PHY, USB FS PHY, and a USB-Serial-JTAG interface.

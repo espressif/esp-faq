@@ -103,7 +103,7 @@ When using the ESP32-S3-WROOM-2 (ESP32-S3R8V) module to enable the PSRAM configu
 
   .. code-block:: text
 
-      E (453) psrm: psrm ID read error: 0x00ffff
+      E (453) psram: psram ID read error: 0x00ffff
       E (454) cpu start: Failed to init external RAM!
 
   ESP32-S3R8V chip integrates a 8-wire 8 MB PSRAM, please set PSRAM mode to **Octal** mode in menuconfig before your action as follows:

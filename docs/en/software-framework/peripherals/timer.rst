@@ -32,3 +32,10 @@ How to set interrupt priority for timers?
 
   - The esp_timer, using ESP32 as an example, allows you to configure the interrupt priority by modifying the configuration item `CONFIG_ESP_TIMER_INTERRUPT_LEVEL <https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32/api-reference/kconfig.html#config-esp-timer-interrupt-level>`_ in Menuconfig.
   - The General Purpose Timer allows setting interrupt priority when registering the interrupt service function. For details, please refer to the API description of `timer_isr_callback_add <https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32/api-reference/peripherals/timer.html#_CPPv422timer_isr_callback_add13timer_group_t11timer_idx_t11timer_isr_tPvi>`_.
+
+--------------
+
+How to improve the timeliness of interrupt response in gptimer?
+---------------------------------------------------------------
+
+Put the interrupt function and the corresponding callback into the IRAM.

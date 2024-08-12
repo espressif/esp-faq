@@ -32,3 +32,10 @@ ESP8266 使⽤ HW 定时器中断有哪些注意事项？
 
   - esp_timer 以 ESP32 为例，可以通过在 Menuconfig 中修改配置项 `CONFIG_ESP_TIMER_INTERRUPT_LEVEL <https://docs.espressif.com/projects/esp-idf/zh_CN/v4.4/esp32/api-reference/kconfig.html#config-esp-timer-interrupt-level>`_ 来配置中断优先级。
   - General-Purpose Timer 可以在注册中断服务函数时设置中断优先级，具体请参考 `timer_isr_callback_add <https://docs.espressif.com/projects/esp-idf/zh_CN/v4.4/esp32/api-reference/peripherals/timer.html#_CPPv422timer_isr_callback_add13timer_group_t11timer_idx_t11timer_isr_tPvi>`_ 的 API 说明。
+
+--------------
+
+如何提高 gptimer 中断响应的及时性？
+---------------------------------------------------------------
+
+  可以将中断函数与相应的 callback 放入到 IRAM 中。

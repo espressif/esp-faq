@@ -103,7 +103,7 @@ SPI 从机支持最大速度是多少？
 
   .. code-block:: text
 
-      E (453) psrm: psrm ID read error: 0x00ffff
+      E (453) psram: psram ID read error: 0x00ffff
       E (454) cpu start: Failed to init external RAM!
 
   ESP32-S3R8V 芯片集成了 8 线的 8 MB PSRAM，请在 menuconfig 中将 PSRAM 模式设置为 **Octal** 模式。如下：

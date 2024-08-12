@@ -179,3 +179,9 @@ When using ESP-IDF v5.1 to test ADC2 based on the ESP32-S3-WROOM-1 module, input
 
   - With normal ADC raw data readings, the reason why ADC conversion value becomes 5 V is because that the effective measurement range of ESP32-S3 ADC is 2900 mV. Please refer to the `ESP32-S3 ADC attenuation level corresponding effective measurement range <https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32s3/schematic-checklist.html#adc>`_.
   - An input voltage exceeding 2900 mV is undefined, which would lead to this situation. If you need to measure an input voltage greater than 2900 mV, it is recommended to use voltage division or adopt the `ESP32-S3 ADC Range Extension Solution <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/others/adc_range.html#esp32-s3-adc>`.
+
+Can the reference source of the ADC be externally applied? If it can be applied, which pin should it be applied to? What is the internal reference voltage of the ADC?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The ADC does not support external reference voltage. It can only use internal reference voltage.
+  - The internal reference voltage is 1.1 V.

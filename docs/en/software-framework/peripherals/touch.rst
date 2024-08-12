@@ -74,3 +74,17 @@ What reference drivers does the ESP32 touch screen have?
 
   - Code: please refer to `touch_panel_code <https://github.com/espressif/esp-iot-solution/tree/master/components/display/touch_panel>`_.
   - Documentation: please refer to `touch_panel_doc <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/input_device/touch_panel.html>`_.
+
+---------------
+
+How long does it take from the moment of touch to the time when the chip detects the touch and issues a command signal?
+--------------------------------------------------------------------------------------------------------------------------------
+
+  If n channels are used, and each channel takes about 2 ms to measure, one round of polling would take 2n ms.
+
+---------------
+
+When the ESP32-S3 touch pin is grounded and touched with human body multiple times, the four pin values previously defined changed to a fixed constant, resulting in invalid pin state. What is the reason for this?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The touch pin must not be grounded. This is what happens when it is grounded.

@@ -33,3 +33,17 @@ Does the I2S interface of ESP32-C3 series chips support the PDM RX mode?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - In the software driver, the I2S interface of ESP32-C3 series chips does not support the PDM RX mode. Unlike ESP32-S3, the PDM RX of ESP32-C3 does not have a module supporting converting from PDM to PCM, which means the acquired data is in the RAW PDM format. The data in this format can't be used directly in most cases.
+
+----------------
+
+Can the input and output BCK pin of ESP32-S3 I2S use the same pin?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes. In the duplex mode, TX and RX achieve duplex functionality by binding these two signals to the same pin.
+
+----------------
+
+Is there a difference between using the Audio PLL (APLL) and PLL in I2S?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  APLL and PLL clock sources do not show a significant difference at lower sampling rates (144 kHz and below).

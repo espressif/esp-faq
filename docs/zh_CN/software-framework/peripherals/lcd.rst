@@ -31,6 +31,15 @@ ESP 系列芯片 LCD 屏幕适配情况是怎样的？
 
 --------------
 
+ESP32-P4 驱动 MIPI-DSI LCD 的一些说明
+-------------------------------------------------------------------
+
+  - 最高支持 2-lane，每路最高支持 1.5 Gbps 的速率（共 3 Gbps），并且支持 ``RGB565``、``RGB666``、``RGB888`` 颜色格式。
+  - 部分 MIPI-DSI LCD 默认通过硬件 (IM[0:3]) 配置为 4-lane，如 ``ILI9881``、``JD9365``，但是可以通过修改 LCD 的初始化命令来配置为 2-lane（如 ILI9881 的 ``B6h-B7h`` 命令），因此需要查看 LCD 驱动 IC 的数据手册来判断是否能够支持。
+  - MIPI-DSI 驱动默认开启了通信应答机制，如果 ESP 与 LCD 之前出现通信异常，ESP 可能会卡死并触发看门狗，此时请检查硬件连接是否正确，或者使用逻辑分析仪检查通信是否正常。
+
+--------------
+
 ESP 系列芯片的带屏开发板是否支持使用 Arduino IDE 开发 GUI？
 -----------------------------------------------------------------------------------------------------------------
 
@@ -38,7 +47,7 @@ ESP 系列芯片的带屏开发板是否支持使用 Arduino IDE 开发 GUI？
   - 需要注意以下几点：
 
     - ESP32_Display_Panel 依赖于 `arduino-esp32 <https://github.com/espressif/arduino-esp32>`__。
-    - 由于 ESP32-S3 的 RGB 接口存在 :ref:`屏幕漂移 <lcd-rgb-screen-drift>` 问题，需要使用 ESP-IDF release/v5.1 及以上版本的特性来解决，而 arduino-esp32 (v2.x.x) 中使用的 ESP-IDF 版本为 v4.4.x，因此该版本无法解决此问题，在未来推出的 arduino-esp32 (v3.x.x) 中则会使用 ESP-IDF v5.1。
+    - 由于 ESP32-S3 的 RGB 接口存在 :ref:`屏幕漂移 <lcd-rgb-screen-drift>` 问题，需要使用 ESP-IDF release/v5.1 及以上版本的特性来解决，而 arduino-esp32 v2.x.x 版本中使用的 ESP-IDF 版本为 v4.4.x，因此该版本无法解决此问题，需要使用 arduino-esp32 v3.x.x 版本，详细说明请参考 `文档 <https://github.com/esp-arduino-libs/ESP32_Display_Panel/blob/master/README_CN.md#%E4%BD%BF%E7%94%A8-esp32-s3-%E9%A9%B1%E5%8A%A8-rgb-lcd-%E6%97%B6%E5%87%BA%E7%8E%B0%E7%94%BB%E9%9D%A2%E6%BC%82%E7%A7%BB%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88>`_。
     - 由于使用 Arduino 无法像 ESP-IDF 一样通过 menuconfig 来调整各种参数配置，如编译优化等级等，所以为了实现最佳的性能，推荐基于 ESP-IDF 开发 GUI。
 
 --------------
@@ -97,10 +106,12 @@ ESP 系列芯片最大可以支持多少分辨率的 LCD？相应的帧率是多
           - QSPI
           - I80
           - RGB
+          - MIPI-DSI
 
         * - ESP32-C3
           - 240 x 240
           - 不推荐
+          - 不支持
           - 不支持
           - 不支持
 
@@ -109,8 +120,17 @@ ESP 系列芯片最大可以支持多少分辨率的 LCD？相应的帧率是多
           - 400 x 400
           - 480 x 320
           - 480 x 480，800 x 480
+          - 不支持
 
-  - 针对 ESP32-S3 的 RGB 接口，目前测试过的最大分辨率为 800 × 480，接口帧率上限为 59 (PCLK 30 MHz), 对应 LVGL 平均帧率为 23; LVGL 平均帧率上限为 26, 对应接口帧率为 41 (PCLK 21 MHz)。
+        * - ESP32-P4
+          - 320 x 240
+          - 400 x 400
+          - 480 x 320
+          - 480 x 480，800 x 480
+          - 1024 x 600，1280 x 720
+
+  - 针对 ESP32-S3 的 RGB 接口，目前基于 LVGL (v8) 应用场景测试过的最大分辨率为 800 x 480，接口帧率上限为 59 (PCLK 30 MHz), 对应 LVGL 平均帧率为 23; LVGL 平均帧率上限为 26, 对应接口帧率为 41 (PCLK 21 MHz)。
+  - 针对 ESP32-P4 的 MIPI-DSI 接口，目前基于 LVGL (v8) 应用场景测试过的最大分辨率为 1080 x 1920，接口帧率上限为 31 (DPI_CLK 80 MHz，2-lane bit rate 2.8 Gbps), 对应 LVGL 平均帧率为 4;
 
 ---------------
 
@@ -152,8 +172,9 @@ ESP32-S3 如何在保证 RGB 屏幕显示正常的情况下提高 PCLK 的设置
     - 减少其他外设对 PSRAM 带宽的占用，如 Wi-Fi、flash 等。
     - 降低 Data Cache Line Size 到 32 Byte（使用 RGB Bounce Buffer 模式时需要设置到 64 Byte）。
 
-  - 开启 RGB 驱动的 Bounce Buffer 模式，并且 buffer 越大效果越好，使用方法请参考 `文档 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__。需注意，由于该模式下是先通过 CPU 搬运 PSRAM 数据到 SRAM，再通过 GDMA 传输数据到 RGB 外设，因此需要同时开启 `CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y`，否则可能会导致屏幕出现漂移。
+  - 开启 RGB 驱动的 Bounce Buffer 模式，并且 buffer 越大效果越好，使用方法请参考 `文档 <https://docs.espressif.com/projects/esp-idf/en/v5.1.4/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__。需注意，由于该模式下是先通过 CPU 搬运 PSRAM 数据到 SRAM，再通过 GDMA 传输数据到 RGB 外设，因此需要同时开启 ``CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y``，否则可能会导致屏幕出现漂移。
   - 经过少量测试，4 线 PSRAM 80 MHz 时的 PCLK 最高设置至 11 MHz，8 线 PSRAM 80 MHz 时的 PCLK 最高设置至 22 MHz，8 线 PSRAM 120 MHz 时的 PCLK 最高设置至 30 MHz。
+  - 对于使用 LVGL 的应用，可以将执行 RGB 外设初始化的任务与执行 LVGL ``lv_timer_handler()`` 的任务分配在同一个核上，能够显著提升 PCLK 的设置上限。
 
 ---------------------
 
@@ -194,13 +215,14 @@ ESP32-S3 系列的芯片支持哪些图片解码格式？
       - 确认内存（SRAM）是否有余量，大概需要占用 [10 * screen_width * 4] 字节。
       - 设置 ``Data cache line size`` 为 64 Byte（可设置 ``Data cache size`` 为 32 KB 以节省内存）。
       - 设置 ``CONFIG_FREERTOS_HZ`` 为 1000。
-      - 如以上均符合条件，那么就可以参考 `文档 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__ 修改 RGB 驱动为 ``Bounce buffer`` 模式。 ``Bounce buffer`` 模式会分配一块 SRAM 内存作为中间缓存，然后通过 CPU 分块搬运帧缓存的数据到 SRAM，再通过 GDMA 传输数据到 RGB 外设，这样就可以避免 PSRAM 被禁用的问题。如果开启后仍存在漂移现象，可以尝试增大 buffer，但是会占用更多的 SRAM 内存。
+      - 如以上均符合条件，那么就可以参考 `文档 <https://docs.espressif.com/projects/esp-idf/en/v5.1.4/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__ 修改 RGB 驱动为 ``Bounce buffer`` 模式。 如果开启后仍存在漂移现象，可以尝试增大 buffer，但是会占用更多的 SRAM 内存。
       - 如操作 Wi-Fi 仍存在屏幕漂移问题，可以尝试关闭 PSRAM 里 ``CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP`` 一项（会占用较大 SRAM）。
       - 设置后带来的影响包括：CPU 使用率升高、可能会造成中断看门狗复位、会造成较大内存开销。
       - 由于 Boucne Buffer 是在 GDMA 中断里通过 CPU 搬运 PSRAM 的数据到 SRAM，程序需要避免长时间执行关中断的操作（如调用 ``portENTER_CRITICAL()``），否则仍会造成屏幕漂移。
 
     - 短时操作 flash 导致漂移的情况，如 wifi 连接等操作前后，可以在操作前调用 ``esp_lcd_rgb_panel_set_pclk()`` 降低 PCLK（如 6 MHz）并延时大约 20 ms（RGB 刷完一帧的时间），然后在操作结束后提高 PCLK 至原始水平，期间可能会造成短暂的闪白屏现象。
     - 如果无法避免，可以开启 ``CONFIG_LCD_RGB_RESTART_IN_VSYNC`` 或调用 ``esp_lcd_rgb_panel_restart()`` 接口重置 RGB 时序，防止永久性漂移。
+    - 关于如何在 Arduino 中避免 RGB 屏幕漂移问题，请参考 `链接 <https://github.com/esp-arduino-libs/ESP32_Display_Panel?tab=readme-ov-file#how-to-fix-screen-drift-issue-when-driving-rgb-lcd-with-esp32-s3>`__。
 
 ---------------------------
 

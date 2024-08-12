@@ -42,3 +42,10 @@ What should I do if ESP32-C3 doesn't support PCNT?
 --------------------------------------------------------------
 
   The `knob <https://components.espressif.com/components/espressif/knob>`_ software can be used for PCNT counting. Please note that this software can only be used for counting in quadrature decoding related application scenarios, and the counting frequency should not be too high.
+
+--------------------------
+
+Can PCNT support multiple channels working simultaneously? Do signal and control necessarily need to be input in pairs?
+----------------------------------------------------------------------------------------------------------------------------
+
+  PCNT supports multiple channels working simultaneously. The signal and control do not necessarily have to be used in pairs. If you do not want to use control, you can set it to -1. The count mode is configured using `pcnt_channel_set_edge_action`.

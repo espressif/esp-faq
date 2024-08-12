@@ -50,4 +50,4 @@ ESP32 芯片作为 I2C 主机怎样才能等待从机处理数据后再接收？
 使用 ESP32 芯片时，能否将 GPIO32 和 GPIO33 分别配置为 I2C_SDA 和 I2C_SCL？
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  可以，ESP32 的 I2C 管脚可以使用任何空闲的 GPIO 进行重映射。请参阅 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`__ 的 4.2 小节，外设引脚配置部分。如果您不需要外部 32.768 KHz 晶振，那么您可以使用 GPIO32 和 GPIO33 作为 I2C 管脚。
+  可以，ESP32 的 I2C 管脚可以使用任何空闲的 GPIO 进行重映射。请参阅 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 的 2.2 小节，管脚概述部分。如果不需要外部 32.768 kHz 晶振，则可以使用 GPIO32 和 GPIO33 作为 I2C 管脚。
