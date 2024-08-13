@@ -31,18 +31,20 @@ ESP32 管脚配置需要注意什么？
 
   详细信息可以参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中表格 6-2 GPIO_Matrix 的内容。
 
-  WROVER/WROVER-I/WROVER-B/WROVER-IB/WROVER-E/WROVER-IE 共有 24 个管脚可供客户使用，注意事项如下：
+  WROVER\ :sup:`*`/WROVER-I\ :sup:`*`/WROVER-B/WROVER-IB/WROVER-E/WROVER-IE 共有 24 个管脚可供客户使用，注意事项如下：
 
-  - WROVER/WROVER-I/WROVER-B/WROVER-IB 系列的 GPIO6-GPIO11 被内置 flash 占用，不可用做它用；
+  - WROVER\ :sup:`*`/WROVER-I\ :sup:`*`/WROVER-B/WROVER-IB 系列的 GPIO6-GPIO11 被内置 flash 占用，不可用做它用；
   - WROVER-E/WROVER-IE 系列的 GPIO6-GPIO11 被内置 flash 占用，且不再拉出至模组管脚；
   - GPIO34、35、36 和 39 为输入管脚，不具备输出能力；
   - WROVER 系列模组中，GPIO12 由于在模组内部被上拉，不建议用做触摸传感功能；
   - ESP32 内置 GPIO 矩阵，部分外设接口可以配置到任意空闲管脚上。即硬件设计时，不需要严格将某些功能固定在某些管脚上；
-  - WROVER/WROVER-I/WROVER-B/WROVER-IB 不推荐用于新设计，推荐使用 WROVER-E/WROVER-IE 系列。
+  - WROVER\ :sup:`*`/WROVER-I\ :sup:`*`/WROVER-B/WROVER-IB 不推荐用于新设计，推荐使用 WROVER-E/WROVER-IE 系列。
 
   详细信息可以参考 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中表格 6-2 GPIO_Matrix 的内容。
 
   ESP32 有 3 组 UART，但下载只可使用 UART0，且管脚固定。
+
+  \ :sup:`*` 表示该产品处于生命周期终止状态。
 
 ----------------------------
 
