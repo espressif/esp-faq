@@ -148,3 +148,21 @@ Windows 环境下 ESP-IDF 编译比较慢如何优化？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 这是因为缺少组件依赖导致的，需要更新 `component-manager`。指令命令为 `pip install --upgrade idf-component-manager`。
+
+--------------
+
+使用 `ESP-IDf v4.4.8-Offline Installer 安装包 <https://dl.espressif.com/dl/esp-idf/?idf=4.4>`_ 安装 ESP-IDF CMD 环境后，直接编译 hello_world 例程，出现如下编译报错，是什么原因？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  .. code:: text
+
+    [1050/1065] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+    FAILED: esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+    D:\esp\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch5-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe: error: @-file refers to a directory
+    [1058/1065] Building C object esp-idf/wifi_provisioning/CMakeFiles/__idf_wifi_provisioning.dir/src/scheme_softap.c.obj
+    ninja: build stopped: subcommand failed.
+    ninja failed with exit code 1
+
+  - 从日志上看是在编译过程中缓存 `build/esp-idf/main/CMakeFiles/__idf_main.dir/ main.c.o.bj` 文件出错，这是在 ccache 调用编译器时生成的，与编译缓存有关。此问题在 v5.0 及之后的版本上做了修复。
+  - 在 v4.4 版本的 ESP-IDF CMD 环境中，请使用 `idf.py --no-ccache build` 指令来编译工程。
+  

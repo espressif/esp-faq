@@ -148,3 +148,21 @@ When running `demo`, the package manager component dependency cannot be pulled, 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - This is due to missing component dependencies and can be solved after updating `component-manager`. The corresponding command is `pip install --upgrade idf-component-manager`.
+
+--------------
+
+After installing the ESP-IDF CMD environment using the `ESP-IDF v4.4.8-Offline Installer package <https://dl.espressif.com/dl/esp-idf/?idf=4.4>`_, why does the following compilation error occur when directly compiling the hello_world example?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  .. code:: text
+
+    [1050/1065] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+    FAILED: esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+    D:\esp\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch5-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe: error: @-file refers to a directory
+    [1058/1065] Building C object esp-idf/wifi_provisioning/CMakeFiles/__idf_wifi_provisioning.dir/src/scheme_softap.c.obj
+    ninja: build stopped: subcommand failed.
+    ninja failed with exit code 1
+
+  - From the logs, it appears that there was an error caching the `build/esp-idf/main/CMakeFiles/__idf_main.dir/ main.c.o.bj` file during the compilation process. This is generated when ccache calls the compiler and is related to the compilation cache. This issue has been fixed in versions v5.0 and later.
+  - In the ESP-IDF CMD environment of version v4.4, please use the `idf.py --no-ccache build` command to compile the project.
+  
