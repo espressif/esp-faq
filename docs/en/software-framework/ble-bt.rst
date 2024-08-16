@@ -794,3 +794,10 @@ Does ESP32 Classic Bluetooth support AVRCP 1.5 or AVRCP 1.6?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   AVRCP 1.5 is now supported on esp-idf v5.0.4 and later versions, while AVRCP 1.6 (deprecated) is not supported. For more details, please refer to `esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c <https://github.com/espressif/esp-idf/blob/8fbf4ba6058bcf736317d8a7aa75d0578563c38b/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c#L55C35-L55C40>`__.
+
+-----------
+
+Can ESP-IDF enable both BLE4.2 and BLE5.0 at the same time?
+----------------------------------------------------------------------------------------------
+
+  Currently, both BLE4.2 and BLE5.0 can be enabled simultaneously in menuconfig, but the APIs for BLE4.2 and BLE5.0 are different and can not be used interchangeably. Therefore, in the future, it will be modified to only allow either BLE4.2 or BLE5.0 to be enabled, and it will not be possible to enable both at the same time.
