@@ -268,3 +268,9 @@ flash 加密方案是否支持对文件系统的加密？
   - 使能 NVS 加密方案时，设备不会在烧录的时候加密 NVS 数据，因此需要在 PC 端使用 `脚本工具 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/storage/nvs_partition_gen.html#generate-encrypted-nvs-partition>`__ 来加密 ``nvs_data.bin``。
   - 使能 NVS 加密方案后，设备执行 ``nvs_set_*`` 类型的 API 时，会自动进行 NVS 数据的加密；执行 ``nvs_get_*`` 类型的 API 时，会自动进行 NVS 数据的解密。
 
+-----------------
+
+基于 ESP32 的 SPIFFS 文件系统是否支持使用 flash 加密方案进行加密？
+-------------------------------------------------------------------------------------------------------------------------
+
+  不支持。SPIFFS 的内部结构不支持与 flash 加密方案的结合。如果需要一个支持 flash 加密的文件系统，可以考虑使用 FatFS 或 LittleFS 方案。

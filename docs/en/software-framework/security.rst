@@ -268,3 +268,9 @@ How to create an encrypted ``nvs_data.bin`` when using NVS encryption?
   - When enabling the NVS encryption scheme, the device will not encrypt the NVS data during flashing, so it is necessary to use the `script tool <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/nvs_partition_gen.html#generate-encrypted-nvs-partition>`__ on the PC side to encrypt ``nvs_data.bin``.
   - After enabling the NVS encryption scheme, the device will automatically encrypt NVS data when executing APIs of the ``nvs_set_*`` type; it will automatically decrypt NVS data when executing APIs of the ``nvs_get_*`` type.
 
+-----------------
+
+Does the SPIFFS file system based on ESP32 support the flash encryption scheme?
+-------------------------------------------------------------------------------------------------------------------------
+
+  No. The internal structure of SPIFFS does not support integration with flash encryption. If you need a file system that supports flash encryption, please consider using FatFS or LittleFS.
