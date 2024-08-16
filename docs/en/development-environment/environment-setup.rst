@@ -163,6 +163,6 @@ After installing the ESP-IDF CMD environment using the `ESP-IDF v4.4.8-Offline I
     ninja: build stopped: subcommand failed.
     ninja failed with exit code 1
 
-  - From the logs, it appears that there was an error caching the `build/esp-idf/main/CMakeFiles/__idf_main.dir/ main.c.o.bj` file during the compilation process. This is generated when ccache calls the compiler and is related to the compilation cache. This issue has been fixed in versions v5.0 and later.
-  - In the ESP-IDF CMD environment of version v4.4, please use the `idf.py --no-ccache build` command to compile the project.
+  - According to the logs, an error occurred while caching the `build/esp-idf/main/CMakeFiles/__idf_main.dir/ main.c.o.bj` file during the compilation process. This file is generated when ccache calls the compiler and is related to the compilation cache. This issue has been resolved in versions 5.0 and later.
+  - In the ESP-IDF CMD environment of version v4.4, please use the `idf.py --no-ccache build` command to build the projects.
   
