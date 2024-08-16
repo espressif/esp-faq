@@ -953,3 +953,10 @@ ESP 芯片是否支持用 `esp-bootloader-plus <https://github.com/espressif/esp
 
   - 上述日志报错通常是由于下载的 ``partition-table.bin`` 的地址与实际软件上的 ``Partition Table`` > ``Offset of partition table`` 设置不匹配导致的，即 ``partition-table.bin`` 的下载地址错误。
   - 工程编译完成后会生成 ``build`` 文件夹，在 ``build`` 文件夹下有一个 ``flash_project_args`` 文件，此文件将存储工程编译生成的 ``bin`` 文件和对应的下载地址信息。
+
+---------------
+
+是否支持将 ESP32 的 UART0 输出日志重定向到文件系统？
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  支持。可通过 `esp_log_set_vprintf <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2.2/esp32/api-reference/system/log.html?highlight=esp_log_set_%20vprintf#_CPPv419esp_log_set_vprintf14vprintf_like_t>`_ API，将 UART0 输出日志重定向到文件。
