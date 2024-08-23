@@ -1450,3 +1450,10 @@ Do ESP chips support uAPSD in SoftAP mode?
 ------------------------------------------------------------------------------------------------------------------------------------
  
   uAPSD is a Wi-Fi capability that provides more power consumption savings on the client, in low periodic latency-sensitive traffic modes (such as VoIP). ESP chips currently do not support this feature.
+
+-----------------
+
+When enabling WiFi AP mode on products based on Espressif series, is it possible to set up automatic channels?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Espressif series products use the WiFi SoftAP mode, which does not support automatic channel settings.
