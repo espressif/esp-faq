@@ -49,3 +49,10 @@ Can PCNT support multiple channels working simultaneously? Do signal and control
 ----------------------------------------------------------------------------------------------------------------------------
 
   PCNT supports multiple channels working simultaneously. The signal and control do not necessarily have to be used in pairs. If you do not want to use control, you can set it to -1. The count mode is configured using `pcnt_channel_set_edge_action`.
+
+-------------------
+
+Is it possible to use ESP32 PCNT to calculate the time between two pulses?
+--------------------------------------------------------------------------------------------------------------
+
+  No, it's not possible. PCNT can only count pulses, it does not support calculating the time between two pulses. You can use RMT to calculate the time between two pulses.
