@@ -73,7 +73,7 @@ ESP8266 如何修改默认上电校准⽅式？
 ESP32 Boot 启动模式不正常如何排查？
 -----------------------------------
 
-  - ESP32-WROVER 模组使用 1.8 V flash 与 PSRAM，启动状态默认为 ``0x33``，下载模式 ``0x23``。
+  - ESP32-WROVER\ :sup:`*` 模组使用 1.8 V flash 与 PSRAM，启动状态默认为 ``0x33``，下载模式 ``0x23``。
   - 其余模组使用 3.3 V flash 与 PSRAM，启动状态默认为 ``0x13``，下载模式 ``0x03``。
   - 详情请参考 `ESP32 系列芯片技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中的 Strapping 管脚部分。示例 ``0x13`` 对应如下：
 
@@ -84,6 +84,8 @@ ESP32 Boot 启动模式不正常如何排查？
     +--------+--------+-------+-------+-------+--------+-------+
 
   您也可以直接参考 `Boot 模式选择文档 <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html>`__。
+
+  \ :sup:`*` 表示该产品处于生命周期终止状态。
 
 --------------
 
@@ -279,7 +281,7 @@ ESP32 导入头文件 protocol_examples_common.h 后，为什么编译时提示�
 
     - 检测电源部分上下电过程中的波动情况。
     - ESP32-C3/ESP32-C2 芯片的 eFuse 功能有所加强，后续可以考虑替换相关产品。
-  
+
 --------------
 
 从 ESP-IDF v4.4 版本更新到 v5.0 以及以上版本，会报 `esp_log.h:265:27: error: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Werror=format=]265 | #define LOG_COLOR(COLOR)  "\033[0;" COLOR "m"` 错误，如何解决？

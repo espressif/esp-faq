@@ -20,29 +20,31 @@ What should I pay attention to for ESP32 pin configurations?
 
   The ESP32 has ESP32-WROOM and ESP32-WROVER series modules. Please pay attention to the following configurations with GPIOs.
 
-  The WROOM-32/32D/32U/32E/32UE series has 26 pins available for customer use, with the following considerations:
+  The WROOM-32\ :sup:`*`/32D/32U/32E/32UE series has 26 pins available for customer use, with the following considerations:
 
-  - GPIO6-GPIO11 of the WROOM-32/32D/32U series are occupied by the internal flash and cannot be used for other purposes;
+  - GPIO6-GPIO11 of the WROOM-32\ :sup:`*`/32D/32U series are occupied by the internal flash and cannot be used for other purposes;
   - GPIO6-GPIO11 of the WROOM-32E/32UE series are occupied by the internal flash and are no longer pulled out to the module pins;
   - GPIO34, 35, 36 and 39 are input-only pins and cannot be used for outputs;
   - ESP32 has a built-in GPIO matrix, and some peripheral interfaces can be connected to any free pin. That is, during hardware design, there is no need to strictly fix certain functions on certain pins;
-  - WROOM-32/32D/32U are not recommended for new designs. It is suggested to use the WROOM-32E/32UE series instead.
+  - WROOM-32\ :sup:`*`/32D/32U are not recommended for new designs. It is suggested to use the WROOM-32E/32UE series instead.
   - In the WROOM-32E/32UE series with QSPI PSRAM, GPIO16 is used to connect to the embedded PSRAM and cannot be used for other functions.
 
   Detailed information can be found in Table 6-2 GPIO_Matrix of `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
-  The WROVER/WROVER-I/WROVER-B/WROVER-IB/WROVER-E/WROVER-IE all have 24 pins available for customer use, with the following considerations:
+  The WROVER\ :sup:`*`/WROVER-I\ :sup:`*`/WROVER-B/WROVER-IB/WROVER-E/WROVER-IE all have 24 pins available for customer use, with the following considerations:
 
-  - GPIO6-GPIO11 of the WROVER/WROVER-I/WROVER-B/WROVER-IB series are occupied by the built-in flash and cannot be used for other purposes;
+  - GPIO6-GPIO11 of the WROVER\ :sup:`*`/WROVER-I\ :sup:`*`/WROVER-B/WROVER-IB series are occupied by the built-in flash and cannot be used for other purposes;
   - GPIO6-GPIO11 of the WROVER-E/WROVER-IE series are occupied by the built-in flash and are no longer pulled out to the module pins;
   - GPIO34, 35, 36 and 39 are input-only pins and cannot be used for outputs;
   - For WROVER series, it is not recommended to use GPIO12 for Touch Sensor functions since it has been pulled up in the module;
   - ESP32 has a built-in GPIO matrix, and some peripheral interfaces can be connected to any free pin. That is, during hardware design, there is no need to strictly fix certain functions on certain pins;
-  - WROVER/WROVER-I/WROVER-B/WROVER-IB are not recommended for new designs. It is suggested to use the WROVER-E/WROVER-IE series instead.
+  - WROVER\ :sup:`*`/WROVER-I\ :sup:`*`/WROVER-B/WROVER-IB are not recommended for new designs. It is suggested to use the WROVER-E/WROVER-IE series instead.
 
   Detailed information can be found in Table 6-2 GPIO_Matrix of `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
 
   There are three sets of UARTs in ESP32, but only UART0 can be used for downloading with fixed pins.
+
+  \ :sup:`*` indicates that the product is in EOL status.
 
 --------------
 
@@ -102,7 +104,7 @@ After configuring the GPIO19 for ESP32-C3 as pulled-down input, the level of thi
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - In ESP32-C3, GPIO19 is a USB D+ pin, whose pull-up resistor is controlled by the pin's pull-up value together with USB's pull-up value. If any of the two pull-up values is 1, the pin's pull-up resistor will be enabled.
-  - The USB pull-up value of GPIO19 is 1 by default, so when the pin is pulled down, GPIO19 still keeps high level. 
+  - The USB pull-up value of GPIO19 is 1 by default, so when the pin is pulled down, GPIO19 still keeps high level.
   - This issue has been fixed in the GPIO driver in ESP-IDF v4.4.3 and later versions. For other versions, please write the register ``USB_SERIAL_JTAG_DP_PULLUP`` to 0 for configuration.
 
 ------------------
@@ -131,7 +133,7 @@ When ESP32 uses `gpio_install_isr_service() <https://docs.espressif.com/projects
 How do I get the input level of the ESP32 RTC_GPIO?
 -------------------------------------------------------------------------------------------------------------------------------------
 
-  - You can obtain the input level of RTC_GPIO by reading the macro of the register address corresponding to RTC GPIO. Please refer to `“esp-idf\components\soc\esp32\include\soc\rtc_io_reg.h” <https://github.com/espressif/esp-idf/blob/8a08cfe7d162bb9c07568b0635193bf922377123/components/soc/esp32/include/soc/rtc_io_reg.h#L91>`_. 
+  - You can obtain the input level of RTC_GPIO by reading the macro of the register address corresponding to RTC GPIO. Please refer to `“esp-idf\components\soc\esp32\include\soc\rtc_io_reg.h” <https://github.com/espressif/esp-idf/blob/8a08cfe7d162bb9c07568b0635193bf922377123/components/soc/esp32/include/soc/rtc_io_reg.h#L91>`_.
   - The related code is as follows :
 
   .. code-block:: c

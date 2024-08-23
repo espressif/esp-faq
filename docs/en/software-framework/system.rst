@@ -746,15 +746,17 @@ How can I wake up ESP8266 from Deep-sleep mode?
 
 -----------------
 
-When using the ESP32-WROVER module, there is a problem of battery jitter or abnormal power-off and power-on, causing the system to crash and fail to wake up. What is the reason?
+When using the ESP32-WROVER\ :sup:`*` module, there is a problem of battery jitter or abnormal power-off and power-on, causing the system to crash and fail to wake up. What is the reason?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Application scenario: When sleeping, the current is about 12 uA. When the battery is unplugged or the product is shaken, it will cause power failure, but there is still electricity in the capacitor. The process of ESP32 discharging from 3.3 V to 0 V, and then powering on to restore 3.3 V will cause ESP32 to be unable to wake up.
 
   - Please check whether the chip VCC and EN meet the power-on timing requirements.
-  - When using the ESP32-WROVER module for sleep, if there is unstable power supply voltage or abnormal power off, it may cause problems with the power management unit of the chip, leading to inability to wake up normally.
+  - When using the ESP32-WROVER\ :sup:`*` module for sleep, if there is unstable power supply voltage or abnormal power off, it may cause problems with the power management unit of the chip, leading to inability to wake up normally.
   - Consider adding a reset chip to ensure normal timing.
   - For the power-on and reset timing description of ESP32, please refer to the `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
+
+  \ :sup:`*` indicates that the product is in EOL status.
 
 --------------
 
@@ -944,7 +946,7 @@ How to obtain the CPU usage of a task when developing applications with ESP32?
 
 After downloading the firmware, ESP32 fails to start normally, and the log shows the following information. What could be the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  
+
   .. code:: text
 
    E(88)flash parts: partition 0 invalid magic number 0x5e9

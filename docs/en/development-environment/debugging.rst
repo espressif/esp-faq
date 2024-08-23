@@ -73,7 +73,7 @@ How to modify the default method of RF calibration in ESP8266?
 How to troubleshoot in ESP32 Boot mode？
 ------------------------------------------
 
-  - The ESP32-WROVER uses 1.8 V flash and PSRAM, which is ``0x33`` by default in boot status and ``0x23`` in download mode.
+  - The ESP32-WROVER\ :sup:`*` uses 1.8 V flash and PSRAM, which is ``0x33`` by default in boot status and ``0x23`` in download mode.
   - Other modules use 3.3 V flash and PSRAM, which are ``0x13`` by default in boot status and ``0x03`` in download mode.
   - For detailed information, please refer to Section Strapping Pins in `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_. Taking ``0x13`` as an example, the pins are as follows:
 
@@ -84,6 +84,8 @@ How to troubleshoot in ESP32 Boot mode？
     +--------+--------+-------+-------+-------+--------+-------+
 
   You can also refer to the `Boot Mode Selection documentation <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html>`__ directly.
+
+  \ :sup:`*` indicates that the product is in EOL status.
 
 --------------
 
@@ -279,7 +281,7 @@ When using flash_download_tool to flash firmware to the ESP8266 module, how to s
 
     - Monitor voltage fluctuations during power-up and power-down processes.
     - The eFuse functionality has been enhanced in ESP32-C3/ESP32-C2 chips. You may consider replacing with the relevant products in the future.
-  
+
 --------------
 
 When upgrading from ESP-IDF v4.4 to v5.0 and above, the error `esp_log.h:265:27: error: format '%d' expects argument of type 'int', but argument 6 has type 'uint32_t' {aka 'long unsigned int'} [-Werror=format=]265 | #define LOG_COLOR(COLOR)  "\033[0;" COLOR "m"` is reported. How can this be resolved?

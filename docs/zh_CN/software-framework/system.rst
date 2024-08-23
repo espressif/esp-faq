@@ -746,15 +746,17 @@ ESP8266 在 Deep-sleep 模式下如何唤醒？
 
 -----------------
 
-使用 ESP32-WROVER 模组，休眠时存在电池抖动或异常掉电上电导致死机无法唤醒的问题，是什么原因？
+使用 ESP32-WROVER\ :sup:`*` 模组，休眠时存在电池抖动或异常掉电上电导致死机无法唤醒的问题，是什么原因？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 应用场景：休眠的时候电流大概是 12 uA, 当拔电池或震动摇晃产品的时候会造成掉电，但是电容里还有电，ESP32 从 3.3 V 放电到 0 V 的过程中，再上电恢复 3.3 V 会导致 ESP32 无法唤醒。
 
   - 请检查芯片 VCC 与 EN 是否满足上电时序要求。
-  - 在使用 ESP32-WROVER 模组进行休眠时，如果存在电源电压不稳定或异常掉电的情况，可能会导致芯片的电源管理单元出现问题，导致无法正常唤醒。
+  - 在使用 ESP32-WROVER\ :sup:`*` 模组进行休眠时，如果存在电源电压不稳定或异常掉电的情况，可能会导致芯片的电源管理单元出现问题，导致无法正常唤醒。
   - 可以考虑添加复位芯片保证时序正常。
   - ESP32 上电、复位时序说明，详见 `《ESP32 技术规格书》 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_。
+
+  \ :sup:`*` 表示该产品处于生命周期终止状态。
 
 --------------
 
@@ -882,7 +884,7 @@ Wi-Fi OTA 时，指定 url 中有空格导致无法解析，如何解决？
 
   - 可使用以下两种方式可以获取版本号：
 
-    - 1. 在 ESP-IDF 环境中运行 `xtensa-esp32-elf-gcc -dM -E -x c - <<< "#include <_newlib_version.h>" | grep NEWLIB_VERSION` 命令去获取 newlib 版本号，将打印类似以下内容： `#define _NEWLIB_VERSION "4.1.0"`。         
+    - 1. 在 ESP-IDF 环境中运行 `xtensa-esp32-elf-gcc -dM -E -x c - <<< "#include <_newlib_version.h>" | grep NEWLIB_VERSION` 命令去获取 newlib 版本号，将打印类似以下内容： `#define _NEWLIB_VERSION "4.1.0"`。
     - 2. 在工具链版本中查找 newlib 版本，查找 ESP-IDF 使用的工具链版本。例如，对于 ESP-IDF v5.0，从 `xtensa-esp32-elf <https://docs.espressif.com/projects/esp-idf/en/v5.0/esp32/api-guides/tools/idf-tools.html#xtensa-esp32-elf>`_ 可以得知工具链版本为 esp2021-r1，转到 `该工具链版本 <https://github.com/espressif/crosstool-NG/releases/tag/esp-2022r1>`_ 的发行说明页面，从链接中可以获知 newlib 版本为 v4.1.0。
 
 --------------
@@ -944,7 +946,7 @@ ESP 芯片是否支持用 `esp-bootloader-plus <https://github.com/espressif/esp
 
 基于 ESP32 下载固件后无法正常启动，出现如下报错是什么原因？
 -----------------------------------------------------------------------------------------------------------
-  
+
   .. code:: text
 
    E(88)flash parts: partition 0 invalid magic number 0x5e9
