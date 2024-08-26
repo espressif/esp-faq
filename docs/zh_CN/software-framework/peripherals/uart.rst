@@ -122,7 +122,7 @@ ESP8266 的串⼝波特率范围是多大？
 ESP32 的 UART0 是否可以在输出日志的同时又用作接收电脑控制台的输入？
 --------------------------------------------------------------------------------------------------------------------------------
 
-  - 可以。UART0 输出日志只需要使用 TXD0 管脚，接收电脑控制台的输入只需要使用 RXD0 管脚。可基于 `"esp-idf/examples/system/console/basic" <https://github.com/espressif/esp-idf/tree/master/examples/system/console/basic>`_ 例程来测试。
+  可以。UART0 输出日志只需要使用 TXD0 管脚，接收电脑控制台的输入只需要使用 RXD0 管脚。可基于 `esp-idf/examples/system/console/basic <https://github.com/espressif/esp-idf/tree/master/examples/system/console/basic>`_ 例程来测试。
 
 --------------
 
@@ -151,3 +151,10 @@ ESP32 是否支持 UART IRDA 工作模式？
 ---------------------------------------------------------------------------------------------------------------------
   
   可基于 `soft_uart <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/dedicated_gpio/soft_uart>`_ 例程来测试。
+
+---------------
+
+在 ESP32-C6 未进入 DeepSleep 模式的情况下，是否可以同时使用 UART 和 LP UART？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  可以同时使用。只需使能 LP Core，即可使用 LP UART。例程请参考：`esp-idf/examples/system/ulp/lp_core/lp_uart <https://github.com/espressif/esp-idf/tree/release/v5.3/examples/system/ulp/lp_core/lp_uart>`_。
