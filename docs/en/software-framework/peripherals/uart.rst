@@ -122,7 +122,7 @@ When using ESP8266, I want to use UART0 exclusively for downloading, and then us
 Can ESP32's UART0 be used for inputting from the computer console while it is being used for outputting logs?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes. Outputting logs only requires using the TXD0 pin, while receiving input from the computer console only requires using the RXD0 pin. You can use the `"esp-idf/examples/system/console/basic" <https://github.com/espressif/esp-idf/tree/master/examples/system/console/basic>`_ example for testing.
+  Yes. Outputting logs only requires using the TXD0 pin, while receiving input from the computer console only requires using the RXD0 pin. You can use the `esp-idf/examples/system/console/basic <https://github.com/espressif/esp-idf/tree/master/examples/system/console/basic>`_ example for testing.
 
 --------------
 
@@ -151,3 +151,10 @@ In situations where serial port resources are limited, is GPIO-based UART simula
 ---------------------------------------------------------------------------------------------------------------------
   
   You can test this using the `soft_uart <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/dedicated_gpio/soft_uart>`_ example.
+
+---------------
+
+Can UART and LP UART be used simultaneously when ESP32-C6 is not in DeepSleep mode?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, UART and LP UART can be used simultaneously. You can enable the LP Core to use LP UART. Please refer to this use case: `esp-idf/examples/system/ulp/lp_core/lp_uart <https://github.com/espressif/esp-idf/tree/release/v5.3/examples/system/ulp/lp_core/lp_uart>`_.
