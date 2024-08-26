@@ -105,3 +105,10 @@ When using Timer for wake-up based on the `esp-idf/examples/system/deep_sleep <h
       ESP_ERROR_CHECK(esp_sleep_enable_timer_wakeup(wakeup_time_sec * 1000000));
 
   - Or directly write it as ``esp_sleep_enable_timer_wakeup(9000 * 1000000ULL);``.
+
+---------------
+
+After enabling the Ethernet function based on the ESP32-WROVER-E module, the chip cannot enter the Power Save (Auto Light-sleep) mode. What is the reason?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Currently, ESP32 does not support using Ethernet as a wake-up source. Therefore, when Ethernet is enabled, the chip must remain in Active mode to receive data.
