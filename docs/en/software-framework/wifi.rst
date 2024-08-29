@@ -1457,3 +1457,11 @@ When enabling WiFi AP mode on products based on Espressif series, is it possible
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Espressif series products use the WiFi SoftAP mode, which does not support automatic channel settings.
+
+-------------
+
+Do ESP series products support roaming in Wi-Fi AP mode?
+-----------------------------------------------------------------------------------------------------------------------
+
+  - No, ESP series products only support connecting to routers with roaming features in Wi-Fi Station mode.
+  - Software Reference: `esp-idf/examples/wifi/roaming <https://github.com/espressif/esp-idf/tree/release/v5.3/examples/wifi/roaming>`_.
