@@ -321,3 +321,10 @@ Note that the capturing does not occur when calling `esp_camera_fb_get`. The cap
     esp_err_t ret = esp_camera_fb_return(esp_camera_fb_get());
     // The background program automatically refreshes the new image data to frame_buffer, then the application layer can access the data in frame_buffer.
     fb = esp_camera_fb_get();
+
+-------------
+
+How to implement frame skipping with the `esp32-camera <https://github.com/espressif/esp32-camera>`_ SDK?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  You can call `esp_camera_fb_return(esp_camera_fb_get());` to discard the current frame, that is, to skip the frame that is being fetched.

@@ -321,3 +321,10 @@ ESP32-Camera 的两种 capture 模式的区别是什么？
     esp_err_t ret = esp_camera_fb_return(esp_camera_fb_get());
     //后台程序自动将新的图像数据刷新到 frame_buffer，然后应用层可以获取到 frame_buffer 中的数据
     fb = esp_camera_fb_get();
+
+-------------
+
+基于 `esp32-camera <https://github.com/espressif/esp32-camera>`_ SDK 如何实现跳帧？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  可使用 `esp_camera_fb_return(esp_camera_fb_get());` 舍弃当前帧，即跳过当前获取的旧帧。
