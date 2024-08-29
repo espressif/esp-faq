@@ -1,5 +1,5 @@
 HTTP 
-====
+=====
 
 :link_to_translation:`zh_CN:[中文]`
 
@@ -119,3 +119,10 @@ How can I resolve the error of `HTTP_HEADER: Buffer length is small to fit all t
 --------------------------------------------------------------------------------------------------------------------------------
 
   - Please change the member ``buffer_size_tx`` of the structure ``esp_http_client_config_t`` in the file `esp-idf/components/esp_http_client/include/esp_http_client.h` to 1024 bytes or larger.
+
+--------------
+
+Why is the data length always 0 when calling ``esp_http_client_read_response`` after executing the ``esp_http_client_perform`` function?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The ``esp_http_client_perform`` function already handles data reading internally, so calling ``esp_http_client_read_response`` afterward is not necessary and will not yield the expected data length. To obtain the data, please handle the ``HTTP_EVENT_ON_DATA`` event in the event handler.
