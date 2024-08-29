@@ -108,3 +108,10 @@ Does the ESP module support the IPP protocol for printers?
 -----------------------------------------------------------------------------------------------------------
 
  Currently not supported.
+
+----------------
+
+When ESP32 connects to an open hotspot that requires login authentication (such as CMCC), how to handle this situation?
+---------------------------------------------------------------------------------------------------------------------------
+
+  This type of hotspot typically uses the ``Captive Portal`` mechanism. When ESP32 connects to such a hotspot, the device will be redirected to a login page where the user needs to enter the mobile number and verification code for authentication. Currently, there is no ready-made solution to automate this authentication process. An alternative approach is to add the device to the whitelist on the router's management page, thus avoiding the need for authentication each time it connects.
