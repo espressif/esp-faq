@@ -123,3 +123,10 @@ How to check if the ESP32 is disconnected from the MQTT server?
 -----------------------------------------------------------------------------------------------------------
 
   To detect if the ESP32 has been disconnected from the server, you can use MQTT's ``PING`` mechanism by configuring the keepalive parameters ``disable_keepalive`` and ``keepalive`` in the ``esp_mqtt_client_config_t`` structure in ESP-MQTT. For example, if you configure ``disable_keepalive`` to false (default setting) and ``keepalive`` to 120 s (default setting), the MQTT client will periodically send ``PING`` to check if the connection to the server is working.
+
+----------------
+
+How can I identify the specific error and troubleshoot the issue when encountering a connection failure to the MQTT server?
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  When MQTT connection fails, you can parse the data in the ``esp_mqtt_error_codes_t`` structure within the MQTT event ``MQTT_EVENT_ERROR``. For more details, please refer to the ``MQTT_EVENT_ERROR`` event in the example.
