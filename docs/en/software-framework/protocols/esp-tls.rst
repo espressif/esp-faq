@@ -67,3 +67,18 @@ When accessing the MQTTS Broker using IP, the error ``MBEDTLS_ERR_X509_CERT_VERI
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The issue might be due to a mismatch in the CN field. This can be bypassed by setting the member variable `skip_cert_common_name_check <https://github.com/espressif/esp-mqtt/blob/e6afdb4025fe018ae0add44e3c45249ea1974774/include/mqtt_client.h#L260>`__ to True to skip the CN check.
+
+----------------
+
+How to solve the issue of insufficient memory during a TLS handshake?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  When memory is insufficient, it needs to be optimized. You can refer to `Minimizing RAM Usage <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/performance/ram-usage.html>`__. If the module is equipped with external PSRAM, it needs to be correctly configured to use this memory.
+
+----------------
+
+What do the error codes ``0x6900`` and ``0x7600`` represent during a TLS handshake?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ``0x6900 (MBEDTLS_ERR_SSL_WANT_READ)``: This usually indicates that the operation would be blocked because there is temporarily no data in the TCP receive buffer. It is not necessarily an error but rather a signal that more data needs to be received.
+  - ``0x7600 (MBEDTLS_ERR_SSL_PRIVATE_KEY_REQUIRED)``: This indicates that the required private key or pre-shared key has not been set. For two-way authentication, please ensure that the client has configured the correct private key.
