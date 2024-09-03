@@ -79,3 +79,31 @@ Can BLE advertising (Connectable) and iBeacon sending (advertising) coexist?
   :IDF\: release/v4.3 and later versions | CHIP\: ESP32-C3|ESP32-S3:
 
   - Yes.
+
+--------------
+
+How do ESP32 Bluetooth® and Bluetooth® LE dual-mode coexist and how can I use this coexistence mode?
+---------------------------------------------------------------------------------------------------------------------------------------
+
+  The ESP32 Bluetooth and Bluetooth LE dual-mode does not require complex configurations. For developers, it is simple as calling Bluetooth LE API for Bluetooth LE, and calling Classic Bluetooth API for Classic Bluetooth.
+
+  For Classic Bluetooth and Bluetooth LE coexistence, please refer to `a2dp_gatts_coex example <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/coex/a2dp_gatts_coex>`_.
+
+--------------
+
+How do ESP32 Bluetooth® and Wi-Fi coexist?
+----------------------------------------------------
+
+  In the ``menuconfig``, there is a special option called ``Software controls WiFi/Bluetooth coexistence``, which is used to control the coexistence of Bluetooth and Wi-Fi for ESP32 using software, thus balancing the coexistence requirement for controlling the RF module by both the Wi-Fi and Bluetooth modules.
+
+  - Please note that if ``Software controls WiFi/Bluetooth coexistence`` is enabled, the Bluetooth LE scan interval shall not exceed ``0x100 slots`` (about 160 ms). If the Bluetooth LE and Wi-Fi coexistence is required, this option can be enabled or disabled. However, if this option is not enabled, please note that the Bluetooth LE scan window should be larger than 150 ms, and the Bluetooth LE scan interval should be less than 500 ms.
+  - If the Classic Bluetooth and Wi-Fi coexistence is required, it is recommended to enable this option.
+
+---------------
+
+How can I resolve the frequently occurred ELxXX error (such as ELx200) when Wi-Fi and Ble co-exit？
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - It has been fixed in commit 386a8e37f19fecc9ef62e72441e6e1272fa985b9. Please switch to the corresponding commit to test.

@@ -6,7 +6,7 @@ Software framework
 .. toctree::
    :maxdepth: 1
 
-   Bluetooth LE & Bluetooth <ble-bt>
+   Bluetooth <bt/index>
    Ethernet <ethernet>
    Coexistence <coexistence>
    Peripherals <peripherals/index>

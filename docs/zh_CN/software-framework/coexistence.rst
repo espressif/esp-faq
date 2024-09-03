@@ -79,3 +79,31 @@ BLE adverting (Connectable) + iBeacon sending(advertising) 可以共存吗？？
   :IDF\: release/v4.3 以及以上版本 | CHIP\: ESP32-C3|ESP32-S3:
 
   - 可以。
+
+--------------
+
+ESP32 的蓝牙双模如何共存及使用？
+------------------------------------
+
+  ESP32 支持的双模蓝牙并没有特殊的地方，不需要做复杂的配置或调用即可使用。从开发者的⻆度来看，Bluetooth® LE 调用 Bluetooth LE 的 API，经典蓝牙调用经典蓝牙的 API。
+
+  经典蓝牙与 Bluetooth LE 共存示例可参考 `a2dp_gatts_coex 示例 <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/coex/a2dp_gatts_coex>`_。
+
+--------------
+
+ESP32 的蓝⽛和 Wi-Fi 如何共存？
+----------------------------------
+
+  在 ``menuconfig`` 中，有个特殊选项 ``Software controls WiFi/Bluetooth coexistence``，⽤于通过软件来控制 ESP32 的蓝⽛和 Wi-Fi 共存，可以平衡 Wi-Fi、蓝⽛控制 RF 的共存需求。
+
+  - 如果使能 ``Software controls WiFi/Bluetooth coexistence`` 选项，Bluetooth® LE scan 间隔不应超过 ``0x100 slots`` （约 160 ms）。若只是 Bluetooth LE 与 Wi-Fi 共存，则开启这个选项和不开启均可正常使⽤。但不开启的时候需要注意 Bluetooth LE scan window 应大于 150 ms，并且 Bluetooth LE scan interval 尽量⼩于 500 ms。
+  - 若经典蓝⽛与 Wi-Fi 共存，则建议开启这个选项。
+
+---------------
+
+Wi-Fi 和 蓝牙共存时，频繁通信出现 ELxXX error（比如 ELx200）如何解决?
+--------------------------------------------------------------------------------------------------
+
+  :CHIP\: ESP32:
+
+  - 该问题目前已在 commit 386a8e37f19fecc9ef62e72441e6e1272fa985b9 修补，请切换至对应的 commit 进行测试。
