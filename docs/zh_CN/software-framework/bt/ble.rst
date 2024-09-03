@@ -1,5 +1,5 @@
-蓝牙
-====
+低功耗蓝牙
+===========
 
 :link_to_translation:`en:[English]`
 
@@ -43,21 +43,10 @@ ESP32 可以支持 Bluetooth LE 5.0 吗？
 
 --------------
 
-ESP32 能否使用蓝牙进行 OTA？
-----------------------------------
+ESP32 能否使用 Bluetooth LE 进行 OTA？
+-----------------------------------------
 
-  可以使用蓝牙进行 OTA。如果是用 Bluetooth®，可以基于 `bt_spp_acceptor <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_acceptor>`_ 和 `bt_spp_initiator <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt/bt_spp_initiator>`_ 修改。
-
-  如果是用 Bluetooth LE，请参考例程 `BLE_OTA <https://github.com/espressif/esp-iot-solution/tree/master/examples/bluetooth/ble_ota>`_。
-
---------------
-
-ESP32 的蓝牙双模如何共存及使用？
-------------------------------------
-
-  ESP32 支持的双模蓝牙并没有特殊的地方，不需要做复杂的配置或调用即可使用。从开发者的⻆度来看，Bluetooth® LE 调用 Bluetooth LE 的 API，经典蓝牙调用经典蓝牙的 API。
-
-  经典蓝牙与 Bluetooth LE 共存示例可参考 `a2dp_gatts_coex 示例 <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/coex/a2dp_gatts_coex>`_。
+  可以，请参考例程 `BLE_OTA <https://github.com/espressif/esp-iot-solution/tree/master/examples/bluetooth/ble_ota>`_。
 
 --------------
 
@@ -76,16 +65,6 @@ ESP32 是否支持 BT4.2 DLE (Data Length Extension)？
 
 --------------
 
-ESP32 的蓝⽛和 Wi-Fi 如何共存？
-----------------------------------
-
-  在 ``menuconfig`` 中，有个特殊选项 ``Software controls WiFi/Bluetooth coexistence``，⽤于通过软件来控制 ESP32 的蓝⽛和 Wi-Fi 共存，可以平衡 Wi-Fi、蓝⽛控制 RF 的共存需求。
-
-  - 如果使能 ``Software controls WiFi/Bluetooth coexistence`` 选项，Bluetooth® LE scan 间隔不应超过 ``0x100 slots`` （约 160 ms）。若只是 Bluetooth LE 与 Wi-Fi 共存，则开启这个选项和不开启均可正常使⽤。但不开启的时候需要注意 Bluetooth LE scan window 应大于 150 ms，并且 Bluetooth LE scan interval 尽量⼩于 500 ms。
-  - 若经典蓝⽛与 Wi-Fi 共存，则建议开启这个选项。
-
---------------
-
 ESP32 蓝牙的兼容性测试报告如何获取？
 ------------------------------------
 
@@ -93,10 +72,10 @@ ESP32 蓝牙的兼容性测试报告如何获取？
 
 --------------
 
-ESP32 蓝牙的发射功率是多少？
---------------------------------
+ESP32 Bluetooth LE 的发射功率是多少？
+-----------------------------------------
 
-  ESP32 蓝牙的发射功率有 8 档，对应功率 -12 ~ 9 dBm，间隔 3 dBm 一档。控制器软件对发射功率进行限制，根据产品声明的对应功率等级选取档位。
+  ESP32 Bluetooth LE的发射功率有 8 档，对应功率 -12 ~ 9 dBm，间隔 3 dBm 一档。控制器软件对发射功率进行限制，根据产品声明的对应功率等级选取档位。
 
 --------------
 
@@ -128,20 +107,6 @@ ESP32 支持哪些 Bluetooth® LE Profile？
 --------------------------------------------
 
   目前支持完整的 GATT/SMP 等基础模块，支持自定义配置；已经实现的配置有 Bluetooth LE HID（设备端）、电池、DIS、BluFi（蓝牙配网）等。
-
---------------
-
-如何使用 ESP32 蓝牙连接手机播放音乐？
--------------------------------------
-
-  用手机通过蓝牙播放音乐，ESP32 用作 A2DP Sink。A2DP Sink Demo 只是通过手机获取 SBC 编码的数据流，若要播放出声音，需要做编解码转换，通常需要编解码器、数/模转换器、扬声器等模块。
-
---------------
-
-ESP32 的 SPP 性能如何？
---------------------------
-
-  使用两块 ESP32 开发板对跑 SPP，单向吞吐量量可达 1900 Kbps，约 235 KB/s，已接近规范里的理论值。
 
 --------------
 
@@ -180,22 +145,8 @@ ESP32 Bluetooth® LE 如何进入 Light-sleep 模式呢？
 
 --------------
 
-ESP32 经典蓝牙 SPP 的传输速率能达到多少？
------------------------------------------
-
-  在开放环境下，双向同时收发，实测可达到 1400+ Kbps 到 1590 Kbps（此数据仅作为参考，实际情况建议客户根据应用环境实测）。
-
---------------
-
-ESP32 的蓝牙是否兼容 Bluetooth® ver2.1 + EDR 协议？
----------------------------------------------------------------------
-
-  兼容。ESP32 的蓝牙是向下兼容的，您可以使用官方的 `蓝牙示例 <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth>`_ 进行测试。
-
---------------
-
-ESP32 支持多少蓝牙客户端连接？
-------------------------------
+ESP32 支持多少低功耗蓝牙客户端连接？
+-------------------------------------
 
   Bluetooth® LE Server 最大支持 9 个客户端连接，应用中需查看配置参数 ble_max_conn。测试稳定连接为 3 个客户端。
 
@@ -217,31 +168,13 @@ ESP32 Wi-Fi Smartconfig 配网和 Bluetooth® LE Mesh 可以同时使用吗？
   - Smartconfig 需要一直收配网数据，所以会一直占用天线，如果和 Bluetooth LE Mesh 共同使用，会导致失败率非常高。
   - Bluetooth LE Mesh 可以和 BluFi 同时使用，所以推荐配网方式选择 BluFi 配网。
 
---------------
-
-ESP32 的经典蓝牙工作电流是多少？
----------------------------------------
-
-  A2DP (Single core CPU 160 Mhz，DFS = false，commit a7a90f)
-
-  +--------------------------------------------------------------+---------------+---------------+----------+
-  | 电流                                                         | 最大值 (mA)   | 最小值 (mA)   | 平均值   |
-  +==============================================================+===============+===============+==========+
-  | Scanning                                                     | 106.4         | 30.8          | 37.8     |
-  +--------------------------------------------------------------+---------------+---------------+----------+
-  | Sniff                                                        | 107.6         | 31.1          | 32.2     |
-  +--------------------------------------------------------------+---------------+---------------+----------+
-  | Play Music                                                   | 123           | 90.1          | 100.4    |
-  +--------------------------------------------------------------+---------------+---------------+----------+
-
 ------------
 
-ESP32 系列如何修改蓝牙的发射功率？
+ESP32 系列如何修改低功耗蓝牙的发射功率？
 ---------------------------------------------------
 
   - ESP32/ESP32-S3/ESP32-C3 蓝牙发射功率可通过 `esp_ble_tx_power_set()` 函数进行设置，可参见 `esp_bt.h <https://github.com/espressif/esp-idf/blob/c77c4ccf6c43ab09fd89e7c907bf5cf2a3499e3b/components/bt/include/esp_bt.h>`_。
   - 对于ESP32-C6/ESP32-C2/ESP32-H2 可以通过调用 `esp_ble_tx_power_set_enhanced() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/include/esp32h4/include/esp_bt.h#L139>`__ API设置发射功率。
-  - 对于经典蓝牙可以使用 `esp_bredr_tx_power_set() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/include/esp32/include/esp_bt.h#L336>`__ 进行设置。
 
 --------------
 
@@ -250,14 +183,6 @@ ESP32 的 Bluetooth® LE 蓝牙配网兼容性如何？是否开源？
 
   - ESP32 的蓝牙配网，简称 BluFi 配网，兼容性与 Bluetooth LE 兼容性一致，测试过苹果、华为、小米、OPPO、魅族、一加、中兴等主流品手机，兼容性良好。
   - 目前 BluFi 协议及手机应用部分的代码都已经开源。
-
---------------
-
-ESP32 运行 bt_spp_acceptor 例程时， IOS 设备无法扫描到 ESP32 设备是什么原因？
------------------------------------------------------------------------------
-
-  - 苹果开放的蓝牙有：A2DP、HID 的 keyboard、avrcp 以及 SPP（需要 MFI）和高端的 Bluetooth® LE 外加给予 Bluetooth LE 的 ANCS。
-  - 如果 IOS 设备想要和对端设备通过 SPP 通信，那么对端设备的 SPP 需要通过 MFI 认证。目前 ESP32 SPP 没有通过 MFI 认证，因此 IOS 设备无法扫描到 ESP32。
 
 --------------
 
@@ -276,7 +201,6 @@ ESP32 Bluetooth® LE MTU 大小如何确定？
   - 手机端的 MTU 由手机端自行定义，最终通信的 MTU 选择两端 MTU 较小的那一个。
 
 --------------
-
 
 ESP32 Bluetooth® LE 能否同时支持主从模式，作 gatt server 的同时，也可作为 gatt client 接收其他设备的广播数据？
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -302,15 +226,7 @@ ESP32 的 Bluetooth® LE 连接数 6 个以上会有哪些风险？
   - ESP32 的 Bluetooth LE 最大支持 9 台从机设备进行连接，建议连接数量不超过 3 个。
   - 可通过 ``menuconfig`` > ``Component config`` > ``Bluetooth`` > ``Bluetooth controller`` > ``BLE MAX Connections`` 进行配置。
 
-----------------
-
-ESP32 如何通过 Bluetooth® BR/EDR 传文件？
-------------------------------------------------------------
-
-  - 可参考链接 `classic bt <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/classic_bt>`_ 下的 ``bt_spp_acceptor`` 或者 ``bt_spp_initiator`` 例程。
-
 ---------------
-
 
 ESP32 下载 BluFi 例程进行配网，若使用 EspBluFi APP 在配网过程配置了一个错误的 Wi-Fi 从而无法连接，此时从 APP 端向设备端发送“扫描”命令后就会导致设备重启，是什么原因？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -341,14 +257,7 @@ ESP32 设置中文蓝牙设备名称会异常显示乱码，原因是什么？
 
 ----------------
 
-ESP32 经典蓝牙支持哪些 Profile？
-------------------------------------------------------------
-
-  - 目前支持 A2DP、AVRCP、SPP、HFP、HID。
-
-----------------
-
-ESP32-C3 Bluetooth® LE (BLE) 稳定连接的数目可以达到多少个？
+ESP32-C3 Bluetooth® LE  稳定连接的数目可以达到多少个？
 ------------------------------------------------------------
 
   视连接参数而定，最多不超过八个。如需优化多连接性能，可选用 ESP32-C6 系列。
@@ -361,16 +270,6 @@ BLE 中如何修改广播的时间间隔？
   - 通过修改广播结构体中的 ``adv_int_min`` 和 ``adv_int_max`` 两个参数来设置。这两个分别对应了广播时间间隔的最小值和最大值。
   - 广播时间间隔参数的取值范围为 0x0020 to 0x4000，默认值为 0x0800。对应的广播时间为参数值 * 0.625 ms，即广播时间间隔为 20 ms 到 10.24 s。
   - 当 ``adv_int_min`` 和 ``adv_int_max`` 不同时，广播的时间间隔在两者区间内产生，当最小值和最大值设置成同一个值时，时间间隔固定为该值。
-
-----------------
-
-ESP32 经典蓝牙配对时如何使手机端输入 PIN 码？
---------------------------------------------------------------------------------------
-
-  可以通过禁用 ``Secure Simple Pairing``，从而仅支持 ``Legacy Pairing``。
-
-  - v3.3 到 v4.0（不包含 v4.0）：``Component config`` > ``Bluetooth`` > ``Bluedroid Enable`` > ``[*] Classic Bluetooth`` > ``[ ]Secure Simple Pairing``
-  - v4.0 及以上：``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` > ``[ ] Secure Simple Pairing``
 
 ----------------
 
@@ -413,22 +312,6 @@ ESP32-C3 BLE 同时支持主从模式吗？主、从模式连接数分别是多�
 
   - ESP32-C3 同时支持主从模式，共用 8 个连接。例如，ESP32-C3 连接了 4 个 slave 设备，那么可被 8 - 4 = 4 个 master 设备连接。
   - 另外，ESP32-C3 用作 slave 时，可被 8 个 master 设备连接；用作 master 时，可连接 8 个 slave 设备。
-
------------------
-
-ESP32 经典蓝牙的 MTU Size 最大可设多大呢？
---------------------------------------------------------------------------------
-
-  - ESP32 经典蓝牙有两种协议，分别为 A2DP 和 SPP 协议。BT A2DP 的 MTU Size 最大设置（默认）为 1008 字节，其中包头占 12 字节，应用层实际传输的数据量即为 1008 - 12 = 996（字节）；BT SPP 的 MTU Size 最大（默认）设置为 990 字节。 
-
----------------
-
-Wi-Fi 和 蓝牙共存时，频繁通信出现 ELxXX error（比如 ELx200）如何解决?
---------------------------------------------------------------------------------------------------
-
-  :CHIP\: ESP32:
-
-  - 该问题目前已在 commit 386a8e37f19fecc9ef62e72441e6e1272fa985b9 修补，请切换至对应的 commit 进行测试。
 
 ---------------
 
@@ -520,21 +403,6 @@ BLE 广播包如何设置为不可连接包?
         .channel_map        = ADV_CHNL_ALL,
         .adv_filter_policy = ADV_FILTER_ALLOW_SCAN_ANY_CON_ANY,
         }
-
----------------
-
-怎样通过串口给 ESP32-WROOM-32D 模块直接发送蓝牙 HCI 命令?
------------------------------------------------------------------
-
-  - 请参考例程 `controller_hci_uart_esp32 <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/hci/controller_hci_uart_esp32>`_。
-  - ESP32 用作 controller，其他设备作为 host，可通过 UART 给 ESP32 发送 HCI 指令。
-
---------------
-
-ESP32 是否支持 A2DP 发送音频？
---------------------------------------
-
-  ESP32 支持 A2DP 发送音频，可参考例程 `a2dp_source <https://github.com/espressif/esp-idf/tree/d85d3d969ff4b42e2616fd40973d637ff337fae6/examples/bluetooth/bluedroid/classic_bt/a2dp_source>`_。
 
 ----------------
 
@@ -787,13 +655,6 @@ ESP32-S3 支持同时在 125 Kbps Coded PHY 和 1 Mbps PHY 下进行广播\扫�
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
   这是由于蓝牙控制器的任务堆栈外溢导致的，可以在 menuconfig 调大蓝牙控制器的任务堆栈大小：``idf.py menuconfig`` --> ``Component config`` --> ``Bluetooth`` --> ``Bluedriod options`` --> ``(3072)Bluetooth event(callback to application) task stack size``。
-
-----------------
-
-ESP32 经典蓝牙支持 AVRCP 1.5 或 AVRCP 1.6 吗？
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  目前已经在 esp-idf v5.0.4 及之后的版本上支持 AVRCP 1.5，不支持 AVRCP 1.6（已废弃），详情参见 `esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c <https://github.com/espressif/esp-idf/blob/8fbf4ba6058bcf736317d8a7aa75d0578563c38b/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c#L55C35-L55C40>`__。
 
 -----------
 

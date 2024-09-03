@@ -6,7 +6,7 @@
 .. toctree::
    :maxdepth: 1
 
-   蓝牙 <ble-bt>
+   蓝牙 <bt/index>
    以太网 <ethernet>
    共存 <coexistence>
    外设 <peripherals/index>
