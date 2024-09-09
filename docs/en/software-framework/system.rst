@@ -962,3 +962,11 @@ Does it support redirecting the UART0 output logs of ESP32 to the file system?
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
   Yes. UART0 output logs can be redirected to a file through the `esp_log_set_vprintf <https://docs.espressif.com/projects/esp-idf/en/v5.2.2/esp32/api-reference/system/log.html?highlight=esp_log_set_%20vprintf#_CPPv419esp_log_set_vprintf14vprintf_like_t>`_ API.
+
+----------------
+
+Can the ESP32 BootLoader, which is configured to run in single-core mode, be upgraded to dual-core mode via OTA?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  - ESP32 does not support this. Each CPU in ESP32 has an independent cache, and the MMU configuration related to the cache is set during the BootLoader. If the BootLoader is configured for single-core mode, but the MMU for the second core is not configured, it will cause an instruction fetch error.
+  - Support is available for ESP32-S3 and ESP32-P4. These two chips feature two cores that share the same cache, which eliminates the aforementioned issue. Therefore, they support upgrading from single-core to dual-core mode.

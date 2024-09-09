@@ -962,3 +962,11 @@ ESP 芯片是否支持用 `esp-bootloader-plus <https://github.com/espressif/esp
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
   支持。可通过 `esp_log_set_vprintf <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2.2/esp32/api-reference/system/log.html?highlight=esp_log_set_%20vprintf#_CPPv419esp_log_set_vprintf14vprintf_like_t>`_ API，将 UART0 输出日志重定向到文件。
+
+----------------
+
+ESP32 的 BootLoader 配置为单核运行，可以通过 OTA 升级为双核运行吗？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  - ESP32 不支持。因为 ESP32 的每个 CPU 都有独立的 cache, 而 cache 对应的 MMU 配置是在 BootLoader 中完成的。如果 BootLoader 配置为单核，但第二内核的 MMU 未被配置，则会导致取指出错。
+  - ESP32-S3 和 ESP32-P4 支持。ESP32-S3 和 ESP32-P4 是两个内核共用同一套 cache，不存在上述问题，支持从单核升级为双核。
