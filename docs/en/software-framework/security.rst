@@ -273,4 +273,33 @@ How to create an encrypted ``nvs_data.bin`` when using NVS encryption?
 Does the SPIFFS file system based on ESP32 support the flash encryption scheme?
 -------------------------------------------------------------------------------------------------------------------------
 
-  No. The internal structure of SPIFFS does not support integration with flash encryption. If you need a file system that supports flash encryption, please consider using FatFS or LittleFS.
+  No. The internal structure of SPIFFS does not support integration with flash encryption. If you need a file system that supports 
+
+------------
+
+Using the ESP32-C3 SDK based on ESP-IDF v5.0.6, NVS encryption based on Flash Encryption is enabled in the software configuration. After the device completes Flash Encryption and restarts the firmware, the firmware runs with the following error. What is the reason?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: c
+
+    I (438) main_task: Calling app_main()
+    E (438) nvs: Failed to read NVS security cfg: [0x1117] (ESP_ERR_NVS_CORRUPT_KEY_PART)
+    ESP_ERROR_CHECK failed: esp_err_t 0x1117 (ESP_ERR_NVS_CORRUPT_KEY_PART) at 0x42007e96
+    0x42007e96: app_main at /home/caiguanhong/esp/esp-idf-5.0.6/esp-idf/examples/wifi/getting_started/softAP/build/../main/softap_example_main.c:95 (discriminator 1)
+
+    file: "../main/softap_example_main.c" line 95
+    func: app_main
+    expression: ret
+
+    abort() was called at PC 0x40386249 on core 0
+    0x40386249: _esp_error_check_failed at /home/caiguanhong/esp/esp-idf-5.0.6/esp-idf/components/esp_system/esp_err.c:47
+
+    Stack dump detected
+    Core  0 register dump:
+    MEPC    : 0x40380938  RA      : 0x40386254  SP      : 0x3fc9a260  GP      : 0x3fc91400  
+    0x40380938: panic_abort at /home/caiguanhong/esp/esp-idf-5.0.6/esp-idf/components/esp_system/panic.c:425
+
+    0x40386254: __ubsan_include at /home/caiguanhong/esp/esp-idf-5.0.6/esp-idf/components/esp_system/ubsan.c:313
+
+  - When using `NVS Encryption: Flash Encryption-Based Scheme <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-reference/storage/nvs_encryption.html#nvs-encryption-flash-encryption-based-scheme>`_, it is necessary to thoroughly erase the nvs_keys partition before starting the application. Otherwise, the application may generate an `ESP_ERR_NVS_CORRUPT_KEY_PART` error code.
+  - Before downloading the firmware, please use the `idf.py erase-flash` command to erase the flash.
