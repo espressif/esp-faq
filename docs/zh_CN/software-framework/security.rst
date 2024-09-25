@@ -274,3 +274,32 @@ flash 加密方案是否支持对文件系统的加密？
 -------------------------------------------------------------------------------------------------------------------------
 
   不支持。SPIFFS 的内部结构不支持与 flash 加密方案的结合。如果需要一个支持 flash 加密的文件系统，可以考虑使用 FatFS 或 LittleFS 方案。
+
+------------
+
+使用 ESP32-C3 基于 ESP-IDF v5.0.6 的 SDK，在软件配置中启用基于 flash 加密的 NVS 加密，设备在完成 flash 加密后重启固件，固件运行时报错如下，是什么原因？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code-block:: c
+
+    I (438) main_task: Calling app_main()
+    E (438) nvs: Failed to read NVS security cfg: [0x1117] (ESP_ERR_NVS_CORRUPT_KEY_PART)
+    ESP_ERROR_CHECK failed: esp_err_t 0x1117 (ESP_ERR_NVS_CORRUPT_KEY_PART) at 0x42007e96
+    0x42007e96: app_main at /home/caiguanhong/esp/esp-idf-5.0.6/esp-idf/examples/wifi/getting_started/softAP/build/../main/softap_example_main.c:95 (discriminator 1)
+
+    file: "../main/softap_example_main.c" line 95
+    func: app_main
+    expression: ret
+
+    abort() was called at PC 0x40386249 on core 0
+    0x40386249: _esp_error_check_failed at /home/caiguanhong/esp/esp-idf-5.0.6/esp-idf/components/esp_system/esp_err.c:47
+
+    Stack dump detected
+    Core  0 register dump:
+    MEPC    : 0x40380938  RA      : 0x40386254  SP      : 0x3fc9a260  GP      : 0x3fc91400  
+    0x40380938: panic_abort at /home/caiguanhong/esp/esp-idf-5.0.6/esp-idf/components/esp_system/panic.c:425
+
+    0x40386254: __ubsan_include at /home/caiguanhong/esp/esp-idf-5.0.6/esp-idf/components/esp_system/ubsan.c:313
+
+  - 使用 `基于 flash 加密的 NVS 加密方案 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/api-reference/storage/nvs_encryption.html#nvs-flash>`_ 时，在启动应用程序前，必须彻底擦除 nvs_keys 分区。否则，应用程序可能会生成 `ESP_ERR_NVS_CORRUPT_KEY_PART` 错误代码。
+  - 在下载固件前，请先使用 `idf.py erase-flash` 指令擦除 flash。 
