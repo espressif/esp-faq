@@ -112,3 +112,10 @@ Is there a corresponding software API for the `ESP RF Test Tool <https://www.esp
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Please refer to the `esp-idf/examples/phy/cert_test <https://github.com/espressif/esp-idf/tree/v5.1.1/examples/phy/cert_test>`_ example, which demonstrates how to use the API for certification testing.
+
+------------
+
+Is it feasible to design a 50-ohm impedance on an FPC?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Although theoretically feasible, it places high demands on the FPC, and there could be risks in EMC handling. Therefore, it is not recommended to place a chip directly on an FPC.
