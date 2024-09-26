@@ -115,3 +115,17 @@ When ESP32 connects to an open hotspot that requires login authentication (such 
 ---------------------------------------------------------------------------------------------------------------------------
 
   This type of hotspot typically uses the ``Captive Portal`` mechanism. When ESP32 connects to such a hotspot, the device will be redirected to a login page where the user needs to enter the mobile number and verification code for authentication. Currently, there is no ready-made solution to automate this authentication process. An alternative approach is to add the device to the whitelist on the router's management page, thus avoiding the need for authentication each time it connects.
+
+----------------
+
+What is the time interval for switching NTP servers when using the NTP function? Is there an interface to change the time of NTP switching?
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+  After the first NTP server fails, the interval time starts to increase from 15 seconds and eventually stabilizes at about two and a half minutes. Currently, there is no interface to modify the switch time of the NTP server.
+
+----------------
+
+Why is the sign of the timezone in SNTP opposite to the actual situation? For example, the timezone in India is GMT+5:30, but in the code, it has to be written as GMT-5:30?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This is the design of the standard time API. The plus or minus sign indicates the direction of the time zone offset relative to GMT, using the GMT offset to represent the local time zone.
