@@ -82,3 +82,17 @@ What do the error codes ``0x6900`` and ``0x7600`` represent during a TLS handsha
 
   - ``0x6900 (MBEDTLS_ERR_SSL_WANT_READ)``: This usually indicates that the operation would be blocked because there is temporarily no data in the TCP receive buffer. It is not necessarily an error but rather a signal that more data needs to be received.
   - ``0x7600 (MBEDTLS_ERR_SSL_PRIVATE_KEY_REQUIRED)``: This indicates that the required private key or pre-shared key has not been set. For two-way authentication, please ensure that the client has configured the correct private key.
+
+----------------
+
+When implementing HTTPS on ESP32, how to resolve the issue that the server certificate chain is different from what is obtained by the PC browser?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Try enabling more detailed mbedtls debug information on ESP32 to obtain the certificate chain sent by the server during the TLS handshake process, and compare it with the certificate chain obtained from the browser.
+
+----------------
+
+How to resolve the issue of certificate parsing failure when using ESP32?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  First, you should check whether the certificate format complies with the X509 standard, and ensure that there are no issues with the certificate chain. In addition, enabling the log function of mbedtls can help diagnose the problem.
