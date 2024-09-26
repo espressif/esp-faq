@@ -130,3 +130,24 @@ How can I identify the specific error and troubleshoot the issue when encounteri
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
   When MQTT connection fails, you can parse the data in the ``esp_mqtt_error_codes_t`` structure within the MQTT event ``MQTT_EVENT_ERROR``. For more details, please refer to the ``MQTT_EVENT_ERROR`` event in the example.
+
+----------------
+
+How to adjust the sending time of MQTT's will message?
+-----------------------------------------------------------------------------------------------------------
+
+  The delay in sending will messages can be reduced by shortening the MQTT heartbeat time.
+
+----------------
+
+While sending data, the MQTT client encounters a timeout. How to determine which network layer the problem occurred in?
+---------------------------------------------------------------------------------------------------------------------------
+
+  Issues can be identified by packet capture analysis to determine whether they occur at the transport layer, network layer, or data link layer. The specific failure point could be that the server did not return an ACK, the server returned an ACK but Wi-Fi did not receive it, or the data packet was not successfully sent.
+
+----------------
+
+Why does the MQTT client still report a write timeout when the network condition is good?
+-----------------------------------------------------------------------------------------------------------
+
+  This may be due to the underlying LWIP buffer being full, resulting in an inability to write. This is usually because the packets in the buffer have not received an ACK from the other end. Specific reasons may include the server not sending an ACK, the server sending an ACK but Wi-Fi not receiving it, or the data packet not being successfully sent out.
