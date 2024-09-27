@@ -43,7 +43,10 @@ specified_files:
   - docs/zh_CN/instruction/question-search.rst
 
 # software-framework
-  - docs/zh_CN/software-framework/ble-bt.rst
+  - docs/zh_CN/software-framework/bt/ble.rst
+  - docs/zh_CN/software-framework/bt/br-edr.rst
+  - docs/zh_CN/software-framework/bt/index.rst
+  - docs/zh_CN/software-framework/bt/other-bt.rst
   - docs/zh_CN/software-framework/coexistence.rst
   - docs/zh_CN/software-framework/ethernet.rst
   - docs/zh_CN/software-framework/index.rst
