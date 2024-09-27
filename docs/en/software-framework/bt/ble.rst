@@ -662,3 +662,10 @@ Can ESP-IDF enable both BLE4.2 and BLE5.0 at the same time?
 ----------------------------------------------------------------------------------------------
 
   Currently, both BLE4.2 and BLE5.0 can be enabled simultaneously in menuconfig, but the APIs for BLE4.2 and BLE5.0 are different and can not be used interchangeably. Therefore, in the future, it will be modified to only allow either BLE4.2 or BLE5.0 to be enabled, and it will not be possible to enable both at the same time.
+
+-----------
+
+When the ESP32 device acts as a BLE server, how does the slave initiate MTU negotiation?
+----------------------------------------------------------------------------------------------
+
+  According to the BLE protocol, MTU negotiation must be initiated by the client, the server can not initiate it. Therefore, the slave can act as a client to initiate MTU negotiation.
