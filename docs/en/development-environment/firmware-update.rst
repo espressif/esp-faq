@@ -279,3 +279,10 @@ Does ESP32-C3 support disabling ROM code logs via OTA?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Yes. You can disable the ROM code log by enabling the `Boot ROM Behavior → Permanently change Boot ROM output → (X) Permanently disable logging` configuration in the software, and then update the firmware via OTA.
+
+--------------
+
+Will the operation of other tasks be affected when the chip is undergoing an OTA firmware upgrade (`esp_ota_write() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/ota.html#_CPPv413esp_ota_write16esp_ota_handle_tPKv6size_t>`_)?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  During the OTA process, the cache will be turned off when writing to the flash, which will affect peripheral interrupts and some SPI tasks. Therefore, it is not recommended to perform other tasks during this period.
