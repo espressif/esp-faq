@@ -1,20 +1,3 @@
-
-check_line_num:
-  extends:
-    - .rules:auto_trans:translate
-  image: python:3.8
-  stage: auto_trans
-  tags:
-    - build_docs
-  script:
-    - echo "Begin Check"
-    - python3 --version
-    - /usr/local/bin/python -m pip install --upgrade pip
-    - git clone $AUTO_TRANSLATE_REPO
-    - pip3 install -r ./auto-translate/requirements.txt
-    - python3 ./auto-translate/check_line_num.py
-    - echo "Check Completed"
-
 translate:
   extends:
     - .rules:auto_trans:translate
@@ -26,10 +9,13 @@ translate:
     - echo "Begin Translation"
     - python3 --version
     - /usr/local/bin/python -m pip install --upgrade pip
-    - git clone $AUTO_TRANSLATE_REPO
+    - git clone -b change/replace_the_model_with_gpt_4_1106_preview $AUTO_TRANSLATE_REPO
     - pip3 install -r ./auto-translate/requirements.txt
-    - echo $CI_COMMIT_REF_NAME
-    - python3 ./auto-translate/translate_rst_files.py $OPENAI_API_KEY $GITLAB_URL $CHATGPT_BOT_TOKEN $PROJECT_ID $CI_COMMIT_REF_NAME
+    - python3 ./auto-translate/check_line_num.py
+    - echo "Check Completed"
+    - git checkout $CI_COMMIT_REF_NAME
+    - echo $TRANS_FILE
+    - TRANS_FILES_STR=$(echo $TRANS_FILE | sed 's/\[//g' | sed 's/\]//g' | sed 's/"//g' | tr ',' ' ')
+    - echo $TRANS_FILES_STR
+    - python3 ./auto-translate/translate_rst_files.py $OPENAI_API_KEY $GITLAB_URL $CHATGPT_BOT_TOKEN $PROJECT_ID $CI_COMMIT_REF_NAME -f $TRANS_FILES_STR
     - echo "Translation Completed"
-  needs:
-    - check_line_num

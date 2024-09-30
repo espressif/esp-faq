@@ -118,7 +118,7 @@
 请问你们技术的联系方式是什么？
 -----------------------------------
 
-  请进入 `这里 <https://www.espressif.com/zh-hans/contact-us/technical-inquiries>`__ ，告诉我们您遇到的问题或困惑。我们会协助您予以解决。
+  请进入 `技术咨询 <https://www.espressif.com/zh-hans/contact-us/technical-inquiries>`__ ，告诉我们您遇到的问题或困惑。我们会协助您予以解决。
 
 --------------
 

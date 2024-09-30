@@ -118,7 +118,7 @@ What is your company's address?
 How can I contact your technical team?
 ---------------------------------------
 
-  Please click `here <https://www.espressif.com/en/contact-us/technical-inquiries>`__ and tell us your problems or questions. We will try to help you as soon as possible.
+  Please visit `Technical Inquiries <https://www.espressif.com/en/contact-us/technical-inquiries>`__, and let us know about any issues or confusion you're experiencing. We will assist you in resolving them.
 
 --------------
 
