@@ -111,7 +111,7 @@ Which of your products support HomeKit? Where can I get the Espressif HomeKit SD
 What is your company's address?
 --------------------------------
 
-  Espressif Systems (688018.SH) is a public multinational, fabless semiconductor company established in 2008, with offices in China, the Czech Republic, India, Singapore and Brazil. Please click `here <https://www.espressif.com/en/join-us/people-at-espressif>`__ to check the details of Espressif’s global offices.
+  Espressif Systems (688018.SH) is a public multinational, fabless semiconductor company established in 2008, with offices in China, Singapore, the Czech Republic, India and Brazil. Please click `here <https://www.espressif.com/en/join-us/people-at-espressif>`__ to check the details of Espressif’s global offices.
 
 --------------
 
