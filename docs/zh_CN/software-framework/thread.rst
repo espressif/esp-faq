@@ -27,3 +27,10 @@ ESP32-H2 作为 OpenThread RCP 设备，是否支持基于 Linux 主机来构建
     OTBR_AGENT_OPTS="-I wpan0 -B wlan0 spinel+hdlc+uart:///dev/ttyUSB2?uart-baudrate=460800"
   
   - 此外，我们还提供了基于 FreeRTOS 系统构建 Thread 边界路由器的方案。详情请参见 `OpenThread > 指南 > 边界路由器 > FreeRTOS <https://openthread.google.cn/guides/border-router/espressif-esp32?hl=cn>`_。
+
+----------------
+
+配备 IEEE 802.15.4 模块并支持 Thread 的 ESP 芯片是否支持通过类似 AT 指令的形式来进行交互？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  支持。OpenThread 发布了公用开源的 `命令行接口 <https://github.com/openthread/openthread/tree/main/src/cli#openthread-cli-reference>`__，可用于组网和参数配置。如果想体验具体的 Demo，可参考 `ot_cli 示例 <https://github.com/espressif/esp-idf/tree/master/examples/openthread/ot_cli>`__。

@@ -27,3 +27,10 @@ Does ESP32-H2, as an OpenThread RCP device, support building a Thread border rou
     OTBR_AGENT_OPTS="-I wpan0 -B wlan0 spinel+hdlc+uart:///dev/ttyUSB2?uart-baudrate=460800"
   
   - In addition, we also provide a solution for building a Thread border router based on the FreeRTOS system. For details, please refer to `OpenThread > Guides > Border Router > FreeRTOS <https://openthread.google.cn/guides/border-router/espressif-esp32>`_.
+
+----------------
+
+Does the ESP chip equipped with an IEEE 802.15.4 module and supporting Thread allow interaction in the form of AT-like commands?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes. OpenThread has released a public open-source `command line interface <https://github.com/openthread/openthread/tree/main/src/cli#openthread-cli-reference>`__, which can be used for networking and parameter configuration. To try a specific demo, please refer to the `ot_cli example <https://github.com/espressif/esp-idf/tree/master/examples/openthread/ot_cli>`__.
