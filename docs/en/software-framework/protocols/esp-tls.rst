@@ -70,10 +70,10 @@ When accessing the MQTTS Broker using IP, the error ``MBEDTLS_ERR_X509_CERT_VERI
 
 ----------------
 
-How to solve the issue of insufficient memory during a TLS handshake?
+How much memory is required for a stable TLS handshake on ESP32? How to solve the problem of insufficient memory during a TLS handshake?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  When memory is insufficient, it needs to be optimized. You can refer to `Minimizing RAM Usage <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/performance/ram-usage.html>`__. If the module is equipped with external PSRAM, it needs to be correctly configured to use this memory.
+  A TLS handshake typically requires 40-50 KB of free heap memory for temporary allocation during the handshake process. If memory fragmentation is excessive or available memory is insufficient, the handshake may fail. When memory is insufficient, it needs to be optimized. Please refer to `Minimizing RAM Usage <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/performance/ram-usage.html>`__. Additionally, if the module includes external PSRAM, ensure it is properly configured and utilized.
 
 ----------------
 
