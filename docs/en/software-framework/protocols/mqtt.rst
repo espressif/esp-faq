@@ -151,3 +151,10 @@ Why does the MQTT client still report a write timeout when the network condition
 -----------------------------------------------------------------------------------------------------------
 
   This may be due to the underlying LWIP buffer being full, resulting in an inability to write. This is usually because the packets in the buffer have not received an ACK from the other end. Specific reasons may include the server not sending an ACK, the server sending an ACK but Wi-Fi not receiving it, or the data packet not being successfully sent out.
+
+----------------
+
+Why does memory usage drop sharply when using MQTT communication?
+-----------------------------------------------------------------------------------------------------------
+
+  The outbox in MQTT consumes memory. For messages with QoS greater than 0, the related memory will only be released after the ACK from the MQTT layer is sent by the peer. You can track the allocation and release of memory by configuring CONFIG_HEAP_USE_HOOKS.
