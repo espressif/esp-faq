@@ -157,3 +157,10 @@ The default state of GPIO20 on ESP32-C6 is initially set as SDIO. How can it be 
     .. code:: c
 
       gpio_hal_iomux_func_sel(GPIO_PIN_MUX_REG[20], PIN_FUNC_GPIO);
+
+----------
+
+Is it possible to set different levels for different GPIOs of ESP32-P4? For example, setting GPIOs in the HP power domain to 3.3 V while setting GPIOs in the LP power domain to 1.8 V?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Mixed settings are not allowed. The levels of all GPIO pins must be uniform, either all at 1.8 V or all at 3.3 V. For example, if a 1.8 V voltage is input to VDDPST_4, then all GPIO levels under this power domain are 1.8 V.
