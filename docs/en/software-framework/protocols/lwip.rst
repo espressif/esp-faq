@@ -317,3 +317,10 @@ TCP or UDP transmission fails with the error code 12(ENOMEM). How to solve it?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   12 indicates insufficient memory. First, print the remaining internal memory. If the memory is sufficient, the error is caused by a full Wi-Fi TX buffer. In this case, please send data on the application layer more slowly or increase the Wi-Fi TX buffer in sdkconfig.
+
+----------------------------
+
+What usually causes the `transport_base: Poll timeout or error, errno=Connection already in progress` error? How to determine if a poll timeout is due to network issues or code logic problems?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This error is usually caused by an unstable network connection or a full underlying buffer. A poll timeout indicates that no ACK was received from the peer, or the peer did not respond while waiting for the write operation to complete. Packet capture analysis can be used to determine whether the ACK from the peer was not received or the peer did not respond. If it's a network issue, you can optimize the network environment or add a retry mechanism; if it's a code logic issue, you need to check whether the use of `poll` and `select` in the code is correct, ensuring that the timeout period and retry strategy are appropriately configured.
