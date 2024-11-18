@@ -970,3 +970,17 @@ Can the ESP32 BootLoader, which is configured to run in single-core mode, be upg
  
   - ESP32 does not support this. Each CPU in ESP32 has an independent cache, and the MMU configuration related to the cache is set during the BootLoader. If the BootLoader is configured for single-core mode, but the MMU for the second core is not configured, it will cause an instruction fetch error.
   - Support is available for ESP32-S3 and ESP32-P4. These two chips feature two cores that share the same cache, which eliminates the aforementioned issue. Therefore, they support upgrading from single-core to dual-core mode.
+
+----------------
+
+Does the ESP32 series chip support OTA firmware updates via File Transfer Protocol (FTP)?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  The default example does not support TLS-based FTP and only implements basic socket programming. However, ESP32 series chips do support TLS-based FTP, and users can implement this feature if needed.
+
+----------------
+
+After using the native_ota_example for an OTA upgrade, why does the device enter the ESP_OTA_IMG_UNDEFINED event, with the ota_state value printed as -1, even though the firmware works normally?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  This may be due to the application rollback feature not being enabled in menuconfig. Please ensure that the application rollback feature is enabled in the configuration to avoid this issue.
