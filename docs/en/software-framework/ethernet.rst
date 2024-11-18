@@ -167,3 +167,10 @@ Do the ESP32 series chips support to use EMAC and SPI-Ethernet modules simultane
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes. ESP32 series chips support to use EMAC and one or two SPI-Ethernet modules simultaneously. You can start PHY and SPI-Ethernet modules simultaneously in menuconfig to test by referring to the example `esp-idf/examples/ethernet/basic <https://github.com/espressif/esp-idf/tree/master/examples/ethernet/basic>`_.
+
+---------------------
+
+How to diagnose packet delay issues in ESP32 Fast Ethernet transmission?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Please add debug prints in ``ethernetif.c`` file in the ESP-IDF repository, focusing on checking the TCP sequence number and acknowledgment number (ACK), to help determine whether the delay comes from the Ethernet layer or the LWIP layer.
