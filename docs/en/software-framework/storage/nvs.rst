@@ -24,10 +24,21 @@ If data needs to be stored or updated to flash every minute, can ESP32 NVS meet 
 
 --------------
 
+Is it feasible to perform 10,000,000 erase/write operations each time when writing data of 1 KB or less?
+--------------------------------------------------------------------------------------------------------
+
+  If each write operation involves 1 KB of data, and the smallest erasable unit of flash is a 4 KB page , then a single erase block can be considered as containing four logical addresses of 1 KB each. Therefore, 10,000,000 write operations are equivalent to 2,500,000 erase/write cycles for a single page (10,000,000 * 1 KB / 4 KB). To avoid exceeding the erase/write cycle limit for each physical block (typically 100,000 cycles), at least 25 physical 4 KB blocks are required to distribute these operations evenly (2,500,000 cycles / 100,000 cycles per block = 25 blocks).
+
+  Considering that the actual available space in each sector may be reduced due to system overhead, and in order to improve the reliability and stability of the system, it is recommended to reserve more physical space. For example, you can allocate about 150 KB of space to ensure sufficient margin to accommodate extra system requirements and future scalability.
+
+--------------
+
 Does NVS have wear levelling function?
 -------------------------------------------------
 
   Yes, NVS (Non-Volatile Storage) has wear leveling functionality. When storing data in flash memory, the limited number of writing and erasing operations to the flash will cause some storage blocks to have shorter service life than others, affecting the overall working life of the memory. To address this issue, NVS uses an erase-write balancing mechanism implemented internally, rather than the wear_levelling component in ESP-IDF, to evenly distribute data across the flash memory blocks, ensuring that each block is used as much as possible to extend the overall working life of the flash memory.
+
+  See more information in `Wear Levelling API <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/storage/wear-levelling.html#api>`_.
 
 --------------
 
