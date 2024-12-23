@@ -117,3 +117,10 @@ ESP32 经典蓝牙支持 AVRCP 1.5 或 AVRCP 1.6 吗？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   目前已经在 esp-idf v5.0.4 及之后的版本上支持 AVRCP 1.5，不支持 AVRCP 1.6（已废弃），详情参见 `esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c <https://github.com/espressif/esp-idf/blob/8fbf4ba6058bcf736317d8a7aa75d0578563c38b/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c#L55C35-L55C40>`__。
+
+--------------
+
+ESP32 经典蓝牙支持 AAC 吗？
+--------------------------------------
+
+  暂不支持该功能。
