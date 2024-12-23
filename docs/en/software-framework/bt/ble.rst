@@ -668,4 +668,12 @@ Can ESP-IDF enable both BLE4.2 and BLE5.0 at the same time?
 When the ESP32 device acts as a BLE server, how does the slave initiate MTU negotiation?
 ----------------------------------------------------------------------------------------------
 
-  According to the BLE protocol, MTU negotiation must be initiated by the client, the server can not initiate it. Therefore, the slave can act as a client to initiate MTU negotiation.
+  According to the BLE protocol, MTU negotiation must be initiated by the client, and the server cannot initiate it actively. Therefore, the slave can act as a client to initiate MTU negotiation.
+
+-----------
+
+How to specify BLE channel?
+-----------------------------------------------------------------------------------------------------------
+
+  - For BLE peripheral devices, you can specify the broadcast channel using ``channel_map`` in ``esp_ble_adv_params_t``.
+  - For BLE central devices, you can call the ``esp_gap_ble_set_channels`` API to update the channel map. For example, ``{0xFF, 0xFF, 0xFF, 0xFF, 0x1F}`` means enabling all channels; and ``{0xFF, 0xFF, 0xFF, 0xFF, 0x0F}`` means blocking channel 36.
