@@ -95,4 +95,12 @@ When implementing HTTPS on ESP32, how to resolve the issue that the server certi
 How to resolve the issue of certificate parsing failure when using ESP32?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  First, you should check whether the certificate format complies with the X509 standard, and ensure that there are no issues with the certificate chain. In addition, enabling the log function of mbedtls can help diagnose the problem.
+  First, you should check whether the certificate format complies with the X509 standard and ensure that there are no issues with the certificate chain. In addition, enabling the log function of mbedtls can help diagnose the problem.
+
+----------------
+
+How to debug when TLS handshake and server certificate verification fail on ESP32?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Enable the Mbedtls debugging feature to log all activities during the TLS handshake, including the server certificate information received.
+
