@@ -126,3 +126,31 @@ Why is the data length always 0 when calling ``esp_http_client_read_response`` a
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The ``esp_http_client_perform`` function already handles data reading internally, so calling ``esp_http_client_read_response`` afterward is not necessary and will not yield the expected data length. To obtain the data, please handle the ``HTTP_EVENT_ON_DATA`` event in the event handler.
+
+--------------
+
+What happens when ``esp_http_client_write`` is called after calling ``esp_http_client_open``?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Calling ``esp_http_client_write`` will immediately send data to the server. Typically, if ``esp_http_client_perform`` is called, the data will be passed to the application layer through ``HTTP_EVENT_ON_DATA`` in the HTTP event. If data is to be obtained using ``esp_http_client_read``, it must go through ``esp_http_client_open->esp_http_client_write->esp_http_client_fetch_headers``, after which``esp_http_client_read`` will contain data.
+
+--------------
+
+How to distinguish whether an HTTP request is sent from WiFi or from the Ethernet in the HTTP request handler?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  In the request handler, you can get the file descriptor (fd) using ``httpd_req_to_sockfd``, then call ``getsockname`` to get the local address. Based on the address, you can determine which network interface card is being used.
+
+--------------  
+
+When downloading files via HTTP, occasionally there will be a failure with an error message "couldn’t get hostname". What could be the reason?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This error is usually due to the failure of sending a DNS request, or WiFi not receiving a DNS response. It is recommended to confirm the problem through packet capture analysis.
+
+--------------  
+
+In the event of an HTTP download failure, how to identify the cause?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  First, analyze the logs to determine the cause of the download failure. If it is due to timeout or network disconnection issues, you can confirm whether the TCP stream is normal by capturing packets.
