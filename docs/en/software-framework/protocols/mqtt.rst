@@ -157,4 +157,25 @@ Why does the MQTT client still report a write timeout when the network condition
 Why does memory usage drop sharply when using MQTT communication?
 -----------------------------------------------------------------------------------------------------------
 
-  The outbox in MQTT consumes memory. For messages with QoS greater than 0, the related memory will only be released after the ACK from the MQTT layer is sent by the peer. You can track the allocation and release of memory by configuring CONFIG_HEAP_USE_HOOKS.
+  The outbox in MQTT will occupy memory. For messages with QoS greater than 0, the related memory will only be released after the ACK from the MQTT layer is sent by the peer. You can track the allocation and release of memory by configuring CONFIG_HEAP_USE_HOOKS.
+
+----------------
+
+How to set the session expiry interval for MQTT?
+-----------------------------------------------------------------------------------------------------------
+
+  This feature is only available for MQTT5 protocol, which can be set through ``session_expiry_interval`` in ``esp_mqtt5_disconnect_property_config_t``.
+
+----------------
+
+Is the reconnection operation effective after MQTT disconnects? Does it need optimization?
+-----------------------------------------------------------------------------------------------------------
+
+  MQTT will automatically reconnect by default, so the application layer does not need to manually disconnect and then reconnect.
+
+----------------
+
+What is the cause of the "mqtt_client: No PING_RESP, disconnected" error?
+-----------------------------------------------------------------------------------------------------------
+
+  This error usually occurs because the MQTT heartbeat response from the peer was not received within the specified time. It is recommended to use packet capture and log comparison to analyze whether the issue is related to the server or WiFi packet transmission.
