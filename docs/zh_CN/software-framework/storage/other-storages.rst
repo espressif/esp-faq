@@ -63,3 +63,18 @@ ESP32 如何读取芯片剩余内存？
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 可以参考 `xTaskCreateStatic() 说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/freertos_idf.html#_CPPv417xTaskCreateStatic14TaskFunction_tPCKcK8uint32_tPCv11UBaseType_tPC11StackType_tPC12StaticTask_t>`__。
+
+------------
+
+基于 ESP-IDF SDK，使用 `RTC_NOINIT_ATTR uint32_t counter = 0 ;` 定义一个全局变量，打印出来的值为 `1368610594`，这是什么原因？
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - RTC_NOINIT_ATTR 变量会被编译到 .rtc_noinit 区域，这个区域并不是在启动时清零，所以在变量初始化时赋值不会生效，需要在初始化后进行赋值才是有效的。
+  - 当使用 `RTC_NOINIT_ATTR` 定义一个全局变量时，需要在应用代码中对变量进行赋值，正确的写法如下：
+
+    .. code-block:: c
+
+      RTC_NOINIT_ATTR uint32_t counter;
+      counter = 0;
+      printf("Counter value: %"PRIu32" \n",counter);
+
