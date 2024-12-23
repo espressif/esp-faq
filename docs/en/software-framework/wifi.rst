@@ -1465,3 +1465,25 @@ Do ESP series products support roaming in Wi-Fi AP mode?
 
   - No, ESP series products only support connecting to routers with roaming features in Wi-Fi Station mode.
   - Software Reference: `esp-idf/examples/wifi/roaming <https://github.com/espressif/esp-idf/tree/release/v5.3/examples/wifi/roaming>`_.
+
+-------------
+
+Does the router's DHCP lease duration affect the module's Wi-Fi connection?
+-----------------------------------------------------------------------------------------------------------------------
+
+  The DHCP protocol handles lease renewal automatically, without requiring a device or Wi-Fi restart. However, if the renewal fails, the module may lose its IP address. In this case, The IP address needs to be detected and acquired by the software again.
+
+-------------
+
+If the module's authentication mode is set to WIFI_AUTH_OPEN, but the router uses a higher-security authentication mode like WIFI_AUTH_WPA3_PSK, can the module still connect?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, the module can connect to the router successfully. The minimum authentication mode (wifi_sta_config_t threshold.authmode) means that the router's encryption level must be no lower than this value. Since IDF v5.0, authmode must be set to WIFI_AUTH_WEP or WIFI_AUTH_WPA_PSK if you need to connect to a WEP or WPA network.
+
+-------------
+
+How to handle the issue "esp-aes: Failed to allocate memory"?
+-----------------------------------------------------------------------------------------------------------------------
+
+  This issue indicates a failure in DMA memory allocation. You can print the DMA memory status to check if it is sufficient. If the memory is insufficient, try to optimize the code to reduce DMA memory usage by other functions or interfaces.
+
