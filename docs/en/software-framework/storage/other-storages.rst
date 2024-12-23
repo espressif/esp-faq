@@ -63,3 +63,18 @@ What should I pay attention to when using ``xTaskCreateStatic()`` in ESP-IDF?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - You can refer to the `xTaskCreateStatic() description <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos_idf.html#_CPPv417xTaskCreateStatic14TaskFunction_tPCKcK8uint32_tPCv11UBaseType_tPC11StackType_tPC12StaticTask_t>`__.
+
+------------
+
+Based on the ESP-IDF SDK, when defining a global variable with `RTC_NOINIT_ATTR uint32_t counter = 0;`, the printed value is `1368610594`. What is the reason for this?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The RTC_NOINIT_ATTR variable is compiled into the .rtc_noinit section, which is not cleared at startup. Therefore, assigning a value at variable initialization will not take effect. It only becomes effective when assigned after initialization.
+  - When using `RTC_NOINIT_ATTR` to define a global variable, it is necessary to assign a value to the variable in the application code. The correct approach is as follows:
+
+    .. code-block:: c
+
+      RTC_NOINIT_ATTR uint32_t counter;
+      counter = 0;
+      printf("Counter value: %"PRIu32" \n",counter);
+
