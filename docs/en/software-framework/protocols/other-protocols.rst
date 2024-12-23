@@ -128,4 +128,19 @@ What is the time interval for switching NTP servers when using the NTP function?
 Why is the sign of the timezone in SNTP opposite to the actual situation? For example, the timezone in India is GMT+5:30, but in the code, it has to be written as GMT-5:30?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  This is the design of the standard time API. The plus or minus sign indicates the direction of the time zone offset relative to GMT, using the GMT offset to represent the local time zone.
+  This is the design of the standard time API. The plus and minus signs indicate the direction of the time zone offset relative to GMT, using the GMT offset to represent the local time zone.
+
+----------------
+
+What should be noted about the handling logic for send timeouts?
+-----------------------------------------------------------------------------------------------------------
+
+  Regarding the handling logic for send timeouts, if error code 11 (indicating too fast sending) is treated as an error, but it does not actually constitute a real exception, then it should not directly trigger an exception handling process that terminates the transmission. The correct approach is to allow quick retries within a certain range, rather than immediately terminating the connection.
+
+----------------
+
+Under normal network connection, why does repeated send timeout occur with error code 113?
+-----------------------------------------------------------------------------------------------------------
+
+  Error code 113 usually indicates that the underlying link has been disconnected or that TCP retransmissions have reached their maximum limit. Packet capture is needed to verify whether the device successfully sent the packets and whether the peer returned a TCP ACK.
+
