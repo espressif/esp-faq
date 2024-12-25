@@ -984,3 +984,13 @@ After using the native_ota_example for an OTA upgrade, why does the device enter
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  
   This may be due to the application rollback feature not being enabled in menuconfig. Please ensure that the application rollback feature is enabled in the configuration to avoid this issue.
+
+----------------
+
+What are the differences between sdkconfig, sdkconfig.default, and sdkconfig.old in an ESP-IDF project?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - sdkconfig.default is the default configuration file for the project. If there is no sdkconfig file under the project, a sdkconfig file will be generated based on the sdkconfig.default file configuration during compilation; if a sdkconfig file already exists, the configuration from that file will be used directly during compilation.
+  - The sdkconfig.old file is a backup file automatically generated when recompiling after modifying the configuration options in the sdkconfig file. After each modification and recompilation, the new configuration is saved in the sdkconfig file, while the previous configuration is preserved in the sdkconfig.old file.
+  - When modifying configuration options through the menuconfig command, the changes are actually applied to the sdkconfig file.
+  - The firmware configuration options after project compilation depend on the settings in the sdkconfig file.
