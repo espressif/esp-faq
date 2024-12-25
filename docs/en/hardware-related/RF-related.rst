@@ -119,3 +119,10 @@ Is it feasible to design a 50-ohm impedance on an FPC?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Although theoretically feasible, it places high demands on the FPC, and there could be risks in EMC handling. Therefore, it is not recommended to place a chip directly on an FPC.
+
+--------------
+
+Can the Espressif U series antenna modules with IPEX antenna connectors (such as ESP32-C3-WROOM-02U) be directly connected to SMA antennas?
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+  No, this is not supported. It is suggested to use an IPEX antenna connector directly. If you need to connect an SMA antenna, please use an IPEX to SMA adapter cable.
