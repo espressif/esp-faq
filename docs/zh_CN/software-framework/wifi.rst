@@ -1494,3 +1494,10 @@ ESP 系列的产品是否支持作为 Wi-Fi AP 模式的漫游功能？
 
   - 软件上，只要不调用 `esp_wifi_init() <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.3.1/esp32/api-reference/network/esp_wifi.html?highlight=esp_wifi_init#_CPPv413esp_wifi_initPK18wifi_init_config_t>`_ 就不会包含任何 Wi-Fi 代码和相关配置，对固件大小没有任何影响。
   - 若需进一步优化固件大小，可参考 `最小化二进制文件大小 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.3.1/esp32/api-guides/performance/size.html#id1>`_ 文档说明。
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+在 menuconfig 中将 WiFi scan auth mode threshold 设置为 WPA2_WPA3_PSK 时，为什么无法连接 WPA2 加密方式的路由，只能连接 WPA3 或者 WPA2/WPA3 加密的路由?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 这是由于 authmode threshold 的排序：``OPEN < WEP < WPA_PSK < OWE < WPA2_PSK = WPA_WPA2_PSK < WAPI_PSK < WPA3_PSK = WPA2_WPA3_PSK = DPP``。也就是说，WPA2_WPA3_PSK 会以 WPA3_PSK 作为 authmode threshold，所以此时无法连接仅支持 WPA2 加密方式的路由。
