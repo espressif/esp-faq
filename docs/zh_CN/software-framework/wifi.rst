@@ -1487,3 +1487,10 @@ ESP 系列的产品是否支持作为 Wi-Fi AP 模式的漫游功能？
 
   出现此问题表示分配 DMA 内存失败，可以打印 DMA 内存状态检查其是否充足。如果内存不足，可以尝试优化代码，减少其他功能或接口对 DMA 内存的占用。
 
+---------------
+
+使用 ESP32 芯片时，如果无需 Wi-Fi 功能，如何完全关闭 Wi-Fi 相关配置以优化固件大小？
+---------------------------------------------------------------------------------------------------------------------------------------
+
+  - 软件上，只要不调用 `esp_wifi_init() <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.3.1/esp32/api-reference/network/esp_wifi.html?highlight=esp_wifi_init#_CPPv413esp_wifi_initPK18wifi_init_config_t>`_ 就不会包含任何 Wi-Fi 代码和相关配置，对固件大小没有任何影响。
+  - 若需进一步优化固件大小，可参考 `最小化二进制文件大小 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.3.1/esp32/api-guides/performance/size.html#id1>`_ 文档说明。
