@@ -352,3 +352,10 @@ ESP-WIFI-MESH 已经组网时，根节点或子节点可以同时开启 Wi-Fi Sc
             esp_mesh_set_self_organized(false, false);
             esp_mesh_set_router(&change_router);
             esp_mesh_set_self_organized(true, true);
+
+------------------
+
+ESP-Mesh-Lite 应用是否支持 Wi-Fi Power Save 模式？
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  不支持。在 ESP-Mesh-Lite 应用中，可通过增大 Beacon 间隔或降低 Wi-Fi TX Power（发射功率）来降低功耗。

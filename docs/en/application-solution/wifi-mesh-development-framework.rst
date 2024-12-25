@@ -352,3 +352,10 @@ When using the ESP-WIFI-MESH Router solution, how to switch to a new router for 
             esp_mesh_set_self_organized(false, false);
             esp_mesh_set_router(&change_router);
             esp_mesh_set_self_organized(true, true);
+
+------------------
+
+Does the ESP-MESH-LITE application support Wi-Fi Power Save mode?
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  No. In ESP-Mesh-Lite, power consumption can be reduced by increasing the beacon interval or decreasing the Wi-Fi TX power.
