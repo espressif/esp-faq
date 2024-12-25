@@ -1494,3 +1494,10 @@ How to completely disable Wi-Fi configurations on ESP32 to optimize firmware siz
 
   - In terms of software, simply avoid calling `esp_wifi_init() <https://docs.espressif.com/projects/esp-idf/en/v5.3.1/esp32/api-reference/network/esp_wifi.html?highlight=esp_wifi_init#_CPPv413esp_wifi_initPK18wifi_init_config_t>`_. This ensures no Wi-Fi code and configurations is included, having no impact on the firmware size.
   - For further optimization, refer to `Minimizing Binary Size <https://docs.espressif.com/projects/esp-idf/en/v5.3.1/esp32/api-guides/performance/size.html#minimizing-binary-size>`_.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+Why can't a router with WPA2 encryption be connnected when the WiFi scan auth mode threshold is set to WPA2_WPA3_PSK in menuconfig, but only routers with WPA3 or WPA2/WPA3 encryption can?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - This is due to the ordering of the authmode threshold: ``OPEN < WEP < WPA_PSK < OWE < WPA2_PSK = WPA_WPA2_PSK < WAPI_PSK < WPA3_PSK = WPA2_WPA3_PSK = DPP``. In other words, WPA2_WPA3_PSK uses WPA3_PSK as the authmode threshold, so it cannot connect to a router that only supports WPA2 encryption.
