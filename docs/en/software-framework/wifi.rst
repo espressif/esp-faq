@@ -1487,3 +1487,10 @@ How to handle the issue "esp-aes: Failed to allocate memory"?
 
   This issue indicates a failure in DMA memory allocation. You can print the DMA memory status to check if it is sufficient. If the memory is insufficient, try to optimize the code to reduce DMA memory usage by other functions or interfaces.
 
+---------------
+
+How to completely disable Wi-Fi configurations on ESP32 to optimize firmware size when Wi-Fi features are not required?
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In terms of software, simply avoid calling `esp_wifi_init() <https://docs.espressif.com/projects/esp-idf/en/v5.3.1/esp32/api-reference/network/esp_wifi.html?highlight=esp_wifi_init#_CPPv413esp_wifi_initPK18wifi_init_config_t>`_. This ensures no Wi-Fi code and configurations is included, having no impact on the firmware size.
+  - For further optimization, refer to `Minimizing Binary Size <https://docs.espressif.com/projects/esp-idf/en/v5.3.1/esp32/api-guides/performance/size.html#minimizing-binary-size>`_.
