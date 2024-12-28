@@ -323,4 +323,11 @@ TCP or UDP transmission fails with the error code 12(ENOMEM). How to solve it?
 What usually causes the `transport_base: Poll timeout or error, errno=Connection already in progress` error? How to determine if a poll timeout is due to network issues or code logic problems?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  This error is usually caused by an unstable network connection or a full underlying buffer. A poll timeout indicates that no ACK was received from the peer, or the peer did not respond while waiting for the write operation to complete. Packet capture analysis can be used to determine whether the ACK from the peer was not received or the peer did not respond. If it's a network issue, you can optimize the network environment or add a retry mechanism; if it's a code logic issue, you need to check whether the use of `poll` and `select` in the code is correct, ensuring that the timeout period and retry strategy are appropriately configured.
+  This error is typically caused by an unstable network connection or a full underlying buffer. A poll timeout indicates that no ACK was received from the peer or the peer did not respond while waiting for the write operation to complete. Packet capture analysis can be used to determine whether the ACK from the peer was not received or the peer did not respond. If it's a network issue, you can optimize the network environment or add a retry mechanism; if it's a code logic issue, you need to check whether the use of poll and select in the code is correct, ensuring that the timeout period and retry strategy are reasonable.
+
+-----------------
+
+From which serial number does the ESP32 LWIP SOCKET start?
+------------------------------------------------------------------------------------------------------------------
+
+  By default, the socket number starts from 54. The macro that determines the socket number is ``LWIP_SOCKET_OFFSET``, which can be calculated by subtracting CONFIG_LWIP_MAX_SOCKETS from FD_SETSIZE. In the ``include/sys/select.h`` file of the compilation toolchain, the value of ``FD_SETSIZE`` is 64, and the default value of ``CONFIG_LWIP_MAX_SOCKETS`` is 10. Therefore, by default, the value of ``LWIP_SOCKET_OFFSET`` is 54. When ``CONFIG_LWIP_MAX_SOCKETS`` is set to 16, the value of ``LWIP_SOCKET_OFFSET`` becomes 48, and the socket number starts from 48.
