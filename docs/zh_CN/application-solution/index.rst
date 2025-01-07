@@ -11,7 +11,6 @@
    音频应用框架 <audio-development-framework>
    BLE Mesh 应用框架 <ble-mesh-development-framework>
    摄像头应用　<camera-application>
-   社区软件平台  <community-sw-and-platforms>
    ESP Matter <esp-matter>
    ESP-NOW <esp-now>
    ESP RainMaker 云服务 <esp-rainmaker-cloud-service>
