@@ -44,3 +44,11 @@ How to update the esp32-arduino library version?
 ---------------------------------------------------------------------------------------------
 
   - Under the path ``Tool`` > ``Board`` > ``BoardManager``, search for ``ESP32`` to select and install the desired version of the `esp32-arduino <https://github.com/espressif/arduino-esp32>`_ library.
+
+--------------
+
+Can ESP32-SOLO-1 be developed using the Arduino software?
+---------------------------------------------------------
+
+  - Currently, ESP32-SOLO-1 is not supported for development in the Arduino software.
+  - If you still prefer to use Arduino to build your code, you can use Arduino-esp32 as an `ESP-IDF component <https://docs.espressif.com/projects/arduino-esp32/en/latest/esp-idf_component.html>`_ for development and testing.

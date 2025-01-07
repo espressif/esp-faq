@@ -11,7 +11,6 @@ application solution
    Audio development framework <audio-development-framework>
    BLE Mesh development framework <ble-mesh-development-framework>
    Camera application　<camera-application>
-   Community sw and platforms  <community-sw-and-platforms>
    ESP Matter <esp-matter>
    ESP-NOW <esp-now>
    ESP RainMaker cloud service <esp-rainmaker-cloud-service>
