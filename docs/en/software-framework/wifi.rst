@@ -1320,7 +1320,8 @@ How can I increase the time for scanning routers when using ESP32 as the Wi-Fi S
 Does ESP32 support LDPC?
 ---------------------------------------------------------------------------------------------------------------
 
-  Yes. No additional configuration or calling is required as it is already implemented in the driver.
+  - Yes. No additional configuration or calling is required as it is already implemented in the driver.
+  - ESP32-C6 or ESP32-C5 does not support LDPC.
 
 -------------
 
@@ -1357,13 +1358,15 @@ What is the default 802.11 Wi-Fi protocol when the ESP32-C6 is in Wi-Fi AP mode?
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
   - When ESP32-C6 enables Wi-Fi AP mode, it uses the mixed mode of 802.11b/g/n by default. The protocol can be set via `esp_wifi_set_protocol() <https://docs.espressif.com/projects/esp-idf/en/v5.1.2/esp32c6/api-reference/network/esp_wifi.html#_CPPv421esp_wifi_set_protocol16wifi_interface_t7uint8_t>`_.
+  - ESP32-C6 does not support 802.11ax in AP mode.
 
 -------------------
 
 Why can't the ESP32 Wi-Fi Station connect to a Wi-Fi hotspot in 2.4 GHz Enhanced Open mode?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Connection to 2.4 GHz Wi-Fi hotspots in Enhanced Open mode is only supported on ESP-IDF  release/v5.2 and above. Additionally, the ``Component config > ``Wi-Fi`` > ``Enable OWE STA`` configuration option should be enabled. For more information, please refer to the `Wi-Fi Enhanced Open <https://github.com/espressif/esp-idf/blob/release/v5.2/docs/en/api-guides/wifi-security.rst#wi-fi-enhanced-open>`_ guide.
+  - Connection to 2.4 GHz Wi-Fi hotspots in Enhanced Open mode is only supported on ESP-IDF release/v5.2 and above. Additionally, the ``Component config > ``Wi-Fi`` > ``Enable OWE STA`` configuration option should be enabled. For more information, please refer to the `Wi-Fi Enhanced Open <https://github.com/espressif/esp-idf/blob/release/v5.2/docs/en/api-guides/wifi-security.rst#wi-fi-enhanced-open>`_ guide.
+  - When connecting to a router in this security mode, do not set any password.
 
 --------------
 
@@ -1399,7 +1402,7 @@ Does the ESP Wi-Fi module support power save mode in SoftAp mode?
 What is the maximum ranging bandwidth supported by ESP32S3 FTM?
 ----------------------------------------------------------------------------------------------------------------------------------------
   
-  ESP32S3 FTM supports maximum ranging bandwidth up to 40 MHz.
+  ESP32-S3 FTM supports maximum ranging bandwidth up to 40 MHz.
 
 --------------
 
