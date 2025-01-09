@@ -1320,7 +1320,8 @@ ESP 模组支持 WAPI (Wireless LAN Authentication and Privacy Infrastructure) �
 ESP32 是否支持 LDPC？
 ---------------------------------------------------------------------------------------------------------------
 
-  支持。ESP32 已经在驱动中实现 LDPC，无需额外配置或调用。
+  - 支持。ESP32 已经在驱动中实现 LDPC，无需额外配置或调用。
+  - ESP32-C6/ESP32-C5 不支持 LDPC。
 
 -------------
 
@@ -1357,6 +1358,7 @@ ESP32-C6 开启 Wi-Fi AP 模式时，默认使用的 802.11 Wi-Fi 协议类型�
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
   - ESP32-C6 开启 Wi-Fi AP 模式时，默认使用 802.11b/g/n 混合模式。可通过 `esp_wifi_set_protocol() <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.1.2/esp32c6/api-reference/network/esp_wifi.html#_CPPv421esp_wifi_set_protocol16wifi_interface_t7uint8_t>`_ 设置协议类型。
+  - ESP32-C6 暂时不支持在 AP 模式下设置为 820.11ax 模式。
 
 -------------------
 
@@ -1364,6 +1366,7 @@ ESP32 Wi-Fi Station 无法连接上 2.4 GHz Enhanced Open mode 模式的 Wi-Fi �
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 仅在 release/v5.2 及以上版本的 ESP-IDF SDK 上支持连接 2.4 GHz 的 Enhanced Open mode 模式的 Wi-Fi 热点。并且在软件上需要开启 ``Component config > ``Wi-Fi`` > ``Enable OWE STA`` 配置选项，请参见 `Wi-Fi Enhanced Open <https://github.com/espressif/esp-idf/blob/release/v5.2/docs/en/api-guides/wifi-security.rst#wi-fi-enhanced-open>`_ 说明。
+  - 另外，在连接该加密模式的路由器时，注意不要设置密码。
 
 --------------
 
@@ -1396,7 +1399,7 @@ ESP Wi-Fi 模块在 SoftAp 模式下支持省电机制吗？
 
 --------------
 
-ESP32S3 FTM 支持最大测距带宽能达到多少呢？
+ESP32-S3 FTM 支持最大测距带宽能达到多少呢？
 ----------------------------------------------------------------------------------------------------------------------------------------
   
   最大测距带宽支持到 40 MHz。
