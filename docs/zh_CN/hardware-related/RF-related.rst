@@ -104,7 +104,7 @@ ESP `射频测试工具 <https://www.espressif.com/zh-hans/support/download/othe
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 支持。在测试界面将 Test mode 设置为 TX tone 模式即可。
-  - 在使用 ESP 射频测试工具之前，建议先阅读 help 文件夹中的说明。
+  - 在使用 ESP 射频测试工具之前，建议先阅读指南 `RF 测试项目 <https://docs.espressif.com/projects/esp-test-tools/zh_CN/latest/esp32/development_stage/rf_test_items/index.html#rf>`_。
 
 ------------
 

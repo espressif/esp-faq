@@ -104,7 +104,7 @@ Does the `ESP RF Test Tool <https://www.espressif.com/en/support/download/other-
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes. To do the single carrier testing, you can set the ``Test mode`` to ``TX tone`` in the test interface.
-  - Before using the ESP RF Test Tool, it is recommended to read the instructions in the ``help`` folder.
+  - Before using ESP RF test tools, it is recommended to read the guide `RF Test Items <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/development_stage/rf_test_items/index.html#rf>`_.
 
 ------------
 
