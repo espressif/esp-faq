@@ -18,7 +18,8 @@ Camera Application
 What type of camera does the ESP32 series chip support?
 --------------------------------------------------------
 
-  Please refer to `camera models supported by the ESP32 series <https://github.com/espressif/esp32-camera/blob/master/README.md>`_.
+  - For camera models supported by the ESP32, ESP32-S2, and ESP32-S3 series, please refer to `ESP32 Camera Driver <https://github.com/espressif/esp32-camera/blob/master/README.md>`_.
+  - For camera models supported by the ESP32-P4 series, please refer to `espressif-camera-sensors-component <https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor#espressif-camera-sensors-component>`_.
 
 --------------
 
@@ -140,6 +141,8 @@ Where are the examples related to the camera solution stored?
   - Please refer to `ESP-WHO <https://github.com/espressif/esp-who>`_.
   - Please refer to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera>`_.
   - Please refer to `esp-dev-kits <https://github.com/espressif/esp-dev-kits>`_.
+  - For common examples of the ESP32-P4 series, please visit `esp-video/examples <https://github.com/espressif/esp-video-components/tree/master/esp_video/examples>`_.
+  - For examples of using ESP32-P4 together with an LCD screen, please visit `esp-iot-solution/examples/camera/video_lcd_display <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/video_lcd_display>`_.
 
 --------------
 
