@@ -18,7 +18,8 @@
 ESP32 系列芯片支持哪种类型的摄像头？
 ---------------------------------------
 
-  请参考 `ESP32 系列支持的摄像头型号 <https://github.com/espressif/esp32-camera/blob/master/README.md>`_。
+  - 有关 ESP32、ESP32-S2 和 ESP32-S3 系列支持的摄像头型号，请参阅 `ESP32 Camera Driver <https://github.com/espressif/esp32-camera/blob/master/README.md>`_。
+  - 有关 ESP32-P4 系列支持的摄像头型号，请参阅 `espressif-camera-sensors-component <https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor#espressif-camera-sensors-component>`_。
 
 --------------
 
@@ -140,6 +141,8 @@ Camera 方案相关的示例存放在哪里？
   - 请参考 `ESP-WHO <https://github.com/espressif/esp-who>`_。
   - 请参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera>`_。
   - 请参考 `esp-dev-kits <https://github.com/espressif/esp-dev-kits>`_。
+  - 要查看 ESP32-P4 系列的常用示例，请前往 `esp-video/examples <https://github.com/espressif/esp-video-components/tree/master/esp_video/examples>`_。
+  - 有关 ESP32-P4 系列与 LCD 屏幕结合使用的示例，请前往 `esp-iot-solution/examples/camera/video_lcd_display <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/video_lcd_display>`_。
 
 --------------
 
