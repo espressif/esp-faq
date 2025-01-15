@@ -48,10 +48,7 @@ ESP-ADF 中 SIP 协议是否开源？
 ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？
 ---------------------------------------------------
 
-  如：pipeline_a2dp_sink_and_hfp, pipeline_a2dp_sink_stream, pipeline_bt_sink
-
-  - 目前 ESP-ADF 还不支持 AVRCP 的调音操作，ESP-IDF release/v4.0 及以上版本已经支持了，您可以尝试使用 ESP-IDF 中的 `a2dp_sink 例程 <https://github.com/espressif/esp-idf/tree/v4.4.2/examples/bluetooth/bluedroid/classic_bt/a2dp_sink>`_ 和 `a2dp_source 例程 <https://github.com/espressif/esp-idf/tree/v4.4.2/examples/bluetooth/bluedroid/classic_bt/a2dp_source>`_ 对跑。
-  - 后续会在 ADF 的例程中直接支持。
+  可以参考例程：`pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_
 
 --------------
 
@@ -111,7 +108,7 @@ ESP-ADF 例程能否实现蓝牙耳机的音量调节功能？
 
 --------------
 
-ESP-ADF 支持语音识别关键词自定义开发吗？
+ESP-ADF 支持语音识别唤醒词自定义开发吗？
 ----------------------------------------
 
   暂时还未开放语音训练接口，您可以直接使用免费唤醒词 “嗨，乐鑫”。如果您有定制需求，可以发送邮件至 sales@espressif.com 咨询。
@@ -121,7 +118,8 @@ ESP-ADF 支持语音识别关键词自定义开发吗？
 ESP-ADF 是否支持 ESP32-LyraTD-MSC v2.1 开发板跑 Alexa 例程？
 ---------------------------------------------------------------------
 
-  ESP-ADF 中还没有直接支持 Alexa 的例程。对于 Alexa 例程，请参考 `esp-va-sdk <https://github.com/espressif/esp-avs-sdk>`_。
+  - ESP-ADF 中还没有直接支持 Alexa 的例程。对于 Alexa 例程，请参考 `esp-va-sdk <https://github.com/espressif/esp-avs-sdk>`_。
+  - 需要注意的是，从 2024 年下半年开始，Alexa 已关闭了主机侧（Build-in）语音接口。如果后续需要接入 Alexa 语音生态，可以尝试使用 ACK 方案或 Matter 方案。
 
 --------------
 
