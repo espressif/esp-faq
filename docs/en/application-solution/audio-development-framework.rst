@@ -48,10 +48,7 @@ Is the SIP protocol in ESP-ADF open-source?
 Can ESP-ADF examples implement the volume adjustment function of Bluetooth headsets?
 -------------------------------------------------------------------------------------------------
 
-  Such as: pipeline_a2dp_sink_and_hfp, pipeline_a2dp_sink_stream, pipeline_bt_sink
-
-  - Currently, ESP-ADF does not support AVRCP's tuning operation. ESP-IDF release/v4.0 and later releases have already supported this function. You can try to use the `a2dp_sink example <https://github.com/espressif/esp-idf/tree/v4.4.2/examples/bluetooth/bluedroid/classic_bt/a2dp_sink>`_ and `a2dp_source example <https://github.com/espressif/esp-idf/tree/v4.4.2/examples/bluetooth/bluedroid/classic_bt/a2dp_source>`_ in ESP-IDF.
-  - The function will be directly supported in the ADF examples in the future.
+  Refer to example: `pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_
 
 --------------
 
@@ -111,7 +108,7 @@ Will integrating DuerOS occupy the recording function of the ESP32-LyraT develop
 
 --------------
 
-Does ESP-ADF support the development of custom voice recognition keywords?
+Does ESP-ADF support customizing voice recognition wake-up words?
 ---------------------------------------------------------------------------
 
   The voice training interface has not yet been opened. You can directly use the free wake-up word "Hi, Espressif". If you have customization requirements, please email sales@espressif.com for details.
@@ -121,7 +118,8 @@ Does ESP-ADF support the development of custom voice recognition keywords?
 Does ESP-ADF support running Alexa examples on the ESP32-LyraTD-MSC v2.1 development board?
 --------------------------------------------------------------------------------------------------------
 
-  ESP-ADF does not directly support Alexa examples. For Alexa examples, please refer to `esp-va-sdk <https://github.com/espressif/esp-avs-sdk>`_.
+  - ESP-ADF does not directly support Alexa examples. For Alexa examples, please refer to `esp-va-sdk <https://github.com/espressif/esp-avs-sdk>`_.
+  - Please note that since the second half of 2024, Alexa has disabled the host-side (build-in) voice interface. If you need to connect to the Alexa voice ecosystem in the future, you can try using the ACK or Matter solution.
 
 --------------
 
