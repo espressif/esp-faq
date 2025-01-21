@@ -51,3 +51,24 @@ When using the ESP32 chip, can GPIO32 and GPIO33 be configured as I2C_SDA and I2
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Yes. The I2C pins of the ESP32 chip can be remapped by any available GPIO. Please refer to Section 2.2, Pin Overview of `ESP32 Series Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_. If an external 32.768 kHz crystal is not required, GPIO32 and GPIO33 can be used as I2C pins.
+
+--------------
+
+Why does the I2C bus occasionally receive incorrect data when Bluetooth or Wi-Fi is enabled on the ESP32 chip?
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  This is due to an issue with the I2C FIFO on ESP32, which may cause data confusion when the I2C host reads data. A software fix has been made in release/v5.4 and subsequent versions. For chips released after ESP32 (such as ESP32-S3, ESP32-C3), this issue has been resolved through hardware fixes.
+
+--------------
+
+Can the I2C and LP I2C be used simultaneously on ESP32-C6 when it is not in Deep-Sleep mode?
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  Sure. In the ``esp_driver_i2c`` driver, you can select ``LP_I2C_PORT`` to enable the LP I2C function. For details, please refer to example: `esp-idf/components/esp_driver_i2c/test_apps/i2c_test_apps/main/test_lp_i2c <https://github.com/espressif/esp-idf/blob/master/components/esp_driver_i2c/test_apps/i2c_test_apps/main/test_lp_i2c.c>`_
+
+--------------
+
+How to set clock stretching for I2C?
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+  In the ``esp_driver_i2c`` driver, you can set the ``scl_wait_us`` parameter in ``i2c_master_dev_t`` to change the SCL wait time, thereby achieving clock stretching.

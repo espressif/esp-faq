@@ -74,6 +74,13 @@ How can I improve the display frame rate of LCD screens?
     - ``CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y``
     - ``CONFIG_COMPILER_OPTIMIZATION_PERF=y``
 
+  - On ESP32-P4, you can adjust the following configurations to increase the frame rate (applicable to ESP-IDF release/v5.4):
+
+    - ``CONFIG_CACHE_L2_CACHE_256KB=y``
+    - ``CONFIG_CACHE_L2_CACHE_LINE_128B=y``
+    - ``CONFIG_SPIRAM_XIP_FROM_PSRAM=y``
+    - ``CONFIG_COMPILER_OPTIMIZATION_PERF=y``
+
   - The following LVGL configuration items can improve the frame rate (LVGL v8.3):
 
     - ``#define LV_MEM_CUSTOM 1`` or ``CONFIG_LV_MEM_CUSTOM=y``
@@ -130,7 +137,7 @@ What is the maximum resolution supported by ESP LCD? What is the corresponding f
           - 1024 x 600，1280 x 720
 
   - For the RGB interface of ESP32-S3, the maximum resolution tested in LVGL (v8) application scenarios is currently 800 x 480, with an interface frame rate limit of 59 (PCLK 30 MHz), corresponding to an average LVGL frame rate of 23; The maximum average LVGL frame rate is 26, corresponding to an interface frame rate of 41 (PCLK 21 MHz).
-  - For the MIPI-DSI interface of ESP32-P4, the maximum resolution tested in LVGL (v8) application scenarios is currently 1080 x 1920, with an interface frame rate limit of 31 (DPI_CLK 80 MHz, 2-lane bit rate 2.8 Gbps), corresponding to an average LVGL frame rate of 4;
+  - For the MIPI-DSI interface of ESP32-P4, the maximum resolution tested in LVGL (v8) application scenarios is currently 1080 x 1920, with an interface frame rate limit of 31 (DPI_CLK 80 MHz, 2-lane bit rate 2.8 Gbps), corresponding to an average LVGL frame rate of 25;
 
 ----------------
 
@@ -222,6 +229,7 @@ Why do I get drift (overall drift of the display) when ESP32-S3 is driving an RG
 
     - For the drift caused by short-term operations of flash, such as before and after Wi-Fi connection, you can call ``esp_lcd_rgb_panel_set_pclk()`` before the operation to reduce the PCLK (such as 6 MHz) and delay about 20 ms (the time for RGB to complete one frame), and then increase PCLK to the original level after the operation. This operation may cause the screen to flash blank in a short-term.
     - If unavoidable, you can enable ``CONFIG_LCD_RGB_RESTART_IN_VSYNC`` or use the ``esp_lcd_rgb_panel_restart()`` to reset the RGB timing to prevent permanent drifting.
+    - For guidance on how to avoid RGB screen drift issues in Arduino, please refer to `the link <https://github.com/esp-arduino-libs/ESP32_Display_Panel/blob/master/docs/FAQ.md#how-to-fix-screen-drift-issue-when-driving-rgb-lcd-with-esp32-s3>`__.
 
 -----------------------------
 
@@ -387,7 +395,7 @@ How to solve the unexpected crash when operating LVGL controls through non-LVGL 
 Does ESP32-S3 support RGB888?
 ---------------------------------------------------------------------------------------------------------------------------
 
-  Parallel RGB888 is not supported. Only RGB565 is supported. You can set up serial RGB888 output as follows:
+  Parallel RGB888 is not supported (ESP32-P4 supports parallel RGB888), only RGB565 is supported. Serial RGB888 output can be configured with the following settings:
 
   .. code-block:: c
 
@@ -432,3 +440,10 @@ Is it supported to drive segment LCD screens?
 -------------------------------------------------------------------------------
 
   ESP chips can't directly drive the segment LCD screen through the GPIO pin, because this fuction requires cycling between high and low voltage levels, with an AC voltage from 2.7 V to 5.0 V and typical values of 3.0 V, 3.3 V, 4.5 V, and 5.0 V. However, the chips do not support voltage range adjustment.
+
+---------------------------
+
+Does ESP32-P4 support HDMI signal output?  
+-------------------------------------------------------------------------------
+
+  ESP32-P4 does not support direct HDMI signal output. However, HDMI signal output can be achieved through an MIPI-DSI to HDMI bridge chip. Currently, the MIPI-DSI to HDMI chip supported by Espressif is `LT8912B <https://github.com/espressif/esp-bsp/tree/master/components/lcd/esp_lcd_lt8912b>`__.

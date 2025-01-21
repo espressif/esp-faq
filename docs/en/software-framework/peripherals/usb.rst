@@ -239,8 +239,11 @@ Can the ESP32-S2/ESP32-S3 USB recognize the USB plugging and unplugging action w
 After enabling the RNDIS and CDC functions on the ESP32-S3 USB, I found that the PC can recognize the COM port. However, the automatic programming function of the COM port is invalid. Is it expected?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+.. _usb_serial_jtag:
+
   - Yes. The USB auto-programming function is implemented through the USB-Seial-JTAG peripheral, and the USB RNDIS function is implemented through the USB-OTG peripheral. However, only one of the two peripherals can work at a moment.
   - If the USB-OTG peripheral is used in the application, the automatic programming function implemented by the USB-Seial-JTAG peripheral will not be available. But you can manually enter the download mode for USB burning.
+  - Please refer to the `USB-Serial-JTAG Peripheral Introduction <https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_overview/usb_serial_jtag.html>`
 
 -------------
 
@@ -344,3 +347,24 @@ Does ESP32-P4 support USB?
 ---------------------------------
 
 Yes. ESP32-P4 has USB HS PHY, USB FS PHY, and a USB-Serial-JTAG interface.
+
+---------------------------
+
+Can the two IO pins of the USB High-Speed PHY on ESP32-P4 be used as regular IO pins?
+-------------------------------------------------------------------------------------
+
+The USB_D- and USB_D+ of the high-speed USB2.0 OTG interface use dedicated digital pins, with pin numbers 49~50, and do not support use as regular IO ports.
+
+---------------------------
+
+Why can't the USB-Serial-JTAG function properly, or perform USB downloads and USB printing, after using USB-related features on the ESP32-S3?
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Please refer to :ref:`usb_serial_jtag <usb_serial_jtag>`.
+
+---------------------------
+
+Does the Espressif USB host protocol stack support HUB? How to use it?
+-------------------------------------------------------------------------
+
+  Yes, the HUB function is supported in the low-level driver. To enable it, please set the macro ``CONFIG_USB_HOST_HUBS_SUPPORTED=y``.

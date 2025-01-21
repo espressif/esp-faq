@@ -98,3 +98,10 @@ Does the ESP32-S3 support One-Wire?
 ---------------------------------------------------------------------------------------------------------------------------
 
   - ESP32-S3 can support the `One-Wire bus protocol <https://www.maximintegrated.com/en/design/technical-documents/tutorials/1/1796.html>`_ through the RMT peripheral. For specific applications, refer to the `"esp-idf/examples/peripherals/rmt/onewire" <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/peripherals/rmt/onewire>`_ example.
+
+-------------------
+
+Can the ``rmt_transmit`` function be used in an interrupt?
+------------------------------------------------------------------------------
+
+  No, the ``rmt_transmit`` function can only be called in a task environment, not in an interrupt.

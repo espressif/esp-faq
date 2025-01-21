@@ -164,3 +164,10 @@ Is it possible to set different levels for different GPIOs of ESP32-P4? For exam
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Mixed settings are not allowed. The levels of all GPIO pins must be uniform, either all at 1.8 V or all at 3.3 V. For example, if a 1.8 V voltage is input to VDDPST_4, then all GPIO levels under this power domain are 1.8 V.
+
+----------
+
+Can the interrupt trigger level in GPIO be adjusted?
+----------------------------------------------------------------
+
+No, it cannot be adjusted. If you need functionality similar to a comparator, you can use chips with analog voltage comparator, such as ESP32-C5.

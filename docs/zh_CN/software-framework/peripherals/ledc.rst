@@ -79,7 +79,16 @@ ESP32 PWM 支持两路死区互补输出吗？
   - LEDC 不支持，MCPWM 外设支持两路死区互补输出。
   - 实测 ESP32-S3 可以通过 MCPWM 产生频率 10 k、占空比精度 1 us、死区精度 100 ns 的互补输出波形。
 
+---------------------------
+
 LEDC 支不支持硬件伽马调光？
 --------------------------------------------------------------
 
-  支持宏 ``SOC_LEDC_GAMMA_CURVE_FADE_SUPPORTED`` 的芯片可以开启硬件伽马调光，通过调用 ``ledc_fill_multi_fade_param_list`` 和 ``ledc_set_multi_fade_and_start`` 来实现
+  支持宏 ``SOC_LEDC_GAMMA_CURVE_FADE_SUPPORTED`` 的芯片可以启用硬件伽马调光功能，需要调用 ``ledc_fill_multi_fade_param_list`` 和 ``ledc_set_multi_fade_and_start`` 来实现。
+
+--------------
+
+ESP32 LEDC 引脚如何 deinit 或 uninstall 给其他外设使用?
+--------------------------------------------------------------
+
+  要释放 LEDC 引脚以供其他外设使用，只需调用 ``ledc_stop`` 接口，无需调用其他 API。
