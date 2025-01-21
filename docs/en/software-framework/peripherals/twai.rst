@@ -25,7 +25,7 @@ What are the considerations when using the ESP32 TWAI® controller?
 Does ESP32-S3 support CAN-FD?
 ----------------------------------------------------------------------
 
-  The ESP32-S3 itself does not integrate a CAN-FD controller, but users can still use a CAN-FD controller with an SPI interface, such as the MCP2518FD.
+  The ESP32-S3 itself does not integrate a CAN-FD controller, but users can still use a CAN-FD controller with an SPI interface, such as the MCP2518FD. In subsequent chips like the ESP32-C5, there are plans to support CAN-FD.
 
 --------------
 

@@ -98,3 +98,10 @@ ESP32-S3 是否支持硬件 One-Wire？
 ------------------------------------------------------------------------------
 
   - ESP32-S3 可以通过 RMT 外设支持 `One-Wire 总线协议 <https://www.maximintegrated.com/en/design/technical-documents/tutorials/1/1796.html>`_。具体应用可参考 `"esp-idf/examples/peripherals/rmt/onewire" <https://github.com/espressif/esp-idf/tree/release/v5.0/examples/peripherals/rmt/onewire>`_ 例程。
+
+-------------------
+
+是否可以在中断中使用 ``rmt_transmit`` 函数？
+------------------------------------------------------------------------------
+
+  不可以。``rmt_transmit`` 函数只能在 task 环境中调用，不能在中断中调用。

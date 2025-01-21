@@ -138,7 +138,7 @@ Why can't the measured voltage reach the nominal 3100 mV when the ESP32-S3 ADC i
   When ESP32-S3 ADC1 or ADC2 is configured as ``ADC_ATTEN_DB_12``, the voltage measurement range is ``0 ~ 3100 mV``. However, the maximum voltage measurement value of some chips is less than ``3100 mV``. The following two methods can be used to solve this problem:
 
 - Solution 1: Try to avoid using the boundary voltage values. You can use a divider circuit to reduce the input voltage to an intermediate value for higher accuracy and consistency. 
-- Solution 2: Use the software `ADC Range Extension Solution <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/others/adc_range.html>`_ to increase the maximum voltage measurement to ``3300 mV``.
+- Solution 2: Use the software `ADC Range Extension Solution <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/others/adc_range.html>`_ to extend the maximum measurement voltage to ``3300 mV``. This solution is supported in IDF v4.4.8 and v5.3.1 for ESP32-S2 and ESP32-S3 chips, and can be ported to other IDF versions based on this solution.
 
 -------------
 
@@ -185,3 +185,10 @@ Can the reference source of the ADC be externally applied? If it can be applied,
 
   - The ADC does not support external reference voltage. It can only use internal reference voltage.
   - The internal reference voltage is 1.1 V.
+
+------------
+
+What is the sample-and-hold capacitance inside the ESP32 SAR-ADC?
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The internal sample-and-hold capacitance of the SAR-ADC in the ESP32 chip is approximately 1 pF.

@@ -74,6 +74,13 @@ ESP 系列芯片的带屏开发板是否支持使用 Arduino IDE 开发 GUI？
     - ``CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y``
     - ``CONFIG_COMPILER_OPTIMIZATION_PERF=y``
 
+  - 在 ESP32-P4 上，可以调整以下配置项以提高帧率（适用于 ESP-IDF release/v5.4）：
+
+    - ``CONFIG_CACHE_L2_CACHE_256KB=y``
+    - ``CONFIG_CACHE_L2_CACHE_LINE_128B=y``
+    - ``CONFIG_SPIRAM_XIP_FROM_PSRAM=y``
+    - ``CONFIG_COMPILER_OPTIMIZATION_PERF=y``
+
   - 以下 LVGL 配置项对帧率提升有帮助 (LVGL v8.3):
 
     - ``#define LV_MEM_CUSTOM 1`` or ``CONFIG_LV_MEM_CUSTOM=y``
@@ -130,7 +137,7 @@ ESP 系列芯片最大可以支持多少分辨率的 LCD？相应的帧率是多
           - 1024 x 600，1280 x 720
 
   - 针对 ESP32-S3 的 RGB 接口，目前基于 LVGL (v8) 应用场景测试过的最大分辨率为 800 x 480，接口帧率上限为 59 (PCLK 30 MHz), 对应 LVGL 平均帧率为 23; LVGL 平均帧率上限为 26, 对应接口帧率为 41 (PCLK 21 MHz)。
-  - 针对 ESP32-P4 的 MIPI-DSI 接口，目前基于 LVGL (v8) 应用场景测试过的最大分辨率为 1080 x 1920，接口帧率上限为 31 (DPI_CLK 80 MHz，2-lane bit rate 2.8 Gbps), 对应 LVGL 平均帧率为 4;
+  - 针对 ESP32-P4 的 MIPI-DSI 接口，目前基于 LVGL (v8) 应用场景测试过的最大分辨率为 1080 x 1920，接口帧率上限为 31 (DPI_CLK 80 MHz，2-lane bit rate 2.8 Gbps), 对应 LVGL 平均帧率为 25;
 
 ---------------
 
@@ -222,7 +229,7 @@ ESP32-S3 系列的芯片支持哪些图片解码格式？
 
     - 短时操作 flash 导致漂移的情况，如 wifi 连接等操作前后，可以在操作前调用 ``esp_lcd_rgb_panel_set_pclk()`` 降低 PCLK（如 6 MHz）并延时大约 20 ms（RGB 刷完一帧的时间），然后在操作结束后提高 PCLK 至原始水平，期间可能会造成短暂的闪白屏现象。
     - 如果无法避免，可以开启 ``CONFIG_LCD_RGB_RESTART_IN_VSYNC`` 或调用 ``esp_lcd_rgb_panel_restart()`` 接口重置 RGB 时序，防止永久性漂移。
-    - 关于如何在 Arduino 中避免 RGB 屏幕漂移问题，请参考 `链接 <https://github.com/esp-arduino-libs/ESP32_Display_Panel?tab=readme-ov-file#how-to-fix-screen-drift-issue-when-driving-rgb-lcd-with-esp32-s3>`__。
+    - 关于如何在 Arduino 中避免 RGB 屏幕漂移问题，请参考 `链接 <https://github.com/esp-arduino-libs/ESP32_Display_Panel/blob/master/docs/FAQ_CN.md#%E4%BD%BF%E7%94%A8-esp32-s3-%E9%A9%B1%E5%8A%A8-rgb-lcd-%E6%97%B6%E5%87%BA%E7%8E%B0%E7%94%BB%E9%9D%A2%E6%BC%82%E7%A7%BB%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88>`__。
 
 ---------------------------
 
@@ -388,7 +395,7 @@ ESP32-S2 USB 摄像头和 I80 LCD 同时使用会导致 LCD 显示缺图像或�
 ESP32-S3 是否支持 RGB888？
 ---------------------------------------------------------------------------------------------------------------------------
 
-  不支持并行 RGB888，只能支持 RGB565。可以设置串行 RGB888 输出，如下：
+  不支持并行 RGB888（ESP32-P4 支持并行 RGB888)，仅支持 RGB565。可以设置串行 RGB888 输出，具体配置如下：
 
   .. code-block:: c
 
@@ -433,3 +440,10 @@ LVGL 统计的 CPU 占用率过高，有没有什么影响？
 -------------------------------------------------------------------------------
 
   我们的芯片无法通过 GPIO 直接连接液晶段码屏进行驱动，因为驱动段码屏需要高低电平循环，要求工作电压为 2.7 V 至 5.0 V 的交流电压，典型值为 3.0 V、3.3 V、4.5 V 和 5.0 V，而我们的芯片不支持调整电压范围。
+
+---------------------------
+
+ESP32-P4 是否支持输出 HDMI 信号？
+-------------------------------------------------------------------------------
+
+  ESP32-P4 不支持直接输出 HDMI 信号，但可以通过 MIPI-DSI 转 HDMI 的芯片来实现 HDMI 信号输出。目前，乐鑫支持的 MIPI-DSI 转 HDMI 芯片为 `LT8912B <https://github.com/espressif/esp-bsp/tree/master/components/lcd/esp_lcd_lt8912b>`__。

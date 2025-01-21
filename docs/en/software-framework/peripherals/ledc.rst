@@ -79,7 +79,16 @@ Does ESP32 PWM support complementary outputs with dead bands on two channels?
   - This feature is not supported by LEDC but by the MCPWM peripheral.
   - By measurement, ESP32-S3 can generate complementary output waveforms with the frequency of 10 k, the duty cycle accuracy of 1 us and the dead band accuracy of 100 ns by MCPWM.
 
+---------------------------
+
 Does LEDC support hardware gamma dimming?
 --------------------------------------------------------------
 
   Chips that support the macro ``SOC_LEDC_GAMMA_CURVE_FADE_SUPPORTED`` can enable hardware gamma dimming by calling ``ledc_fill_multi_fade_param_list`` and ``ledc_set_multi_fade_and_start``.
+
+--------------
+
+How to deinit or uninstall ESP32 LEDC pin for use by other peripherals?
+-----------------------------------------------------------------------
+
+  To free up the LEDC pin for use by other peripherals, simply call the ``ledc_stop`` interface. No other AIPs are required.
