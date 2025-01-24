@@ -308,8 +308,6 @@ When I use the "gattc_gatts_coex.c" example on ESP32 to test BLE multi-connectio
 Does ESP32-C3 BLE support master and slave mode at the same time? What is the number of connections in master mode and slave mode?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  :IDF\: release/v4.3, master:
-
   - ESP32-C3 supports master and slave mode at the same time, which share 8 connections. For example, if ESP32-C3 connects to 4 slave devices, it can be connected by 8 - 4 = 4 master devices.
   - In addition, when ESP32-C3 is used as a slave, it can be connected by 8 master devices; when used as a master, it can connect to 8 slave devices.
 
@@ -325,23 +323,11 @@ How does BLE capture packets?
 
 ---------------------
 
-When I use an ESP32 development board to test several versions of bluefi example under ESP-IDF for networking, the following error kept printing. What is the reason?
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  .. code-block:: text
-
-    E (117198) BT_L2CAP: l2ble_update_att_acl_pkt_num not found p_tcb
-    W (117198) BT_BTC: btc_blufi_send_encap wait to send blufi custom data
-
-  - When this error occurs, please modify the ``esp_ble_get_cur_sendable_packets_num(blufi_env.conn_id)`` to ``esp_ble_get_sendable_packets_num()`` in the ``components/bt/host/bluedroid/btc/profile/esp/blufi/blufi_prf.c`` file.
-  - This bug has been fixed in all branches, you can update ESP-IDF to the latest release version.
-
---------------------
 
 When I use ESP32, can Light-sleep mode be enabled for Bluetooth and can Bluetooth be kept connected in Light-sleep mode?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - To use Light-sleep mode for ESP32, release/4.0 or above versions of ESP-IDF and a 32.768 kHz crystal are needed.
+  - To use ESP32 in light-sleep mode, release/4.0 or above versions of ESP-IDF and a 32.768 kHz crystal are needed. For the ESP32 series chips, adding a 32.768 kHz can significantly reduce power consumption.
   - Bluetooth can be kept connected in Light-sleep mode. Please refer to `Bluetooth modem sleep with external 32.768 kHz xtal under light sleep <https://github.com/espressif/esp-idf/issues/947#issuecomment-500312453>`_.
 
 --------------
@@ -374,6 +360,7 @@ How can I modify the Bluetooth device name of ESP32?
       };
 
   - The above ``/* device name*/`` is the modified item. Among them, 0x0f is the total length of the field type plus specific content, and 0x09 indicates that this type refers to the device name. Subsequent'E','S','P','_','G','A','T','T','S','_','D','E', 'M','O' are the ASCII code of the broadcast device name.
+  - For more tutorials, please refer to the `Device Discovery <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ble/get-started/ble-device-discovery.html>`_ guide.
 
 ----------------
 
@@ -386,8 +373,6 @@ What is the maximum supported broadcast length of BLE 5.0 broadcast after it is 
 
 How can I set a BLE broadcast package as unconnectable package?
 --------------------------------------------------------------------------------------------------
-
-  :CHIP\: ESP32:
 
   - please reffer to the `gatt_server demo <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server>`_，and set adv_type as ADV_TYPE_NONCONN_IND.
 
@@ -427,12 +412,6 @@ When using ESP32-C3 BLE Scan, can I set it to only scan the Long Range devices?
 
 --------------
 
-Is there a limit to the name length of ESP32 as a Bluetooth device?
-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  - The names should be no longer than 248 bytes. However, in practice, the name length is also limited by the length of Bluetooth advertising packets. For the description of configurations, please refer to `CONFIG_BT_MAX_DEVICE_NAME_LEN <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/kconfig.html#config-bt-max-device-name-len>`__.
-
---------------
 
 How do I set the ESP32 BLE Scan to the permanent scan without generating a timeout?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -584,8 +563,9 @@ How to set up the GATT service with a 128-bit UUID based on the `GATT Server <ht
 When testing based on the `GATT Server <https://github.com/espressif/esp-idf/tree/v5.1/examples/bluetooth/bluedroid/ble/gatt_server>`_ example, is it possible to delete the default 1800 and 1801 service attributes?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The 1800 and 1801 service attributes are two standard GATT service attributes in the BLE protocol, which cannot be deleted or disabled. They are part of the BLE protocol specifications, providing basic device information and general access capabilities, and maintaining compatibility with the standard BLE protocol.
+  - The 1800 and 1801 service attributes are two standard GATT service attributes in the BLE protocol, and it is not recommended to delete or disable them. They are part of the BLE protocol specifications, providing basic device information and general access capabilities, and maintaining compatibility with the standard BLE protocol.
   - 0x1800 refers to generic access, defining the general attributes of the device, while 0x1801 refers to generic attribute, a simple GATT service used to provide basic information about the device.
+  - If you indeed need to delete these two services, you can comment out the two lines of code `gap_attr_db_init() <https://github.com/espressif/esp-idf/blob/cc9fb5bd5ea7d3ddb1a8c26e5bf0076b3e1352f3/components/bt/host/bluedroid/stack/gap/gap_api.c#L85>`_ and `gatt_profile_db_init() <https://github.com/espressif/esp-idf/blob/cc9fb5bd5ea7d3ddb1a8c26e5bf0076b3e1352f3/components/bt/host/bluedroid/stack/gatt/gatt_main.c#L148>`_.
 
 -----------
 

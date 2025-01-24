@@ -308,8 +308,6 @@ ESP32 使用 gattc_gatts_coex.c 例程测试 BLE 多连接，在 ``menuconfi`` �
 ESP32-C3 BLE 同时支持主从模式吗？主、从模式连接数分别是多少？
 --------------------------------------------------------------------------------------
 
-  :IDF\: release/v4.3, master:
-
   - ESP32-C3 同时支持主从模式，共用 8 个连接。例如，ESP32-C3 连接了 4 个 slave 设备，那么可被 8 - 4 = 4 个 master 设备连接。
   - 另外，ESP32-C3 用作 slave 时，可被 8 个 master 设备连接；用作 master 时，可连接 8 个 slave 设备。
 
@@ -325,23 +323,11 @@ BLE 如何抓包？
 
 ------------
 
-使用 ESP32 开发板，测试好几个版本的 ESP-IDF 下的 BluFi 例程进行配网，点击配网之后都会打印如下报错，是什么原因？
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  .. code-block:: text
-
-    E (117198) BT_L2CAP: l2ble_update_att_acl_pkt_num not found p_tcb
-    W (117198) BT_BTC: btc_blufi_send_encap wait to send blufi custom data
-
-  - 当出现此报错，请在 ``components/bt/host/bluedroid/btc/profile/esp/blufi/blufi_prf.c`` 文件下，把 ``esp_ble_get_cur_sendable_packets_num(blufi_env.conn_id)`` 换成  ``esp_ble_get_sendable_packets_num()``。
-  - 此问题已经在所有分支上面进行修复，可以更新 ESP-IDF 为最新 Release 版本。
-
---------------
 
 使用 ESP32，请问蓝牙能否使用 light-sleep 模式，并在 light-sleep 模式下保持蓝牙连接？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 使用 light-sleep 模式，需要 ESP-IDF release/4.0 以上版本的 SDK 外加 32.768 kHz 晶振。
+  - ESP32 使用 light-sleep 模式，需要 ESP-IDF release/4.0 以上版本的 SDK 外加 32.768 kHz 晶振，对于 ESP32 系列芯片外加 32.768 kHz 可以显著降低功耗。
   - light-sleep 模式下，蓝牙可以保持连接。请参考 `Bluetooth modem sleep with external 32.768 kHz xtal under light sleep <https://github.com/espressif/esp-idf/issues/947#issuecomment-500312453>`_ 指南。
 
 ----------------------------
@@ -374,6 +360,7 @@ BLE 如何抓包？
       };
 
   - 上述 ``/* device name*/`` 为修改项。其中 0x0f 为此字段类型加具体内容的总长度，0x09 表示此类型代指设备名。后续的 'E', 'S', 'P', '_', 'G', 'A', 'T', 'T', 'S', '_', 'D','E', 'M', 'O' 为广播设备名的 ASCII 码表达。
+  - 如需更多教程，请参阅 `设备发现 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/ble/get-started/ble-device-discovery.html>`_ 指南。
 
 ----------------
 
@@ -386,8 +373,6 @@ BLE 5.0 广播设置为 legacy 模式时支持最大广播长度为多少？
 
 BLE 广播包如何设置为不可连接包?
 ---------------------------------------------------------------------------------------------
-
-  :CHIP\: ESP32:
 
   - 可参考 `gatt_server demo <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server>`_， 将广播包类型 adv_type 变量修改为 ADV_TYPE_NONCONN_IND。
 
@@ -427,12 +412,6 @@ ESP32 低功耗蓝牙可以使用 PSRAM 吗？
 
 ------------------
 
-ESP32 蓝牙设备名称长度是否有限制？
----------------------------------------------------------------------------------------------------------------------------------------------------
-
-  - ESP32 蓝牙设备名称长度不超过 248 字节，实际蓝牙设备名称受限于蓝牙广播数据包的长度。关于配置选项说明，请参见 `CONFIG_BT_MAX_DEVICE_NAME_LEN <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.0/esp32/api-reference/kconfig.html#config-bt-max-device-name-len>`__。
-
-----------------
 
 使用 ESP32 如何设置 BLE Scan 永久扫描而不产生超时？
 --------------------------------------------------------------------------------------------------------------------------
@@ -584,8 +563,9 @@ ESP32 用作 BLE server 时支持多个 client 同时连接吗？如何实现呢
 基于 `GATT Server <https://github.com/espressif/esp-idf/tree/v5.1/examples/bluetooth/bluedroid/ble/gatt_server>`_ 例程进行测试，是否可以删除默认的 1800 和 1801 服务属性？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 1800 和 1801 服务属性是 BLE 协议中的两个标准的 GATT 服务属性，不可以删除或禁用。它们是 BLE 协议规定的一部分，提供了设备的基本信息和通用访问能力，并保持与标准 BLE 协议的兼容性。
+  - 1800 和 1801 服务属性是 BLE 协议中的两个标准的 GATT 服务属性，不推荐删除或禁用。它们是 BLE 协议规定的一部分，提供了设备的基本信息和通用访问能力，并保持与标准 BLE 协议的兼容性。
   - 0x1800 代表“通用访问”，定义了设备的通用属性；而 0x1801 代表“通用属性”，是一个简单的 GATT 服务，用于提供设备的基本信息。
+  - 如果确实需要删除这两个服务，可以注释 `gap_attr_db_init() <https://github.com/espressif/esp-idf/blob/cc9fb5bd5ea7d3ddb1a8c26e5bf0076b3e1352f3/components/bt/host/bluedroid/stack/gap/gap_api.c#L85>`_ 与 `gatt_profile_db_init() <https://github.com/espressif/esp-idf/blob/cc9fb5bd5ea7d3ddb1a8c26e5bf0076b3e1352f3/components/bt/host/bluedroid/stack/gatt/gatt_main.c#L148>`_ 两行代码。
 
 -----------
 
