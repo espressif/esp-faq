@@ -46,14 +46,14 @@ ESP-WHO 支持使用 ESP-IDF 哪些版本？
 `ESP-DL <https://github.com/espressif/esp-dl>`_ 支持哪些模型框架？
 ----------------------------------------------------------------------------------------
 
-  目前支持 mxnet、pytorch、tensorflow 三个平台的模型。
+  ESP-DL 所使用的 ESP-PPQ 量化工具支持直接对 ONNX 模型进行量化。Pytorch 和 TensorFlow 需要先转换为 ONNX 模型，因此请确保你的模型可以转换为 ONNX 模型。
 
 ----------------------
 
-`ESP-DL <https://github.com/espressif/esp-dl>`_ 支持上述三个平台(mxnet, pytorch, and tensorflow)的所有的模型吗？
+`ESP-DL <https://github.com/espressif/esp-dl>`_ 支持上述三个平台（MXNet、Pytorch、TensorFlow）的所有的模型吗？
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  模型中所有的算子须为 ESP-DL 所支持的算子。有关支持的算子，请参考 `layer <https://github.com/espressif/esp-dl/tree/master/include/layer>`_。
+  模型中所有算子必须为 ESP-DL 所支持的算子。有关支持的算子，请参考 `Operator Support State <https://github.com/espressif/esp-dl/blob/master/operator_support_state.md>`_。
 
 ----------------------
 
@@ -109,7 +109,12 @@ AI 语音模型如何修改麦克风通道数量？
 有关 `ESP-DL <https://github.com/espressif/esp-dl>`__ 的学习资料存放在哪里？
 ---------------------------------------------------------------------------------------------------
 
-  请参考 `如何使用 ESP-DL 部署手势识别 <https://medium.com/the-esp-journal/hand-gesture-recognition-on-esp32-s3-with-esp-deep-learning-176d7e13fd37>`_。
+  请参考如下教程：
+
+  - `如何使用 ESP-DL 部署手势识别 <https://medium.com/the-esp-journal/hand-gesture-recognition-on-esp32-s3-with-esp-deep-learning-176d7e13fd37>`_。
+  - `行人检测 <https://github.com/espressif/esp-dl/tree/master/examples/pedestrian_detect>`_。
+  - `人脸检测 <https://github.com/espressif/esp-dl/tree/master/examples/human_face_detect>`_。
+  - `人脸识别 <https://github.com/espressif/esp-dl/tree/master/examples/human_face_recognition>`_。
 
 -------------
 

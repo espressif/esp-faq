@@ -46,14 +46,14 @@ What languages are supported by the `esp-skainet <https://github.com/espressif/e
 What model frameworks does `ESP-DL <https://github.com/espressif/esp-dl>`_ support?
 -------------------------------------------------------------------------------------------------------------------------------
 
-  Currently, `ESP-DL <https://github.com/espressif/esp-dl>`_ supports models from mxnet, pytorch, and tensorflow.
+  The quantization tool ESP-PPQ used by ESP-DL can directly quantize ONNX models. Pytorch and TensorFlow need to be converted to ONNX models first. Please make sure your model can be converted to an ONNX model.
 
 --------------
 
-Does `ESP-DL <https://github.com/espressif/esp-dl>`_ support all models of the three platforms mentioned above (mxnet, pytorch, and tensorflow)?
+Does `ESP-DL <https://github.com/espressif/esp-dl>`_ support all models of the three platforms mentioned above (MXNet, Pytorch, and TensorFlow)?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  ESP-DL supports models in which all the operators are supported by ESP-DL. Please check `layer <https://github.com/espressif/esp-dl/tree/master/include/layer>`_ for the supported operators.
+  All operators in the above models must be supported by ESP-DL. For supported operators, please refer to `Operator Support State <https://github.com/espressif/esp-dl/blob/master/operator_support_state.md>`_.
 
 --------------
 
@@ -109,7 +109,12 @@ Do you have relevant study materials for `ESP-SR GitHub <https://github.com/espr
 Do you have relevant study materials for `ESP-DL <https://github.com/espressif/esp-dl>`__?
 -----------------------------------------------------------------------------------------------------
 
-  Please refer to `How to deploy hand gesture recognition with ESP-DL <https://medium.com/the-esp-journal/hand-gesture-recognition-on-esp32-s3-with-esp-deep-learning-176d7e13fd37>`_.
+  Please refer to the following tutorials:
+
+  - `Hand Gesture Recognition with ESP-Deep Learning <https://medium.com/the-esp-journal/hand-gesture-recognition-on-esp32-s3-with-esp-deep-learning-176d7e13fd37>`_.
+  - `Pedestrian Detection <https://github.com/espressif/esp-dl/tree/master/examples/pedestrian_detect>`_.
+  - `Face Detection <https://github.com/espressif/esp-dl/tree/master/examples/human_face_detect>`_.
+  - `Face Recognition <https://github.com/espressif/esp-dl/tree/master/examples/human_face_recognition>`_.
 
 -------------
 
