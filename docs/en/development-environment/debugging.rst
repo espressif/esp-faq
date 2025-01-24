@@ -171,7 +171,7 @@ How to obtain and parse coredump with ESP32?
 How to do RF performance test with ESP32, ESP8266, and ESP32S2?
 --------------------------------------------------------------------------------------------
 
-  Please refer to the documentation in the ``help`` folder of the `ESP RF Test Guide <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_EN.zip>`_.
+  Download the `ESP RF Test Tool <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_EN.zip>`_ and refer to the `RF Test Guide <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/development_stage/rf_test_items/index.html#rf>`_ for test instructions.
 
 --------------
 
