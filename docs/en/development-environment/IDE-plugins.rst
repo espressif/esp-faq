@@ -50,5 +50,6 @@ How to update the esp32-arduino library version?
 Can ESP32-SOLO-1 be developed using the Arduino software?
 ---------------------------------------------------------
 
-  - Currently, ESP32-SOLO-1 is not supported for development in the Arduino software.
-  - If you still prefer to use Arduino to build your code, you can use Arduino-esp32 as an `ESP-IDF component <https://docs.espressif.com/projects/arduino-esp32/en/latest/esp-idf_component.html>`_ for development and testing.
+  - Currently, the Arduino software development environment only supports the operation of ESP32 dual-core chips and does not support the operation of ESP32 single-core chips. Therefore, ESP32-SOLO-1 is not yet supported for development on Arduino software.
+  - If you still prefer to use Arduino to build your code, you can use the `arduino-esp32 <https://github.com/espressif/arduino-esp32>`_ library as an `ESP-IDF component <https://docs.espressif.com/projects/arduino-esp32/en/latest/esp-idf_component.html>`_ for development and testing.
+
