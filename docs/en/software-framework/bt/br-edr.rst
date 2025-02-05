@@ -46,17 +46,43 @@ Is ESP32 Bluetooth® compatible to Bluetooth® ver2.1 + EDR protocol?
 What is the operating current for ESP32 Classic Bluetooth®？
 ------------------------------------------------------------------------
 
-  A2DP (Single core CPU 160 Mhz，DFS = false，commit a7a90f)
+  A2DP (160 MHz dual-core CPU, DFS disabled, light-sleep mode disabled, commit b7159741)
 
-  +--------------------------------------------------------------+---------------+---------------+--------------+
-  | Current                                                      | Maximum (mA)  | Minimum (mA)  | Average (mA) |
-  +==============================================================+===============+===============+==============+
-  | Scanning                                                     | 106.4         | 30.8          | 37.8         |
-  +--------------------------------------------------------------+---------------+---------------+--------------+
-  | Sniff                                                        | 107.6         | 31.1          | 32.2         |
-  +--------------------------------------------------------------+---------------+---------------+--------------+
-  | Play Music                                                   | 123           | 90.1          | 100.4        |
-  +--------------------------------------------------------------+---------------+---------------+--------------+
+  .. list-table::
+    :header-rows: 1
+
+    * - Current
+      - Maximum (mA)
+      - Minimum (mA)
+      - Average (mA)
+    * - Sniff interval = 33.75 ms
+      - 183.1
+      - 30.27
+      - 42.5
+    * - Play Music
+      - 192.62
+      - –
+      - 103.03
+
+  A2DP (160 MHz dual-core CPU, DFS enabled, light-sleep mode enabled, commit b7159741)
+
+  .. list-table::
+    :header-rows: 1
+
+    * - Current
+      - Maximum (mA)
+      - Minimum (mA)
+      - Average (mA)
+    * - Sniff interval = 33.75 ms
+      - 196.12
+      - 1.47
+      - 19.7
+    * - Play Music
+      - 219.4
+      - –
+      - 101.26
+
+  Since the CPU is constantly working while playing music, no minimum value has been recorded.
 
 ------------
 
@@ -116,7 +142,7 @@ Does ESP32 support transmitting audio stream using A2DP?
 Does ESP32 Classic Bluetooth support AVRCP 1.5 or AVRCP 1.6?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  AVRCP 1.5 is now supported on esp-idf v5.0.4 and later versions, while AVRCP 1.6 (deprecated) is not supported. For more details, please refer to `esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c <https://github.com/espressif/esp-idf/blob/8fbf4ba6058bcf736317d8a7aa75d0578563c38b/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c#L55C35-L55C40>`__.
+  AVRCP 1.5 is currently supported on esp-idf v5.0.4 to v5.3, and AVRCP 1.6 is supported on v5.4 and later versions. For details, please refer to `esp-idf/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c <https://github.com/espressif/esp-idf/blob/8fbf4ba6058bcf736317d8a7aa75d0578563c38b/components/bt/host/bluedroid/stack/avrc/avrc_sdp.c#L55C35-L55C40>`__.
 
 --------------
 
