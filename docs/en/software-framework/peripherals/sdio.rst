@@ -24,10 +24,10 @@ What is the maximum speed supported by the SDIO interface?
 
 --------------
 
-Does the hardware SDIO interface support SD cards?
+Does the ESP8266 SDIO support connecting to an SD card?
 ----------------------------------------------------------------------
 
-  Please note that the SDIO hardware only supports the device or slave profile, i.e. it cannot act as a host to control SDIO devices such as SD cards.
+  ESP8266 only has an SDIO slave interface, so it does not support connecting to an SD card. If you need an ESP chip to connect to an SD card, please choose one that supports the SD/MMC host interface, such as the ESP32-S3.
 
 --------------
 
