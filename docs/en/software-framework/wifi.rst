@@ -1504,3 +1504,10 @@ Why can't a router with WPA2 encryption be connnected when the WiFi scan auth mo
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - This is due to the ordering of the authmode threshold: ``OPEN < WEP < WPA_PSK < OWE < WPA2_PSK = WPA_WPA2_PSK < WAPI_PSK < WPA3_PSK = WPA2_WPA3_PSK = DPP``. In other words, WPA2_WPA3_PSK uses WPA3_PSK as the authmode threshold, so it cannot connect to a router that only supports WPA2 encryption.
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+What is the coexistence relationship between ESP32-C6's Wi-Fi 6 mode and HT40?
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+  By default, ESP32-C6 connects using the latest protocol, i.e., 802.11ax (Wi-Fi 6). However, Wi-Fi 6 mode of ESP32-C6 only supports 20 MHz bandwidth. If the router is set to HT40 bandwidth, or is forced to 40 MHz bandwidth using `esp_wifi_set_bandwidth(0, WIFI_BW_HT40)`  in the program, ESP32-C6 will switch to the 802.11bgn protocol instead of 802.11ax (Wi-Fi 6).
