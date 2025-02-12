@@ -67,7 +67,7 @@ Do your products have a longevity commitment?
 Where can I find the SPQ (Standard Pack Quantity) and MOQ (Minimum Order Quantity) for your products?
 ------------------------------------------------------------------------------------------------------
 
-  Please refer to our `Product Ordering Information <https://www.espressif.com/sites/default/files/documentation/espressif_products_ordering_information_en.pdf>`__ , where you can find our products’ SPQ and MOQ.
+  For the standard packaging quantity (SPQ) and minimum order quantity (MOQ) of each product, please refer to the `ESP Product Selector Tool <https://products.espressif.com/#/product-selector?names=>`__.
 
 --------------
 

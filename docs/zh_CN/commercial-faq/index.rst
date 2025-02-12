@@ -67,7 +67,7 @@
 如何查看产品的标准包装量 (SPQ) 和最小起订量 (MOQ)？
 -----------------------------------------------------------
 
-  各个产品的标准包装量 (SPQ) 和最⼩起订量 (MOQ) 请点击 `这里 <https://www.espressif.com/sites/default/files/documentation/espressif_products_ordering_information_cn.pdf>`__ 参阅《乐鑫产品订购信息》。
+  各个产品的标准包装量 (SPQ) 和最⼩起订量 (MOQ) ，请参阅 `ESP 产品选型工具 <https://products.espressif.com/#/product-selector?names=>`__。
 
 --------------
 
