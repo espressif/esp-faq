@@ -53,7 +53,7 @@ ESP32 和 ESP8266 是否支持中文 SSID？
 
 --------------
 
-[Scan] 乐鑫是否支持 boundary scans(边界扫描)？
+[Scan] 乐鑫是否支持 boundary scans（边界扫描）？
 --------------------------------------------------
 
   ESP32 不⽀持 boundary scan。
@@ -1308,7 +1308,7 @@ ESP 模组支持 WAPI (Wireless LAN Authentication and Privacy Infrastructure) �
       extern void scan_set_pas_duration(uint32_t time);
       scan_set_act_duration(50, 500);
       scan_set_pas_duration(500);
-  
+
   - 或者可以直接通过修改 ``wifi_ap_record_t`` 结构体里的值修改主动扫描和被动扫描的时间
 
   .. note::
@@ -1374,41 +1374,41 @@ ESP32 Wi-Fi Station 无法连接上 2.4 GHz Enhanced Open mode 模式的 Wi-Fi �
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 可以使用 `esp_wifi_sta_get_negotiated_phymode(wifi_phy_mode_t *phymode) <https://github.com/espressif/esp-idf/blob/5f4249357372f209fdd57288265741aaba21a2b1/components/esp_wifi/include/esp_wifi.h#L1454>`__ API 来得到当前连接的 station 的模式。以下是使用示例：
-    
+
   .. code-block:: c
 
       wifi_phy_mode_t phymode;
       esp_wifi_sta_get_negotiated_phymode(&phymode);
       printf("111=%d\n",phymode);
-  
+
   - 如果打印的值是 3，则表明用 Wi-Fi 4 和 station 建立了连接，如果打印的值为 5，则表明用 Wi-Fi 6 和 station 建立了连接。
 
 --------------
 
 ESP32-S3 支持 AP 和 STA 同时工作吗？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  
+
   - 支持，参考例程 `softap_sta <https://github.com/espressif/esp-idf/tree/v5.2/examples/wifi/softap_sta>`_。
 
 --------------
 
 ESP Wi-Fi 模块在 SoftAp 模式下支持省电机制吗？
 ------------------------------------------------------------------------------------------------------------------------------------
- 
+
   目前暂不支持该功能。
 
 --------------
 
 ESP32-S3 FTM 支持最大测距带宽能达到多少呢？
 ----------------------------------------------------------------------------------------------------------------------------------------
-  
+
   最大测距带宽支持到 40 MHz。
 
 --------------
 
 ESP 芯片支持一个 STA 同时和多个 AP 进行 FTM 吗？
 ------------------------------------------------------------------------------------------------------------------------------------
- 
+
   不支持，STA 一次只能对一个 AP 执行 FTM。
 
 -------------
@@ -1437,7 +1437,7 @@ ESP32 支持 WPA3 WiFi AP 模式吗？
 
 ESP 芯片在 SoftAP 模式下支持 Short GI 吗？
 ------------------------------------------------------------------------------------------------------------------------------------
- 
+
   目前暂不支持该功能。
 
 ---------------
@@ -1451,7 +1451,7 @@ STA 和 AP 是否需要先建立连接才能执行 FTM？
 
 ESP 芯片在 SoftAP 模式下支持 uAPSD 吗？
 ------------------------------------------------------------------------------------------------------------------------------------
- 
+
   uAPSD 是一种 Wi-Fi 功能, 可在低周期性滞后时间敏感的通信模式（如 VoIP）中为客户端节约功耗。ESP 芯片目前不支持该功能。
 
 -----------------
@@ -1511,3 +1511,12 @@ ESP32-C6 的 Wi-Fi 6 模式和 HT40 之间的共存关系是怎样的？
 --------------------------------------------------------------------------------------------------------------------------------------------
 
   ESP32-C6 默认会用最新的协议，也就是 802.11ax（Wi-Fi 6）去进行连接，但 ESP32-C6 的 Wi-Fi 6 模式仅支持 20 MHz 频宽。如果我们将路由器固定为 HT40，或在程序中使用 `esp_wifi_set_bandwidth(0, WIFI_BW_HT40)` 强制设置为 40 MHz 频宽的话，ESP32-C6 则会切换至 802.11bgn 协议，而不再使用 802.11ax。
+
+---------------
+
+使用 ESP8266 下载 `ESP8266_RTOS_SDK/examples/wifi/getting_started/station <https://github.com/espressif/ESP8266_RTOS_SDK/tree/release/v3.4/examples/wifi/getting_started/station>`_ 例程时，无法连接到 ESP32-S3 下载的 esp-idf v5.3 版本上的 `esp-idf/examples/wifi/getting_started/softAP <https://github.com/espressif/esp-idf/blob/release/v5.3/examples/wifi/getting_started/softAP/main/softap_example_main.c>`_ 例程作为 Wi-Fi AP 模式的热点，但可以连接到 ESP32-S3 下载的 esp-idf v5.0 版本上的 `esp-idf/examples/wifi/getting_started/softAP <https://github.com/espressif/esp-idf/blob/release/v5.0/examples/wifi/getting_started/softAP/main/softap_example_main.c>`__ 例程作为 Wi-Fi AP 模式的热点。是什么原因？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 在 esp-idf v5.3 版本的 ``esp-idf/examples/wifi/getting_started/softAP`` 例程中，默认启用了 `Wi-Fi PMF（Protected Management Frames，受保护的管理帧） <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.3.2/esp32s3/api-guides/wifi-security.html#pmf>`_ 功能，即 `.pmf_cfg = { .required = true,  }, <https://github.com/espressif/esp-idf/blob/fb25eb02ebcf78a78b4c34a839238a4a56accec7/examples/wifi/getting_started/softAP/main/softap_example_main.c#L75>`_ ，这要求对端 Station 设备必须支持 Wi-Fi PMF。但 ESP8266 不支持 Wi-Fi PMF 功能，因此无法连接到 v5.3 版本的 Wi-Fi AP 热点。
+  - 但在 esp-idf v5.0 版本的 ``esp-idf/examples/wifi/getting_started/softAP`` 例程中，默认设置为 `.pmf_cfg = { .required = false,  }, <https://github.com/espressif/esp-idf/blob/789db760d6555ff72d454c342c7bb698788b24ad/examples/wifi/getting_started/softAP/main/softap_example_main.c#L70C5-L72C15>`_ ，即不强制要求 Station 设备支持 Wi-Fi PMF 功能，因此可以连到此类 Wi-Fi AP 热点。
+  - 因此，当 Station 设备不支持 Wi-Fi PMF 功能时，如需连接到 SoftAP，可以修改设置为 ``.pmf_cfg = { .required = false,  },``。

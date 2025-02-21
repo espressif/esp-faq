@@ -839,7 +839,7 @@ How do I set the country code for a Wi-Fi module ?
 
 ---------------
 
-When using ESP32 as a SoftAP and have it connected to an Iphone, a warning prompts as "low security WPA/WPA2(TKIP) is not secure. If this is your wireless LAN, please configure the router to use WPA2(AES) or WPA3 security type", how to solve it?
+When using ESP32 as a SoftAP and have it connected to an iPhone, a warning prompts as "low security WPA/WPA2(TKIP) is not secure. If this is your wireless LAN, please configure the router to use WPA2(AES) or WPA3 security type", how to solve it?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   :IDF\: release/v4.0 and above:
@@ -1314,7 +1314,7 @@ How can I increase the time for scanning routers when using ESP32 as the Wi-Fi S
   .. note::
 
     - A typical beacon interval is 102.4 ms, so it is recommended to set the active scanning time bigger than this value, which should be at least 120 ms.
-    
+
 -------------
 
 Does ESP32 support LDPC?
@@ -1374,41 +1374,41 @@ How to determine whether the connected Wi-Fi applies Wi-Fi 4 or Wi-Fi 6？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - You can use `esp_wifi_sta_get_negotiated_phymode(wifi_phy_mode_t *phymode) <https://github.com/espressif/esp-idf/blob/5f4249357372f209fdd57288265741aaba21a2b1/components/esp_wifi/include/esp_wifi.h#L1454>`__ to obtian the mode of the current connected station. Here is an example:
-    
+
   .. code-block:: c
 
       wifi_phy_mode_t phymode;
       esp_wifi_sta_get_negotiated_phymode(&phymode);
       printf("111=%d\n",phymode);
-  
+
   - If the printed value is 3, it indicates the connection with the station applies Wi-Fi 4. If the printed value is 5, it indicates the connection is based on Wi-Fi 6.
 
 --------------
 
 Does ESP32-S3 support AP and STA working simultaneously?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  
+
   - Yes. Please refer to the example `softap_sta <https://github.com/espressif/esp-idf/tree/v5.2/examples/wifi/softap_sta>`_.
 
 --------------
 
 Does the ESP Wi-Fi module support power save mode in SoftAp mode?
 ------------------------------------------------------------------------------------------------------------------------------------
- 
+
   This feature is currently not supported.
 
 --------------
 
 What is the maximum ranging bandwidth supported by ESP32S3 FTM?
 ----------------------------------------------------------------------------------------------------------------------------------------
-  
+
   ESP32-S3 FTM supports maximum ranging bandwidth up to 40 MHz.
 
 --------------
 
 Do ESP chips support one STA conducting FTM with multiple APs at the same time?
 ------------------------------------------------------------------------------------------------------------------------------------
- 
+
   Not supported. STA can only perform FTM with one AP at a time.
 
 -------------
@@ -1437,7 +1437,7 @@ Does ESP32 support WPA3 WiFi AP mode?
 
 Do ESP chips support Short GI in SoftAP mode?
 ------------------------------------------------------------------------------------------------------------------------------------
- 
+
   This feature is currently not supported.
 
 ---------------
@@ -1451,7 +1451,7 @@ Do STA and AP need to establish a connection first before executing FTM?
 
 Do ESP chips support uAPSD in SoftAP mode?
 ------------------------------------------------------------------------------------------------------------------------------------
- 
+
   uAPSD is a Wi-Fi capability that provides more power consumption savings on the client, in low periodic latency-sensitive traffic modes (such as VoIP). ESP chips currently do not support this feature.
 
 -----------------
@@ -1511,3 +1511,12 @@ What is the coexistence relationship between ESP32-C6's Wi-Fi 6 mode and HT40?
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
   By default, ESP32-C6 connects using the latest protocol, i.e., 802.11ax (Wi-Fi 6). However, Wi-Fi 6 mode of ESP32-C6 only supports 20 MHz bandwidth. If the router is set to HT40 bandwidth, or is forced to 40 MHz bandwidth using `esp_wifi_set_bandwidth(0, WIFI_BW_HT40)`  in the program, ESP32-C6 will switch to the 802.11bgn protocol instead of 802.11ax (Wi-Fi 6).
+
+---------------
+
+When running the `ESP8266_RTOS_SDK/examples/wifi/getting_started/station <https://github.com/espressif/ESP8266_RTOS_SDK/tree/release/v3.4/examples/wifi/getting_started/station>`_ example on ESP8266, it cannot connect to the `esp-idf/examples/wifi/getting_started/softAP <https://github.com/espressif/esp-idf/blob/release/v5.3/examples/wifi/getting_started/softAP/main/softap_example_main.c>`_ example on ESP32-S3 with esp-idf v5.3 as Wi-Fi AP mode hotspot. However, it can connect to the `esp-idf/examples/wifi/getting_started/softAP <https://github.com/espressif/esp-idf/blob/release/v5.0/examples/wifi/getting_started/softAP/main/softap_example_main.c>`__ example on ESP32-S3 with esp-idf v5.0 as Wi-Fi AP mode hotspot. What is the reason?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In the ``esp-idf/examples/wifi/getting_started/softAP`` example of esp-idf v5.3, `Wi-Fi PMF (Protected Management Frames) <https://docs.espressif.com/projects/esp-idf/en/v5.3.2/esp32s3/api-guides/wifi-security.html#pmf>`_ feature is enabled by default, i.e., `.pmf_cfg = { .required = true,  }, <https://github.com/espressif/esp-idf/blob/fb25eb02ebcf78a78b4c34a839238a4a56accec7/examples/wifi/getting_started/softAP/main/softap_example_main.c#L75>`_ . This requires the peer Station device to support Wi-Fi PMF function. However, ESP8266 does not support PMF, so it cannot connect to the Wi-Fi AP hotspot of esp-idf v5.3.
+  - But in the ``esp-idf/examples/wifi/getting_started/softAP`` example of esp-idf v5.0, the default setting is `.pmf_cfg = { .required = false,  }, <https://github.com/espressif/esp-idf/blob/789db760d6555ff72d454c342c7bb698788b24ad/examples/wifi/getting_started/softAP/main/softap_example_main.c#L70C5-L72C15>`_ , that is, it does not forcibly require Station devices to support Wi-Fi PMF, so it can connect to such Wi-Fi AP hotspots.
+  - Therefore, when the station device does not support Wi-Fi PMF function, and it needs to connect to a SoftAP, you can modify the setting as ``.pmf_cfg = { .required = false,  },``.
