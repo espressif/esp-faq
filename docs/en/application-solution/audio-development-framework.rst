@@ -280,3 +280,10 @@ Can Wi-Fi and FFT be used simultaneously?
 -----------------------------------------------------------------------------------------------------------------
 
   Wi-Fi and FFT can be used simultaneously. For example, Wi-Fi functionality can be directly added to the `rhythm light example <https://github.com/espressif/esp-adf/tree/master/examples/display/led_pixels>`__ with FFT functionality.
+
+---------------
+
+Are there any recommended product models and application references for developing an outdoor pure voice intercom solution based on Espressif's products?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  For pure voice intercom solutions, the `ESP32-S3 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf>`_ series is recommended for development. For application software, refer to the `esp-adf/examples/protocols/voip <https://github.com/espressif/esp-adf/tree/master/examples/protocols/voip>`__ example.
