@@ -280,3 +280,10 @@ Wi-Fi 和 FFT 可以同时使用吗？
 -----------------------------------------------------------------------------------------------------------------
 
   Wi-Fi 和 FFT 可同时使用。例如，可以在包含 FFT 功能的 `律动灯示例 <https://github.com/espressif/esp-adf/tree/master/examples/display/led_pixels>`__ 上直接添加 Wi-Fi 功能。
+
+---------------
+
+想基于乐鑫的产品开发一个室外纯语音对讲机的方案，是否有推荐的产品型号和应用参考？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  纯语音对讲机方案推荐使用 `ESP32-S3 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_cn.pdf>`_ 系列的产品进行开发，应用软件可参考 `esp-adf/examples/protocols/voip <https://github.com/espressif/esp-adf/tree/master/examples/protocols/voip>`__ 例程。
