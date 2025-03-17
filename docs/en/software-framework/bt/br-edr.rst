@@ -150,3 +150,10 @@ Does ESP32 Classic Bluetooth support AAC?
 -----------------------------------------
 
   Currently, this function is not supported.
+
+------------------
+
+Does ESP32 support BT mesh functionality?
+-------------------------------------------------------------------------------------------------------------------------------------
+
+  Not supported. Classic Bluetooth is not suitable for mesh functionality as it primarily supports point-to-point communication.
