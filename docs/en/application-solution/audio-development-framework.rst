@@ -281,6 +281,13 @@ Can Wi-Fi and FFT be used simultaneously?
 
   Wi-Fi and FFT can be used simultaneously. For example, Wi-Fi functionality can be directly added to the `rhythm light example <https://github.com/espressif/esp-adf/tree/master/examples/display/led_pixels>`__ with FFT functionality.
 
+-----------------
+
+What does the RECORD_HARDWARE_AEC macro mean when it is True or False in the ESP-ADF SDK?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The value of RECORD_HARDWARE_AEC macro being True or False indicates whether the development board has a hardware AEC (Acoustic Echo Cancellation) circuit. If it is True, the development board has a hardware AEC circuit. If it is False, the development board does not have a hardware AEC circuit.
+
 ---------------
 
 Are there any recommended product models and application references for developing an outdoor pure voice intercom solution based on Espressif's products?
