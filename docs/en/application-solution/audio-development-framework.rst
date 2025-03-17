@@ -294,3 +294,10 @@ Are there any recommended product models and application references for developi
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   For pure voice intercom solutions, the `ESP32-S3 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf>`_ series is recommended for development. For application software, refer to the `esp-adf/examples/protocols/voip <https://github.com/espressif/esp-adf/tree/master/examples/protocols/voip>`__ example.
+
+-------------
+
+What is the difference between software AEC (Acoustic Echo Cancellation) and hardware AEC in the ESP-ADF audio application development framework?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The difference between hardware AEC and software AEC lies in the source of the reference signal. If the reference signal comes from an external chip (such as ES8311, ES7210) that is independent of the main controller, it is hardware AEC; if the main controller itself replicates the reference signal for echo cancellation, it is software AEC.
