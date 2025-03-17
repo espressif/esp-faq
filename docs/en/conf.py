@@ -12,7 +12,7 @@ except ImportError:
     import os
     import sys
     sys.path.insert(0, os.path.abspath('../'))
-    from conf_common import * 
+    from conf_common import *
 
 import datetime
 
@@ -34,3 +34,6 @@ latex_documents = [
   ('index', 'ReadtheDocsTemplate.tex', project,
    copyright, 'manual'),
 ]
+
+html_js_files += ['js/chatbot_widget.js']
+html_css_files = ['js/chatbot_widget.css']

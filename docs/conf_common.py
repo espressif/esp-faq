@@ -21,14 +21,12 @@ html_context['github_user'] = 'espressif'
 html_context['github_repo'] = 'esp-faq'
 
 html_static_path = ['../_static']
-html_js_files = ['js/chatbot_widget.js']
-html_css_files = ['js/chatbot_widget.css']
 
 # add Tracking ID for Google Analytics
 google_analytics_id = 'G-1SP3XY5NKQ'
 
 # add html js files ID for Baidu Analytics
-html_js_files += ['baidu_analytics.js']
+html_js_files = ['baidu_analytics.js']
 
 # Extra options required by sphinx_idf_theme
 project_slug = 'esp-faq'
