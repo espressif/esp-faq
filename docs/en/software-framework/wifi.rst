@@ -1520,3 +1520,11 @@ When running the `ESP8266_RTOS_SDK/examples/wifi/getting_started/station <https:
   - In the ``esp-idf/examples/wifi/getting_started/softAP`` example of esp-idf v5.3, `Wi-Fi PMF (Protected Management Frames) <https://docs.espressif.com/projects/esp-idf/en/v5.3.2/esp32s3/api-guides/wifi-security.html#pmf>`_ feature is enabled by default, i.e., `.pmf_cfg = { .required = true,  }, <https://github.com/espressif/esp-idf/blob/fb25eb02ebcf78a78b4c34a839238a4a56accec7/examples/wifi/getting_started/softAP/main/softap_example_main.c#L75>`_ . This requires the peer Station device to support Wi-Fi PMF function. However, ESP8266 does not support PMF, so it cannot connect to the Wi-Fi AP hotspot of esp-idf v5.3.
   - But in the ``esp-idf/examples/wifi/getting_started/softAP`` example of esp-idf v5.0, the default setting is `.pmf_cfg = { .required = false,  }, <https://github.com/espressif/esp-idf/blob/789db760d6555ff72d454c342c7bb698788b24ad/examples/wifi/getting_started/softAP/main/softap_example_main.c#L70C5-L72C15>`_ , that is, it does not forcibly require Station devices to support Wi-Fi PMF, so it can connect to such Wi-Fi AP hotspots.
   - Therefore, when the station device does not support Wi-Fi PMF function, and it needs to connect to a SoftAP, you can modify the setting as ``.pmf_cfg = { .required = false,  },``.
+
+------------------
+
+Does ESP32-C5 support simultaneous use of 2.4GHz and 5GHz Wi-Fi?
+---------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-C5 chip supports two antenna interfaces for 2.4GHz and 5GHz, but only one can be used at a time. Antenna selection is controlled via software by switching GPIO levels. For implementation details, refer to the `esp-idf/examples/phy/antenna <https://github.com/espressif/esp-idf/tree/v5.4/examples/phy/antenna>`_ example.
+  - Modules of ESP32-C5 series (such as ESP32-C5-WROOM-1) provide only a single antenna interface, so there is no antenna switching physically speaking. In this case, the same antenna is used for both frequency bands (2.4GHz and 5GHz), with software controlling the switching through time-division multiplexing. Users cannot manually switch antennas via GPIO.
