@@ -1528,3 +1528,10 @@ Does ESP32-C5 support simultaneous use of 2.4GHz and 5GHz Wi-Fi?
 
   - ESP32-C5 chip supports two antenna interfaces for 2.4GHz and 5GHz, but only one can be used at a time. Antenna selection is controlled via software by switching GPIO levels. For implementation details, refer to the `esp-idf/examples/phy/antenna <https://github.com/espressif/esp-idf/tree/v5.4/examples/phy/antenna>`_ example.
   - Modules of ESP32-C5 series (such as ESP32-C5-WROOM-1) provide only a single antenna interface, so there is no antenna switching physically speaking. In this case, the same antenna is used for both frequency bands (2.4GHz and 5GHz), with software controlling the switching through time-division multiplexing. Users cannot manually switch antennas via GPIO.
+
+-------------
+
+When using an ESP32 device, can I enable smartconfig provisioning (esp_smartconfig_start) while maintaining an existing Wi-Fi connection, so as to switch to another Wi-Fi at any time?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This is not supported. When smartconfig provisioning (esp_smartconfig_start) is enabled, the device enters promiscuous mode and switches channels, causing the existing Wi-Fi connection to be disconnected.
