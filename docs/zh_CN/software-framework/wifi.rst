@@ -1520,3 +1520,11 @@ ESP32-C6 的 Wi-Fi 6 模式和 HT40 之间的共存关系是怎样的？
   - 在 esp-idf v5.3 版本的 ``esp-idf/examples/wifi/getting_started/softAP`` 例程中，默认启用了 `Wi-Fi PMF（Protected Management Frames，受保护的管理帧） <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.3.2/esp32s3/api-guides/wifi-security.html#pmf>`_ 功能，即 `.pmf_cfg = { .required = true,  }, <https://github.com/espressif/esp-idf/blob/fb25eb02ebcf78a78b4c34a839238a4a56accec7/examples/wifi/getting_started/softAP/main/softap_example_main.c#L75>`_ ，这要求对端 Station 设备必须支持 Wi-Fi PMF。但 ESP8266 不支持 Wi-Fi PMF 功能，因此无法连接到 v5.3 版本的 Wi-Fi AP 热点。
   - 但在 esp-idf v5.0 版本的 ``esp-idf/examples/wifi/getting_started/softAP`` 例程中，默认设置为 `.pmf_cfg = { .required = false,  }, <https://github.com/espressif/esp-idf/blob/789db760d6555ff72d454c342c7bb698788b24ad/examples/wifi/getting_started/softAP/main/softap_example_main.c#L70C5-L72C15>`_ ，即不强制要求 Station 设备支持 Wi-Fi PMF 功能，因此可以连到此类 Wi-Fi AP 热点。
   - 因此，当 Station 设备不支持 Wi-Fi PMF 功能时，如需连接到 SoftAP，可以修改设置为 ``.pmf_cfg = { .required = false,  },``。
+
+------------------
+
+ESP32-C5 是否支持同时使用 2.4GHz 和 5GHz 的 Wi-Fi 功能？
+---------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-C5 芯片支持 2.4GHz 和 5GHz 两根天线接口，但同一时刻只能使用其中一根。天线的选择需要通过软件控制 GPIO 电平切换，具体实现可参考 `esp-idf/examples/phy/antenna <https://github.com/espressif/esp-idf/tree/v5.4/examples/phy/antenna>`_ 例程。
+  - ESP32-C5 系列的模组（如 ESP32-C5-WROOM-1）只提供了一个天线接口，因此不存在物理上两根天线的切换。在这种情况下，不同频段（2.4GHz 和 5GHz）采用同一根天线，由软件在不同时间段内调度来实现分时复用，用户无法使用 GPIO 自行切换。
