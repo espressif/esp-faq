@@ -126,3 +126,10 @@ Can the Espressif U series antenna modules with IPEX antenna connectors (such as
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
   No, this is not supported. It is suggested to use an IPEX antenna connector directly. If you need to connect an SMA antenna, please use an IPEX to SMA adapter cable.
+
+---------------
+
+Can I reuse Espressif's FCC/CE certification reports for the ESP32-S3-WROOM-1 module without additional fixed-frequency testing?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Some data can be reused, but EMC testing is still required for the final product.
