@@ -157,3 +157,10 @@ Does ESP32 support BT mesh functionality?
 -------------------------------------------------------------------------------------------------------------------------------------
 
   Not supported. Classic Bluetooth is not suitable for mesh functionality as it primarily supports point-to-point communication.
+
+------------------
+
+Does ESP32 classic Bluetooth support the Bluetooth printing service (HCRP) on Windows?
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This function is currently not supported.
