@@ -62,3 +62,10 @@ What should I do to connect ESP32 to Alibaba Cloud via Ethernet and MQTT?
 --------------------------------------------------------------------------------------------------------------------------------
 
   Use `esp-aliyun <https://github.com/espressif/esp-aliyun>`_ but replace the Wi-Fi initialization code with Ethernet initialization. You can refer to the Ethernet examples under `ESP-IDF <https://github.com/espressif/esp-idf/tree/master/examples/ethernet>`_.
+
+--------------
+
+How to generate triplet bin files in bulk on Alibaba Cloud?
+--------------------------------------------------------------
+
+  The instructions in the document have been updated. On version 4.4.X, please use the following command to generate the corresponding bin files: `python $IDF_PATH/tools/mass_mfg/mfg_gen.py generate multipule_mfg_config.csv multipule_mfg_values.csv scgw 0x4000`.
