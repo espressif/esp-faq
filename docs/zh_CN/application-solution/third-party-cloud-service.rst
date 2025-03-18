@@ -62,3 +62,10 @@ ESP32 + 以太网 + MQTT 方式接入阿里云，应该怎么做？
 -------------------------------------------------------------------------------------------------------------
 
   使用 `esp-aliyun <https://github.com/espressif/esp-aliyun>`_，将 Wi-Fi 初始化代码替换为 Ethernet 初始化即可。可以参考 ESP-IDF 下的 `Ethernet 示例 <https://github.com/espressif/esp-idf/tree/master/examples/ethernet>`_。
+
+--------------
+
+如何在阿里云上批量生成三元组 bin 文件？
+--------------------------------------------------------------
+
+  文档中的指令已经更新。在 4.4.X 版本上，请使用以下指令生成对应的 bin 文件：`python $IDF_PATH/tools/mass_mfg/mfg_gen.py generate multipule_mfg_config.csv multipule_mfg_values.csv scgw 0x4000`。
