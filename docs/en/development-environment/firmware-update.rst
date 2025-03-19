@@ -286,3 +286,15 @@ Will the operation of other tasks be affected when the chip is undergoing an OTA
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   During the OTA process, the cache will be turned off when writing to the flash, which will affect peripheral interrupts and some SPI tasks. Therefore, it is not recommended to perform other tasks during this period.
+
+----------------
+
+How many devices can be flashed at once in factory mode using `Flash Download Tool <https://dl.espressif.com/public/flash_download_tool.zip>`__?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Currently, up to 20 devices are supported. You need to update to the latest version of the Flash Download Tool (3.7.8) and modify the configuration file `flash_download_tool\configure\esp32s3\multi_download.conf` as follows:
+  
+  .. code-block:: shell
+
+      [MULTI_UI_CONFIG]
+      multi_col = 4
