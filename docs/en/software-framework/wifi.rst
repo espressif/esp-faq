@@ -224,10 +224,10 @@ Does the buffer parameter in `esp_wifi_802.11_tx <https://docs.espressif.com/pro
 
 --------------
 
-What is the supported Wi-Fi frequency band and power meter for ESP-WROOM-32D?
+What is the supported Wi-Fi frequency band and power meter for ESP32?
 -------------------------------------------------------------------------------------------
 
-  The Wi-Fi frequency band is 2412 ~ 2484 MHz, and the available channels and corresponding operating frequencies can be configured in software. There are default values in power meter, and it can also be configured by software. For detailed guidance, please refer to `ESP32 Phy Init Bin Parameter Configuration Guide <https://www.espressif.com/sites/default/files/documentation/esp32_phy_init_bin_parameter_configuration_guide_en.pdf>`_.
+  The Wi-Fi frequency band is 2412 ~ 2484 MHz, and the available channels and corresponding operating frequencies can be configured in software. There are default values in power meter, and it can also be configured by software. For detailed guidance, please refer to `Power Limit Tool <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/development_stage/rf_test_guide/rf_test_guide.html#powerlimittool>`_.
 
 --------------
 
