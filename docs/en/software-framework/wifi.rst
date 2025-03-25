@@ -1535,3 +1535,10 @@ When using an ESP32 device, can I enable smartconfig provisioning (esp_smartconf
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   This is not supported. When smartconfig provisioning (esp_smartconfig_start) is enabled, the device enters promiscuous mode and switches channels, causing the existing Wi-Fi connection to be disconnected.
+
+---------------
+
+After successful Wi-Fi provisioning with the Blufi example, why does the chip automatically reconnect to the previously configured Wi-Fi hotspot after reset and restart?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The software enables Wi-Fi NVS flash provisioning by default, which saves the Wi-Fi NVS provisioning information in the NVS partition of the flash. After the chip is reset and restarted, it directly reads the Wi-Fi information in the NVS partition for automatic reconnection. Please refer to the `Wi-Fi Configuration Phase <https://docs.espressif.com/projects/esp-idf/en/v5.2.5/esp32/api-guides/wifi.html#wi-fi-configuration-phase>`_ for details.
