@@ -171,3 +171,19 @@ GPIO 中断触发电平是否可以调整？
 ----------------------------------------------------------------
 
   不可以，如果需要实现类似比较器的功能，可以使用 ESP32-C5 等带有模拟电压比较器的芯片。
+
+-----------------------
+
+ESP32-C3 的 GPIO11 (VDD_SPI) 引脚用作普通 GPIO 时，软、硬件上需要如何操作？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 硬件上，VDD_SPI 默认作为 flash 的供电管脚，仅在 flash 连接到外部电源时，才可作为普通 GPIO 使用。
+  - 软件上，可调用 `esp_efuse_write_field_bit() <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.3.2/esp32c3/api-reference/system/efuse.html?highlight=esp_efuse_write_field_bit#_CPPv425esp_efuse_write_field_bitA_PK16esp_efuse_desc_t>`_ API，将 `ESP_EFUSE_VDD_SPI_AS_GPIO` 的 eFuse 位写为 1。参考代码如下：
+
+    .. code:: c
+  
+        #include "esp_efuse.h"
+        #include "esp_efuse_table.h"
+
+        esp_efuse_write_field_bit(ESP_EFUSE_VDD_SPI_AS_GPIO);
+

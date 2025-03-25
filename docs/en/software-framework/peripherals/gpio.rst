@@ -171,3 +171,19 @@ Can the interrupt trigger level in GPIO be adjusted?
 ----------------------------------------------------------------
 
 No, it cannot be adjusted. If you need functionality similar to a comparator, you can use chips with analog voltage comparator, such as ESP32-C5.
+
+-----------------------
+
+How to configure ESP32-C3’s GPIO11 (VDD_SPI) pin as a general purpose GPIO in both software and hardware?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - **Hardware:** VDD_SPI is by default used as the power supply pin for the flash. It can only be used as a general-purpose GPIO when the flash is powered by an external power source.
+  - In software, you can call the `esp_efuse_write_field_bit() <https://docs.espressif.com/projects/esp-idf/en/v5.3.2/esp32c3/api-reference/system/efuse.html?highlight=esp_efuse_write_field_bit#_CPPv425esp_efuse_write_field_bitA_PK16esp_efuse_desc_t>`_ API to write the eFuse bit of `ESP_EFUSE_VDD_SPI_AS_GPIO` as 1. Refer to the following code:
+
+    .. code:: c
+  
+        #include "esp_efuse.h"
+        #include "esp_efuse_table.h"
+
+        esp_efuse_write_field_bit(ESP_EFUSE_VDD_SPI_AS_GPIO);
+
