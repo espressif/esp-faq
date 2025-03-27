@@ -41,7 +41,7 @@ What is the default keepalive value of the MQTT component in ESP-IDF?
 ---------------------------------------------------------------------------------------
 
   The default value is 120 s, which is defined by ``MQTT_KEEPALIVE_TICK`` in file ``mqtt_config.h``.
-  
+
 ----------------
 
 Does MQTT support automatic reconnection?
@@ -67,7 +67,7 @@ When a Wi-Fi connection is disconnected in ESP-IDF, will the memory previously r
 
 ----------------
 
-For ESP32-C3 MQTT, can I not set corrresponding ``client_id`` but configure it as an empty string by default? 
+For ESP32-C3 MQTT, can I not set corrresponding ``client_id`` but configure it as an empty string by default?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes, you can achieve this by setting ``set_null_client_id`` to ``true`` in the application code.
@@ -179,3 +179,34 @@ What is the cause of the "mqtt_client: No PING_RESP, disconnected" error?
 -----------------------------------------------------------------------------------------------------------
 
   This error usually occurs because the MQTT heartbeat response from the peer was not received within the specified time. It is recommended to use packet capture and log comparison to analyze whether the issue is related to the server or WiFi packet transmission.
+
+----------------
+
+Why does the TCP receive window decrease by 2 bytes each time when MQTT connection only has heartbeat packets?
+---------------------------------------------------------------------------------------------------------------------
+
+  This may be because the data is stuck in the underlying receive buffer, causing the receive window to decrease gradually. To avoid this situation, ensure that the application calls the ``read`` function correctly to handle the MQTT ping response.
+
+----------------
+
+ESP32 acting as an AP connects to two ESP Stations, both of which have established MQTT connections. Can the AP monitor the MQTT messages?
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  No, ESP32 acting as an AP is only responsible for routing and forwarding. Since the destination address of the packets sent by the Stations is not the AP itself, the AP only forwards the packet upon receipt and does not listen to or process the messages.
+
+----------------
+
+Why does the MQTT connection fail with error ``MQTT_CONNECTION_REFUSE_NOT_AUTHORIZED``?
+-----------------------------------------------------------------------------------------------------------
+
+  This error typically indicates that the username or password is incorrect. Please check and ensure that you provide the correct ``username`` and ``password``.
+
+----------------
+
+How to ensure that MQTT devices receive messages published during offline periods after waking from Deep Sleep?
+--------------------------------------------------------------------------------------------------------------------
+
+  Configure the MQTT connection parameters as follows:
+
+  - Set ``disable_clean_session = True``. This ensures that the device can still receive QoS 1 or QoS 2 messages upon reconnecting.
+  - Set ``retain = True`` on the publisher side. This allows the server to save the message, enabling the device to retrieve it after waking up.
