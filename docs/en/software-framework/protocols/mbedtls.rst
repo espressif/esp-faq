@@ -90,3 +90,40 @@ The following error occurred when I ran the `esp-idf/examples/protocols/https_mb
       E(53769) example: Last error was: -0x6c00 - SSL - Internal error (eg, unexpected failure in lower-level module)
    
   - TLS v1.3 is not yet supported on ESP-IDF v5.1.2. If you need to connect to a TLS v1.3 server, please test with the ESP-IDF v5.2-beta1 or later SDK. See: `esp_tls: add initial support for TLS 1.3 connection <https://github.com/espressif/esp-idf/commit/7fd1378fbb0b81231a83f91f8227f8fb083635a5>`_.
+
+
+-------------
+
+How can mbedtls be modified to support the parsing of fragmented TLS handshake messages?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  You can refer to the relevant PR from the mbedtls community (e.g., https://github.com/Mbed-TLS/mbedtls/pull/9872/files). This PR provides a solution.
+
+-------------
+
+Does ESP32 support the secp256r1 encryption algorithm?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, ESP32 supports the secp256r1 encryption algorithm, and the corresponding implementation is provided in mbedtls.
+
+-------------
+
+What does the error ``mbedtls_ssl_handshake returned -0x2800`` indicate?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This error is usually caused by insufficient memory. It is recommended to check the available RAM on the device.
+
+-------------
+
+How to restrict mbedtls to only use specific cipher suites?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  You can use the `mbedtls_ssl_conf_ciphersuites` interface, as shown below:
+
+  .. code-block:: c
+
+    static int force_ciphersuite[2] = {MBEDTLS_TLS_RSA_WITH_AES_128_GCM_SHA256, 0};  
+    mbedtls_ssl_conf_ciphersuites(&tls->conf, force_ciphersuite);  
+
+  For more details, please refer to: https://github.com/espressif/esp-idf/blob/master/components/esp-tls/esp_tls_mbedtls.c#L880-L889.
+
