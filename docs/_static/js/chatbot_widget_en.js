@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     var script = document.createElement("script");
     script.src = "https://widget.kapa.ai/kapa-widget.bundle.js";
+    script.setAttribute("data-bot-protection-mechanism", "hcaptcha");
     script.setAttribute("data-website-id", "6b40a459-ba92-4a20-91eb-691bc46a653a");
     script.setAttribute("data-project-name", "ESP-FAQ");
     script.setAttribute("data-project-color", "#C62817");
@@ -10,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
     script.setAttribute("data-button-border-radius", "50%");
     script.setAttribute("data-button-bg-color", "#38393a");
     script.setAttribute("data-button-border", "#38393a");
-    script.setAttribute("data-button-height", "52px");
-    script.setAttribute("data-button-width", "52px");
+    script.setAttribute("data-button-height", "45px");
+    script.setAttribute("data-button-width", "45px");
     script.setAttribute("data-button-animation-enabled", "false");
     script.setAttribute("data-button-image-height", "100%");
     script.setAttribute("data-button-image-width", "100%");

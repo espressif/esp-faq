@@ -22,6 +22,9 @@ html_context['github_repo'] = 'esp-faq'
 
 html_static_path = ['../_static']
 
+# add chatbot widget
+html_css_files = ['js/chatbot_widget.css']
+
 # add Tracking ID for Google Analytics
 google_analytics_id = 'G-1SP3XY5NKQ'
 
