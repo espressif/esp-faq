@@ -46,7 +46,7 @@ What is the default packet length for TCP/IP?
 -----------------------------------------------------------------
 
   Please go to ``menuconfig`` > ``Component config`` > ``LWIP`` > ``TCP`` > ``Maximum Segment Size (MSS)`` for the length.
-  
+
 --------------
 
 When using UTC and GMT methods in SNTP protocol, why can't I get the time of the target time zone？
@@ -73,14 +73,14 @@ When ESP32 & ESP8266 are used as TCP servers, how can the ports be used again im
   - Alternatively, the setsockopt() function can be used to set the SO_REUSEADDR option. Here is an example:
 
     .. code-block:: c
-    
+
       int reuse = 1;
       if (setsockopt(socket, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse)) < 0) {
         ESP_LOGE(TAG, "setsockopt(SO_REUSEADDR) failed");
         return ESP_FAIL;
       }
 
-    In the above code, "socket" means a socket that has already been created, and "reuse" is an integer variable with a value of 1, indicating that the SO_REUSEADDR option is enabled. If the setsockopt() function returns a negative value, it means that the setting has failed. 
+    In the above code, "socket" means a socket that has already been created, and "reuse" is an integer variable with a value of 1, indicating that the SO_REUSEADDR option is enabled. If the setsockopt() function returns a negative value, it means that the setting has failed.
     Enabling the SO_REUSEADDR option allows the port to be immediately reused after being closed. However, there are some potential risks. If another connection uses the same port while it is still in the TIME_WAIT state, it may cause packet confusion. Thus, it's better to make choice based on actual situations.
 
 ------------------
@@ -96,7 +96,7 @@ How can I set static IP when using ESP-IDF?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   For details, please refer to `static_ip example <https://github.com/espressif/esp-idf/tree/master/examples/protocols/static_ip>`__.
-        
+
 --------------
 
 Does ESP32 have an LTE connection demo?
@@ -111,7 +111,7 @@ Will memory leak occur when ESP32 TCP repeatedly closes and rebuilds socket (IDF
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   In ESP-IDF v3.3, every time a socket is created, a lock will be assigned, given that this internal socket array has not been assigned any lock before. This lock will not be reclaimed after the socket is released. Thus, next time the same socket array is allocated, the previous lock will be used again. That is to say, every time a new socket array is allocated and released, there will be one lock memory used. After all socket arrays being allocated, there will be no memory leak any more.
-  
+
 ----------------
 
 Are there any limits on the maximum number of TCP client connection after the ESP32 additionally opens the TCP server?
@@ -125,7 +125,7 @@ What is the default MTU of lwIP for an ESP32?
 ----------------------------------------------------------------------------------------------
 
   The default MTU of lwIP is 1500. This is a fixed value and it is not recommended to change it.
-  
+
 ---------------
 
 How to increase the DNS request time for ESP32?
@@ -139,7 +139,7 @@ After creating and closing TCP SOCKET several times, an error is reported as "Un
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   :CHIP\: ESP8266 | ESP32 | ESP32-S2 | ESP32-C3 | ESP32-S3 :
 
-  - Reason: "errno 23 " means open many open files in system. Closing a socket takes 2 MSL of time, which means sockets will not be closed immediately after calling the close interface. Due to this reason, open sockets are accumulated and exceeds the maximum connection number (the default is 10 in menuconfig, the maximum connection is 16) thus triggering this error. 
+  - Reason: "errno 23 " means open many open files in system. Closing a socket takes 2 MSL of time, which means sockets will not be closed immediately after calling the close interface. Due to this reason, open sockets are accumulated and exceeds the maximum connection number (the default is 10 in menuconfig, the maximum connection is 16) thus triggering this error.
   - Solution: Set SO_LINGER via the setsockopt interface to adjust the TCP close time.
 
 ::
@@ -213,9 +213,9 @@ How to choose the default route when ESP32 works as dual NICs (e.g. ETH+STA)?
 
     - When the device accesses the LAN address, the data will go to the last up netif.
     - When the device accesses the non-LAN address, the data will go to the netif with the larger ``route_prio`` value.
-  
+
   - Supposing ETH and STA are not in a LAN, ETH belongs to 192.168.3.x segment, and STA belongs to 192.168.2.x segment:
-  
+
     - When the device accesses 192.168.3.5, it will take the ETH netif.
     - When the device accesses 192.168.2.5, it will take the STA netif.
     - When the device accesses 10.10.10.10, it takes the default route (the netif with the larger ``route_prio`` value). When netif is up, it sets the default route based on the ``route_prio`` value size, and the default route is often the netif with the larger ``route_prio`` value. When the device accesses an address that is not inside the routing table, the data takes the default route.
@@ -331,3 +331,61 @@ From which serial number does the ESP32 LWIP SOCKET start?
 ------------------------------------------------------------------------------------------------------------------
 
   By default, the socket number starts from 54. The macro that determines the socket number is ``LWIP_SOCKET_OFFSET``, which can be calculated by subtracting CONFIG_LWIP_MAX_SOCKETS from FD_SETSIZE. In the ``include/sys/select.h`` file of the compilation toolchain, the value of ``FD_SETSIZE`` is 64, and the default value of ``CONFIG_LWIP_MAX_SOCKETS`` is 10. Therefore, by default, the value of ``LWIP_SOCKET_OFFSET`` is 54. When ``CONFIG_LWIP_MAX_SOCKETS`` is set to 16, the value of ``LWIP_SOCKET_OFFSET`` becomes 48, and the socket number starts from 48.
+
+-----------------
+
+How to optimize the TCP send buffer?
+------------------------------------------------------------------------------------------------------------------
+
+  Try the following configurations:
+
+  - CONFIG_ESP_WIFI_STATIC_RX_BUFFER_NUM = 16
+  - CONFIG_ESP_WIFI_DYNAMIC_RX_BUFFER_NUM = 64
+  - CONFIG_ESP_WIFI_DYNAMIC_TX_BUFFER_NUM = 64
+  - CONFIG_ESP_WIFI_AMPDU_TX_ENABLED = y
+  - CONFIG_ESP_WIFI_TX_BA_WIN = 32
+  - CONFIG_ESP_WIFI_AMPDU_RX_ENABLED = y
+  - CONFIG_ESP_WIFI_RX_BA_WIN = 32
+
+  - CONFIG_LWIP_TCP_SND_BUF_DEFAULT = 28800
+  - CONFIG_LWIP_TCP_WND_DEFAULT = 28800
+  - CONFIG_LWIP_TCP_RECVMBOX_SIZE = 32
+  - CONFIG_LWIP_TCPIP_RECVMBOX_SIZE = 32
+
+-----------------
+
+When ESP32 is used as an STA, Could a static IP trigger the GOT_IP event?
+------------------------------------------------------------------------------------------------------------------
+
+  If the static IP does not conflict with other devices on the network, a GOT_IP event can be triggered; if there is a conflict, the GOP_IP event cannot be triggered.
+
+-----------------
+
+What could cause a TCP write operation timeout?
+------------------------------------------------------------------------------------------------------------------
+
+  A TCP write operation timeout is typically caused by network latency or the peer device failing to acknowledge (ACK) in time. If the timeout is set too short (e.g., 200 ms), the write operation may fail. It is recommended to increase the timeout duration and check network conditions to ensure that the peer device responds in time.
+
+-----------------
+
+What could cause a TCP write operation returning -1?
+------------------------------------------------------------------------------------------------------------------
+
+  Returning -1 usually indicates that the socket has been closed. This may happen due to a previous write operation timeout, or a network issue causing the socket to close. It is recommended to check the network connection and ensure that the socket is valid before use.
+
+-----------------
+
+Why does the WebSocket callback receive packets of varying sizes, sometimes split, sometimes combined?
+----------------------------------------------------------------------------------------------------------------------------------
+
+  This is a normal behavior of TCP transmission. WebSocket operates over TCP, which transmits data as a stream. Therefore:
+
+  - The received packet size can vary because TCP may split or merge packets during transmission.
+  - The WebSocket framework does not control this behavior. If a fixed packet size is required, you need to implement buffering and packet reassembly at the application layer yourself.
+
+-----------------
+
+Does ESP32 support using different DNS servers for each network interface?
+------------------------------------------------------------------------------------------------------------------
+
+  Currently, this is not supported because lwIP does not allow separate DNS servers for each network interface.
