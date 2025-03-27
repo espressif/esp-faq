@@ -1542,3 +1542,35 @@ After successful Wi-Fi provisioning with the Blufi example, why does the chip au
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The software enables Wi-Fi NVS flash provisioning by default, which saves the Wi-Fi NVS provisioning information in the NVS partition of the flash. After the chip is reset and restarted, it directly reads the Wi-Fi information in the NVS partition for automatic reconnection. Please refer to the `Wi-Fi Configuration Phase <https://docs.espressif.com/projects/esp-idf/en/v5.2.5/esp32/api-guides/wifi.html#wi-fi-configuration-phase>`_ for details.
+
+---------------
+
+Why doesn't the AP receive an ACK when the Wi-Fi STA sends data?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  If the AP does not receive an ACK from the STA, it may be due to a Wi-Fi signal problem, or the STA's TX buffer is full. It is recommended to check the Wi-Fi signal strength, and ensure the STA's TX buffer has sufficient space. In addition, the problem can be further analyzed by capturing the Wi-Fi air interface packets.
+
+---------------
+
+Why does the power consumption increase when ``wifi:bcn_timeout,ap_probe_send_start`` appears in the Wi-Fi STA log?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Network environment issues: The network environment may be poor, or the router may have experienced a power failure. In such cases, the STA device might not receive the beacon for a long time, extending the time to receive packets, which leads to increased power consumption;
+  - Active AP Detection: When a ``bcn_timeout`` occurs, the STA attempts to send up to 5 Probe Requests. If the AP sends a Probe Response, the connection is maintained; if the AP does not respond, the STA will send a Disconnect event and disconnect. During this process, the additional packet transmissions can also lead to increased power consumption.
+
+---------------
+
+Can ESP32-C5 sniff Wi-Fi 5 and Wi-Fi 6 packets at 20 MHz?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, ESP32-C5 can sniff Wi-Fi 5 and Wi-Fi 6 packets at 20 MHz, provided that these packets are transmitted on the same channel. If the packets are on different channels, they cannot be sniffed.
+
+---------------
+
+Why does the ESP32 timeout when pinging a public IP through a 4G dial-up connection?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Possible reasons:
+
+  - Network fluctuations from the carrier. It is recommended to test with a different network to verify the problem.
+  - AP mode may affect forwarding. If ESP32 is in AP mode with terminal device connected, the default routing may switch from the 4G network to the AP interface. It is recommended to disable AP mode for verification.
