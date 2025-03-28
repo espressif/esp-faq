@@ -144,3 +144,16 @@ Under normal network connection, why does repeated send timeout occur with error
 
   Error code 113 usually indicates that the underlying link has been disconnected or that TCP retransmissions have reached their maximum limit. Packet capture is needed to verify whether the device successfully sent the packets and whether the peer returned a TCP ACK.
 
+----------------
+
+Does ESP-IDF support the Undefined Behavior Sanitizer (UBSAN) tool?
+-----------------------------------------------------------------------------------------------------------
+
+  ESP-IDF supports UBSAN, and you can refer to the official documentation: `Undefined Behavior Sanitizer Checks <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/fatal-errors.html#undefined-behavior-sanitizer-ubsan-checks>`__.
+
+-----------------
+
+How to prevent ICMP packet attacks?
+-------------------------------------------------------------------------------------------------------------------------
+
+  Currently, there is no specific protection mechanism in IDF to prevent ICMP message attacks. It is recommended to either disable the ICMP function, or limit the processing frequency of ICMP messages, to reduce the impact of attacks on the system.
