@@ -104,3 +104,19 @@ How to debug when TLS handshake and server certificate verification fail on ESP3
 
   Enable the Mbedtls debugging feature to log all activities during the TLS handshake, including the server certificate information received.
 
+----------------
+
+Does the MQTTS server require TLS authentication?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  MQTTS servers usually require TLS authentication. If you want to skip the server CA certificate verification, you can set the CA certificate to NULL and enable ``CONFIG_ESP_TLS_SKIP_SERVER_CERT_VERIFY`` in menuconfig.
+
+----------------
+
+How to resolve the error ``esp-tls: couldn't get hostname for drive.google.com: getaddrinfo() returns 202``?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This error indicates that DNS resolution has failed, which could be due to:
+
+  - The device's WiFi or LTE network is not correctly connected.
+  - lwIP only supports a single DNS server. When multiple network interfaces (such as WiFi + LTE) are used, the DNS configuration may be overwritten. It is recommended to check the DNS server configuration.
