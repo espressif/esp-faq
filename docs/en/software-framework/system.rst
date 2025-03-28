@@ -994,3 +994,24 @@ What are the differences between sdkconfig, sdkconfig.default, and sdkconfig.old
   - The sdkconfig.old file is a backup file automatically generated when recompiling after modifying the configuration options in the sdkconfig file. After each modification and recompilation, the new configuration is saved in the sdkconfig file, while the previous configuration is preserved in the sdkconfig.old file.
   - When modifying configuration options through the menuconfig command, the changes are actually applied to the sdkconfig file.
   - The firmware configuration options after project compilation depend on the settings in the sdkconfig file.
+
+----------------
+
+What could possibly be the reason for the "Not digestSign key in json doc of OTA" error that occurs during an OTA upgrade?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  This error message indicates that the security OTA is not enabled, but it does not affect the upgrade process. If you are using a non-secure OTA, this error can be ignored. If security OTA is required, it is recommended to check the platform configuration to ensure that the security OTA feature is enabled.
+
+----------------
+
+Does the ESP32 chip series support differential OTA?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  Currently, only ESP32-C2 and ESP32-C3 support the differential upgrade scheme. For more details, refer to: `ESP-Bootloader-Plus <https://github.com/espressif/esp-bootloader-plus/blob/master/README.md>`_.
+
+----------------
+
+Can the crystal oscillator glitch detector be disabled via software?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+  Yes, it can be disabled in the bootloader. However, this feature is enabled by default and needs to be manually disabled in the bootloader. The specific operation is as follows: REG_CLR_BIT(RTC_CNTL_ANA_CONF_REG, RTC_CNTL_GLITCH_RST_EN);
