@@ -1,4 +1,4 @@
-HTTP 
+HTTP
 =====
 
 :link_to_translation:`zh_CN:[中文]`
@@ -109,7 +109,7 @@ When the ESP module acts as a local HTTP/HTTPS Server, it returns the `Header fi
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The reason for this problem is that the URL is too long for the browser, and the underlying buffer is not big enough. You can increase the HTTP header length by modifying the menuconfig configuration. You can change the default value, which is 512 bytes, to a larger size, for example, 1024 bytes. The specific steps are as follows:
-  
+
     - ``idf.py menuconfig`` > ``Component config`` > ``HTTP Server`` > ``(1024)Max HTTP Request Header Length``
     - ``idf.py menuconfig`` > ``Component config`` > ``HTTP Server`` > ``(1024)Max HTTP URI Length``
 
@@ -141,16 +141,42 @@ How to distinguish whether an HTTP request is sent from WiFi or from the Etherne
 
   In the request handler, you can get the file descriptor (fd) using ``httpd_req_to_sockfd``, then call ``getsockname`` to get the local address. Based on the address, you can determine which network interface card is being used.
 
---------------  
+--------------
 
 When downloading files via HTTP, occasionally there will be a failure with an error message "couldn’t get hostname". What could be the reason?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   This error is usually due to the failure of sending a DNS request, or WiFi not receiving a DNS response. It is recommended to confirm the problem through packet capture analysis.
 
---------------  
+--------------
 
 In the event of an HTTP download failure, how to identify the cause?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   First, analyze the logs to determine the cause of the download failure. If it is due to timeout or network disconnection issues, you can confirm whether the TCP stream is normal by capturing packets.
+
+--------------
+
+How to Upload a Grayscale Image via ESP HTTP?
+------------------------------------------------------------------------------------------------
+
+  The HTTP "Content-Type" can be modified as follows:
+  ::
+
+      esp_http_client_set_header(http_client_cam, "Content-Type", "application/octet-stream");
+
+  Alternatively, you can convert the image to JPEG format locally and continue using ``image/jpeg`` as the "Content-Type". If an ``HTTP 500`` error occurs during upload, verify that the image format is correct and ensure that the server supports this format.
+
+--------------
+
+How does an Espressif device handle HTTPS certificate expiration?
+--------------------------------------------------------------------------------------------------
+
+  Certificates are usually updated via OTA. It is recommended to embed the certificates into app.bin, and then update app.bin through an OTA update to refresh the certificates.
+
+--------------
+
+How to resolve stack overflow in the HTTPD task?
+----------------------------------------------------------------------------------------------------
+
+  To address this issue, increase the ``stack_size`` in ``HTTPD_DEFAULT_CONFIG``. For details, refer to the `example code <https://github.com/espressif/esp-idf/blob/master/components/esp_http_server/include/esp_http_server.h#L55>`_.
