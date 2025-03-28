@@ -224,10 +224,10 @@ ESP8266/ESP32/ESP32-S2/S3/C2/C3 是否支持 web/softAP 配网？
 
 --------------
 
-ESP-WROOM-32D 支持的 Wi-Fi 频段信息和功率表分别是什么？
+ESP32 支持的 Wi-Fi 频段信息和功率表分别是什么？
 -------------------------------------------------------
 
-  Wi-Fi 频段是 2412 ~ 2484 MHz，软件里可配置可用信道和对应的工作频率。功率表有默认值，也可支持软件配置。详细指导请参考 `《ESP32 Phy Init Bin 重要参数配置说明》 <https://www.espressif.com/sites/default/files/documentation/esp32_phy_init_bin_parameter_configuration_guide_cn.pdf>`_。
+  Wi-Fi 频段是 2412 ~ 2484 MHz，软件里可配置可用信道和对应的工作频率。功率表有默认值，也可支持软件配置。详细指导请参考 `《Power Limit Tool》 <https://docs.espressif.com/projects/esp-test-tools/zh_CN/latest/esp32/development_stage/rf_test_guide/rf_test_guide.html#powerlimittool>`_。
 
 --------------
 
