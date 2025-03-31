@@ -657,3 +657,10 @@ How to specify BLE channel?
 
   - For BLE peripheral devices, you can specify the broadcast channel using ``channel_map`` in ``esp_ble_adv_params_t``.
   - For BLE central devices, you can call the ``esp_gap_ble_set_channels`` API to update the channel map. For example, ``{0xFF, 0xFF, 0xFF, 0xFF, 0x1F}`` means enabling all channels; and ``{0xFF, 0xFF, 0xFF, 0xFF, 0x0F}`` means blocking channel 36.
+
+------------------------
+
+ESP32 BLE takes 4 seconds to discover a service UUID. How to accelerate this process?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The time required to discover a service's UUID depends on the BLE connection parameters, the complexity of the GATT service, and the MTU. To shorten the time, you can try to reduce the `BLE connection interval <https://docs.espressif.com/projects/esp-idf/en/v5.4/esp32/api-reference/bluetooth/esp_bt_defs.html#_CPPv421esp_ble_conn_params_t>`_, increase the MTU, or narrow the GATT service discovery scope.
