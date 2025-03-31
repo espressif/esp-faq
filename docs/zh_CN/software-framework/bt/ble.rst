@@ -657,3 +657,10 @@ ESP32 设备作为 BLE 服务器时，从机端如何发起 MTU 协商？
 
   - 对于 BLE 外围设备，可以使用 ``esp_ble_adv_params_t`` 中的 ``channel_map`` 指定广播信道。
   - 对于 BLE 中心设备，可以调用 ``esp_gap_ble_set_channels`` API 自定义信道映射表。例如 ``{0xFF, 0xFF, 0xFF, 0xFF, 0x1F}`` 表示使能全部信道，``{0xFF, 0xFF, 0xFF, 0xFF, 0x0F}`` 表示屏蔽 36 信道。
+
+------------------------
+
+ESP32 BLE 发现服务的 UUID 需要 4 秒，是否可以缩短发现服务 UUID 的时间？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  发现服务的 UUID 所需时间取决于 BLE 连接参数、GATT 服务的复杂度和 MTU。要缩短时间，可尝试降低 `BLE 连接间隔 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.4/esp32/api-reference/bluetooth/esp_bt_defs.html#_CPPv421esp_ble_conn_params_t>`_、增大 MTU 或减少 GATT 服务的发现范围。
