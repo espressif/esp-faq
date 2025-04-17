@@ -1004,10 +1004,12 @@ OTA 升级时出现 "Not digestSign key in json doc of OTA" 错误，可能是�
 
 ----------------
 
-ESP32 系列芯片是否支持差分 OTA？  
+是否有可以节省 flash 存储空间和传输流量的固件更新方案？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
-  目前只有 ESP32-C2 和 ESP32-C3 支持差分升级方案，参考：`ESP-Bootloader-Plus <https://github.com/espressif/esp-bootloader-plus/blob/master/README_CN.md>`_。
+
+  - `bootloader_support_plus <https://github.com/espressif/esp-iot-solution/blob/master/components/bootloader_support_plus/README_CN.md>`_ 组件提供了压缩更新的功能，可减少 flash 存储占用并降低新固件传输所需的流量。此外，该组件还支持在 flash 中同时存储两个原始固件，这通常在 RF 测试中有一定的应用场景。
+  - `esp_delta_ota <https://github.com/espressif/idf-extra-components/tree/master/esp_delta_ota>`_ 组件提供了差分更新的功能，能最大限度地减少传输新固件的流量，但无法节省 flash 存储空间。
+  - `esp_bootloader_plus <https://github.com/espressif/esp-bootloader-plus/blob/master/README_CN.md>`_ 组件仅在 ESP32-C2 和 ESP32-C3 芯片上支持差分升级方案，目前已经暂停维护。
 
 ----------------
 
