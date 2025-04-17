@@ -1004,10 +1004,12 @@ What could possibly be the reason for the "Not digestSign key in json doc of OTA
 
 ----------------
 
-Does the ESP32 chip series support differential OTA?
+Are there any firmware update solutions that can help reduce flash memory and transmission traffic?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
-  Currently, only ESP32-C2 and ESP32-C3 support the differential upgrade scheme. For more details, refer to: `ESP-Bootloader-Plus <https://github.com/espressif/esp-bootloader-plus/blob/master/README.md>`_.
+
+  - The `bootloader_support_plus <https://github.com/espressif/esp-iot-solution/blob/master/components/bootloader_support_plus/README.md>`_ component provides compressed update functionality, which can reduce flash memory and data traffic required to transfer new firmware. Additionally, it also supports storing two original firmwares in the flash simultaneously, which is often used in RF testing scenarios.
+  - The `esp_delta_ota <https://github.com/espressif/idf-extra-components/tree/master/esp_delta_ota>`_ component offers differential update functionality, which can significantly reduce the traffic required to transmit new firmware, but it does not reduce flash memory.
+  - The `esp_bootloader_plus <https://github.com/espressif/esp-bootloader-plus/blob/master/README.md>`_ component only supports the differential upgrade scheme on ESP32-C2 and ESP32-C3 chips, and is no longer actively maintained.
 
 ----------------
 
