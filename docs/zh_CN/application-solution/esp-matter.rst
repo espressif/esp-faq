@@ -152,3 +152,10 @@ ESP32 Matter 设备可以通过 BLE 来配置 Wi-Fi 吗？
       [1707138771.417820][46462:46464] CHIP:BLE: No adapter available for new connection establishment
 
   - 上述错误时因为电脑没有蓝牙适配器，请使用带蓝牙适配器的电脑。笔记本一般自带蓝牙适配器，如果使用台式电脑，需要借助蓝牙 dongle 提供蓝牙功能。
+
+---------------------
+
+在量产过程中，如何实现 Matter 二维码的生成和安装？
+----------------------------------------------------------------------------------------------------------------------
+
+  可以使用 `esp-matter-mfg-tools <https://docs.espressif.com/projects/esp-matter/en/latest/esp32/production.html#the-esp-matter-mfg-tool-example>`__ 工具批量生成设备的工厂信息，然后在产线上将其烧录到设备中，并为设备粘贴对应的二维码。同时，记录每台设备的 MAC 地址和工厂固件的对应关系，方便后续追溯。

@@ -152,3 +152,10 @@ How to solve the following error when provisioning the device with the command `
       [1707138771.417820][46462:46464] CHIP:BLE: No adapter available for new connection establishment
 
   - The above error is due to the computer not having a Bluetooth adapter. Please use a computer with a Bluetooth adapter. Laptops generally come with a Bluetooth adapter. If you are using a desktop computer, you will need a Bluetooth dongle to provide Bluetooth functionality.
+
+---------------------
+
+How to generate and install Matter QR codes during mass production?
+----------------------------------------------------------------------------------------------------------------------
+
+  You can use the `esp-matter-mfg-tools <https://docs.espressif.com/projects/esp-matter/en/latest/esp32/production.html#the-esp-matter-mfg-tool-example>`__ tool to generate factory information for devices in batch. Then on the production line, flash the generated information and attach the corresponding QR code labels for each device. At the same time, record the mapping between each device's MAC address and its factory firmware for future traceability.
