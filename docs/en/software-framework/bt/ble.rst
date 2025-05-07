@@ -664,3 +664,16 @@ ESP32 BLE takes 4 seconds to discover a service UUID. How to accelerate this pro
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The time required to discover a service's UUID depends on the BLE connection parameters, the complexity of the GATT service, and the MTU. To shorten the time, you can try to reduce the `BLE connection interval <https://docs.espressif.com/projects/esp-idf/en/v5.4/esp32/api-reference/bluetooth/esp_bt_defs.html#_CPPv421esp_ble_conn_params_t>`_, increase the MTU, or narrow the GATT service discovery scope.
+
+--------------
+
+How to deinitialize the Nimble application on ESP32-C6?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  You can use the following sequence of APIs to deinitialize Nimble:
+
+    .. code:: text
+
+      nimble_port_stop();
+      nimble_port_freertos_deinit();
+      nimble_port_deinit();
