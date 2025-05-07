@@ -677,3 +677,35 @@ ESP32-C6 如何注销 Nimble 应用？
       nimble_port_stop();
       nimble_port_freertos_deinit();
       nimble_port_deinit();
+
+-----------------
+
+ESP32 如何结束 BLE 任务与释放 BLE 资源？
+-----------------------------------------------------------------------------------------------------------------
+
+  - 可调用如下 API 流程来结束 BLE Server 任务：
+
+    .. code:: text
+
+      esp_ble_gap_stop_advertising ();
+      esp_ble_gap_disconnect ();
+      esp_ble_gatts_close  ();
+
+  - 可调用如下 API 流程来结束 BLE Client 任务：
+    
+    .. code:: text
+
+      esp_ble_gap_stop_scanning ();
+      esp_ble_gap_disconnect ();
+      esp_ble_gattc_close ();
+
+  - 可调用如下 API 流程来释放 BLE 资源：
+
+    .. code:: text 
+ 
+      esp_bluedroid_disable ();
+      esp_bluedroid_deinit ();
+      esp_bt_controller_disable ();
+      esp_bt_controller_deinit ();
+
+  - 更多编程指南请参见: `低功耗蓝牙 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/bluetooth/bt_le.html#bluetooth-low-energy-bluetooth-le>`_ API 使用说明。
