@@ -677,3 +677,35 @@ How to deinitialize the Nimble application on ESP32-C6?
       nimble_port_stop();
       nimble_port_freertos_deinit();
       nimble_port_deinit();
+
+-----------------
+
+How to terminate BLE tasks and release BLE resources on ESP32?
+-----------------------------------------------------------------------------------------------------------------
+
+  - To terminate a BLE Server task, invoke the following API sequence:
+
+    .. code:: text
+
+      esp_ble_gap_stop_advertising ();
+      esp_ble_gap_disconnect ();
+      esp_ble_gatts_close  ();
+
+  - To terminate a BLE Client task, invoke the following API sequence:
+    
+    .. code:: text
+
+      esp_ble_gap_stop_scanning ();
+      esp_ble_gap_disconnect ();
+      esp_ble_gattc_close ();
+
+  - To release BLE resources, invoke the following API sequence:
+
+    .. code:: text 
+ 
+      esp_bluedroid_disable ();
+      esp_bluedroid_deinit ();
+      esp_bt_controller_disable ();
+      esp_bt_controller_deinit ();
+
+  - For more programming guides, please refer to: `Low Power Bluetooth <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/bt_le.html#bluetooth-low-energy-bluetooth-le>`_ API usage instructions.
