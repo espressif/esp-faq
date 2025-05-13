@@ -62,15 +62,14 @@ Is a higher PCLK always better for the camera?
 Do the ESP32 series chips support the MIPI interface?
 -------------------------------------------------------
 
-  - ESP32, ESP32-S2, and ESP32-S3 do not support MIPI. Subsequent chips will add the support.
-  - The current ESP32 series chips support camera interfaces such as DVP, SPI, and USB.
+  - ESP32-P4 supports the MIPI interface.
 
 --------------
 
 Do the ESP32 series chips support the USB2.0 interface?
 ---------------------------------------------------------
 
-  - ESP32 and ESP32-S2 do not support USB2.0. Subsequent chips will add the support.
+  - ESP32-S2 and ESP32-S3 support USB2.0 full-speed interface (12 Mbps). In addition, ESP32-P4 also supports USB2.0 high-speed interface (480 Mbps).
 
 --------------
 
@@ -280,8 +279,8 @@ How to modify the register configuration of the camera sensor?
 
 --------------
 
-What triggers “cam_hal: EV-VSYNC-OVF” in esp32-camera?
------------------------------------------------------------------
+What is the reason for triggering "cam_hal: EV-VSYNC-OVF" in esp32-camera?
+--------------------------------------------------------------------------
 
   This issue occurs when the frame synchronization signal triggered by the sensor is too fast. You can troubleshoot it following the steps below:
   - Run the `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/pic_server>`_ example. If this example runs normally, it indicates that the issue is not hardware-related.
