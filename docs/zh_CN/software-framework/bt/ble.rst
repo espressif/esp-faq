@@ -692,7 +692,7 @@ ESP32 如何结束 BLE 任务与释放 BLE 资源？
       esp_ble_gatts_close  ();
 
   - 可调用如下 API 流程来结束 BLE Client 任务：
-    
+
     .. code:: text
 
       esp_ble_gap_stop_scanning ();
@@ -701,11 +701,23 @@ ESP32 如何结束 BLE 任务与释放 BLE 资源？
 
   - 可调用如下 API 流程来释放 BLE 资源：
 
-    .. code:: text 
- 
+    .. code:: text
+
       esp_bluedroid_disable ();
       esp_bluedroid_deinit ();
       esp_bt_controller_disable ();
       esp_bt_controller_deinit ();
 
   - 更多编程指南请参见: `低功耗蓝牙 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/bluetooth/bt_le.html#bluetooth-low-energy-bluetooth-le>`_ API 使用说明。
+
+-------------
+
+如何提高 ESP32-S3 的 BLE 吞吐量？
+------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-S3 系列产品的 BLE 吞吐量取决于多种因素，例如环境干扰、BLE 连接间隔、MTU 大小，以及对端设备的性能。
+    - BLE 连接间隔越小，BLE 传输速率越快。
+    - MTU Size 越大，BLE 传输速率越快。
+  - ESP32-S3 支持 BLE 5.0 特性，可基于 `ble_throughput <https://github.com/espressif/esp-idf/tree/release/v5.4/examples/bluetooth/bluedroid/ble/ble_throughput>`_ 示例测试两块 ESP32-S3 设备之间的 BLE 吞吐, 数据参考如下：
+    - 1M PHY，0.73 Mbit/s
+    - 2M PHY，1.35 Mbit/s
