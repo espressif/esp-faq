@@ -692,7 +692,7 @@ How to terminate BLE tasks and release BLE resources on ESP32?
       esp_ble_gatts_close  ();
 
   - To terminate a BLE Client task, invoke the following API sequence:
-    
+
     .. code:: text
 
       esp_ble_gap_stop_scanning ();
@@ -701,11 +701,23 @@ How to terminate BLE tasks and release BLE resources on ESP32?
 
   - To release BLE resources, invoke the following API sequence:
 
-    .. code:: text 
- 
+    .. code:: text
+
       esp_bluedroid_disable ();
       esp_bluedroid_deinit ();
       esp_bt_controller_disable ();
       esp_bt_controller_deinit ();
 
   - For more programming guides, please refer to: `Low Power Bluetooth <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/bluetooth/bt_le.html#bluetooth-low-energy-bluetooth-le>`_ API usage instructions.
+
+------------
+
+How to improve the BLE throughput of ESP32-S3?
+------------------------------------------------------------------------------------------------------------------------
+
+  - The BLE throughput of the ESP32-S3 series products depends on various factors, such as environmental interference, BLE connection interval, MTU size (up to 512 bytes per packet), and the performance of the peer device.
+    - The smaller the BLE connection interval, the faster the BLE transmission rate.
+    - The larger the MTU size, the faster the BLE transmission rate.
+  - ESP32-S3 supports BLE 5.0 features, which can be tested based on the `ble_throughput <https://github.com/espressif/esp-idf/tree/release/v5.4/examples/bluetooth/bluedroid/ble/ble_throughput>`_ example between two ESP32-S3 devices. The reference data is as follows:
+    - 1M PHY，0.73 Mbit/s
+    - 2M PHY，1.35 Mbit/s
