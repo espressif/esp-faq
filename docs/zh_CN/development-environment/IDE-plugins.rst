@@ -36,7 +36,7 @@ Arduino IDE 如何添加 ESP32 开发板？
 ------------------------------------------------------------------------------------------------
 
   - 请前往 ``File`` -> ``Preferences`` -> ``Show verbose output during`` 勾选 ``compilation``，编译成功后，会打印一条 Python 烧录命令，其中包含待烧录的 bin 文件以及对应的烧录地址。
-  - 在乐鑫官网的 `工具 <https://www.espressif.com/zh-hans/support/download/other-tools>`_ 页面下载 Flash 下载工具，使用 Flash 下载工具烧录时选择 bin 文件，输入对应的烧录地址即可。
+  - 下载 `Flash 下载工具 <https://dl.espressif.com/public/flash_download_tool.zip>`_，使用该工具烧录时选择 bin 文件，输入对应的烧录地址即可。更多信息请参阅 `Flash 下载工具用户指南 <https://docs.espressif.com/projects/esp-test-tools/zh_CN/latest/esp32/production_stage/tools/flash_download_tool.html>`_。
 
 ------------
 
