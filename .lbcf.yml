@@ -1,0 +1,85 @@
+####################################
+# Shared Configuration
+####################################
+
+#syntax_version: version of this YMAL file. This configuration is shared by all documents in one project.
+syntax_version: v0.62
+
+
+######################################
+# Document-specific Configuration
+######################################
+
+documents:
+########################################
+# 1. ESP-FAQ
+########################################
+
+    - document_name: ESP-FAQ
+      doc_id: 4962
+      translation_docid: 4960
+      chip_series: all
+      product_name:
+        - hardware
+        - software
+      product_name_old_website:
+        - ESP32-C6
+        - ESP8685
+        - ESP32-C3
+        - ESP8266
+        - ESP32-H2
+        - ESP32-C2
+        - ESP32
+        - ESP8684
+        - ESP32-S2
+        - ESP32-S3
+      soc_series_base_filter: all
+      document_type: guide # or errata, datasheet, reference, book, guide, application note
+      document_type_old_website: guide
+      document_status: active
+      version: latest # or specific version number
+      revision_date:
+      language: en # or cn
+      document_storage: docs
+      document_link: https://docs.espressif.com/projects/esp-faq/en/latest/index.html
+      document_summary: This document provides frequently asked questions on Espressif's products.
+      notify_subscribers: true
+      visibility_on_website: show # or hide
+      scheduled_release_date:
+      document_classification: public
+########################################
+# 2. ESP-FAQ（常见问题汇总）
+########################################
+
+    - document_name: ESP-FAQ（常见问题汇总）
+      doc_id: 4960
+      translation_docid: 4962
+      chip_series: all
+      product_name:
+        - hardware
+        - software
+      product_name_old_website:
+        - ESP32-C6
+        - ESP8685
+        - ESP32-C3
+        - ESP8266
+        - ESP32-H2
+        - ESP32-C2
+        - ESP32
+        - ESP8684
+        - ESP32-S2
+        - ESP32-S3
+      soc_series_base_filter: all
+      document_type: guide # or errata, datasheet, reference, book, guide, application note
+      document_type_old_website: guide
+      document_status: active
+      version: latest # or specific version number
+      revision_date:
+      language: cn
+      document_storage: docs
+      document_link: https://docs.espressif.com/projects/esp-faq/zh_CN/latest/index.html
+      document_summary: 本文档总结了乐鑫产品常见问题。
+      notify_subscribers: true
+      visibility_on_website: show # or hide
+      scheduled_release_date:
+      document_classification: public

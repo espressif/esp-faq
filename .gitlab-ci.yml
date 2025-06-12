@@ -25,3 +25,4 @@ include:
   - '.gitlab/ci/build_docs.yml'
   - '.gitlab/ci/deploy.yml'
   - '.gitlab/ci/auto_trans.yml'
+  - '.gitlab/ci/publish_docs_to_cdp.yml'
