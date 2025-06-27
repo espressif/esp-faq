@@ -303,3 +303,10 @@ Using the ESP32-C3 SDK based on ESP-IDF v5.0.6, NVS encryption based on Flash En
 
   - When using `NVS Encryption: Flash Encryption-Based Scheme <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-reference/storage/nvs_encryption.html#nvs-encryption-flash-encryption-based-scheme>`_, it is necessary to thoroughly erase the nvs_keys partition before starting the application. Otherwise, the application may generate an `ESP_ERR_NVS_CORRUPT_KEY_PART` error code.
   - Before downloading the firmware, please use the `idf.py erase-flash` command to erase the flash.
+
+-----------------
+
+How to implement firmware signature verification (ECDSA) at the application level?
+-------------------------------------------------------------------------------------------------------------------------
+
+  For application-layer verification, refer to the Bootloader implementation in `secure_boot_signatures_app.c#L56 <https://github.com/espressif/esp-idf/blob/master/components/bootloader_support/src/secure_boot_v1/secure_boot_signatures_app.c#L56>`_.
