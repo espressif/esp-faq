@@ -20,3 +20,4 @@ build-docs build
 
 # Exit the virtual environment
 deactivate
+

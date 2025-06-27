@@ -3,6 +3,7 @@
   image: $ESP_DOCS_ENV_IMAGE
   tags:
     - deploy_docs
+  allow_failure: true
   script:
     - git config --global credential.helper store
     # Pass GitLab credentials
