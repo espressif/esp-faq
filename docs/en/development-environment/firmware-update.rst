@@ -298,3 +298,10 @@ How many devices can be flashed at once in factory mode using `Flash Download To
 
       [MULTI_UI_CONFIG]
       multi_col = 4
+
+----------------
+
+Does ESP32 OTA support resumable uploads?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Supported, refer to the link: `OTA Resumption <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/esp_https_ota.html#ota-resumption>`__.
