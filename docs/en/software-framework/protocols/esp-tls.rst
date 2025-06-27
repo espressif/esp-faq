@@ -120,3 +120,17 @@ How to resolve the error ``esp-tls: couldn't get hostname for drive.google.com: 
 
   - The device's WiFi or LTE network is not correctly connected.
   - lwIP only supports a single DNS server. When multiple network interfaces (such as WiFi + LTE) are used, the DNS configuration may be overwritten. It is recommended to check the DNS server configuration.
+
+----------------
+
+How can the ESP act as an HTTPS server and verify client certificates?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  By default, when acting as a TLS server, the ESP does not validate the legitimacy of the client certificate. Even if client certificate verification fails, the ESP may still consider the handshake successful. To enable client certificate verification, you must provide a valid CA certificate via the ``cacert_pem`` configuration.
+
+----------------
+
+How to configure the HTTPS server's cipher suites to meet European certification requirements?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  You can configure the supported cipher suites by calling ``mbedtls_ssl_conf_ciphersuites()`` after line 789 in `esp_tls_mbedtls.c <https://github.com/espressif/esp-idf/blob/master/components/esp-tls/esp_tls_mbedtls.c#L789>`__. Only enable high-security cipher suites such as ``TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384``. Avoid using weak algorithms like SHA1 or MD5 to comply with security standards.
