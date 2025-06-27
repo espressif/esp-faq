@@ -157,3 +157,10 @@ How to prevent ICMP packet attacks?
 -------------------------------------------------------------------------------------------------------------------------
 
   Currently, there is no specific protection mechanism in IDF to prevent ICMP message attacks. It is recommended to either disable the ICMP function, or limit the processing frequency of ICMP messages, to reduce the impact of attacks on the system.
+
+-----------------
+
+What could be the reason for an assertion failure during SNTP initialization (`sntp_init`)?
+-------------------------------------------------------------------------------------------------------------------------
+
+  Repeated initialization causes assertion failure, ensure that SNTP is only initialized once. Refer to the fix: `GitHub Issue #12854 <https://github.com/espressif/esp-idf/issues/12854>`__.
