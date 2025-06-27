@@ -389,3 +389,24 @@ Does ESP32 support using different DNS servers for each network interface?
 ------------------------------------------------------------------------------------------------------------------
 
   Currently, this is not supported because lwIP does not allow separate DNS servers for each network interface.
+
+-----------------
+
+When ETH, Wi-Fi, and PPP connections are all successfully established in the system, which network interface will be used for application-layer data, such as MQTT? Is there a priority mechanism? How can it be configured?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Please refer to: `Analysis of Default Route Selection Mechanism for Dual Network Interfaces on ESP32 <https://blog.csdn.net/Marchtwentytwo/article/details/118364080>`__
+
+-----------------
+
+When DNS resolution fails, what aspects should be checked to identify the cause?
+------------------------------------------------------------------------------------------------------------------
+
+  Packet capture analysis is one of the key steps. At the same time, check whether there is enough memory allocated for related operations. For instance, a failure in pbuf_alloc allocation may be due to insufficient memory.
+
+-----------------
+
+Why does the device fail to respond to Ping when AP + STA are in the same network segment?
+------------------------------------------------------------------------------------------------------------------
+
+  This is usually due to a routing conflict. To avoid this, ensure that the AP and STA are assigned to different subnets. If using the same subnet is required, you must explicitly bind the outgoing interface at the application layer—note that this is not supported by standard lwIP implementations.
