@@ -536,7 +536,6 @@ What could be the reason that a PCB designed with the ESP32 chip can not connect
 ------------------
 
 Is it possible to change the default power-up reset initial state of GPIO6 (JTAG pin MTCK) of ESP32-C6, which is input enabled and internal weak pull-up resistor enabled (IE & WPU), to input enable only (IE) by burning eFuse?
-
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Yes. After setting EFUSE DIS_PAD_JTAG to 1, the power-up reset initial state of GPIO6 (JTAG pin MTCK) is changed to input enabled (IE). Please refer to `Section 2.2 Pin Overview` in `ESP32-C6 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-c6_datasheet_en.pdf>`_.
@@ -549,3 +548,10 @@ Is it possible to change the default power-up reset initial state of GPIO6 (JTAG
       #include "esp_efuse_table.h"
 
       esp_efuse_write_field_bit(ESP_EFUSE_DIS_PAD_JTAG);
+
+------------------
+
+Can the VBAT pin of H2 be powered independently?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  In theory, RTC is supported for power supply, but 3.3V is already connected inside the module, so this pin is actually not available.
