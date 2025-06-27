@@ -203,10 +203,17 @@ Why does the MQTT connection fail with error ``MQTT_CONNECTION_REFUSE_NOT_AUTHOR
 
 ----------------
 
-How to ensure that MQTT devices receive messages published during offline periods after waking from Deep Sleep?
+How to ensure that MQTT devices can still receive messages published during offline periods after going offline?
 --------------------------------------------------------------------------------------------------------------------
 
   Configure the MQTT connection parameters as follows:
 
   - Set ``disable_clean_session = True``. This ensures that the device can still receive QoS 1 or QoS 2 messages upon reconnecting.
   - Set ``retain = True`` on the publisher side. This allows the server to save the message, enabling the device to retrieve it after waking up.
+
+----------------
+
+Will the MQTT broker send a Last Will message if the client disconnects unexpectedly?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  If the client disconnects without sending an MQTT DISCONNECT message and the keepalive interval is short, the broker may assume the client is offline and trigger the Last Will message. It is recommended to explicitly call the disconnect API and set an appropriate keepalive interval.
