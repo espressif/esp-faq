@@ -330,3 +330,17 @@ How to implement frame skipping with the `esp32-camera <https://github.com/espre
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   You can call `esp_camera_fb_return(esp_camera_fb_get());` to discard the current frame, that is, to skip the frame that is being fetched.
+
+-------------
+
+Can ESP32-S3 connect to two cameras and display split screen?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  ESP32-S3 can connect to two cameras with SPI interfaces (with a relatively small resolution, 240*320). However, if using the DVP interface, multiple cameras cannot be used simultaneously. In such cases, the ESP32-P4 is a more suitable option.
+
+-------------
+
+Does ESP32-S3 support a 10-bit DVP camera?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  In general, a 10-bit DVP camera can be used by capturing only the upper 8 bits, which is sufficient to produce a normal image.
