@@ -303,3 +303,11 @@ flash 加密方案是否支持对文件系统的加密？
 
   - 使用 `基于 flash 加密的 NVS 加密方案 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/api-reference/storage/nvs_encryption.html#nvs-flash>`_ 时，在启动应用程序前，必须彻底擦除 nvs_keys 分区。否则，应用程序可能会生成 `ESP_ERR_NVS_CORRUPT_KEY_PART` 错误代码。
   - 在下载固件前，请先使用 `idf.py erase-flash` 指令擦除 flash。 
+
+-----------------
+
+如何在应用层实现固件签名校验（ECDSA）？
+-------------------------------------------------------------------------------------------------------------------------
+
+  应用层校验需参考 Bootloader 实现：
+  `secure_boot_signatures_app.c#L56 <https://github.com/espressif/esp-idf/blob/master/components/bootloader_support/src/secure_boot_v1/secure_boot_signatures_app.c#L56>`_ 。
