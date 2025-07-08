@@ -1587,7 +1587,7 @@ Within a local area network, is it possible to find the MAC address of a mobile 
 Does the Wi-Fi of ESP32-C5 support the simultaneous use of sniffer (promiscuous mode) and STA mode?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes, RF coexistence is supported. Sniffer mode and STA mode can be configured to operate in parallel via the Wi-Fi API.
+  Yes, RF coexistence is supported. Sniffer mode and STA mode can be configured to operate in parallel via the Wi-Fi API `esp_wifi_set_promiscuous(true)`.
 
 ---------------
 
@@ -1598,7 +1598,7 @@ When enabling the 5G band softAP on C5, will DFS be activated to avoid interfere
 
 ---------------
 
-Can the ESP32-C5 be set to single mode, such as only working in the 2.4G or 5G frequency band?
+How to configure the working frequency band (2.4 GHz/5.8 GHz) of ESP32-C5?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The ESP32-C5 does not currently support simultaneous dual-band operation; it can operate on only one band at a time. You can use `esp_wifi_set_band_mode() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c5/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_band_mode16wifi_band_mode_t>`_ to set the band mode. The default value is WIFI_BAND_MODE_AUTO, which scans both 2.4G and 5G bands, allowing flexible selection. In test environments where multiple hotspots with the same SSID exist on both bands, the device connects to the one with the strongest RSSI. When set to WIFI_BAND_MODE_5G_ONLY, it can only connect to 5G hotspots. When set to WIFI_BAND_MODE_2G_ONLY, it can only connect to 2.4G hotspots. For dual-band unified SSIDs, you can adjust the preference for 2.4G or 5G using the `rssi_5g_adjustment <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c5/api-reference/network/esp_wifi.html#_CPPv4N21wifi_scan_threshold_t18rssi_5g_adjustmentE>`_ parameter.
