@@ -1538,7 +1538,7 @@ ESP32-C5 是否支持同时使用 2.4GHz 和 5GHz 的 Wi-Fi 功能？
 
 ---------------
 
-基于 Blifi 例程配网成功后，为什么芯片复位重启后会自动连接上次配置的 Wi-Fi 热点？
+基于 Blufi 例程配网成功后，为什么芯片复位重启后会自动连接上次配置的 Wi-Fi 热点？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   软件配置中默认开启了 Wi-Fi NVS flash 配置，Wi-Fi 配网信息会保存在 flash 的 NVS 分区。芯片复位重启后会直接读取 NVS 分区里的 Wi-Fi 信息以自动重连。请参见 `Wi-Fi 配置阶段 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.2.5/esp32/api-guides/wifi.html#id11>`_ 说明。
@@ -1587,7 +1587,7 @@ ESP32-C5 能否在 20 MHz 下嗅探到 Wi-Fi 5 和 Wi-Fi 6 的数据包？
 ESP32-C5 的 Wi-Fi 是否支持 sniffer （混杂模式）与 STA 模式同时使用？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  是的，支持 RF 共存，可通过 Wi-Fi API 配置 sniffer 模式与 STA 模式并行工作。
+  是的，支持 RF 共存，可通过 Wi-Fi API `esp_wifi_set_promiscuous(true)` 配置 sniffer 模式与 STA 模式并行工作。
 
 ---------------
 
@@ -1598,7 +1598,7 @@ C5 启用 5G 频段 softAP 时，是否会启用 DFS 以避免对同信道雷达
 
 ---------------
 
-ESP32-C5 可以设置为单模使用吗？比如只工作在 2.4G 或者 5G 频段？
+ESP32-C5 如何配置工作的频段 (2.4 GHz/5.8 GHz)?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   ESP32-C5 目前不支持双频同时工作，同一时刻只能工作在单个频段下面，可以使用 `esp_wifi_set_band_mode() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c5/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_band_mode16wifi_band_mode_t>`_ 设置频段模式，默认值为 WIFI_BAND_MODE_AUTO，会在 2.4G 和 5G 频段进行扫描，可以在 2.4G / 5G 中自由选择，当测试环境中有多个同名 2.4G 或者 5G 热点时，会选择 RSSI 最好的热点去连接；当设置为  WIFI_BAND_MODE_5G_ONLY 时，只能连接 5G 热点；当设置为 WIFI_BAND_MODE_2G_ONLY 时，只能连接 2.4G 热点。对于双频合一的热点，可以通过 `rssi_5g_adjustment <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c5/api-reference/network/esp_wifi.html#_CPPv4N21wifi_scan_threshold_t18rssi_5g_adjustmentE>`_  调整 offset 决定优先选择 2.4G 还是 5G。
