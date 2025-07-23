@@ -310,3 +310,8 @@ How to implement firmware signature verification (ECDSA) at the application leve
 -------------------------------------------------------------------------------------------------------------------------
 
   For application-layer verification, refer to the Bootloader implementation in `secure_boot_signatures_app.c#L56 <https://github.com/espressif/esp-idf/blob/master/components/bootloader_support/src/secure_boot_v1/secure_boot_signatures_app.c#L56>`_.
+
+How to perform encryption on custom data?
+-----------------------------------------------------------------------------------------
+
+  You can use the APIs provided by mbedtls to perform encryption, checksum calculation, signature generation, and other operations on custom data. For an example of AES-based data encryption and decryption, refer to `components/mbedtls/test_apps/main/test_aes.c <https://github.com/espressif/esp-idf/blob/master/components/mbedtls/test_apps/main/test_aes.c>`_.
