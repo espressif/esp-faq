@@ -306,8 +306,12 @@ flash 加密方案是否支持对文件系统的加密？
 
 -----------------
 
-如何在应用层实现固件签名校验（ECDSA）？
+如何在应用层实现固件签名校验 (ECDSA)？
 -------------------------------------------------------------------------------------------------------------------------
 
-  应用层校验需参考 Bootloader 实现：
-  `secure_boot_signatures_app.c#L56 <https://github.com/espressif/esp-idf/blob/master/components/bootloader_support/src/secure_boot_v1/secure_boot_signatures_app.c#L56>`_ 。
+  应用层校验需参考 Bootloader 实现：`secure_boot_signatures_app.c#L56 <https://github.com/espressif/esp-idf/blob/master/components/bootloader_support/src/secure_boot_v1/secure_boot_signatures_app.c#L56>`_ 。
+
+如何对自定义数据执行加密？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  可通过 mbedtls 提供的 API 实现对自定义数据的加密、校验和计算、签名等操作。关于如何使用 AES 算法对数据进行加解密，可参考示例文件 `components/mbedtls/test_apps/main/test_aes.c <https://github.com/espressif/esp-idf/blob/master/components/mbedtls/test_apps/main/test_aes.c>`_ 。
