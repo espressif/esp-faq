@@ -40,15 +40,15 @@ MQTT
 ESP-IDF 中 MQTT 组件 keepalive 的默认值是多少？
 ----------------------------------------------------
 
-  默认值为 120 s，在 ``mqtt_config.h`` 中通过 ``MQTT_KEEPALIVE_TICK`` 定义。
+  默认值为 120 s，在 ``mqtt_config.h`` 中通过 ``MQTT_KEEPALIVE_TICK`` 定义，可以通过 ``esp_mqtt_client_config_t`` 中的 ``session.keepalive`` 参数修改该值。
 
 ----------------
 
 MQTT 支持自动重连吗？
 ----------------------------------------
 
-  - MQTT 的自动重连由 `esp_mqtt_client_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/protocols/mqtt.html?highlight=esp_mqtt_client_config_t#_CPPv424esp_mqtt_client_config_t>`_ 中的成员变量　``disable_auto_reconnect`` 控制，该变量值默认为 ``false``，表示使能自动重连。
-  - 可以使用 ``reconnect_timeout_ms`` 设置重连超时时间。
+  - 支持。MQTT 的自动重连由 `esp_mqtt_client_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/protocols/mqtt.html?highlight=esp_mqtt_client_config_t#_CPPv424esp_mqtt_client_config_t>`_ 中的成员变量 ``disable_auto_reconnect`` 控制，该变量默认值为 ``false``，表示使能自动重连。
+  - 也可以通过 ``esp_mqtt_client_config_t`` 中的 ``network.reconnect_timeout_ms`` 参数来修改重连的超时时间。
 
 ---------------
 
@@ -70,7 +70,7 @@ ESP-IDF 里 Wi-Fi 连接断开的时候，之前 MQTT 上层协议申请的内�
 ESP32-C3 MQTT 是否能不设置对应的 ``client_id`` 而将 ``client_id`` 默认配置为空字符串？
 -----------------------------------------------------------------------------------------------------------
 
-  - 可以，可通过在应用代码里设置 ``set_null_client_id`` 为 ``true`` 来实现。
+  可以。可在应用代码中将 ``esp_mqtt_client_config_t`` 的 ``credentials.set_null_client_id`` 参数设置为 ``true`` 来实现该功能。
 
 ----------------
 
@@ -115,14 +115,14 @@ ESP MQTT 客户端的 disconnect 事件消息什么时候才会触发？
 ESP32 MQTT 客户端与服务器断开后会自动尝试重新连接吗?
 -----------------------------------------------------------------------------------------------------------
 
-  ESP MQTT 客户端里的 ``esp_mqtt_client_config_t`` 结构体配置里有 ``disable_auto_reconnect`` 参数，可以通过配置这个参数为 ``true`` 或者 ``false`` 来决定是否需要 MQTT 自动重连，MQTT 默认会自动进行重连。
+  ESP MQTT 客户端通过 ``esp_mqtt_client_config_t`` 结构体中的 ``network.disable_auto_reconnect`` 参数控制是否启用自动重连。该参数默认值为 ``false``，表示 MQTT 默认会自动尝试重连。
 
 ----------------
 
 如何检测 ESP32 是否已经与 MQTT 服务器断开?
 -----------------------------------------------------------------------------------------------------------
 
-  检测 ESP32 是否已经与服务器断开可以使用 MQTT 的 ``PING`` 机制。也就是配置 ESP-MQTT 中 ``esp_mqtt_client_config_t`` 结构体里的 ``keepalive`` 参数 ``disable_keepalive`` 和 ``keepalive``，比如将 ``disable_keepalive`` 配置为 ``false`` （默认参数也是 ``false``，即默认开启 keepalive 机制），然后配置 ``keepalive`` 参数为 120 s 来设置保活时间，默认为 120 s。这样 MQTT 客户端会定期发送 ``PING`` 来检测和 MQTT 服务器的连接是否正常。
+  可以通过 MQTT 的 ``PING`` 机制进行检测。具体做法是在 ``esp_mqtt_client_config_t`` 结构体中设置 ``session.disable_keepalive`` 为 ``false`` （默认即为 ``false``，表示启用 keepalive 机制），并设置 ``session.keepalive`` 参数为 120 s（默认值）。这样 MQTT 客户端就会定期发送 ``PING`` 报文来检测与 MQTT 服务器的连接是否正常。
 
 ----------------
 
@@ -208,8 +208,8 @@ ESP32 作为 AP 连接了 2 个 ESP Station，这两个 Station 建立了 MQTT �
 
   如下配置 MQTT 连接参数：
 
-  - 设置 ``disable_clean_session = True``，确保设备重连时仍能收到 QoS 1 或 QoS 2 消息。
-  - 在发布端设置 ``retain = True``，让服务器保存该消息，设备唤醒后可以重新获取。
+  - 将 ``esp_mqtt_client_config_t`` 中的 ``session.disable_clean_session`` 设置为 ``true``，确保设备重连时仍能收到 QoS 1 或 QoS 2 消息。
+  - 在发布端调用 ``esp_mqtt_client_publish`` 时，设置 ``retain`` 为 ``true``，让服务器保存该消息，设备唤醒后可以重新获取。
 
 ----------------
 
