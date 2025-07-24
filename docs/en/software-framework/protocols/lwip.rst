@@ -177,7 +177,7 @@ Every time ESP32 attempts to read 4 KB of data with ``read`` and ``recv`` APIs i
 What is the version of lwIP currently used in ESP-IDF?
 --------------------------------------------------------------------------------------------------------------------------------
 
-  lwIP v2.1.3 is used currently.
+  The current version of lwIP in use is 2.2.0.
 
 ----------------
 
@@ -388,7 +388,7 @@ Why does the WebSocket callback receive packets of varying sizes, sometimes spli
 Does ESP32 support using different DNS servers for each network interface?
 ------------------------------------------------------------------------------------------------------------------
 
-  Currently, this is not supported because lwIP does not allow separate DNS servers for each network interface.
+  Yes. Starting from ESP-IDF v5.2, the ``esp_netif`` layer stores the DNS server addresses obtained by each network interface. However, in the Lwip layer, all network interfaces still share a single DNS server. The ``esp_netif`` layer sets the DNS server of the Lwip layer based on the default route interface (i.e., the interface with the highest priority). To enable this feature, please define the macro ``CONFIG_ESP_NETIF_SET_DNS_PER_DEFAULT_NETIF``.
 
 -----------------
 

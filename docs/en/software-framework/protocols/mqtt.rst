@@ -40,15 +40,15 @@ I'm using ESP8266 release/v3.3 version of SDK to test the example/protocols/esp-
 What is the default keepalive value of the MQTT component in ESP-IDF?
 ---------------------------------------------------------------------------------------
 
-  The default value is 120 s, which is defined by ``MQTT_KEEPALIVE_TICK`` in file ``mqtt_config.h``.
+  The default value is 120 s, defined by the ``MQTT_KEEPALIVE_TICK`` macro in ``mqtt_config.h``. This value can be modified via the ``session.keepalive`` parameter in ``esp_mqtt_client_config_t``.
 
 ----------------
 
 Does MQTT support automatic reconnection?
 ------------------------------------------------
 
-  - The automatic reconnection of MQTT is controlled by the ``disable_auto_reconnect`` variable of struct `esp_mqtt_client_config_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/mqtt.html#_CPPv424esp_mqtt_client_config_t>`_. The default value of ``disable_auto_reconnect`` is ``false``, which means that automatic reconnection is enabled.
-  - The reconnection timeout value can be set using ``reconnect_timeout_ms``.
+  - Yes. The automatic reconnection of MQTT is controlled by the member variable ``disable_auto_reconnect`` in `esp_mqtt_client_config_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/mqtt.html?highlight=esp_mqtt_client_config_t#_CPPv424esp_mqtt_client_config_t>`_. The default value of this variable is ``false``, which means automatic reconnection is enabled.
+  - You can also modify the reconnection timeout by changing the ``network.reconnect_timeout_ms`` parameter in ``esp_mqtt_client_config_t``.
 
 -----------------
 
@@ -70,7 +70,7 @@ When a Wi-Fi connection is disconnected in ESP-IDF, will the memory previously r
 For ESP32-C3 MQTT, can I not set corrresponding ``client_id`` but configure it as an empty string by default?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes, you can achieve this by setting ``set_null_client_id`` to ``true`` in the application code.
+  Yes. You can achieve this by setting the ``credentials.set_null_client_id`` parameter of ``esp_mqtt_client_config_t`` to ``true`` in the application code.
 
 ----------------
 
@@ -115,14 +115,14 @@ When will the disconnect event message be triggered for ESP-MQTT clients?
 Does the ESP32 MQTT client automatically try to reconnect after disconnecting from the server?
 -----------------------------------------------------------------------------------------------------------
 
-  The ``esp_mqtt_client_config_t`` structure in the ESP-MQTT client has the ``disable_auto_reconnect`` parameter, which can be configured as ``true`` or ``false`` to determine to reconnect or not. By default, it will reconnect.
+  Yes. The ESP MQTT client controls whether to enable automatic reconnection by the ``network.disable_auto_reconnect`` parameter in the ``esp_mqtt_client_config_t`` structure. By default, this parameter is set to ``false``, indicating that MQTT will automatically attempt to reconnect.
 
 ----------------
 
 How to check if the ESP32 is disconnected from the MQTT server?
 -----------------------------------------------------------------------------------------------------------
 
-  To detect if the ESP32 has been disconnected from the server, you can use MQTT's ``PING`` mechanism by configuring the keepalive parameters ``disable_keepalive`` and ``keepalive`` in the ``esp_mqtt_client_config_t`` structure in ESP-MQTT. For example, if you configure ``disable_keepalive`` to false (default setting) and ``keepalive`` to 120 s (default setting), the MQTT client will periodically send ``PING`` to check if the connection to the server is working.
+  You can use the MQTT ``PING`` mechanism for detection. Specifically, in the ``esp_mqtt_client_config_t`` structure, set ``session.disable_keepalive`` to ``false`` (default value, which means the keepalive mechanism is enabled), and configure the ``session.keepalive`` parameter to 120 s (default value). In this way, the MQTT client will periodically send ``PING`` messages to check the connection status with the server.
 
 ----------------
 
@@ -208,8 +208,8 @@ How to ensure that MQTT devices can still receive messages published during offl
 
   Configure the MQTT connection parameters as follows:
 
-  - Set ``disable_clean_session = True``. This ensures that the device can still receive QoS 1 or QoS 2 messages upon reconnecting.
-  - Set ``retain = True`` on the publisher side. This allows the server to save the message, enabling the device to retrieve it after waking up.
+  - Set ``session.disable_clean_session`` to ``true`` in ``esp_mqtt_client_config_t`` to ensure that the device can still receive QoS 1 or QoS 2 messages after reconnecting.
+  - When publishing messages using ``esp_mqtt_client_publish``, set ``retain`` to ``true`` so the server retains the message. This allows the device to retrieve the message again after waking up.
 
 ----------------
 
