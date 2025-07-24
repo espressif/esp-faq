@@ -344,3 +344,11 @@ Does ESP32-S3 support a 10-bit DVP camera?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   In general, a 10-bit DVP camera can be used by capturing only the upper 8 bits, which is sufficient to produce a normal image.
+
+-------------
+
+How to scale image data?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - For JPEG images, use the `esp_new_jpeg <https://components.espressif.com/components/espressif/esp_new_jpeg/>`_ component to directly scale down the decoded data during the decoding process.
+  - For RGB or YUV data, use the `PPA <https://docs.espressif.com/projects/esp-idf/en/latest/esp32p4/api-reference/peripherals/ppa.html>`_ peripheral (only supported on P series chips), or use the software-based image processing component `esp_image_effects <https://components.espressif.com/components/espressif/esp_image_effects>`_ for scaling.
