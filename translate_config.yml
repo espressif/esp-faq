@@ -55,7 +55,7 @@ specified_files:
   - docs/zh_CN/software-framework/peripherals/i2c.rst
   - docs/zh_CN/software-framework/peripherals/i2s.rst
   - docs/zh_CN/software-framework/peripherals/index.rst
-#  - docs/zh_CN/software-framework/peripherals/lcd.rst
+  - docs/zh_CN/software-framework/peripherals/lcd.rst
   - docs/zh_CN/software-framework/peripherals/ledc.rst
   - docs/zh_CN/software-framework/peripherals/mcpwm.rst
   - docs/zh_CN/software-framework/peripherals/other-peripherals.rst

@@ -18,7 +18,16 @@
 使用 ESP32/ESP32-S2/ESP32-S3 Touch 是否可以通过 EMS 传导抗扰测试？
 -----------------------------------------------------------------------------
 
-  EMS 传导抗扰测试是整机测试，受到内外部电源、电路、外部环境等因素共同影响。由于 ESP32/ESP32-S2/ESP32-S3 Touch 抗干扰能力较差，如果用户有该项测试需求，建议外接专用 Touch IC。
+  EMS 传导抗扰测试是整机测试，受到内外部电源、电路、外部环境等因素共同影响。由于 ESP32/ESP32-S2/ESP32-S3 Touch 抗干扰能力较差，如果用户有该项测试需求，建议外接专用 Touch IC 或使用 ESP32-P4。
+
+--------------
+
+使用 ESP32-P4 Touch 是否可以通过 EMS 传导抗扰测试？
+------------------------------------------------------------
+
+  是的，ESP32-P4 Touch 可通过 EMS 3V 传导抗扰测试（需搭配专用软件驱动，如有需求请联系乐鑫）。
+
+--------------
 
 使⽤ ESP32 做触摸相关应⽤时，哪⾥有相关资料可参考？
 ------------------------------------------------------------------
@@ -72,8 +81,10 @@ Touch Sensor 能否检测是否有亚克力板覆盖，以便在添加或移除�
 ESP32 触摸屏有哪些参考驱动？
 --------------------------------------------------------------
 
-  - 代码请参考 `touch_panel_code <https://github.com/espressif/esp-iot-solution/tree/master/components/display/touch_panel>`_。
-  - 文档请参考 `touch_panel_doc <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/input_device/touch_panel.html>`_。
+  触摸屏驱动请参考:
+
+  - esp-iot-solution 的 touch 驱动组件：`lcd_touch <https://github.com/espressif/esp-iot-solution/tree/master/components/display/lcd_touch>`__。
+  - esp-bsp 的 touch 驱动组件：`lcd_touch <https://github.com/espressif/esp-bsp/tree/master/components/lcd_touch>`__。
 
 ---------------
 

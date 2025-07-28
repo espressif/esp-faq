@@ -85,7 +85,7 @@ What is ESP32's highest sampling rate in ADC DMA mode?
 When an ESP32 calling ``adc2_get_raw()`` between ``esp_wifi_start()`` and ``esp_wifi_stop()``, the read operation fails. What is the reason?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Since Wi-Fi also uses ADC2, and the Wi-Fi driver has a higher priority, the application may fail to read using ``adc2_get_raw()`` during the operation period of Wi-Fi. It is recommended to check the return value of this function and re-measure it after failure. 
+  Since Wi-Fi also uses ADC2, and the Wi-Fi driver has a higher priority, the application may fail to read using ``adc2_get_raw()`` during the operation period of Wi-Fi. It is recommended to check the return value of this function and re-measure it after failure.
 
 ---------------
 
@@ -127,7 +127,7 @@ What is the measurement error between the ADCs of the ESP32 chip?
 
 Can ESP32 measure different data from two ADC channels at the same time, such as current and voltage?
 ---------------------------------------------------------------------------------------------------------------------------------------------------
-   
+
   It is not possible to read multiple ADC channels at the same time using one ADC, but you can poll the data of both ADC channels in turn.
 
 -------------
@@ -137,7 +137,7 @@ Why can't the measured voltage reach the nominal 3100 mV when the ESP32-S3 ADC i
 
   When ESP32-S3 ADC1 or ADC2 is configured as ``ADC_ATTEN_DB_12``, the voltage measurement range is ``0 ~ 3100 mV``. However, the maximum voltage measurement value of some chips is less than ``3100 mV``. The following two methods can be used to solve this problem:
 
-- Solution 1: Try to avoid using the boundary voltage values. You can use a divider circuit to reduce the input voltage to an intermediate value for higher accuracy and consistency. 
+- Solution 1: Try to avoid using the boundary voltage values. You can use a divider circuit to reduce the input voltage to an intermediate value for higher accuracy and consistency.
 - Solution 2: Use the software `ADC Range Extension Solution <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/others/adc_range.html>`_ to extend the maximum measurement voltage to ``3300 mV``. This solution is supported in IDF v4.4.8 and v5.3.1 for ESP32-S2 and ESP32-S3 chips, and can be ported to other IDF versions based on this solution.
 
 -------------
@@ -146,7 +146,7 @@ Can we use GPIO0 as the ADC pin when using ESP32 as a Wi-Fi access point?
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The ESP32 ADC2 pins cannot be used when you are using Wi-Fi. So, if you are having trouble getting the value from an ADC2 GPIO while using Wi-Fi, you may consider using an ADC1 GPIO instead. For more details, please refer to `Hardware Limitations of ADC Continuous Mode <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc_continuous.html>`__ and `Hardware Limitations of ADC Oneshot Mode <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc_oneshot.html>`__.
-  - The GPIO0, GPIO2, GPIO5, GPIO12 (MTDI), and GPIO15 (MTDO) are strapping pins. When using GPIO0 for other functions, you need to pay attention to the GPIO level during power-up. If the GPIO0 level is low during power-up, the chip can enter the download mode. For more infomation, please refer to `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__. 
+  - The GPIO0, GPIO2, GPIO5, GPIO12 (MTDI), and GPIO15 (MTDO) are strapping pins. When using GPIO0 for other functions, you need to pay attention to the GPIO level during power-up. If the GPIO0 level is low during power-up, the chip can enter the download mode. For more infomation, please refer to `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__.
 
 --------------------
 
@@ -192,3 +192,10 @@ What is the sample-and-hold capacitance inside the ESP32 SAR-ADC?
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The internal sample-and-hold capacitance of the SAR-ADC in the ESP32 chip is approximately 1 pF.
+
+------------
+
+How to use the two-point calibration scheme for ADC on ESP32?
+-------------------------------------------------------------
+
+  ESP32 uses a reference voltage for ADC calibration by default. To improve the consistency of ADC measurements, you can switch the calibration scheme in eFuse to two-point calibration scheme. However, eFuse changes are irreversible, so please proceed with caution. It is also recommended to use the software-based two-point calibration scheme for ADC: `adc_tp_calibration <https://components.espressif.com/components/espressif/adc_tp_calibration/versions/0.1.0>`_.

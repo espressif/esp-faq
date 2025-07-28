@@ -80,6 +80,8 @@ ESP32-S2 支持 USB 摄像头吗？
 
   支持。ESP32-S2/ESP32-S3 USB Host UVC 示例代码请参考 `usb_stream <https://github.com/espressif/esp-iot-solution/tree/master/components/usb/usb_stream>`__。
 
+---------------
+
 ESP32-S3 是否支持带有麦克风和扬声器的 USB 摄像头？
 ----------------------------------------------------------------
 
@@ -183,7 +185,7 @@ ESP32-S2/ESP32-S3 做 UVC Host 连接部分型号的 UVC 摄像头后提示 HID_
 ESP32-S2/ESP32-S3 是否有 USB 4G 上网方案？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  有，请参考 `USB CDC 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_4g_module>`_。
+  有，请参考 `USB CDC 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_4g_module>`_ 与 `USB ECM 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_ecm_4g_module>`_。
 
 ---------------------
 
@@ -232,7 +234,7 @@ ESP32-S2/ESP32-S3 USB 做 USB CDC Device 时是否能识别到 USB 的插拔动�
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 可以，USB device 采用 tinyusb 协议栈，包含 mount 和 umount 回调函数来反馈 USB 的插拔动作事件。
-  - 需要注意的是，如果该设备为自供电 USB 设备，若需要在不断电的情况检测到插拔动作，请注意预留 VBUS 检测引脚，请参考 `自供电 USB 设备解决方案 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/usb/usb_overview/usb_device_self_power.html>`_
+  - 需要注意的是，如果该设备为自供电 USB 设备，若需要在不断电的情况检测到插拔动作，请注意预留 VBUS 检测引脚，请参考 `自供电 USB 设备解决方案 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/usb/usb_overview/usb_device_self_power.html>`_。
 
 ---------------------
 
@@ -243,19 +245,23 @@ ESP32-S3 USB 使能 RNDIS 和 CDC 功能后发现 PC 能识别到 COM 口，但�
 
   - 符合预期，因为 USB 自动烧录功能通过 USB-Seial-JTAG 外设实现，但 USB RNDIS 功能通过 USB-OTG 外设来实现，USB-OTG 外设和 USB-Seial-JTAG 外设在同一时刻只有其一能工作。
   - 如果应用上使用了 USB-OTG 外设，那通过 USB-Seial-JTAG 外设实现的自动烧录功能就没有了。但是可以手动进入下载模式来进行 USB 烧录。
-  - 请参考 `USB-Serial-JTAG 外设介绍 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/usb/usb_overview/usb_serial_jtag.html>`
+  - 请参考 `USB-Serial-JTAG 外设介绍 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/usb/usb_overview/usb_serial_jtag.html>`__。
 
 ---------------
 
 请问 ESP32-S2/ESP32-S3 是否支持 USB CDC NCM 协议？
 ---------------------------------------------------------------------------------------------------
 
-  - 目前只支持 USB CDC ECM 协议，不支持 USB CDC NCM 协议。
+  请参考 `USB NCM 示例 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device/tusb_ncm>`__。
+
+---------------
 
 将 ESP32-C3/ESP32-S3 的 USB 引脚初始化为 GPIO 或其它外设功能以后, 为什么无法再通过 USB 进入固件烧录？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32-C3/ESP32-S3 的 USB 引脚可初始化为 GPIO 或其它外设引脚，但是需要注意的是，初始化完成以后，原有的 USB 下载功能将被断开，无法再通过 USB 接口自动进入下载模式，但用户可以通过手动拉低 Boot 引脚 (ESP32-C3 为 GPIO9, ESP32-S3 为 GPIO0)，手动使 ESP32-C3/ESP32-S3 进入下载模式，再通过 USB 进行下载。
+  ESP32-C3/ESP32-S3 的 USB 引脚可初始化为 GPIO 或其它外设引脚，但是需要注意的是，初始化完成以后，原有的 USB 下载功能将被断开，无法再通过 USB 接口自动进入下载模式，但用户可以通过手动拉低 Boot 引脚（ESP32-C3 为 GPIO9，ESP32-S3 为 GPIO0），手动使 ESP32-C3/ESP32-S3 进入下载模式，再通过 USB 进行下载。
+
+---------------
 
 将 ESP32-C3/ESP32-S3 的 USB 接口作为产品唯一的固件下载接口，有哪些注意事项?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

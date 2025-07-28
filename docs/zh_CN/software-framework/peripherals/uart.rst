@@ -158,3 +158,10 @@ ESP32 是否支持 UART IRDA 工作模式？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   可以同时使用。只需使能 LP Core，即可使用 LP UART。例程请参考：`esp-idf/examples/system/ulp/lp_core/lp_uart <https://github.com/espressif/esp-idf/tree/release/v5.3/examples/system/ulp/lp_core/lp_uart>`_。
+
+---------------
+
+UART 是否支持 DMA 功能？
+----------------------------------------------------------
+
+  请参考 `UART DMA (UHCI) <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s3/api-reference/peripherals/uhci.html>`_。请注意，UART DMA 与 BT 共享 HCI 硬件，因此请勿同时使用 BT HCI 和 UART DMA。

@@ -158,3 +158,10 @@ Can UART and LP UART be used simultaneously when ESP32-C6 is not in DeepSleep mo
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Yes, UART and LP UART can be used simultaneously. You can enable the LP Core to use LP UART. Please refer to this use case: `esp-idf/examples/system/ulp/lp_core/lp_uart <https://github.com/espressif/esp-idf/tree/release/v5.3/examples/system/ulp/lp_core/lp_uart>`_.
+
+---------------
+
+Does UART support DMA functionality?
+----------------------------------------------------------
+
+  Please refer to `UART DMA (UHCI) <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/uhci.html>`_. Please note that UART DMA shares HCI hardware with BT, so do not use BT HCI and UART DMA at the same time.
