@@ -43,7 +43,7 @@ When a 8 MB PSRAM mounted on ESP32, why only 4 MB of it is actually mapped?
 -----------------------------------------------------------------------------------------------------------------------
 
   - It is recommended to use the official ESP-PSRAM chip in conjunction with the ESP32 chip.
-  - Up to 4 MB (0x3F80_0000 ~ 0x3FBF_FFFF) of external RAM can be mapped into data address space, please refer to the specifications of Section 3.1.4 Memory Map in `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_.
+  - The maximum capacity of PSRAM supported by different chip series varies. For the ESP32 series, up to 4 MB (0x3F80_0000 to 0x3FBF_FFFF) of the external RAM can map into the data address space. For details, refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ > section 4.1.4 ``Address Mapping Structure``.
   - For a 8 MB PSRAM, you can access the other 4 MB following example `himem <https://github.com/espressif/esp-idf/tree/master/examples/system/himem>`_.
 
 --------------------

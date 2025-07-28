@@ -87,3 +87,11 @@ When I used the `ext_flash_fatfs <https://github.com/espressif/esp-idf/tree/mast
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   A FAT partition has 128 sectors at the minimum, so the minimum size of the file system should be 128*4+4*4=528 KB. The extra four sectors are used for wear leveling information. As a result, the size of the fatffs partition must not be less than 528 KB.
+
+How to support CJK (Chinese, Japanese, Korean) or other language filenames in FATFS?
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  FatFs supports Unicode filenames. To manually adjust the multilingual support for filenames, please modify the following options in `menuconfig`:
+
+  - Navigate to `(Top)` > `Component config` > `FAT Filesystem support` > `OEM Code Page`, and set it to `Dynamic (all code pages supported) (FATFS_CODEPAGE_DYNAMIC)`. With this setting, FATFS will support all code pages, but it will increase the size of the compiled output by about 500 kB. If you choose another code page, make sure that the selected code page matches the character set used in the filenames; otherwise it may cause garbled text, file not found errors, or other latent issues.
+  - Navigate to `(Top)` > `Component config` > `FAT Filesystem support` > `API character encoding-UTF-8 encoding (FATFS_API_ENCODING_UTF_8)`. This option controls the encoding method used by the filenames read by the FATFS API. For more details, please refer to the configuration help.
