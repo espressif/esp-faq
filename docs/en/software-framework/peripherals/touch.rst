@@ -15,10 +15,19 @@ Touch Sensor
 
 --------------
 
-Can the ESP32/ESP32-S2/ESP32-S3 Touch pass the EMS conduction interference test?
+Can ESP32/ESP32-S2/ESP32-S3 Touch pass the EMS conduction interference test?
 -----------------------------------------------------------------------------------
 
-  The EMS conduction interference test is a whole machine test, which is jointly affected by internal and external power supplies, circuits, and external environments. Since the ESP32/ESP32-S2/ESP32-S3 Touch has poor anti-interference ability, if users have this test requirement, it is recommended to externally connect a dedicated Touch IC.
+  The EMS conduction interference test is a whole machine test, which is jointly affected by internal and external power supplies, circuits, and external environments. Since the ESP32/ESP32-S2/ESP32-S3 Touch has poor anti-interference ability, if users have this test requirement, it is recommended to externally connect a dedicated Touch IC or use ESP32-P4.
+
+--------------
+
+Can ESP32-P4 Touch pass the EMS conduction interference test?
+-----------------------------------------------------------------------
+
+  Yes, ESP32-P4 Touch can pass the EMS 3V conduction interference test (This requires a dedicated software driver. Please contact Espressif if needed).
+
+--------------
 
 When using ESP32 to develop Touch Sensor applications, where can I find references?
 ------------------------------------------------------------------------------------------------------------
@@ -69,11 +78,13 @@ Is it possible for Touch Sensor to detect whether there is a acrylic plate on th
 
 ---------------
 
-What reference drivers does the ESP32 touch screen have?
+What reference drivers are available for ESP32 touch screens?
 ------------------------------------------------------------------------------------------
 
-  - Code: please refer to `touch_panel_code <https://github.com/espressif/esp-iot-solution/tree/master/components/display/touch_panel>`_.
-  - Documentation: please refer to `touch_panel_doc <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/input_device/touch_panel.html>`_.
+  For touch screen drivers, refer to:
+
+  - esp-iot-solution touch driver: `lcd_touch <https://github.com/espressif/esp-iot-solution/tree/master/components/display/lcd_touch>`__.
+  - esp-bsp touch driver: `lcd_touch <https://github.com/espressif/esp-bsp/tree/master/components/lcd_touch>`__.
 
 ---------------
 

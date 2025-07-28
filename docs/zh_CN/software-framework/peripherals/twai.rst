@@ -25,11 +25,11 @@
 ESP32-S3 支持 CAN-FD 吗？
 ----------------------------------------------------------------------
 
-  ESP32-S3 本身没有集成 CAN-FD 控制器，但用户仍然可以使用 SPI 接口的 CAN-FD 控制器，例如 MCP2518FD。在后续的芯片例如 ESP32-C5 中，有计划支持 CAN-FD。
+  ESP32-S3 本身没有集成 CAN-FD 控制器，但用户仍然可以使用 SPI 接口的 CAN-FD 控制器，例如 MCP2518FD。后续的芯片例如 ESP32-C5 支持 CAN-FD，详情请参考 `esp_driver_twai <https://github.com/espressif/esp-idf/tree/master/components/esp_driver_twai/test_apps/test_twai>`_。
 
 --------------
 
 ESP32 有 CAN 接收中断模式吗？
 ----------------------------------------------------------------------
 
-  TAWI 驱动程序已经使用了中断接收，并自动将接收到的信息存储到 RX 队列中。
+  TWAI 驱动程序已经使用了中断接收，并自动将接收到的信息存储到 RX 队列中。

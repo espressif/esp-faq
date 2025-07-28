@@ -80,6 +80,8 @@ Does ESP32-S2 support USB camera?
 
   Yes. For the demo code of ESP32-S2/ESP32-S3 USB Host UVC, please refer to `usb_stream <https://github.com/espressif/esp-iot-solution/tree/master/components/usb/usb_stream>`__.
 
+---------------
+
 Does ESP32-S3 support USB cameras with microphones and speakers?
 ----------------------------------------------------------------------------
 
@@ -180,10 +182,10 @@ When ESP32-S2/ESP32-S3 serves as the UVC Host and connects some models of UVC ca
 
 ---------------------
 
-Does ESP32-S2/ESP32-S3 have a USB 4G Internet access solution?
+Does ESP32-S2/ESP32-S3 support USB 4G Internet access solutions?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes, please refer to `USB CDC 4G Module Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_4g_module>`_.
+  Yes, please refer to the `USB CDC 4G module example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_4g_module>`_, and the `USB ECM 4G module example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_ecm_4g_module>`_.
 
 ---------------------
 
@@ -243,19 +245,23 @@ After enabling the RNDIS and CDC functions on the ESP32-S3 USB, I found that the
 
   - Yes. The USB auto-programming function is implemented through the USB-Seial-JTAG peripheral, and the USB RNDIS function is implemented through the USB-OTG peripheral. However, only one of the two peripherals can work at a moment.
   - If the USB-OTG peripheral is used in the application, the automatic programming function implemented by the USB-Seial-JTAG peripheral will not be available. But you can manually enter the download mode for USB burning.
-  - Please refer to the `USB-Serial-JTAG Peripheral Introduction <https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_overview/usb_serial_jtag.html>`
+  - Please refer to the `USB-Serial-JTAG Peripheral Introduction <https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_overview/usb_serial_jtag.html>`__.
 
 -------------
 
-Does the ESP32-S2/ESP32-S3 support the USB CDC NCM protocol?
+Does ESP32-S2/ESP32-S3 support the USB CDC NCM protocol?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Currently, ESP32-S2/ESP32-S3 only supports the USB CDC ECM protocol, but does not support the USB CDC NCM protocol.
+  Please refer to the `USB NCM example <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device/tusb_ncm>`__.
+
+---------------
 
 After I initialize the USB pins of ESP32-C3/ESP32-S3 to GPIO or other peripheral pins, why cannot I burn firmware through USB?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The USB pin of the ESP32-C3/ESP32-S3 can be initialized to GPIO or other peripheral pins. However, please note that after the initialization, the original USB download function will be disconnected, and the download mode cannot be entered automatically through USB. But you can manually pull down the Boot pin (GPIO9 in ESP32-C3 and GPIO0 in ESP32-S3) to make ESP32-C3/ESP32-S3 enter the download mode. Then you can download firmware through USB.
+  The USB pin of the ESP32-C3/ESP32-S3 can be initialized to GPIO or other peripheral pins. However, please note that after the initialization, the original USB download function will be disconnected, and the download mode cannot be entered automatically through USB. But you can manually pull down the Boot pin (GPIO9 in ESP32-C3 and GPIO0 in ESP32-S3) to make ESP32-C3/ESP32-S3 enter the download mode. Then you can download firmware through USB.
+
+---------------
 
 What should I pay attention to if I want to use the USB interface of ESP32-C3/ESP32-S3 as the unique download interface of firmware?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

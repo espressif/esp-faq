@@ -112,9 +112,12 @@ AI 语音模型如何修改麦克风通道数量？
   请参考如下教程：
 
   - `如何使用 ESP-DL 部署手势识别 <https://medium.com/the-esp-journal/hand-gesture-recognition-on-esp32-s3-with-esp-deep-learning-176d7e13fd37>`_。
+  - `如何使用 ESP-DL 部署 Touch 手写数字识别 <https://developer.espressif.com/blog/2025/06/touchpad-digit-recognition>`_。
   - `行人检测 <https://github.com/espressif/esp-dl/tree/master/examples/pedestrian_detect>`_。
   - `人脸检测 <https://github.com/espressif/esp-dl/tree/master/examples/human_face_detect>`_。
   - `人脸识别 <https://github.com/espressif/esp-dl/tree/master/examples/human_face_recognition>`_。
+  - `Yolo11N 目标检测 <https://github.com/espressif/esp-dl/tree/master/models/coco_detect>`_。
+  - `猫脸识别 <https://github.com/espressif/esp-dl/tree/master/models/cat_detect>`_。
 
 -------------
 
@@ -122,3 +125,11 @@ ESP32-S3 如何自定义英文命令词进行识别？
 -----------------------------------------------------------------------------------------------------------------
 
   - 对于 MultiNet6，需要准备 ``commands_en.txt`` 来自定义英文命令词。对于 MultiNet5，可使用 ``multinet_g2p.py`` 脚本将英文命令词转换为 multinet 可以识别的音素。具体请参考 `esp-sr/tool <https://github.com/espressif/esp-sr/tree/master/tool>`_。
+
+-------------
+
+如何提高 Yolo11 的检测效率？
+----------------------------------
+
+  - 尝试量化小分辨率的模型，但这将损失一些精度，具体请参考 `quantize_yolo11n <https://github.com/espressif/esp-dl/tree/master/examples/tutorial/how_to_quantize_model/quantize_yolo11n>`_。
+  - 使用轻量级的检测模型框架 `esp-detection <https://github.com/espressif/esp-detection>`_。

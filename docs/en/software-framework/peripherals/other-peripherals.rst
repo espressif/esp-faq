@@ -35,3 +35,10 @@ Does ESP32-P4 support video encoding and decoding?
 -----------------------------------------------------------------------------------------
 
   Yes. ESP32-P4 Supports JPEG hardware encoding/decoding, H.264 hardware encoding, and H.264 software decoding.
+
+-----------------
+
+How to Use the Bit Manipulator on ESP32-P4?
+-----------------------------------------------------------------------------------------
+
+  The BitScrambler driver has been released. Please refer to `BitScrambler Driver <https://docs.espressif.com/projects/esp-idf/en/latest/esp32p4/api-reference/peripherals/bitscrambler.html>`_. The RMT peripheral now supports BitScrambler.

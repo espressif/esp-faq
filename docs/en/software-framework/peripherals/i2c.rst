@@ -72,3 +72,10 @@ How to set clock stretching for I2C?
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
   In the ``esp_driver_i2c`` driver, you can set the ``scl_wait_us`` parameter in ``i2c_master_dev_t`` to change the SCL wait time, thereby achieving clock stretching.
+
+--------------
+
+Where can I find the I2C timing parameters for the ESP32 series chips?
+----------------------------------------------------------------------
+
+  The Chip Datasheet and Technical Reference Manual do not specify I2C timing parameters. Any tining that complies with `I2C timing specifications <https://www.csd.uoc.gr/~hy428/reading/i2c_spec.pdf>`_ is considered valid.

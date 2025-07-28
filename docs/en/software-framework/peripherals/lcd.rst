@@ -126,7 +126,7 @@ What is the maximum resolution supported by ESP LCD? What is the corresponding f
           - 320 x 240
           - 400 x 400
           - 480 x 320
-          - 480 x 480, 800 x 480  
+          - 480 x 480, 800 x 480
           - Not supported
 
         * - ESP32-P4
@@ -153,13 +153,6 @@ How can I enable PSRAM 120M Octal (DDR) on ESP32-S3R8?
     - Temperature changes may also cause program crashes when accessing PSRAM/flash. For more details, please refer to `SPI Flash and External SPI RAM Configuration <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-guides/flash_psram_config.html#all-supported-modes-and-speeds>`__.
 
 ----------------
-
-What models of display touch panels are supported for testing the `LVGL <https://github.com/espressif/esp-iot-solution/tree/master/examples/hmi/lvgl_example>`__ example on ESP32-S3?
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  The driver and examples in esp-iot-solution are not recommended. For details, please refer to :ref:`lcd-examples`.
-
----------------
 
 Does ESP32-S3 require an external PSRAM to use the RGB screen?
 ------------------------------------------------------------------------------------------------------
@@ -295,7 +288,7 @@ The spaces in the LVGL's label are correctly inputted, for example "Indoor tempe
 
 ---------------------------
 
-When LVGL continuously loads different images stored on flash, the speed is too slow. For example, how to avoid the slow speed issue when cycling through three images on the home screen?
+When LVGL v8 continuously loads different images stored on flash, the speed is too slow. For example, how to avoid the slow speed issue when cycling through three images on the home screen?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The reason for the slow speed is that the corresponding image caching mechanism is not turned on, so each images need to be parsed by the parser each time it is used.
@@ -303,7 +296,7 @@ When LVGL continuously loads different images stored on flash, the speed is too 
 
 ---------------------------
 
-LVGL fails to load PNG, JPEG images from flash. What's the reason for a blank screen?
+LVGL v8 fails to load PNG, JPEG images from flash. What's the reason for a blank screen?
 ---------------------------------------------------------------------------------------------------------------------------
 
   - First, it is necessary to check the status of the remaining memory. LVGL needs to perform two steps to load images: loadpng_get_raw_size and loadpng_convert. If the memory is not enough, it will directly return error code 83.
@@ -443,7 +436,7 @@ Is it supported to drive segment LCD screens?
 
 ---------------------------
 
-Does ESP32-P4 support HDMI signal output?  
+Does ESP32-P4 support HDMI signal output?
 -------------------------------------------------------------------------------
 
-  ESP32-P4 does not support direct HDMI signal output. However, HDMI signal output can be achieved through an MIPI-DSI to HDMI bridge chip. Currently, the MIPI-DSI to HDMI chip supported by Espressif is `LT8912B <https://github.com/espressif/esp-bsp/tree/master/components/lcd/esp_lcd_lt8912b>`__.
+  ESP32-P4 does not support direct HDMI signal output. However, HDMI signal output can be achieved through an MIPI-DSI to HDMI bridge chip. Currently, the MIPI-DSI to HDMI chip supported by Espressif is `LT8912B <https://github.com/espressif/esp-bsp/tree/master/components/lcd/esp_lcd_lt8912b>`__. For more information, refer to `example code <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/lcd/hdmi_video_renderer>`__.
