@@ -43,7 +43,7 @@ ESP32 模组挂载 8 MB PSRAM, 为何实际映射的只有 4 MB？
 ---------------------------------------------------------------------
 
   - 使用 ESP32 芯片建议搭配使用官方 ESP-PSRAM 芯片。
-  - 片外 RAM 最大可映射 4 MB (0x3F80_0000 ~ 0x3FBF_FFFF) 到数据地址空间，可参考 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ 中 3.1.4 节存储器映射的说明。
+  - 不同系列芯片支持的 PSRAM 最大容量不同。对于 ESP32 系列，片外 RAM 最大可映射 4 MB (0x3F80_0000 ~ 0x3FBF_FFFF) 到数据地址空间。详情请参考 `ESP32 技术规格书 <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_cn.pdf>`_ > 4.1.4 节 ``地址映射结构``。
   - 对于 8 MB PSRAM，可参考例程 `himem <https://github.com/espressif/esp-idf/tree/master/examples/system/himem>`_ 访问其余的 4 MB 空间。
 
 -----------------
