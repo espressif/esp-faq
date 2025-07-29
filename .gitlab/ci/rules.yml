@@ -53,8 +53,6 @@
     - <<: *if-trigger-job
     - <<: *if-dev-push
       changes: *patterns-docs
-    - <<: *if-dev-push
-      changes: *patterns-docs
 
 .rules:build:docs:
   rules:
@@ -63,15 +61,11 @@
     - <<: *if-trigger-job
     - <<: *if-dev-push
       changes: *patterns-docs
-    - <<: *if-dev-push
-      changes: *patterns-docs
 
 .rules:deploy:docs_preview:
   rules:
     - <<: *if-label-build_docs
     - <<: *if-trigger-job
-    - <<: *if-dev-push
-      changes: *patterns-docs
     - <<: *if-dev-push
       changes: *patterns-docs
 
@@ -84,15 +78,3 @@
   rules:
     - <<: *if-label-auto_trans
     - <<: *if-trigger-job
-
-
-.rules:deploy:docs_preview:
-  rules:
-    - <<: *if-label-build_docs
-    - <<: *if-dev-push
-      changes: *patterns-docs
-
-
-.rules:deploy:docs_production:
-  rules:
-    - <<: *if-protected
