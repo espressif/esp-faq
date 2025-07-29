@@ -26,3 +26,14 @@ doc_linkcheck:
     - .doc_linkcheck_template
     - .rules:pre_check:linkcheck
 
+ci_always:
+  stage: pre_check
+  tags:
+    - build_docs
+  script:
+    - echo "no docs modification"
+  rules:
+    - changes:
+      - docs/**/*  
+      when: never
+    - when: always

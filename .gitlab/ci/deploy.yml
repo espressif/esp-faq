@@ -9,6 +9,8 @@ push_master_to_github:
     - /^release\/v/
 #  when: on_success
   image: $CI_DEPLOY_DOCKER
+  tags: 
+    - internet
   variables:
     GIT_STRATEGY: clone
     GITHUB_PUSH_REFS: refs/remotes/origin/release refs/remotes/origin/master
@@ -76,14 +78,15 @@ deploy_docs_production:
     DOCS_DEPLOY_URL_BASE: "$DOCS_PROD_URL_BASE"
 
 post_links:
+  extends:
+    - .deploy_docs_template
+    - .rules:deploy:docs_preview
   stage: deploy
   tags: [deploy_docs]
   image: $ESP_DOCS_ENV_IMAGE
   needs:
-    - deploy_docs_preview
-  rules:
-    # Run for all changes to a merge request's source branch
-    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - job: deploy_docs_preview
+      optional: true
   script:
     - ls -al logs
     - python3 ${CI_PROJECT_DIR}/.gitlab/tools/post-mr-note.py $GITLAB_MR_NOTE_TOKEN $CI_PROJECT_PATH $CI_MERGE_REQUEST_IID
