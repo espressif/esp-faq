@@ -38,19 +38,6 @@ If a development board is not powered up through USB, how to use pins to supply 
 
   .. note:: The power supply current should be bigger than 500 mA.
 
-----------
-
-What are the possible reasons for the following error when ESP8266 connects to the mobile hotspot?
--------------------------------------------------------------------------------------------------------
-
-  .. code-block:: text
-
-    wifi: state : 0 -> 2 (b0)
-    wifi: state : 2 -> 0 (200)
-    simple wifi : Disconnect reason : 2
-
-  Please check the status of the external antenna, whether the router exists, and whether the SSID is correct.
-
 --------------
 
 In `ESP32-Korvo-DU1906 <https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/dev-boards/get-started-esp32-korvo-du1906.html>`__, how does the DU1906 chip interact with ESP32 for audio data?
@@ -144,10 +131,3 @@ Which GPIO is connected to the RGB LED of the `ESP32-S3-DevKitC-1 <https://docs.
   - The RGB LED on the `ESP32-S3-DevKitC-1 v1.0 <https://dl.espressif.com/dl/SCH_ESP32-S3-DEVKITC-1_V1_20210312C.pdf>`_ development board is connected to GPIO48.
   - The RGB LED on the `ESP32-S3-DevKitC-1 v1.1 <https://dl.espressif.com/dl/schematics/SCH_ESP32-S3-DevKitC-1_V1.1_20221130.pdf>`_ development board is connected to GPIO38.
   - The reason why the `ESP32-S3-DevKitC-1 v1.1 <https://dl.espressif.com/dl/schematics/SCH_ESP32-S3-DevKitC-1_V1.1_20221130.pdf>`_ development board changed the RGB LED pin to GPIO38 is that the `ESP32-S3R8V <https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf>`_ chip’s VDD_SPI voltage has been set to 1.8 V. Therefore, unlike other GPIOs, GPIO47 and GPIO48 in the VDD_SPI power domain of this chip also operate at 1.8 V.
-
-----------------
-
-When using the ESP32-S3-DevKitC-1 development board as a 3.3 V power supply for other devices, what is the maximum output current it can provide?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  The `ESP32-S3-DevKitC-1 development board <https://dl.espressif.com/dl/schematics/SCH_ESP32-S3-DevKitC-1_V1.1_20221130.pdf>`_ uses the power chip SGM2212-3.3XKC3G, which can provide a maximum output current of 800 mA.
