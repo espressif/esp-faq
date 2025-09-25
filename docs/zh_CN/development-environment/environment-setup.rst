@@ -166,3 +166,27 @@ Windows 环境下 ESP-IDF 编译比较慢如何优化？
   - 从日志上看是在编译过程中缓存 `build/esp-idf/main/CMakeFiles/__idf_main.dir/ main.c.o.bj` 文件出错，这是在 ccache 调用编译器时生成的，与编译缓存有关。此问题在 v5.0 及之后的版本上做了修复。
   - 在 v4.4 版本的 ESP-IDF CMD 环境中，请使用 `idf.py --no-ccache build` 指令来编译工程。
   
+--------------
+
+编译工程并拉取组件时遇到如下错误，该如何解决？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  .. code:: text
+
+    CMake Error at C:/Espressif/frameworks/esp-idf-v5.1.2/tools/cmake/build.cmake:540 (message):
+      ERROR: Cannot establish a connection to the component registry. Are you
+      connected to the internet?
+
+      URL:
+      https://components-file.espressif.com/components/espressif/esp_lcd_gc9a01.json
+
+  - 可以在 ``IDF_TOOLS_PATH`` 路径下创建文件 ``idf_component_manager.yml``，内容如下：
+
+  .. code-block:: yaml
+
+      profiles:
+        default:
+          storage_url:
+            - "https://components-file.espressif.cn"
+
+  - 详情可参考 `idf_component_manager.yml Configuration File <https://docs.espressif.com/projects/idf-component-manager/en/latest/reference/config_file.html>`_。
