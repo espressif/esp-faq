@@ -166,3 +166,27 @@ After installing the ESP-IDF CMD environment using the `ESP-IDF v4.4.8-Offline I
   - According to the logs, an error occurred while caching the `build/esp-idf/main/CMakeFiles/__idf_main.dir/ main.c.o.bj` file during the compilation process. This file is generated when ccache calls the compiler and is related to the compilation cache. This issue has been resolved in versions 5.0 and later.
   - In the ESP-IDF CMD environment of version v4.4, please use the `idf.py --no-ccache build` command to build the projects.
   
+--------------
+
+How to fix the following error when building a project and pulling components?
+----------------------------------------------------------------------------------
+
+  .. code:: text
+
+    CMake Error at C:/Espressif/frameworks/esp-idf-v5.1.2/tools/cmake/build.cmake:540 (message):
+      ERROR: Cannot establish a connection to the component registry. Are you
+      connected to the internet?
+
+      URL:
+      https://components-file.espressif.com/components/espressif/esp_lcd_gc9a01.json
+
+  - Create a file named ``idf_component_manager.yml`` in the ``IDF_TOOLS_PATH`` directory with the following content:
+
+  .. code-block:: yaml
+
+      profiles:
+        default:
+          storage_url:
+            - "https://components-file.espressif.cn"
+
+  - For more details, refer to `idf_component_manager.yml Configuration File <https://docs.espressif.com/projects/idf-component-manager/en/latest/reference/config_file.html>`_。
