@@ -410,3 +410,10 @@ Why does the device fail to respond to Ping when AP + STA are in the same networ
 ------------------------------------------------------------------------------------------------------------------
 
   This is usually due to a routing conflict. To avoid this, ensure that the AP and STA are assigned to different subnets. If using the same subnet is required, you must explicitly bind the outgoing interface at the application layer—note that this is not supported by standard lwIP implementations.
+
+-----------------
+
+Why does the device open multiple UDP ports? Is this normal?
+------------------------------------------------------------------------------------------------------
+
+  This is normal behavior. UDP ports are used by protocols such as DHCP, DNS, and SNTP. Each query may temporarily allocate a port number higher than 1024, which will automatically close after use.
