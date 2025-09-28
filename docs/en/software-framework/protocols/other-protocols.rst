@@ -164,3 +164,10 @@ What could be the reason for an assertion failure during SNTP initialization (`s
 -------------------------------------------------------------------------------------------------------------------------
 
   Repeated initialization causes assertion failure, ensure that SNTP is only initialized once. Refer to the fix: `GitHub Issue #12854 <https://github.com/espressif/esp-idf/issues/12854>`__.
+
+-----------------
+
+What are the encryption suite requirements for European certification?
+------------------------------------------------------------------------------------------------------
+
+European certifications (such as EN18031) require the use of encryption suites with strong security. Weak encryption suites (such as SHA1, MD5, DES, and RC4) are prohibited. It is recommended to prioritize R-class encryption suites and use `ciphersuite.info <https://ciphersuite.info/cs/?security=all>`__ to evaluate the security of the encryption suites.
