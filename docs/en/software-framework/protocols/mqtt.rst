@@ -217,3 +217,10 @@ Will the MQTT broker send a Last Will message if the client disconnects unexpect
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   If the client disconnects without sending an MQTT DISCONNECT message and the keepalive interval is short, the broker may assume the client is offline and trigger the Last Will message. It is recommended to explicitly call the disconnect API and set an appropriate keepalive interval.
+
+----------------
+
+During MQTT5 operation, frequent Wi-Fi network switching causes repeated re-subscriptions. As a result, ``MQTT5 publish check fail`` messages flood the log and the connection cannot recover. What is the reason, and how can this be resolved?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  MQTT5 provides a flow control mechanism that allows the server to limit the client’s message publishing rate. The number of messages that a client can send simultaneously is determined by the server. When the PUBLISH messages sent by the client have not yet received PUBACK confirmation from the server, and the total number reaches the limit set by the server, the client must wait for the server to acknowledge one packet before it can send another. If the device is restricted by flow control, it must wait for the PUBACK acknowledgment before continuing to publish; otherwise, message sending will fail.
