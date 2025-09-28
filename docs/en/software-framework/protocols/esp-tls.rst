@@ -134,3 +134,10 @@ How to configure the HTTPS server's cipher suites to meet European certification
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   You can configure the supported cipher suites by calling ``mbedtls_ssl_conf_ciphersuites()`` after line 789 in `esp_tls_mbedtls.c <https://github.com/espressif/esp-idf/blob/master/components/esp-tls/esp_tls_mbedtls.c#L789>`__. Only enable high-security cipher suites such as ``TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384``. Avoid using weak algorithms like SHA1 or MD5 to comply with security standards.
+
+----------------
+
+How can I detect if the peer has sent a FIN packet in a TLS connection?
+------------------------------------------------------------------------------------------------------
+
+  You can check for the error code ``-0x004C`` or ``errno=128``, which indicates that the peer has actively closed the connection.
