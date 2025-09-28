@@ -1602,3 +1602,20 @@ How to configure the working frequency band (2.4 GHz/5.8 GHz) of ESP32-C5?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The ESP32-C5 does not currently support simultaneous dual-band operation; it can operate on only one band at a time. You can use `esp_wifi_set_band_mode() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c5/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_band_mode16wifi_band_mode_t>`_ to set the band mode. The default value is WIFI_BAND_MODE_AUTO, which scans both 2.4G and 5G bands, allowing flexible selection. In test environments where multiple hotspots with the same SSID exist on both bands, the device connects to the one with the strongest RSSI. When set to WIFI_BAND_MODE_5G_ONLY, it can only connect to 5G hotspots. When set to WIFI_BAND_MODE_2G_ONLY, it can only connect to 2.4G hotspots. For dual-band unified SSIDs, you can adjust the preference for 2.4G or 5G using the `rssi_5g_adjustment <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c5/api-reference/network/esp_wifi.html#_CPPv4N21wifi_scan_threshold_t18rssi_5g_adjustmentE>`_ parameter.
+
+---------------
+
+Does Espressif chips support the ARP aging mechanism? What is the aging time, and can it be modified? For example, when connecting via Wi-Fi, the MAC address of the AP is obtained through ARP. How long is the interval before the next ARP request is sent?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - APR aging mechanism is supported.
+  - The default aging time is 5 minutes, defined by `ARP_MAXAGE`. Currently, no API or menuconfig option is available to modify this value.
+  - When accessing an IP address, the chip will first checks the ARP table. If there is no entry in the ARP table or the entry is about to expire, it will send an ARP request. After receiving the ARP response, the chip will update the ARP table and keep the record valid for approximately 5 minutes.
+
+---------------
+
+What does ``LWIP_GARP_TMR_INTERVAL`` do? What is the interval in seconds for sending ARP?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  GARP is a mechanism where an Espressif chip proactively sends its IP and MAC address mapping, which is used to notify other devices to update their ARP tables. INTERVAL represents the sending interval defaulted to 60 seconds.
+
