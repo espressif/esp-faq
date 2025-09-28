@@ -181,9 +181,27 @@ ESP32-C3 的 GPIO11 (VDD_SPI) 引脚用作普通 GPIO 时，软、硬件上需�
   - 软件上，可调用 `esp_efuse_write_field_bit() <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.3.2/esp32c3/api-reference/system/efuse.html?highlight=esp_efuse_write_field_bit#_CPPv425esp_efuse_write_field_bitA_PK16esp_efuse_desc_t>`_ API，将 `ESP_EFUSE_VDD_SPI_AS_GPIO` 的 eFuse 位写为 1。参考代码如下：
 
     .. code:: c
-  
+
         #include "esp_efuse.h"
         #include "esp_efuse_table.h"
 
         esp_efuse_write_field_bit(ESP_EFUSE_VDD_SPI_AS_GPIO);
+
+
+-----------------------
+
+ESP32-C6 的 GPIO27 (VDD_SPI) 引脚用作普通 GPIO 时，软硬件上需要如何操作？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 硬件上，VDD_SPI 默认作为 flash 的供电管脚，仅在 flash 连接到外部电源时，才可作为普通 GPIO 使用。
+  - 与 ESP32-C3 不同，ESP32-C6 在使用上存在一些限制：默认上电时，VDD_SPI 会被拉高，需要通过软件进行配置后才能正常使用，可参考如下代码：
+
+    .. code-block:: c
+
+      #include "soc/pmu_reg.h"
+
+      REG_SET_FIELD(PMU_POWER_VDD_SPI_CNTL_REG, PMU_VDD_SPI_PWR_SEL_SW, 1);
+      REG_SET_FIELD(PMU_POWER_VDD_SPI_CNTL_REG, PMU_VDD_SPI_PWR_SW, 0);
+
+  - ESP32-C5 和 ESP32-C61 上也有这样的使用限制。
 

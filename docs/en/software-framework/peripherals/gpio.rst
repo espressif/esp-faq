@@ -181,9 +181,27 @@ How to configure ESP32-C3’s GPIO11 (VDD_SPI) pin as a general purpose GPIO in 
   - In software, you can call the `esp_efuse_write_field_bit() <https://docs.espressif.com/projects/esp-idf/en/v5.3.2/esp32c3/api-reference/system/efuse.html?highlight=esp_efuse_write_field_bit#_CPPv425esp_efuse_write_field_bitA_PK16esp_efuse_desc_t>`_ API to write the eFuse bit of `ESP_EFUSE_VDD_SPI_AS_GPIO` as 1. Refer to the following code:
 
     .. code:: c
-  
+
         #include "esp_efuse.h"
         #include "esp_efuse_table.h"
 
         esp_efuse_write_field_bit(ESP_EFUSE_VDD_SPI_AS_GPIO);
+
+
+-----------------------
+
+When using ESP32-C6 GPIO27 (VDD_SPI) pin as a regular GPIO, what hardware and software operations are required?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In hardware, VDD_SPI is by default the power supply pin for flash. It can only be used as a regular GPIO when the flash is powered by an external power source.
+  - Unlike ESP32-C3, ESP32-C6 has some usage restrictions: by default, upon power-up, VDD_SPI will be pulled high. It must be configured through software before it can be used normally. Please refer to the following code:
+
+    .. code-block:: c
+
+      #include "soc/pmu_reg.h"
+
+      REG_SET_FIELD(PMU_POWER_VDD_SPI_CNTL_REG, PMU_VDD_SPI_PWR_SEL_SW, 1);
+      REG_SET_FIELD(PMU_POWER_VDD_SPI_CNTL_REG, PMU_VDD_SPI_PWR_SW, 0);
+
+  - ESP32-C5 and ESP32-C61 have similar usage restrictions.
 
