@@ -967,7 +967,7 @@ Does it support redirecting the UART0 output logs of ESP32 to the file system?
 
 Can the ESP32 BootLoader, which is configured to run in single-core mode, be upgraded to dual-core mode via OTA?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
+
   - ESP32 does not support this. Each CPU in ESP32 has an independent cache, and the MMU configuration related to the cache is set during the BootLoader. If the BootLoader is configured for single-core mode, but the MMU for the second core is not configured, it will cause an instruction fetch error.
   - Support is available for ESP32-S3 and ESP32-P4. These two chips feature two cores that share the same cache, which eliminates the aforementioned issue. Therefore, they support upgrading from single-core to dual-core mode.
 
@@ -975,14 +975,14 @@ Can the ESP32 BootLoader, which is configured to run in single-core mode, be upg
 
 Does the ESP32 series chip support OTA firmware updates via File Transfer Protocol (FTP)?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
+
   The default example does not support TLS-based FTP and only implements basic socket programming. However, ESP32 series chips do support TLS-based FTP, and users can implement this feature if needed.
 
 ----------------
 
 After using the native_ota_example for an OTA upgrade, why does the device enter the ESP_OTA_IMG_UNDEFINED event, with the ota_state value printed as -1, even though the firmware works normally?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
+
   This may be due to the application rollback feature not being enabled in menuconfig. Please ensure that the application rollback feature is enabled in the configuration to avoid this issue.
 
 ----------------
@@ -999,7 +999,7 @@ What are the differences between sdkconfig, sdkconfig.default, and sdkconfig.old
 
 What could possibly be the reason for the "Not digestSign key in json doc of OTA" error that occurs during an OTA upgrade?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
+
   This error message indicates that the security OTA is not enabled, but it does not affect the upgrade process. If you are using a non-secure OTA, this error can be ignored. If security OTA is required, it is recommended to check the platform configuration to ensure that the security OTA feature is enabled.
 
 ----------------
@@ -1015,5 +1015,69 @@ Are there any firmware update solutions that can help reduce flash memory and tr
 
 Can the crystal oscillator glitch detector be disabled via software?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
+
   Yes, it can be disabled in the bootloader. However, this feature is enabled by default and needs to be manually disabled in the bootloader. The specific operation is as follows: REG_CLR_BIT(RTC_CNTL_ANA_CONF_REG, RTC_CNTL_GLITCH_RST_EN);
+
+---------------
+
+Do ESP32-C2 and ESP32-C3 built-in flash support the suspend function? After enabling suspend in the configuration, the log shows ``Flash suspend feature is enabled``. What should I do?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, supported. The log issue indicates that the current esp-idf version being used does not support flash suspend for XMC-D. Suggested solutions:
+
+  (1) Upgrade esp-idf to a version that supports XMC-D flash suspend (and manually enable ``CONFIG_SPI_FLASH_FORCE_ENABLE_XMC_C_SUSPEND``). The versions supporting XMC-D flash suspend are as follows:
+
+  ===============  ==============================================
+  ESP-IDF Branch   Supported TAG version for XMC-D flash suspend
+  ===============  ==============================================
+  Release v5.4     v5.4 or later
+  Release v5.3     v5.3.3 or later
+  Release v5.2     v5.2.6 or later
+  Release v5.1     v5.1.7 or later
+  Release v5.0     v5.0.9 or later
+  ===============  ==============================================
+
+  (2) For customers who use the v4.x esp-idf branches that have already reached EOF (End-of-Life), you can fix this issue on the existing version. The main changes include:
+
+    - Add flash ID support for XMC-D to prevent exceptions when flash suspend is enabled
+    - Enable XMC-D flash suspend in the code
+
+    The modifications you need for esp-idf v4.4.8 are:
+
+::
+
+    diff --git a/components/spi_flash/spi_flash_chip_generic.c
+    b/components/spi_flash/spi_flash_chip_generic.c
+    index 6726c4feeaef..4f3a35f79b11 100644
+    --- a/components/spi_flash/spi_flash_chip_generic.c
+    +++ b/components/spi_flash/spi_flash_chip_generic.c
+    @@ -590,6 +590,10 @@ spi_flash_caps_t
+    spi_flash_chip_generic_get_caps(esp_flash_t *chip)
+        spi_flash_caps_t caps_flags = 0;
+        // 32M-bits address support
+
+    +    if (chip->chip_id >> 16 == 0x46) {
+    +        caps_flags |= SPI_FLASH_CHIP_CAP_SUSPEND;
+    +    }
+    +
+        // flash suspend support
+        // Only `XMC` support suspend for now.
+        if (chip->chip_id >> 16 == 0x20) {
+    @@ -786,7 +790,7 @@ esp_err_t spi_flash_common_set_io_mode(esp_flash_t *chip,
+    esp_flash_wrsr_func_t esp_err_t spi_flash_chip_generic_suspend_cmd_conf(esp_flash_t *chip)
+    {
+        // Only XMC support auto-suspend-
+    -    if (chip->chip_id >> 16 != 0x20) {
+    +    if (chip->chip_id >> 16 != 0x20 && chip->chip_id >> 16 != 0x46) {
+            ESP_EARLY_LOGE(TAG, "The flash you use doesn't support auto suspend,
+    only \'XMC\' is supported");
+            return ESP_ERR_NOT_SUPPORTED;
+        }
+    --
+
+----------------
+
+Is UART wakeup reliable in Light Sleep mode?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The wakeup time of UART is relatively short, but the first few bits may be lost. It is not recommended for critical communication. After wakeup, it is advisable to delay about 50 ms before starting data transmission.
