@@ -180,3 +180,24 @@ How to resolve stack overflow in the HTTPD task?
 ----------------------------------------------------------------------------------------------------
 
   To address this issue, increase the ``stack_size`` in ``HTTPD_DEFAULT_CONFIG``. For details, refer to the `example code <https://github.com/espressif/esp-idf/blob/master/components/esp_http_server/include/esp_http_server.h#L55>`_.
+
+--------------
+
+What specification does ESP-IDF follow for URL encoding in HTTP/HTTPS requests?
+----------------------------------------------------------------------------------------------
+
+  The underlying URL encoding in ESP-IDF does not fully comply with the RFC-3986 specification for automatic encoding. Typically, users need to pre-encode the URL before passing it in.
+
+--------------
+
+If the status code of http_data is 200 but the content_length is 0, is this normal?
+----------------------------------------------------------------------------------------------
+
+  This situation may be normal, especially when the response uses chunked transfer encoding. In such cases, ``content_length`` may not be the accurate length. Use ``esp_http_client_get_chunk_length`` to obtain the actual length, or handle the data within the callback.
+
+--------------
+
+After running HTTPS for some time, a decrease in minimum heap memory is observed. Could this be a memory leak?
+-------------------------------------------------------------------------------------------------------------------
+
+  Not necessarily. If the remaining memory is stable, the behavior may simply indicate higher peak memory usage (e.g., TCP is in the TIME_WAIT state and not released). You can set the ``SO_LINGER`` option to force close the connection and release resources.
