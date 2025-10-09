@@ -716,8 +716,30 @@ How to improve the BLE throughput of ESP32-S3?
 ------------------------------------------------------------------------------------------------------------------------
 
   - The BLE throughput of the ESP32-S3 series products depends on various factors, such as environmental interference, BLE connection interval, MTU size (up to 512 bytes per packet), and the performance of the peer device.
+
     - The smaller the BLE connection interval, the faster the BLE transmission rate.
     - The larger the MTU size, the faster the BLE transmission rate.
   - ESP32-S3 supports BLE 5.0 features, which can be tested based on the `ble_throughput <https://github.com/espressif/esp-idf/tree/release/v5.4/examples/bluetooth/bluedroid/ble/ble_throughput>`_ example between two ESP32-S3 devices. The reference data is as follows:
+
     - 1M PHY，0.73 Mbit/s
     - 2M PHY，1.35 Mbit/s
+
+-------------
+
+When using the official gatt_server_service_table example, the device can be discovered by the phone’s system Bluetooth but cannot be connected, whereas BLE debugging apps (such as BLE Debug Assistant or nRF Connect) can connect successfully. What is the reason?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Cause Analysis:
+
+    - The phone’s system Bluetooth is not a universal BLE client. iOS/Android system Bluetooth is more like **Classic Bluetooth (BR/EDR)** or standard **BLE Profiles** (e.g., HID, HRP, ANCS). System Bluetooth can connect to devices like BLE keyboards, mice, and wearables.
+    - System Bluetooth usually initiates a pairing request during connection.
+    - The gatt_server_service_table example does not enable BLE encryption and does not implement standard **BLE Profiles**, so the connection cannot be successfully established.
+
+  - Solution:
+
+    - To allow the device to be successfully connected by system Bluetooth, BLE encryption must be enabled on the device, and a standard **BLE Profile** should be implemented.
+
+  - Reference Examples:
+
+    - `gatt_security_server example <https://github.com/espressif/esp-idf/tree/v5.5.1/examples/bluetooth/bluedroid/ble/gatt_security_server>`_ enables BLE encryption and uses Heart Rate Profile (HRP), allowing the system Bluetooth to connect successfully.
+    - `ble_hid_device_demo example <https://github.com/espressif/esp-idf/tree/v5.5.1/examples/bluetooth/bluedroid/ble/ble_hid_device_demo>`_ enables BLE encryption and uses HID Profile, allowing the system Bluetooth to connect successfully.
