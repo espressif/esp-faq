@@ -716,8 +716,30 @@ ESP32 如何结束 BLE 任务与释放 BLE 资源？
 ------------------------------------------------------------------------------------------------------------------------
 
   - ESP32-S3 系列产品的 BLE 吞吐量取决于多种因素，例如环境干扰、BLE 连接间隔、MTU 大小，以及对端设备的性能。
+
     - BLE 连接间隔越小，BLE 传输速率越快。
     - MTU Size 越大，BLE 传输速率越快。
   - ESP32-S3 支持 BLE 5.0 特性，可基于 `ble_throughput <https://github.com/espressif/esp-idf/tree/release/v5.4/examples/bluetooth/bluedroid/ble/ble_throughput>`_ 示例测试两块 ESP32-S3 设备之间的 BLE 吞吐, 数据参考如下：
+
     - 1M PHY，0.73 Mbit/s
     - 2M PHY，1.35 Mbit/s
+
+-------------
+
+使用官方 gatt_server_service_table 例程时，手机系统蓝牙可以搜索到设备，但无法连接；而通过 BLE 调试类 App（如 BLE 调试助手、nRF Connect）可以成功连接，这是什么原因？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  
+  - 原因分析：
+
+    - 手机系统蓝牙并非通用 BLE 客户端，iOS/Android 的系统蓝牙更偏向 **经典蓝牙 (BR/EDR)** 或标准 **BLE Profile** （如 HID、HRP、ANCS），系统蓝牙可以正常连接诸如 BLE 键盘、鼠标和手环等设备。
+    - 系统蓝牙连接时通常会主动发起配对请求。
+    - gatt_server_service_table 未开启 BLE 加密，也未实现标准的 **BLE Profile**，所以无法成功建立连接。
+
+  - 解决方法:
+
+    - 如果希望设备能被系统蓝牙成功连接，需要在设备端开启 BLE 加密，并实现标准 **BLE Profile**。
+
+  - 参考示例：
+
+    - `gatt_security_server 例程 <https://github.com/espressif/esp-idf/tree/v5.5.1/examples/bluetooth/bluedroid/ble/gatt_security_server>`_ 开启了 BLE 加密，使用 Heart Rate Profile (HRP)，系统蓝牙可以成功连接。
+    - `ble_hid_device_demo 例程 <https://github.com/espressif/esp-idf/tree/v5.5.1/examples/bluetooth/bluedroid/ble/ble_hid_device_demo>`_ 开启了 BLE 加密，使用 HID profile，系统蓝牙可以成功连接。
