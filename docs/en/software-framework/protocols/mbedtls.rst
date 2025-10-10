@@ -33,9 +33,9 @@ How to optimize memory when ESP32 uses Mbed TLS?
 
 When I connected an ESP32 module with the HTTPS Server, I got the following log. What is the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-   
+
     .. code-block:: c
-      
+
       free heap size: 181784 bytes
       I (4285) esp_https_server: Starting server
       E (4285) esp_https_server: Could not allocate memory
@@ -55,7 +55,7 @@ When resolving a hostname on ESP32, I encountered the following error. What coul
   .. code-block:: text
 
     getaddrinfo() returns 202, addrinfo=0x0
-    
+
   - The error is caused by DNS request timeout.
   - You can enable DNS log with the debug level or capture wireless packets for further analysis.
   - To enable the debug level DNS log, you can add ``#define DNS_DEBUG LWIP_DBG_ON`` code to the ``esp-idf/components/lwip/lwip/src/include/lwip/opt.h`` file, and then enable the ``Component config`` > ``LWIP`` > ``Enable LWIP Debug`` configuration.
@@ -67,7 +67,7 @@ Why does the following mbedtls software error occur when I develop applications 
 
     .. code-block:: c
 
-      E: esp-tls-mbedtls: mbedtls_ssl_handshake returned -0x4290 
+      E: esp-tls-mbedtls: mbedtls_ssl_handshake returned -0x4290
       E: esp-tls: Failed to open new connection
       E: transport_base: Failed to open a new connection
       E: HTTP_CLIENT: Connection failed, sock < 0
@@ -88,7 +88,7 @@ The following error occurred when I ran the `esp-idf/examples/protocols/https_mb
       I(53779) mbedtls: ssl_tls.c:355 Reallocating in_buf to 4429
       I(53779) mbedtls: ssl_tls.c:355 Reallocating in_buf to 16717
       E(53769) example: Last error was: -0x6c00 - SSL - Internal error (eg, unexpected failure in lower-level module)
-   
+
   - TLS v1.3 is not yet supported on ESP-IDF v5.1.2. If you need to connect to a TLS v1.3 server, please test with the ESP-IDF v5.2-beta1 or later SDK. See: `esp_tls: add initial support for TLS 1.3 connection <https://github.com/espressif/esp-idf/commit/7fd1378fbb0b81231a83f91f8227f8fb083635a5>`_.
 
 
@@ -122,8 +122,35 @@ How to restrict mbedtls to only use specific cipher suites?
 
   .. code-block:: c
 
-    static int force_ciphersuite[2] = {MBEDTLS_TLS_RSA_WITH_AES_128_GCM_SHA256, 0};  
-    mbedtls_ssl_conf_ciphersuites(&tls->conf, force_ciphersuite);  
+    static int force_ciphersuite[2] = {MBEDTLS_TLS_RSA_WITH_AES_128_GCM_SHA256, 0};
+    mbedtls_ssl_conf_ciphersuites(&tls->conf, force_ciphersuite);
 
   For more details, please refer to: https://github.com/espressif/esp-idf/blob/master/components/esp-tls/esp_tls_mbedtls.c#L880-L889.
 
+-------------
+
+Using a certificate validated by OpenSSL, the device fails to verify the certificate when connecting to the MQTT server. However, the MQTTX tool can successfully connect and verify it. Why?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Check whether the field length of the SAN (Subject Alternative Name) IP address in the certificate meets the definition of the x.509 standard. In Mbedtls, the length for IPv4 is 4 bytes, and the length for IPv6 is 16 bytes.
+
+-------------
+
+Is the WolfSSL license included with Espressif chips?
+----------------------------------------------------------
+
+  The agreement between Espressif chips and WolfSSL has expired. You need to purchase their license for commercial usage.
+
+-------------
+
+During OTA upgrade, Mbedtls reports an error (e.g., -0x7780). How to resolve this?
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+  0x7780 indicates that the device received an alert message sent by the peer. For example, when the Espressif device uses a self-signed CA certificate and acts as an HTTP server, if a PC browser accesses the server, the PC will send such an alert message. However, this does not affect normal communication. In other cases, it is recommended to enable Mbedtls debug logs to investigate further.
+
+-------------
+
+TLS handshake failed with error code -0x7100 (BAD_INPUT_DATA). What could be the reason?
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+  This is usually caused by incomplete reception of data, making parsing impossible. Verify whether ``CONFIG_MBEDTLS_SSL_IN_CONTENT_LEN`` is set to 16 K. If it is already configured to the maximum 16 K, enable Mbedtls debug logs to investigate the issue.
