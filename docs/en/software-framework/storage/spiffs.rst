@@ -13,15 +13,6 @@ SPIFFS Filesystem
      h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
    </style>
 
----------------
-
-Can SPIFFS partition be encrypted?
-----------------------------------------------------------------
-
-  :CHIP\: ESP32, ESP32S2, ESP32S3, ESP32C3:
-
-  - SPIFFS does not provide native disk encryption. However, as SPIFFS is realized based on flash, the data can be encrypted using flash encryption. Standard encryption libraries such as mbedtls or OpenSSL can be used to encrypt and decrypt files in SPIFFS. When writing files, the data is encrypted first, and then written to SPIFFS. When reading files, data is first read from SPIFFS, and then decrypted using corresponding decryption algorithms.
-
 -------------------
 
 How do I store the keys and certs of ESP32 devices in SPIFFS?
