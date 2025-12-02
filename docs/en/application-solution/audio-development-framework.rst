@@ -18,7 +18,7 @@ Audio Application Framework
 When using the VoIP feature of ESP-ADF, how to eliminate echo during calls between a mobile phone and an ESP32 device?
 ----------------------------------------------------------------------------------------------------------------------------------
 
-  - Espressif provides an Acoustic Echo Cancelation (AEC) algorithm based on ESP32 and ESP32-S3 chips. For details, please refer to the `algorithm examples <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/algorithm>`_.
+  - Espressif provides an Acoustic Echo Cancellation (AEC) algorithm based on ESP32 and ESP32-S3 chips. For details, please refer to the `algorithm examples <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/algorithm>`_.
   - Note that the effect of AEC not only depends on software parameter configuration and debugging, but also on hardware design, such as distortion-free playback, noise-free recording, and problem-free echo reference signal, etc. For this part, it is recommended to refer to the Espressif's design on the `ESP32-Lyrat-Mini development board <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/en/latest/design-guide/dev-boards/get-started-esp32-lyrat-mini.html>`_ and `ESP32-S3-Korvo-2 development board <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/en/latest/design-guide/dev-boards/user-guide-esp32-s3-korvo-2.html>`_.
 
 --------------
@@ -119,7 +119,7 @@ Does ESP-ADF support running Alexa examples on the ESP32-LyraTD-MSC v2.1 develop
 --------------------------------------------------------------------------------------------------------
 
   - ESP-ADF does not directly support Alexa examples. For Alexa examples, please refer to `esp-va-sdk <https://github.com/espressif/esp-avs-sdk>`_.
-  - Please note that since the second half of 2024, Alexa has disabled the host-side (build-in) voice interface. If you need to connect to the Alexa voice ecosystem in the future, you can try using the ACK or Matter solution.
+  - Please note that since the second half of 2024, Alexa has disabled the host-side (built-in) voice interface. If you need to connect to the Alexa voice ecosystem in the future, you can try using the ACK or Matter solution.
 
 --------------
 

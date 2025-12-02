@@ -18,7 +18,7 @@
 使用 ESP-ADF 的 VoIP 功能时，手机和 ESP32 设备进行通话如何消除回音？
 -----------------------------------------------------------------------
 
-  - 乐鑫提供基于 ESP32、ESP32-S3 芯片的回声消除 (Acoustic Echo Cancelation, AEC) 算法，可以参考 `算法例程 <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/algorithm>`_。
+  - 乐鑫提供基于 ESP32、ESP32-S3 芯片的回声消除 (Acoustic Echo Cancellation, AEC) 算法，可以参考 `算法例程 <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/algorithm>`_。
   - 需要注意，AEC 的效果不仅仅依赖于软件参数配置和调试，还依赖于硬件设计，例如播放不能失真、录音不能有杂音以及回升参考信号没有问题等等，此部分推荐参考乐鑫 `ESP32-Lyrat-Mini 开发板 <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/zh_CN/latest/design-guide/dev-boards/get-started-esp32-lyrat-mini.html>`_ 以及 `ESP32-S3-Korvo-2 开发板 <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/zh_CN/latest/design-guide/dev-boards/user-guide-esp32-s3-korvo-2.html>`_ 的设计。
 
 --------------
@@ -119,7 +119,7 @@ ESP-ADF 是否支持 ESP32-LyraTD-MSC v2.1 开发板跑 Alexa 例程？
 ---------------------------------------------------------------------
 
   - ESP-ADF 中还没有直接支持 Alexa 的例程。对于 Alexa 例程，请参考 `esp-va-sdk <https://github.com/espressif/esp-avs-sdk>`_。
-  - 需要注意的是，从 2024 年下半年开始，Alexa 已关闭了主机侧（Build-in）语音接口。如果后续需要接入 Alexa 语音生态，可以尝试使用 ACK 方案或 Matter 方案。
+  - 需要注意的是，从 2024 年下半年开始，Alexa 已关闭了主机侧（Built-in）语音接口。如果后续需要接入 Alexa 语音生态，可以尝试使用 ACK 方案或 Matter 方案。
 
 --------------
 
@@ -297,7 +297,7 @@ Wi-Fi 和 FFT 可以同时使用吗？
 
 -------------
 
-ESP-ADF 音频应用开发框架中，软件 AEC（Acoustic Echo Cancelation，回声消除）与硬件 AEC 有什么区别？
+ESP-ADF 音频应用开发框架中，软件 AEC（Acoustic Echo Cancellation，回声消除）与硬件 AEC 有什么区别？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   硬件 AEC 与 软件 AEC 的区别在于参考信号的来源。若参考信号来自于非主控芯片（比如 ES8311、ES7210），则是硬件 AEC；若由主控设备自行复制出参考信号进行回声消除，则是软件 AEC。

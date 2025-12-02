@@ -32,7 +32,7 @@ Wi-Fi 和 ESP-BLE-MESH 共存时，为什么 Wi-Fi 吞吐量很低？
   - ``ESP32-specific --> Support for external,SPI-connected RAM --> Try to allocate memories of Wi-Fi and LWIP...``
   - ``Bluetooth --> Bluedriod Enable --> BT/BLE will first malloc the memory from the PSRAM``
   - ``Bluetooth --> Bluedriod Enable --> Use dynamic memory allocation in BT/BLE stack.``
-  - ``Bluetooth --> Blutooth controller --> BLE full scan feature supported.``
+  - ``Bluetooth --> Bluetooth controller --> BLE full scan feature supported.``
   - ``Wi-Fi --> Software controls Wi-Fi/Bluetooth coexistence --> Wi-Fi``
 
 --------------

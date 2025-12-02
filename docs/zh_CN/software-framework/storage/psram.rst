@@ -86,7 +86,7 @@ ESP32 支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存吗？
     E(39307)BLE_INIT:Mallocfailed
     E(40307)BLE_INIT:Mallocfailed
 
-  - 当前报错是因为 Malloc 内存不足，当应用内存小于 ``idf.py menuconfig > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``(16384) Maximum malloc() zise , in bytes , to always put in internal memory`` 配置时，会默认使用芯片内部内存。可以将此配置调小，或者将 ``idf.py menuconfig`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``SPI RAM access method`` 配置改为 ``Make RAM allocatable using heap_caps_malloc(...... MALLOC_CAP_SPIRAM)`` 的配置。 
+  - 当前报错是因为 Malloc 内存不足，当应用内存小于 ``idf.py menuconfig > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``(16384) Maximum malloc() size , in bytes , to always put in internal memory`` 配置时，会默认使用芯片内部内存。可以将此配置调小，或者将 ``idf.py menuconfig`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``SPI RAM access method`` 配置改为 ``Make RAM allocatable using heap_caps_malloc(...... MALLOC_CAP_SPIRAM)`` 的配置。 
 
 -------------
 

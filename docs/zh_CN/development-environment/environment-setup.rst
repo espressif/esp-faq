@@ -144,7 +144,7 @@ Windows 环境下 ESP-IDF 编译比较慢如何优化？
 
 -----------------
 
-运行 `demo` 时出现包管理器组件依赖拉不下，出现失败 `Invaild manifest format`、 `Invalid dependency format`、 `unknown keys in dependency details: override_path`，可能是什么原因导致的？
+运行 `demo` 时出现包管理器组件依赖拉不下，出现失败 `Invalid manifest format`、 `Invalid dependency format`、 `unknown keys in dependency details: override_path`，可能是什么原因导致的？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 这是因为缺少组件依赖导致的，需要更新 `component-manager`。指令命令为 `pip install --upgrade idf-component-manager`。

@@ -121,7 +121,7 @@ How to modify the log output without changing the output level of menuconfig？
 
     esp_log_level_set("network", ESP_LOG_DEBUG);
 
-  For more information about this functinality, please refer to `Logging library <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/log.html>`_.
+  For more information about this functionality, please refer to `Logging library <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/log.html>`_.
 
 --------------
 
@@ -184,7 +184,7 @@ What are the reasons for not being able to recognize ESP devices under the Win10
 
 --------------
 
-One error occurred with ESP32 as: Core 1 paniced (Cache disabled but cache memory region accessed). What could be the reason?
+One error occurred with ESP32 as: Core 1 panicked (Cache disabled but cache memory region accessed). What could be the reason?
 ------------------------------------------------------------------------------------------------------------------------------------
 
   Reasons:

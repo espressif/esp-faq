@@ -20,7 +20,7 @@ Do ESP32 and ESP8266 support Chinese SSID for Wi-Fi?
 
   Both ESP32 and ESP8266 support Chinese SSID, but you need to use corresponding libraries and implement some settings. It should be noted you need to make special configurations when using Chinese SSID as Chinese characters occupy different numbers of bytes.
 
-  For ESP32, you can use the Wi-Fi related API provided by ESP-IDF. When connecting AP, you can use the fuction `esp_wifi_set_config() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv419esp_wifi_set_config16wifi_interface_tP13wifi_config_t>`_ to set Wi-Fi. The SSID parameter can be set to Chinese characters. For example,
+  For ESP32, you can use the Wi-Fi related API provided by ESP-IDF. When connecting AP, you can use the function `esp_wifi_set_config() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv419esp_wifi_set_config16wifi_interface_tP13wifi_config_t>`_ to set Wi-Fi. The SSID parameter can be set to Chinese characters. For example,
 
   .. code-block:: c
 
@@ -235,7 +235,7 @@ What is the maximum value of ESP32 Wi-Fi RF power？
 -----------------------------------------------------------
 
   The output RF power of ESP32 can be set to 20 dBm at maximum.
-  Please note that the maximum output power may vary in different countires and regions. Please ensure that you comply with local rules and regulations when using ESP32. In addition, high power output also influence battery life and Wi-Fi signal stability. As a result, you should confirm the output power depending on applications and requirements.
+  Please note that the maximum output power may vary in different countries and regions. Please ensure that you comply with local rules and regulations when using ESP32. In addition, high power output also influence battery life and Wi-Fi signal stability. As a result, you should confirm the output power depending on applications and requirements.
 
 --------------
 
@@ -1065,7 +1065,7 @@ Does ESP8089 support Wi-Fi Direct mode?
 How does ESP32 connect to an AP whose RSSI does not fall below the configured threshold when there are multiple APs in the environment?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  In ESP32 staion mode, there is a `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N13wifi_config_t3staE>`_ structure with 2 variables underneath, i.e., `sort_method <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11sort_methodE>`_ and `threshold <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE>`_. The RSSI threshold is configured by assigning values to these two variables.
+  In ESP32 station mode, there is a `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N13wifi_config_t3staE>`_ structure with 2 variables underneath, i.e., `sort_method <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11sort_methodE>`_ and `threshold <https://docs.espressif.com/projects/esp-idf/en/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE>`_. The RSSI threshold is configured by assigning values to these two variables.
 
 --------------
 
@@ -1184,7 +1184,7 @@ How to configure the Wi-Fi country code when the ESP end product needs to be sol
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Different Wi-Fi country codes need to be set for different countries.
-  - The default country code configuration can be used for most countries, but it is not compatible with some special cases. The default country code is ``CHINA {.cc="CN", .schan=1, .nchan=13, policy=WIFI_COUNTRY_POLICY_AUTO}``. While in the ESP-IDF v5.0 or later version, the dafualt one has been changed to ``"01" (world safe mode) {.cc="01", .schan=1, .nchan=11, .policy=WIFI_COUNTRY_POLICY_AUTO}）``. Since channels 12 and 13 are passively scanned by default, they do not violate the regulations of most countries. Besides, the country code of the ESP product is automatically adapted to the router that it is connected to. When disconnected from the router, it automatically goes back to the default country code.
+  - The default country code configuration can be used for most countries, but it is not compatible with some special cases. The default country code is ``CHINA {.cc="CN", .schan=1, .nchan=13, policy=WIFI_COUNTRY_POLICY_AUTO}``. While in the ESP-IDF v5.0 or later version, the default one has been changed to ``"01" (world safe mode) {.cc="01", .schan=1, .nchan=11, .policy=WIFI_COUNTRY_POLICY_AUTO}）``. Since channels 12 and 13 are passively scanned by default, they do not violate the regulations of most countries. Besides, the country code of the ESP product is automatically adapted to the router that it is connected to. When disconnected from the router, it automatically goes back to the default country code.
 
   .. note::
 
@@ -1300,7 +1300,7 @@ Does ESP modules support WAPI (Wireless LAN Authentication and Privacy Infrastru
 How can I increase the time for scanning routers when using ESP32 as the Wi-Fi Station to connect routers?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - In ESP32, by defualt, channels 1 ~ 11 are active scanning, while channels 12 ~ 13 are passive scanning. Active and passive scanning require different amounts of time. For more details, please refer to `Wi-Fi scan configuration <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#scan-configuration>`_. The default duration for active scanning is 120 ms per channel, while for passive scanning, it is 360 ms per channel. You can call the following function before calling ``esp_wifi_start()`` to increase the time for scanning routers:
+  - In ESP32, by default, channels 1 ~ 11 are active scanning, while channels 12 ~ 13 are passive scanning. Active and passive scanning require different amounts of time. For more details, please refer to `Wi-Fi scan configuration <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#scan-configuration>`_. The default duration for active scanning is 120 ms per channel, while for passive scanning, it is 360 ms per channel. You can call the following function before calling ``esp_wifi_start()`` to increase the time for scanning routers:
 
   .. code-block:: c
 
@@ -1500,7 +1500,7 @@ How to completely disable Wi-Fi configurations on ESP32 to optimize firmware siz
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
-Why can't a router with WPA2 encryption be connnected when the WiFi scan auth mode threshold is set to WPA2_WPA3_PSK in menuconfig, but only routers with WPA3 or WPA2/WPA3 encryption can?
+Why can't a router with WPA2 encryption be connected when the WiFi scan auth mode threshold is set to WPA2_WPA3_PSK in menuconfig, but only routers with WPA3 or WPA2/WPA3 encryption can?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - This is due to the ordering of the authmode threshold: ``OPEN < WEP < WPA_PSK < OWE < WPA2_PSK = WPA_WPA2_PSK < WAPI_PSK < WPA3_PSK = WPA2_WPA3_PSK = DPP``. In other words, WPA2_WPA3_PSK uses WPA3_PSK as the authmode threshold, so it cannot connect to a router that only supports WPA2 encryption.

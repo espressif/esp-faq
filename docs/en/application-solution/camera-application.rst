@@ -302,7 +302,7 @@ What could be the reason for the following warning log appearing in the Camera a
     W (8022) cam_haL:FB-OVF
     W (8042) cam_haL:FB-OVF
 
-  The above warning log indicates a frame buffer overflow, which is caused by too fast a frame rate. You can try to reduce the XCLK (Note that the XCLK of ESP32S3 is devided from the 80 MHz clock by default, so the size of XCLK must be divisible by 80 MHz).
+  The above warning log indicates a frame buffer overflow, which is caused by too fast a frame rate. You can try to reduce the XCLK (Note that the XCLK of ESP32S3 is divided from the 80 MHz clock by default, so the size of XCLK must be divisible by 80 MHz).
   Specifically, if the sensor is operating in JPEG mode, you can try to increase the size of the jpeg recv buffer by increasing the value of the `Custom JPEG mode frame size (bytes)` option in menuconfig.
 
 -------------------

@@ -41,7 +41,7 @@ How to enable exFAT?
 
   :CHIP\: ESP32:
 
-  - please modify #define FF_FS_EXFAT  0 as #define FF_FS_EXFAT  1 , please reffer to `ffconf.h <https://github.com/espressif/esp-idf/blob/178b122c145c19e94ac896197a3a4a9d379cd618/components/fatfs/src/ffconf.h#L255>`_ for details.
+  - please modify #define FF_FS_EXFAT  0 as #define FF_FS_EXFAT  1 , please refer to `ffconf.h <https://github.com/espressif/esp-idf/blob/178b122c145c19e94ac896197a3a4a9d379cd618/components/fatfs/src/ffconf.h#L255>`_ for details.
 
 ----------------
 

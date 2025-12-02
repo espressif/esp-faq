@@ -1,4 +1,5 @@
 stages:
+    - pre_commit
     - pre_check
     - auto_trans
     - build_docs
@@ -21,6 +22,7 @@ workflow:
 
 include:
   - '.gitlab/ci/rules.yml'
+  - '.gitlab/ci/pre_commit.yml'
   - '.gitlab/ci/pre_check.yml'
   - '.gitlab/ci/build_docs.yml'
   - '.gitlab/ci/deploy.yml'

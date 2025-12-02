@@ -355,7 +355,7 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
     - Rssi 值太低。在复杂环境下 Rssi 值较低时，可能导致 STA 收不到 beacon，可通过调用 ``esp_wifi_sta_get_ap_info`` 获取 Rssi 值来排查。
     - 硬件原因。收包性能差。
 
-  出现 bcn_timeout 时，STA 会尝试发送 5 次 Probe Request，如果 AP 回 Probe Reponse，就保持连接；如果 AP 未回复，STA 发送 Disconnect 事件，并断开连接。
+  出现 bcn_timeout 时，STA 会尝试发送 5 次 Probe Request，如果 AP 回 Probe Response，就保持连接；如果 AP 未回复，STA 发送 Disconnect 事件，并断开连接。
 
 --------------
 
@@ -1065,7 +1065,7 @@ ESP8089 是否支持 Wi-Fi Direct 模式？
 环境中有很多 AP，ESP32 如何连接 RSSI 不低于配置阈值的 AP?
 -----------------------------------------------------------------------------------
 
-  在 ESP32 staion 模式下，有一个 `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N13wifi_config_t3staE>`_ 的结构体，下面有 2 个变量，分别是 `sort_method <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11sort_methodE>`_ 和 `threshold <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE>`_ 变量，通过给这两个变量赋值来设置 RSSI 阈值。
+  在 ESP32 station 模式下，有一个 `wifi_sta_config_t <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N13wifi_config_t3staE>`_ 的结构体，下面有 2 个变量，分别是 `sort_method <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t11sort_methodE>`_ 和 `threshold <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/api-reference/network/esp_wifi.html#_CPPv4N17wifi_sta_config_t9thresholdE>`_ 变量，通过给这两个变量赋值来设置 RSSI 阈值。
 
 --------------
 
@@ -1556,7 +1556,7 @@ Wi-Fi STA 日志中出现 ``wifi:bcn_timeout,ap_probe_send_start`` 时，为什�
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 网络环境问题：可能由于目前网络环境较差或者路由器掉电，STA 设备长时间收不到 beacon，收包时间变长，导致功耗增加；
-  - 主动探测 AP：出现 bcn_timeout 时，STA 会尝试发送最多 5 次 Probe Request。如果 AP 响应 Probe Reponse，则保持连接；如果 AP 未响应，STA 会发送 Disconnect 事件，并断开连接。这一过程中，额外的发包也会导致功耗增加。
+  - 主动探测 AP：出现 bcn_timeout 时，STA 会尝试发送最多 5 次 Probe Request。如果 AP 响应 Probe Response，则保持连接；如果 AP 未响应，STA 会发送 Disconnect 事件，并断开连接。这一过程中，额外的发包也会导致功耗增加。
 
 ---------------
 
