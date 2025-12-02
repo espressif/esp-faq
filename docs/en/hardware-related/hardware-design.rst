@@ -145,8 +145,8 @@ Can I use ESP32 to play music with PWM or DAC?
 
 ------------
 
-Why is the suggested voltage range of ESP32 modules diffrent from that of ESP32 chips?
---------------------------------------------------------------------------------------
+Why is the suggested voltage range of ESP32 modules different from that of ESP32 chips?
+-----------------------------------------------------------------------------------------------
 
   - This is because of the different working environments and usage scenarios.
     - The ESP32 chip is a bare die and requires external circuitry on a circuit board to function properly. The recommended operating voltage range for the ESP32 chip is 2.3 V to 3.6 V, which is determined by the chip's electrical parameters. Within this voltage range, the ESP32 chip can function properly and provide optimal performance and power consumption.
@@ -371,7 +371,7 @@ When using the ESP32-WROOM-32D module, can I set GPIO12 for other uses?
   - GPIO12 is a strapping pin that controls the startup voltage of SPI flash. The SPI flash startup voltage of the ESP32-WROOM-32D module is 3.3 V, so GPIO12 needs to be pulled down during powering on.
   - If you need to set GPIO12 for other uses, please use the command `espefuse.py set_flash_voltage 3.3v <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/set-flash-voltage-cmd.html#set-flash-voltage>`_ in the esptool to set the voltage through VDD_SDIO as 3.3 V.
   - It is possible to connect VDD_SDIO to 3.3 V in hardware directly without burning eFuse again.
-  - In the mass production stage, you can also download the firmware directly by modifying the default configuration of ESP32_EFUSE_CONFIG to config_voltage = 3.3 V in config/esp32/utility.confgi in the flash download tool.
+  - In the mass production stage, you can also download the firmware directly by modifying the default configuration of ESP32_EFUSE_CONFIG to config_voltage = 3.3 V in config/esp32/utility.config in the flash download tool.
 
 --------------------
 

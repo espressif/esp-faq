@@ -166,7 +166,7 @@ ESP32 的 ESP-BLE-MESH 应用可以连接多少个节点设备？
 
 --------------------------------------------------------
 
-ESP32 长时间运行 ESP-BLE-MESH 程序后，发现客户端向服务器发送消息时出现分段错误，ESP-BLE-MESH 打印日志 ``NO multi-segment messsage contexts available``。如何解决？
+ESP32 长时间运行 ESP-BLE-MESH 程序后，发现客户端向服务器发送消息时出现分段错误，ESP-BLE-MESH 打印日志 ``NO multi-segment message contexts available``。如何解决？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   您可以前往 ``Component config`` > ``ESP BLE Mesh Support`` > ``Maximum number of simultaneous outgoing segmented messages``，通过配置 ``BLE_MESH_TX_SEG_MSG_COUNT`` 来扩展空间。

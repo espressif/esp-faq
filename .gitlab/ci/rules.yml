@@ -38,6 +38,9 @@
 .if_label-deploy: &if-label-deploy
   if: '$BOT_LABEL_DEPLOY || $CI_MERGE_REQUEST_LABELS =~ /^(?:[^,\n\r]+,)*deploy(?:,[^,\n\r]+)*$/i'
 
+.if_label-pre_commit: &if-label-pre_commit
+  if: '$BOT_LABEL_PRE_COMMIT || $CI_MERGE_REQUEST_LABELS =~ /^(?:[^,\n\r]+,)*pre_commit(?:,[^,\n\r]+)*$/i'
+
 # For docs
 
 .rules:pre_check:linkcheck:
@@ -78,3 +81,10 @@
   rules:
     - <<: *if-label-auto_trans
     - <<: *if-trigger-job
+
+.rules:pre_commit:check_pre_commit:
+  rules:
+    - <<: *if-label-pre_commit
+    - <<: *if-trigger-job
+    - <<: *if-dev-push
+      changes: *patterns-docs

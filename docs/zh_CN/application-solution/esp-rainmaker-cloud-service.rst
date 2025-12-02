@@ -214,7 +214,7 @@ ESP RainMaker 是否支持本地控制？
 
   请拉取最新的代码，并确认 OTA 时使用的为 `最新的 OTA 服务器证书 <https://github.com/espressif/esp-rainmaker/blob/master/components/esp_rainmaker/server_certs/rmaker_ota_server.crt>`_。如果确定为最新的证书则可尝试下述方案:
   
-  1. 获取 OTA 使用的 URL。您可以在云下发给设备的 OTA 消息中找到 URL，格式通常为 `https://esp-rainmaker-ota-xxxx-dev.s3.us-west-1.amazonaws.com/users/xxx/firmwar/xxx/xxxxxxxxxx`。
+  1. 获取 OTA 使用的 URL。您可以在云下发给设备的 OTA 消息中找到 URL，格式通常为 `https://esp-rainmaker-ota-xxxx-dev.s3.us-west-1.amazonaws.com/users/xxx/firmware/xxx/xxxxxxxxxx`。
   2. 查询该链接使用的 OTA 服务器证书。您需要使用 Linux 命令行执行 `openssl s_client -showcerts -verify 5 -connect esp-rainmaker-ota-xxxxx-dev.s3.us-west-1.amazonaws.com:443 < /dev/null`。
   3. 替换证书。如果一切正常，在执行完成第 2 步后，命令行中将打印多个证书，您需要选择并替换您当前使用的证书。
 

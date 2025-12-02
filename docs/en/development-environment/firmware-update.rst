@@ -192,7 +192,7 @@ Why does the programming fail for the jig with a 4-port hub in factory mode?
 I'm using an ESP32-WROVER-B module to download the AT firmware via the `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_. However, an error occurred after writing to flash. But the same operation succeeded when replacing the module with ESP32-WEOVER-E, what is the reason?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The ESP32-WROVER-B module leads out the SPI flash pin, but the ESP32-WROVER-E module does not. Please check whether the SPI flash pin of the ESP32-WROVER-B module is re-used by other external application circuits.
+  - The ESP32-WROVER-B module leads out the SPI flash pin, but the ESP32-WROVER-E module does not. Please check whether the SPI flash pin of the ESP32-WROVER-B module is reused by other external application circuits.
   - Connecting the CMD pin of the SPI flash in ESP32-WROVER-B to GND will cause the flash to fail to start. The following error log will be printed:
 
   .. code:: shell

@@ -144,7 +144,7 @@ What could be the cause of the error `KeyError: 'idfSelectedId'` when running `.
 
 -----------------
 
-When running `demo`, the package manager component dependency cannot be pulled, with the failure information `Invaild manifest format`, `Invalid dependency format`, and `unknown keys in dependency details: override_path`. What could be the reason?
+When running `demo`, the package manager component dependency cannot be pulled, with the failure information `Invalid manifest format`, `Invalid dependency format`, and `unknown keys in dependency details: override_path`. What could be the reason?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - This is due to missing component dependencies and can be solved after updating `component-manager`. The corresponding command is `pip install --upgrade idf-component-manager`.

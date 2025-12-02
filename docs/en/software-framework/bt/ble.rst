@@ -374,7 +374,7 @@ What is the maximum supported broadcast length of BLE 5.0 broadcast after it is 
 How can I set a BLE broadcast package as unconnectable package?
 --------------------------------------------------------------------------------------------------
 
-  - please reffer to the `gatt_server demo <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server>`_，and set adv_type as ADV_TYPE_NONCONN_IND.
+  - please refer to the `gatt_server demo <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/gatt_server>`_，and set adv_type as ADV_TYPE_NONCONN_IND.
 
     .. code:: text
 

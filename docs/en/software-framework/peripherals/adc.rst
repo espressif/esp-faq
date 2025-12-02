@@ -146,7 +146,7 @@ Can we use GPIO0 as the ADC pin when using ESP32 as a Wi-Fi access point?
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The ESP32 ADC2 pins cannot be used when you are using Wi-Fi. So, if you are having trouble getting the value from an ADC2 GPIO while using Wi-Fi, you may consider using an ADC1 GPIO instead. For more details, please refer to `Hardware Limitations of ADC Continuous Mode <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc_continuous.html>`__ and `Hardware Limitations of ADC Oneshot Mode <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/adc_oneshot.html>`__.
-  - The GPIO0, GPIO2, GPIO5, GPIO12 (MTDI), and GPIO15 (MTDO) are strapping pins. When using GPIO0 for other functions, you need to pay attention to the GPIO level during power-up. If the GPIO0 level is low during power-up, the chip can enter the download mode. For more infomation, please refer to `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__.
+  - The GPIO0, GPIO2, GPIO5, GPIO12 (MTDI), and GPIO15 (MTDO) are strapping pins. When using GPIO0 for other functions, you need to pay attention to the GPIO level during power-up. If the GPIO0 level is low during power-up, the chip can enter the download mode. For more information, please refer to `ESP32 datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__.
 
 --------------------
 

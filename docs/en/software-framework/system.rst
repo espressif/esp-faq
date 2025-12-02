@@ -674,7 +674,7 @@ How do I change the system time of a module?
 
   :CHIP\: ESP32 | ESP32 | ESP32-C3:
 
-  - You can use the ``time()`` interface in C libraray to set the system time.
+  - You can use the ``time()`` interface in C library to set the system time.
 
 ----------------------------------------------------------------------------------------
 

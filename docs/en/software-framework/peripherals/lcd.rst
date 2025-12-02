@@ -432,7 +432,7 @@ Can ESP32-S3 enter Light-sleep mode after enabling the RGB screen driver?
 Is it supported to drive segment LCD screens?
 -------------------------------------------------------------------------------
 
-  ESP chips can't directly drive the segment LCD screen through the GPIO pin, because this fuction requires cycling between high and low voltage levels, with an AC voltage from 2.7 V to 5.0 V and typical values of 3.0 V, 3.3 V, 4.5 V, and 5.0 V. However, the chips do not support voltage range adjustment.
+  ESP chips can't directly drive the segment LCD screen through the GPIO pin, because this function requires cycling between high and low voltage levels, with an AC voltage from 2.7 V to 5.0 V and typical values of 3.0 V, 3.3 V, 4.5 V, and 5.0 V. However, the chips do not support voltage range adjustment.
 
 ---------------------------
 

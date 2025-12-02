@@ -184,7 +184,7 @@ Win 10 系统下识别不到 ESP 设备有哪些原因？
 
 --------------
 
-ESP32 出现 Error:Core 1 paniced (Cache disabled but cache memory region accessed) 是什么原因？
+ESP32 出现 Error:Core 1 panicked (Cache disabled but cache memory region accessed) 是什么原因？
 ----------------------------------------------------------------------------------------------------
 
   问题原因：

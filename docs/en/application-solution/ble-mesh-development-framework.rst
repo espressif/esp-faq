@@ -166,7 +166,7 @@ How many node devices can the ESP32 ESP-BLE-MESH application connect to?
 
 --------------------------------------------------------
 
-After ESP32 runs the ESP-BLE-MESH program for a long time, a segmentation error occurs when the client sends a message to the server, and the ESP-BLE-MESH prints ``NO multi-segment messsage contexts available``. How to solve the issue?
+After ESP32 runs the ESP-BLE-MESH program for a long time, a segmentation error occurs when the client sends a message to the server, and the ESP-BLE-MESH prints ``NO multi-segment message contexts available``. How to solve the issue?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   You can go to ``Component config`` > ``ESP BLE Mesh Support`` > ``Maximum number of simultaneous outgoing segmented messages``, and expand the space by configuring ``BLE_MESH_TX_SEG_MSG_COUNT``.
