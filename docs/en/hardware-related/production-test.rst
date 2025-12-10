@@ -52,3 +52,8 @@ When downloading bin files to ESP32-WROVER-E (16 MB flash) using Flash Download 
 
     compress = False
     no_compress = True
+
+Where can I find the MTBF report for a chip or module?
+------------------------------------------------------
+
+MTBF (Mean Time Between Failures) values are not publicly provided. MTBF can vary widely depending on test scope, operating conditions, and actual application scenarios. Publishing a single number may cause misunderstanding or lead to incorrect conclusions for real-world use.
