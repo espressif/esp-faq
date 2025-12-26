@@ -141,3 +141,19 @@ How can I detect if the peer has sent a FIN packet in a TLS connection?
 ------------------------------------------------------------------------------------------------------
 
   You can check for the error code ``-0x004C`` or ``errno=128``, which indicates that the peer has actively closed the connection.
+
+----------------
+
+How should I handle the expired TLS certificates after the device has been mass-produced?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Extend the validity period of the certificate as much as possible to ensure that the certificate's validity period is longer than the device's service life;
+  - Update the certificate via OTA before it expires;
+  - If the certificate has expired, it can be updated through other remote methods, such as uploading a new certificate through the HTTP interface.
+
+----------------
+
+How to troubleshoot if a certificate error is prompted in a TLS or WSS connection, but the client configuration is confirmed to be correct?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  You can use other TLS/WSS clients (such as a PC or third-party library) to connect to the same server for comparison testing. If the same certificate error is reported, it usually indicates an issue with the server's certificate or certificate chain, rather than a problem with the device's verification logic.
