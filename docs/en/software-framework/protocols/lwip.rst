@@ -416,4 +416,43 @@ Why does the device fail to respond to Ping when AP + STA are in the same networ
 Why does the device open multiple UDP ports? Is this normal?
 ------------------------------------------------------------------------------------------------------
 
-  This is normal behavior. UDP ports are used by protocols such as DHCP, DNS, and SNTP. Each query may temporarily allocate a port number higher than 1024, which will automatically close after use.
+  This is normal behavior. UDP ports are used by protocols such as DHCP, DNS, and SNTP. For each request, a temporary port (typically above 1024) may be allocated, which will automatically close after the request is completed.
+
+-----------------
+
+How should I handle the situation where the ESP32-P4 cannot obtain a global IPv6 address when using an Ethernet connection, but the link-local IPv6 address is available?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+  You can check whether `line 1176 of the esp_netif_lwip.c file <https://github.com/espressif/esp-idf/blob/v5.5.1/components/esp_netif/lwip/esp_netif_lwip.c#L1176>`_ is executed in the Ethernet scenario. At the same time, confirm the value of ``ip6_autoconfig_enabled`` (0 or 1).
+
+-----------------
+
+When there are multiple netifs (such as Wi-Fi and Ethernet) on a device, can the data be automatically switched to another netif when one netif is disconnected?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Automatic switching is not supported. The direction of data flow is determined by the priority of netif. If the high-priority netif remains connected (even if it is actually offline), data will still attempt to go through that interface, and will not automatically switch to another available lower-priority interface.
+
+-----------------
+
+When both Wi-Fi and Ethernet are enabled, and a static IP is set for Ethernet, DNS resolution fails. How should this be troubleshooted and resolved?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  In multi-netif scenarios, the DNS server obtained by the netif started later may overwrite the previous one. The solution is as follows:
+
+  1. Check and enable the ``LWIP_DNS_SETSERVER_WITH_NETIF`` configuration, so that each netif has its own independent DNS server.
+  2. Ensure that the code for setting a static IP is executed after the correct network event (such as ``ETHERNET_EVENT_CONNECTED``).
+
+-----------------
+
+How can I publish the mDNS service on a specific network interface (netif)? For example, how to have different services published on Wi-Fi or Ethernet interfaces respectively?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The current mDNS implementation does not support registering different services on different netifs. Services are registered globally, and only the enabling or disabling of mDNS on a netif can be controlled (through ``mdns_netif_action``). It is not possible to have "Service A only on Wi-Fi, and Service B only on Ethernet".
+
+-----------------
+
+How to update headers (such as Authorization token) before automatic reconnection when using esp_websocket_client?
+------------------------------------------------------------------------------------------------------------------
+
+  The newer version of the ``esp_websocket_client`` component provides the ``esp_websocket_client_set_headers`` API, which allows for dynamic updating of header information when needed, without the need to destroy and rebuild the client.
