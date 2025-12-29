@@ -1619,3 +1619,23 @@ What does ``LWIP_GARP_TMR_INTERVAL`` do? What is the interval in seconds for sen
 
   GARP is a mechanism where an Espressif chip proactively sends its IP and MAC address mapping, which is used to notify other devices to update their ARP tables. INTERVAL represents the sending interval defaulted to 60 seconds.
 
+---------------
+
+After disabling modem sleep, the ping latency is still high. How can it be further optimized?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - In an open wireless environment, Wi-Fi latency is affected by channel competition and air interface fluctuations, and the optimization effect at the lwIP level is limited.
+
+  - The following optimizations can be performed:
+
+    1. Try to disable the WIFI AMPDU feature;
+    2. Refer to the relevant documents in `Wi-Fi Driver <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#how-to-improve-wi-fi-performance>`_ based on your target, and try to improve Wi-Fi performance.
+
+  - If the peer is also an ESP device and requires extremely low latency, it is recommended to use direct connection protocols such as `ESP-NOW <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_now.html>`_ to reduce latency.
+
+---------------
+
+When using a packet capture tool to analyze Wi-Fi traffic, is it normal that the data remains encrypted even after entering the SSID and password?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, this is normal. If the complete four-way handshake is not captured, the packet capture tool cannot decrypt subsequent data. To obtain complete handshake data, packet capturing should be performed while the client reconnects to the network.
