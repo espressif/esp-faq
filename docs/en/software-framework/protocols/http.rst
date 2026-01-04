@@ -201,3 +201,26 @@ After running HTTPS for some time, a decrease in minimum heap memory is observed
 -------------------------------------------------------------------------------------------------------------------
 
   Not necessarily. If the remaining memory is stable, the behavior may simply indicate higher peak memory usage (e.g., TCP is in the TIME_WAIT state and not released). You can set the ``SO_LINGER`` option to force close the connection and release resources.
+
+--------------
+
+When downloading firmware via HTTP, a read timeout occurs, sometimes after reading about 5 KB of data (default TCP receive window 5760), and extending the timeout does not solve the problem. What could be the reason? How to solve it?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Possible reasons:
+
+    Due to the working strategy of the mobile operator’s base station, the Espressif device does not acknowledge the complete data packet with a full ACK. This causes intermediate network devices to drop the packet. Consequently, the server does not receive the ACK and stops transmitting subsequent data.
+
+  Troubleshooting Approach:
+
+    1. Switch carrier network for testing;
+    2. Check and increase the size of the TCP receive window (such as ``CONFIG_LWIP_TCP_WND_DEFAULT``), and observe whether the amount of data read when failing increases with the window size.
+    3. Contact Espressif technical support to get guidance on the targeted solution.
+
+
+--------------
+
+How can HTTP connection reuse be maintained when performing a POST using low-level APIs like ``esp_http_client_open``?
+---------------------------------------------------------------------------------------------------------------------------------
+
+  To reuse a connection, you can reuse the same ``esp_http_client_handle_t`` instance. As long as the server does not explicitly request the connection to close via the ``Connection: close`` header, and the ESP side does not call ``esp_http_client_close()`` function to close the connection, this connection will remain open for new requests. For more information, refer to `Persistent Connections <https://docs.espressif.com/projects/esp-idf/en/v5.5.1/esp32/api-reference/protocols/esp_http_client.html#persistent-connections>`_.
