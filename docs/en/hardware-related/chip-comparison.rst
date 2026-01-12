@@ -45,9 +45,14 @@ Can the GPIO34 ~ GPIO39 of ESP32 only be set to input mode?
 Does ESP32 support a driver for Linux?
 -----------------------------------------
 
-  Yes, please refer to the example `esp-hosted <https://github.com/espressif/esp-hosted>`_.
+  You can use the `esp-hosted <https://github.com/espressif/esp-hosted>`__ solution. This solution currently offers three main variants: **ESP-Hosted-NG**, **ESP-Hosted-FG**, and **ESP-Hosted-MCU**. For differences between the variants, see `Variant Comparison <https://github.com/espressif/esp-hosted#-variant-comparison>`__.
 
-  .. note:: This example is adapted to the 802.3 protocol rather than the 802.11 protocol.
+  - Both **ESP-Hosted-NG** and **ESP-Hosted-FG** support Linux hosts:
+
+    - **ESP-Hosted-NG** provides a standard 802.11 Wi-Fi interface, and supports both STA and SoftAP modes.
+    - **ESP-Hosted-FG** provides an 802.3 Ethernet interface, and supports STA, SoftAP, and STA+SoftAP modes.
+  - If you use **ESP-Hosted-FG** and the target Linux platform is not yet adapted, you can refer to the `ESP-Hosted-FG Porting Guide <https://github.com/espressif/esp-hosted/blob/master/esp_hosted_fg/docs/Linux_based_host/porting_guide.md#porting-guide>`__.
+  - If you use **ESP-Hosted-NG** and the target Linux platform is not yet adapted, you can refer to the `ESP-Hosted-NG Porting Guide <https://github.com/espressif/esp-hosted/blob/master/esp_hosted_ng/docs/porting_guide.md>`__.
 
 ---------------
 

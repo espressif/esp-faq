@@ -45,9 +45,14 @@ ESP32 的 GPIO34 ~ GPIO39 管脚是否只能设置为输入模式？
 ESP32 有适配 Linux 平台驱动吗？
 -------------------------------
 
-  有适配，请参考 `esp-hosted <https://github.com/espressif/esp-hosted>`_ 示例。
+  可以使用 `esp-hosted <https://github.com/espressif/esp-hosted>`__ 方案。该方案目前提供三种主要变体： **ESP-Hosted-NG**、 **ESP-Hosted-FG** 和 **ESP-Hosted-MCU** 。各变体的区别详见 `变体比较 <https://github.com/espressif/esp-hosted#-variant-comparison>`__。
 
-  .. note:: 该示例适配 802.3 协议，并不是 802.11 协议。
+  - **ESP-Hosted-NG** 与 **ESP-Hosted-FG** 均支持 Linux 主机：
+
+    - **ESP-Hosted-NG** 提供标准的 802.11 Wi-Fi 接口，支持 STA 和 SoftAP 模式。
+    - **ESP-Hosted-FG** 提供 802.3 Ethernet 接口，支持 STA、SoftAP 以及 STA+SoftAP 模式。
+  - 若使用 **ESP-Hosted-FG** 且目标 Linux 平台尚未适配，可参考 `ESP-Hosted-FG 移植指南 <https://github.com/espressif/esp-hosted/blob/master/esp_hosted_fg/docs/Linux_based_host/porting_guide.md#porting-guide>`__ 进行移植。
+  - 若使用 **ESP-Hosted-NG** 且目标 Linux 平台尚未适配，可参考 `ESP-Hosted-NG 移植指南 <https://github.com/espressif/esp-hosted/blob/master/esp_hosted_ng/docs/porting_guide.md>`__ 进行移植。
 
 --------------
 
