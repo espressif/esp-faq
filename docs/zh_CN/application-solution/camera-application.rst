@@ -19,7 +19,7 @@ ESP32 系列芯片支持哪种类型的摄像头？
 ---------------------------------------
 
   - 有关 ESP32、ESP32-S2 和 ESP32-S3 系列支持的摄像头型号，请参阅 `ESP32 Camera Driver <https://github.com/espressif/esp32-camera/blob/master/README.md>`_。
-  - 有关 ESP32-P4 系列支持的摄像头型号，请参阅 `espressif-camera-sensors-component <https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor#espressif-camera-sensors-component>`_。
+  - 有关 ESP32-P4、ESP32-C5 和 ESP32-C61 系列支持的摄像头型号，请参阅 `espressif-camera-sensors-component <https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor#espressif-camera-sensors-component>`_。
 
 --------------
 
@@ -169,7 +169,7 @@ ESP-EYE 上的 200 万像素的 OV2640 摄像头是否可以改成只输出 30 �
 ESP32 支持全局快门的摄像头吗？
 -----------------------------------------------------------------
 
-  支持，目前支持的摄像头型号为 SC031GS、SC132GS，其他摄像头需要额外增加驱动支持。
+  支持，目前支持的摄像头型号为 SC031GS、SC035HGS、OV9281，其他摄像头需要额外增加驱动支持。
 
 --------------
 
@@ -352,3 +352,33 @@ ESP32-S3 是否支持 10 位 DVP 摄像头？
 
   - 对于 JPEG 格式的图像数据，可使用 `esp_new_jpeg <https://components.espressif.com/components/espressif/esp_new_jpeg/>`_ 组件，在解码过程中对解码数据直接进行缩小处理。
   - 对于 RGB 或 YUV 格式的数据，可使用 `PPA <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32p4/api-reference/peripherals/ppa.html>`_ 外设（仅支持 P 系列芯片），或使用软件实现的编码库组件 `esp_image_effects <https://components.espressif.com/components/espressif/esp_image_effects>`_ 进行缩放。
+
+两个相机应用组件 esp32-camera 和 esp-video 有什么区别？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+- esp32-camera 支持的芯片有 ESP32、ESP32-S2、ESP32-S3。此外，该组件仅支持使用 DVP 接口的相机传感器。
+- esp-video 支持的芯片有 ESP32-P4、ESP32-S3 以及 ESP32-C 系列的芯片。该组件支持包括 SPI、DVP、USB、MIPI-CSI 接口的相机传感器。
+
+
+对于使用 esp-video 框架的应用，如何新增一个相机驱动程序？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 请参考文档 `add_new_camera_sensor_driver <https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor#steps-to-add-a-new-camera-sensor-driver>`__。
+
+是否可以在 ESP32-P4 上连接多个摄像头？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  可以。ESP32-P4 的 DVP、MIPI-CSI 接口可以分别连接一个摄像头。USB、SPI 接口分别可以连接多个摄像头。
+
+对于只能输出 RAW 格式的数据的相机传感器，必须搭配 ISP 模块才能输出清晰的图像吗？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  是的。RAW 格式的数据是原始数据，需要 ISP 模块来完成对原始数据的降噪、颜色还原和自动曝光控制等功能。
+
+调试 ISP 模块需要哪些设备？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  调试 ISP 模块需要标准光源、色温计、24 色卡等设备。
+
+  - 对于通过评估的项目，可 `联系乐鑫 <https://www.espressif.com/zh-hans/contact-us/technical-inquiries>`__ 协助调试 ISP 模块的参数。
+  - 对于已经调试过的相机传感器，可参考 ISP 图像处理算法文档 `Espressif Image Process Algorithm for ISP <https://github.com/espressif/esp-video-components/tree/master/esp_ipa#espressif-image-process-algorithm-for-isp>`__ 微调图像效果。

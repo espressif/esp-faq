@@ -19,7 +19,7 @@ What type of camera does the ESP32 series chip support?
 --------------------------------------------------------
 
   - For camera models supported by the ESP32, ESP32-S2, and ESP32-S3 series, please refer to `ESP32 Camera Driver <https://github.com/espressif/esp32-camera/blob/master/README.md>`_.
-  - For camera models supported by the ESP32-P4 series, please refer to `espressif-camera-sensors-component <https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor#espressif-camera-sensors-component>`_.
+  - For camera models supported by the ESP32-P4, ESP32-C5, and ESP32-C61 series, please refer to `espressif-camera-sensors-component <https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor#espressif-camera-sensors-component>`__.
 
 --------------
 
@@ -169,7 +169,7 @@ Can the 2-megapixel OV2640 camera on ESP-EYE be changed to only output 300,000-p
 Does ESP32 support a global shutter camera?
 ---------------------------------------------------
 
-  Yes. Currently, the camera models supported by ESP32 are SC031GS and SC132GS, while other cameras need additional driver support.
+  Yes. Currently, the camera models supported by ESP32 are SC031GS, SC035HGS, and OV9281, while other cameras need additional driver support.
 
 --------------
 
@@ -352,3 +352,33 @@ How to scale image data?
 
   - For JPEG images, use the `esp_new_jpeg <https://components.espressif.com/components/espressif/esp_new_jpeg/>`_ component to directly scale down the decoded data during the decoding process.
   - For RGB or YUV data, use the `PPA <https://docs.espressif.com/projects/esp-idf/en/latest/esp32p4/api-reference/peripherals/ppa.html>`_ peripheral (only supported on P series chips), or use the software-based image processing component `esp_image_effects <https://components.espressif.com/components/espressif/esp_image_effects>`_ for scaling.
+
+What's the difference between the two camera application components esp32-camera and esp-video?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+- The chips supported by esp32-camera include ESP32, ESP32-S2, ESP32-S3. In addition, this component only supports camera sensors using the DVP interface.
+- The chips supported by esp-video include ESP32-P4, ESP32-S3, and the ESP32-C series chips. This component supports camera sensors with interfaces including SPI, DVP, USB, and MIPI-CSI.
+
+
+How to add a new camera driver for applications using the esp-video framework?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Please refer to the document `add_new_camera_sensor_driver <https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor#steps-to-add-a-new-camera-sensor-driver>`__.
+
+Can I connect multiple cameras to ESP32-P4?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Sure. The DVP and MIPI-CSI interfaces of ESP32-P4 can each connect to one camera. The USB and SPI interfaces can each connect to multiple cameras.
+
+Is it necessary to pair a camera sensor that can only output RAW format data with an ISP module to output clear images?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes. RAW data is unprocessed raw data, which requires the ISP module to perform operations such as noise reduction, color restoration, and automatic exposure control.
+
+What equipment is needed to debug the ISP module?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Debugging the ISP module requires standard light sources, colorimeters, 24-color cards, and other equipment.
+
+  - For projects that have passed evaluation, you can `contact Espressif <https://www.espressif.com/en/contact-us/technical-inquiries>`__ for assistance in debugging ISP module parameters.
+  - For camera sensors that have already been debugged, you can fine-tune the image effects by referring to the ISP image processing algorithm document `Espressif Image Process Algorithm for ISP <https://github.com/espressif/esp-video-components/tree/master/esp_ipa#espressif-image-process-algorithm-for-isp>`__.
