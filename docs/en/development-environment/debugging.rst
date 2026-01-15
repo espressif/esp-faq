@@ -29,11 +29,18 @@ What is the serial port name of ESP devices？
 --------------
 
 How to block debugging messages sent through UART0 by default in ESP32?
--------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 
-  - For first-stage Bootloader log, you could block the logs by connecting GPIO15 to Ground.
-  - For second-stage Bootloader log, go to menuconfig and configure the ``Bootloader config`` option.
-  - For ESP-IDF log, go to menuconfig > ``Component config`` and configure the ``Log output`` option.
+  The ESP32 log printing is divided into three levels: the first stage (ROM) bootloader chip startup log, the second stage bootloader log, and the application (app.bin) running log. By default, ESP32 outputs debug information through UART0, which can be turned off by following the steps below:
+  
+  - Disable the first stage (ROM) bootloader log: Ground GPIO15, and the serial log output of the first stage (ROM) bootloader will be blocked upon power-up.
+  - Turn off the second stage bootloader log: In ``menuconfig``, select ``Bootloader config`` > ``Bootloader log verbosity`` > ``No output``.
+  - Turn off application logs: In ``menuconfig``, select ``Component config`` > ``Log output`` > ``Default log verbosity`` > ``No output``.
+  - Completely turn off UART0 as console output:
+
+    - For IDF 4.3 and earlier, go to ``menuconfig`` > ``Component Config`` > ``Common ESP-related`` > ``Channel for console output``, and select ``None``.
+    - For IDF 4.4 and later, go to: ``menuconfig`` > ``Component config`` > ``ESP System Settings`` > ``Channel for console output``, and select ``None``.
+
 
 --------------
 
@@ -106,7 +113,7 @@ How to monitor the free space of the task stack?
 Is it possible to use JTAG to debug with ESP32-S2？
 -------------------------------------------------------
 
-  Yes. For detailed information, please refer to `ESP32-S2 JTAG Debugging <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/api-guides/jtag-debugging/>`_.
+  Yes. For detailed information, please refer to `ESP32-S2 JTAG Debugging <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/api-guides/jtag-debugging/>`__. For specific steps, refer to `ESP32-S3 JTAG Debugging User Guide <https://blog.csdn.net/Marchtwentytwo/article/details/129561010?>`__.
 
 --------------
 
@@ -133,8 +140,8 @@ ESP8266 enters boot mode (2,7) and hits a watchdog reset. What could be wrong?
 
 ---------------
 
-When using the ESP-WROVER-KIT board with OpenOCD, an error occurred as: Can't find board/esp32-wrover-kit-3.3v.cfg. How can I resolve such issue?
---------------------------------------------------------------------------------------------------------------------------------------------------
+When using the ESP-WROVER-KIT board with OpenOCD, an error occurred as ``Can't find board/esp32-wrover-kit-3.3v.cfg``. How can I resolve such issue?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - With 20190313 and 20190708 versions of OpenOCD, please use instruction ``openocd -f board/esp32-wrover.cfg``.
   - With 20191114 and 20200420 (2020 later versions) versions of OpenOCD, please use instruction ``openocd -f board/esp32-wrover-kit-3.3v.cfg``.
@@ -184,7 +191,7 @@ What are the reasons for not being able to recognize ESP devices under the Win10
 
 --------------
 
-One error occurred with ESP32 as: Core 1 panicked (Cache disabled but cache memory region accessed). What could be the reason?
+One error occurred with ESP32 as ``Core 1 panicked (Cache disabled but cache memory region accessed)``. What could be the reason?
 ------------------------------------------------------------------------------------------------------------------------------------
 
   Reasons:
@@ -205,14 +212,9 @@ One error occurred with ESP32 as: Core 1 panicked (Cache disabled but cache memo
 How to read the flash model information of the modules?
 -----------------------------------------------------------
 
-  - Please use the python script `esptool <https://github.com/espressif/esptool>`_ to read information of Espressif's chips and modules.
-  - For Windows:
-
-    .. code-block:: text
-
-      esptool.py -p COM* flash_id
-
-  - For Linux:
+  - For information about Espressif modules or chips. please refer to `Flash Download Tool <https://dl.espressif.com/public/flash_download_tool.zip>`__. For more details, please refer to the `chipInfoDump Tab <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/production_stage/tools/flash_download_tool.html#chipinfodump-tab>`__.
+  
+  - In a Linux environment, you can read it through the python script `esptool <https://github.com/espressif/esptool>`_.
 
     .. code-block:: text
 

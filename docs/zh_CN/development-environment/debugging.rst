@@ -29,11 +29,18 @@ ESP 设备的串口名称是什么？
 --------------
 
 ESP32 如何关闭默认通过 UART0 发送的调试信息？
----------------------------------------------
+----------------------------------------------------------------------------------------------------------
 
-  - 一级 Bootloader 日志信息可以通过 GPIO15 接地来屏蔽。
-  - 二级 Bootloader 日志信息可以在 menuconfig 里的 ``Bootloader config`` 中进⾏相关配置。
-  - ESP-IDF 中的日志信息可以在 menuconfig 里的 ``Component config`` > ``Log output`` 中进⾏相关配置。
+  ESP32 日志打印分为一级 (ROM) 引导加载程序芯片启动日志、二级引导加载程序日志和应用程序 (app.bin) 运行日志。ESP32 默认通过 UART0 输出调试信息，可以按以下步骤关闭信息：
+  
+  - 关闭一级 (ROM) 引导加载程序日志：将 GPIO15 接地，上电时即可屏蔽一级 (ROM) 引导加载程序的串口日志输出。
+  - 关闭二级引导加载程序日志：在 ``menuconfig`` 中，选择 ``Bootloader config`` > ``Bootloader log verbosity`` > ``No output``。
+  - 关闭应用程序日志：在 ``menuconfig`` 中，选择 ``Component config`` > ``Log output`` > ``Default log verbosity`` > ``No output`` 。
+  - 彻底关闭 UART0 作为控制台输出:
+
+    - IDF 4.3 及之前，前往 ``menuconfig`` > ``Component Config`` > ``Common ESP-related`` > ``Channel for console output``，选择 ``None`` 。
+    - IDF 4.4 及之后，前往：``menuconfig`` > ``Component config`` > ``ESP System Settings`` > ``Channel for console output``，选择 ``None``。
+
 
 --------------
 
@@ -106,7 +113,7 @@ ESP32 Boot 启动模式不正常如何排查？
 ESP32-S2 是否可以使用 JTAG 进行下载调试？
 -----------------------------------------
 
-  可以，详情请参考 `ESP32-S2 JTAG 调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/jtag-debugging/>`_。
+  可以，说明文档请参考 `ESP32-S2 JTAG 调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/jtag-debugging/>`_，具体步骤参考 `ESP32-S3 JTAG Debugging User Guide <https://blog.csdn.net/Marchtwentytwo/article/details/129561010?>`__。
 
 --------------
 
@@ -133,7 +140,7 @@ ESP32-S2 是否可以使用 JTAG 进行下载调试？
 
 --------------
 
-ESP-WROVER-KIT 开发板 OpenOCD 错误 Error: Can't find board/esp32-wrover-kit-3.3v.cfg，如何解决？
+ESP-WROVER-KIT 开发板 OpenOCD 错误 ``Error: Can't find board/esp32-wrover-kit-3.3v.cfg``，如何解决？
 -----------------------------------------------------------------------------------------------------
 
   - OpenOCD 版本为 20190313 和 20190708，请使用 ``openocd -f board/esp32-wrover.cfg`` 指令打开。
@@ -184,7 +191,7 @@ Win 10 系统下识别不到 ESP 设备有哪些原因？
 
 --------------
 
-ESP32 出现 Error:Core 1 panicked (Cache disabled but cache memory region accessed) 是什么原因？
+ESP32 出现 ``Error:Core 1 panicked (Cache disabled but cache memory region accessed)`` 是什么原因？
 ----------------------------------------------------------------------------------------------------
 
   问题原因：
@@ -205,14 +212,9 @@ ESP32 出现 Error:Core 1 panicked (Cache disabled but cache memory region acces
 如何读取模组 Flash 型号信息？
 ----------------------------------
 
-  - 乐鑫模组或芯片可通过 python 脚本 `esptool <https://github.com/espressif/esptool>`_ 读取。
-  - Windows 环境：
-
-    .. code-block:: text
-
-      esptool.py -p COM* flash_id
-
-  - Linux 环境：
+  - 乐鑫模组或芯片信息可通过 `Flash 下载工具 <https://dl.espressif.com/public/flash_download_tool.zip>`__ 读取。详情请参阅 `chipInfoDump 界面 <https://docs.espressif.com/projects/esp-test-tools/zh_CN/latest/esp32/production_stage/tools/flash_download_tool.html#chipinfodump>`__。
+  
+  - Linux 环境可通过 python 脚本 `esptool <https://github.com/espressif/esptool>`_ 读取。
 
     .. code-block:: text
 
