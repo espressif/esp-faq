@@ -24,7 +24,9 @@ PSRAM
 
   .. code-block:: c
 
-    size_t psram_size = esp_spiram_get_size();
+    #include "esp_psram.h"
+    ...
+    size_t psram_size = esp_psram_get_size();
     printf("PSRAM size: %d bytes\n", psram_size);
 
   注意，该函数需要在使用 PSRAM 之前调用，以确保正确获取 PSRAM 的大小。另外，需要先在 ``make menuconfig`` 中配置开启 PSRAM 功能，以便正确启用和配置 PSRAM。
@@ -35,7 +37,10 @@ PSRAM
 ESP32 外接 PSRAM 后，如何更改 PSRAM 的 clock 来源？
 ----------------------------------------------------------
 
-  在 menuconfig 中修改。具体位置：menuconfig -> Component config -> ESP32-specific -> SPI RAM config。
+  在 menuconfig 中修改。具体位置：
+  
+  - ESP-IDF v4.x: ``menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``SPI RAM config``。
+  - ESP-IDF v5.x: ``menuconfig`` > ``Component config`` > ``ESP PSRAM`` > ``SPI RAM config``。
 
 --------------
 
@@ -51,7 +56,10 @@ ESP32 模组挂载 8 MB PSRAM, 为何实际映射的只有 4 MB？
 使用 ESP32 开发板，上面用了官方 PSRAM 芯片 PSRAM64H，当更换了另一个型号的 PSRAM 芯片后，运行 ESP-IDF 的例程并开启 PSRAM 配置，却无法正常识别，是什么原因？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 更换 PSRAM 芯片的型号，需要在 ``menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``Type of SPI RAM chip in use`` 中修改相应配置选项。
+  - 更换 PSRAM 芯片的型号，需要在 menuconfig 中修改相应配置选项：
+  
+    - ESP-IDF v4.x：``menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``Type of SPI RAM chip in use``
+    - ESP-IDF v5.x：``menuconfig`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``Type of SPI RAM chip in use``
   - 若更换的 PSRAM 芯片型号在 menuconfig 中没有相应的配置选项，则需要自行加入 PSRAM 芯片的驱动。
 
 -----------------------
@@ -64,7 +72,7 @@ ESP32 模组挂载 8 MB PSRAM, 为何实际映射的只有 4 MB？
     E (225) psram: PSRAM ID read error: 0xffffffff
     E (225) spiram: SPI RAM enabled but initialization failed. Bailing out. 
 
-  报错原因是：软件上开启了 PSRAM (``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM``) 的设置，但硬件上没有检测到可用的 PSRAM。
+  报错原因是：软件上开启了 PSRAM 的设置（ESP-IDF v4.x 路径：``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM``；ESP-IDF v5.x 路径：``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM``），但硬件上没有检测到可用的 PSRAM。
 
 --------------
 
@@ -86,7 +94,12 @@ ESP32 支持 16 MB 的 External Flash 和 8 MB 的 External PSRAM 共存吗？
     E(39307)BLE_INIT:Mallocfailed
     E(40307)BLE_INIT:Mallocfailed
 
-  - 当前报错是因为 Malloc 内存不足，当应用内存小于 ``idf.py menuconfig > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``(16384) Maximum malloc() size , in bytes , to always put in internal memory`` 配置时，会默认使用芯片内部内存。可以将此配置调小，或者将 ``idf.py menuconfig`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``SPI RAM access method`` 配置改为 ``Make RAM allocatable using heap_caps_malloc(...... MALLOC_CAP_SPIRAM)`` 的配置。 
+  - 当前报错是因为 Malloc 内存不足，当应用内存小于 ``Maximum malloc() size , in bytes , to always put in internal memory`` 配置时，会默认使用芯片内部内存。该配置路径为：
+  
+    - ESP-IDF v4.x：``idf.py menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config``
+    - ESP-IDF v5.x：``idf.py menuconfig`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config``
+    
+    可以将此配置调小，或者将 ``SPI RAM access method`` 配置改为 ``Make RAM allocatable using heap_caps_malloc(...... MALLOC_CAP_SPIRAM)`` 的配置。 
 
 -------------
 
@@ -112,4 +125,4 @@ ESP32-C6 支持外挂 PSRAM 芯片吗？
 
     assert failed: xTaskCreateStaticPinnedToCore freertos_tasks_c_additions.h:314 (xPortcheckValidStackMem(puxStackBuffer))
 
-当使用 ``xTaskCreateWithCaps()`` 分配 PSRAM 时，menuconfig 中需要启用 ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` 配置，然后将 ``SPI RAM config`` > ``SPI RAM access method`` 设置为 ``(X) Make RAM allocatable using malloc() as well`` 模式，最后需要启用 ``[*] Allow external memory as an argument to xTaskCreateStatic`` 配置选项。
+当使用 ``xTaskCreateWithCaps()`` 分配 PSRAM 时，menuconfig 中需要启用 ``Support for external, SPI-connected RAM`` 配置（ESP-IDF v4.x 路径：``Component config`` > ``ESP32-specific``；ESP-IDF v5.x 路径：``Component config`` > ``ESP PSRAM``），然后将 ``SPI RAM config`` > ``SPI RAM access method`` 设置为 ``(X) Make RAM allocatable using malloc() as well`` 模式，最后需要启用 ``[*] Allow external memory as an argument to xTaskCreateStatic`` 配置选项。
