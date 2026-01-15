@@ -24,7 +24,9 @@ When using ESP32 modules, how to check the size of their PSRAM?
 
   .. code-block:: c
 
-    size_t psram_size = esp_spiram_get_size();
+    #include "esp_psram.h"
+    ...
+    size_t psram_size = esp_psram_get_size();
     printf("PSRAM size: %d bytes\n", psram_size);
 
   Note that the esp_spiram_get_size() function should be called before using the PSRAM to ensure the correct PSRAM size can be obtained. Additionally, PSRAM functionality should be enabled in ``make menuconfig``, so that PSRAM can be used and configured.
@@ -35,7 +37,10 @@ When using ESP32 modules, how to check the size of their PSRAM?
 When ESP32 connected to a PSRAM externally, how to change its clock source?
 ----------------------------------------------------------------------------------------------
 
-  In menuconfig: menuconfig -> Component config -> ESP32-specific -> SPI RAM config.
+  Modify in menuconfig:
+  
+  - ESP-IDF v4.x: ``menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``SPI RAM config``。
+  - ESP-IDF v5.x: ``menuconfig`` > ``Component config`` > ``ESP PSRAM`` > ``SPI RAM config``。
 
 --------------
 
@@ -51,7 +56,10 @@ When a 8 MB PSRAM mounted on ESP32, why only 4 MB of it is actually mapped?
 I'm using an ESP32 development board with the official PSRAM chip PSRAM64H embedded. But after replacing another type of PSRAM chip to PSRAM64H, it failed to recognize when I ran an ESP-IDF example and enabled the PSRAM configuration. What is the reason?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - To change the model of the PSRAM chip, you need to modify the configuration option in ``menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``Type of SPI RAM chip in use``.
+  - To change the model of the PSRAM chip, you need to modify the corresponding configuration options in menuconfig:
+  
+    - ESP-IDF v4.x: ``menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``Type of SPI RAM chip in use``
+    - ESP-IDF v5.x: ``menuconfig`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``Type of SPI RAM chip in use``
   - If you cannot find the corresponding type options of the new PSRAM chip you are about to use, please add the chip driver manually.
 
 ----------------------
@@ -64,7 +72,7 @@ Why is the following error printed when I download the hello-world example into 
     E (225) psram: PSRAM ID read error: 0xffffffff
     E (225) spiram: SPI RAM enabled but initialization failed. Bailing out. 
 
-  The error is due to: The PSRAM setting is enabled in the software (``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM``), but no available PSRAM was detected on the hardware.
+  The error is due to: The PSRAM setting is enabled in the software (ESP-IDF v4.x path: ``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM``; ESP-IDF v5.x path: ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM``), but no available PSRAM was detected on the hardware.
 
 --------------
 
@@ -86,7 +94,12 @@ After enabling the ``BT/BLE will first malloc the memory form the PARAM`` config
     E(39307)BLE_INIT:Mallocfailed
     E(40307)BLE_INIT:Mallocfailed
 
-  - The error is caused by insufficient Malloc memory. When the application memory is less than the configuration of ``idf.py menuconfig > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``(16384) Maximum malloc() size, in bytes, to always put in internal memory``, it will use the chip's internal memory by default. You can reduce this configuration option, or change ``idf.py menuconfig`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config`` > ``SPI RAM access method`` to ``Make RAM allocatable using heap_caps_malloc(...... MALLOC_CAP_SPIRAM)``.
+  - The current error is due to insufficient Malloc memory. When the application memory is less than the ``Maximum malloc() size, in bytes, to always put in internal memory`` configuration, the internal memory of the chip will be used by default. The path to this configuration is:
+  
+    - ESP-IDF v4.x: ``idf.py menuconfig`` > ``Component config`` > ``ESP32-specific`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config``
+    - ESP-IDF v5.x: ``idf.py menuconfig`` > ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` > ``SPI RAM config``
+    
+    You can reduce this configuration, or change the ``SPI RAM access method`` configuration to ``Make RAM allocatable using heap_caps_malloc(...... MALLOC_CAP_SPIRAM)``.
 
 -------------
 
@@ -112,4 +125,4 @@ When using the `xTaskCreateWithCaps() <https://docs.espressif.com/projects/esp-i
 
     assert failed: xTaskCreateStaticPinnedToCore freertos_tasks_c_additions.h:314 (xPortcheckValidStackMem(puxStackBuffer))
 
-When using ``xTaskCreateWithCaps()`` to allocate PSRAM, you need to enable the ``Component config`` > ``ESP PSRAM`` > ``Support for external, SPI-connected RAM`` configuration in menuconfig. Then, set the ``SPI RAM config`` > ``SPI RAM access method`` to ``(X) Make RAM allocatable using malloc() as well`` mode. Finally, you need to enable the ``[*] Allow external memory as an argument to xTaskCreateStatic`` configuration option.
+When using ``xTaskCreateWithCaps()`` to allocate PSRAM, you need to enable the ``Support for external, SPI-connected RAM`` configuration in menuconfig (ESP-IDF v4.x path: ``Component config`` > ``ESP32-specific``; ESP-IDF v5.x path: ``Component config`` > ``ESP PSRAM``), then set ``SPI RAM config`` > ``SPI RAM access method`` to ``(X) Make RAM allocatable using malloc() as well`` mode, and finally, you need to enable the ``[*] Allow external memory as an argument to xTaskCreateStatic`` configuration option.
