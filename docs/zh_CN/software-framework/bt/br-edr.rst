@@ -111,7 +111,8 @@ ESP32 如何通过 Bluetooth® BR/EDR 传文件？
 ESP32 经典蓝牙支持哪些 Profile？
 ------------------------------------------------------------
 
-  - 目前支持 A2DP、AVRCP、SPP、HFP、HID。
+  - v5.3 及以下版本：支持 A2DP、AVRCP、SPP、HFP、HID。
+  - v5.4 及以上版本：支持 A2DP、AVRCP、SPP、HFP、HID、PBAP-Client。
 
 ----------------
 
@@ -121,7 +122,8 @@ ESP32 经典蓝牙配对时如何使手机端输入 PIN 码？
   可以通过禁用 ``Secure Simple Pairing``，从而仅支持 ``Legacy Pairing``。
 
   - v3.3 到 v4.0（不包含 v4.0）：``Component config`` > ``Bluetooth`` > ``Bluedroid Enable`` > ``[*] Classic Bluetooth`` > ``[ ]Secure Simple Pairing``
-  - v4.0 及以上：``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` > ``[ ] Secure Simple Pairing``
+  - v4.0 到 v5.2：``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` > ``[ ] Secure Simple Pairing``
+  - v5.3 及以上版本：需在代码中调用 ``esp_bluedroid_init_with_cfg()`` 函数进行配置。具体操作是：创建一个 ``esp_bluedroid_config_t`` 类型的配置结构体，并将其 ``ssp_en`` 成员设置为 false ，然后将此结构体传递给初始化函数。
 
 -----------------
 
