@@ -374,3 +374,17 @@ Does the Espressif USB host protocol stack support HUB? How to use it?
 -------------------------------------------------------------------------
 
   Yes, the HUB function is supported in the low-level driver. To enable it, please set the macro ``CONFIG_USB_HOST_HUBS_SUPPORTED=y``.
+
+---------------------------
+
+Can the Serial-JTAG and Full-Speed USB pins be adjusted on the ESP32-P4?
+---------------------------------------------------------------------------------------------------------------------
+
+  By default, ``FS_PHY1`` is connected to ``USB_SERIAL_JTAG``, and ``FS_PHY2`` is connected to ``OTG_FS``. The connection can be changed through ``EFUSE_USB_PHY_SEL``.
+
+---------------------------
+
+Is the High-Speed USB of ESP32-P4 available for programming?
+---------------------------------------------------------------------------------------------------------------------
+
+  After entering download mode, programming can be done via High-Speed USB.

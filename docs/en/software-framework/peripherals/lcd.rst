@@ -20,14 +20,23 @@ LCD
 Where are the LCD drivers and reference examples for ESP series chips?
 --------------------------------------------------------------------------------------------------------------------------------------
 
-  Please refer to the `ESP-IoT-Solution Programming Guide - LCD Development Guide <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_development_guide.html#lcd-development-guide>`__.
+  - Please first understand the LCD development process through the `ESP-IoT-Solution Programming Guide - LCD Development Guide <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_development_guide.html#supported-interface-types>`__.
+  - For basic LCD driver examples, please refer to `esp-idf/examples/peripherals/lcd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd>`_.
+  - For advanced LCD driver examples, please refer to `esp-iot-solution/examples/display <https://github.com/espressif/esp-iot-solution/tree/master/examples/display>`_.
 
 ---------------
 
 Which adapted ICs can be used by the LCD screen of ESP32 series chips?
 -------------------------------------------------------------------------------------------------
 
-  Please refer to the `ESP-IoT-Solution Programming Guide - LCD Development Guide <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_development_guide.html#id2>`__.
+  Please refer to the `ESP-IoT-Solution Programming Guide - LCD Development Guide <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_development_guide.html#supported-interface-types>`__ to learn about the adapted LCD screen models.
+
+--------------
+
+Common issues in application development with the ESP series chips
+-------------------------------------------------------------------
+
+  For common issues about the LCD screen, please refer to the `LCD Application Development Notes <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/advanced-development/lcd-application-note/index.html>`__.
 
 --------------
 
@@ -36,7 +45,7 @@ Notes for Driving MIPI-DSI LCD with ESP32-P4
 
   - ESP32-P4 supports MIPI-DSI LCD with up to 2 lanes. Each supports a maximum rate of 1.5 Gbps, totaling 3 Gbps. It also supports color formats ``RGB565``, ``RGB666``, and ``RGB888``.
   - Some MIPI-DSI LCDs, such as ``ILI9881`` and ``JD9365``, are configured as 4-lane by default through hardware (IM[0:3]). However, they can be configured to 2-lane by modifying the LCD's initialization commands (e.g., the ``B6h-B7h`` command of ILI9881). Therefore, it is necessary to consult the datasheet of the LCD driver IC to confirm if it is supported.
-  - The MIPI-DSI driver has the communication response mechanism enabled by default. If there is a communication anomaly between the ESP and the LCD, the ESP may freeze and trigger the watchdog. At this point, please check whether the hardware connection is correct, or use a logic analyzer to check if the communication works well.
+  - The MIPI-DSI driver has the communication response mechanism enabled by default. If there is a communication anomaly between the ESP and the LCD, the ESP may freeze and trigger the watchdog. At this point, please check whether the hardware connection is correct, whether the initialization command is correct, whether the reset timing is correct, or use a logic analyzer to check if the communication is normal.
 
 --------------
 
@@ -81,13 +90,13 @@ How can I improve the display frame rate of LCD screens?
     - ``CONFIG_SPIRAM_XIP_FROM_PSRAM=y``
     - ``CONFIG_COMPILER_OPTIMIZATION_PERF=y``
 
-  - The following LVGL configuration items can improve the frame rate (LVGL v8.3):
+  - The following LVGL configuration items can help improve the frame rate (LVGL v8.4):
 
     - ``#define LV_MEM_CUSTOM 1`` or ``CONFIG_LV_MEM_CUSTOM=y``
     - ``#define LV_MEMCPY_MEMSET_STD 1`` or ``CONFIG_LV_MEMCPY_MEMSET_STD=y``
-    - ``#define LV_ATTRIBUTE_FAST_MEM IRAM_ATTR`` or ``CONFIG_LV_ATTRIBUTE_FAST_MEM=y``
+    - ``CONFIG_LV_ATTRIBUTE_FAST_MEM=y``
 
-  - For detailed LCD and LVGL performance specifications, please refer to the `document <https://github.com/espressif/esp-bsp/blob/master/components/esp_lvgl_port/docs/performance.md>`__.
+  - If higher frame rates, better rotation performance, and improved anti-tearing behavior are required, it is recommended to use the `esp_lvgl_adapter component <https://github.com/espressif/esp-iot-solution/blob/7c133a8b81c161635ee1f093acd180a2322adb72/components/display/tools/esp_lvgl_adapter/README.md>`__.
 
 ---------------
 
@@ -103,41 +112,7 @@ What is the maximum resolution supported by ESP LCD? What is the corresponding f
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - For the RGB peripheral interfaces of ESP32-S3 and ESP32-P4, due to their hardware limitations, they theoretically support a maximum resolution of ``4096 x 1024`` (with a maximum of ``4096`` horizontally and ``1024`` vertically); for the other peripheral interfaces of the ESP series chips, there is no "maximum" hardware limitation on how much resolution they can support.
-  - Because chip storage, computing performance, and peripheral interface bandwidth are limited, and different types of LCDs usually have specific resolution ranges, it is recommended to use the following resolutions for ESP32-C3 and ESP32-S3 chips:
-
-    .. list-table::
-        :header-rows: 1
-
-        * - SoCs
-          - SPI
-          - QSPI
-          - I80
-          - RGB
-          - MIPI-DSI
-
-        * - ESP32-C3
-          - 240 x 240
-          - Not_recommended
-          - Not_supported
-          - Not_supported
-          - Not supported
-
-        * - ESP32-S3
-          - 320 x 240
-          - 400 x 400
-          - 480 x 320
-          - 480 x 480, 800 x 480
-          - Not supported
-
-        * - ESP32-P4
-          - 320 x 240
-          - 400 x 400
-          - 480 x 320
-          - 480 x 480，800 x 480
-          - 1024 x 600，1280 x 720
-
-  - For the RGB interface of ESP32-S3, the maximum resolution tested in LVGL (v8) application scenarios is currently 800 x 480, with an interface frame rate limit of 59 (PCLK 30 MHz), corresponding to an average LVGL frame rate of 23; The maximum average LVGL frame rate is 26, corresponding to an interface frame rate of 41 (PCLK 21 MHz).
-  - For the MIPI-DSI interface of ESP32-P4, the maximum resolution tested in LVGL (v8) application scenarios is currently 1080 x 1920, with an interface frame rate limit of 31 (DPI_CLK 80 MHz, 2-lane bit rate 2.8 Gbps), corresponding to an average LVGL frame rate of 25;
+  - For specific resolution scenarios and corresponding frame rates, please refer to `Selection of LCD Driver Chip <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/advanced-development/lcd-application-note/overview.html#selection-of-lcd-driver-chip>`__.
 
 ----------------
 
@@ -183,6 +158,7 @@ Which image decoding formats are supported by the ESP32-S3 series of chips?
 
   - Currently, ESP-IDF only supports the JPEG decoding format. For an application example, please refer to `esp-idf/examples/peripherals/lcd/tjpgd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd/tjpgd>`_.
   - If you develop based on LVGL, PNG, BMP, SJPG and GIF decoding formats are supported. For details, please refer to `LVGL libs <https://docs.lvgl.io/master/libs/index.html>`_.
+  - Additionally, if there is a need for animated graphics, you can use the EAF animation format customized by Espressif. For details, refer to the `LVGL EAF Player Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/gui/lvgl_eaf_player>`__.
 
 --------------------------
 
@@ -381,7 +357,7 @@ Using the ESP32-S2 USB camera and I80 LCD simultaneously may result in the LCD d
 How to solve the unexpected crash when operating LVGL controls through non-LVGL tasks?
 ---------------------------------------------------------------------------------------------------------------------------
 
-  When operating LVGL controls, use ``bsp_display_lock()`` and ``bsp_display_unlock()`` to protect operation variables, thereby ensuring thread safety.
+  When operating LVGL controls, use ``display_lock()`` and ``display_unlock()`` to protect operation variables, thereby ensuring thread safety.
 
 ---------------------------
 
@@ -440,3 +416,11 @@ Does ESP32-P4 support HDMI signal output?
 -------------------------------------------------------------------------------
 
   ESP32-P4 does not support direct HDMI signal output. However, HDMI signal output can be achieved through an MIPI-DSI to HDMI bridge chip. Currently, the MIPI-DSI to HDMI chip supported by Espressif is `LT8912B <https://github.com/espressif/esp-bsp/tree/master/components/lcd/esp_lcd_lt8912b>`__. For more information, refer to `example code <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/lcd/hdmi_video_renderer>`__.
+
+---------------------------
+
+In LVGL applications, how to rotate the RGB or MIPI-DSI interface screen by 90 degrees/270 degrees? How to avoid tearing? How to further improve the frame rate?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - It is recommended to use the `esp_lvgl_adapter component <https://github.com/espressif/esp-iot-solution/blob/7c133a8b81c161635ee1f093acd180a2322adb72/components/display/tools/esp_lvgl_adapter/README.md>`__. This component provides features such as high-efficiency rotation, tear prevention, frame rate enhancement, and supports LVGL v8 and v9 versions.
+  - Refer to the example code `esp_lvgl_adapter example <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/gui/lvgl_common_demo>`__.

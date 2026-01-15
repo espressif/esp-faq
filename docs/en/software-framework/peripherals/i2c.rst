@@ -79,3 +79,8 @@ Where can I find the I2C timing parameters for the ESP32 series chips?
 ----------------------------------------------------------------------
 
   The Chip Datasheet and Technical Reference Manual do not specify I2C timing parameters. Any tining that complies with `I2C timing specifications <https://www.csd.uoc.gr/~hy428/reading/i2c_spec.pdf>`_ is considered valid.
+
+Why is there a delay between the 8th and 9th clock during I2C read/write operations on the ESP32 chip?
+---------------------------------------------------------------------------------------------------------------------
+
+  This is a limitation of ESP32 hardware design, where the hardware needs to handle specific internal logic during this period. Other series of chips do not have this issue.

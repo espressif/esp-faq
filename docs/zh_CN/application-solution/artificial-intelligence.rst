@@ -19,6 +19,8 @@ AI 图像识别产品可兼容哪些摄像头？
 ----------------------------------
 
   当前 ESP-EYE 主控芯⽚为 ESP32，可兼容 0V2640，OV3660，OV5640，OV7725 等多款摄像头。详见：`esp32-camera Github <https://github.com/espressif/esp32-camera/tree/master/sensors>`_。
+  
+  对于 ESP32-P4 系列，请参考 `esp-video-components <https://github.com/espressif/esp-video-components>`_ 获取支持的摄像头型号。
 
 --------------
 
@@ -118,6 +120,8 @@ AI 语音模型如何修改麦克风通道数量？
   - `人脸识别 <https://github.com/espressif/esp-dl/tree/master/examples/human_face_recognition>`_。
   - `Yolo11N 目标检测 <https://github.com/espressif/esp-dl/tree/master/models/coco_detect>`_。
   - `猫脸识别 <https://github.com/espressif/esp-dl/tree/master/models/cat_detect>`_。
+  - `颜色识别 <https://github.com/espressif/esp-dl/tree/master/models/color_detect>`_。
+  - `轻量级目标检测框架 `ESP-Detection <https://github.com/espressif/esp-detection>`_。
 
 -------------
 
