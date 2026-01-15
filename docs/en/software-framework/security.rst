@@ -315,3 +315,9 @@ How to perform encryption on custom data?
 -----------------------------------------------------------------------------------------
 
   You can use the APIs provided by mbedtls to perform encryption, checksum calculation, signature generation, and other operations on custom data. For an example of AES-based data encryption and decryption, refer to `components/mbedtls/test_apps/main/test_aes.c <https://github.com/espressif/esp-idf/blob/master/components/mbedtls/test_apps/main/test_aes.c>`_.
+
+What is the difference between the NVS encryption scheme based on the Flash encryption framework and the NVS encryption scheme based on HMAC?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The NVS encryption scheme based on the Flash encryption framework requires the Flash encryption framework to be enabled first. The NVS encryption key is stored in the partition table. When it is necessary to protect the contents of the app partition, this scheme is recommended.
+  - The HMAC-based NVS encryption scheme does not require the activation of the Flash encryption framework. The NVS encryption key is stored in the eFuse special memory. This scheme is recommended when only the contents of the NVS partition need to be protected.
