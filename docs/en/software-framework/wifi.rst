@@ -1608,7 +1608,7 @@ How to configure the working frequency band (2.4 GHz/5.8 GHz) of ESP32-C5?
 Does Espressif chips support the ARP aging mechanism? What is the aging time, and can it be modified? For example, when connecting via Wi-Fi, the MAC address of the AP is obtained through ARP. How long is the interval before the next ARP request is sent?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - APR aging mechanism is supported.
+  - ARP aging mechanism is supported.
   - The default aging time is 5 minutes, defined by `ARP_MAXAGE`. Currently, no API or menuconfig option is available to modify this value.
   - When accessing an IP address, the chip will first checks the ARP table. If there is no entry in the ARP table or the entry is about to expire, it will send an ARP request. After receiving the ARP response, the chip will update the ARP table and keep the record valid for approximately 5 minutes.
 
@@ -1638,4 +1638,7 @@ After disabling modem sleep, the ping latency is still high. How can it be furth
 When using a packet capture tool to analyze Wi-Fi traffic, is it normal that the data remains encrypted even after entering the SSID and password?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes, this is normal. If the complete four-way handshake is not captured, the packet capture tool cannot decrypt subsequent data. To obtain complete handshake data, packet capturing should be performed while the client reconnects to the network.
+  Yes, this is normal.
+
+  - For WPA2-encrypted networks, in addition to the network password, the packet capture must include the complete four-way EAPOL handshake (EAPOL 1–4). If the full handshake is not captured, the packet capture tool will be unable to decrypt any subsequent data traffic. In this case, the device must reconnect to the network and packets must be captured again to obtain the complete handshake.
+  - For WPA3-encrypted networks, the network password and a complete handshake alone are not sufficient. The PMK (Pairwise Master Key) is also required for decryption. The PMK can be obtained from printout logs by enabling ``ESP_WIFI_DEBUG_PRINT``.
