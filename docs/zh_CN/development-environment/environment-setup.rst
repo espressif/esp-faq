@@ -15,15 +15,15 @@
 
 --------------
 
-为 ESP32-S2 搭建环境时，使用 ``idf.py set-target esp32s2`` 指令，显示 "Error: No such command 'set-target'"，为什么？
+为 ESP32-S2 搭建环境时，使用 ``idf.py set-target esp32s2`` 指令，显示 ``Error: No such command 'set-target'``，为什么？
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 因为 ESP-IDF 是从 release/v4.2 版本开始适配 ESP32-S2 的，所以如果在之前的 ESP-IDF 版本上搭建 ESP32-S2 环境，就会出现错误。例如使用指令 ``idf.py set-target esp32s2`` 时，会报错 "Error: No such command 'set-target'"。建议使用 ESP-IDF release/v4.2 及以后版本进行 ESP32-S2 的测试开发。更多请参考 `ESP32-S2 入门指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/get-started/>`_。
+  - 因为 ESP-IDF 是从 release/v4.2 版本开始适配 ESP32-S2 的，所以如果在之前的 ESP-IDF 版本上搭建 ESP32-S2 环境，就会出现错误。例如使用指令 ``idf.py set-target esp32s2`` 时，会报错 ``Error: No such command 'set-target'``。建议使用 ESP-IDF release/v4.2 及以后版本进行 ESP32-S2 的测试开发。更多请参考 `ESP32-S2 入门指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/get-started/>`_。
   - 不同 ESP-IDF 版本的 ESP 芯片支持情况，请查阅 `ESP-IDF Release and SoC Compatibility <https://github.com/espressif/esp-idf/blob/master/README_CN.md#esp-idf-%E4%B8%8E%E4%B9%90%E9%91%AB%E8%8A%AF%E7%89%87>`__。
 
 --------------
 
-Windows 下使用 ESP-IDF Tools 2.3 工具安装 master 版本的 ESP-IDF 出现错误：Installation has failed with exit code 2，是什么原因？
+Windows 下使用 ESP-IDF Tools 2.3 工具安装 master 版本的 ESP-IDF 出现错误： ``Installation has failed with exit code 2``，是什么原因？
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
   此报错跟网络环境有关，代表在该网络环境下无法流畅地拉取 Github 仓库，导致电脑 SDK 下载失败。如遇到 Github 访问问题，推荐使用最新 `Windows 安装工具 <https://dl.espressif.com/dl/esp-idf/>`_ 中的 **offline** 版本。
@@ -49,8 +49,8 @@ Windows 下使用 `esp-idf-tools <https://dl.espressif.com/dl/esp-idf/?idf=4.4>`
 
     Installation has failed with exit code 1
 
-    
-  此错误由网络环境不适合导致，请在使用工具时勾选 "通过 gitee 下载"。
+  - 此错误通常是由网络环境不稳定导致的，建议在安装工具时勾选 “通过 gitee 下载” (Mirror Settings) 选项以避开 GitHub 网络连接不畅的问题。
+  - 为了进一步提高安装成功率，还可以考虑使用从 `乐鑫下载服务器 <https://dl.espressif.com/dl/esp-idf/>`__ 下载离线版本的 Windows 安装工具，该版本包含了所有必要的软件内容，不再依赖安装过程中的实时下载。
 
 --------------
 
@@ -118,36 +118,36 @@ Windows 下执行 export.bat，提示 CMake、gdbgui 版本错误：
 
   - 命令行中获取版本号：可以通过在 IDF 环境中执行 ``idf.py --version`` 获取当前 IDF 版本号。
   - CMake 脚本中获取版本号：可以通过变量 ``${IDF_VERSION_MAJOR}.${IDF_VERSION_MINOR}.${IDF_VERSION_PATCH}`` 获取当前版本号。
-  - 代码编译期间获取版本号：可以通过调用函数 ``esp_get_idf_version`` 查询，或直接使用 "components/esp_common/include/esp_idf_version.h" 中的版本号宏定义。
+  - 代码编译期间获取版本号：可以通过调用函数 ``esp_get_idf_version`` 查询，或直接使用 ``components/esp_common/include/esp_idf_version.h`` 中的版本号宏定义。
 
 --------------
 
 Windows 环境下 ESP-IDF 编译比较慢如何优化？
 --------------------------------------------------------------------------------------------------
 
-  - 请将 ESP-IDF 源码目录以及编译器目录 ``.espressif`` 添加到杀毒软件的排除项。
+  请将 ESP-IDF 源码目录以及编译器目录 ``.espressif`` 添加到杀毒软件的排除项。
   
 -----------------
 
 是否有可以直接在 Windows 上使用的 esptool 工具？
 ---------------------------------------------------------------------------------------------------------------
 
-  - 可以前往 `esptool ——> Releases <https://github.com/espressif/esptool/releases>`_，在下拉页面的 Asset 栏下载 Windows 版本的 esptool 工具。
+  可以前往 `esptool > Releases <https://github.com/espressif/esptool/releases>`_，在下拉页面的 Asset 栏下载 Windows 版本的 esptool 工具。
 
 -----------------
 
-运行 `./install.sh` 时出现错误 `KeyError: 'idfSelectedId'` 可能是什么原因导致的？
+运行 ``./install.sh`` 时出现错误 ``KeyError: 'idfSelectedId'`` 可能是什么原因导致的？
 ---------------------------------------------------------------------------------------------------------------
 
-  - 这是因为系统安装过 ESP-IDF v5.0 以上版本导致的，可以查看 `~/.espressif/idf-env.json` 文件中的配置。
-  - 运行 `rm -rf ~/.espressif/idf-env.json` 解决。
+  - 这是因为系统安装过 ESP-IDF v5.0 以上版本导致的，可以查看 ``~/.espressif/idf-env.json`` 文件中的配置。
+  - 运行 ``rm -rf ~/.espressif/idf-env.json`` 解决。
 
 -----------------
 
-运行 `demo` 时出现包管理器组件依赖拉不下，出现失败 `Invalid manifest format`、 `Invalid dependency format`、 `unknown keys in dependency details: override_path`，可能是什么原因导致的？
+运行 ``demo`` 时出现包管理器组件依赖拉不下，出现失败 ``Invalid manifest format``、 ``Invalid dependency format``、 ``unknown keys in dependency details: override_path``，可能是什么原因导致的？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 这是因为缺少组件依赖导致的，需要更新 `component-manager`。指令命令为 `pip install --upgrade idf-component-manager`。
+  这是因为缺少组件依赖导致的，需要更新 `component-manager`。指令命令为 ``pip install --upgrade idf-component-manager``。
 
 --------------
 
@@ -163,8 +163,8 @@ Windows 环境下 ESP-IDF 编译比较慢如何优化？
     ninja: build stopped: subcommand failed.
     ninja failed with exit code 1
 
-  - 从日志上看是在编译过程中缓存 `build/esp-idf/main/CMakeFiles/__idf_main.dir/ main.c.o.bj` 文件出错，这是在 ccache 调用编译器时生成的，与编译缓存有关。此问题在 v5.0 及之后的版本上做了修复。
-  - 在 v4.4 版本的 ESP-IDF CMD 环境中，请使用 `idf.py --no-ccache build` 指令来编译工程。
+  - 从日志上看是在编译过程中缓存 ``build/esp-idf/main/CMakeFiles/__idf_main.dir/ main.c.o.bj`` 文件出错，这是在 ccache 调用编译器时生成的，与编译缓存有关。此问题在 v5.0 及之后的版本上做了修复。
+  - 在 v4.4 版本的 ESP-IDF CMD 环境中，请使用 ``idf.py --no-ccache build`` 指令来编译工程。
   
 --------------
 
