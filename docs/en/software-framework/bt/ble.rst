@@ -32,6 +32,8 @@ Does ESP32 support Bluetooth 5.0?
 
   ESP32 has passed Bluetooth LE 5.0 certification, but does not support the new functions of Bluetooth LE 5.0. If you need to use the features of Bluetooth LE 5.0, please choose other ESP32 series chips.
 
+  For Bluetooth certification information of the ESP32 series chips, please refer to `ESP32 Bluetooth LE Certification Information <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ble/ble-qualification.html>`_.
+
 --------------
 
 After the Bluetooth® LE starts advertising, why some mobile phones cannot successfully scan them?
@@ -54,7 +56,8 @@ What is the throughput of ESP32 Bluetooth® LE?
 ------------------------------------------------------------
 
   - The throughput of ESP32 Bluetooth LE depends on various factors such as environmental interference, connection interval, MTU size, and the performance of peer devices.
-  - The maximum throughput of Bluetooth LE communication between ESP32 boards can reach up to 700 Kbps, which is about 90 KB/s. For details, please refer to example ble_throughput in ESP-IDF.
+  - The maximum throughput of Bluetooth LE communication between ESP32 boards can reach 700 Kbps, about 90 KB/s. For devices that support 2M phy, the maximum throughput can reach 1.4 Mbps, approximately 170 KB/s.
+  - For details, please refer to the `ble_throughput example <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_throughput>`__ in ESP-IDF.
 
 --------------
 
@@ -75,14 +78,14 @@ How can I get ESP32 Bluetooth® Compatibility Test Report?
 What is the transmit power of ESP32 Bluetooth LE?
 ---------------------------------------------------------
 
-  The ESP32 Bluetooth LE has 8 transmit power levels, corresponding to -12 ~ 9 dBm of transmit power, with a 3 dBm interval. The controller software limits the transmit power and selects the power level according to the corresponding power level declared by the product.
+  The transmit power of ESP32 Bluetooth LE has 8 levels, corresponding to the power of -12 ~ 9 dBm, with an interval of 3 dBm per level. The configurable transmit power varies for different chip series, please refer to the corresponding header file of the chip. For example: `ESP32 <https://github.com/espressif/esp-idf/blob/master/components/bt/include/esp32/include/esp_bt.h#L400>`_.
 
 --------------
 
-Could ESP32 realize bridging between Wi-Fi and Bluetooth® LE?
+Can ESP32 realize bridging between Wi-Fi and Bluetooth® LE?
 ------------------------------------------------------------------------
 
-  Yes, this function is developed on the application layer. You can retrieve data through Bluetooth LE and send them out via Wi-Fi. For detailed information, please refer to `Wi-Fi and Bluetooth LE Coexist demo <https://github.com/espressif/esp-idf/tree/release/v4.0/examples/bluetooth/esp_ble_mesh/ble_mesh_wifi_coexist>`_.
+  Yes, this function is developed on the application layer. You can retrieve data through BLE Mesh and send them out via Wi-Fi. For detailed information, please refer to `ESP BLE Mesh and WiFi Coexist example <https://github.com/espressif/esp-idf/tree/release/v4.0/examples/bluetooth/esp_ble_mesh/ble_mesh_wifi_coexist>`_, and modify it for your own application.
 
 --------------
 
@@ -107,13 +110,6 @@ What kinds of Bluetooth® LE profiles does ESP32 support?
 -------------------------------------------------------------------
 
   Currently, ESP32 Bluetooth LE fully supports some basic profiles, such as GATT/SMP/GAP, as well as some self-defined profiles. The ones that have already been implemented include Bluetooth LE HID (receiving side), Bluetooth LE SPP-Like, Battery, DIS, BluFi (Bluetooth Network Configuration-transmitting side), and so on.
-
---------------
-
-What is the maximum transmission rate for ESP32 Bluetooth® LE?
---------------------------------------------------------------------------
-
-  The transmission rate of ESP32 Bluetooth LE can reach 700 Kbps when it is tested in a shielded box.
 
 --------------
 
@@ -148,7 +144,7 @@ Are there any documentation references for ESP32 BluFi networking?
 How many Bluetooth LE clients can be connected to ESP32?
 --------------------------------------------------------------------
 
-  The Bluetooth LE server supports up to nine client connections, please check the configuration of parameter ble_max_conn for applications. For stable connection, three clients should be good.
+  The Bluetooth® LE Server supports up to nine client connections at most, please check the configuration parameter ``ble_max_conn`` in the application. For stable connection, three clients should be good. If you need to support more connected devices, you can choose ESP32-C6/C5/H2. For the multi-connection capabilities of different chips, you can refer to the `Multi-Connection Guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ble/ble-multiconnection-guide.html>`_.
 
 --------------
 
@@ -173,8 +169,8 @@ Is it possible to use Wi-Fi Smartconfig and Bluetooth® LE Mesh for ESP32 simult
 How can I modify the transmit power of Bluetooth® LE for ESP32 series chips？
 --------------------------------------------------------------------------------
 
-  For ESP32/ESP32-S3/ESP32-C3, the Bluetooth transmit power can be configured via function esp_ble_tx_power_set(). For details, please refer to `esp_bt.h <https://github.com/espressif/esp-idf/blob/c77c4ccf6c43ab09fd89e7c907bf5cf2a3499e3b/components/bt/include/esp_bt.h>`_.
-  For ESP32-C6/ESP32-C2/ESP32-H2, you can set the transmit power by calling the `esp_ble_tx_power_set_enhanced() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/include/esp32h4/include/esp_bt.h#L139>`__ API.
+  - For ESP32/ESP32-S3/ESP32-C3, the Bluetooth transmit power can be configured via function ``esp_ble_tx_power_set()``. For details, please refer to `esp_bt.h <https://github.com/espressif/esp-idf/blob/c77c4ccf6c43ab09fd89e7c907bf5cf2a3499e3b/components/bt/include/esp_bt.h>`_.
+  - For ESP32-C6/ESP32-C2/ESP32-H2, you can set the transmit power by calling the `esp_ble_tx_power_set_enhanced() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/include/esp32h4/include/esp_bt.h#L139>`__ API.
 
 --------------
 
@@ -487,7 +483,7 @@ After setting `gatt_security_server <https://github.com/espressif/esp-idf/tree/v
 Does ESP32-C3/ESP32-C6/ESP32-S3 support Bluetooth AOA/AOD?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  ESP32-C3/ESP32-C6/ESP32-S3 do not support Bluetooth AOA/AOD.
+  ESP32-C3/ESP32-C6/ESP32-S3 do not support Bluetooth AOA/AOD. For information on the BLE support status of other chips, please refer to `Major Feature Support Status <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c61/api-guides/ble/ble-feature-support-status.html>`_.
 
 ------------------
 
@@ -712,10 +708,10 @@ How to terminate BLE tasks and release BLE resources on ESP32?
 
 ------------
 
-How to improve the BLE throughput of ESP32-S3?
+How to improve the BLE throughput of the ESP32 series chips?
 ------------------------------------------------------------------------------------------------------------------------
 
-  - The BLE throughput of the ESP32-S3 series products depends on various factors, such as environmental interference, BLE connection interval, MTU size (up to 512 bytes per packet), and the performance of the peer device.
+  - The BLE throughput of the ESP32 series products depends on various factors, such as environmental interference, BLE connection interval, MTU size, and the performance of the peer device.
 
     - The smaller the BLE connection interval, the faster the BLE transmission rate.
     - The larger the MTU size, the faster the BLE transmission rate.

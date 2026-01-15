@@ -32,6 +32,8 @@ ESP32 可以支持 Bluetooth LE 5.0 吗？
 
   ESP32 目前通过了 Bluetooth LE 5.0 的认证，但不支持 Bluetooth LE 5.0 的新功能。如需使用 Bluetooth LE 5.0 的功能，请选择其它 ESP32 系列芯片。
 
+  ESP32 系列芯片的蓝牙认证信息请参考 `ESP32 Bluetooth LE 认证信息 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/ble/ble-qualification.html>`_。
+
 --------------
 
 为什么 Bluetooth® LE 开始广播后，有些手机扫描不到？
@@ -54,7 +56,8 @@ ESP32 的 Bluetooth® LE 吞吐量是多少？
 ---------------------------------------------
 
   - ESP32 的 Bluetooth LE 吞吐率取决于各种因素，例如环境干扰、连接间隔、MTU 大小以及对端设备性能等等。
-  - ESP32 板子之间的 Bluetooth LE 通信最大吞吐量可达 700 Kbps，约 90 KB/s，具体可以参考 ESP-IDF 中的 ble_throughput example。
+  - ESP32 板子之间的 Bluetooth LE 通信最大吞吐量可达 700 Kbps，约 90 KB/s。对于支持 2M phy 的设备，最大吞吐量可达 1.4 Mbps，约 170 KB/s。
+  - 具体可以参考 ESP-IDF 中的 `ble_throughput example <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/bluedroid/ble/ble_throughput>`__。
 
 --------------
 
@@ -75,14 +78,14 @@ ESP32 蓝牙的兼容性测试报告如何获取？
 ESP32 Bluetooth LE 的发射功率是多少？
 -----------------------------------------
 
-  ESP32 Bluetooth LE的发射功率有 8 档，对应功率 -12 ~ 9 dBm，间隔 3 dBm 一档。控制器软件对发射功率进行限制，根据产品声明的对应功率等级选取档位。
+  ESP32 Bluetooth LE的发射功率有 8 档，对应功率 -12 ~ 9 dBm，间隔 3 dBm 一档。不同系列的芯片可配置的发射功率不同，具体请参见芯片对应的头文件。例如： `ESP32 <https://github.com/espressif/esp-idf/blob/master/components/bt/include/esp32/include/esp_bt.h#L400>`_。
 
 --------------
 
-ESP32 可以实现 Wi-Fi 和 Bluetooth® LE 桥接的功能吗？
+ESP32 可以实现 Wi-Fi 和 BLE Mesh 桥接的功能吗？
 --------------------------------------------------------------------
 
-  可以实现，这个属于应⽤层开发：可以通过 Bluetooth LE 获取数据，由 Wi-Fi 转出去。可参考 `Wi-Fi 和蓝⽛共存的 demo <https://github.com/espressif/esp-idf/tree/release/v4.0/examples/bluetooth/esp_ble_mesh/ble_mesh_wifi_coexist>`_，修改为⾃⼰的应⽤即可。
+  可以实现，这个属于应⽤层开发：可以通过 BLE Mesh 获取数据，由 Wi-Fi 转出去。可参考 `Wi-Fi 和蓝⽛共存的 demo <https://github.com/espressif/esp-idf/tree/release/v4.0/examples/bluetooth/esp_ble_mesh/ble_mesh_wifi_coexist>`_，修改为⾃⼰的应⽤即可。
 
 --------------
 
@@ -107,13 +110,6 @@ ESP32 支持哪些 Bluetooth® LE Profile？
 --------------------------------------------
 
   目前支持完整的 GATT/SMP 等基础模块，支持自定义配置；已经实现的配置有 Bluetooth LE HID（设备端）、电池、DIS、BluFi（蓝牙配网）等。
-
---------------
-
-ESP32 的 Bluetooth® LE 传输速率最大为多少？
------------------------------------------------------
-
-  屏蔽箱测试 Bluetooth LE 传输速率可以达到 700 Kbps。
 
 --------------
 
@@ -148,7 +144,7 @@ ESP32 Bluetooth® LE 如何进入 Light-sleep 模式呢？
 ESP32 支持多少低功耗蓝牙客户端连接？
 -------------------------------------
 
-  Bluetooth® LE Server 最大支持 9 个客户端连接，应用中需查看配置参数 ble_max_conn。测试稳定连接为 3 个客户端。
+  Bluetooth® LE Server 最大支持 9 个客户端连接，应用中需查看配置参数 ``ble_max_conn``。测试稳定连接为 3 个客户端。如需支持更多的连接设备可以选择 ESP32-C6/C5/H2。不同芯片的多连接能力可以参考 `多连接指南 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/ble/ble-multiconnection-guide.html>`_。
 
 --------------
 
@@ -174,7 +170,7 @@ ESP32 系列如何修改低功耗蓝牙的发射功率？
 ---------------------------------------------------
 
   - ESP32/ESP32-S3/ESP32-C3 蓝牙发射功率可通过 `esp_ble_tx_power_set()` 函数进行设置，可参见 `esp_bt.h <https://github.com/espressif/esp-idf/blob/c77c4ccf6c43ab09fd89e7c907bf5cf2a3499e3b/components/bt/include/esp_bt.h>`_。
-  - 对于ESP32-C6/ESP32-C2/ESP32-H2 可以通过调用 `esp_ble_tx_power_set_enhanced() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/include/esp32h4/include/esp_bt.h#L139>`__ API设置发射功率。
+  - 对于 ESP32-C6/ESP32-C2/ESP32-H2，可以通过调用 `esp_ble_tx_power_set_enhanced() <https://github.com/espressif/esp-idf/blob/b3f7e2c8a4d354df8ef8558ea7caddc07283a57b/components/bt/include/esp32h4/include/esp_bt.h#L139>`__ API设置发射功率。
 
 --------------
 
@@ -298,7 +294,7 @@ ESP32 蓝牙占用多少内存？
 
 ---------------
 
-ESP32 使用 gattc_gatts_coex.c 例程测试 BLE 多连接，在 ``menuconfi`` 中将 ``BLE Max connection`` 配置选项设置为 "5" ，但实际只能连 4 个设备，连接第 5 个设备的时候会报错，是什么原因？
+ESP32 使用 gattc_gatts_coex.c 例程测试 BLE 多连接，在 ``menuconfig`` 中将 ``BLE Max connection`` 配置选项设置为 "5" ，但实际只能连 4 个设备，连接第 5 个设备的时候会报错，是什么原因？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 请在 ``menuconfig`` 中将 ``BT/BLE MAX ACL CONNECTIONS`` 配置选项设置为 “5”。
@@ -487,7 +483,7 @@ ESP32 低功耗蓝牙可以使用 PSRAM 吗？
 ESP32-C3/ESP32-C6/ESP32-S3 是否支持蓝牙 AOA/AOD?
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
-  ESP32-C3/ESP32-C6/ESP32-S3 均不支持蓝牙 AOA/AOD。
+  ESP32-C3/ESP32-C6/ESP32-S3 均不支持蓝牙 AOA/AOD。关于其它芯片 BLE 功能支持情况，请参考 `BLE 主要功能支持状态 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c61/api-guides/ble/ble-feature-support-status.html>`_。
 
 --------------
 
@@ -712,10 +708,10 @@ ESP32 如何结束 BLE 任务与释放 BLE 资源？
 
 -------------
 
-如何提高 ESP32-S3 的 BLE 吞吐量？
+如何提高 ESP32 系列芯片的 BLE 吞吐量？
 ------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32-S3 系列产品的 BLE 吞吐量取决于多种因素，例如环境干扰、BLE 连接间隔、MTU 大小，以及对端设备的性能。
+  - ESP32 系列产品的 BLE 吞吐量取决于多种因素，例如环境干扰、BLE 连接间隔、MTU 大小，以及对端设备的性能。
 
     - BLE 连接间隔越小，BLE 传输速率越快。
     - MTU Size 越大，BLE 传输速率越快。
