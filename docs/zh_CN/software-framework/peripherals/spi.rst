@@ -149,3 +149,10 @@ ESP32 作为 SPI 主机，是否支持 30 MHz 时钟？
 
   - 不支持。ESP32 作为 SPI 主机时，当使用 SPI IO_MUX 管脚，最高可支持 80 MHz CLK，支持 80 MHz 进行整数分频。
   - 当使用 GPIO 矩阵管脚，最高可支持 40 MHz CLK；如果使用 GPIO 矩阵管脚的全双工传输模式，仅支持高达 26 MHz CLK。详细说明参见 `SPI 主机驱动程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v5.2/esp32/api-reference/peripherals/spi_master.html#spi>`_ 软件使用说明。
+
+---------------
+
+为什么在 SPI 半双工模式下，ESP32 与后续芯片的 MISO/MOSI 状态会有差异？
+----------------------------------------------------------------------------------------------------------------------
+
+  在半双工 TX 模式下，ESP32 默认将未使用的 MISO 线拉至低电平，除 ESP32 外其他芯片则默认拉至高电平，这属于正常现象。如需将除 ESP32 以外的其他芯片拉至低电平，可置位 ``SPI_Q_POL`` 为 0。

@@ -165,3 +165,9 @@ Does UART support DMA functionality?
 ----------------------------------------------------------
 
   Please refer to `UART DMA (UHCI) <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/uhci.html>`_. Please note that UART DMA shares HCI hardware with BT, so do not use BT HCI and UART DMA at the same time.
+
+---------------
+
+What is the UART RX sampling mechanism on the ESP32-S3?
+---------------------------------------------------------------------------------------------------------------------
+  Midpoint sampling.

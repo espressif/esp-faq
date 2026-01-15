@@ -149,3 +149,10 @@ Does ESP32, as an SPI host, support a 30 MHz clock?
 
   - Not supported. When ESP32 acts as an SPI host, it can support up to 80 MHz CLK when using SPI IO_MUX pins, and supports integer division at 80 MHz.
   - When using GPIO matrix pins, it can support up to 40 MHz CLK. If using the full-duplex transmission mode of GPIO matrix pins, it only supports up to 26 MHz CLK. For detailed instructions, refer to the `SPI Master Driver <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/peripherals/spi_master.html#spi>`_ software usage instructions.
+
+---------------
+
+Why is there a difference in the MISO/MOSI status of the ESP32 and subsequent chips in SPI half-duplex mode?
+----------------------------------------------------------------------------------------------------------------------
+
+  In half-duplex TX mode, the ESP32 by default pulls the unused MISO line to a low level, while other chips except for the ESP32 default to a high level, which is a normal phenomenon. If you need to pull other chips except for the ESP32 to a low level, you can set ``SPI_Q_POL`` to 0.

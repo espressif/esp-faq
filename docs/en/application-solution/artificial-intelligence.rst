@@ -19,6 +19,8 @@ What types of cameras are supported on AI image recognition products?
 -------------------------------------------------------------------------------------
 
   With ESP32 as its main control chip, ESP-EYE supports various types of cameras, such as 0V2640, OV3660, OV5640, OV7725, etc. Please see `esp32-camera Github <https://github.com/espressif/esp32-camera/tree/master/sensors>`_.
+  
+  For the ESP32-P4 series, please refer to `esp-video-components <https://github.com/espressif/esp-video-components>`_ to get the supported camera models.
 
 --------------
 
@@ -118,6 +120,8 @@ Do you have relevant study materials for `ESP-DL <https://github.com/espressif/e
   - `Face Recognition <https://github.com/espressif/esp-dl/tree/master/examples/human_face_recognition>`_.
   - `Yolo11N Object Detection <https://github.com/espressif/esp-dl/tree/master/models/coco_detect>`_.
   - `Cat Face Recognition <https://github.com/espressif/esp-dl/tree/master/models/cat_detect>`_.
+  - `Color Recognition <https://github.com/espressif/esp-dl/tree/master/models/color_detect>`_.
+  - `Lightweight Object Detection Framework ESP-Detection <https://github.com/espressif/esp-detection>`_.
 
 -------------
 

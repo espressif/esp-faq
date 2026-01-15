@@ -165,3 +165,9 @@ UART 是否支持 DMA 功能？
 ----------------------------------------------------------
 
   请参考 `UART DMA (UHCI) <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s3/api-reference/peripherals/uhci.html>`_。请注意，UART DMA 与 BT 共享 HCI 硬件，因此请勿同时使用 BT HCI 和 UART DMA。
+
+---------------
+
+ESP32-S3 UART RX 采样原则？
+---------------------------------------------------------------------------------------------------------------------
+  中间点采样。

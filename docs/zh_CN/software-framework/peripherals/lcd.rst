@@ -20,14 +20,23 @@ LCD
 ESP 系列芯片 LCD 驱动及参考例程在哪？
 ------------------------------------------------------------------
 
-  请参考 `ESP-IoT-Solution 编程指南 - LCD 开发指南 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/display/lcd/lcd_development_guide.html#id2>`__。
+  - 请首先通过 `ESP-IoT-Solution 编程指南 - LCD 开发指南 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/display/lcd/lcd_development_guide.html#id2>`__ 了解 LCD 的开发流程。
+  - 基础 LCD 驱动例程请参考 `esp-idf/examples/peripherals/lcd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd>`_。
+  - 进阶 LCD 驱动例程请参考 `esp-iot-solution/examples/display <https://github.com/espressif/esp-iot-solution/tree/master/examples/display>`_。
 
 ---------------
 
 ESP 系列芯片 LCD 屏幕适配情况是怎样的？
 -------------------------------------------------------------------
 
-  请参考 `ESP-IoT-Solution 编程指南 - LCD 开发指南 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/display/lcd/lcd_development_guide.html#id2>`__。
+  请参考 `ESP-IoT-Solution 编程指南 - LCD 开发指南 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/display/lcd/lcd_development_guide.html#id2>`__ 了解已适配的 LCD 屏幕型号。
+
+--------------
+
+ESP 系列芯片在应用开发中的常见问题
+-------------------------------------------------------------------
+
+  关于 LCD 屏幕的常见问题，请参考 `LCD 应用开发笔记 <https://docs.espressif.com/projects/esp-techpedia/zh_CN/latest/esp-friends/advanced-development/lcd-application-note/index.html>`__。
 
 --------------
 
@@ -36,7 +45,7 @@ ESP32-P4 驱动 MIPI-DSI LCD 的一些说明
 
   - 最高支持 2-lane，每路最高支持 1.5 Gbps 的速率（共 3 Gbps），并且支持 ``RGB565``、``RGB666``、``RGB888`` 颜色格式。
   - 部分 MIPI-DSI LCD 默认通过硬件 (IM[0:3]) 配置为 4-lane，如 ``ILI9881``、``JD9365``，但是可以通过修改 LCD 的初始化命令来配置为 2-lane（如 ILI9881 的 ``B6h-B7h`` 命令），因此需要查看 LCD 驱动 IC 的数据手册来判断是否能够支持。
-  - MIPI-DSI 驱动默认开启了通信应答机制，如果 ESP 与 LCD 之前出现通信异常，ESP 可能会卡死并触发看门狗，此时请检查硬件连接是否正确，或者使用逻辑分析仪检查通信是否正常。
+  - MIPI-DSI 驱动默认开启了通信应答机制，如果 ESP 与 LCD 之前出现通信异常，ESP 可能会卡死并触发看门狗。此时请检查硬件连接是否正确、初始化命令是否正确、复位时序是否正确，或者使用逻辑分析仪检查通信是否正常。
 
 --------------
 
@@ -81,13 +90,13 @@ ESP 系列芯片的带屏开发板是否支持使用 Arduino IDE 开发 GUI？
     - ``CONFIG_SPIRAM_XIP_FROM_PSRAM=y``
     - ``CONFIG_COMPILER_OPTIMIZATION_PERF=y``
 
-  - 以下 LVGL 配置项对帧率提升有帮助 (LVGL v8.3):
+  - 以下 LVGL 配置项对帧率提升有帮助 (LVGL v8.4):
 
     - ``#define LV_MEM_CUSTOM 1`` or ``CONFIG_LV_MEM_CUSTOM=y``
     - ``#define LV_MEMCPY_MEMSET_STD 1`` or ``CONFIG_LV_MEMCPY_MEMSET_STD=y``
-    - ``#define LV_ATTRIBUTE_FAST_MEM IRAM_ATTR`` or ``CONFIG_LV_ATTRIBUTE_FAST_MEM=y``
+    - ``CONFIG_LV_ATTRIBUTE_FAST_MEM=y``
 
-  - 详细 LCD 及 LVGL 性能说明，请参考 `文档 <https://github.com/espressif/esp-bsp/blob/master/components/esp_lvgl_port/docs/performance.md>`__。
+  - 如果对帧率、旋转效率和防撕裂效果有更高的要求，建议使用 `esp_lvgl_adapter 组件 <https://github.com/espressif/esp-iot-solution/blob/7c133a8b81c161635ee1f093acd180a2322adb72/components/display/tools/esp_lvgl_adapter/README_CN.md>`__。
 
 ---------------
 
@@ -103,41 +112,7 @@ ESP 系列芯片最大可以支持多少分辨率的 LCD？相应的帧率是多
 ----------------------------------------------------------------------------------------------------------
 
   - 对于 ESP32-S3 和 ESP32-P4 的 RGB 外设接口，由于受其硬件限制，理论上最大支持 ``4096 x 1024`` 分辨率（水平最大为 ``4096``，垂直最大为 ``1024``）；对于 ESP 系列芯片的其他外设接口，可以支持多大的分辨率并没有一个“最大”的硬件限制，
-  - 由于芯片的存储大小、计算性能和外设接口的传输带宽有限，而且不同接口类型的 LCD 通常具有特定范围内的分辨率，因此针对 ESP32-C3 和 ESP32-S3 这两款芯片推荐使用 LCD 的分辨率如下：
-
-    .. list-table::
-        :header-rows: 1
-
-        * - SoCs
-          - SPI
-          - QSPI
-          - I80
-          - RGB
-          - MIPI-DSI
-
-        * - ESP32-C3
-          - 240 x 240
-          - 不推荐
-          - 不支持
-          - 不支持
-          - 不支持
-
-        * - ESP32-S3
-          - 320 x 240
-          - 400 x 400
-          - 480 x 320
-          - 480 x 480，800 x 480
-          - 不支持
-
-        * - ESP32-P4
-          - 320 x 240
-          - 400 x 400
-          - 480 x 320
-          - 480 x 480，800 x 480
-          - 1024 x 600，1280 x 720
-
-  - 针对 ESP32-S3 的 RGB 接口，目前基于 LVGL (v8) 应用场景测试过的最大分辨率为 800 x 480，接口帧率上限为 59 (PCLK 30 MHz), 对应 LVGL 平均帧率为 23; LVGL 平均帧率上限为 26, 对应接口帧率为 41 (PCLK 21 MHz)。
-  - 针对 ESP32-P4 的 MIPI-DSI 接口，目前基于 LVGL (v8) 应用场景测试过的最大分辨率为 1080 x 1920，接口帧率上限为 31 (DPI_CLK 80 MHz，2-lane bit rate 2.8 Gbps), 对应 LVGL 平均帧率为 25;
+  - 具体分辨率情况以及对应帧率请参考 `LCD 驱动芯片选型 <https://docs.espressif.com/projects/esp-techpedia/zh_CN/latest/esp-friends/advanced-development/lcd-application-note/overview.html#id5>`__。
 
 ---------------
 
@@ -183,6 +158,7 @@ ESP32-S3 系列的芯片支持哪些图片解码格式？
 
   - 目前官方仅支持 JPEG 解码格式，应用例程可参考 `esp-idf/examples/peripherals/lcd/tjpgd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd/tjpgd>`_。
   - 基于 LVGL 开发的话，可以支持 PNG、BMP、SJPG、GIF 图片解码格式，具体介绍见 `LVGL libs <https://docs.lvgl.io/master/libs/index.html>`_。
+  - 此外，如果有动图需求，可使用乐鑫自定义的 EAF 动图格式，具体参考 `EAF 动图格式示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/gui/lvgl_eaf_player>`__。
 
 ------------------------
 
@@ -381,7 +357,7 @@ ESP32-S2 USB 摄像头和 I80 LCD 同时使用会导致 LCD 显示缺图像或�
 通过非 LVGL 任务操作 LVGL 控件时出现异常 crash，如何解决？
 ---------------------------------------------------------------------------------------------------------------------------
 
-  操作 LVGL 控件时使用 ``bsp_display_lock()`` 和 ``bsp_display_unlock()`` 来保护操作变量，进而保证线程安全。
+  操作 LVGL 控件时使用 ``display_lock()`` 和 ``display_unlock()`` 来保护操作变量，进而保证线程安全。
 
 ---------------------------
 
@@ -440,3 +416,11 @@ ESP32-P4 是否支持输出 HDMI 信号？
 -------------------------------------------------------------------------------
 
   ESP32-P4 不支持直接输出 HDMI 信号，但可以通过 MIPI-DSI 转 HDMI 的芯片来实现 HDMI 信号输出。目前，乐鑫支持的 MIPI-DSI 转 HDMI 芯片为 `LT8912B <https://github.com/espressif/esp-bsp/tree/master/components/lcd/esp_lcd_lt8912b>`__，相关使用方法可参考 `示例代码 <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/lcd/hdmi_video_renderer>`__。
+
+---------------------------
+
+在 LVGL 应用中，RGB 或者 MIPI-DSI 接口屏幕如何旋转 90 度/270 度？如何避免撕裂现象？如何进一步提高帧率？
+----------------------------------------------------------------------------------------------------------
+
+  - 推荐使用 `esp_lvgl_adapter 组件 <https://github.com/espressif/esp-iot-solution/blob/7c133a8b81c161635ee1f093acd180a2322adb72/components/display/tools/esp_lvgl_adapter/README_CN.md>`__ 。该组件提供了高效率旋转、防撕裂、帧率提升等特性，并且支持 LVGL v8 和 v9 版本。
+  - 参考示例代码 `esp_lvgl_adapter 示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/gui/lvgl_common_demo>`__ 。
