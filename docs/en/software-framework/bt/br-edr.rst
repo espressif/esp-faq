@@ -111,7 +111,8 @@ How can I send files via Bluetooth® BR/EDR for ESP32?
 What profile does ESP32's classic Bluetooth® support?
 -------------------------------------------------------
 
-  - Currently, it supports A2DP, AVRCP, SPP, HFP, and HID.
+  - v5.3 and below versions: Support for A2DP, AVRCP, SPP, HFP, HID.
+  - v5.4 and above versions: Support for A2DP, AVRCP, SPP, HFP, HID, PBAP-Client.
 
 ----------------
 
@@ -121,7 +122,8 @@ How can I input the PIN code via mobile phone during ESP32's Classic Bluetooth P
   You can disable ``Secure Simple Pairing`` to support only ``Legacy Pairing``.
 
   - From esp-idf v3.3 to v4.0 (not include v4.0): ``Component config`` > ``Bluetooth`` > ``Bluedroid Enable`` > ``[*] Classic Bluetooth`` > ``[ ]Secure Simple Pairing``
-  - esp-idf v4.0 and above: ``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` > ``[ ] Secure Simple Pairing``
+  - v4.0 to v5.2: ``Component config`` > ``Bluetooth`` > ``Bluedroid Options`` > ``[ ] Secure Simple Pairing``
+  - v5.3 and above versions: You need to call the ``esp_bluedroid_init_with_cfg()`` function for configuration. To be specific: create a configuration structure of type ``esp_bluedroid_config_t``, and set its ``ssp_en`` member to false, then pass this structure to the initialization function.
 
 -------------------
 
