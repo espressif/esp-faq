@@ -1,4 +1,4 @@
-Environment setup
+Environment Setup
 =================
 
 :link_to_translation:`zh_CN:[中文]`
@@ -15,15 +15,15 @@ Environment setup
 
 --------------
 
-When setting up ESP32-S2 environment using command ``idf.py set-target esp32s2``, an error occurred as "Error: No such command 'set-target'". What could be the reason?
+When setting up ESP32-S2 environment using command ``idf.py set-target esp32s2``, an error occurred as ``Error: No such command 'set-target'``. What could be the reason?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The ESP-IDF is adapted to ESP32-S2 from release/v4.2, thus setting up ESP32-S2 environment in previous versions will cause errors. In this case, when using command ``idf.py set-target esp32s2``, there will be error as "Error: No such command 'set-target'". It is recommended to perform tests and development on ESP32-S2 using ESP-IDF release/v4.2 and later versions. For more information, please refer to `ESP32-S2 Get Started <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/>`_.
+  - The ESP-IDF is adapted to ESP32-S2 from release/v4.2, thus setting up ESP32-S2 environment in previous versions will cause errors. In this case, when using command ``idf.py set-target esp32s2``, there will be error as ``Error: No such command 'set-target'``. It is recommended to perform tests and development on ESP32-S2 using ESP-IDF release/v4.2 and later versions. For more information, please refer to `ESP32-S2 Get Started <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/get-started/>`_.
   - For information on the support of different ESP chips by different ESP-IDF versions, please refer to `ESP-IDF Release and SoC Compatibility <https://github.com/espressif/esp-idf/blob/master/README.md#esp-idf-release-and-soc-compatibility>`__.
 
 --------------
 
-When installing ESP-IDF version master using ESP-IDF Tools 2.3 in Windows system, an error occurred as: Installation has failed with exit code 2. What could be the reason?
+When installing ESP-IDF version master using ESP-IDF Tools 2.3 in Windows system, an error occurred as ``Installation has failed with exit code 2``. What could be the reason?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   This is related to the bad network environment. The Github repository cannot be downloaded smoothly under such network environment, causing SDK download failure on your PC. If you encounter Github access problems, it is recommended to use the **offline** version of the latest `ESP-IDF Windows Installer <https://dl.espressif.com/dl/esp-idf/>`_.
@@ -49,8 +49,8 @@ During the installation process of `esp-idf-tools <https://dl.espressif.com/dl/e
 
     Installation has failed with exit code 1
 
-    
-  This error is caused by an unsuitable network environment. Please check the "Download via gitee" option when using the tool.
+  - This error is usually caused by an unstable network environment. It is recommended to check the "Download via gitee" (Mirror Settings) option when installing tools to avoid issues with poor GitHub network connections.
+  - For a more reliable installation option, consider using the offline version of the Windows installation tool downloaded from `Espressif download server <https://dl.espressif.com/dl/esp-idf/>`__, which includes all required software components and does not rely on real-time downloads during the installation process.
 
 --------------
 
@@ -118,36 +118,36 @@ How to know the version of ESP-IDF, is it recorded in a certain document?
 
   - Command line: You can obtain the version number by inputting ``idf.py --version`` in the terminal with an IDF environment. 
   - CMake script: You can obtain the version number through the variable ``${IDF_VERSION_MAJOR}.${IDF_VERSION_MINOR}.${IDF_VERSION_PATCH}``.
-  - Code compilation: You can obtain the version number by calling ``esp_get_idf_version`` during code compilation or directly using the macro definition of version in "components/esp_common/include/esp_idf_version.h".
+  - Code compilation: You can obtain the version number by calling ``esp_get_idf_version`` during code compilation or directly using the macro definition of version in ``components/esp_common/include/esp_idf_version.h``.
 
 ---------------
 
 How to optimize ESP-IDF compilation in Windows environment?
 ---------------------------------------------------------------------------------------------------
 
-  - Please add the directories of ESP-IDF source code and compiler ``.espressif`` to the exclusions of anti-virus program.
+  Please add the ESP-IDF source directory and the compiler directory ``.espressif`` to the antivirus software's exclusion list.
 
 -------------------
 
 Is there an esptool that can be used directly on Windows?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - You can go to `esptool --> Releases <https://github.com/espressif/esptool/releases>`_ and download the Windows version of the esptool from the Asset column on the drop-down page. 
+  You can go to `esptool > Releases <https://github.com/espressif/esptool/releases>`_, and download the Windows version of the esptool tool from the Asset column on the dropdown page.
 
 -------------------
 
-What could be the cause of the error `KeyError: 'idfSelectedId'` when running `. /install.sh`?
+What could be the cause of the error ``KeyError: 'idfSelectedId'`` when running ``. /install.sh``?
 ---------------------------------------------------------------------------------------------------------------
 
-  - This is because ESP-IDF v5.0 or above is installed on your system. You can check the configuration in the `~/.espressif/idf-env.json` file.
-  - This error can be solved by running `rm -rf ~/.espressif/idf-env.json`.
+  - This is because ESP-IDF v5.0 or above is installed on your system. You can check the configuration in the ``~/.espressif/idf-env.json`` file.
+  - This error can be solved by running ``rm -rf ~/.espressif/idf-env.json``.
 
 -----------------
 
-When running `demo`, the package manager component dependency cannot be pulled, with the failure information `Invalid manifest format`, `Invalid dependency format`, and `unknown keys in dependency details: override_path`. What could be the reason?
+When running ``demo``, the package manager component dependency cannot be pulled, with the failure ``Invalid manifest format``, ``Invalid dependency format``, and ``unknown keys in dependency details: override_path``. What could be the reason?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - This is due to missing component dependencies and can be solved after updating `component-manager`. The corresponding command is `pip install --upgrade idf-component-manager`.
+  This is due to missing component dependencies, and it requires an update to the `component-manager`. The command instruction is ``pip install --upgrade idf-component-manager``.
 
 --------------
 
@@ -163,8 +163,8 @@ After installing the ESP-IDF CMD environment using the `ESP-IDF v4.4.8-Offline I
     ninja: build stopped: subcommand failed.
     ninja failed with exit code 1
 
-  - According to the logs, an error occurred while caching the `build/esp-idf/main/CMakeFiles/__idf_main.dir/ main.c.o.bj` file during the compilation process. This file is generated when ccache calls the compiler and is related to the compilation cache. This issue has been resolved in versions 5.0 and later.
-  - In the ESP-IDF CMD environment of version v4.4, please use the `idf.py --no-ccache build` command to build the projects.
+  - According to the logs, an error occurred while caching the ``build/esp-idf/main/CMakeFiles/__idf_main.dir/ main.c.o.bj`` file during the compilation process. This file is generated when ccache calls the compiler and is related to the compilation cache. This issue has been resolved in versions 5.0 and later.
+  - In the ESP-IDF CMD environment of version v4.4, please use the ``idf.py --no-ccache build`` command to build the projects.
   
 --------------
 
@@ -189,4 +189,4 @@ How to fix the following error when building a project and pulling components?
           storage_url:
             - "https://components-file.espressif.cn"
 
-  - For more details, refer to `idf_component_manager.yml Configuration File <https://docs.espressif.com/projects/idf-component-manager/en/latest/reference/config_file.html>`_。
+  - For more details, refer to `idf_component_manager.yml Configuration File <https://docs.espressif.com/projects/idf-component-manager/en/latest/reference/config_file.html>`_.
