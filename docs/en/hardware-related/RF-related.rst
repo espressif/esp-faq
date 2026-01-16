@@ -10,7 +10,7 @@ RF Related
      h2 {counter-reset: h3}
      h2:before {counter-increment: h2; content: counter(h2) ". "}
      h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
-     h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
+     h2.nocount:before, h3.nocount:before { content: ""; counter-increment: none }
    </style>
 
 --------------
@@ -43,7 +43,7 @@ How can I get the RF related information (e.g., antenna specification, antenna p
 Why does ESP32 automatically reduce its transmit power when it uses the RF Test Tool at 80 °C?
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Temperature compensation is disabled by default when ESP32 runs the fixed frequency firmware. Therefore, the power reduces at a high temperature. To enable temperature compensation, please send ``txpwr_track_en 1 1 0`` to ESP32 through the default log serial port.
+  Temperature compensation is disabled by default when ESP32 runs the fixed frequency firmware. Therefore, the power reduces at a high temperature. To enable temperature compensation, please send ``txpwr_track_en 1 1 0`` to ESP32 through the default log serial port.
 
 --------------
 
@@ -65,7 +65,29 @@ How to write phy_init data to flash ?
 
   :CHIP\: ESP32 :
 
-  - You can write it via the power limit tool. Please download the `ESP_RF_TEST Tool <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_EN.zip>`_, unzip the package, open the EspRFTestTool_vx.x_Manual.exe file, and then go to ``help`` > ``Tool help`` > ``PowerLimitTool help`` for detailed operations.
+  To write the phy_init data into flash, you need to first check the ``menuconfig`` > ``Component config`` > ``PHY settings``. Depending on the configuration, the flashing method differs.
+
+    - If ``CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION`` is not enabled, the phy_init data will be directly embedded into the application binary file, and does not need to be flashed separately.
+    - If ``CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION`` is enabled, the phy_init data must be flashed separately to a phy data partition. The steps are as follows:
+
+      - The partition table of the project must include a phy data partition, for example:
+
+        .. code-block:: c
+
+          # Name,   Type, SubType, Offset,   Size, Flags
+          phy_init, data, phy,     ,        0x1000,
+
+      - After building the project, a separate ``phy_init_data.bin`` file will be generated.
+
+        .. note::
+
+          You can also use the `PowerLimitTool tool <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32c3/development_stage/rf_test_guide/rf_test_guide.html#powerlimittool>`__ to generate the ``phy_init_data.bin`` file.
+
+      - Use the `flash download tool <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/production_stage/tools/flash_download_tool.html>`__ to flash the generated ``phy_init_data.bin`` into the flash at the address specified in the partition table.
+
+      .. note::
+
+        If ``CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION`` is enabled, but the ``phy_init_data.bin`` file is not actually flashed into the phy partition, an error will occur.
 
 --------------
 
