@@ -1,4 +1,4 @@
-Hardware design
+Hardware Design
 ===============
 
 :link_to_translation:`zh_CN:[中文]`
@@ -149,6 +149,7 @@ Why is the suggested voltage range of ESP32 modules different from that of ESP32
 -----------------------------------------------------------------------------------------------
 
   - This is because of the different working environments and usage scenarios.
+
     - The ESP32 chip is a bare die and requires external circuitry on a circuit board to function properly. The recommended operating voltage range for the ESP32 chip is 2.3 V to 3.6 V, which is determined by the chip's electrical parameters. Within this voltage range, the ESP32 chip can function properly and provide optimal performance and power consumption.
     - The ESP32 module, on the other hand, is a packaged electronic module that typically includes voltage regulators, external crystals, external antennas, and other peripheral chips, such as flash memory and RAM, and can be used directly. As the module's circuitry has already been optimized and tested, its recommended operating voltage range may be narrower. For example, the ESP32-WROOM-32 module has a recommended operating voltage range of 3.0 V to 3.6 V. Apart from that, as the module has to take flash voltage into account, the recommended operating voltage for the ESP32 module would thus be higher.
 
@@ -245,7 +246,7 @@ Can GPIO 34 ~ GPIO39 of ESP32 be used as UART RX pins?
 Where can I find the design reference for the external 32 kHz crystal of ESP32 modules?
 -------------------------------------------------------------------------------------------------------
 
-  Please refer to Section *RTC (optional)* in the `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
+  Please refer to the hardware design instructions in the document `RTC Clock Source (Optional) (ESP32) <https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32/schematic-checklist.html#rtc>`_.
 
 ----------------
 
@@ -313,10 +314,16 @@ Is there any hardware design reference for ESP-Skainet Speech Recognition?
 
 ----------------------------------------------------------------------------------------
 
-Is it necessary to connect a 32 kHz RTC crystal?
+Is it necessary to connect a 32 kHz RTC crystal to the ESP32 chip in hardware design?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  The external 32 kHz crystal is often used for Bluetooth Light-sleep timing. Therefore, when Bluetooth LE Light-sleep mode is not necessary, there is no need to do so.
+  - An external 32 kHz RTC crystal is optional, not mandatory. Its main purpose is to provide higher time accuracy and reduce power consumption. Typical application scenarios include:
+
+    - Low Power Bluetooth (BLE) Design: An external 32 kHz crystal is mainly used for  timing during BLE Light-sleep. If a 32 kHz external crystal is not added to the hardware, Light-sleep may not function correctly in some BLE applications.
+    - Improved time accuracy: Compared with the internal RC oscillator, an external crystal oscillator is less affected by the environment and has higher accuracy. This is crucial for applications that require periodic wakeups to receive beacons (such as Wi-Fi/Bluetooth keep-alive), as it helps prevent RF receive windows from being extended due to clock drift, thereby significantly reducing average power consumption.
+
+  - If the application scenario does not involve low power mode or there is no need to maintain high precision timing during sleep, the external crystal can be omitted.
+  - The ESP32 integrates a 150 kHz RC oscillator and a clock derived from an 8.5 MHz oscillator divider, which can serve as RTC clock sources. Although their frequency stability is more sensitive to temperature variations, they can replace the external 32 kHz crystal oscillator in applications that do not have strict accuracy requirements.
 
 ---------------
 
@@ -371,7 +378,7 @@ When using the ESP32-WROOM-32D module, can I set GPIO12 for other uses?
   - GPIO12 is a strapping pin that controls the startup voltage of SPI flash. The SPI flash startup voltage of the ESP32-WROOM-32D module is 3.3 V, so GPIO12 needs to be pulled down during powering on.
   - If you need to set GPIO12 for other uses, please use the command `espefuse.py set_flash_voltage 3.3v <https://docs.espressif.com/projects/esptool/en/latest/esp32/espefuse/set-flash-voltage-cmd.html#set-flash-voltage>`_ in the esptool to set the voltage through VDD_SDIO as 3.3 V.
   - It is possible to connect VDD_SDIO to 3.3 V in hardware directly without burning eFuse again.
-  - In the mass production stage, you can also download the firmware directly by modifying the default configuration of ESP32_EFUSE_CONFIG to config_voltage = 3.3 V in config/esp32/utility.config in the flash download tool.
+  - In the mass production stage, you can also download the firmware directly by modifying the default configuration of ``ESP32_EFUSE_CONFIG`` to ``config_voltage = 3.3 V`` in ``config/esp32/utility.config`` in the flash download tool.
 
 --------------------
 
@@ -387,7 +394,7 @@ Do I need to add a shielding case to the PCB of ESP32 modules?
 
   - Whether a shield needs to be added depends on the specific application scenarios and requirements.
 
-    - In some high-demand application scenarios, such as environments with severe wireless communication interference or high electromagnetic compatibility (EMC) testing requirements, adding a shield can effectively reduce external interference and mutual interference on the PCB board, improving system stability and reliability. At this time, the shield should be made of conductive material and grounded to ensure its effectiveness.
+    - In some demanding application scenarios, such as severe wireless communication interference environments, high electromagnetic compatibility (EMC) test requirements, etc., installing a shield can effectively reduce external interference and mutual interference on the PCB board, improving the system's stability and reliability. At this time, the shield should be made of conductive material and grounded to ensure its effectiveness.
     - On the other hand, if the application scenario is relatively simple, such as low wireless communication interference and low EMC requirements, the effect of adding a shield may not be very obvious and may increase system cost and complexity.
     - If the board has other signal interference, such as 2G, 3G, 4G, Wi-Fi, Bluetooth, Zigbee, etc., it is recommended to add a shielding case.
 
@@ -438,7 +445,7 @@ Could you please provide the 3D model and Footprint files of the ESP32-S3-WROOM-
 Does ESP32/ESP32-S2/ESP32-C3/ESP32-S3 support powering the RTC power domain only to keep the chip working with low power consumption?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  No, it is not supported. Take ESP32 as an example, detailed information will be updated to the RTC chapter in `ESP32 Hardware Design Guidelines <https://www.espressif.com/sites/default/files/documentation/esp32_hardware_design_guidelines_en.pdf>`_.
+  Not supported. For detailed explanation, refer to the hardware design instructions in the document `RTC Clock Source (Optional) (ESP32-C3) <https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32c3/schematic-checklist.html#rtc>`_.
 
 ----------------
 
@@ -459,14 +466,14 @@ How can I improve the EMC performance?
 Why do I need to connect a 499 Ω resistor to U0TXD for ESP32-S3?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  The 499 Ω resistor is reserved for the U0TXD to suppress 80 MHz harmonics. For more information, please refer to `《ESP32­S3 Series Hardware Design Guidelines》 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_hardware_design_guidelines_en.pdf>`_.
+  The 499 Ω resistor is reserved for the U0TXD to suppress 80 MHz harmonics. For more information, please refer to `UART <https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32s3/schematic-checklist.html#uart>`__.
 
 --------------
 
 How to calibrate the ESP32-S3 ADC in hardware?
 -------------------------------------------------------------------------------------------------------------------------------
 
-  ESP32-S3 already has the ADC calibrated in hardware on the chip. ESP32-S3 ADCs can be sensitive to noise, resulting in large differences in ADC readings. Depending on the usage scenario, you may need to connect a bypass capacitor (e.g. 100 nF ceramic capacitor) to the ADC input pads for minimising noise. In addition, multi-sampling can be used to further mitigate the effects of noise.
+  ESP32-S3 already has the ADC calibrated in hardware on the chip. ESP32-S3 ADCs can be sensitive to noise, resulting in large differences in ADC readings. Depending on the usage scenario, you may need to connect a bypass capacitor (e.g. 100 nF ceramic capacitor) to the ADC input pads for minimizing noise. In addition, multi-sampling can be used to further mitigate the effects of noise.
 
 --------------
 
@@ -551,7 +558,7 @@ Is it possible to change the default power-up reset initial state of GPIO6 (JTAG
 
 ------------------
 
-Can the VBAT pin of H2 be powered independently?
+Can the VBAT pin of ESP32-H2 be powered independently?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   In theory, RTC is supported for power supply, but 3.3V is already connected inside the module, so this pin is actually not available.
