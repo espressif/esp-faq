@@ -20,6 +20,7 @@ Does ESP32 support USB function?
 
   - No, ESP32 does not support USB function.
   - However, ESP32-S2/S3 supports USB2.0 Full-speed mode.
+  - ESP32-P4 supports USB2.0 High-speed and Full-speed modes.
 
 ---------------
 
@@ -75,17 +76,21 @@ The USB protocol supported by ESP32-S2 is OTG 1.1, with the maximum speed of 12 
 
 ---------------
 
-Does ESP32-S2 support USB camera?
+Does ESP32-S2/S3 support USB cameras?
 ------------------------------------------------------------------------
 
-  Yes. For the demo code of ESP32-S2/ESP32-S3 USB Host UVC, please refer to `usb_stream <https://github.com/espressif/esp-iot-solution/tree/master/components/usb/usb_stream>`__.
+  Supported. For ESP32-S2/ESP32-S3 USB Host UVC example code, please refer to `usb_hub_dual_camera <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_hub_dual_camera>`__. This example can connect to a single USB camera, or multiple USB cameras through a HUB.
 
 ---------------
 
 Does ESP32-S3 support USB cameras with microphones and speakers?
 ----------------------------------------------------------------------------
 
-  Yes. For the demo code of ESP32-S2/ESP32-S3 USB Host UVC, please refer to `usb_stream <https://github.com/espressif/esp-iot-solution/tree/master/components/usb/usb_stream>`__.
+  Supported. Please refer to the example codes for ESP32-S2/ESP32-S3 respectively:
+
+  - Audio: `audio_player <https://github.com/espressif/esp-usb/tree/master/host/class/uac/usb_host_uac/examples/audio_player>`__.
+  - Camera: `basic_uvc_stream <https://github.com/espressif/esp-usb/tree/master/host/class/uvc/usb_host_uvc/examples/basic_uvc_stream>`__.
+  - Web preview camera: `usb_hub_dual_camera <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_hub_dual_camera>`__.
 
 ---------------
 
@@ -149,7 +154,7 @@ Does ESP32-S3 support USB CDC for printing program log and downloading firmware?
 Does ESP32-S3 support devices with USB Device being Class 0?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes, please refer to the example `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/v5.0-dev/components/tinyusb/additions/src/usb_descriptors.c>`_. When class code == 00H, the class category is specified by the interface.
+  Supported, you can refer to the example: `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/v5.0-dev/components/tinyusb/additions/src/usb_descriptors.c>`__. When Class code == 00H, the class category is specified by the interface.
 
 -----------
 
@@ -171,28 +176,74 @@ When testing the `esp-idf/examples/peripherals/usb/device/tusb_serial_device <ht
 Can ESP32-S3 use an external USB hub chip with two of its USB ports connecting to a USB 4G module and a dongle at the same time?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Supported. The driver is under development.
+  Supported. Two devices can be connected to the ESP32-S3 chip via a USB hub. For the implementation of the USB 4G module, please refer to :ref:`4G Internet Solution <4g_network_solution>`; for the encryption dog, you need to develop the corresponding USB Host driver according to the device type.
 
 ---------------------
 
-When ESP32-S2/ESP32-S3 serves as the UVC Host and connects some models of UVC cameras, why is there an error `HID_PIPI_EVENT_ERROR_OVERFLOW` in the log?
+When ESP32-S2/ESP32-S3 serves as the UVC Host and connects some models of UVC cameras, why is there an error ``HID_PIPI_EVENT_ERROR_OVERFLOW`` in the log?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   This is because MPS of the Alt interface endpoint of the selected camera is too large (ESP32-S2/ESP32-S3 supports up to 512 bytes). Please confirm whether the camera has an interface of less than or equal to 512 bytes under USB1.1.
 
 ---------------------
 
+.. _4g_network_solution:
+
 Does ESP32-S2/ESP32-S3 support USB 4G Internet access solutions?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes, please refer to the `USB CDC 4G module example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_4g_module>`_, and the `USB ECM 4G module example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_ecm_4g_module>`_.
+Yes, depending on the support of the 4G module, refer to (ECM/RNDIS recommended):
+
+* PPP Protocol: `USB CDC 4G Module Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_4g_module>`__
+* ECM Protocol: `USB ECM 4G Module Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_ecm_4g_module>`__
+* RNDIS Protocol: `USB RNDIS 4G Module Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_rndis_4g_module>`__
+
+---------------------
+
+Why can't I access the internet or successfully ping after obtaining an IP using ECM/RNDIS to connect to the 4G module?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  * Check if the auto-dial function in ECM/RNDIS mode has been activated. For details, please refer to the corresponding module's datasheet.
+  * Check if the SIM card is properly inserted and whether it has been successfully registered to the network.
+
+---------------------
+
+What is the reason for the 4G module printing ``No ECM interface found for device VID: xxxx, PID: xxxx, ignore it`` after connecting to USB?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The reason is that the ECM interface was not recognized. Please check whether the module has been correctly set to ECM mode. For details, please refer to the documentation of the corresponding module.
+
+---------------------
+
+What is the reason for the ``E (887) HCD DWC: EP MPS (512) exceeds supported limit (408)`` printout after connecting the 4G module to USB?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The USB endpoint MPS of this module exceeds the size allowed by the ESP chip hardware, please try:
+
+  * Connect using the RNDIS protocol.
+  * Replace with another 4G module.
+  * Using the ESP32-P4 chip, this chip supports a larger USB endpoint MPS.
+
+---------------------
+
+Does it support connecting a 4G module and a USB sound card simultaneously using a USB HUB?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Supported. It is recommended to use 4G modules with RNDIS/ECM protocol and USB UAC sound cards. Refer to :ref:`4G Internet Solution <4g_network_solution>` and `USB UAC Sound Card Example <https://github.com/espressif/esp-usb/tree/master/host/class/uac/usb_host_uac/examples/audio_player>`__ respectively.
+
+---------------------
+
+Is there a limit to the number of devices that can be connected via a USB HUB?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  There are hardware limitations. The ESP32-S2/ESP32-S3 USB Host peripheral has 8 channels; the ESP32-P4 USB Host HS peripheral has 16 channels; the ESP32-P4 USB Host FS peripheral has 8 channels. One endpoint of a device will occupy one channel, and the HUB itself will also occupy a certain number of channels. Therefore, the actual number of connectable USB devices depends on the number of device endpoints and the number of channels occupied by the HUB.
 
 ---------------------
 
 Is there any USB CDC Host example for ESP32-S2/ESP32-S3?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes, please refer to `ESP-IDF USB CDC Host example <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/cdc>`__ or `esp-iot-solution USB CDC Host example <https://github.com/leeebo/esp-iot-solution/tree/master/components/usb/iot_usbh_cdc>`__.
+  Yes, please refer to the `ESP-IDF USB CDC Host Example <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/cdc>`__ or the `esp-iot-solution USB CDC Host Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_basic>`__.
 
 ---------------------
 
@@ -218,7 +269,7 @@ Why does ESP32-S2/ESP32-S3 not reach the maximum USB full speed, 12 Mbps?
 How can I confirm if ESP32-S2/ESP32-S3 USB supports a certain USB camera or not?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  ESP32-S2/ESP32-S3 USB only supports USB cameras that correspond to wMaxPacketSize Video Streaming endpoints which include 512 bytes at the maximum. You can use `USB Stream Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_camera_mic_spk>__` to test. An error log will be printed if the camera is not supported.
+  ESP32-S2/ESP32-S3 USB only supports USB cameras that correspond to wMaxPacketSize Video Streaming endpoints which include 512 bytes at the maximum. You can use `USB Stream Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_camera_mic_spk>`__ to test. An error log will be printed if the camera is not supported.
 
 ---------------------
 
@@ -287,7 +338,7 @@ When I attempted to download and print log via the USB interface using the comma
 How can I apply for USB VID/PID for ESP32-S series products?
 ---------------------------------------------------------------------------------------------------------------------------
 
-  - If your software is based on the TinyUSB protocol stack, you can use the default TinyUSB PID. Otherwise, you need to apply for a USB VID/PID for each ESP32-S series product. For detailed instructions, please refer to `"usb-pids" <https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_overview/usb_vid_pid.html>`__.
+  If your software is based on the TinyUSB protocol stack, you can use the default TinyUSB PID. Otherwise, you need to apply for a USB VID/PID for each ESP32-S series product. For detailed instructions, please refer to `"usb-pids" <https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_overview/usb_vid_pid.html>`__.
 
 --------------
 
@@ -321,14 +372,14 @@ Does the ESP32 series chip support USB 2.0 High-Speed mode (480 Mbps)?
 How to improve the transmission rate of ESP32-S3 USB?
 ---------------------------------------------------------------------------------------------------
 
-  - To enhance the transmission performance of USB, you can use USB bulk transfer mode, as well as increase the amount of data transferred per packet.
+  To enhance the transmission performance of USB, you can use the USB bulk transfer method, as well as increase the amount of data transferred per packet.
 
 -------------
 
 Does the USB interface of ESP32-S3 support USB charging function?
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-No, ESP32-S3 does not support the USB PD (USB-PowerDelivery) protocol currently.
+  Not supported, currently the USB PD (USB-PowerDelivery) protocol is not supported.
 
 ------------
 
@@ -343,30 +394,44 @@ A USB disk application is implemented based on the ESP32-S3 USB interface. Can t
 How does a USB UAC device synchronize with the host's audio?
 --------------------------------------------------------------------
 
-Since the USB bus is not a clock bus, the interval between each transmission is not fixed. Therefore, UAC devices may experience audio-visual desynchronization and noise, etc. It is recommended to synchronize with the host using the feedback endpoint, allowing the host to send more or less data through the feedback endpoint to achieve audio synchronization.
+  Since the USB bus is not a clock bus, the interval of each transmission is not fixed, so UAC devices may experience audio and video desynchronization, noise, and other phenomena. It is recommended to synchronize with the host using the feedback endpoint, and let the host send more or less data through the feedback endpoint to achieve audio synchronization.
 
-The `usb_device_uac <https://components.espressif.com/components/espressif/usb_device_uac/versions/0.1.1>`_ component now supports the Feed Back endpoint. You can refer to the example code of this component to implement audio synchronization for the USB UAC device.
+  The `usb_device_uac <https://components.espressif.com/components/espressif/usb_device_uac/versions/0.1.1>`__ component now supports the feedback endpoint. You can refer to the example code of this component to implement audio synchronization for the USB UAC device.
 
 ------------
 
 Does ESP32-P4 support USB?
 ---------------------------------
 
-Yes. ESP32-P4 has USB HS PHY, USB FS PHY, and a USB-Serial-JTAG interface.
+  Supported, ESP32-P4 has USB HS PHY and USB FS PHY as well as a USB-Serial-JTAG interface.
+
+--------------
+
+How to Use USB FS PHY as a Host with ESP32-P4?
+----------------------------------------------
+
+  When calling the USB host initialization function ``usb_host_install``, you can use the USB FS PHY as the host by setting the value of ``peripheral_map`` in the structure parameter to ``BIT1``.
+
+--------------
+
+Which two IOs are used when ESP32-P4 uses USB FS PHY as a host?
+---------------------------------------------------------------
+
+  The default is IO26/IO27, which can be switched to IO24/IO25 by burning the efuse bit ``USB_PHY_SEL``.
 
 ---------------------------
 
 Can the two IO pins of the USB High-Speed PHY on ESP32-P4 be used as regular IO pins?
 -------------------------------------------------------------------------------------
 
-The USB_D- and USB_D+ of the high-speed USB2.0 OTG interface use dedicated digital pins, with pin numbers 49~50, and do not support use as regular IO ports.
+  The USB_D- and USB_D+ of the high-speed USB2.0 OTG interface use dedicated digital pins, with pin numbers 49-50, and do not support use as regular IO ports.
 
 ---------------------------
 
 Why can't the USB-Serial-JTAG function properly, or perform USB downloads and USB printing, after using USB-related features on the ESP32-S3?
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
-Please refer to :ref:`usb_serial_jtag <usb_serial_jtag>`.
+  Please refer to :ref:`usb_serial_jtag <usb_serial_jtag>`.
 
 ---------------------------
 
