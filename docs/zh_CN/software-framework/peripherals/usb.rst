@@ -20,6 +20,7 @@ ESP32 是否支持 USB 功能？
 
   - ESP32 不支持 USB 功能。
   - ESP32-S2/S3 支持 USB2.0 Full-speed 模式。
+  - ESP32-P4 支持 USB2.0 High-speed 和 Full-speed 模式。
 
 ---------------
 
@@ -75,17 +76,21 @@ ESP32-S2 支持的 USB 协议是 OTG 1.1，速度最高是 12 Mbps。能和 USB 
 
 ---------------
 
-ESP32-S2 支持 USB 摄像头吗？
+ESP32-S2/S3 支持 USB 摄像头吗？
 ----------------------------------------------------------------
 
-  支持。ESP32-S2/ESP32-S3 USB Host UVC 示例代码请参考 `usb_stream <https://github.com/espressif/esp-iot-solution/tree/master/components/usb/usb_stream>`__。
+  支持。ESP32-S2/ESP32-S3 USB Host UVC 示例代码请参考 `usb_hub_dual_camera <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_hub_dual_camera>`__。该示例可以只连接一个 USB 摄像头，也可以通过 HUB 连接多个 USB 摄像头。
 
 ---------------
 
 ESP32-S3 是否支持带有麦克风和扬声器的 USB 摄像头？
 ----------------------------------------------------------------
 
-  支持。ESP32-S2/ESP32-S3 USB Host UVC + UAC 示例代码请参考 `usb_stream <https://github.com/espressif/esp-iot-solution/tree/master/components/usb/usb_stream>`__。
+  支持。ESP32-S2/ESP32-S3 示例代码请分别参考：
+
+  - 音频： `audio_player <https://github.com/espressif/esp-usb/tree/master/host/class/uac/usb_host_uac/examples/audio_player>`__。
+  - 摄像头： `basic_uvc_stream <https://github.com/espressif/esp-usb/tree/master/host/class/uvc/usb_host_uvc/examples/basic_uvc_stream>`__。
+  - 网页预览摄像头： `usb_hub_dual_camera <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_hub_dual_camera>`__。
 
 ---------------
 
@@ -149,7 +154,7 @@ ESP32-S3 支持 USB CDC 输出程序日志和下载固件吗？
 ESP32-S3 是否支持 USB Device 为 Class 0 的裝置?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 支持，可参考示例： `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/v5.0-dev/components/tinyusb/additions/src/usb_descriptors.c>`_ 。当 Class code == 00H 时，class 类别由 interface 指定。
+  支持，可参考示例： `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/v5.0-dev/components/tinyusb/additions/src/usb_descriptors.c>`__。当 Class code == 00H 时，class 类别由 interface 指定。
 
 ---------------
 
@@ -171,28 +176,74 @@ ESP32-S3 的 USB OTG 接口可以同时使用 USB Host 和 USB Device 模式吗�
 ESP32-S3 是否支持外接 USB hub 芯片分出两个 USB 口同时连接 USB 4G 模块和加密狗？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  支持，驱动正在开发中。
+  支持。两个设备可通过 USB hub 连接至 ESP32-S3 芯片。USB 4G 模块的实现请参考 :ref:`4G 上网方案 <4g_network_solution>`；加密狗需要根据设备类型自行开发对应的 USB Host 驱动。
 
 ---------------------
 
-ESP32-S2/ESP32-S3 做 UVC Host 连接部分型号的 UVC 摄像头后提示 HID_PIPI_EVENT_ERROR_OVERFLOW，什么原因？
+ESP32-S2/ESP32-S3 做 UVC Host 连接部分型号的 UVC 摄像头后提示 ``HID_PIPI_EVENT_ERROR_OVERFLOW``，什么原因？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   这个错误说明选择的摄像头 Alt 接口端点 MPS 过大（ESP32-S2/ESP32-S3 最高支持 512 字节），需要确认摄像头在 USB1.1 下是否有小于等于 512 字节的接口。
 
 ---------------------
 
+.. _4g_network_solution:
+
 ESP32-S2/ESP32-S3 是否有 USB 4G 上网方案？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  有，请参考 `USB CDC 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_4g_module>`_ 与 `USB ECM 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_ecm_4g_module>`_。
+有，根据 4G 模组的支持情况分别参考（推荐使用 ECM/RNDIS）：
+
+* PPP 协议： `USB CDC 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_4g_module>`__
+* ECM 协议： `USB ECM 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_ecm_4g_module>`__
+* RNDIS 协议： `USB RNDIS 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_rndis_4g_module>`__
+
+---------------------
+
+使用 ECM/RNDIS 连接 4G 模组成功获取 IP 后为什么无法上网，ping 也失败？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  * 检查是否已激活 ECM/RNDIS 模式下的自动拨号功能，具体请参考对应模组的文档手册。
+  * 检查 SIM 卡是否正常插入，是否已正常注册到网络。
+
+---------------------
+
+4G 模组连接 USB 后打印 ``No ECM interface found for device VID: xxxx, PID: xxxx, ignore it`` 是什么原因？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  原因是未识别到 ECM 接口。请检查模组是否已正确设置为 ECM 模式，具体请参考对应模组的文档手册。
+
+---------------------
+
+4G 模组连接 USB 后打印 ``E (887) HCD DWC: EP MPS (512) exceeds supported limit (408)`` 是什么原因？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  该模组的 USB 端点 MPS 超出该款 ESP 芯片硬件允许的大小，请尝试：
+
+  * 使用 RNDIS 协议连接。
+  * 更换另一个 4G 模组。
+  * 使用 ESP32-P4 芯片，该芯片支持更大的 USB 端点 MPS。
+
+---------------------
+
+是否支持使用 USB HUB 同时连接 4G 模组和 USB 声卡？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  支持。推荐使用 RNDIS/ECM 协议的 4G 模组和 USB UAC 声卡。分别参考 :ref:`4G 上网方案 <4g_network_solution>` 和 `USB UAC 声卡示例 <https://github.com/espressif/esp-usb/tree/master/host/class/uac/usb_host_uac/examples/audio_player>`__。
+
+---------------------
+
+使用 USB HUB 连接的设备数量是否有限制？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  硬件上有限制。ESP32-S2/ESP32-S3 USB Host 外设有 8 个通道；ESP32-P4 USB Host HS 外设有 16 个通道；ESP32-P4 USB Host FS 外设有 8 个通道。设备的一个端点会占用一个通道，HUB 本身也会占用一定数量的通道。因此，实际可连接的 USB 设备数量取决于设备端点数量和 HUB 占用的通道数量。
 
 ---------------------
 
 ESP32-S2/ESP32-S3 是否有 USB CDC Host 示例？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  有，请参考 `ESP-IDF USB CDC Host 示例 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/cdc>`__ 或 `esp-iot-solution USB CDC Host 示例 <https://github.com/leeebo/esp-iot-solution/tree/master/components/usb/iot_usbh_cdc>`__。
+  有，请参考 `ESP-IDF USB CDC Host 示例 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/cdc>`__ 或 `esp-iot-solution USB CDC Host 示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_basic>`__。
 
 ---------------------
 
@@ -287,7 +338,7 @@ Windows 环境下使用 ``idf.py -p com35 flash monitor`` 命令，通过 USB �
 如何为 ESP32-S 系列的产品申请 USB VID/PID？
 ----------------------------------------------------------------------------------------------------------------
 
-  - 如果你的软件是基于 TinyUSB 协议栈来实现的，可以使用默认的TinyUSB PID。否则，你需要为每个 ESP32-S 系列的产品申请 USB VID/PID。详细说明请参见 `"usb-pids" <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/usb/usb_overview/usb_vid_pid.html>`__。
+  如果你的软件是基于 TinyUSB 协议栈来实现的，可以使用默认的TinyUSB PID。否则，你需要为每个 ESP32-S 系列的产品申请 USB VID/PID。详细说明请参见 `"usb-pids" <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/usb/usb_overview/usb_vid_pid.html>`__。
 
 ---------------------
 
@@ -321,14 +372,14 @@ ESP32 系列芯片支持 USB 2.0 高速模式 (High Speed: 480 Mbps) 吗？
 如何提高 ESP32-S3 USB 的传输速率？
 ---------------------------------------------------------------------------------------------------
 
-  - 要提升 USB 的传输性能，可以使用 USB 批量传输方式，以及增大每包传输的数据量。
+  要提升 USB 的传输性能，可以使用 USB 批量传输方式，以及增大每包传输的数据量。
 
 -------------
 
 ESP32-S3 的 USB 接口是否支持 USB 充电功能？
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-不支持，目前不支持 USB PD (USB-PowerDelivery) 协议。
+  不支持，目前不支持 USB PD (USB-PowerDelivery) 协议。
 
 ------------
 
@@ -343,30 +394,44 @@ ESP32-S3 的 USB 接口是否支持 USB 充电功能？
 USB UAC 设备如何与主机的音频进行同步?
 -------------------------------------------
 
-因为 USB 总线并非时钟总线，每一次传输的间隔并不是固定的，所以 UAC 设备设备可能会出现音画不同步，噪声等现象。建议使用 feedback 端点与主机进行同步，通过 feedback 端点让主机多发或少发数据，从而完成音频同步。
+  因为 USB 总线并非时钟总线，每一次传输的间隔并不是固定的，所以 UAC 设备设备可能会出现音画不同步，噪声等现象。建议使用 feedback 端点与主机进行同步，通过 feedback 端点让主机多发或少发数据，从而完成音频同步。
 
-`usb_device_uac <https://components.espressif.com/components/espressif/usb_device_uac/versions/0.1.1>`_ 组件已经支持了 feedback 端点，可以参考该组件的示例代码实现 USB UAC 设备的音频同步。
+  `usb_device_uac <https://components.espressif.com/components/espressif/usb_device_uac/versions/0.1.1>`__ 组件已经支持了 feedback 端点，可以参考该组件的示例代码实现 USB UAC 设备的音频同步。
 
 ------------
 
 ESP32-P4 支持 USB 吗?
 ------------------------------
 
-支持，ESP32-P4 具有 USB HS PHY 和 USB FS PHY 以及 USB-Serial-JTAG 接口。
+  支持，ESP32-P4 具有 USB HS PHY 和 USB FS PHY 以及 USB-Serial-JTAG 接口。
+
+--------------
+
+ESP32-P4 如何使用 USB FS PHY 做主机?
+----------------------------------------
+
+  在调用 USB 主机初始化函数 ``usb_host_install`` 时，传入结构体参数中 ``peripheral_map`` 的值设为 ``BIT1`` 即可使用 USB FS PHY 做主机。
+
+--------------
+
+ESP32-P4 使用 USB FS PHY 做主机时是用哪两个 IO?
+----------------------------------------------------
+
+  默认是 IO26/IO27，可以通过烧写 efuse 位 ``USB_PHY_SEL`` 来切换为 IO24/IO25。
 
 ---------------------------
 
 ESP32-P4 的 USB High-Speed PHY 的两个 IO 口可以用作普通 IO 口吗？
 ------------------------------------------------------------------
 
-高速 USB2.0 OTG 接口的 USB_D- 和 USB_D+ 使用专用数字管脚，管脚序号为 49-50，不支持用作普通 IO 口。
+  高速 USB2.0 OTG 接口的 USB_D- 和 USB_D+ 使用专用数字管脚，管脚序号为 49-50，不支持用作普通 IO 口。
 
 ---------------------------
 
 为什么在 ESP32-S3 使用了 USB 相关功能后，USB-Serial-JTAG 无法正常工作，无法进行 USB 下载和 USB 打印？
 -------------------------------------------------------------------------------------------------------------
 
-请参考 :ref:`usb_serial_jtag <usb_serial_jtag>`。
+  请参考 :ref:`usb_serial_jtag <usb_serial_jtag>`。
 
 ---------------------------
 
