@@ -26,15 +26,7 @@ Host MCU 如何通过串口对 ESP32 进行烧录升级？
 如何使用 USB 转串口工具对 ESP32 系列的模组下载固件？
 --------------------------------------------------------------------------------
 
-  USB 转串口对 ESP32 系列的模组下载固件的接线方式如下：
-
-  +------------+-------+-------+-------+-------+-------+-------+
-  | 乐鑫模组   | 3V3   | GND   | TXD   | RXD   | IO0   | EN    |
-  +============+=======+=======+=======+=======+=======+=======+
-  | 串口工具   | 3V3   | GND   | RXD   | TXD   | DTR   | RTS   |
-  +------------+-------+-------+-------+-------+-------+-------+
-
-  .. note:: ESP8266 模组需要额外将 IO15 接地。
+  参见 `烧录不同芯片需满足的硬件环境 <https://docs.espressif.com/projects/esp-techpedia/zh_CN/latest/esp-friends/get-started/try-firmware/try-firmware-hardware/index.html#id1>`__。
 
 --------------
 
@@ -46,10 +38,12 @@ macOS 与 Linux 如何烧录固件？
 
 --------------
 
-ESP32 是否支持使用 JTAG 管脚直接烧写程序？
+ESP32 是否支持使用 JTAG 管脚直接烧录程序？
 -------------------------------------------------------------------------
 
-  ESP32 支持使用 `JTAG 管脚 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html#id1>`_ 直接烧写程序，请参考 `上传待调试的应用程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_。
+  ESP32 支持使用 `JTAG 管脚 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html#id1>`__ 直接烧写程序，请参考 `上传待调试的应用程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`__。详细步骤参见： `Windows 环境下，使用 ESP32 JTAG 接口进行固件下载 <https://blog.csdn.net/Marchtwentytwo/article/details/148540368?>`__。
+
+  **注意**：量产烧录推荐使用 `flash 下载工具烧录 <https://docs.espressif.com/projects/esp-techpedia/zh_CN/latest/esp-friends/get-started/try-firmware/try-firmware-platform.html#flash>`__ 烧写固件。详细说明参见： `选择合适的烧录平台 <https://docs.espressif.com/projects/esp-techpedia/zh_CN/latest/esp-friends/get-started/try-firmware/try-firmware-platform.html#id1>`__。
 
 --------------
 
@@ -124,9 +118,9 @@ ESP32 能否通过 OTA 开启 Secure Boot 功能？
 ESP 芯片烧录通讯协议是什么？
 ------------------------------------------------------------------------------
 
-  - ESP 烧录协议规范：`Serial Protocol <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html>`__。
-  - 串口协议 Python 实现：`esptool <https://github.com/espressif/esptool>`_。
-  - 串口协议 C 语言实现：`esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_。
+  - ESP 烧录协议规范： `Serial Protocol <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html>`__。
+  - 串口协议 Python 实现： `esptool <https://github.com/espressif/esptool>`__。
+  - 串口协议 C 语言实现： `esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`__。
 
 --------------
 
@@ -138,10 +132,10 @@ ESP 芯片烧录通讯协议是什么？
 
 --------------
 
-ESP32 如何设置 Flash SPI 模式为 QIO 模式？
+ESP32 如何设置 flash SPI 模式为 QIO 模式？
 ---------------------------------------------------------------------------------------------
 
-  可前往 menuconfig，通过 ``Serial flasher config`` > ``Flash SPI mode`` 配置端进行设置，对应 API 为 `esp_image_spi_mode_t() <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/system/app_image_format.html?highlight=esp_image_spi_mode_t#_CPPv420esp_image_spi_mode_t>`_。
+  可前往 menuconfig，通过 ``Serial flasher config`` > ``Flash SPI mode`` 配置端进行设置，对应 API 为 `esp_image_spi_mode_t <https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.4/esp32/api-reference/system/app_image_format.html?highlight=esp_image_spi_mode_t#_CPPv420esp_image_spi_mode_t>`__。
 
 ----------------------
 
@@ -211,8 +205,8 @@ ESP32-C3 芯片可以使用 USB 进行固件下载，但在 ESP-IDF v4.3 下使�
 
   - flash 下载工具的默认配置开启了 eFuse 校验，若希望对已经开启 flash 加密的设备重烧固件，需要修改如下配置：
 
-    - 修改 `esp32 > security.conf` 文件里的默认配置，将 `flash_force_write_enable = False` 改为 `flash_force_write_enable = True`。
-    - 修改 `esp32 > spi_download.conf` 文件里的默认配置，将 `no_stub = False` 改为 `no_stub = True`。
+    - 修改 ``esp32 > security.conf`` 文件里的默认配置，将 ``flash_force_write_enable = False`` 改为 ``flash_force_write_enable = True``。
+    - 修改 ``esp32 > spi_download.conf`` 文件里的默认配置，将 ``no_stub = False`` 改为 ``no_stub = True``。
   
   - 注意：对已开启 flash 加密的设备重烧固件，要求重烧的固件使用相同的 flash 加密密钥。若 flash 加密密钥不匹配，将无法正常运行新固件。
 
@@ -221,7 +215,7 @@ ESP32-C3 芯片可以使用 USB 进行固件下载，但在 ESP-IDF v4.3 下使�
 基于 `esptool 串口协议 <https://github.com/espressif/esptool>`_ 通过 UART 接口对 ESP32 进行刷新固件，是否可以新增一个 app 分区？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - flash 实际的分区情况主要取决于 partition_table.bin 的数据。若可以更新 partition_table.bin，则可以重新划分 bootloader.bin、app.bin 等其他数据的存储空间，从而新增一个 app 分区。
+  flash 实际的分区情况主要取决于 ``partition_table.bin`` 的数据。若可以更新 ``partition_table.bin``，则可以重新划分 ``bootloader.bin``、 ``app.bin`` 等其他数据的存储空间，从而新增一个 app 分区。
 
 -------------
 
@@ -242,7 +236,7 @@ ESP32-C3 芯片可以使用 USB 进行固件下载，但在 ESP-IDF v4.3 下使�
 Windows 7 系统 USB 驱动无法识别是什么原因？
 --------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Windows 7 系统需要手动下载并安装 `USB Serial JTAG 驱动 <https://dl.espressif.com/dl/idf-driver/idf-driver-esp32-usb-jtag-2021-07-15.zip>`_。
+  Windows 7 系统需要手动下载并安装 `USB Serial JTAG 驱动 <https://dl.espressif.com/dl/idf-driver/idf-driver-esp32-usb-jtag-2021-07-15.zip>`_。
 
 ----------------
 
@@ -252,7 +246,7 @@ Windows 7 系统 USB 驱动无法识别是什么原因？
   .. code-block:: shell
 
       rst：0x10 （RTCWDT_RTC_RESET），boot:0x37（SPI_FLASH_BOOT）
-    【2020-12-11 15:51:42 049】invalrd header：0xffffffff
+      【2020-12-11 15:51:42 049】invalrd header：0xffffffff
       invalrd header：0xffffffff
       invalrd header：0xffffffff
 
@@ -271,7 +265,7 @@ Windows 7 系统 USB 驱动无法识别是什么原因？
 ESP32 使用 ESP-IDF v3.0 版本的 bootloader.bin 无法正常启动 ESP-IDF v5.0 版本的 app.bin，是什么原因？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 当使用 ESP-IDF v3.0 版本的 bootloader.bin 启动 ESP-IDF v5.0 版本的 app.bin 时，需要在 ESP-IDF v5.0 上开启 ``idf.py menuconfig`` > ``Build type`` > ``[*] App compatible with bootloader and partition table before ESP-IDF v3.1`` 配置选项。
+  当使用 ESP-IDF v3.0 版本的 ``bootloader.bin`` 启动 ESP-IDF v5.0 版本的 ``app.bin`` 时，需要在 ESP-IDF v5.0 上开启 ``idf.py menuconfig`` > ``Build type`` > ``[*] App compatible with bootloader and partition table before ESP-IDF v3.1`` 配置选项。
 
 ------------
 
@@ -282,7 +276,7 @@ ESP32-C3 是否支持通过 OTA 来关闭 ROM 代码日志？
 
 --------------
 
-芯片在进行 OTA 固件升级 (`esp_ota_write() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/ota.html#_CPPv413esp_ota_write16esp_ota_handle_tPKv6size_t>`_ ) 时，是否会影响到其他任务的运行？
+芯片在进行 OTA 固件升级 (`esp_ota_write() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/ota.html#_CPPv413esp_ota_write16esp_ota_handle_tPKv6size_t>`_) 时，是否会影响到其他任务的运行？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   在 OTA 升级过程中，写入 flash 时会关闭 cache，这会影响外设中断和部分 SPI 任务。因此，在此期间不建议执行其他任务。
@@ -292,7 +286,7 @@ ESP32-C3 是否支持通过 OTA 来关闭 ROM 代码日志？
 `Flash Download Tool <https://dl.espressif.com/public/flash_download_tool.zip>`__ 工厂模式一次最多支持烧录多少个设备？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  目前最多支持烧录 20 个设备。需要更新到 Flash Download Tool 3.7.8（最新版本），并修改配置文件 `flash_download_tool\configure\esp32s3\multi_download.conf`，内容如下:
+  目前最多支持烧录 20 个设备。需要更新到 Flash Download Tool 3.7.8（最新版本），并修改配置文件 ``flash_download_tool\configure\esp32s3\multi_download.conf``，内容如下:
   
   .. code-block:: shell
 
@@ -304,4 +298,4 @@ ESP32-C3 是否支持通过 OTA 来关闭 ROM 代码日志？
 ESP32 OTA 升级支持断点续传吗？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  支持，参考链接：`OTA 恢复 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/esp_https_ota.html#ota>`__。
+  支持，参考链接： `OTA 恢复 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/esp_https_ota.html#ota>`__。

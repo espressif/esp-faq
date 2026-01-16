@@ -1,4 +1,4 @@
-Firmware update
+Firmware Update
 ===============
 
 :link_to_translation:`zh_CN:[中文]`
@@ -26,15 +26,7 @@ How does the host MCU flash ESP32 via serial interfaces?
 How to download firmware for ESP32 series modules using the USB-Serial tool?
 ---------------------------------------------------------------------------------------------------------------------
 
-  The methods are as follows:
-
-  +------------+-------+-------+-------+-------+-------+-------+
-  |  Modules   | 3V3   | GND   | TXD   | RXD   | IO0   | EN    |
-  +============+=======+=======+=======+=======+=======+=======+
-  |Serial tool | 3V3   | GND   | RXD   | TXD   | DTR   | RTS   |
-  +------------+-------+-------+-------+-------+-------+-------+
-
-  .. note:: For the ESP8266 modules, IO15 should be specially connected to ground.
+  Refer to `Hardware Requirements for Entering Download Mode on Different ESP Chips <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/try-firmware/try-firmware-hardware/index.html#id1>`__.
 
 --------------
 
@@ -49,7 +41,9 @@ How to flash firmware on macOS and Linux?
 Does ESP32 support programming using JTAG pins directly?
 ---------------------------------------------------------------------------------------------------
 
-  Yes, ESP32 supports using `JTAG Pins <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html#id1>`_ to flash directly. Please refer to `Upload application for debugging <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`_.
+  ESP32 supports flashing programs directly using `JTAG pins <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html#id1>`__. Please refer to `Upload the application to be debugged <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`__. For detailed steps, see `Using the ESP32 JTAG interface for firmware download in a Windows environment <https://blog.csdn.net/Marchtwentytwo/article/details/148540368?>`__.
+
+  **Note**: For mass production flashing, it is recommended to use the `flash download tool <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/try-firmware/try-firmware-platform.html#flash>`__ to flash the firmware. For detailed instructions, see `Choosing the appropriate burning platform <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/try-firmware/try-firmware-platform.html#id1>`__.
 
 --------------
 
@@ -124,9 +118,9 @@ How to download firmware based on ESP-IDF using flash_download_tool?
 What is the communication protocol for flashing ESP chips?
 -------------------------------------------------------------------------------------------------------------------
 
-  - ESP Serial Protocol: `Serial Protocol <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html>`__.
-  - Python-based implementation: `esptool <https://github.com/espressif/esptool>`_.
-  - C-language-based implementation: `esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_.
+  - ESP flashing protocol specification: `Serial Protocol <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html>`__.
+  - Serial protocol Python implementation: `esptool <https://github.com/espressif/esptool>`__.
+  - Serial protocol C language implementation: `esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`__.
 
 --------------
 
@@ -138,10 +132,10 @@ How to program ESP32-C3's firmware offline?
 
 ----------------------
 
-How does ESP32 set the Flash SPI mode to QIO mode?
+How to set the flash SPI mode to QIO mode on ESP32?
 ----------------------------------------------------------------------------------------------
 
-  It can be set in menuconfig through ``Serial flasher config`` > ``Flash SPI mode``, the corresponding API is `esp_image_spi_mode_t() <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-reference/system/app_image_format.html?highlight=esp_image_spi_mode_t#_CPPv420esp_image_spi_mode_t>`_.
+  Go to menuconfig and set it through ``Serial flasher config`` > ``Flash SPI mode``, the corresponding API is `esp_image_spi_mode_t <https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/api-reference/system/app_image_format.html?highlight=esp_image_spi_mode_t#_CPPv420esp_image_spi_mode_t>`__.
 
 -------------------
 
@@ -211,8 +205,8 @@ Why can't the `Flash Download Tools <https://www.espressif.com/en/support/downlo
 
   - The default configuration of the flash download tool has enabled eFuse verification. If you want to reflash the firmware of a device that has already enabled flash encryption, please modify the following configuration:
 
-    - Modify the default configuration in the `esp32 > security.conf` file, change `flash_force_write_enable = False` to `flash_force_write_enable = True`.
-    - Modify the default configuration in the `esp32 > spi_download.conf` file, change `no_stub = False` to `no_stub = True`.
+    - Modify the default configuration in the ``esp32 > security.conf`` file, change ``flash_force_write_enable = False`` to ``flash_force_write_enable = True``.
+    - Modify the default configuration in the ``esp32 > spi_download.conf`` file, change ``no_stub = False` to `no_stub = True``.
   
   - Note: When reflashing the firmware on devices with flash encryption enabled, the reflashed firmware must use the same flash encryption key. If the keys do not match, the new firmware will not function properly.
 
@@ -221,7 +215,7 @@ Why can't the `Flash Download Tools <https://www.espressif.com/en/support/downlo
 When updating ESP32 firmware through the UART interface based on `esptool serial port protocol <https://github.com/espressif/esptool>`_, can I add a new app partition?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The partitions in flash depend on the data in partition_table.bin. If partition_table.bin can be updated, the storage space of other data, such as bootloader.bin and app.bin, can be redivided to create an app partition.
+  The actual partitioning of the flash primarily depends on the data in ``partition_table.bin``. If ``partition_table.bin`` can be updated, the storage space for other data such as ``bootloader.bin``, ``app.bin``, etc., can be re-partitioned, thereby adding a new app partition.
 
 ---------------------------
 
@@ -242,7 +236,7 @@ I am using ESP8266 to download the firmware via the `flash download tool <https:
 Why does my USB driver fail to be recognized by the Windows 7 system?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Please download and install the `USB Serial JTAG driver <https://dl.espressif.com/dl/idf-driver/idf-driver-esp32-usb-jtag-2021-07-15.zip>` manually for the Windows 7 system.
+  Please download and install the `USB Serial JTAG driver <https://dl.espressif.com/dl/idf-driver/idf-driver-esp32-usb-jtag-2021-07-15.zip>`_ manually for the Windows 7 system.
 
 ----------------------------
 
@@ -252,7 +246,7 @@ After using the ESP32-WROVER-E module to download the program, the following log
   .. code-block:: shell
 
       rst：0x10 （RTCWDT_RTC_RESET），boot:0x37（SPI_FLASH_BOOT）
-    【2020-12-11 15:51:42 049】invalrd header：0xffffffff
+      【2020-12-11 15:51:42 049】invalrd header：0xffffffff
       invalrd header：0xffffffff
       invalrd header：0xffffffff
 
@@ -271,7 +265,7 @@ When using the `Flash Download Tools <https://www.espressif.com/en/support/downl
 On ESP32, the bootloader.bin of ESP-IDF v3.0 can not start app.bin of ESP-IDF v5.0. Why?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - When booting the app.bin of ESP-IDF v5.0 with the bootloader.bin of ESP-IDF v3.0, it is necessary to enable the configuration option ``idf.py menuconfig`` > ``Build type`` > ``[*] App compatible with bootloader and partition table before ESP-IDF v3.1`` on ESP-IDF v5.0.
+  When booting the ``app.bin`` of ESP-IDF v5.0 with the ``bootloader.bin`` of ESP-IDF v3.0, it is necessary to enable the configuration option ``idf.py menuconfig`` > ``Build type`` > ``[*] App compatible with bootloader and partition table before ESP-IDF v3.1`` on ESP-IDF v5.0.
 
 ------------
 
@@ -292,7 +286,7 @@ Will the operation of other tasks be affected when the chip is undergoing an OTA
 How many devices can be flashed at once in factory mode using `Flash Download Tool <https://dl.espressif.com/public/flash_download_tool.zip>`__?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Currently, up to 20 devices are supported. You need to update to the latest version of the Flash Download Tool (3.7.8) and modify the configuration file `flash_download_tool\configure\esp32s3\multi_download.conf` as follows:
+  Currently, up to 20 devices are supported. You need to update to the latest version of the Flash Download Tool (3.7.8) and modify the configuration file ``flash_download_tool\configure\esp32s3\multi_download.conf`` as follows:
   
   .. code-block:: shell
 
