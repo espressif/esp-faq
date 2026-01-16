@@ -10,7 +10,7 @@
      h2 {counter-reset: h3}
      h2:before {counter-increment: h2; content: counter(h2) ". "}
      h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
-     h2.nocount:before, h3.nocount:before, { content: ""; counter-increment: none }
+     h2.nocount:before, h3.nocount:before { content: ""; counter-increment: none }
    </style>
 
 --------------
@@ -43,7 +43,7 @@ ESP32 模组在 2.8 V 电源下运行，射频性能会有下降吗？
 ESP32 使用 RF Test Tool 时为什么在高温 80 °C 下运行会自动降低发射功率？
 ----------------------------------------------------------------------------------------------------------------------
 
-  - ESP32 的定频测试固件默认不开启温度补偿，当温度较高时功率会变低，如果需要打开温度补偿就需要通过默认的 log 串口向 ESP32 发送 ``txpwr_track_en 1 1 0``。
+  ESP32 的定频测试固件默认不开启温度补偿，当温度较高时功率会变低，如果需要打开温度补偿就需要通过默认的 log 串口向 ESP32 发送 ``txpwr_track_en 1 1 0``。
 
 --------------
 
@@ -65,7 +65,29 @@ ESP32-WROVER-E 模组如何提高 Wi-Fi 信号的接收距离和强度？(应用
 
   :CHIP\: ESP32 :
 
-  - 可以通过 power limit tool 烧写。下载 `ESP_RF_TEST Tool <https://www.espressif.com/sites/default/files/tools/ESP_RF_Test_CN.zip>`_，解压完成后，打开 EspRFTestTool_vx.x_Manual.exe，点击 ``help`` > ``Tool help`` > ``PowerLimitTool help`` 查看详细的操作步骤。
+  要将 phy_init 数据烧写到 flash 中，需要先检查 menuconfig > Component config > PHY 设置，根据配置方式的不同，烧写方法也有所不同。
+
+    - 若未启用 ``CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION`` 设置，phy_init 数据将直接嵌入到应用程序二进制文件中，无需单独烧写。
+    - 若启用 ``CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION`` 设置，phy_init 数据将需要单独烧写至 phy 数据分区。具体做法如下：
+
+      - 工程的分区表中必须包含一个 phy 数据分区，例如：
+
+        .. code-block:: c
+
+          # Name,   Type, SubType, Offset,   Size, Flags
+          phy_init, data, phy,     ,        0x1000,
+
+      - 工程编译后将生成一个单独的 ``phy_init_data.bin`` 文件。
+
+        .. note::
+
+          也可以使用 `PowerLimitTool 工具 <https://docs.espressif.com/projects/esp-test-tools/zh_CN/latest/esp32c3/development_stage/rf_test_guide/rf_test_guide.html#powerlimittool>`__ 生成 ``phy_init_data.bin`` 文件。
+
+      - 使用 `flash 下载工具 <https://docs.espressif.com/projects/esp-test-tools/zh_CN/latest/esp32/production_stage/tools/flash_download_tool.html>`__ 将生成的 ``phy_init_data.bin`` 按照分区表中分配的地址烧录到 flash 中。
+
+      .. note::
+
+        如果启用了 ``CONFIG_ESP_PHY_INIT_DATA_IN_PARTITION`` 设置，但未实际烧录 ``phy_init_data.bin`` 数据到 phy 分区，程序运行时会触发错误。
 
 --------------
 
