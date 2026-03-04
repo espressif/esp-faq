@@ -81,3 +81,38 @@ For the SPI flash connected to ESP32-S3, what is the maximum amount of data that
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Due to hardware limitations, ESP32-S3 allows a maximum of 64 bytes of data per operation.
+
+------------------
+
+The following error occurs when setting up an OTA partition for firmware upgrades on a flash area exceeding 16 MB, using ESP32-S3R8 with an external GD25Q256EYIGR (32 MB) quad-SPI flash. However, the same test succeeds on the ESP32-S3-WROOM-2-N32R8 module. What could be the reason?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    .. code-block:: text
+
+      E (136196) esp_image: Checksum failed. Calculated 0xe0 read 0x2
+      E (136196) esp_ota_ops: New image failed verification
+      E (136206) simple_ota_example: Firmware upgrade failed
+
+Additionally, if a factory app partition is directly placed beyond the 16 MB flash boundary to store firmware, the following error occurs:
+
+    .. code-block:: text
+
+      I (52) boot: Partition Table:
+      I (55) boot: ## Label            Usage          Type ST Offset   Length
+      I (61) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+      I (68) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+      I (74) boot:  2 factory          factory app      00 00 01000000 00100000
+      I (81) boot: End of partition table
+      I (84) esp_image: segment 0: paddr=01000020 vaddr=3fce2820 size=014f0h (  5360) load
+      E (91) esp_image: Segment 0 0x3fce2820-0x3fce3d10 invalid: overlaps bootloader stack
+      E (99) boot: Factory app partition is not bootable
+      E (103) boot: No bootable app partitions in the partition table
+
+  - To achieve full support (including code execution and data access) in a quad flash area exceeding 16 MB, please enable the following experimental configuration options:
+  
+    - CONFIG_IDF_EXPERIMENTAL_FEATURES 
+    - CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_QUAD_FLASH
+
+    Please note, these options are experimental and may not work stably on all quad flash chips. Additionally, they are only supported on ESP-IDF v5.2 and later.
+  
+  - The reason for the successful test based on the ESP32-S3-WROOM-2-N32R8 module is that this module defaults to using octal flash. In octal flash mode, the 32 bit Cache function is enabled by default, corresponding to the configuration option ``CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_OCTAL_FLASH``.
+  - For detailed instructions, see `Restrictions of 32-bit address support for QSPI flash chips <https://docs.espressif.com/projects/esp-idf/en/v5.5.3/esp32s3/api-reference/peripherals/spi_flash/spi_flash_optional_feature.html#restrictions>`__.

@@ -81,3 +81,38 @@ ESP8266 如何读取 flash 数据？
 -------------------------------------------------------------------------------------------------------------------------
 
   - ESP32-S3 硬件限制外接 SPI flash 只允许单次写入最大 64 字节数据。
+
+------------------
+
+基于 ESP32-S3R8 芯片外接 GD25Q256EYIGR (32 MB) 四线 flash 芯片，在超过 16 MB 的 flash 区域上设置 OTA 分区进行固件升级时出现如下报错；但基于 ESP32-S3-WROOM-2-N32R8 模组进行相同的测试则成功，是什么原因？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    .. code-block:: text
+
+      E (136196) esp_image: Checksum failed. Calculated 0xe0 read 0x2
+      E (136196) esp_ota_ops: New image failed verification
+      E (136206) simple_ota_example: Firmware upgrade failed
+
+另外，如果直接在超过 16 MB 的 flash 区域上设置 factory app 分区用于存储固件，则会出现如下报错：
+
+    .. code-block:: text
+
+      I (52) boot: Partition Table:
+      I (55) boot: ## Label            Usage          Type ST Offset   Length
+      I (61) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+      I (68) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+      I (74) boot:  2 factory          factory app      00 00 01000000 00100000
+      I (81) boot: End of partition table
+      I (84) esp_image: segment 0: paddr=01000020 vaddr=3fce2820 size=014f0h (  5360) load
+      E (91) esp_image: Segment 0 0x3fce2820-0x3fce3d10 invalid: overlaps bootloader stack
+      E (99) boot: Factory app partition is not bootable
+      E (103) boot: No bootable app partitions in the partition table
+
+  - 如需在超过 16 MB 的四线 flash 区域实现完整支持（包括代码执行和数据访问），请启用以下实验性配置选项： 
+  
+    - CONFIG_IDF_EXPERIMENTAL_FEATURES 
+    - CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_QUAD_FLASH
+
+    请注意，以上选项为实验性功能，无法在所有四线 flash 芯片上稳定使用。另外，这些配置仅在 v5.2 及以后版本的 SDK 上支持。
+  
+  - 基于 ESP32-S3-WROOM-2-N32R8 模组测试成功的原因是，此模组默认使用八线 flash。在八线 flash 模式下，默认开启 32 bit Cache 功能，对应配置选项为 ``CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_OCTAL_FLASH``。
+  - 详细说明参见：`QSPI flash 芯片的 32 位地址支持的限制 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.5.3/esp32s3/api-reference/peripherals/spi_flash/spi_flash_optional_feature.html#id4>`__。
