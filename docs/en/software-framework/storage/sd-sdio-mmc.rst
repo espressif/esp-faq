@@ -36,3 +36,18 @@ Does ESP32 support DDR52, HS200, HS400, and SDR52 modes when it is connected to 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - At the frequency of 40 MHz, ESP32 supports the DDR52 mode and does not support other modes. For details, please refer to `Supported Speed Modes <https://docs.espressif.com/projects/esp-idf/en/release-v5.1/esp32/api-reference/peripherals/sdmmc_host.html#supported-speed-modes>`_.
+
+--------------------
+
+Does ESP32-C5/C6 support Quad SPI mode when accessing an SD card via the SPI interface?
+------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Not supported. The SDSPI application only supports standard SPI mode, with a maximum clock frequency of 40 MHz.
+  - You can increase the standard SPI rate as follows:
+
+    - Use SPI IO MUX pins
+    - Use the maximum supported clock frequency
+    - Shorten the length of SPI pin wiring
+    - Increase task buffer size
+    - Enable DMA mode
+    - Place SPI ISR into IRAM
