@@ -156,3 +156,16 @@ ESP32 作为 SPI 主机，是否支持 30 MHz 时钟？
 ----------------------------------------------------------------------------------------------------------------------
 
   在半双工 TX 模式下，ESP32 默认将未使用的 MISO 线拉至低电平，除 ESP32 外其他芯片则默认拉至高电平，这属于正常现象。如需将除 ESP32 以外的其他芯片拉至低电平，可置位 ``SPI_Q_POL`` 为 0。
+
+-------------
+
+使用乐鑫系列产品作为 SPI 从机设备，必须设置 Handshake（握手线）管脚吗？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Handshake 管脚不是必须的，要视具体方案而定。从官方提供的解决方案来看，Handshake 管脚在以下几类方案中是协议设计的一部分，属于必需信号：
+
+    - ESP-AT 的 SPI AT 方案（ESP32-C2/C3/C5/C6/C61 等）：为了让作为 SPI 从机的乐鑫设备能主动上报数据，官方专门增加了一根握手线，用于从机拉高通知主机有数据可收或允许发送数据。因此在 SPI AT 协议中，Handshake 是必需的。
+    - ESP-Hosted/ESP-Hosted-MCU SPI 模式：协议明确要求在标准四线 SPI 之外，额外连接 Handshake、Data Ready 和 Reset/EN 等 GPIO，其中 Handshake 用于指示乐鑫外设已准备好进行一次 SPI 事务，属于必需信号。详情请参见 `ESP-Hosted SPI FD (Full Duplex) Operation <https://github.com/espressif/esp-hosted-mcu/blob/main/docs/spi_full_duplex.md#31-number-of-pins-required>`__ 和 `SPI Communication Protocol <https://github.com/espressif/esp-hosted/blob/master/esp_hosted_ng/docs/spi_protocol.md>`__ 文档说明。
+
+  - 此外，ESP-IDF 官方的 `spi_slave <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/spi_slave>`__ 示例也默认使用一根 Handshake 线进行同步控制。
+  - 如果只是用乐鑫产品实现 SPI 从机协议，从硬件和驱动角度来看，SPI 本身只需要 SCLK、MOSI、MISO、CS 四根信号线，是否增加 Handshake 线取决于上层协议设计和同步需求。例如 ESP-IDF 官方的 `spi_slave_hd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/spi_slave_hd>`__ 示例就无需 Handshake 线。
