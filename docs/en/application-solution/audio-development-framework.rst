@@ -301,3 +301,14 @@ What is the difference between software AEC (Acoustic Echo Cancellation) and har
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The difference between hardware AEC and software AEC lies in the source of the reference signal. If the reference signal comes from an external chip (such as ES8311, ES7210) that is independent of the main controller, it is hardware AEC; if the main controller itself replicates the reference signal for echo cancellation, it is software AEC.
+
+--------------
+
+Do ESP series products support Voice Activity Detection (VAD)?
+----------------------------------------------------------------------------------------------------------------------------------
+
+  Yes, ESP series products support Voice Activity Detection (VAD).
+
+  - ESP32, ESP32-C series, ESP32-S series products do not have a dedicated hardware VAD unit, but VAD can be implemented through software algorithms combined with I2S/PDM microphone input. For details, please refer to `esp-sr/include/esp32c5/esp_vad.h <https://github.com/espressif/esp-sr/blob/master/include/esp32c5/esp_vad.h>`__.
+  - ESP32-P4 features a built-in hardware VAD unit, which can detect voice activity by configuring the LP I2S and VAD drivers. For more details, please refer to `esp-sr/include/esp32p4/esp_vad.h <https://github.com/espressif/esp-sr/blob/master/include/esp32p4/esp_vad.h>`__.
+  - For VAD support on other products, please check under `esp-sr/include <https://github.com/espressif/esp-sr/blob/master/include>`__.
