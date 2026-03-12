@@ -156,3 +156,16 @@ Why is there a difference in the MISO/MOSI status of the ESP32 and subsequent ch
 ----------------------------------------------------------------------------------------------------------------------
 
   In half-duplex TX mode, the ESP32 by default pulls the unused MISO line to a low level, while other chips except for the ESP32 default to a high level, which is a normal phenomenon. If you need to pull other chips except for the ESP32 to a low level, you can set ``SPI_Q_POL`` to 0.
+
+-------------
+
+Is the Handshake pin mandatory when using an ESP series product as an SPI slave device?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The Handshake pin is not mandatory; whether it is required depends on the specific application. In the following official solutions, the Handshake pin is part of the protocol design and is a required signal:
+
+    - SPI AT Solution for ESP-AT (ESP32-C2/C3/C5/C6/C61, etc.): In order to allow Espressif devices, which act as SPI slaves, to actively report data, an additional Handshake line is used. The slave pulls this signal high to notify the master that data is available for reception or that data transmission is permitted. Therefore, the Handshake pin is required in the SPI AT protocol.
+    - ESP-Hosted/ESP-Hosted-MCU SPI mode: The protocol explicitly requires additional GPIO connections such as Handshake, Data Ready, and Reset/EN, in addition to the standard Quad SPI. Among them, the Handshake pin is used to indicate that the Espressif peripheral is ready for an SPI transaction, and is a required signal. For more details, please refer to the `ESP-Hosted SPI FD (Full Duplex) Operation <https://github.com/espressif/esp-hosted-mcu/blob/main/docs/spi_full_duplex.md#31-number-of-pins-required>`__ and `SPI Communication Protocol <https://github.com/espressif/esp-hosted/blob/master/esp_hosted_ng/docs/spi_protocol.md>`__ documentation.
+
+  - Additionally, the official ESP-IDF `spi_slave <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/spi_slave>`__ example also defaults to using a single Handshake line for synchronous control.
+  - If you are implementing an SPI slave protocol using an ESP product, from a hardware and driver perspective, SPI itself only requires four signal lines: SCLK, MOSI, MISO, and CS. Whether to add a Handshake line depends on the design of the upper-layer protocol and synchronization requirements. For example, the official ESP-IDF `spi_slave_hd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/spi_slave_hd>`__ example does not require a Handshake line.
