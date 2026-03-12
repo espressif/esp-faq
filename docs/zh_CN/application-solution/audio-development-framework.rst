@@ -301,3 +301,14 @@ ESP-ADF 音频应用开发框架中，软件 AEC（Acoustic Echo Cancellation，
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   硬件 AEC 与 软件 AEC 的区别在于参考信号的来源。若参考信号来自于非主控芯片（比如 ES8311、ES7210），则是硬件 AEC；若由主控设备自行复制出参考信号进行回声消除，则是软件 AEC。
+
+--------------
+
+ESP 系列产品是否支持语音活动检测 (Voice Activity Detection, VAD)？
+----------------------------------------------------------------------------------------------------------------------------------
+
+  ESP 系列产品支持语音活动检测。
+
+  - 其中 ESP32、ESP32-C、ESP32-S 等系列产品本身没有专用的硬件级 VAD 单元，但可以通过软件算法配合 I2S/PDM 麦克风输入实现语音活动检测。详情请参考 `esp-sr/include/esp32c5/esp_vad.h <https://github.com/espressif/esp-sr/blob/master/include/esp32c5/esp_vad.h>`__。
+  - ESP32-P4 内置硬件 VAD 单元，可以通过配置 LP I2S 和 VAD 驱动来检测语音活动状态。详情请参考 `esp-sr/include/esp32p4/esp_vad.h <https://github.com/espressif/esp-sr/blob/master/include/esp32p4/esp_vad.h>`__。
+  - 有关更多产品对 VAD 的支持，请在 `esp-sr/include <https://github.com/espressif/esp-sr/blob/master/include>`__ 下查找。
