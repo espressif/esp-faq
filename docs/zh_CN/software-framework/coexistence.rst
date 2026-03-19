@@ -29,11 +29,11 @@ Wi-Fi 和 ESP-BLE-MESH 共存时，为什么 Wi-Fi 吞吐量很低？
 
   应使能 menuconfig 中的一些配置来支持 PSRAM:
 
-  - ``ESP32-specific --> Support for external,SPI-connected RAM --> Try to allocate memories of Wi-Fi and LWIP...``
-  - ``Bluetooth --> Bluedriod Enable --> BT/BLE will first malloc the memory from the PSRAM``
-  - ``Bluetooth --> Bluedriod Enable --> Use dynamic memory allocation in BT/BLE stack.``
-  - ``Bluetooth --> Bluetooth controller --> BLE full scan feature supported.``
-  - ``Wi-Fi --> Software controls Wi-Fi/Bluetooth coexistence --> Wi-Fi``
+  - ``Component config -> ESP PSRAM -> Support for external, SPI-connected RAM -> SPI RAM config -> Try to allocate memories of WiFi and LWIP in SPIRAM firstly. If failed, allocate internal memory``
+  - ``Component config -> Bluetooth -> Bluedroid Options -> BT/BLE will first malloc the memory from the PSRAM``
+  - ``Component config -> Bluetooth -> Bluedroid Options -> Use dynamic memory allocation in BT/BLE stack``
+  - ``Component config -> Bluetooth -> Controller Options -> BLE full scan feature supported``
+  - ``Component config -> Wireless Coexistence -> Software controls WiFi/Bluetooth coexistence (Enable)``
 
 --------------
 
@@ -96,8 +96,8 @@ ESP32 的蓝⽛和 Wi-Fi 如何共存？
 
   在 ``menuconfig`` 中，有个特殊选项 ``Software controls WiFi/Bluetooth coexistence``，⽤于通过软件来控制 ESP32 的蓝⽛和 Wi-Fi 共存，可以平衡 Wi-Fi、蓝⽛控制 RF 的共存需求。
 
-  - 如果使能 ``Software controls WiFi/Bluetooth coexistence`` 选项，Bluetooth® LE scan 间隔不应超过 ``0x100 slots`` （约 160 ms）。若只是 Bluetooth LE 与 Wi-Fi 共存，则开启这个选项和不开启均可正常使⽤。但不开启的时候需要注意 Bluetooth LE scan window 应大于 150 ms，并且 Bluetooth LE scan interval 尽量⼩于 500 ms。
-  - 若经典蓝⽛与 Wi-Fi 共存，则建议开启这个选项。
+  - 若同时使用蓝牙和 Wi-Fi 功能，建议开启该选项。
+  - 共存场景中，由于蓝⽛与 Wi-Fi 是以时分复用的方式使用 RF 资源，在使用 Bluetooth® LE 扫描时，预定的扫描窗口可能会因落入 Wi-Fi 时间片而被中断，从而导致扫描时长小于设定的窗口值。因此，在共存场景中，建议将 Bluetooth® LE 扫描的 ``interval`` 与 ``window`` 设置为相同的值以提高扫描的性能。
 
 ---------------
 
