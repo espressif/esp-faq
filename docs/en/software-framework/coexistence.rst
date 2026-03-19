@@ -29,11 +29,11 @@ When Wi-Fi coexists with ESP-BLE-MESH, the Wi-Fi throughput is low, why?
 
   To support PSRAM, the following configurations in menuconfig should be enabled accordingly:
 
-  - ``ESP32-specific --> Support for external,SPI-connected RAM --> Try to allocate memories of Wi-Fi and LWIP...``
-  - ``Bluetooth --> Bluedriod Enable --> BT/BLE will first malloc the memory from the PSRAM``
-  - ``Bluetooth --> Bluedriod Enable --> Use dynamic memory allocation in BT/BLE stack.``
-  - ``Bluetooth --> Bluetooth controller --> BLE full scan feature supported.``
-  - ``Wi-Fi --> Software controls Wi-Fi/Bluetooth coexistence --> Wi-Fi``
+  - ``Component config -> ESP PSRAM -> Support for external, SPI-connected RAM -> SPI RAM config -> Try to allocate memories of WiFi and LWIP in SPIRAM firstly. If failed, allocate internal memory``
+  - ``Component config -> Bluetooth -> Bluedroid Options -> BT/BLE will first malloc the memory from the PSRAM``
+  - ``Component config -> Bluetooth -> Bluedroid Options -> Use dynamic memory allocation in BT/BLE stack``
+  - ``Component config -> Bluetooth -> Controller Options -> BLE full scan feature supported``
+  - ``Component config -> Wireless Coexistence -> Software controls WiFi/Bluetooth coexistence (Enable)``
 
 --------------
 
@@ -96,8 +96,8 @@ How do ESP32 Bluetooth® and Wi-Fi coexist?
 
   In the ``menuconfig``, there is a special option called ``Software controls WiFi/Bluetooth coexistence``, which is used to control the coexistence of Bluetooth and Wi-Fi for ESP32 using software, thus balancing the coexistence requirement for controlling the RF module by both the Wi-Fi and Bluetooth modules.
 
-  - Please note that if ``Software controls WiFi/Bluetooth coexistence`` is enabled, the Bluetooth LE scan interval shall not exceed ``0x100 slots`` (about 160 ms). If the Bluetooth LE and Wi-Fi coexistence is required, this option can be enabled or disabled. However, if this option is not enabled, please note that the Bluetooth LE scan window should be larger than 150 ms, and the Bluetooth LE scan interval should be less than 500 ms.
-  - If the Classic Bluetooth and Wi-Fi coexistence is required, it is recommended to enable this option.
+  - It is recommended to enable this option if both Bluetooth and Wi-Fi functions are used simultaneously.
+  - In coexistence scenarios, Bluetooth and Wi-Fi share RF resources through Time Division Multiplexing (TDM). When performing a Bluetooth® LE scan, the scheduled scan window may fall into the Wi-Fi time slot and be interrupted, resulting in an actual scan duration shorter than the configured value. Therefore, it is recommended to set the scan ``interval`` and ``window`` to the same value to improve scanning performance.
 
 ---------------
 
