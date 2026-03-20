@@ -1081,3 +1081,9 @@ Is UART wakeup reliable in Light Sleep mode?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The wakeup time of UART is relatively short, but the first few bits may be lost. It is not recommended for critical communication. After wakeup, it is advisable to delay about 50 ms before starting data transmission.
+
+
+Does the ESP32 series of chips support decompression?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes. You can refer to the example: `XZ_Decompress <https://github.com/espressif/esp-iot-solution/tree/master/examples/utilities/xz_decompress_file>`_.
