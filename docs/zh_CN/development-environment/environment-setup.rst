@@ -190,3 +190,70 @@ Windows 环境下 ESP-IDF 编译比较慢如何优化？
             - "https://components-file.espressif.cn"
 
   - 详情可参考 `idf_component_manager.yml Configuration File <https://docs.espressif.com/projects/idf-component-manager/en/latest/reference/config_file.html>`_。
+
+--------------------
+
+Windows 环境下如何将 esp-idf SDK 和相关工具链从 GitHub 镜像到国内源？
+----------------------------------------------------------------------
+
+  - 在 **ESP-IDF CMD 终端** 环境中，可执行如下命令：
+
+    - **ESP-IDF 仓库 (Git) 镜像**
+
+      .. code:: doscon
+
+        git config --global url."https://jihulab.com/esp-mirror/".insteadOf "https://github.com/"
+
+      解除镜像源设置：
+
+      .. code:: doscon
+
+        git config --global --unset url."https://jihulab.com/esp-mirror/".insteadOf
+        git config --global --list
+
+    - **ESP-IDF 工具镜像**
+
+      .. code:: doscon
+
+        set IDF_GITHUB_ASSETS=dl.espressif.com/github_assets
+
+      解除镜像源设置：
+
+      .. code:: doscon
+
+        set IDF_GITHUB_ASSETS=
+        echo %IDF_GITHUB_ASSETS%
+
+    - **PyPI 镜像**
+
+      .. code:: bash
+
+        python -m pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
+        #或：
+        #python -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \\ 使用清华镜像
+        #或：
+        #python -m pip config set global.index-url https://pypi.mirrors.ustc.edu.cn/simple \\ 使用中科大镜像
+
+      解除 PyPI 镜像设置：
+
+      .. code:: bash
+
+        python -m pip config unset global.index-url
+        python -m pip config list
+
+  - 在 **PowerShell 终端** 环境中，可执行如下命令：
+
+    - Git 仓库镜像与 PyPI 的配置命令与上文 CMD 中相同；
+
+    - **ESP-IDF 工具镜像**
+
+      .. code:: powershell
+
+        $env:IDF_GITHUB_ASSETS="dl.espressif.com/github_assets"
+
+      解除镜像源设置：
+
+      .. code:: powershell
+
+        Remove-Item Env:IDF_GITHUB_ASSETS
+        $Env:IDF_GITHUB_ASSETS

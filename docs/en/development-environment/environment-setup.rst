@@ -190,3 +190,70 @@ How to fix the following error when building a project and pulling components?
             - "https://components-file.espressif.cn"
 
   - For more details, refer to `idf_component_manager.yml Configuration File <https://docs.espressif.com/projects/idf-component-manager/en/latest/reference/config_file.html>`_.
+
+--------------------
+
+How to mirror esp-idf SDK and related toolchains from GitHub to domestic sources on Windows?
+---------------------------------------------------------------------------------------------
+
+  - In the **ESP-IDF CMD terminal** environment, you can run the following commands:
+
+    - **ESP-IDF repository (Git) mirror**
+
+      .. code:: doscon
+
+        git config --global url."https://jihulab.com/esp-mirror/".insteadOf "https://github.com/"
+
+      To remove the mirror settings:
+
+      .. code:: doscon
+
+        git config --global --unset url."https://jihulab.com/esp-mirror/".insteadOf
+        git config --global --list
+
+    - **ESP-IDF tools mirror**
+
+      .. code:: doscon
+
+        set IDF_GITHUB_ASSETS=dl.espressif.com/github_assets
+
+      To remove the mirror settings:
+
+      .. code:: doscon
+
+        set IDF_GITHUB_ASSETS=
+        echo %IDF_GITHUB_ASSETS%
+
+    - **PyPI mirror**
+
+      .. code:: bash
+
+        python -m pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
+        # or:
+        # python -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple  # Tsinghua mirror
+        # or:
+        # python -m pip config set global.index-url https://pypi.mirrors.ustc.edu.cn/simple  # USTC mirror
+
+      To remove the PyPI mirror settings:
+
+      .. code:: bash
+
+        python -m pip config unset global.index-url
+        python -m pip config list
+
+  - In the **PowerShell terminal** environment, you can run the following commands:
+
+    - The Git repository mirror and PyPI configuration commands are the same as in **CMD** above;
+
+    - **ESP-IDF tools mirror**
+
+      .. code:: powershell
+
+        $env:IDF_GITHUB_ASSETS="dl.espressif.com/github_assets"
+
+      To remove the mirror settings:
+
+      .. code:: powershell
+
+        Remove-Item Env:IDF_GITHUB_ASSETS
+        $Env:IDF_GITHUB_ASSETS
