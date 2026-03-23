@@ -168,9 +168,9 @@ Is it possible to set different levels for different GPIOs of ESP32-P4? For exam
 ----------
 
 Can the interrupt trigger level in GPIO be adjusted?
-----------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 
-No, it cannot be adjusted. If you need functionality similar to a comparator, you can use chips with analog voltage comparator, such as ESP32-C5.
+Mixed configuration is supported. For example, GPIOs in the VDD_IO_4 domain can use 1.8 V, while GPIOs in the VDD_IO_6 domain can use 3.3 V. However, the voltage levels of the GPIO pins in the same power domain must be uniform, either all 1.8 V or all 3.3 V. For instance, if 1.8 V voltage is input to VDD_IO_4, then all GPIO levels in this power domain are 1.8 V.
 
 -----------------------
 
