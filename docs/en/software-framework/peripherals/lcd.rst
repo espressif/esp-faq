@@ -424,3 +424,21 @@ In LVGL applications, how to rotate the RGB or MIPI-DSI interface screen by 90 d
 
   - It is recommended to use the `esp_lvgl_adapter component <https://github.com/espressif/esp-iot-solution/blob/7c133a8b81c161635ee1f093acd180a2322adb72/components/display/tools/esp_lvgl_adapter/README.md>`__. This component provides features such as high-efficiency rotation, tear prevention, frame rate enhancement, and supports LVGL v8 and v9 versions.
   - Refer to the example code `esp_lvgl_adapter example <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/gui/lvgl_common_demo>`__.
+
+--------------
+
+Can ESP32-P4 generate MIPI-DSI signals (LP and HP) when no MIPI peripheral is connected?
+----------------------------------------------------------------------------------------
+
+  Theoretically possible, but with limitations: Signals can be output during the LP (Low Power) phase; however, during the HP (High Performance) phase, because the driver enables frame ACK by default and has no timeout mechanism, when the FIFO is full it will continuously wait for ACK (BTA), causing the link to freeze. If only capturing waveform segments can satisfy your requirements, then it's feasible. If continuous output is needed, you must modify the MIPI-DSI driver inside IDF; currently it cannot be achieved through external configuration alone.
+
+--------------
+
+GIF animations in EAF format play slowly on ESP32-S3/P4. How to optimize?
+--------------------------------------------------------------------------------
+
+  - You can change the EAF encoding format to JPEG (set in the conversion tool), which will increase file size but decode faster;
+  - For larger resolution screens (such as 466×466), LVGL rendering burden is heavy;
+  - Compared with EAF + LVGL, using the ``esp_emote_gfx`` component directly for screen refreshing (segmented decoding) is more efficient. EAF was originally designed for ``esp_emote_gfx``, and is only additionally adapted to LVGL;
+  - AVI with JPEG-encoded frames is smoother on an LCD than GIF;
+  - P4 revision v3.1 improves CPU frequency and PSRAM bandwidth, enabling LVGL and MP4 to stably reach 15 frames under 1080p RGB888.

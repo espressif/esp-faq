@@ -424,3 +424,21 @@ ESP32-P4 是否支持输出 HDMI 信号？
 
   - 推荐使用 `esp_lvgl_adapter 组件 <https://github.com/espressif/esp-iot-solution/blob/7c133a8b81c161635ee1f093acd180a2322adb72/components/display/tools/esp_lvgl_adapter/README_CN.md>`__ 。该组件提供了高效率旋转、防撕裂、帧率提升等特性，并且支持 LVGL v8 和 v9 版本。
   - 参考示例代码 `esp_lvgl_adapter 示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/gui/lvgl_common_demo>`__ 。
+
+--------------
+
+ESP32-P4 在未连接 MIPI 外设的情况下，能否产生 MIPI-DSI 信号（LP 和 HP）？
+--------------------------------------------------------------------------------------------------------
+
+  理论上可以，但有限制：LP 阶段可输出部分信号；HP 阶段因驱动默认开启 frame ACK 且无超时机制，FIFO 满后会一直等待 ACK (BTA)，导致链路卡住。若仅需抓取波形片段即可满足需求。若要持续输出，需修改 IDF 内部的 MIPI-DSI 驱动，目前无法仅靠外部配置实现。
+
+--------------
+
+EAF 格式的 GIF 动画在 ESP32-S3/P4 上播放较慢，如何优化？
+-------------------------------------------------------------------
+
+  - 可将 EAF 编码格式改为 JPEG（在转换工具中设置），体积会增大但解码更快；
+  - 对于较大分辨率屏幕（如 466×466），LVGL 渲染负担较重；
+  - 相比 EAF + LVGL，直接使用 ``esp_emote_gfx`` 组件刷屏（分段解码）效率更高，EAF 本来就是为 ``esp_emote_gfx`` 设计的，只是额外适配到了 LVGL；
+  - AVI（JPEG 编码帧）在 LCD 上显示比 GIF 更流畅；
+  - P4 revision v3.1 优化了 CPU 主频和 PSRAM 带宽，在 1080p RGB888 下，LVGL 和 MP4 可稳定达到 15 帧。
