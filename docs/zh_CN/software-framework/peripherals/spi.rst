@@ -169,3 +169,10 @@ ESP32 作为 SPI 主机，是否支持 30 MHz 时钟？
 
   - 此外，ESP-IDF 官方的 `spi_slave <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/spi_slave>`__ 示例也默认使用一根 Handshake 线进行同步控制。
   - 如果只是用乐鑫产品实现 SPI 从机协议，从硬件和驱动角度来看，SPI 本身只需要 SCLK、MOSI、MISO、CS 四根信号线，是否增加 Handshake 线取决于上层协议设计和同步需求。例如 ESP-IDF 官方的 `spi_slave_hd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/spi_slave_hd>`__ 示例就无需 Handshake 线。
+
+--------------
+
+ESP32-C3 作为 SPI 从机使用 receiver 示例时，主机 MCU 时钟为 20 MHz 时数据全错，10 MHz 时丢包严重，如何解决？
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  ESP32-C3 SPI 从机的 receiver 示例需要握手线控制（握手线拉高表示已挂载好 DMA），必须正确实现握手协议才能正常收发数据。如不想用物理握手线，可改用 ``spi_slave_hd`` 半双工方案，其内部具备循环挂载 DMA 缓冲区的机制，传输速率更稳定。
