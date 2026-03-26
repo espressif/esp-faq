@@ -359,3 +359,24 @@ Does the ESP-MESH-LITE application support Wi-Fi Power Save mode?
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
   No. In ESP-Mesh-Lite, power consumption can be reduced by increasing the beacon interval or decreasing the Wi-Fi TX power.
+
+----------------
+
+Both devices are root nodes connected to the router but the mesh network is not formed. How to fix this?
+--------------------------------------------------------------------------------------------------------
+
+  A common cause is inconsistent Mesh IDs between the two devices. Mesh-Lite requires the same Mesh ID and router credentials (SSID and password) to form one network.
+
+----------------
+
+When using the Mesh-Lite App for provisioning, the device is connected to Wi-Fi 1 and then switched to Wi-Fi 2, but after ``esp_restart`` it still connects to Wi-Fi 1. How to fix this?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Call ``esp_mesh_lite_erase_rtc_store`` before ``esp_restart`` to clear the mesh networking information stored in RTC.
+
+----------------
+
+Can Mesh-Lite child nodes directly maintain an MQTT long connection?
+-------------------------------------------------------------------------
+
+  Yes, there's no need to send the data to the root node first; the child nodes can directly maintain MQTT long connections.
