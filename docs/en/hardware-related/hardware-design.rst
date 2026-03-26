@@ -562,3 +562,10 @@ Can the VBAT pin of ESP32-H2 be powered independently?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   In theory, RTC is supported for power supply, but 3.3V is already connected inside the module, so this pin is actually not available.
+
+---------------
+
+Is ESP32-P4 VBAT (Backup Battery) now fully supported?
+-------------------------------------------------------------
+
+  IDF has support for VBAT, please refer to the ``examples/lowpower/vbat`` example. The document under solution is outdated, please refer to the latest IDF document. VBAT power supply is only switched during deep sleep, and light sleep does not switch to VBAT power supply. In this case, a 32.768 kHz crystal oscillator must be externally attached.
