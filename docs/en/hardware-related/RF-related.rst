@@ -155,3 +155,10 @@ Can I reuse Espressif's FCC/CE certification reports for the ESP32-S3-WROOM-1 mo
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Some data can be reused, but EMC testing is still required for the final product.
+
+--------------
+
+What could be the reason for the signaling test results being worse when provisioning with Bluetooth first, then testing Wi-Fi after turning off Bluetooth, compared to testing Wi-Fi alone?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Bluetooth does not affect the actual performance of Wi-Fi, but it does affect the signaling test process. If Bluetooth still occupies radio frequency front-end resources during Wi-Fi testing, Wi-Fi will drop packets, which in turn affects the interaction between the instrument and the chip during the signaling test process, causing the measured data to deviate, rather than the actual RF performance decreasing. It is necessary to ensure that Bluetooth is completely turned off (thoroughly deinitialized) during testing.
