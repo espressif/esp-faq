@@ -169,3 +169,10 @@ Is the Handshake pin mandatory when using an ESP series product as an SPI slave 
 
   - Additionally, the official ESP-IDF `spi_slave <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/spi_slave>`__ example also defaults to using a single Handshake line for synchronous control.
   - If you are implementing an SPI slave protocol using an ESP product, from a hardware and driver perspective, SPI itself only requires four signal lines: SCLK, MOSI, MISO, and CS. Whether to add a Handshake line depends on the design of the upper-layer protocol and synchronization requirements. For example, the official ESP-IDF `spi_slave_hd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/spi_slave_hd>`__ example does not require a Handshake line.
+
+--------------
+
+When using the ESP32-C3 as an SPI slave with the receiver example, all data is incorrect when the master MCU clock is 20 MHz, and there is severe packet loss at 10 MHz. How to solve this problem?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The ESP32-C3 SPI slave receiver example requires handshake line control (the handshake line being pulled high indicates that the DMA is properly mounted). The handshake protocol must be correctly implemented for normal data transmission and reception. If you do not want to use a physical handshake line, you can switch to the ``spi_slave_hd`` half-duplex scheme, which has an internal mechanism for cyclically mounting DMA buffers, resulting in more stable transmission rates.
