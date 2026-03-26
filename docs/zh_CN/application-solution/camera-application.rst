@@ -382,3 +382,10 @@ ESP32-S3 是否支持 10 位 DVP 摄像头？
 
   - 对于通过评估的项目，可 `联系乐鑫 <https://www.espressif.com/zh-hans/contact-us/technical-inquiries>`__ 协助调试 ISP 模块的参数。
   - 对于已经调试过的相机传感器，可参考 ISP 图像处理算法文档 `Espressif Image Process Algorithm for ISP <https://github.com/espressif/esp-video-components/tree/master/esp_ipa#espressif-image-process-algorithm-for-isp>`__ 微调图像效果。
+
+-------------
+
+esp-video-components 如何向相机传感器输出 XVCLK？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  XVCLK/XCLK/MCLK 是相机传感器的主输入时钟，可由外部晶振提供，也可由 MCU 的某个管脚输出。可参考 `esp_cam_sensor xclk_generator 测试示例 <https://github.com/espressif/esp-video-components/blob/master/esp_cam_sensor/test_apps/xclk_generator/main/test_xclk_generator.c>`__。

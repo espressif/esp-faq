@@ -382,3 +382,10 @@ What equipment is needed to debug the ISP module?
 
   - For projects that have passed evaluation, you can `contact Espressif <https://www.espressif.com/en/contact-us/technical-inquiries>`__ for assistance in debugging ISP module parameters.
   - For camera sensors that have already been debugged, you can fine-tune the image effects by referring to the ISP image processing algorithm document `Espressif Image Process Algorithm for ISP <https://github.com/espressif/esp-video-components/tree/master/esp_ipa#espressif-image-process-algorithm-for-isp>`__.
+
+-------------
+
+How does esp-video-components output XVCLK to the camera sensor?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  XVCLK/XCLK/MCLK is the master input clock for the camera sensor. It can be supplied by an external crystal oscillator or from an MCU pin. See the `esp_cam_sensor xclk_generator test example <https://github.com/espressif/esp-video-components/blob/master/esp_cam_sensor/test_apps/xclk_generator/main/test_xclk_generator.c>`__.
