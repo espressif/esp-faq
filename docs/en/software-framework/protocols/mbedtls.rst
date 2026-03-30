@@ -154,3 +154,12 @@ TLS handshake failed with error code -0x7100 (BAD_INPUT_DATA). What could be the
 --------------------------------------------------------------------------------------------------------------------------------------------
 
   This is usually caused by incomplete reception of data, making parsing impossible. Verify whether ``CONFIG_MBEDTLS_SSL_IN_CONTENT_LEN`` is set to 16 K. If it is already configured to the maximum 16 K, enable Mbedtls debug logs to investigate the issue.
+
+--------------
+
+The certificate works fine when connecting to a local MQTT broker via MQTTX, but on the ESP device, it reports ``mbedtls_ssl_handshake returned -0x7A00``. Is this a certificate format issue?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The error code ``-0x7A00`` indicates a certificate validation failure, which is not necessarily a format issue. Troubleshooting suggestions:
+  1. Enable mbedTLS log.
+  2. Enable the debug log in the ``esp_mbedtls_verify_certificate`` function in ESP-IDF to obtain detailed failure reasons.
