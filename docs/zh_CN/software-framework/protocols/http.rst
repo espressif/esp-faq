@@ -224,3 +224,10 @@ http_data 的 status code 是 200，但是 content_length 为 0 是否正常？
 ------------------------------------------------------------------------------------
 
   复用同一个 ``esp_http_client_handle_t`` 实例即可。如果服务器没有使用 ``Connection: close`` 头请求关闭连接，且 ESP 侧也未调用 ``esp_http_client_close()`` 函数关闭连接，则该连接会一直保持开放，用于其他新请求。更多信息请参考官方文档 `持久连接 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.5.1/esp32/api-reference/protocols/esp_http_client.html#id3>`_。
+
+--------------
+
+乐鑫系列芯片是否支持 HTTP/2？是否支持基于 HTTP/2 的 WebSocket？
+-------------------------------------------------------------------
+
+  支持，可以使用 `espressif/sh2lib <https://components.espressif.com/components/espressif/sh2lib>`__ 组件。例程中暂无基于 HTTP/2 的 websocket 演示，但芯片能力支持，用户可自行实现。无论使用哪个版本的 HTTP 协议，HTTP 连接和 WebSocket 均可共存，且可分别监听不同的端口。

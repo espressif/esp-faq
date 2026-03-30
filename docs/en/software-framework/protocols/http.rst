@@ -224,3 +224,10 @@ How can HTTP connection reuse be maintained when performing a POST using low-lev
 ---------------------------------------------------------------------------------------------------------------------------------
 
   To reuse a connection, you can reuse the same ``esp_http_client_handle_t`` instance. As long as the server does not explicitly request the connection to close via the ``Connection: close`` header, and the ESP side does not call ``esp_http_client_close()`` function to close the connection, this connection will remain open for new requests. For more information, refer to `Persistent Connections <https://docs.espressif.com/projects/esp-idf/en/v5.5.1/esp32/api-reference/protocols/esp_http_client.html#persistent-connections>`_.
+
+--------------
+
+Do Espressif series chips support HTTP/2? Do they support WebSocket over HTTP/2?
+-----------------------------------------------------------------------------------------
+
+  Yes. You can use the `espressif/sh2lib <https://components.espressif.com/components/espressif/sh2lib>`__ component. There is currently no WebSocket-over-HTTP/2 demo in the example, but the chip capability supports it, and users can implement it themselves. Regardless of the HTTP protocol version used, HTTP connections and WebSocket can coexist and listen on different ports respectively.
