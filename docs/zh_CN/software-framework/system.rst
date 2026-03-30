@@ -1082,8 +1082,28 @@ Light Sleep 模式下串口唤醒是否可靠？
 
   串口唤醒时间较短，但最初几个 bit 可能丢失，不建议用于关键通信。唤醒后可延迟 50 ms 再进行数据传输。
 
+----------------
 
 ESP32 系列芯片是否支持解压缩？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   支持。可以参考示例：`XZ_Decompress <https://github.com/espressif/esp-iot-solution/tree/master/examples/utilities/xz_decompress_file>`_。
+
+----------------
+
+ESP-IDF v5.5.3 是否支持 ESP32-P4 v1.3 芯片？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  ESP-IDF v5.5.3 默认将 ESP32-P4 芯片的最低版本要求 (``ESP32P4_REV_MIN``) 配置为 v3.1 (``ESP32P4_REV_MIN_301``)。
+
+  配置路径：``(Top)`` > ``Component config`` > ``Hardware Settings`` > ``Chip revision`` > ``Minimum Supported ESP32-P4 Revision (Rev v3.1)``
+
+  如果使用 v1.3 版本的芯片，直接编译烧录会出现以下错误提示：
+
+  .. code:: text
+
+    A fatal error occurred: bootloader/bootloader.bin requires chip revision in range [v3.1 - v3.99] (this chip is revision v1.3). Use --force to flash anyway.
+
+  需要在 menuconfig 中使能 ``CONFIG_ESP32P4_SELECTS_REV_LESS_V3=y``，重新编译并烧录，方可在 v1.3 版本的芯片上正常运行。
+
+  配置路径：``(Top)`` > ``Component config`` > ``Hardware Settings`` > ``Chip revision`` > ``[*] Select ESP32-P4 revisions <3.0 (No >=3.x Support)``
