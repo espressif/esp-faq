@@ -1642,3 +1642,11 @@ When using a packet capture tool to analyze Wi-Fi traffic, is it normal that the
 
   - For WPA2-encrypted networks, in addition to the network password, the packet capture must include the complete four-way EAPOL handshake (EAPOL 1–4). If the full handshake is not captured, the packet capture tool will be unable to decrypt any subsequent data traffic. In this case, the device must reconnect to the network and packets must be captured again to obtain the complete handshake.
   - For WPA3-encrypted networks, the network password and a complete handshake alone are not sufficient. The PMK (Pairwise Master Key) is also required for decryption. The PMK can be obtained from printout logs by enabling ``ESP_WIFI_DEBUG_PRINT``.
+
+---------------
+
+Does ESP32-C5 support AP mode on the 5GHz band? Do 2.4 GHz and 5 GHz share the same MAC address in AP mode?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - ESP32-C5 supports working in AP mode on the 5GHz band. It supports HT40 bandwidth under IEEE 802.11n. However, 40 MHz bandwidth is not supported under IEEE 802.11ac or IEEE 802.11ax. In 802.11ax mode, only HE rates and BSS Color are supported; other features such as OFDMA and MU-MIMO are not supported. In addition, C5 currently does not support simultaneous dual-band operation, and can only work on a single band at any given time.
+  - In AP mode, 2.4 GHz and 5 GHz share the same MAC address.
