@@ -116,3 +116,10 @@ Additionally, if a factory app partition is directly placed beyond the 16 MB fla
   
   - The reason for the successful test based on the ESP32-S3-WROOM-2-N32R8 module is that this module defaults to using octal flash. In octal flash mode, the 32 bit Cache function is enabled by default, corresponding to the configuration option ``CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_OCTAL_FLASH``.
   - For detailed instructions, see `Restrictions of 32-bit address support for QSPI flash chips <https://docs.espressif.com/projects/esp-idf/en/v5.5.3/esp32s3/api-reference/peripherals/spi_flash/spi_flash_optional_feature.html#restrictions>`__.
+
+--------------
+
+When using an XMC-D flash on ESP32-C3 with the flash suspend feature enabled, OTA upgrade fails with the error ``only xmc is supported``. How can this be resolved?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The issue has been fixed in ESP-IDF v5.3.3 and later versions. Users on earlier versions need to upgrade to v5.3.3 or later, or contact Espressif for customized support. The root cause is that after enabling flash suspend, spi0 enters the suspend state, but spi1 is not correctly configured, resulting in an error when writing OTA to flash.
