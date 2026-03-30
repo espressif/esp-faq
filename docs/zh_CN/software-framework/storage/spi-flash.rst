@@ -116,3 +116,10 @@ ESP8266 如何读取 flash 数据？
   
   - 基于 ESP32-S3-WROOM-2-N32R8 模组测试成功的原因是，此模组默认使用八线 flash。在八线 flash 模式下，默认开启 32 bit Cache 功能，对应配置选项为 ``CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_OCTAL_FLASH``。
   - 详细说明参见：`QSPI flash 芯片的 32 位地址支持的限制 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.5.3/esp32s3/api-reference/peripherals/spi_flash/spi_flash_optional_feature.html#id4>`__。
+
+--------------
+
+ESP32-C3 使用 XMC-D 型号的 flash，开启 flash suspend 功能后 OTA 升级失败，报错 ``only xmc is supported``，如何解决？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  ESP-IDF v5.3.3 及以上版本已修复此问题。使用其他版本的用户需要升级到 v5.3.3 及以上，或联系乐鑫获取定制支持。根本原因是开启 flash suspend 后，spi0 进入了 suspend 状态，但 spi1 没有被正确配置，导致 OTA 写入 flash 时出错。
