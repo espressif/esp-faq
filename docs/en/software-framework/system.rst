@@ -1082,8 +1082,28 @@ Is UART wakeup reliable in Light Sleep mode?
 
   The wakeup time of UART is relatively short, but the first few bits may be lost. It is not recommended for critical communication. After wakeup, it is advisable to delay about 50 ms before starting data transmission.
 
+----------------
 
 Does the ESP32 series of chips support decompression?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Yes. You can refer to the example: `XZ_Decompress <https://github.com/espressif/esp-iot-solution/tree/master/examples/utilities/xz_decompress_file>`_.
+
+----------------
+
+Does ESP-IDF v5.5.3 support ESP32-P4 v1.3?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  By default, ESP-IDF v5.5.3 sets the minimum chip revision requirement for ESP32-P4 (`ESP32P4_REV_MIN`) to v3.1 (`ESP32P4_REV_MIN_301`).
+
+  Menu path: ``(Top)`` > ``Component config`` > ``Hardware Settings`` > ``Chip revision`` > ``Minimum Supported ESP32-P4 Revision (Rev v3.1)``
+
+  If you are using a v1.3 chip, building and flashing directly will result in the following error:
+
+  .. code:: text
+
+    A fatal error occurred: bootloader/bootloader.bin requires chip revision in range [v3.1 - v3.99] (this chip is revision v1.3). Use --force to flash anyway.
+
+  You need to enable ``CONFIG_ESP32P4_SELECTS_REV_LESS_V3=y`` in menuconfig, then build and flash to run properly on the v1.3 chip.
+
+  Menu path: ``(Top)`` > ``Component config`` > ``Hardware Settings`` > ``Chip revision`` > ``[*] Select ESP32-P4 revisions <3.0 (No >=3.x Support)``
