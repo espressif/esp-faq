@@ -298,4 +298,11 @@ How many devices can be flashed at once in factory mode using `Flash Download To
 Does ESP32 OTA support resumable uploads?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Supported, refer to the link: `OTA Resumption <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/esp_https_ota.html#ota-resumption>`__.
+  Supported. Please refer to `OTA Resumption <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/esp_https_ota.html#ota-resumption>`__.
+
+--------------
+
+When using esptool for host computer development, after increasing the download baud rate to above 1,152,000, there is no significant improvement in download speed. Is this a limitation imposed by esptool?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  esptool itself does not limit the baud rate. As the baud rate continues to increase, the data processing time on both the host side and the chip side becomes the main bottleneck, making further baud rate increases ineffective at improving download speed. Currently, there are no more methods to further increase the download speed.
