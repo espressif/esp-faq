@@ -423,7 +423,6 @@ Why does the device open multiple UDP ports? Is this normal?
 How should I handle the situation where the ESP32-P4 cannot obtain a global IPv6 address when using an Ethernet connection, but the link-local IPv6 address is available?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
   You can check whether `line 1176 of the esp_netif_lwip.c file <https://github.com/espressif/esp-idf/blob/v5.5.1/components/esp_netif/lwip/esp_netif_lwip.c#L1176>`_ is executed in the Ethernet scenario. At the same time, confirm the value of ``ip6_autoconfig_enabled`` (0 or 1).
 
 -----------------
