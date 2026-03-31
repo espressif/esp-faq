@@ -455,3 +455,24 @@ How to update headers (such as Authorization token) before automatic reconnectio
 ------------------------------------------------------------------------------------------------------------------
 
   The newer version of the ``esp_websocket_client`` component provides the ``esp_websocket_client_set_headers`` API, which allows for dynamic updating of header information when needed, without the need to destroy and rebuild the client.
+
+--------------
+
+Do ESP32 series chips support scenarios such as obtaining global IPv6 address prefixes and DNS server addresses in IPv6 mode?
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The acquisition of global IPv6 address prefixes only supports the SLAAC method, while the acquisition of DNS server addresses can support both SLAAC and DHCPv6 stateless methods.
+
+--------------
+
+Does ESP-IDF support the SNMP protocol stack?
+---------------------------------------------
+
+  lwIP has built-in SNMPv3 support, but it is not enabled at the ESP-IDF level and no example is provided. Users need to call the SNMP interfaces in lwIP themselves.
+
+--------------
+
+When receiving UDP packets over Ethernet, out-of-order delivery (with packet loss) is observed. How to determine whether the packet loss occurs at the lwIP layer or the Ethernet layer?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Reduce the ``CONFIG_LWIP_TCPIP_RECVMBOX_SIZE`` and ``CONFIG_LWIP_UDP_RECVMBOX_SIZE`` (for example, from 48 to 16). If the received packets also decrease accordingly, it indicates that packets are being dropped at the lwIP layer; otherwise, the problem is at the Ethernet layer.
