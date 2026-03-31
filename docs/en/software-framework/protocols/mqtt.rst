@@ -224,3 +224,10 @@ During MQTT5 operation, frequent Wi-Fi network switching causes repeated re-subs
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   MQTT5 provides a flow control mechanism that allows the server to limit the client’s message publishing rate. The number of messages that a client can send simultaneously is determined by the server. When the PUBLISH messages sent by the client have not yet received PUBACK confirmation from the server, and the total number reaches the limit set by the server, the client must wait for the server to acknowledge one packet before it can send another. If the device is restricted by flow control, it must wait for the PUBACK acknowledgment before continuing to publish; otherwise, message sending will fail.
+
+--------------
+
+In ESP-IDF, is it possible to have MQTT use a specified netif (such as Ethernet), while other services use different netifs?
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes. This can be achieved by configuring the ``if_name`` field in ``esp_mqtt_client_config_t`` to bind to a specific netif. The netif name can be obtained through ``esp_netif_get_netif_impl_name(netif, ifr.ifr_name)``. If you need to iterate through all netifs, you can use ``netif = esp_netif_next(netif)``.
