@@ -257,3 +257,15 @@ Windows 环境下如何将 esp-idf SDK 和相关工具链从 GitHub 镜像到国
 
         Remove-Item Env:IDF_GITHUB_ASSETS
         $Env:IDF_GITHUB_ASSETS
+
+--------------
+
+ESP 芯片支持哪些操作系统和开发环境 / IDE？
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 官方框架与环境： 
+
+    - `ESP-IDF <https://github.com/espressif/esp-idf/blob/master/README_CN.md>`_ ，支持 Windows、Linux、macOS。可用命令行，也可配合 `Visual Studio Code 插件 <https://github.com/espressif/vscode-esp-idf-extension>`_ 或 `Eclipse <https://github.com/espressif/idf-eclipse-plugin>`_ / `Espressif-IDE <https://github.com/espressif/idf-eclipse-plugin/blob/master/README_CN.md>`_ 插件做图形化开发；
+    - `Arduino IDE <https://github.com/espressif/arduino-esp32>`_ ，基于封装了部分 ESP-IDF 能力的 Arduino core，上手更简单。
+
+  - 其他常见方案： CLion、CircuitPython、MicroPython、PlatformIO、Toit、UIFlow、Wokwi 等，具体可见 `ESP-Techpedia <https://docs.espressif.com/projects/esp-techpedia/zh_CN/latest/esp-friends/get-started/environment-setup.html>`_。
