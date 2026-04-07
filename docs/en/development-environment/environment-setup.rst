@@ -257,3 +257,15 @@ How to mirror esp-idf SDK and related toolchains from GitHub to domestic sources
 
         Remove-Item Env:IDF_GITHUB_ASSETS
         $Env:IDF_GITHUB_ASSETS
+
+--------------
+
+Which operating systems and development environments/IDEs are supported by Espressif chips?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - Official framework and environment:
+
+    - `ESP-IDF <https://github.com/espressif/esp-idf/blob/master/README_en.md>`_, supports Windows, Linux, macOS. It can be used with the command line, or in conjunction with the `Visual Studio Code Plugin <https://github.com/espressif/vscode-esp-idf-extension>`_ or `Eclipse <https://github.com/espressif/idf-eclipse-plugin>`_ / `Espressif-IDE <https://github.com/espressif/idf-eclipse-plugin/blob/master/README_en.md>`_ plugins for graphical development;
+    - `Arduino IDE <https://github.com/espressif/arduino-esp32>`_, based on the Arduino core that encapsulates some of the ESP-IDF capabilities, is easier to get started with.
+
+  - Other common solutions: CLion, CircuitPython, MicroPython, PlatformIO, Toit, UIFlow, Wokwi, etc. For details, see `ESP-Techpedia <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/environment-setup.html>`_.
