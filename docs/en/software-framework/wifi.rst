@@ -1055,13 +1055,6 @@ Using wpa2_enterprise (EAP-TLS method), what is the maximum length supported for
 
 ------------------------
 
-Does ESP8089 support Wi-Fi Direct mode?
-------------------------------------------------------------------------------------------------------------
-
-  Yes, but ESP8089 can only use the default fixed firmware and cannot be used for secondary development.
-
---------------
-
 How does ESP32 connect to an AP whose RSSI does not fall below the configured threshold when there are multiple APs in the environment?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1650,3 +1643,17 @@ Does ESP32-C5 support AP mode on the 5GHz band? Do 2.4 GHz and 5 GHz share the s
 
   - ESP32-C5 supports working in AP mode on the 5GHz band. It supports HT40 bandwidth under IEEE 802.11n. However, 40 MHz bandwidth is not supported under IEEE 802.11ac or IEEE 802.11ax. In 802.11ax mode, only HE rates and BSS Color are supported; other features such as OFDMA and MU-MIMO are not supported. In addition, C5 currently does not support simultaneous dual-band operation, and can only work on a single band at any given time.
   - In AP mode, 2.4 GHz and 5 GHz share the same MAC address.
+
+---------------
+
+Do Espressif chips support Wi-Fi Direct / Wi-Fi P2P?
+------------------------------------------------------------------------------------------------------------------------
+
+  Espressif chips do not currently support Wi-Fi Direct or Wi-Fi P2P, and there are no plans to add support currently.
+
+---------------
+
+Does ESP32-C5 support using ESP-NOW on the 5G band?
+------------------------------------------------------------------------------------------------------------------------
+
+  Yes, configure the channel on the 5G band.
