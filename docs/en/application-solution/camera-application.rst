@@ -249,7 +249,7 @@ When adding the SD-card interface and camera interface for OV5640 sensor, we fou
 Can a driver for a specific camera model be added if the currently supported camera sensors do not meet my requirements?
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-  Yes. Please confirm your requirements and select the camera sensor model with our engineers through `technical support <https://www.espressif.com/en/contact-us/technical-inquiries>`__. We can then provide the corresponding driver for your camera sensor.
+  To add a driver for a specified camera model, Espressif must conduct an internal feasibility assessment first. Please contact Espressif engineers through `technical inquiries on the official website <https://www.espressif.com/en/contact-us/technical-inquiries>`__ first to discuss and confirm your requirements. For the latest support policy, please refer to `Camera Sensor Support Policy <https://github.com/espressif/esp-video-components/blob/master/esp_cam_sensor/SUPPORT_POLICY.md>`__.
 
 --------------
 
