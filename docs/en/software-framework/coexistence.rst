@@ -107,3 +107,10 @@ How can I resolve the frequently occurred ELxXX error (such as ELx200) when Wi-F
   :CHIP\: ESP32:
 
   - It has been fixed in commit 386a8e37f19fecc9ef62e72441e6e1272fa985b9. Please switch to the corresponding commit to test.
+
+---------------
+
+When Wi-Fi transfers large amounts of data, HFP call quality is very poor. How can it be optimized?
+----------------------------------------------------------------------------------------------------
+
+  This is expected behavior. Because Wi-Fi and Bluetooth Classic share the same antenna via time-division multiplexing, when both transfer large amounts of data at the same time, services with strict real-time requirements (such as HFP calls) experience performance degradation. A similar phenomenon occurs when BLE Audio and Wi-Fi exchange large amounts of data simultaneously.
