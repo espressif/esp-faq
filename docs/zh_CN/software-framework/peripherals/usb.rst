@@ -453,3 +453,33 @@ ESP32-P4 的 High-Speed USB 是否可用于烧录？
 ---------------------------------------------------------------------------------------------------------------------
 
   进入下载模式后，可通过 High-Speed USB 进行烧录。
+
+---------------
+
+ESP32-P4 HS 模式下，标准 CDC ACM 最多支持几个？如何最大化支持的 CDC 设备数量？
+------------------------------------------------------------------------------------------------------------------------
+
+  ESP32-P4 在 USB High Speed (HS) 模式下，USB 控制器最多支持 8 个 IN Endpoint，其中 Endpoint 0 (EP0) 占用 1 个，因此实际可用于 CDC 的 IN Endpoint 数量为 7 个。每个标准 CDC ACM 需要 2 个 IN Endpoint，因此 ESP32-P4 HS 模式下标准 CDC ACM 最多支持 3 个。
+
+  当所需 IN Endpoint 数量超过控制器限制时，在 USB SET_CONFIGURATION 阶段会因 Endpoint 资源不足导致枚举失败，并出现类似如下报错：
+
+  .. code-block:: text
+
+    process_set_config: ASSERT FAILED
+    process_control_request: ASSERT FAILED
+
+  若需要最大化 CDC 数量，可采用以下优化方案：
+
+  - 删除 CDC Notification Endpoint (Interrupt IN)，每个 CDC 仅保留 Bulk IN 和 Bulk OUT
+  - 修改 TinyUSB Descriptor
+  - 放宽 esp_tinyusb Endpoint 数量检查
+  - 降低 Endpoint MPS（建议从 512 调整为 64）以减少 FIFO 占用
+
+  优化后，每个 CDC 仅占用 1 个 IN Endpoint，ESP32-P4 HS 模式下最多可支持 7 个 CDC 设备（EP0 仍占用 1 个 IN Endpoint）。
+
+---------------
+
+esp-iot-solution 中的 RNDIS 例程是否可以支持 5G 模组？
+------------------------------------------------------------------------------------------------------------------------
+
+  支持。只要是支持 RNDIS 驱动的模组（无论是 4G 还是 5G）都可以兼容。

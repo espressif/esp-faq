@@ -453,3 +453,33 @@ Is the High-Speed USB of ESP32-P4 available for programming?
 ---------------------------------------------------------------------------------------------------------------------
 
   After entering download mode, programming can be done via High-Speed USB.
+
+---------------
+
+In ESP32-P4 HS mode, how many standard CDC ACM devices are supported at most, and how to maximize the number of supported CDC devices?
+--------------------------------------------------------------------------------------------------------------------------------------
+
+  On ESP32-P4 in USB High Speed (HS) mode, the USB controller supports up to 8 IN Endpoints. Endpoint 0 (EP0) occupies 1 of them, so only 7 IN Endpoints are actually available for CDC. Each standard CDC ACM requires 2 IN Endpoints, so at most 3 standard CDC ACM devices are supported in ESP32-P4 HS mode.
+
+  When the required number of IN Endpoints exceeds the controller's limit, enumeration fails during the USB SET_CONFIGURATION stage due to insufficient Endpoint resources, and errors similar to the following appear:
+
+  .. code-block:: text
+
+    process_set_config: ASSERT FAILED
+    process_control_request: ASSERT FAILED
+
+  To maximize the number of CDC devices, the following optimizations can be applied:
+
+  - Remove the CDC Notification Endpoint (Interrupt IN) so that each CDC keeps only Bulk IN and Bulk OUT
+  - Modify the TinyUSB Descriptor
+  - Relax the Endpoint count check in esp_tinyusb
+  - Reduce the Endpoint MPS (recommended to change from 512 to 64) to reduce FIFO usage
+
+  After these optimizations, each CDC occupies only 1 IN Endpoint, so up to 7 CDC devices can be supported in ESP32-P4 HS mode (EP0 still occupies 1 IN Endpoint).
+
+---------------
+
+Can the RNDIS example in esp-iot-solution support 5G modules?
+------------------------------------------------------------------------------------------------------------------------
+
+  Yes. Any module that supports the RNDIS driver (4G or 5G) is compatible.
