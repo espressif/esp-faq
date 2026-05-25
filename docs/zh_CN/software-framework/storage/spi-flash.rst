@@ -112,7 +112,7 @@ ESP8266 如何读取 flash 数据？
     - CONFIG_IDF_EXPERIMENTAL_FEATURES 
     - CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_QUAD_FLASH
 
-    请注意，以上选项为实验性功能，无法在所有四线 flash 芯片上稳定使用。另外，这些配置仅在 v5.2 及以后版本的 SDK 上支持。
+    请注意，以上选项为实验性功能，无法在所有四线 flash 芯片上稳定使用。另外，这些配置仅在 v5.3.4 及以后版本的 SDK 上支持。
   
   - 基于 ESP32-S3-WROOM-2-N32R8 模组测试成功的原因是，此模组默认使用八线 flash。在八线 flash 模式下，默认开启 32 bit Cache 功能，对应配置选项为 ``CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_OCTAL_FLASH``。
   - 详细说明参见：`QSPI flash 芯片的 32 位地址支持的限制 <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.5.3/esp32s3/api-reference/peripherals/spi_flash/spi_flash_optional_feature.html#id4>`__。
