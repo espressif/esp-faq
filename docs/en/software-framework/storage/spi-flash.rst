@@ -112,7 +112,7 @@ Additionally, if a factory app partition is directly placed beyond the 16 MB fla
     - CONFIG_IDF_EXPERIMENTAL_FEATURES 
     - CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_QUAD_FLASH
 
-    Please note, these options are experimental and may not work stably on all quad flash chips. Additionally, they are only supported on ESP-IDF v5.2 and later.
+    Please note, these options are experimental and may not work stably on all quad flash chips. Additionally, they are only supported on ESP-IDF v5.3.4 and later.
   
   - The reason for the successful test based on the ESP32-S3-WROOM-2-N32R8 module is that this module defaults to using octal flash. In octal flash mode, the 32 bit Cache function is enabled by default, corresponding to the configuration option ``CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_OCTAL_FLASH``.
   - For detailed instructions, see `Restrictions of 32-bit address support for QSPI flash chips <https://docs.espressif.com/projects/esp-idf/en/v5.5.3/esp32s3/api-reference/peripherals/spi_flash/spi_flash_optional_feature.html#restrictions>`__.
