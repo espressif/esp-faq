@@ -739,3 +739,16 @@ ESP32 如何结束 BLE 任务与释放 BLE 资源？
 
     - `gatt_security_server 例程 <https://github.com/espressif/esp-idf/tree/v5.5.1/examples/bluetooth/bluedroid/ble/gatt_security_server>`_ 开启了 BLE 加密，使用 Heart Rate Profile (HRP)，系统蓝牙可以成功连接。
     - `ble_hid_device_demo 例程 <https://github.com/espressif/esp-idf/tree/v5.5.1/examples/bluetooth/bluedroid/ble/ble_hid_device_demo>`_ 开启了 BLE 加密，使用 HID profile，系统蓝牙可以成功连接。
+
+---------------
+
+对于 ESP 设备，开启 BLE 加密后，如何判断连接已成功加密，从而安全地进行后续 GATT 操作（如 Read/Write/Notify/Indicate）？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  在 ESP-IDF 的 BLE 安全示例中，无论是 NimBLE 还是 Bluedroid 协议栈，均通过“加密/配对完成事件”来判断链路是否已经进入加密状态，然后再进行后续操作：
+
+  - NimBLE 会在 GAP 事件 ``BLE_GAP_EVENT_ENC_CHANGE`` 中报告“连接已加密或加密失败”，应用可在此事件中检查链路是否已加密。参考 `NimBLE 安全示例 <https://github.com/espressif/esp-idf/blob/master/examples/bluetooth/ble_get_started/nimble/NimBLE_Security/README.md>`_。
+  - Bluedroid GATT 安全示例中，配对/密钥交换完成后会触发 ``ESP_GAP_BLE_AUTH_CMPL_EVT`` 事件，表示可以开始加密传输。参考 `GATT 安全客户端 <https://github.com/espressif/esp-idf/blob/master/examples/bluetooth/bluedroid/ble/gatt_security_client/tutorial/Gatt_Security_Client_Example_Walkthrough.md>`_ 和 `GATT 安全服务端 <https://github.com/espressif/esp-idf/blob/master/examples/bluetooth/bluedroid/ble/gatt_security_server/tutorial/Gatt_Security_Server_Example_Walkthrough.md>`_。
+
+  在这些示例中，应用层就是在“加密完成事件”之后，才认为链路安全，可以进行需要加密保护的 GATT 操作（包括 Notify/Indicate）。
+  因此，从协议栈设计上，完全可以通过“配对成功/加密完成”的回调（或事件）来判断链路已加密，然后再开始发送 Notify 数据。
