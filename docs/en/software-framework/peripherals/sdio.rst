@@ -89,3 +89,10 @@ How to set the ESP32-C6 SDIO clock?
 --------------------------------------------------------------------------------------------------
 
   The ESP32-C6 only supports SDIO slave mode, with the SDIO slave CLK dependent on the SDIO host settings.
+
+--------------------
+
+Does ESP32-P4 SDIO host support mounting two SDIO slave devices (such as ESP32-C5) simultaneously?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The SDIO host driver supports mounting two SDIO slaves simultaneously. For details, refer to the `SDMMC driver resource allocation test <https://github.com/espressif/esp-idf/blob/60720790264d036c698b5cb6e326a5231dc37b64/components/esp_driver_sdmmc/test_apps/sdmmc/main/test_sd_driver_resource.c#L75>`__ in ESP-IDF, which includes the ``TEST_CASE("SDMMC slot exhausted allocation", "[sdmmc]")`` test case.
