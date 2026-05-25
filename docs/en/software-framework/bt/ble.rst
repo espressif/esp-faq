@@ -739,3 +739,16 @@ When using the official gatt_server_service_table example, the device can be dis
 
     - `gatt_security_server example <https://github.com/espressif/esp-idf/tree/v5.5.1/examples/bluetooth/bluedroid/ble/gatt_security_server>`_ enables BLE encryption and uses Heart Rate Profile (HRP), allowing the system Bluetooth to connect successfully.
     - `ble_hid_device_demo example <https://github.com/espressif/esp-idf/tree/v5.5.1/examples/bluetooth/bluedroid/ble/ble_hid_device_demo>`_ enables BLE encryption and uses HID Profile, allowing the system Bluetooth to connect successfully.
+
+---------------
+
+For ESP devices, after enabling BLE encryption, how to determine that the connection has been successfully encrypted, so as to securely perform subsequent GATT operations (such as Read/Write/Notify/Indicate)?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  In ESP-IDF BLE security examples, both NimBLE and Bluedroid stacks use "encryption/pairing completion events" to determine if the link has entered an encrypted state before proceeding with subsequent operations:
+
+  - NimBLE will report "connection encrypted or encryption failed" in the GAP event ``BLE_GAP_EVENT_ENC_CHANGE``. The application can check in this event whether the link has been encrypted. Refer to the `NimBLE Security Example <https://github.com/espressif/esp-idf/blob/master/examples/bluetooth/ble_get_started/nimble/NimBLE_Security/README.md>`_.
+  - In the Bluedroid GATT security example, the ``ESP_GAP_BLE_AUTH_CMPL_EVT`` event is triggered after the pairing/key exchange is completed, indicating that encrypted transmission can begin. Refer to the `GATT Security Client <https://github.com/espressif/esp-idf/blob/master/examples/bluetooth/bluedroid/ble/gatt_security_client/tutorial/Gatt_Security_Client_Example_Walkthrough.md>`_ and `GATT Security Server <https://github.com/espressif/esp-idf/blob/master/examples/bluetooth/bluedroid/ble/gatt_security_server/tutorial/Gatt_Security_Server_Example_Walkthrough.md>`_.
+
+  In these examples, the application layer only considers the link secure and ready for GATT operations requiring encryption (including Notify/Indicate) after the "encryption completion event".
+  Therefore, based on the protocol stack design, it is recommended to verify that the link is encrypted via the "pairing success/encryption completion" callback (or event) before initiating Notify data transmissions.
