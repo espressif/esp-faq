@@ -171,3 +171,17 @@ What are the encryption suite requirements for European certification?
 ------------------------------------------------------------------------------------------------------
 
 European certifications (such as EN18031) require the use of encryption suites with strong security. Weak encryption suites (such as SHA1, MD5, DES, and RC4) are prohibited. It is recommended to prioritize R-class encryption suites and use `ciphersuite.info <https://ciphersuite.info/cs/?security=all>`__ to evaluate the security of the encryption suites.
+
+---------------
+
+Can ESP32-P4 support running SSH client and server? Are there any official components available?
+------------------------------------------------------------------------------------------------------------------------
+
+  Yes, it can be implemented at the software level. Since SSH does not depend on specific hardware, all ESP32 series chips can support it. However, there is no official SSH component adaptation yet. You can refer to the third-party components on the `Espressif Component Registry <https://components.espressif.com/>`_.
+
+---------------
+
+How to implement an automatic redirect to a provisioning page after a phone connects to the Wi-Fi hotspot (i.e., Web Captive Portal provisioning)?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Currently, this feature is not implemented in ``iot-bridge``. You can refer to `at_web_dns_server.c <https://github.com/espressif/esp-at/blob/master/components/at/src/at_web_dns_server.c>`_ in the esp-at component to implement the Web Captive Portal functionality.
