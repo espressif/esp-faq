@@ -268,4 +268,4 @@ ESP 芯片支持哪些操作系统和开发环境 / IDE？
     - `ESP-IDF <https://github.com/espressif/esp-idf/blob/master/README_CN.md>`_ ，支持 Windows、Linux、macOS。可用命令行，也可配合 `Visual Studio Code 插件 <https://github.com/espressif/vscode-esp-idf-extension>`_ 或 `Eclipse <https://github.com/espressif/idf-eclipse-plugin>`_ / `Espressif-IDE <https://github.com/espressif/idf-eclipse-plugin/blob/master/README_CN.md>`_ 插件做图形化开发；
     - `Arduino IDE <https://github.com/espressif/arduino-esp32>`_ ，基于封装了部分 ESP-IDF 能力的 Arduino core，上手更简单。
 
-  - 其他常见方案： CLion、CircuitPython、MicroPython、PlatformIO、Toit、UIFlow、Wokwi 等，具体可见 `ESP-Techpedia <https://docs.espressif.com/projects/esp-techpedia/zh_CN/latest/esp-friends/get-started/environment-setup.html>`_。
+  - 其他常见第三方开发环境：CLion、CircuitPython、MicroPython、PlatformIO、Toit、UIFlow、Wokwi 等，具体可见 `ESP-Techpedia <https://docs.espressif.com/projects/esp-techpedia/zh_CN/latest/esp-friends/get-started/environment-setup.html>`_。
