@@ -89,3 +89,10 @@ ESP32 如何开启和关闭 SDIO 从机接收数据的中断？
 --------------------------------------------------------------------------------------------------
 
   ESP32-C6 仅支持 SDIO 从机模式，SDIO 从机 CLK 取决于 SDIO 主机设置。
+
+--------------------
+
+ESP32-P4 的 SDIO 主机是否支持同时挂载两个 SDIO 从机（如 ESP32-C5）？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  SDIO 主机驱动已支持同时挂载两个 SDIO 从机。可参考 ESP-IDF 中的 `SDMMC 驱动资源分配测试 <https://github.com/espressif/esp-idf/blob/60720790264d036c698b5cb6e326a5231dc37b64/components/esp_driver_sdmmc/test_apps/sdmmc/main/test_sd_driver_resource.c#L75>`__，其中包括 ``TEST_CASE("SDMMC slot exhausted allocation", "[sdmmc]")`` 测试用例。
