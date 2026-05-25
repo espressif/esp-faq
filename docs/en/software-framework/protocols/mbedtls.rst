@@ -163,3 +163,10 @@ The certificate works fine when connecting to a local MQTT broker via MQTTX, but
   The error code ``-0x7A00`` indicates a certificate validation failure, which is not necessarily a format issue. Troubleshooting suggestions:
   1. Enable mbedTLS log.
   2. Enable the debug log in the ``esp_mbedtls_verify_certificate`` function in ESP-IDF to obtain detailed failure reasons.
+
+---------------
+
+Does ESP32-C3 support the Curve25519 algorithm? There seems to be garbled text when it decrypts router information sent from an APP.
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+  Mbed TLS supports the Curve25519 algorithm, and the configuration option ``CONFIG_MBEDTLS_ECP_DP_CURVE25519_ENABLED`` is enabled by default. It is recommended to check the endianness issues and the implementation of the encryption/decryption logic. You can print the calculated AES shared key on both the device and the APP sides to verify if they are consistent.
