@@ -306,3 +306,76 @@ ESP32 OTA 升级支持断点续传吗？
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   esptool 本身没有限制波特率。波特率持续提高时，上位机和芯片的数据处理时间成为主要瓶颈，单纯提升波特率对下载速度的提升不再明显。目前没有更多方法进一步提升下载速度。
+
+--------------
+
+使用 ESP32-P4X-Function-EV-Board，基于 ESP-IDF v5.5.3 或者 ESP-IDF v5.5.4 开发，烧录固件失败，如何解决？
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  为 ESP32-P4X-Function-EV-Board（使用 ESP32-P4 v3.2 芯片版本）烧录固件时，可能会遇到如下报错：
+
+  .. code-block:: shell
+
+     esptool v5.2.dev1
+     Serial port COM3:
+     Note: Pre-connection option "no-reset" was selected. Connection may fail if the chip is not in bootloader or flasher stub mode.
+     Connected to ESP32-P4 on COM3:
+     Chip type:        ESP32-P4 (revision v3.2)
+     Features:         Dual Core + LP Core, 400MHz
+     Crystal frequency: 40MHz
+     USB mode:         USB-Serial/JTAG
+     MAC:              e8:f6:0a:e3:a9:32
+
+     Stub flasher running.
+
+
+     Hard resetting via RTS pin...
+
+     A serial exception error occurred: Write timeout
+     Note: This error originates from pySerial. It is likely not a problem with esptool, but with the hardware connection or drivers.
+     For troubleshooting steps visit: https://docs.espressif.com/projects/esptool/en/latest/troubleshooting.html
+
+  或者：
+
+  .. code-block:: shell
+
+     esptool.py v4.12.dev1
+     Serial port /dev/ttyACM0
+     Connecting...
+     Chip is ESP32-P4 (revision v3.2)
+     Features: High-Performance MCU
+     Crystal is 40MHz
+     USB mode: USB-Serial/JTAG
+     MAC: 30:ed:a0:ed:39:9f
+     Uploading stub...
+     Running stub...
+     Stub running...
+     Changing baud rate to 921600
+
+     A fatal error occurred: Guru Meditation Error detected
+     CMake Error at run_serial_tool.cmake:67 (message):
+
+
+  **解决办法：**
+
+  可以通过 pip 安装 esptool v5.3.dev3 或 v4.12.dev2:
+
+  .. code-block:: shell
+
+     pip install esptool==5.3.dev3
+     pip install esptool==4.12.dev2
+
+  若下载速度较慢，可以配置下 pip 镜像源：
+
+  .. code-block:: shell
+
+     pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+  **注意**：更新 ``esptool`` 之后，使用 ``idf.py flash`` 编译烧录时可能会报 ``esptool`` 版本不满足约束的错误。此时需要修改 ``IDF_TOOLS_PATH`` 目录下的 ``espidf.constraints.*.txt`` 文件（以 v5.5 版本为例，文件名为 ``espidf.constraints.v5.5.txt``）：
+
+  - **Linux/macOS** 默认路径：``~/.espressif/espidf.constraints.v5.5.txt``
+  - **Windows** 默认路径：``%USER_PROFILE%\.espressif\espidf.constraints.v5.5.txt``
+
+  如果在安装 ESP-IDF 时自定义了 ``IDF_TOOLS_PATH`` 环境变量，则该约束文件位于对应的自定义路径下。详情请参考 `可下载的 IDF 工具 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/tools/idf-tools.html>`__。
+
+  打开该文件，找到类似 ``esptool==4.12.dev1`` 的约束条件，将其修改为新安装的版本号（如 ``esptool~=5.3.dev3`` 或 ``esptool~=4.12.dev2``），之后便可使用 ``idf.py flash`` 正常烧录。
