@@ -305,4 +305,77 @@ Does ESP32 OTA support resumable uploads?
 When using esptool for host computer development, after increasing the download baud rate to above 1,152,000, there is no significant improvement in download speed. Is this a limitation imposed by esptool?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  esptool itself does not limit the baud rate. As the baud rate continues to increase, the data processing time on both the host side and the chip side becomes the main bottleneck, making further baud rate increases ineffective at improving download speed. Currently, there are no more methods to further increase the download speed.
+  esptool itself does not limit the baud rate. As the baud rate continues to increase, the data processing time of the host computer and the chip becomes the main bottleneck, and simply increasing the baud rate no longer significantly improves the download speed. Currently, there are no more methods to further increase the download speed.
+
+--------------
+
+How to resolve the firmware flashing failure when developing with ESP32-P4X-Function-EV-Board based on ESP-IDF v5.5.3 or ESP-IDF v5.5.4?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  You may encounter the following error when flashing firmware to the ESP32-P4X-Function-EV-Board (using ESP32-P4 v3.2 chip version):
+
+  .. code-block:: shell
+
+     esptool v5.2.dev1
+     Serial port COM3:
+     Note: Pre-connection option "no-reset" was selected. Connection may fail if the chip is not in bootloader or flasher stub mode.
+     Connected to ESP32-P4 on COM3:
+     Chip type:        ESP32-P4 (revision v3.2)
+     Features:         Dual Core + LP Core, 400MHz
+     Crystal frequency: 40MHz
+     USB mode:         USB-Serial/JTAG
+     MAC:              e8:f6:0a:e3:a9:32
+
+     Stub flasher running.
+
+
+     Hard resetting via RTS pin...
+
+     A serial exception error occurred: Write timeout
+     Note: This error originates from pySerial. It is likely not a problem with esptool, but with the hardware connection or drivers.
+     For troubleshooting steps visit: https://docs.espressif.com/projects/esptool/en/latest/troubleshooting.html
+
+  Or:
+
+  .. code-block:: shell
+
+     esptool.py v4.12.dev1
+     Serial port /dev/ttyACM0
+     Connecting...
+     Chip is ESP32-P4 (revision v3.2)
+     Features: High-Performance MCU
+     Crystal is 40MHz
+     USB mode: USB-Serial/JTAG
+     MAC: 30:ed:a0:ed:39:9f
+     Uploading stub...
+     Running stub...
+     Stub running...
+     Changing baud rate to 921600
+
+     A fatal error occurred: Guru Meditation Error detected
+     CMake Error at run_serial_tool.cmake:67 (message):
+
+
+  **Solution:**
+
+  These issues can be resolved by upgrading ``esptool`` to v5.3.dev3 or v4.12.dev2 via pip:
+
+  .. code-block:: shell
+
+     pip install esptool==5.3.dev3
+     pip install esptool==4.12.dev2
+
+  If the download is slow, you can configure the pip mirror source:
+
+  .. code-block:: shell
+
+     pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+
+  **Note**: After updating ``esptool``, you may encounter an error stating that the ``esptool`` version does not meet the constraints when flashing with ``idf.py flash``. To fix this, you need to modify the ``espidf.constraints.*.txt`` file in the ``IDF_TOOLS_PATH`` directory (for example, the file name for version v5.5 is ``espidf.constraints.v5.5.txt``).
+
+  - **Linux/macOS** default path: ``~/.espressif/espidf.constraints.v5.5.txt``
+  - **Windows** default path: ``%USER_PROFILE%\.espressif\espidf.constraints.v5.5.txt``
+
+  If you customized the ``IDF_TOOLS_PATH`` environment variable during the installation of ESP-IDF, then the constraint file is located under the corresponding custom path. For more details, please refer to `Downloadable IDF Tools <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/tools/idf-tools.html>`__.
+
+  Open the file, locate the line containing the ``esptool`` constraint (e.g., ``esptool==4.12.dev1``), and update it to the newly installed version (such as ``esptool~=5.3.dev3`` or ``esptool~=4.12.dev2``). Once saved, ``idf.py flash`` should function correctly.
