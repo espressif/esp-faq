@@ -1657,3 +1657,12 @@ Does ESP32-C5 support using ESP-NOW on the 5G band?
 ------------------------------------------------------------------------------------------------------------------------
 
   Yes, configure the channel on the 5G band.
+
+---------------
+
+Does the ESP series chip support the AMPDU function? How to enable and disable it?
+------------------------------------------------------------------------------------------------------------------------
+
+  ESP chips that support Wi-Fi functionality all support AMPDU. This can be enabled or disabled for TX and RX directions through ``Component config`` > ``Wi-Fi`` under `CONFIG_ESP_WIFI_AMPDU_TX_ENABLED <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig-reference.html#config-esp-wifi-ampdu-tx-enabled>`_ and `CONFIG_ESP_WIFI_AMPDU_RX_ENABLED <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/kconfig-reference.html#config-esp-wifi-ampdu-rx-enabled>`_.
+
+  It should be noted that: If the router does not support AMPDU, the ESP chip will automatically turn off AMPDU during connection, or a connection failure may occur. At the same time, it is highly discouraged to turn off RX AMPDU, as this is likely to cause compatibility issues and lead to connection failures. Additionally, in very poor wireless conditions, the ESP chip will temporarily turn off TX AMPDU, and will resume when conditions improve.

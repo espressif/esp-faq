@@ -1657,3 +1657,12 @@ ESP32-C5 是否支持在 5G 频段上使用 ESP-NOW？
 ------------------------------------------------------------------------------------------------------------------------
 
   支持，配置 5G 频段的信道即可。
+
+---------------
+
+ESP 系列芯片支持 AMPDU 功能 吗？如何启用与禁用？
+------------------------------------------------------------------------------------------------------------------------
+
+  支持 Wi-Fi 功能的 ESP 芯片都支持 AMPDU，可以通过 ``Component config`` > ``Wi-Fi`` 下的 `CONFIG_ESP_WIFI_AMPDU_TX_ENABLED <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/kconfig-reference.html#config-esp-wifi-ampdu-tx-enabled>`_ 和 `CONFIG_ESP_WIFI_AMPDU_RX_ENABLED <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/kconfig-reference.html#config-esp-wifi-ampdu-rx-enabled>`_ 启用与禁用 TX 和 RX 方向的 AMPDU。
+
+  需要注意的是：若路由器不支持 AMPDU，ESP 芯片会在连接时自动关闭 AMPDU，或者出现连接失败问题。同时非常不建议关闭 RX AMPDU，这有很大概率引起兼容性问题、导致连接失败。另外在无线环境很差的情况，ESP 芯片会暂时关闭 TX AMPDU，等到环境变好会恢复。
