@@ -182,13 +182,13 @@ ESP8266 SoftAP + Station 模式下，连接的 192.168.4.X ⽹段时，为什么
 
 --------------
 
-ESP8266/ESP32/ESP32-S2/S3/C2/C3 是否支持 web/softAP 配网？
------------------------------------------------------------------
+ESP8266/ESP32/ESP32-S2/S3/C2/C3/C6/C5/C61 是否支持 web/softAP 配网？
+------------------------------------------------------------------------------
 
   支持。
 
   - ESP8266 请参考此示例 `ESP8266 softap_prov <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/provisioning/legacy/softap_prov>`_；
-  - ESP32/ESP32-S2/S3/C2/C3 请参考此示例 `ESP32/ESP32-S2/S3/C2/C3 wifi_prov_mgr <https://github.com/espressif/esp-idf/tree/master/examples/provisioning/wifi_prov_mgr>`_。
+  - ESP32/ESP32-S2/S3/C2/C3/C6/C5/C61 请参考此示例 `network_provisioning <https://github.com/espressif/idf-extra-components/tree/master/network_provisioning>`_。
 
 --------------
 

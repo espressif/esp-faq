@@ -182,13 +182,13 @@ Why do I have problem connecting to router with IP 192.168.4.X in SoftAP + Stati
 
 --------------
 
-Do ESP8266/ESP32/ESP32-S2/S3/C2/C3 support web/SoftAP provisioning?
------------------------------------------------------------------------------------------
+Do ESP8266/ESP32/ESP32-S2/S3/C2/C3/C6/C5/C61 support web/SoftAP provisioning?
+-----------------------------------------------------------------------------------------------
 
   Yes.
 
   - For ESP8266, please refer to example `ESP8266 softap_prov <https://github.com/espressif/ESP8266_RTOS_SDK/tree/master/examples/provisioning/legacy/softap_prov>`_.
-  - For ESP32/ESP32-S2/S3/C2/C3, please refer to example `ESP32/ESP32-S2/S3/C2/C3 wifi_prov_mgr <https://github.com/espressif/esp-idf/tree/master/examples/provisioning/wifi_prov_mgr>`_.
+  - For ESP32/ESP32-S2/S3/C2/C3/C6/C5/C61, please refer to example `network_provisioning <https://github.com/espressif/idf-extra-components/tree/master/network_provisioning>`_.
 
 --------------
 
