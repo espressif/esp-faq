@@ -79,14 +79,13 @@ deploy_docs_production:
 
 post_links:
   extends:
-    - .deploy_docs_template
-    - .rules:deploy:docs_preview
+    - .rules:deploy:post_links
   stage: deploy
   tags: [deploy_docs]
   image: $ESP_DOCS_ENV_IMAGE
   needs:
     - job: deploy_docs_preview
-      optional: true
+      artifacts: true
   script:
     - ls -al logs
     - python3 ${CI_PROJECT_DIR}/.gitlab/tools/post-mr-note.py $GITLAB_MR_NOTE_TOKEN $CI_PROJECT_PATH $CI_MERGE_REQUEST_IID

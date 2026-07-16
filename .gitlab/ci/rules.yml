@@ -72,6 +72,12 @@
     - <<: *if-dev-push
       changes: *patterns-docs
 
+.rules:deploy:post_links:
+  rules:
+    - <<: *if-label-build_docs
+    - <<: *if-dev-push
+      changes: *patterns-docs
+
 
 .rules:deploy:docs_production:
   rules:
