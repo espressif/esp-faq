@@ -83,7 +83,7 @@ FatFs 支持的最大容量是多少?
 
 ----------------------------------------------------------------------
 
-使用 `ext_flash_fatfs <https://github.com/espressif/esp-idf/tree/master/examples/storage/ext_flash_fatfs>`_ 示例测试，分区表中将 fatffs 分区设置小于 512 KB 时，会报 ``vfs_fat_spiflash:f_mks failed(14),config:Failed to mount FATFS(ESP_FAIL)`` 错误，如何解决？
+使用 `fatfs/ext_flash <https://github.com/espressif/esp-idf/tree/master/examples/storage/fatfs/ext_flash>`_ 示例测试，分区表中将 fatffs 分区设置小于 512 KB 时，会报 ``vfs_fat_spiflash:f_mks failed(14),config:Failed to mount FATFS(ESP_FAIL)`` 错误，如何解决？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   FAT 分区的最小扇区数是 128，所以文件系统的最小尺寸是 128*4+4*4=528 KB，额外的 4 个扇区需要用于磨损均衡信息，所以至少需要保证 fatffs 分区 size 不小于 528 KB。
