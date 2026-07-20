@@ -265,7 +265,7 @@ Which operating systems and development environments/IDEs are supported by Espre
 
   - Official framework and environment:
 
-    - `ESP-IDF <https://github.com/espressif/esp-idf/blob/master/README_en.md>`_, supports Windows, Linux, macOS. It can be used with the command line, or in conjunction with the `Visual Studio Code Plugin <https://github.com/espressif/vscode-esp-idf-extension>`_ or `Eclipse <https://github.com/espressif/idf-eclipse-plugin>`_ / `Espressif-IDE <https://github.com/espressif/idf-eclipse-plugin/blob/master/README_en.md>`_ plugins for graphical development;
+    - `ESP-IDF <https://github.com/espressif/esp-idf>`_, supports Windows, Linux, macOS. It can be used with the command line, or in conjunction with the `Visual Studio Code Plugin <https://github.com/espressif/vscode-esp-idf-extension>`_ or `Eclipse <https://github.com/espressif/idf-eclipse-plugin>`_ / `Espressif-IDE <https://github.com/espressif/idf-eclipse-plugin/blob/master/README_en.md>`_ plugins for graphical development;
     - `Arduino IDE <https://github.com/espressif/arduino-esp32>`_, based on the Arduino core that encapsulates some of the ESP-IDF capabilities, is easier to get started with.
 
   - Other common third-party development environments: CLion, CircuitPython, MicroPython, PlatformIO, Toit, UIFlow, Wokwi, etc. For details, see `ESP-Techpedia <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/environment-setup.html>`_.
