@@ -899,7 +899,7 @@ Does ESP32-P4 support floating-point arithmetic?
 What are the ESP-IDF versions supported by different series of ESP32 chip versions?
 -------------------------------------------------------------------------------------------------------------------
 
-  - Please refer to the `ESP-IDF version compatibility with Espressif chip versions <https://github.com/espressif/esp-idf/blob/master/COMPATIBILITY_EN.md>`_ description.
+  - Please refer to the `ESP-IDF version compatibility with Espressif chip versions <https://github.com/espressif/esp-idf/blob/master/COMPATIBILITY.md>`_ description.
 
 ------------
 
