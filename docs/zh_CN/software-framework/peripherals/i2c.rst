@@ -64,7 +64,7 @@ ESP32 芯片作为 I2C 主机怎样才能等待从机处理数据后再接收？
 ESP32-C6 未进入 DeepSleep 模式时，是否可以同时使用 I2C 和 LP I2C？
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  可以。在 ``esp_driver_i2c`` 驱动中，可以选择 ``LP_I2C_PORT`` 以启用 LP I2C 功能。具体实现请参考例程：`esp-idf/components/esp_driver_i2c/test_apps/i2c_test_apps/main/test_lp_i2c <https://github.com/espressif/esp-idf/blob/master/components/esp_driver_i2c/test_apps/i2c_test_apps/main/test_lp_i2c.c>`_
+  可以。在 ``esp_driver_i2c`` 驱动中，可以选择 ``LP_I2C_PORT`` 以启用 LP I2C 功能。具体实现请参考例程：`esp-idf/components/esp_driver_i2c/test_apps/i2c_test_apps/ <https://github.com/espressif/esp-idf/blob/master/components/esp_driver_i2c/test_apps/i2c_test_apps/main/test_lp_i2c.cpp>`_
 
 --------------
 
