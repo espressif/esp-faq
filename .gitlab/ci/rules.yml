@@ -35,6 +35,9 @@
 .if-label-pre_check: &if-label-pre_check
   if: '$BOT_LABEL_PRE_CHECK || $CI_MERGE_REQUEST_LABELS =~ /^(?:[^,\n\r]+,)*pre_check(?:,[^,\n\r]+)*$/i'
 
+.if-label-doc-link-check: &if-label-doc-link-check
+  if: '$CI_MERGE_REQUEST_LABELS =~ /^(?:[^,\n\r]+,)*doc_link_check(?:,[^,\n\r]+)*$/i'
+
 .if_label-deploy: &if-label-deploy
   if: '$BOT_LABEL_DEPLOY || $CI_MERGE_REQUEST_LABELS =~ /^(?:[^,\n\r]+,)*deploy(?:,[^,\n\r]+)*$/i'
 
@@ -45,9 +48,7 @@
 
 .rules:pre_check:linkcheck:
   rules:
-    - <<: *if-linkcheck
-    - <<: *if-label-pre_check
-    - <<: *if-trigger-job
+    - <<: *if-label-doc-link-check
 
 .rules:pre_check:readme:
   rules:
