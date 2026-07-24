@@ -18,9 +18,7 @@ USB
 Does ESP32 support USB function?
 ----------------------------------------------------
 
-  - No, ESP32 does not support USB function.
-  - However, ESP32-S2/S3 supports USB2.0 Full-speed mode.
-  - ESP32-P4 supports USB2.0 High-speed and Full-speed modes.
+  For USB support of ESP32 series chips, see `USB Peripheral Support <https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_overview/usb_overview.html#esp32-s-p-c-series-usb-peripheral-support>`__.
 
 ---------------
 
@@ -86,11 +84,12 @@ Does ESP32-S2/S3 support USB cameras?
 Does ESP32-S3 support USB cameras with microphones and speakers?
 ----------------------------------------------------------------------------
 
-  Supported. Please refer to the example codes for ESP32-S2/ESP32-S3 respectively:
+  Supported. Please refer to the example code:
 
   - Audio: `audio_player <https://github.com/espressif/esp-usb/tree/master/host/class/uac/usb_host_uac/examples/audio_player>`__.
   - Camera: `basic_uvc_stream <https://github.com/espressif/esp-usb/tree/master/host/class/uvc/usb_host_uvc/examples/basic_uvc_stream>`__.
   - Web preview camera: `usb_hub_dual_camera <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_hub_dual_camera>`__.
+  - Camera and microphone: `usb_camera_mic_spk <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_camera_mic_spk>`__.
 
 ---------------
 
@@ -365,7 +364,7 @@ Can a USB drive be used for OTA upgrades?
 Does the ESP32 series chip support USB 2.0 High-Speed mode (480 Mbps)?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Currently, only ESP32-P4 supports USB 2.0 High-Speed mode.
+  Currently, ESP32-P4 and ESP32-S31 support USB 2.0 High-Speed mode.
 
 ------------
 
