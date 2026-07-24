@@ -558,14 +558,19 @@ Is it possible to change the default power-up reset initial state of GPIO6 (JTAG
 
 ------------------
 
-Can the VBAT pin of ESP32-H2 be powered independently?
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Which products support powering the RTC separately with a backup battery?
+-------------------------------------------------------------------------------------------------
 
-  In theory, RTC is supported for power supply, but 3.3V is already connected inside the module, so this pin is actually not available.
+  - Currently, both ESP32-H2 and ESP32-P4 support providing backup power to the RTC power domain via the VBAT pin.
+  - This feature can be enabled via the ``CONFIG_ESP_VBAT_INIT_AUTO`` option. The compatible battery voltage ranges are as follows:
 
----------------
+    - ESP32-P4: 2.3 V – 3.6 V
+    - ESP32-H2: 2.5 V – 3.6 V
 
-Is ESP32-P4 VBAT (Backup Battery) now fully supported?
--------------------------------------------------------------
+  - Note: On ESP32-H2 modules, the VBAT pin is already connected to 3.3 V inside the module and is therefore not available for use.
+  - For a test example, see `esp-idf/examples/lowpower/vbat <https://github.com/espressif/esp-idf/tree/v6.0.2/examples/lowpower/vbat>`__.
+  - Special notes:
 
-  IDF has support for VBAT, please refer to the ``examples/lowpower/vbat`` example. The document under solution is outdated, please refer to the latest IDF document. VBAT power supply is only switched during deep sleep, and light sleep does not switch to VBAT power supply. In this case, a 32.768 kHz crystal oscillator must be externally attached.
+    - When providing backup power to the RTC power domain via VBAT, an external 32.768 kHz crystal oscillator is required.
+    - The chip automatically switches the RTC power domain to the VBAT supply only after entering Deep-sleep mode; automatic switching is not supported in Light-sleep mode.
+    - If the main power supply is unexpectedly lost, the chip cannot automatically switch to the VBAT supply to keep RTC timing.
