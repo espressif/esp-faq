@@ -64,7 +64,7 @@ Why does the I2C bus occasionally receive incorrect data when Bluetooth or Wi-Fi
 Can the I2C and LP I2C be used simultaneously on ESP32-C6 when it is not in Deep-Sleep mode?
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  Sure. In the ``esp_driver_i2c`` driver, you can select ``LP_I2C_PORT`` to enable the LP I2C function. For details, please refer to example: `esp-idf/components/esp_driver_i2c/test_apps/i2c_test_apps/main/test_lp_i2c.cpp <https://github.com/espressif/esp-idf/blob/master/components/esp_driver_i2c/test_apps/i2c_test_apps/main/test_lp_i2c.cpp>`_
+  Sure. In the ``esp_driver_i2c`` driver, you can select ``LP_I2C_PORT`` to enable the LP I2C function. For details, please refer to example: `esp-idf/components/esp_driver_i2c/test_apps/i2c_test_apps/main/test_lp_i2c <https://github.com/espressif/esp-idf/blob/master/components/esp_driver_i2c/test_apps/i2c_test_apps/main/test_lp_i2c.c>`_
 
 --------------
 
