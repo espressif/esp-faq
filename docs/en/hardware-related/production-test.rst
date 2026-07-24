@@ -29,9 +29,7 @@ Why can some modules download firmware normally when using DIO/DOUT, but encount
 How to get the production test tool?
 ------------------------------------------------------------
 
-  :CHIP\: ESP32 | ESP8266:
-
-  - Please click `production test tool <https://download.espressif.com/fac_tool_release/Qrelease/the_latest_release/ESP_PRODUCTION_TEST_TOOL_NORMAL.zip>`_ to download.
+  Please refer to `Production Testing Tool <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/production_stage/tools/esp_production_testing_guide.html#production-testing-tool>`_ instructions。
 
 ----------------
 
