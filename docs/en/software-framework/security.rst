@@ -314,10 +314,22 @@ How to implement firmware signature verification (ECDSA) at the application leve
 How to perform encryption on custom data?
 -----------------------------------------------------------------------------------------
 
-  You can use the APIs provided by mbedtls to perform encryption, checksum calculation, signature generation, and other operations on custom data. For an example of AES-based data encryption and decryption, refer to `components/mbedtls/test_apps/main/test_aes.c <https://github.com/espressif/esp-idf/blob/master/components/mbedtls/test_apps/main/test_aes.c>`_.
+  You can use the APIs provided by mbedtls to perform encryption, checksum calculation, signature generation, and other operations on custom data. For an example of AES-based data encryption and decryption, refer to `components/mbedtls/test_apps/mbedtls_ut <https://github.com/espressif/esp-idf/tree/master/components/mbedtls/test_apps/mbedtls_ut/main>`_.
 
 What is the difference between the NVS encryption scheme based on the Flash encryption framework and the NVS encryption scheme based on HMAC?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The NVS encryption scheme based on the Flash encryption framework requires the Flash encryption framework to be enabled first. The NVS encryption key is stored in the partition table. When it is necessary to protect the contents of the app partition, this scheme is recommended.
   - The HMAC-based NVS encryption scheme does not require the activation of the Flash encryption framework. The NVS encryption key is stored in the eFuse special memory. This scheme is recommended when only the contents of the NVS partition need to be protected.
+
+After enabling flash encryption, external PSRAM access performance decreases. How can I improve it?
+--------------------------------------------------------------------------------------------------------
+
+  You can reserve part of the PSRAM as an unencrypted region and allocate buffers from that region in the application. For details, see `Reserving an Unencrypted PSRAM Region <https://docs.espressif.com/projects/esp-idf/en/latest/esp32p4/api-guides/external-ram.html#reserving-an-unencrypted-psram-region>`_.
+
+----------------
+
+How to use software Secure Boot?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Please refer to `Signed App Verification Without Hardware Secure Boot <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c5/security/secure-boot-v2.html#signed-app-verify-v2>`_.
