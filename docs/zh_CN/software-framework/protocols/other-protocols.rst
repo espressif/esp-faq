@@ -184,4 +184,4 @@ ESP32-P4 能否支持运行 SSH 客户端和服务器？是否有官方组件？
 如何实现手机连接热点后自动跳转到配网页面，即 Web Captive Portal 配网？
 ------------------------------------------------------------------------------------------------------------------------
 
-  当前 iot-bridge 尚未实现该功能。可以参考 esp-at 组件中的 `at_web_dns_server.c <https://github.com/espressif/esp-at/blob/master/components/at/src/at_web_dns_server.c>`_ 来实现 Web Captive Portal。
+  可以参考 ESP-IDF 示例 `captive_portal <https://github.com/espressif/esp-idf/tree/master/examples/protocols/http_server/captive_portal>`_ 来实现 Web Captive Portal。
