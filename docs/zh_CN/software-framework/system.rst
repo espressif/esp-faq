@@ -1107,3 +1107,10 @@ ESP-IDF v5.5.3 是否支持 ESP32-P4 v1.3 芯片？
   需要在 menuconfig 中使能 ``CONFIG_ESP32P4_SELECTS_REV_LESS_V3=y``，重新编译并烧录，方可在 v1.3 版本的芯片上正常运行。
 
   配置路径：``(Top)`` > ``Component config`` > ``Hardware Settings`` > ``Chip revision`` > ``[*] Select ESP32-P4 revisions <3.0 (No >=3.x Support)``
+
+----------------
+
+ESP32 系列芯片是否支持对引导加载程序进行远程更新？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  支持。可以参考示例：`partitions_ota <https://github.com/espressif/esp-idf/tree/master/examples/system/ota/partitions_ota>`_。

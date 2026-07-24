@@ -1107,3 +1107,10 @@ Does ESP-IDF v5.5.3 support ESP32-P4 v1.3?
   You need to enable ``CONFIG_ESP32P4_SELECTS_REV_LESS_V3=y`` in menuconfig, then build and flash to run properly on the v1.3 chip.
 
   Menu path: ``(Top)`` > ``Component config`` > ``Hardware Settings`` > ``Chip revision`` > ``[*] Select ESP32-P4 revisions <3.0 (No >=3.x Support)``
+
+----------------
+
+Does the ESP32 series chip support remote updates for the bootloader?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Yes. You can refer to the example: `partitions_ota <https://github.com/espressif/esp-idf/tree/master/examples/system/ota/partitions_ota>`_.
