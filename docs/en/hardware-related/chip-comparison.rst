@@ -92,7 +92,7 @@ Do ESP products support Zephyr?
 ----------------------------------------------------------------------------------------------------------------------------------
 
   - Please refer to `Espressif's Support for Zephyr <https://www.espressif.com/zh-hans/news/Zephyr_updates>`_ for detailed information about the support for Zephyr in ESP products. While there are only a few functional modules have been adapted so far, other modules will be updated further later. For feature requests, you may check or ask on the `Zephyr GitHub issue <https://github.com/zephyrproject-rtos/zephyr/issues/29394>`_ first.
-  - You can also find information about ESP products in sections like `XTENSA Boards <https://docs.zephyrproject.org/latest/boards/xtensa/index.html>`_ and `RISCV Boards <https://docs.zephyrproject.org/latest/boards/riscv/index.html>`_ in `Zephyr Docs <https://docs.zephyrproject.org/latest/introduction/index.html>`.
+  - You can also find information about ESP products under `Supported Boards and Shields > Espressif <https://docs.zephyrproject.org/latest/boards/espressif/index.html>`__ in `Zephyr Docs <https://docs.zephyrproject.org/latest/introduction/index.html>`_.
 
 ---------------
 
