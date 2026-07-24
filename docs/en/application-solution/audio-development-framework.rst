@@ -15,40 +15,50 @@ Audio Application Framework
 
 --------------
 
-When using the VoIP feature of ESP-ADF, how to eliminate echo during calls between a mobile phone and an ESP32 device?
-----------------------------------------------------------------------------------------------------------------------------------
+When using the VoIP feature of ESP-ADF, how can I eliminate call echo?
+-----------------------------------------------------------------------
 
-  - Espressif provides an Acoustic Echo Cancellation (AEC) algorithm based on ESP32 and ESP32-S3 chips. For details, please refer to the `algorithm examples <https://github.com/espressif/esp-adf/tree/master/examples/advanced_examples/algorithm>`_.
-  - Note that the effect of AEC not only depends on software parameter configuration and debugging, but also on hardware design, such as distortion-free playback, noise-free recording, and problem-free echo reference signal, etc. For this part, it is recommended to refer to the Espressif's design on the `ESP32-Lyrat-Mini development board <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/en/latest/design-guide/dev-boards/get-started-esp32-lyrat-mini.html>`_ and `ESP32-S3-Korvo-2 development board <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/en/latest/design-guide/dev-boards/user-guide-esp32-s3-korvo-2.html>`_.
+  - Espressif provides an Acoustic Echo Cancellation (AEC) algorithm. For details, please refer to the `algorithm examples <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/advanced_examples/algorithm>`_. For new designs, the `ESP32-S3-Korvo-2 development board <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/en/latest/design-guide/dev-boards/user-guide-esp32-s3-korvo-2.html>`_ is recommended.
+  - Note that AEC performance depends not only on software parameter configuration and debugging, but also on hardware design, such as distortion-free playback, noise-free recording, and a valid echo reference signal. For existing designs, you can also refer to the `ESP32-Lyrat-Mini development board <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/en/latest/design-guide/dev-boards/get-started-esp32-lyrat-mini.html>`_.
 
 --------------
 
-Is there a reference example for accessing the big language model provided by Baidu?
+How can I troubleshoot hardware issues when AEC or wake-up performance is poor?
+------------------------------------------------------------------------------------------
+
+  If AEC or wake-up performance is poor, first verify that the hardware recording and playback path is working correctly:
+
+  - On the device, flash the `esp_audio_analyzer_app <https://github.com/espressif/esp-adf/tree/master/adf_examples/checks/esp_audio_analyzer_app>`_ example for capture and self-check.
+  - Then use the web analysis tool `ESP Audio Analyzer <https://audio-tools.espressif.com.cn/>`_ to check spectrum, distortion, noise, and other metrics to help locate hardware issues.
+
+--------------
+
+Is there a reference example for accessing Baidu Speech or large language models?
 --------------------------------------------------------------------------------------------
 
-  Please refer to the `dueros example <https://github.com/espressif/esp-adf/tree/master/examples/dueros>`_.
+  Please refer to the `dueros example <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/dueros>`_.
 
 --------------
 
 Does the official VoIP example provided by Espressif support RTP?
 ---------------------------------------------------------------------------------------------------
 
-  - In ESP-ADF, the default VoIP provided is based on SIP, and the protocol utilizes RTP.
-  - You can use the `VoIP example <https://github.com/espressif/esp-adf/tree/master/examples/protocols/voip>`_ under Espressif SDK ESP-ADF.
+  - In ESP-ADF, the default VoIP implementation is based on SIP, and the protocol uses RTP.
+  - You can use the `VoIP example <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/protocols/voip>`_ under ESP-ADF.
 
 --------------
 
 Is the SIP protocol in ESP-ADF open-source?
 ----------------------------------------------
 
-  The protocol is currently not open-source and is provided for external calls in the form of a library.
+  The protocol is currently not open-source and is provided for external use as a library.
 
 --------------
 
-Can ESP-ADF examples implement the volume adjustment function of Bluetooth headsets?
+Can ESP-ADF examples implement volume adjustment for Bluetooth headsets?
 -------------------------------------------------------------------------------------------------
 
-  Refer to example: `pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_bt_sink>`_
+  Yes. This feature depends on the Classic Bluetooth AVRCP protocol. You can refer to the `pipeline_bt_sink <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/player/pipeline_bt_sink>`_ or `pipeline_a2dp_sink_stream <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/player/pipeline_a2dp_sink_stream>`_ examples. Chips that support Classic Bluetooth (such as ESP32 and ESP32-S31) can use this solution.
 
 --------------
 
@@ -97,11 +107,11 @@ Why do I always get an error when compiling example/get-started/play-mp3 with ES
 Where can I check the ESP-IDF version supported by ESP-ADF?
 -----------------------------------------------------------------------
 
-  Please refer to the `ESP-IDF version supported under ESP-ADF <https://github.com/espressif/esp-adf/blob/master/README.md#idf-version>`__.
+  Please refer to the `ESP-IDF versions supported by ESP-ADF <https://github.com/espressif/esp-adf/blob/release/v2.x/README.md#idf-version>`__.
 
 --------------
 
-Will integrating DuerOS occupy the recording function of the ESP32-LyraT development board throughout the process?
+Will integrating DuerOS occupy the recording function of the development board throughout the process?
 -------------------------------------------------------------------------------------------------------------------
 
   The current design occupies the recording data throughout the process. However, you can enable the ``multi_output`` function of ``I2S_stream`` to output the recording data to the desired location through this channel.
@@ -111,7 +121,7 @@ Will integrating DuerOS occupy the recording function of the ESP32-LyraT develop
 Does ESP-ADF support customizing voice recognition wake-up words?
 ---------------------------------------------------------------------------
 
-  The voice training interface has not yet been opened. You can directly use the free wake-up word "Hi, Espressif". If you have customization requirements, please email sales@espressif.com for details.
+  The voice training interface has not yet been opened. You can directly use the free wake-up word "Hi, Espressif". For wake-up and other voice solutions, ESP32-S3 series development boards (such as Korvo-2) are recommended. If you have customization requirements, please email sales@espressif.com for details.
 
 --------------
 
@@ -123,32 +133,32 @@ Does ESP-ADF support running Alexa examples on the ESP32-LyraTD-MSC v2.1 develop
 
 --------------
 
-Regarding voice recognition on ESP32, can you recommend a suitable development board for localization?
+Please recommend a development board for local voice recognition.
 --------------------------------------------------------------------------------------------------------------------------
 
-  We recommend using the `ESP32-Lyrat-Mini development board <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/en/latest/design-guide/dev-boards/get-started-esp32-lyrat-mini.html>`_ or the `ESP32-S3-Korvo-2 development board <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/en/latest/design-guide/dev-boards/user-guide-esp32-s3-korvo-2.html>`_ for localization.
+  The `ESP32-S3-Korvo-2 development board <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/en/latest/design-guide/dev-boards/user-guide-esp32-s3-korvo-2.html>`_ is recommended first. You can also refer to the `ESP32-Lyrat-Mini development board <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/en/latest/design-guide/dev-boards/get-started-esp32-lyrat-mini.html>`_.
 
 ---------------
 
-Does ESP32 have a development board that supports both MIC and AUX pickup?
+Is there a development board that supports both MIC and AUX pickup?
 ---------------------------------------------------------------------------
 
   The `ESP32-lyraT-4.3 development board <https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/dev-boards/get-started-esp32-lyrat.html>`__ supports both MIC and AUX pickup.
 
 ---------------
 
-How to implement call function using the ESP32-LyraT development board?
+How can I implement call functionality with ESP-ADF?
 ------------------------------------------------------------------------------------------
 
-  You can refer to the VoIP example `VoIP <https://github.com/espressif/esp-adf/tree/master/examples/protocols/voip>`__.
+  You can refer to the VoIP example `VoIP <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/protocols/voip>`__. For new designs, ESP32-S3 series development boards are recommended.
 
 ---------------
 
-What is the maximum power of supported speakers for ESP32 series audio development board?
+What speaker power do Espressif audio development boards support?
 ------------------------------------------------------------------------------------------------
 
-  - ESP32 development board uses NS4150 PA by default, and its maximum power is 3 W.
-  - You may change the PA design according to needs.
+  - Development boards use the NS4150 PA by default, generally up to 3 W.
+  - You may change the PA design according to your needs.
 
 ---------------
 
@@ -159,7 +169,7 @@ Does Espressif's voice wake-up solution have specific requirements regarding env
 
 ---------------------
 
-If there is an AUX input on the ESP32's AI development board, can the MIC still be used to pick up sound?
+If there is an AUX input on the development board, can the MIC still be used to pick up sound?
 --------------------------------------------------------------------------------------------------------------------------
 
   - The ESP-ADF development framework can choose various ways to pick up sound, including MIC input and Line-in.
@@ -186,13 +196,13 @@ If there is an AUX input on the ESP32's AI development board, can the MIC still 
 When designing an audio development board with the ESP32-WROVER-B module and ES8311, which pins can be selected for the MCLK clock?
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  - On the hardware side, MCLK can only use GPIO0, GPIO1, GPIO3 pins. You can check the IO_MUX table in the `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__, where GPIO0 is used by default.
+  - On classic ESP32, MCLK only supports GPIO0, GPIO1, and GPIO3, with GPIO0 recommended by default. See the CLK_OUT* entries in the IO_MUX table of the `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`__.
   - You can refer to the design of the `schematic of ESP32-LyraT-Mini <https://dl.espressif.com/dl/schematics/SCH_ESP32-LYRAT-MINI_V1.2_20190605.pdf>`_.
   - For allocation of pins, please refer to `ESP32-LyraT-Mini V1.2 Hardware Reference <https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/board-esp32-lyrat-mini-v1.2.html>`_.
 
 ----------------
 
-Can the ESP32-WROVER-E module use a single I2S to realize simultaneous playback and recording?
+Can a single I2S interface realize simultaneous playback and recording?
 -----------------------------------------------------------------------------------------------
 
   Yes. You can refer to the `ESP32-LyraT getting started guide <https://docs.espressif.com/projects/esp-adf/en/latest/design-guide/dev-boards/get-started-esp32-lyrat.html>`_.
@@ -202,17 +212,7 @@ Can the ESP32-WROVER-E module use a single I2S to realize simultaneous playback 
 Do Espressif modules support Spotify Connect?
 ---------------------------------------------------
 
-  :CHIP\: ESP32 | ESP32-S2 | ESP32-S3 :
-
- Not supported yet. It is recommended to consider using dlna, which can achieve a similar effect.
-
-----------------
-
-When running the `korvo_du1906 <https://github.com/espressif/esp-adf/tree/master/examples/korvo_du1906>`_ example on an ESP32-Korvo-DU1906 board, a reboot caused the following error message: Guru Meditation Error: Core  0 panic'ed (IllegalInstruction). Exception was unhandled. How to resolve such issue?
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  - Please check the power supply.
-  - Provide power to the entire system. It is recommended to use at least a 5 V/2 A power adapter to ensure stable power supply.
+  If needed, please contact sales@espressif.com for details.
 
 ----------------
 
@@ -223,92 +223,83 @@ Can ESP-DSP fft run 4096, 8192, and more samples?
 
 ---------------
 
-How to connect a microphone to ESP32?
+How to connect a microphone?
 --------------------------------------
 
-  - You can connect I2S peripheral if it is a digital microphone.
-  - You can connect ADC peripheral if it is an analog microphone.
-  - Considering the recording quality, it is more recommended to use an external AD.
+  - For a digital microphone, connect it to the I2S peripheral.
+  - For an analog microphone, some chips can use the ADC peripheral; considering recording quality, an external ADC/codec is recommended.
 
 --------------
 
-Does ESP32 support analog audio or digital audio output?
+Is analog or digital audio output supported?
 ---------------------------------------------------------
 
-  - ESP32 supports DAC analog audio output, which can be used to play simple audio such as prompt tones.
-  - ESP32 supports PWM analog audio output, which is slightly better than DAC. Demonstration code: `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`__.
-  - ESP32 also supports I2S digital audio output. For I2S configurable pins, please refer to `ESP32 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf>`_ > Chapter Peripherals and Sensors.
+  - Some chips (such as classic ESP32) support DAC and PWM analog audio output, which can be used to play simple audio such as prompt tones. PWM demonstration code: `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/master/examples/audio/wav_player>`__.
+  - I2S digital audio output with an external codec is recommended. For pin details, please refer to the datasheet of the corresponding chip.
 
 ----------------
 
-What audio formats does the ESP32 chip support?
+What audio formats does ESP-ADF support?
 ------------------------------------------------
 
-  ESP32 supports audio formats such as MP3, AAC, FLAC, WAV, OGG, OPUS, AMR, G.711, etc. For more information, please refer to the instructions under `ESP-ADF <https://github.com/espressif/esp-adf>`_ SDK.
+  Supported audio formats include MP3, AAC, FLAC, WAV, OGG, OPUS, AMR, G.711, and more. For details, please refer to the instructions under the `ESP-ADF <https://github.com/espressif/esp-adf>`_ SDK.
 
 ---------------
 
-How to use the ESP32 chip to decode compressed audio?
+How to decode compressed audio?
 ------------------------------------------------------
 
-  For applications using the ESP32 chip to decode compressed audio, refer to the examples in the `esp-adf/examples/recorder <https://github.com/espressif/esp-adf/tree/c50f3dc43bd754568d0f52dbc111b543f0baa5cd/examples/recorder>`_ folder.
+  Please refer to the examples in the `esp-adf/examples/player <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/player>`_ folder.
 
 ---------------
 
 Where is the code example for `ESP-LED-Strip <https://www.espressif.com/en/news/ESP-LEDStrip>`_?
 -------------------------------------------------------------------------------------------------
 
-  The corresponding code examples are stored in ESP-ADF. Please refer to the `led_pixels example <https://github.com/espressif/esp-adf/tree/master/examples/display/led_pixels>`_.
+  The corresponding code examples are stored in ESP-ADF. Please refer to the `led_pixels example <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/display/led_pixels>`_.
 
 ------------
 
-Does ESP32 support online voice recognition?
+Is online voice recognition supported?
 ---------------------------------------------
 
-  Yes, it does. Please refer to the `esp-adf/examples/dueros <https://github.com/espressif/esp-adf/blob/master/examples/dueros/README.md>`_ example.
+  Yes. Please refer to the `esp-adf/examples/dueros <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/dueros>`_ example. For wake-up and other voice interaction scenarios, the ESP32-S3 series is recommended.
 
 -------------
-
-Does ESP32 support volume adjustment of Bluetooth headphones?
----------------------------------------------------------------------------------------------------------------
-
-  Yes. ESP32 uses the Bluetooth AVRCP tuning protocol. You can test the function with the `pipeline_a2dp_sink_stream <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_a2dp_sink_stream>`_ example.
-
----------------
 
 Can Wi-Fi and FFT be used simultaneously?
 -----------------------------------------------------------------------------------------------------------------
 
-  Wi-Fi and FFT can be used simultaneously. For example, Wi-Fi functionality can be directly added to the `rhythm light example <https://github.com/espressif/esp-adf/tree/master/examples/display/led_pixels>`__ with FFT functionality.
+  Wi-Fi and FFT can be used simultaneously. For example, Wi-Fi functionality can be directly added to the `rhythm light example <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/display/led_pixels>`__ with FFT functionality.
 
 -----------------
 
-What does the RECORD_HARDWARE_AEC macro mean when it is True or False in the ESP-ADF SDK?
+What does the ``RECORD_HARDWARE_AEC`` macro mean when it is True or False in the ESP-ADF SDK?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  The value of RECORD_HARDWARE_AEC macro being True or False indicates whether the development board has a hardware AEC (Acoustic Echo Cancellation) circuit. If it is True, the development board has a hardware AEC circuit. If it is False, the development board does not have a hardware AEC circuit.
+  The ``RECORD_HARDWARE_AEC`` macro being True or False indicates whether the development board has a hardware AEC (Acoustic Echo Cancellation) circuit. True means it has one; False means it does not.
 
 ---------------
 
 Are there any recommended product models and application references for developing an outdoor pure voice intercom solution based on Espressif's products?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  For pure voice intercom solutions, the `ESP32-S3 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf>`_ series is recommended for development. For application software, refer to the `esp-adf/examples/protocols/voip <https://github.com/espressif/esp-adf/tree/master/examples/protocols/voip>`__ example.
+  For pure voice intercom solutions, the `ESP32-S3 <https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf>`_ series is recommended for development. For application software, refer to the `esp-adf/examples/protocols/voip <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/protocols/voip>`__ example.
 
 -------------
 
 What is the difference between software AEC (Acoustic Echo Cancellation) and hardware AEC in the ESP-ADF audio application development framework?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  The difference between hardware AEC and software AEC lies in the source of the reference signal. If the reference signal comes from an external chip (such as ES8311, ES7210) that is independent of the main controller, it is hardware AEC; if the main controller itself replicates the reference signal for echo cancellation, it is software AEC.
+  The difference between hardware AEC and software AEC lies in the source of the reference signal. If the reference signal comes from a chip other than the main controller (such as ES8311 or ES7210), it is hardware AEC; if the main controller itself replicates the reference signal for echo cancellation, it is software AEC.
 
 --------------
 
-Do ESP series products support Voice Activity Detection (VAD)?
+Is Voice Activity Detection (VAD) supported?
 ----------------------------------------------------------------------------------------------------------------------------------
 
-  Yes, ESP series products support Voice Activity Detection (VAD).
+  Yes.
 
-  - ESP32, ESP32-C series, ESP32-S series products do not have a dedicated hardware VAD unit, but VAD can be implemented through software algorithms combined with I2S/PDM microphone input. For details, please refer to `esp-sr/include/esp32c5/esp_vad.h <https://github.com/espressif/esp-sr/blob/master/include/esp32c5/esp_vad.h>`__.
-  - ESP32-P4 features a built-in hardware VAD unit, which can detect voice activity by configuring the LP I2S and VAD drivers. For more details, please refer to `esp-sr/include/esp32p4/esp_vad.h <https://github.com/espressif/esp-sr/blob/master/include/esp32p4/esp_vad.h>`__.
+  - On most products, VAD can be implemented through software algorithms combined with I2S/PDM microphone input. For details, please refer to `esp-sr/include/esp32c5/esp_vad.h <https://github.com/espressif/esp-sr/blob/master/include/esp32c5/esp_vad.h>`__.
+  - Some products (such as ESP32-P4) feature a built-in hardware VAD unit, which can detect voice activity by configuring the LP I2S and VAD drivers. For more details, please refer to `esp-sr/include/esp32p4/esp_vad.h <https://github.com/espressif/esp-sr/blob/master/include/esp32p4/esp_vad.h>`__.
   - For VAD support on other products, please check under `esp-sr/include <https://github.com/espressif/esp-sr/blob/master/include>`__.
