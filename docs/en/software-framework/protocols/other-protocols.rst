@@ -184,4 +184,4 @@ Can ESP32-P4 support running SSH client and server? Are there any official compo
 How to implement an automatic redirect to a provisioning page after a phone connects to the Wi-Fi hotspot (i.e., Web Captive Portal provisioning)?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Currently, this feature is not implemented in ``iot-bridge``. You can refer to `at_web_dns_server.c <https://github.com/espressif/esp-at/blob/master/components/at/src/at_web_dns_server.c>`_ in the esp-at component to implement the Web Captive Portal functionality.
+  You can refer to the ESP-IDF example `captive_portal <https://github.com/espressif/esp-idf/tree/master/examples/protocols/http_server/captive_portal>`_ to implement Web Captive Portal.
