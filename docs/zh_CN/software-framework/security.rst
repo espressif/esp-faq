@@ -314,10 +314,22 @@ flash 加密方案是否支持对文件系统的加密？
 如何对自定义数据执行加密？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  可通过 mbedtls 提供的 API 实现对自定义数据的加密、校验和计算、签名等操作。关于如何使用 AES 算法对数据进行加解密，可参考示例文件 `components/mbedtls/test_apps/main/test_aes.c <https://github.com/espressif/esp-idf/blob/master/components/mbedtls/test_apps/main/test_aes.c>`_ 。
+  可通过 mbedtls 提供的 API 实现对自定义数据的加密、校验和计算、签名等操作。关于如何使用 AES 算法对数据进行加解密，可参考示例文件 `components/mbedtls/test_apps/mbedtls_ut <https://github.com/espressif/esp-idf/tree/master/components/mbedtls/test_apps/mbedtls_ut/main>`_。
 
 基于 Flash 加密框架的 NVS 加密方案与基于 HMAC 的 NVS 加密方案有什么不同？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 基于 Flash 加密框架的 NVS 加密方案需要先开启 Flash 加密框架。NVS 加密密钥被保存在分区表中。当需要保护 app 分区的内容时，推荐使用该方案。
   - 基于 HMAC 的 NVS 加密方案不需要开启 Flash 加密框架。NVS 加密密钥被保存在 eFuse 特殊存储器中。当仅需要保护 NVS 分区的内容时，推荐使用该方案。
+
+启用 flash 加密后，片外 PSRAM 的访问速率下降。如何改善？
+-------------------------------------------------------------------------------------------------------------------------
+
+  可将部分 PSRAM 预留为未加密区域，并在应用程序中从该区域分配缓冲区。具体用法请参考 `预留未加密的 PSRAM 区域 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32p4/api-guides/external-ram.html#id9>`_ 。
+
+----------------
+
+如何使用软件安全启动？
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  请参考 `在未启用硬件安全启动时对应用程序进行签名校验 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c5/security/secure-boot-v2.html#signed-app-verify-v2>`_ 。
