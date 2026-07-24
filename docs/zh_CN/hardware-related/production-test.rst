@@ -29,9 +29,7 @@
 如何获取产测工具?
 --------------------------------------------------------------------------------------------------
 
-  :CHIP\: ESP32 | ESP8266:
-
-  - 请点击 `产测工具 <https://download.espressif.com/fac_tool_release/Qrelease/the_latest_release/ESP_PRODUCTION_TEST_TOOL_NORMAL.zip>`_ 进行下载。
+  参见 `产测工具 <https://docs.espressif.com/projects/esp-test-tools/zh_CN/latest/esp32/production_stage/tools/esp_production_testing_guide.html#production-testing-tool>`_ 说明。
 
 --------------
 
