@@ -18,8 +18,8 @@ Firmware Update
 How does the host MCU flash ESP32 via serial interfaces?
 ------------------------------------------------------------------------------------------
 
-  - For the related protocol, please refer to `ESP32 Serial Protocol <https://github.com/espressif/esptool>`_. For the corresponding documentation, please refer to `Serial Protocol <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html#serial-protocol>`_.
-  - For code examples, please refer to `esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`_.
+  - For the related protocol, please refer to `ESP32 Serial Protocol <https://github.com/espressif/esptool>`__. For the corresponding documentation, please refer to `Serial Protocol <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/serial-protocol.html#serial-protocol>`__.
+  - For code examples, please refer to `esp-serial-flasher <https://github.com/espressif/esp-serial-flasher>`__.
 
 --------------
 
@@ -33,8 +33,8 @@ How to download firmware for ESP32 series modules using the USB-Serial tool?
 How to flash firmware on macOS and Linux?
 ------------------------------------------------------------------------------------------------
 
-  - For the Apple system (macOS), you can use `esptool <https://github.com/espressif/esptool>`_ downloaded via brew or git to flash firmware.
-  - For the Linux system (e.g., Ubuntu), you can use `esptool <https://github.com/espressif/esptool>`_ downloaded via apt-get or git to flash firmware.
+  - For the Apple system (macOS), you can use `esptool <https://github.com/espressif/esptool>`__ downloaded via brew or git to flash firmware.
+  - For the Linux system (e.g., Ubuntu), you can use `esptool <https://github.com/espressif/esptool>`__ downloaded via apt-get or git to flash firmware.
 
 --------------
 
@@ -43,7 +43,7 @@ Does ESP32 support programming using JTAG pins directly?
 
   ESP32 supports flashing programs directly using `JTAG pins <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html#id1>`__. Please refer to `Upload the application to be debugged <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`__. For detailed steps, see `Using the ESP32 JTAG interface for firmware download in a Windows environment <https://blog.csdn.net/Marchtwentytwo/article/details/148540368?>`__.
 
-  **Note**: For mass production flashing, it is recommended to use the `flash download tool <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/try-firmware/try-firmware-platform.html#flash>`__ to flash the firmware. For detailed instructions, see `Choosing the appropriate burning platform <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/try-firmware/try-firmware-platform.html#id1>`__.
+  **Note**: For mass production flashing, it is recommended to use the `Flash Download Tool <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/try-firmware/try-firmware-platform.html#flash-download-tool>`__ to flash the firmware. For detailed instructions, see `Selecting the Suitable Flashing Platform <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/try-firmware/try-firmware-platform.html#selecting-the-suitable-flashing-platform>`__.
 
 --------------
 
@@ -51,7 +51,7 @@ Does ESP_Flash_Downloader_Tool support customized programming control?
 --------------------------------------------------------------------------------------------
 
   - The GUI tool is not open-sourced and does not support embedded executive script.
-  - The low-level component `esptool <https://github.com/espressif/esptool>`_ is open-sourced and can be used to perform all functions such as flashing and encryption. It is recommended to conduct secondary development based on this component.
+  - The low-level component `esptool <https://github.com/espressif/esptool>`__ is open-sourced and can be used to perform all functions such as flashing and encryption. It is recommended to conduct secondary development based on this component.
 
 ---------------
 
@@ -102,16 +102,7 @@ How to resolve the following error that occurred when flashing firmware to ESP32
 How to download firmware based on ESP-IDF using flash_download_tool?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Please refer to `get-started-guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html>`_ when building an ESP-IDF project for the first time.
-  - Taken hello-world example for instance, run ``idf.py build`` (supports ESP-IDF v4.0 and later versions, for versions before v4.0, please use ``make``). After building, the following flash command for the bin file will be generated:
-
-  .. code:: shell
-
-    #Project build complete. To flash, run this command:
-    ../../../components/esptool_py/esptool/esptool.py -p (PORT) -b 921600 write_flash --flash_mode dio --flash_size detect --flash_freq 40m 0x10000 build/hello-world.bin  build 0x1000 build/bootloader/bootloader.bin 0x8000 build/partition_table/partition-table.bin
-    or run 'idf.py -p PORT flash'
-
-  You can use flash_download_tool to flash according to the bin file and flash address prompted by this command.
+  Please refer to `Obtaining Firmware Flashing Information for Different Software Development Platforms <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/try-firmware/get-firmware-address.html#obtaining-firmware-flashing-information-for-different-software-development-platforms-development-stage>`__.
 
 --------------
 
@@ -127,8 +118,8 @@ What is the communication protocol for flashing ESP chips?
 How to program ESP32-C3's firmware offline?
 -----------------------------------------------------------------------------------------------------------
 
-  - Currently, no tool supports the offline programming of ESP32-C3's firmware. However, the official `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_ can directly download binary firmware and support mass production download mode for up to eight ESP32-C3 devices at the same time.
-  - In addition, we also provide `Test Fixture <https://www.espressif.com/en/products/equipment/production-testing-equipment/overview>`_ for mass production, which supports up to four ESP32-C3 modules to download firmware simultaneously.
+  - Currently, no tool supports the offline programming of ESP32-C3's firmware. However, the official `Flash Download Tool <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/production_stage/tools/flash_download_tool.html#flash-download-tool-user-guide>`__ can directly download binary firmware and support mass production download mode for up to eight ESP32-C3 devices at the same time.
+  - In addition, we also provide `Test fixture <https://www.espressif.com/en/products/equipment/production-testing-equipment/overview>`__ for mass production, which supports up to four ESP32-C3 modules to download firmware simultaneously.
 
 ----------------------
 
@@ -147,30 +138,30 @@ After downloading the program and powering on EPS8266, the serial port printed t
     ets Jan  8 2013,rst cause:1, boot mode:(7,7)
     waiting for host
 
-  `waiting for host` means the Boot is in SDIO mode, indicating that GPIO15 (MTDO) is pulled up (HIGH). Please refer to `ESP8266 Boot Mode Description <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process>`_.
+  `waiting for host` means the Boot is in SDIO mode, indicating that GPIO15 (MTDO) is pulled up (HIGH). Please refer to `ESP8266 Boot Mode Description <https://github.com/esp8266/esp8266-wiki/wiki/Boot-Process>`__.
 
 ----------------
 
 What are the Espressif module programming tools?
 -----------------------------------------------------------------------------------------------------------------
 
-  - For Espressif programming software, please go to `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_. Installation-free GUI tools are for the ``Windows`` environment only.
-  - Espressif programming tool `esptool <https://github.com/espressif/esptool>`_ is written based on `Python` with open-source code, supporting secondary development.
+  Please refer to `Selecting the Suitable Flashing Platform <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/try-firmware/try-firmware-platform.html#selecting-the-suitable-flashing-platform>`__.
 
 -----------------------------------------------------------------------------------------------------
 
-What is the difference between the Factory mode and Developer mode of the flash download tool?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is the difference between the Factory mode and Developer mode of the `Flash Download Tool <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/production_stage/tools/flash_download_tool.html#flash>`__?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Factory mode supports multi-channel downloads, while Developer mode only supports single channel.
-  - The path of bin files under the Factory mode is relative, while under Developer is absolute.
+  - Developer mode supports single-channel download only; the bin file path in Developer mode is an absolute path.
+  - Factory mode supports multi-channel download; the bin file path in Factory mode is a relative path.
+  - For details, see the `Flash Download Tool User Guide <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/production_stage/tools/flash_download_tool.html#flash>`__.
 
 ---------------
 
 The ESP32-C3 chip should be able to conduct firmware download through USB, but I failed to do so under ESP-IDF v4.3. So, how can I use USB for firmware download?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  You need to compile under ESP-IDF v4.4 or above versions. After pulling the latest branch and `updating the IDF tool <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html>`_, you can compile normally and use USB for download. Please refer to `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`_.
+  You need to compile under ESP-IDF v4.4 or above versions. After pulling the latest branch and `updating the IDF tool <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/get-started/index.html>`__, you can compile normally and use USB for download. Please refer to `usb-serial-jtag-console <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c3/api-guides/usb-serial-jtag-console.html>`__.
 
 ---------------
 
@@ -183,7 +174,7 @@ Why does the programming fail for the jig with a 4-port hub in factory mode?
 
 -------------------
 
-I'm using an ESP32-WROVER-B module to download the AT firmware via the `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_. However, an error occurred after writing to flash. But the same operation succeeded when replacing the module with ESP32-WEOVER-E, what is the reason?
+I'm using an ESP32-WROVER-B module to download the AT firmware via the `Flash Download Tool <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/production_stage/tools/flash_download_tool.html#flash>`__. However, an error occurred after writing to flash. But the same operation succeeded when replacing the module with ESP32-WROVER-E, what is the reason?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - The ESP32-WROVER-B module leads out the SPI flash pin, but the ESP32-WROVER-E module does not. Please check whether the SPI flash pin of the ESP32-WROVER-B module is reused by other external application circuits.
@@ -198,8 +189,8 @@ I'm using an ESP32-WROVER-B module to download the AT firmware via the `flash do
 
 ---------------
 
-Why can't the `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_ be used to reflash the firmware on a device that has enabled flash encryption but not disabled the download mode?
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Why can't the `Flash Download Tool <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/production_stage/tools/flash_download_tool.html#flash>`__ be used to reflash the firmware on a device that has enabled flash encryption but not disabled the download mode?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   :CHIP\: ESP32 | ESP32-S2:
 
@@ -212,14 +203,14 @@ Why can't the `Flash Download Tools <https://www.espressif.com/en/support/downlo
 
 -----------------
 
-When updating ESP32 firmware through the UART interface based on `esptool serial port protocol <https://github.com/espressif/esptool>`_, can I add a new app partition?
+When updating ESP32 firmware through the UART interface based on `esptool serial port protocol <https://github.com/espressif/esptool>`__, can I add a new app partition?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The actual partitioning of the flash primarily depends on the data in ``partition_table.bin``. If ``partition_table.bin`` can be updated, the storage space for other data such as ``bootloader.bin``, ``app.bin``, etc., can be re-partitioned, thereby adding a new app partition.
 
 ---------------------------
 
-I am using ESP8266 to download the firmware via the `flash download tool <https://www.espressif.com/en/support/download/other-tools>`_. After downloading the firmware, there is no programming output log, and the serial port prints the following messages. What could be the reason?
+I am using ESP8266 to download the firmware via the `Flash Download Tool <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/production_stage/tools/flash_download_tool.html#flash>`__. After downloading the firmware, there is no programming output log, and the serial port prints the following messages. What could be the reason?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   .. code-block:: shell
@@ -228,7 +219,7 @@ I am using ESP8266 to download the firmware via the `flash download tool <https:
     2013,rst cause:1, boot mode:(3,7)
     ets_main.c
 
-  - Please check whether the hardware wiring is correct. See `Boot mode wiring instructions <https://docs.espressif.com/projects/esptool/en/latest/esp8266/advanced-topics/boot-mode-selection.html>`_.
+  - Please check whether the hardware wiring is correct. See `Boot mode wiring instructions <https://docs.espressif.com/projects/esptool/en/latest/esp8266/advanced-topics/boot-mode-selection.html>`__.
   - Please check whether the download offset address of ``bootloader.bin`` is correct. The offset address downloaded from ``bootloader.bin`` of ESP8266 is "0x0". If the offset address is wrong, the flash cannot be started.
 
 ----------------
@@ -236,7 +227,7 @@ I am using ESP8266 to download the firmware via the `flash download tool <https:
 Why does my USB driver fail to be recognized by the Windows 7 system?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Please download and install the `USB Serial JTAG driver <https://dl.espressif.com/dl/idf-driver/idf-driver-esp32-usb-jtag-2021-07-15.zip>`_ manually for the Windows 7 system.
+  For Windows 7, please manually download and install the `USB-Serial-JTAG peripheral driver <https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_overview/usb_serial_jtag.html#usb-serial-jtag-peripheral-driver>`__.
 
 ----------------------------
 
@@ -250,12 +241,12 @@ After using the ESP32-WROVER-E module to download the program, the following log
       invalrd header：0xffffffff
       invalrd header：0xffffffff
 
-  - Generally, it is because the GPIO12 was pulled high. It is recommended to pull it low and see the results. Please see `ESP32 Boot Log Guide <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html#select-bootloader-mode>`_.
+  Generally, it is because the GPIO12 was pulled high. It is recommended to pull it low and see the results. Please see `ESP32 Boot Log Guide <https://docs.espressif.com/projects/esptool/en/latest/esp32/advanced-topics/boot-mode-selection.html#select-bootloader-mode>`__.
 
 ----------------
 
-When using the `Flash Download Tools <https://www.espressif.com/en/support/download/other-tools>`_ to flash ESP32-C3 via USB, 8-download data fail occurs repeatedly. How can I solve it?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+When using the `Flash Download Tool <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/production_stage/tools/flash_download_tool.html#flash>`__ to flash ESP32-C3 via USB, 8-download data fail occurs repeatedly. How can I solve it?
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - Please erase the chip completely first before flashing.
   - This problem has been solved in V3.9.4 and above versions.
@@ -283,8 +274,8 @@ Will the operation of other tasks be affected when the chip is undergoing an OTA
 
 ----------------
 
-How many devices can be flashed at once in factory mode using `Flash Download Tool <https://dl.espressif.com/public/flash_download_tool.zip>`__?
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How many devices can be flashed at once in factory mode using `Flash Download Tool <https://docs.espressif.com/projects/esp-test-tools/en/latest/esp32/production_stage/tools/flash_download_tool.html#flash>`__?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Currently, up to 20 devices are supported. You need to update to the latest version of the Flash Download Tool (3.7.8) and modify the configuration file ``flash_download_tool\configure\esp32s3\multi_download.conf`` as follows:
   
@@ -298,7 +289,7 @@ How many devices can be flashed at once in factory mode using `Flash Download To
 Does ESP32 OTA support resumable uploads?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Supported. Please refer to `OTA Resumption <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/esp_https_ota.html#ota-resumption>`__.
+  Yes. Please refer to `OTA Resumption <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/esp_https_ota.html#ota-resumption>`__.
 
 --------------
 
