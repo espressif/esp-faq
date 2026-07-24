@@ -21,15 +21,16 @@ Where are the LCD drivers and reference examples for ESP series chips?
 --------------------------------------------------------------------------------------------------------------------------------------
 
   - Please first understand the LCD development process through the `ESP-IoT-Solution Programming Guide - LCD Development Guide <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_development_guide.html#supported-interface-types>`__.
-  - For basic LCD driver examples, please refer to `esp-idf/examples/peripherals/lcd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd>`_.
-  - For advanced LCD driver examples, please refer to `esp-iot-solution/examples/display <https://github.com/espressif/esp-iot-solution/tree/master/examples/display>`_.
+  - For basic LCD driver examples, please refer to `esp-idf/examples/peripherals/lcd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd>`__.
+  - For advanced LCD driver examples, please refer to `esp-iot-solution/examples/display <https://github.com/espressif/esp-iot-solution/tree/master/examples/display>`__.
 
 ---------------
 
 Which adapted ICs can be used by the LCD screen of ESP32 series chips?
 -------------------------------------------------------------------------------------------------
 
-  Please refer to the `ESP-IoT-Solution Programming Guide - LCD Development Guide <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_development_guide.html#supported-interface-types>`__ to learn about the adapted LCD screen models.
+  - For support of SPI, I80, RGB, MIPI-DSI, and other interfaces across ESP chip series, please refer to `LCD Development Guide - Supported Interface Types <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_development_guide.html#supported-interface-types>`__. Some chips (such as ESP32-C5/C6/H2/H4) do not have a native I80 peripheral, but can drive an LCD by simulating I80 timing through the ``Parlio`` interface in ``esp_lcd``.
+  - For the list of LCD driver IC components officially ported by Espressif based on ``esp_lcd`` (including I2C, SPI, QSPI, I80, MIPI-DSI, 3-wire SPI + RGB, and other interfaces), please refer to `LCD Development Guide - Driver and Examples <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/lcd_development_guide.html#driver-and-examples>`__.
 
 --------------
 
@@ -44,8 +45,10 @@ Notes for Driving MIPI-DSI LCD with ESP32-P4
 -------------------------------------------------------------------
 
   - ESP32-P4 supports MIPI-DSI LCD with up to 2 lanes. Each supports a maximum rate of 1.5 Gbps, totaling 3 Gbps. It also supports color formats ``RGB565``, ``RGB666``, and ``RGB888``.
-  - Some MIPI-DSI LCDs, such as ``ILI9881`` and ``JD9365``, are configured as 4-lane by default through hardware (IM[0:3]). However, they can be configured to 2-lane by modifying the LCD's initialization commands (e.g., the ``B6h-B7h`` command of ILI9881). Therefore, it is necessary to consult the datasheet of the LCD driver IC to confirm if it is supported.
-  - The MIPI-DSI driver has the communication response mechanism enabled by default. If there is a communication anomaly between the ESP and the LCD, the ESP may freeze and trigger the watchdog. At this point, please check whether the hardware connection is correct, whether the initialization command is correct, whether the reset timing is correct, or use a logic analyzer to check if the communication is normal.
+  - Some MIPI-DSI LCDs, such as ``ILI9881C`` and ``JD9365``, are configured as 4-lane by default through hardware. However, most ICs support switching to 2-lane by modifying initialization registers. The register addresses and operations vary by IC model; please consult the LCD driver IC datasheet or the panel vendor. ESP32-P4 only supports 1-lane and 2-lane configurations.
+  - When configuring ``lane_bit_rate_mbps``: the maximum must not exceed 1500 Mbps; a minimum of 480 Mbps is recommended. The actual value can be calculated from resolution, refresh rate, color depth, and lane count, then determined with a 20% margin. For the calculation method, please refer to `MIPI DSI LCD Detailed Guide <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/mipi_dsi_lcd.html>`__.
+  - The MIPI-DSI driver enables the communication response mechanism (frame ACK) by default. If there is a communication anomaly between the ESP and the LCD, the ESP may freeze and trigger the watchdog. At this point, please check whether the hardware connection is correct, whether the initialization command is correct, whether the reset timing is correct, or use a logic analyzer to troubleshoot communication issues.
+  - Driving a MIPI-DSI screen requires a stable 2.5 V power supply for the MIPI DSI PHY (obtained via an LDO). Please refer to the LDO configuration section in the corresponding example code.
 
 --------------
 
@@ -56,7 +59,7 @@ Do ESP series development boards with screens support GUI development using the 
   - Several points to note:
 
     - ESP32_Display_Panel relies on `arduino-esp32 <https://github.com/espressif/arduino-esp32>`__.
-    - Due to the :ref:`screen drift <lcd-rgb-screen-drift>` issue with the RGB interface of ESP32-S3, it is necessary to use features from ESP-IDF release/v5.1 or later to solve the problem. However, the ESP-IDF version used in arduino-esp32 v2.x.x is v4.4.x, which cannot solve this problem. Therefore, you should use arduino-esp32 v3.x.x. For detailed instructions, please refer to `Document <https://github.com/esp-arduino-libs/ESP32_Display_Panel/blob/master/README.md#how-to-fix-screen-drift-issue-when-driving-rgb-lcd-with-esp32-s3>`_.
+    - Due to the :ref:`screen drift <lcd-rgb-screen-drift>` issue with the RGB interface of ESP32-S3, it is necessary to use features from ESP-IDF release/v5.1 or later to solve the problem. However, the ESP-IDF version used in arduino-esp32 v2.x.x is v4.4.x, which cannot solve this problem. Therefore, you should use arduino-esp32 v3.x.x. For detailed instructions, please refer to `Document <https://github.com/esp-arduino-libs/ESP32_Display_Panel/blob/master/README.md#how-to-fix-screen-drift-issue-when-driving-rgb-lcd-with-esp32-s3>`__.
     - Given that Arduino cannot adjust various parameter configurations, such as compile optimization levels, through menuconfig like ESP-IDF, it is recommended to develop a GUI based on ESP-IDF to achieve optimal performance.
 
 --------------
@@ -83,36 +86,35 @@ How can I improve the display frame rate of LCD screens?
     - ``CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y``
     - ``CONFIG_COMPILER_OPTIMIZATION_PERF=y``
 
-  - On ESP32-P4, you can adjust the following configurations to increase the frame rate (applicable to ESP-IDF release/v5.4):
+  - On ESP32-P4, you can adjust the following configurations to increase the frame rate (applicable to ESP-IDF release/v5.4 and later; release/v6.0 is recommended):
 
     - ``CONFIG_CACHE_L2_CACHE_256KB=y``
     - ``CONFIG_CACHE_L2_CACHE_LINE_128B=y``
     - ``CONFIG_SPIRAM_XIP_FROM_PSRAM=y``
     - ``CONFIG_COMPILER_OPTIMIZATION_PERF=y``
 
-  - The following LVGL configuration items can help improve the frame rate (LVGL v8.4):
+  - The following LVGL configuration items can help improve the frame rate:
 
-    - ``#define LV_MEM_CUSTOM 1`` or ``CONFIG_LV_MEM_CUSTOM=y``
-    - ``#define LV_MEMCPY_MEMSET_STD 1`` or ``CONFIG_LV_MEMCPY_MEMSET_STD=y``
-    - ``CONFIG_LV_ATTRIBUTE_FAST_MEM=y``
+    - **LVGL v8**: ``CONFIG_LV_MEM_CUSTOM=y``, ``CONFIG_LV_MEMCPY_MEMSET_STD=y``, ``CONFIG_LV_ATTRIBUTE_FAST_MEM=y``
+    - **LVGL v9**: ``CONFIG_LV_OS_FREERTOS=y``, ``CONFIG_LV_USE_CLIB_MALLOC=y``, ``CONFIG_LV_USE_CLIB_STRING=y``, ``CONFIG_LV_USE_CLIB_SPRINTF=y``, ``CONFIG_LV_DEF_REFR_PERIOD=15``
 
-  - If higher frame rates, better rotation performance, and improved anti-tearing behavior are required, it is recommended to use the `esp_lvgl_adapter component <https://github.com/espressif/esp-iot-solution/blob/7c133a8b81c161635ee1f093acd180a2322adb72/components/display/tools/esp_lvgl_adapter/README.md>`__.
-
----------------
-
-Is there any example code for I2S driving LCD with ESP32?
--------------------------------------------------------------------------------------
-
-  - The interface type of the screen driven by I2S in ESP32/ESP32-S2 is i80(8080)
-  - For the application examples, please refer to :ref:`LCD examples <lcd-examples>`.
+  - If higher frame rates, better rotation performance, and improved anti-tearing behavior are required, it is recommended to use the `esp_lvgl_adapter component <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/tools/esp_lvgl_adapter.html>`__.
 
 ---------------
 
-What is the maximum resolution supported by ESP LCD? What is the corresponding frame rate?
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Is there any example code for I2S driving I80 LCD with ESP32/ESP32-S2?
+----------------------------------------------------------------------------------
 
-  - For the RGB peripheral interfaces of ESP32-S3 and ESP32-P4, due to their hardware limitations, they theoretically support a maximum resolution of ``4096 x 1024`` (with a maximum of ``4096`` horizontally and ``1024`` vertically); for the other peripheral interfaces of the ESP series chips, there is no "maximum" hardware limitation on how much resolution they can support.
-  - For specific resolution scenarios and corresponding frame rates, please refer to `Selection of LCD Driver Chip <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/advanced-development/lcd-application-note/overview.html#selection-of-lcd-driver-chip>`__.
+  In earlier ESP-IDF versions (v4.x and before), ESP32/ESP32-S2 drove LCD via the I80 (8080) parallel interface by reusing the I2S peripheral to simulate I80 timing. Starting from ESP-IDF v5.0, this was unified to the I80 interface of the ``esp_lcd`` component (``esp_lcd_new_i80_bus``), which no longer depends on I2S and provides a more standardized API.
+
+  To drive an I80 LCD, please refer directly to the ``i80_controller`` example in :ref:`LCD examples <lcd-examples>`, and `ESP-IDF Programming Guide - I80 LCD <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd/i80_lcd.html>`__.
+
+---------------
+
+What is the recommended upper limit of LCD resolution for ESP series chips? What is the corresponding frame rate?
+---------------------------------------------------------------------------------------------------------------------
+
+  The resolution upper limit depends on the interface type and the application's frame-rate requirements. It is recommended to use the maximum resolution that can achieve a smooth frame rate (typically ≥ 30 FPS) as the practical upper limit, rather than pursuing the theoretical hardware limit. For typical resolutions and corresponding frame rates on each platform (based on ``esp_lvgl_adapter`` + LVGL v9 Benchmark), please refer to `Selection of LCD Driver Chip <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/advanced-development/lcd-application-note/overview.html#selection-of-lcd-driver-chip>`__.
 
 ----------------
 
@@ -147,18 +149,25 @@ How can I increase the upper limit of PCLK settings on ESP32-S3 while ensuring n
     - Reduce the PSRAM bandwidth occupied by other peripherals like Wi-Fi, flash, etc.
     - Decrease the Data Cache Line Size to 32 Bytes (set to 64 Bytes when using RGB Bounce Buffer mode).
 
-  - Enable the Bounce Buffer mode of the RGB driver. The larger the buffer, the better the effect. For usage, please refer to the `documentation <https://docs.espressif.com/projects/esp-idf/en/v5.1.4/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`_. Please note that in this mode, the CPU first moves PSRAM data to SRAM, and then the GDMA transfers data to the RGB peripheral. Therefore, it is necessary to enable ``CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y``. Otherwise, it may cause the screen to drift.
+  - Enable the Bounce Buffer mode of the RGB driver. The larger the buffer, the better the effect. For usage, please refer to the `documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd/rgb_lcd.html>`__. Please note that in this mode, the CPU first moves PSRAM data to SRAM, and then the GDMA transfers data to the RGB peripheral. Therefore, it is necessary to enable ``CONFIG_ESP32S3_DATA_CACHE_LINE_64B=y``. Otherwise, it may cause the screen to drift.
   - Based on limited testing, for Quad PSRAM at 80 MHz, the highest PCLK setting is around 11 MHz; for Octal PSRAM at 80 MHz, the highest PCLK setting is around 22 MHz; for Octal PSRAM at 120 MHz, the highest PCLK setting is around 30 MHz.
   - For applications using LVGL, the task of RGB peripheral initialization can be assigned to the same core as the task of LVGL ``lv_timer_handler()``. This significantly increases the upper limit of PCLK settings.
 
 --------------------
 
-Which image decoding formats are supported by the ESP32-S3 series of chips?
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Which image decoding formats are supported by LCD applications on ESP series chips?
+--------------------------------------------------------------------------------------------
 
-  - Currently, ESP-IDF only supports the JPEG decoding format. For an application example, please refer to `esp-idf/examples/peripherals/lcd/tjpgd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd/tjpgd>`_.
-  - If you develop based on LVGL, PNG, BMP, SJPG and GIF decoding formats are supported. For details, please refer to `LVGL libs <https://docs.lvgl.io/master/libs/index.html>`_.
-  - Additionally, if there is a need for animated graphics, you can use the EAF animation format customized by Espressif. For details, refer to the `LVGL EAF Player Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/gui/lvgl_eaf_player>`__.
+  - **Software JPEG decoding**: ESP-IDF includes the built-in ``tjpgd`` software decoder for JPEG. For an application example, please refer to `esp-idf/examples/peripherals/lcd/tjpgd <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/lcd/tjpgd>`__.
+  - **Hardware JPEG decoding**: ESP32-S31 and ESP32-P4 integrate a hardware JPEG codec (``SOC_JPEG_CODEC_SUPPORTED``), and support hardware-accelerated JPEG decoding through the `esp_driver_jpeg <https://docs.espressif.com/projects/esp-idf/en/latest/esp32p4/api-reference/peripherals/jpeg.html>`__ component, which is significantly faster than software decoding.
+  - **Via esp_lvgl_adapter + esp_lv_decoder**: It is recommended to use `esp_lvgl_adapter <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/tools/esp_lvgl_adapter.html>`__ together with `esp_lv_decoder <https://components.espressif.com/components/espressif/esp_lv_decoder>`__, which supports the following formats:
+
+    - Standard formats: JPG, PNG, QOI
+    - Sliced formats (optimized for embedded memory): SJPG, SPNG, SQOI
+    - Hardware acceleration (supported chips only): JPEG, PJPG
+
+  - **Based on LVGL built-in libraries**: LVGL itself also provides decoding support for PNG, BMP, GIF, and other formats. For details, please refer to `LVGL libs <https://docs.lvgl.io/master/libs/index.html>`__.
+  - **EAF animation format**: An Espressif custom animation format, originally designed for screen refreshing with the `esp_emote_gfx <https://components.espressif.com/components/espressif2022/esp_emote_gfx>`__ component (segmented decoding), and also adapted to LVGL. Refer to the `LVGL EAF Player Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/gui/lvgl_eaf_player>`__.
 
 --------------------------
 
@@ -188,24 +197,27 @@ Why do I get drift (overall drift of the display) when ESP32-S3 is driving an RG
 
       - Make sure the ESP-IDF version is release/v5.0 or newer (released after 2022.12.12), as older versions do not support the ``XIP on PSRAM`` function. (release/v4.4 supports this function through patching, but it is not recommended)
       - Confirm whether ``CONFIG_SPIRAM_FETCH_INSTRUCTIONS`` and ``CONFIG_SPIRAM_RODATA`` can be enabled in the PSRAM configuration. If the read-only data segment is too large (such as a large number of images), it may cause insufficient PSRAM space. At this time, you can use the file system or make the images into a bin to load into the designated partition.
-      - Check if there is any memory (SRAM) left, and it takes about [10 * screen_width * 4] bytes.
+      - Check if there is any memory (SRAM) left, and it takes about [10 × screen_width × 4] bytes.
       - Set ``Data cache line size`` to 64 Bytes (you can set ``Data cache size`` to 32 KB to save memory).
-      - Set ``CONFIG_FREERTOS_HZ`` to 1000。
-      - If all the above conditions are met, you can refer to the `documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd.html#bounce-buffer-with-single-psram-frame-buffer>`__ to modify the RGB driver to ``Bounce buffer`` mode. The ``Bounce buffer`` mode allocates a block of SRAM memory as an intermediate cache, then quickly transfers the frame buffer data in blocks to SRAM via the CPU, and then transfers the data to the RGB peripheral via GDMA, thus avoiding the issue of PSRAM being disabled. If drift still occurs after enabling, you can try to increase the buffer, but this will consume more SRAM memory.
+      - Set ``CONFIG_FREERTOS_HZ`` to 1000.
+      - If all the above conditions are met, you can refer to the `documentation <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/lcd/rgb_lcd.html>`__ to modify the RGB driver to Bounce Buffer mode. If drift still occurs after enabling, you can try to increase the buffer, but this will consume more SRAM memory.
       - If you still have the drift problem when dealing with Wi-Fi, you can try to turn off ``CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP`` in PSRAM, which takes up much SRAM space.
       - The effects of this setting include higher CPU usage, possible interrupt watchdog reset, and higher memory overhead.
       - Since the Bounce Buffer transfers data from PSRAM to SRAM through the CPU in GDMA interrupts, the program should avoid performing operations that disable interrupts for an extended period (such as calling ``portENTER_CRITICAL()``), as it can still result in screen drifting.
 
     - For the drift caused by short-term operations of flash, such as before and after Wi-Fi connection, you can call ``esp_lcd_rgb_panel_set_pclk()`` before the operation to reduce the PCLK (such as 6 MHz) and delay about 20 ms (the time for RGB to complete one frame), and then increase PCLK to the original level after the operation. This operation may cause the screen to flash blank in a short-term.
     - If unavoidable, you can enable ``CONFIG_LCD_RGB_RESTART_IN_VSYNC`` or use the ``esp_lcd_rgb_panel_restart()`` to reset the RGB timing to prevent permanent drifting.
-    - For guidance on how to avoid RGB screen drift issues in Arduino, please refer to `the link <https://github.com/esp-arduino-libs/ESP32_Display_Panel/blob/master/docs/FAQ.md#how-to-fix-screen-drift-issue-when-driving-rgb-lcd-with-esp32-s3>`__.
+    - For guidance on how to avoid RGB screen drift issues in Arduino, please refer to `the link <https://github.com/esp-arduino-libs/ESP32_Display_Panel/blob/master/README.md#how-to-fix-screen-drift-issue-when-driving-rgb-lcd-with-esp32-s3>`__.
 
 -----------------------------
 
 Why is there vertical dislocation when I drive SPI/8080 LCD screen to display LVGL?
----------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 
-  If you use DMA interrupt to transfer data, ``lv_disp_flush_ready()`` of LVGL should be called after DMA transfer instead of immediately after calling ``draw_bitmap()``.
+  If you use DMA interrupt transfer, the flush-complete callback should be called after the DMA transfer finishes, not immediately after ``draw_bitmap()``.
+
+  - LVGL v8: Call ``lv_disp_flush_ready()`` in the DMA transfer complete interrupt.
+  - LVGL v9: Call ``lv_display_flush_ready()`` in the DMA transfer complete interrupt.
 
 ---------------------------
 
@@ -218,7 +230,7 @@ When I use ESP32-C3 to drive the LCD display through the SPI interface, is it po
 
 -----------------------
 
-Are 9-bit bus and 18-bit color depth supported if I use the ILI9488 LCD screen to test the `screen <https://github.com/espressif/esp-iot-solution/tree/master/examples/screen>`__ example?
+Are 9-bit bus and 18-bit color depth supported if I use the ILI9488 LCD screen to test the `screen <https://github.com/espressif/esp-iot-solution/tree/release/v2.0/examples/screen>`__ example?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The ILI9488 driver chip can support 9-bit bus and 18-bit color depth. However, Espressif's driver can only support 8-bit bus and 16-bit color depth for now.
@@ -319,31 +331,41 @@ Which image format is better for the LVGL interface? Is there any reference?
         - Small
         - Fast
 
-  When converting images to MAP format via imageconverter, if using non-RAW formats such as CF_TRUE_COLOR for conversion, subsequent LVGL loading will not require re-decoding, but it will occupy a larger code segment.
+  When converting images to MAP format via `LVGL imageconverter <https://lvgl.io/tools/imageconverter>`__, if using non-RAW formats such as ``CF_TRUE_COLOR`` for conversion, subsequent LVGL loading will not require re-decoding, but it will occupy a larger code segment.
 
 ---------------------------
 
 When using some third-party libraries such as FreeType and Lottie with LVGL, why does the screen go blank despite the program loading normally?
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  First, consider whether the task stack settings are incorrect. Generally, more than 30 KB of task stack needs to be allocated. Please refer to the following demos:
+  First, consider whether the task stack settings are incorrect:
 
-  - `freetype demo <https://github.com/espressif/esp-iot-solution/tree/master/examples/hmi/lvgl_freetype>`__
-  - `lottie porting <https://docs.lvgl.io/master/libs/rlottie.html>`__
+  - **FreeType**: When using ``esp_lvgl_adapter``, first confirm the stack configuration: for LVGL v8, set ``CONFIG_ESP_MAIN_TASK_STACK_SIZE`` to 32768 (font initialization runs on the calling thread); for LVGL v9, set ``CONFIG_LV_DRAW_THREAD_STACK_SIZE`` to 32768 (font rendering runs on the draw thread). In addition, the following two Kconfig options can reduce resource usage:
+
+    - ``ESP_LVGL_ADAPTER_FREETYPE_SMALL_RENDER_POOL``: Reduces the FreeType render pool from 16 KB to 4 KB, and can also reduce the LVGL v9 draw thread stack requirement.
+    - ``ESP_LVGL_ADAPTER_FREETYPE_MINIMAL_BUILD``: Trims FreeType build modules and keeps only what is needed for common TTF/OTF paths (removes Type1/CID/BDF/PCF and other legacy drivers and compressed-stream helpers), which significantly reduces flash usage. Do not enable this if your project needs any of the trimmed formats.
+
+    Reference example: `lvgl_freetype_font <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/gui/lvgl_freetype_font>`__.
+
+  - **Lottie**: Generally, more than 30 KB of task stack needs to be allocated. Refer to `lottie porting <https://docs.lvgl.io/9.1/libs/rlottie.html>`__.
 
 ---------------------------
 
 What are some good solutions if the internal RAM of ESP32-S3, driving an SPI screen, is insufficient to allocate space for the entire screen buffer?
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Use PSRAM as a framebuffer, and then use a small SRAM buffer to transfer data to the framebuffer in multiple batches (SPI DMA can't directly transfer PSRAM data). After completing the transfer, use the framebuffer to render directly. Compared to rendering directly with a small buffer and then sending data, this can prevent tearing and speed up rendering. For specific implementation, please refer to `esp_lvgl_port <https://components.espressif.com/components/espressif/esp_lvgl_port/versions/1.4.0?language=en>`__.
+  Use PSRAM as a framebuffer, and then use a small SRAM buffer to transfer data to the framebuffer in multiple batches (SPI DMA can't directly transfer PSRAM data). After completing the transfer, use the framebuffer to render directly. Compared to rendering directly with a small buffer and then sending data, this can prevent tearing and speed up rendering. For specific implementation, please refer to `esp_lvgl_adapter <https://components.espressif.com/components/espressif/esp_lvgl_adapter>`__.
 
 ---------------------------
 
 How to deal with diagonal tearing on the SPI screen after the hardware is rotated 90 or 270 degrees?
 ---------------------------------------------------------------------------------------------------------------------------
 
-  It is recommended to enable the LVGL sw_rotate flag in normal mode to use LVGL's sw_rotate function for software rotation. However, please note that this function conflicts with full_refresh and direct_mode, so do not use them together. For example, calling sw_rotate under full_refresh will directly return without any effect.
+  It is recommended to enable the LVGL ``sw_rotate`` flag in normal mode and use LVGL software rotation. However, please note that ``sw_rotate`` conflicts with ``full_refresh`` and ``direct_mode``, so do not use them together. For example, calling ``sw_rotate`` under ``full_refresh`` will directly return without any effect.
+
+  .. note::
+
+    ``sw_rotate``, ``full_refresh``, and ``direct_mode`` are **LVGL v8** APIs. Rotation in LVGL v9 works differently; please refer to `LVGL v9 Rotation Notes <https://docs.lvgl.io/9.1/API/display/index.html>`__.
 
 ---------------------------
 
@@ -357,7 +379,18 @@ Using the ESP32-S2 USB camera and I80 LCD simultaneously may result in the LCD d
 How to solve the unexpected crash when operating LVGL controls through non-LVGL tasks?
 ---------------------------------------------------------------------------------------------------------------------------
 
-  When operating LVGL controls, use ``display_lock()`` and ``display_unlock()`` to protect operation variables, thereby ensuring thread safety.
+  LVGL APIs are not thread-safe. When operating LVGL controls from a non-LVGL task, you must protect the calls with a lock.
+
+  - If you use the ``esp_lvgl_adapter`` component, use the lock APIs it provides:
+
+    .. code-block:: c
+
+      if (esp_lv_adapter_lock(-1) == ESP_OK) {
+          /* LVGL API calls */
+          esp_lv_adapter_unlock();
+      }
+
+  - If you use the legacy ``esp_lvgl_port`` component, the corresponding APIs are ``lvgl_port_lock(0)`` and ``lvgl_port_unlock()``.
 
 ---------------------------
 
@@ -387,7 +420,26 @@ How can I disable the left and right swipe functionality when operating the LVGL
 Does LVGL support multiple indev inputs?
 ---------------------------------------------------------------------------------------------------------------------------
 
-  Yes. All input devices are managed in a linked list, supporting multiple input devices of the same and different types. For application examples, please refer to the component `espressif/esp_lvgl_port <https://components.espressif.com/components/espressif/esp_lvgl_port>`__, the current component supports inputs such as touch, button, knob, and hid_host.
+  Yes. All input devices are managed in a linked list, supporting multiple input devices of the same and different types. For application examples, please refer to the component `espressif/esp_lvgl_adapter <https://components.espressif.com/components/espressif/esp_lvgl_adapter>`__. The component currently supports input device types such as touch, button, and knob.
+
+---------------------------
+
+Does LVGL support multi-touch?
+---------------------------------------------------------------------------------------------------------------------------
+
+  LVGL multi-touch support varies by version:
+
+  - **LVGL v8**: Native multi-touch is not supported; each indev can report only one touch point.
+  - **LVGL v9**: Multi-pointer input is supported. Multiple touch indevs can be registered for the same display, and each touch point can control different widgets independently.
+
+  When using `esp_lvgl_adapter <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/tools/esp_lvgl_adapter.html>`__, you can enable multi-touch mode when registering a touch device (LVGL v9 only):
+
+  .. code-block:: c
+
+    esp_lv_adapter_touch_config_t touch_cfg = ESP_LV_ADAPTER_TOUCH_DEFAULT_CONFIG(disp, touch_handle);
+    touch_cfg.multi_touch.mode = ESP_LV_ADAPTER_TOUCH_MODE_MULTI_CONTROL;
+    touch_cfg.multi_touch.pointers = 2;  /* Must be >= 2, and not exceed CONFIG_ESP_LCD_TOUCH_MAX_POINTS */
+    lv_indev_t *touch = esp_lv_adapter_register_touch(&touch_cfg);
 
 ---------------------------
 
@@ -401,7 +453,38 @@ Does a high CPU usage rate reported by LVGL have any impact?
 Can ESP32-S3 enter Light-sleep mode after enabling the RGB screen driver?
 ---------------------------------------------------------------------------------------------------------------------------
 
-  No, it can't. When initializing the RGB interface, if ``CONFIG_PM_ENABLE`` is enabled, ``ESP_PM_NO_LIGHT_SLEEP`` will be automatically locked, preventing the system from entering Light-sleep mode. At this time, please execute ``lcd_rgb_panel_destory`` to disable the RGB screen driver before entering Light-sleep mode.
+  **Using the esp_lcd RGB driver directly**: When initializing the RGB interface, if ``CONFIG_PM_ENABLE`` is enabled, the driver automatically holds the ``ESP_PM_NO_LIGHT_SLEEP`` lock, preventing the system from entering Light-sleep mode. To enter Light-sleep, you must first call ``esp_lcd_panel_del()`` to delete the RGB panel (releasing the lock), then reinitialize after waking from sleep.
+
+  **Using the** `esp_lvgl_adapter component <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/tools/esp_lvgl_adapter.html>`__: This component provides two Light-sleep usage modes. The LVGL UI state (widget tree) is retained during sleep, so the UI does not need to be rebuilt.
+
+  **Manual sleep**: The application controls the full sleep/wake flow:
+
+    #. Before entering sleep, call ``esp_lv_adapter_sleep_prepare()`` to pause the adapter and wait for the current frame refresh to complete.
+    #. Call ``esp_lcd_panel_del()`` to release display hardware resources.
+    #. Call ``esp_light_sleep_start()`` to enter Light-sleep.
+    #. After waking, reinitialize the LCD hardware, then call ``esp_lv_adapter_sleep_recover()`` to rebind the panel and resume the adapter.
+
+  **Automatic sleep (auto_sleep)**: Configure an idle timeout at initialization. The adapter automatically triggers sleep after LVGL has been idle longer than the specified time:
+
+  .. code-block:: c
+
+    esp_lv_adapter_config_t cfg = ESP_LV_ADAPTER_DEFAULT_CONFIG();
+    cfg.auto_sleep.enable = true;
+    cfg.auto_sleep.idle_timeout_ms = 5000;  /* Auto-sleep after 5 s of idle */
+
+    /* Pause mode: the adapter releases the lock and pauses LVGL; the system
+       enters tickless light sleep; panel sleep/backlight is handled by user callbacks */
+    cfg.auto_sleep.mode = ESP_LV_ADAPTER_AUTO_SLEEP_MODE_PAUSE;
+    cfg.auto_sleep.callbacks.on_enter_sleep = panel_sleep_cb;
+    cfg.auto_sleep.callbacks.on_exit_sleep  = panel_wake_cb;
+
+    /* User mode: the on_enter_sleep callback owns the full
+       sleep_prepare → LCD deinit → light_sleep_start → LCD init → sleep_recover flow */
+    /* cfg.auto_sleep.mode = ESP_LV_ADAPTER_AUTO_SLEEP_MODE_USER; */
+
+    ESP_ERROR_CHECK(esp_lv_adapter_init(&cfg));
+
+  In Pause mode, registered touch/button/knob inputs automatically notify the adapter to wake; custom wake sources can call ``esp_lv_adapter_request_wake()`` or ``esp_lv_adapter_request_wake_from_isr()``.
 
 ---------------------------
 
@@ -409,6 +492,15 @@ Is it supported to drive segment LCD screens?
 -------------------------------------------------------------------------------
 
   ESP chips can't directly drive the segment LCD screen through the GPIO pin, because this function requires cycling between high and low voltage levels, with an AC voltage from 2.7 V to 5.0 V and typical values of 3.0 V, 3.3 V, 4.5 V, and 5.0 V. However, the chips do not support voltage range adjustment.
+
+---------------------------
+
+When driving an RGB LCD with ESP32-P4, the screen shows abnormal colors. How to troubleshoot?
+-------------------------------------------------------------------------------------------------------------
+
+  ESP32-P4 has multiple VDDPST power domains. Each VDDPST controls the maximum output level of GPIOs in the corresponding region (for the GPIO-to-VDDPST mapping, please refer to the `ESP32-P4 Datasheet <https://www.espressif.com/sites/default/files/documentation/esp32-p4_datasheet_en.pdf>`__). If the corresponding VDDPST supply is insufficient or not configured correctly, some GPIOs may have a maximum output level of 1.8 V, causing insufficient RGB interface signal levels and abnormal screen colors. Please check that the VDDPST for the GPIOs used by the RGB interface is configured to the correct voltage (typically 3.3 V).
+
+  Note also: Unlike ESP32-S3 (PCLK up to about 30 MHz), the RGB interface clock frequency on ESP32-S31 and ESP32-P4 has no such 30 MHz upper limit, so they can support higher interface frame rates and larger-resolution RGB screens.
 
 ---------------------------
 
@@ -422,7 +514,7 @@ Does ESP32-P4 support HDMI signal output?
 In LVGL applications, how to rotate the RGB or MIPI-DSI interface screen by 90 degrees/270 degrees? How to avoid tearing? How to further improve the frame rate?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - It is recommended to use the `esp_lvgl_adapter component <https://github.com/espressif/esp-iot-solution/blob/7c133a8b81c161635ee1f093acd180a2322adb72/components/display/tools/esp_lvgl_adapter/README.md>`__. This component provides features such as high-efficiency rotation, tear prevention, frame rate enhancement, and supports LVGL v8 and v9 versions.
+  - It is recommended to use the `esp_lvgl_adapter component <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/tools/esp_lvgl_adapter.html>`__. This component provides features such as high-efficiency rotation, tear prevention, frame rate enhancement, and supports LVGL v8 and v9 versions.
   - Refer to the example code `esp_lvgl_adapter example <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/gui/lvgl_common_demo>`__.
 
 --------------
@@ -439,6 +531,38 @@ GIF animations in EAF format play slowly on ESP32-S3/P4. How to optimize?
 
   - You can change the EAF encoding format to JPEG (set in the conversion tool), which will increase file size but decode faster;
   - For larger resolution screens (such as 466×466), LVGL rendering burden is heavy;
-  - Compared with EAF + LVGL, using the ``esp_emote_gfx`` component directly for screen refreshing (segmented decoding) is more efficient. EAF was originally designed for ``esp_emote_gfx``, and is only additionally adapted to LVGL;
+  - Compared with EAF + LVGL, using the `esp_emote_gfx <https://components.espressif.com/components/espressif2022/esp_emote_gfx>`__ component directly for screen refreshing (segmented decoding) is more efficient. EAF was originally designed for ``esp_emote_gfx``, and is only additionally adapted to LVGL;
   - AVI with JPEG-encoded frames is smoother on an LCD than GIF;
   - P4 revision v3.1 improves CPU frequency and PSRAM bandwidth, enabling LVGL and MP4 to stably reach 15 frames under 1080p RGB888.
+
+---------------------------
+
+ESP32-P4 drives a MIPI-DSI LCD with no image and no other error logs. How to troubleshoot?
+----------------------------------------------------------------------------------------------------------------
+
+  First, check whether the SPIRAM clock rate is configured to 200 MHz or above (``CONFIG_SPIRAM_SPEED_200M=y``). Driving a MIPI-DSI interface screen requires higher PSRAM bandwidth; when bandwidth is insufficient, the screen may fail to display without reporting an error.
+
+  Next, check whether the DSI data pins (``DSI_DATAN0``/``DSI_DATAP0``) and clock pins (``DSI_CLKN``/``DSI_CLKP``) are correctly connected to the panel.
+
+---------------------------
+
+ESP32-P4 drives a MIPI-DSI LCD with twisted or misaligned images. How to handle this?
+----------------------------------------------------------------------------------------------------------------
+
+  This issue is generally caused by a mismatch between ``lane_bit_rate_mbps`` and the actual ``pixel_clock``, or between ``lane_bit_rate_mbps`` and the rate required by the panel. Recalculate ``lane_bit_rate_mbps`` based on resolution, refresh rate, color depth, and lane count (with about a 20% margin). For the calculation method, please refer to `MIPI DSI LCD Detailed Guide <https://docs.espressif.com/projects/esp-iot-solution/en/latest/display/lcd/mipi_dsi_lcd.html>`__. Note that on ESP32-P4, ``lane_bit_rate_mbps`` must not exceed 1500, and a minimum of 480 is recommended.
+
+---------------------------
+
+ESP32-P4 drives a MIPI-DSI LCD with a flashing blue screen and the message "can't fetch data from external memory fast enough, underrun happens". How to handle this?
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  This issue is caused by insufficient PSRAM bandwidth. You can try the following:
+
+  - Lower ``lane_bit_rate_mbps`` and ``dpi_clock_freq_mhz`` (pixel clock frequency).
+  - If using the RGB888 color format, consider switching to RGB565 to reduce bandwidth demand.
+  - Enable the following configuration items to improve PSRAM bandwidth:
+
+    - ``CONFIG_SPIRAM_XIP_FROM_PSRAM=y``
+    - ``CONFIG_CACHE_L2_CACHE_256KB=y``
+    - ``CONFIG_CACHE_L2_CACHE_LINE_128B=y``
+    - ``CONFIG_COMPILER_OPTIMIZATION_PERF=y``
