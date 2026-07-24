@@ -151,7 +151,7 @@ Does ESP32 Classic Bluetooth support AVRCP 1.5 or AVRCP 1.6?
 Does ESP32 Classic Bluetooth support AAC?
 -----------------------------------------
 
-  Currently, this function is not supported.
+  Yes. Starting from the master branch (commit ID: `197d7846 <https://github.com/espressif/esp-idf/commit/197d784600c03fc25e4baaba92ec1a0086aea3d3>`_), AAC support has been added to Classic Bluetooth A2DP. This feature will be officially available in ESP-IDF v6.1.
 
 ------------------
 

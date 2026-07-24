@@ -151,7 +151,7 @@ ESP32 经典蓝牙支持 AVRCP 1.5 或 AVRCP 1.6 吗？
 ESP32 经典蓝牙支持 AAC 吗？
 --------------------------------------
 
-  暂不支持该功能。
+  支持。从 master（commit ID: `197d7846 <https://github.com/espressif/esp-idf/commit/197d784600c03fc25e4baaba92ec1a0086aea3d3>`_ ）开始，经典蓝牙 A2DP 已新增对 AAC 的支持，并将在 ESP-IDF v6.1 中正式发布。
 
 ------------------
 
