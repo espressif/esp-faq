@@ -119,9 +119,12 @@ AI 语音模型如何修改麦克风通道数量？
   - `人脸检测 <https://github.com/espressif/esp-dl/tree/master/examples/human_face_detect>`_。
   - `人脸识别 <https://github.com/espressif/esp-dl/tree/master/examples/human_face_recognition>`_。
   - `Yolo11N 目标检测 <https://github.com/espressif/esp-dl/tree/master/models/coco_detect>`_。
+  - `Yolo11N 实例分割 <https://github.com/espressif/esp-dl/tree/master/models/coco_seg>`_。
   - `猫脸识别 <https://github.com/espressif/esp-dl/tree/master/models/cat_detect>`_。
   - `颜色识别 <https://github.com/espressif/esp-dl/tree/master/models/color_detect>`_。
-  - `轻量级目标检测框架 `ESP-Detection <https://github.com/espressif/esp-detection>`_。
+  - `手势识别 <https://github.com/espressif/esp-dl/tree/master/models/hand_gesture_recognition>`_。
+  - `轻量级目标检测框架 ESP-Detection <https://github.com/espressif/esp-detection>`_。
+  - `人脸识别与情绪识别组合模型 <https://github.com/espressif/esp-iot-solution/tree/master/examples/ai/esp_dl/emotion_recognition>`_。
 
 -------------
 
@@ -137,3 +140,17 @@ ESP32-S3 如何自定义英文命令词进行识别？
 
   - 尝试量化小分辨率的模型，但这将损失一些精度，具体请参考 `quantize_yolo11n <https://github.com/espressif/esp-dl/tree/master/examples/tutorial/how_to_quantize_model/quantize_yolo11n>`_。
   - 使用轻量级的检测模型框架 `esp-detection <https://github.com/espressif/esp-detection>`_。
+
+-------------
+
+如何快速进行端侧 AI 原型验证？
+----------------------------------
+
+  `esp-vision <https://vision.espressif.com/>`_ 支持多种官方开发板，并内置多种 AI 端侧模型。用户可基于 MicroPython 快速进行端侧 AI 原型验证。
+
+-------------
+
+如何让 AI 构建 PIE 加速代码？
+----------------------------------
+
+  可参考 `esp32s3-pie-simd <https://github.com/espressif/esp-dl/tree/master/tools/agents/skills/esp32s3-pie-simd>`_ 与 `esp32p4-pie-simd <https://github.com/espressif/esp-dl/tree/master/tools/agents/skills/esp32p4-pie-simd>`_ 这两个 Skill，辅助 AI 构建 PIE 加速代码。

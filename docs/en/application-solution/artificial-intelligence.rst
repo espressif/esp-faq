@@ -119,9 +119,12 @@ Do you have relevant study materials for `ESP-DL <https://github.com/espressif/e
   - `Face Detection <https://github.com/espressif/esp-dl/tree/master/examples/human_face_detect>`_.
   - `Face Recognition <https://github.com/espressif/esp-dl/tree/master/examples/human_face_recognition>`_.
   - `Yolo11N Object Detection <https://github.com/espressif/esp-dl/tree/master/models/coco_detect>`_.
+  - `Yolo11N Instance Segmentation <https://github.com/espressif/esp-dl/tree/master/models/coco_seg>`_.
   - `Cat Face Recognition <https://github.com/espressif/esp-dl/tree/master/models/cat_detect>`_.
   - `Color Recognition <https://github.com/espressif/esp-dl/tree/master/models/color_detect>`_.
+  - `Hand Gesture Recognition <https://github.com/espressif/esp-dl/tree/master/models/hand_gesture_recognition>`_.
   - `Lightweight Object Detection Framework ESP-Detection <https://github.com/espressif/esp-detection>`_.
+  - `Combined Face and Emotion Recognition Model <https://github.com/espressif/esp-iot-solution/tree/master/examples/ai/esp_dl/emotion_recognition>`_.
 
 -------------
 
@@ -137,3 +140,17 @@ How to improve the detection efficiency of Yolo11?
 
   - You can try quantizing the model with small resolution, but this may cause some loss in accuracy. For details, please refer to `quantize_yolo11n <https://github.com/espressif/esp-dl/tree/master/examples/tutorial/how_to_quantize_model/quantize_yolo11n>`_.
   - Use the lightweight detection model framework `esp-detection <https://github.com/espressif/esp-detection>`_.
+
+-------------
+
+How to quickly validate an edge AI prototype?
+-------------------------------------------------------------
+
+  `esp-vision <https://vision.espressif.com/>`_ supports multiple official development boards and includes various built-in edge AI models. Users can quickly validate edge AI prototypes with MicroPython.
+
+-------------
+
+How to use AI to generate PIE acceleration code?
+-------------------------------------------------
+
+  Refer to the `esp32s3-pie-simd <https://github.com/espressif/esp-dl/tree/master/tools/agents/skills/esp32s3-pie-simd>`_ and `esp32p4-pie-simd <https://github.com/espressif/esp-dl/tree/master/tools/agents/skills/esp32p4-pie-simd>`_ skills to help AI generate PIE acceleration code.
