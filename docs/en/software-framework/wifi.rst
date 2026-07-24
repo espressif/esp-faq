@@ -48,8 +48,10 @@ How much time does an ESP32 scan take?
 
   By default, channels 1 to 11 use active scans, and channels 12 to 13 use passive scans.
 
-  - In the absence of connection in Station mode, the total time for a full-channel scan is: 11*120 + 2*360 = 2040 ms.
-  - With active connections in Station mode or Station-AP mode, the total time for a full-channel scan is: 11*120 + 2*360 + 13*30 = 2430 ms.
+  - In the absence of connection in Station mode, the total time for a full-channel scan is: 11 × 120 + 2 × 360 = 2040 ms.
+  - With active connections in Station mode or Station-AP mode, the total time for a full-channel scan is: 11 × 120 + 2 × 360 + 13 × 30 = 2430 ms.
+
+  For 5 GHz channels, DFS channels must use passive scanning in accordance with regulatory requirements. DFS channel allocation differs across countries and regions. Refer to `esp_wifi_regulatory.c <https://github.com/espressif/esp-idf/blob/055ba9d3f9c6fd9a0efacd4993a2a942972dd65d/components/esp_wifi/regulatory/esp_wifi_regulatory.c#L280>`__: channels with the DFS flag set to 1 are DFS channels.
 
 --------------
 
@@ -63,7 +65,7 @@ How much time does an ESP32 scan take?
 What is the definition for Wi-Fi channel? Can I select any channel of my choice?
 ------------------------------------------------------------------------------------------
 
-  - A Wi-Fi channel is a frequency range used for wireless communication. Different countries and regions have regulations on the available Wi-Fi channels. For example, in North America, the Wi-Fi channel ranges from 1 to 11, while in Europe, the Wi-Fi channel ranges from 1 to 13. For more details, please refer to `ESP8266 Wi-Fi Channel Selection Guidelines <https://www.espressif.com/sites/default/files/documentation/esp8266_wi-fi_channel_selection_guidelines_en.pdf>`_.
+  A Wi-Fi channel is a frequency range used for wireless communication. Different countries and regions have regulations on the available Wi-Fi channels. For example, in North America, the Wi-Fi channel ranges from 1 to 11, while in Europe, the Wi-Fi channel ranges from 1 to 13. For more details, please refer to `ESP8266 Wi-Fi Channel Selection Guidelines <https://www.espressif.com/sites/default/files/documentation/esp8266_wi-fi_channel_selection_guidelines_en.pdf>`_.
 
 --------------
 
@@ -684,7 +686,7 @@ Does ESP8266 support EDCF (AC) scheme?
 
 ---------------------
 
-I'm using the master version of ESP8266-RTOS-SDK to open the WiFi Qos application to get EDCF support. How does ESP8266 decide which data packet should be allocated to the EDCF AC category?
+I'm using the master version of ESP8266-RTOS-SDK to open the Wi-Fi QoS application to get EDCF support. How does ESP8266 decide which data packet should be allocated to the EDCF AC category?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   It can be determined by setting ``IPH_TOS_SET(iphdr, tos)``.
@@ -1004,7 +1006,7 @@ Does ESP modules support EAP-FAST?
 
 ---------------
 
-Does ESP modules support the WiFi NAN (Neighbor Awareness Networking) protocol?
+Do ESP modules support the Wi-Fi NAN (Neighbor Awareness Networking) protocol?
 ---------------------------------------------------------------------------------------------
   :CHIP\: ESP8266 | ESP32 | ESP32-C3 | ESP32-S2 | ESP32-S3:
 
@@ -1343,7 +1345,7 @@ Does the ESP module support Wi-Fi HaLow functionality?
 How to prevent any radio frequency waves from being sent in ESP32 Wi-Fi Scan mode?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Use the `esp_wifi_scan_start() <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv419esp_wifi_scan_startPK18wifi_scan_config_tb>`_ API to set ESP32 to passive scan mode `WIFI_SCAN_TYPE_PASSIVE <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv4N16wifi_scan_type_t22WIFI_SCAN_TYPE_PASSIVEE>`_.
+  Use the `esp_wifi_scan_start() <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv419esp_wifi_scan_startPK18wifi_scan_config_tb>`_ API to set ESP32 to passive scan mode `WIFI_SCAN_TYPE_PASSIVE <https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/api-reference/network/esp_wifi.html?highlight=wifi_scan#_CPPv4N16wifi_scan_type_t22WIFI_SCAN_TYPE_PASSIVEE>`_.
 
 -------------
 
@@ -1381,7 +1383,7 @@ How to determine whether the connected Wi-Fi applies Wi-Fi 4 or Wi-Fi 6？
 Does ESP32-S3 support AP and STA working simultaneously?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes. Please refer to the example `softap_sta <https://github.com/espressif/esp-idf/tree/v5.2/examples/wifi/softap_sta>`_.
+  Yes. Please refer to the example `softap_sta <https://github.com/espressif/esp-idf/tree/v5.2/examples/wifi/softap_sta>`_.
 
 --------------
 
@@ -1406,25 +1408,25 @@ Do ESP chips support one STA conducting FTM with multiple APs at the same time?
 
 -------------
 
-In WiFi Station mode, which WiFi mode will ESP32-C6 use to establish a connection with the router when both WiFi 4 and WiFi 6 modes are enabled on the router?
+In Wi-Fi Station mode, which Wi-Fi mode will ESP32-C6 use to establish a connection with the router when both Wi-Fi 4 and Wi-Fi 6 modes are enabled on the router?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  ESP32-C6 will prioritize establishing a connection with the router using WiFi 6.
+  When the ESP32-C6 protocol mode is not restricted, ESP32-C6 prioritizes establishing a connection with the router using Wi-Fi 6. You can also use `esp_wifi_set_protocol() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c6/api-reference/network/esp_wifi.html#_CPPv421esp_wifi_set_protocol16wifi_interface_t7uint8_t>`__ to restrict whether Wi-Fi 6 is used.
 
 -----------------
 
-In WiFi AP mode, how many WiFi Station devices can ESP32-C2 series products support at most?
+In Wi-Fi AP mode, how many Wi-Fi Station devices can ESP32-C2 series products support at most?
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Due to hardware limitations, ESP32-C2 can support up to four WiFi Station connections in WiFi AP mode.
-  - The maximum number of connections supported in WiFi AP mode varies between different chips. For details, please refer to `esp-idf/components/esp_wifi/include/esp_wifi_types.h <https://github.com/espressif/esp-idf/blob/a322e6bdad4b6675d4597fb2722eea2851ba88cb/components/esp_wifi/include/esp_wifi_types.h#L379>`_.
+  - Due to hardware limitations, ESP32-C2 can support up to four Wi-Fi Station connections in Wi-Fi AP mode.
+  - The maximum number of connections supported in Wi-Fi AP mode varies between different chips. For details, please refer to `esp-idf/components/esp_wifi/include/esp_wifi_types.h <https://github.com/espressif/esp-idf/blob/a322e6bdad4b6675d4597fb2722eea2851ba88cb/components/esp_wifi/include/esp_wifi_types.h#L379>`_.
 
 ---------------
 
-Does ESP32 support WPA3 WiFi AP mode?
+Does ESP32 support WPA3 Wi-Fi AP mode?
 -----------------------------------------------------------------------------------------------------------------------
 
-  Yes. ESP-IDF v5.1 and above support WPA3 WiFi AP mode. Please refer to the description in `ESP-IDF v5.1 Release <https://github.com/espressif/esp-idf/releases/tag/v5.1>`_.
+  Yes. ESP-IDF v5.1 and above support WPA3 Wi-Fi AP mode. Please refer to the description in `ESP-IDF v5.1 Release <https://github.com/espressif/esp-idf/releases/tag/v5.1>`_.
 
 ---------------
 
@@ -1449,10 +1451,10 @@ Do ESP chips support uAPSD in SoftAP mode?
 
 -----------------
 
-When enabling WiFi AP mode on products based on Espressif series, is it possible to set up automatic channels?
+When enabling Wi-Fi AP mode on products based on Espressif series, is it possible to set up automatic channels?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  Espressif series products use the WiFi SoftAP mode, which does not support automatic channel settings.
+  Espressif series products use the Wi-Fi SoftAP mode, which does not support automatic channel settings.
 
 -------------
 
