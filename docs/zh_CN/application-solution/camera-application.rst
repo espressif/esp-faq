@@ -52,24 +52,23 @@ ESP32 系列芯片支持哪种类型的摄像头？
   - 理论上，PCLK 速度越高，数据传输越快，但实际使用中，PCLK 越高也意味着对芯片的处理速度要求越高。
   - 当前 ESP32 和 ESP32-S2 芯片并口通信是通过 I2S 接口实现的，过高的 PCLK 会导致并口数据无法同步，出现图像抖动甚至花屏的现象。
   - ESP32-S3 使用独立的 LCD—CAM 接口，可以支持更高的 PCLK 频率。
-
-   - ESP32 的 PCLK 上限为 8 MHz。
-   - ESP32-S2 的 PCLK 上限为 32 MHz。
-   - ESP32-S3 的 PCLK 上限为 40 MHz。
+  - ESP32 的 PCLK 上限为 8 MHz。
+  - ESP32-S2 的 PCLK 上限为 32 MHz。
+  - ESP32-S3 的 PCLK 上限为 40 MHz。
 
 --------------
 
 ESP32 系列芯片支持 MIPI 接口吗？
 --------------------------------
 
-  - ESP32-P4 支持 MIPI 接口。
+  ESP32-P4 支持 MIPI 接口。
 
 --------------
 
 ESP32 系列芯片支持 USB2.0 接口吗？
 ----------------------------------
 
-  - ESP32-S2 和 ESP32-S3 支持 USB2.0 全速接口（12 Mbps）。此外，ESP32-P4 还支持 USB2.0 高速接口（480 Mbps）。
+  ESP32-S2 和 ESP32-S3 支持 USB2.0 全速接口 (12 Mbps)。此外，ESP32-P4 还支持 USB2.0 高速接口 (480 Mbps)。
 
 --------------
 
@@ -101,19 +100,19 @@ ESP32 系列芯片支持 USB2.0 接口吗？
 
   - 无法识别摄像头型号：
 
-   - 检查管脚是否对应正确，重点关注 XCLK、SIOC、SIOD。
-   - XCLK 输入的时钟频率太低或摄像头供电不正常，导致摄像头无法正常运行。
-   - SIOC 和 SIOD 上挂载太多设备，导致轮询读到率先返回的地址 ID 不是摄像头而是其他设备。此情况建议固定摄像头 ID，以去除轮询步骤。
+    - 检查管脚是否对应正确，重点关注 XCLK、SIOC、SIOD。
+    - XCLK 输入的时钟频率太低或摄像头供电不正常，导致摄像头无法正常运行。
+    - SIOC 和 SIOD 上挂载太多设备，导致轮询读到率先返回的地址 ID 不是摄像头而是其他设备。此情况建议固定摄像头 ID，以去除轮询步骤。
 
   - 摄像头识别到了型号，没有图像显示：
 
-   - 检查摄像头数据管脚是否有信号，MCLK 是否正常输入。
-   - 摄像头寄存器参数配置正确。
+    - 检查摄像头数据管脚是否有信号，MCLK 是否正常输入。
+    - 摄像头寄存器参数配置正确。
 
   - 摄像头图像显示不正常：
 
-   - 检查代码，查看输出格式是 RGB、YUV 还是 JPEG，是否符合接收端需要的格式。
-   - 尝试降低 PCLK 频率。
+    - 检查代码，查看输出格式是 RGB、YUV 还是 JPEG，是否符合接收端需要的格式。
+    - 尝试降低 PCLK 频率。
 
 --------------
 
@@ -122,8 +121,8 @@ ESP32 支持传输视频流吗？
 
   - 视频流的传输操作分为二进制传输和视频流编解码。
 
-   - 二进制传输：ESP32 支持二进制传输，此处是否支持取决于传输的网络带宽。目前 ESP32 TCP 的带宽为 20 MB/s，请参考 `Wi-Fi 测试数据 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#id52>`_。
-   - 视频流编解码：ESP32 暂不支持视频流编解码。
+    - 二进制传输：ESP32 支持二进制传输，此处是否支持取决于传输的网络带宽。目前 ESP32 TCP 的带宽为 20 MB/s，请参考 `Wi-Fi 测试数据 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/wifi.html#id52>`_。
+    - 视频流编解码：ESP32 暂不支持视频流编解码。
 
 --------------
 
@@ -140,6 +139,8 @@ Camera 方案相关的示例存放在哪里？
   - 请参考 `ESP-WHO <https://github.com/espressif/esp-who>`_。
   - 请参考 `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera>`_。
   - 请参考 `esp-dev-kits <https://github.com/espressif/esp-dev-kits>`_。
+  - 请参考 `esp-webrtc-solution <https://github.com/espressif/esp-webrtc-solution>`__。
+  - 请参考 `esp-gmf <https://github.com/espressif/esp-gmf>`__。
   - 要查看 ESP32-P4 系列的常用示例，请前往 `esp-video/examples <https://github.com/espressif/esp-video-components/tree/master/esp_video/examples>`_。
   - 有关 ESP32-P4 系列与 LCD 屏幕结合使用的示例，请前往 `esp-iot-solution/examples/camera/video_lcd_display <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/video_lcd_display>`_。
 
@@ -152,7 +153,7 @@ ESP32 支持 12 位 DVP 接口的摄像头吗？
 
 -----------------
 
-ESP32 是否支持使用不带 JEPG 编码的摄像头来获取 JPEG 图像？
+ESP32 是否支持使用不带 JPEG 编码的摄像头来获取 JPEG 图像？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   如果摄像头本身不支持 JPEG 编码，可以参考我们提供的 `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/pic_server>`_ 例程，在 ESP32 设备上实现软件 JPEG 编码。该方法通过软件对 YUV422 或 RGB565 数据进行编码，得到 JPEG 图像。
@@ -162,7 +163,7 @@ ESP32 是否支持使用不带 JEPG 编码的摄像头来获取 JPEG 图像？
 ESP-EYE 上的 200 万像素的 OV2640 摄像头是否可以改成只输出 30 万像素的图片？
 ------------------------------------------------------------------------------------------------------------------
 
-  可以, 在初始化时通过配置 `frame_size <https://github.com/espressif/esp32-camera/blob/master/driver/include/sensor.h#L110>`_ 的值来指定摄像头要输出的分辨率大小。
+  可以，在初始化时通过配置 `frame_size <https://github.com/espressif/esp32-camera/blob/master/driver/include/sensor.h#L110>`__ 的值来指定摄像头要输出的分辨率大小。
 
 --------------
 
@@ -176,7 +177,7 @@ ESP32 支持全局快门的摄像头吗？
 ESP32 使用 DVP 摄像头通过 RTSP 传输 1080P 的视频可以达到多少帧？
 ------------------------------------------------------------------------------------------------------------------
 
-  暂未测试 1080P 的情况。目前 720P 可以达到 20 FPS.
+  暂未测试 1080P 的情况。目前 720P 可以达到 20 FPS。
 
 --------------
 
@@ -235,14 +236,14 @@ ESP32-S3 是否支持 GB28181 协议？
 ESP32/ESP32-S2/ESP32-S3 是否有通过摄像头识别二维码的参考？
 ----------------------------------------------------------------------------
 
-  有，可以参考 ESP-WHO 里的 `code recognition <https://github.com/espressif/esp-who/tree/master/examples/code_recognition>`_。
+  有，可以参考 ESP-WHO 里的 `qrcode_recognition <https://github.com/espressif/esp-who/tree/master/examples/qrcode_recognition>`_。
 
 --------------
 
 想为 OV5640 传感器添加 SD 卡接口和摄像头接口，但发现 ESP32 中不同外设的一些管脚存在冲突，请提供摄像头接口和 SD 卡接口的管脚。
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  `ESP-WROVER-KIT 开发板 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-wrover-kit-v3.html>`__ 中有 Camera 和 SD 卡电路，可以参考 `ESP-WROVER-KIT V3 入门指南的管脚配置 <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-wrover-kit-v3.html>`__。
+  `ESP-WROVER-KIT 开发板 <https://docs.espressif.com/projects/esp-dev-kits/zh_CN/latest/esp32/esp-wrover-kit/user_guide.html>`__ 中有 Camera 和 SD 卡电路，可以参考 `ESP-WROVER-KIT V3 入门指南的管脚配置 <https://docs.espressif.com/projects/esp-dev-kits/zh_CN/latest/esp32/esp-wrover-kit/user_guide.html#id12>`__。
 
 --------------
 
@@ -256,10 +257,10 @@ ESP32/ESP32-S2/ESP32-S3 是否有通过摄像头识别二维码的参考？
 如何增加一个自定义的分辨率？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  假设您需要的分辨率为 640x240，可以通过下述两种方法使用自定义分辨率：
-  - 配置 sensor 工作在典型的分辨率 640x480 上，然后只使用其中的上半部分数据 (640x240)。
-  - 在 `esp32-camera/driver/include/sensor.h <https://github.com/espressif/esp32-camera/blob/master/driver/include/sensor.h#L92>`__ 中增加标识 FRAMESIZE_640*240，然后在 `esp32-camera/driver/sensor.c <https://github.com/espressif/esp32-camera/blob/master/driver/sensor.c#L31>`__ 中增加该分辨率的长度与宽度的定义 {640, 240，ASPECT_RATIO_16X9}。这种方式需要 sensor 的驱动支持自定义分辨率才能正常工作。
+  假设您需要的分辨率为 640 × 240，可以通过下述两种方法使用自定义分辨率：
 
+  - 配置 sensor 工作在典型的分辨率 640 × 480 上，然后只使用其中的上半部分数据 (640 × 240)。
+  - 在 `esp32-camera/driver/include/sensor.h <https://github.com/espressif/esp32-camera/blob/master/driver/include/sensor.h#L92>`__ 中增加标识 ``FRAMESIZE_640x240``，然后在 `esp32-camera/driver/sensor.c <https://github.com/espressif/esp32-camera/blob/master/driver/sensor.c#L31>`__ 中增加该分辨率的长度与宽度的定义 ``{640, 240, ASPECT_RATIO_16X9}``。这种方式需要 sensor 的驱动支持自定义分辨率才能正常工作。
 
 --------------
 
@@ -267,8 +268,9 @@ ESP32/ESP32-S2/ESP32-S3 是否有通过摄像头识别二维码的参考？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   假设您需要更改 OV5640 传感器的寄存器配置，可以通过下述两种方法实现：
-  - 直接在 esp32-camera/sensors/ov5640.c 的 reset() 函数中使用 write_reg() 配置相关的寄存器。
-  - 在应用层通过 set_reg() 函数配置相关的寄存器：
+
+  - 直接在 ``esp32-camera/sensors/ov5640.c`` 的 ``reset()`` 函数中使用 ``write_reg()`` 配置相关的寄存器。
+  - 在应用层通过 ``set_reg()`` 函数配置相关的寄存器：
 
   .. code-block:: c
 
@@ -283,6 +285,7 @@ esp32-camera 中触发 "cam_hal: EV-VSYNC-OVF" 是什么原因？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   这是传感器触发的帧同步信号过快导致的问题。可以按照下面的步骤进行排查：
+
   - 运行 `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/pic_server>`_ 示例。如果该示例能够正常运行，则说明该问题不是硬件问题。
   - 检查初始化传感器时指定的 XCLK 和分辨率的大小。分辨率变小或是 XCLK 变大，均可能导致传感器触发的帧同步信号过快。请注意，传感器使用的 XCLK 应该和当前指定的分辨率大小匹配。
 
@@ -302,8 +305,8 @@ esp32-camera 中触发 "cam_hal: EV-VSYNC-OVF" 是什么原因？
     W (8022) cam_haL:FB-OVF
     W (8042) cam_haL:FB-OVF
 
-  如上警告日志代表帧 buffer 溢出，可能是由于帧率太快导致，可以尝试降低 XCLK（注意 ESP32S3 的 XCLK 默认从 80 MHz 的时钟上分频得到，因此 XCLK 的大小必须可以被 80 MHz 整除）。
-  特别地，如果 sensor 在 JPEG 模式工作，可以尝试在 menuconfig 中增大 `Custom JPEG mode frame size (bytes)` 选项的值来增大 jpeg recv buffer 的大小。
+  如上警告日志代表帧 buffer 溢出，可能是由于帧率太快导致，可以尝试降低 XCLK（注意 ESP32-S3 的 XCLK 默认从 80 MHz 的时钟上分频得到，因此 XCLK 的大小必须可以被 80 MHz 整除）。
+  特别地，如果 sensor 在 JPEG 模式工作，可以尝试在 menuconfig 中增大 ``Custom JPEG mode frame size (bytes)`` 选项的值来增大 JPEG recv buffer 的大小。
 
 -------------------
 
@@ -312,10 +315,10 @@ ESP32-Camera 的两种 capture 模式的区别是什么？
 
   Camera sensor 在初始化后将图像数据推送到 ESP32 的接收器上。
 
-  - 当配置的接收模式为 CAMERA_GRAB_WHEN_EMPTY 时，只要有空闲的 frame_buffer，后台的驱动程序就将图像数据写入到 frame_buffer 中。当所有的 frame_buffer 用尽时，Camera sensor 推送的新的图像数据将因为没有可用的 frame_buffer 而被迫地丢弃。
-  - 当配置的接收模式为 CAMERA_GRAB_LATEST 时，应用层能获取的 frame_buffer 的个数是 fb_count - 1，这是因为后台的驱动程序会占用一个 frame_buffer，并且尝试刷新最新的数据到这个 frame_buffer 中。
+  - 当配置的接收模式为 ``CAMERA_GRAB_WHEN_EMPTY`` 时，只要有空闲的 frame_buffer，后台的驱动程序就将图像数据写入到 frame_buffer 中。当所有的 frame_buffer 用尽时，Camera sensor 推送的新的图像数据将因为没有可用的 frame_buffer 而被迫地丢弃。
+  - 当配置的接收模式为 ``CAMERA_GRAB_LATEST`` 时，应用层能获取的 frame_buffer 的个数是 fb_count - 1，这是因为后台的驱动程序会占用一个 frame_buffer，并且尝试刷新最新的数据到这个 frame_buffer 中。
 
-  注意，拍摄的行为并不是发生在调用 "esp_camera_fb_get" 时。拍摄的动作是持续进行的，我们只能控制后台使用的 frame_buffer 来获取新的数据，因此如果想要立即获取一个新的图像，可以尝试执行下面的代码：
+  注意，拍摄的行为并不是发生在调用 ``esp_camera_fb_get`` 时。拍摄的动作是持续进行的，我们只能控制后台使用的 frame_buffer 来获取新的数据，因此如果想要立即获取一个新的图像，可以尝试执行下面的代码：
 
   .. code-block:: c
 
@@ -329,57 +332,67 @@ ESP32-Camera 的两种 capture 模式的区别是什么？
 基于 `esp32-camera <https://github.com/espressif/esp32-camera>`_ SDK 如何实现跳帧？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  可使用 `esp_camera_fb_return(esp_camera_fb_get());` 舍弃当前帧，即跳过当前获取的旧帧。
+  可使用 ``esp_camera_fb_return(esp_camera_fb_get());`` 舍弃当前帧，即跳过当前获取的旧帧。
 
 -------------
 
-ESP32-S3 能否接两路摄像头并分屏显示？  
+ESP32-S3 能否接两路摄像头并分屏显示？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  ESP32-S3 可以接两个 SPI 接口的摄像头（分辨率比较小，240*320）。DVP 接口的话，无法同时使用多摄像头，ESP32-P4 更适合。
+  ESP32-S3 可以接两个 SPI 接口的摄像头（分辨率比较小，240 × 320）。DVP 接口的话，无法同时使用多摄像头，ESP32-P4 更适合。
 
 -------------
 
-ESP32-S3 是否支持 10 位 DVP 摄像头？  
+ESP32-S3 是否支持 10 位 DVP 摄像头？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  通常 10 bit DVP 摄像头可以允许仅接收其高 8 bit，仍旧可以获取正常图像。
+  通常 10 位 DVP 摄像头可以允许仅接收其高 8 位，仍旧可以获取正常图像。
 
 -------------
 
-如何对图像数据进行缩放？  
+如何对图像数据进行缩放？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 对于 JPEG 格式的图像数据，可使用 `esp_new_jpeg <https://components.espressif.com/components/espressif/esp_new_jpeg/>`_ 组件，在解码过程中对解码数据直接进行缩小处理。
   - 对于 RGB 或 YUV 格式的数据，可使用 `PPA <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32p4/api-reference/peripherals/ppa.html>`_ 外设（仅支持 P 系列芯片），或使用软件实现的编码库组件 `esp_image_effects <https://components.espressif.com/components/espressif/esp_image_effects>`_ 进行缩放。
 
+-------------
+
 两个相机应用组件 esp32-camera 和 esp-video 有什么区别？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-- esp32-camera 支持的芯片有 ESP32、ESP32-S2、ESP32-S3。此外，该组件仅支持使用 DVP 接口的相机传感器。
-- esp-video 支持的芯片有 ESP32-P4、ESP32-S3 以及 ESP32-C 系列的芯片。该组件支持包括 SPI、DVP、USB、MIPI-CSI 接口的相机传感器。
+  - esp32-camera 支持的芯片有 ESP32、ESP32-S2、ESP32-S3。此外，该组件仅支持使用 DVP 接口的相机传感器。
+  - esp-video 支持的芯片有 ESP32-P4、ESP32-S3、ESP32-S31 以及 ESP32-C 系列的芯片。该组件支持 SPI、DVP、USB、MIPI-CSI 等接口的相机传感器。
 
+-------------
 
 对于使用 esp-video 框架的应用，如何新增一个相机驱动程序？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 请参考文档 `add_new_camera_sensor_driver <https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor#steps-to-add-a-new-camera-sensor-driver>`__。
+  请参考文档 `add_new_camera_sensor_driver <https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor#steps-to-add-a-new-camera-sensor-driver>`__。
+
+-------------
 
 是否可以在 ESP32-P4 上连接多个摄像头？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   可以。ESP32-P4 的 DVP、MIPI-CSI 接口可以分别连接一个摄像头。USB、SPI 接口分别可以连接多个摄像头。
 
+-------------
+
 对于只能输出 RAW 格式的数据的相机传感器，必须搭配 ISP 模块才能输出清晰的图像吗？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   是的。RAW 格式的数据是原始数据，需要 ISP 模块来完成对原始数据的降噪、颜色还原和自动曝光控制等功能。
+
+-------------
 
 调试 ISP 模块需要哪些设备？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   调试 ISP 模块需要标准光源、色温计、24 色卡等设备。
 
+  - 对于尚未经过评估的项目，可参考 `摄像头传感器支持政策 <https://github.com/espressif/esp-video-components/blob/master/esp_cam_sensor/SUPPORT_POLICY_CN.md>`__。
   - 对于通过评估的项目，可 `联系乐鑫 <https://www.espressif.com/zh-hans/contact-us/technical-inquiries>`__ 协助调试 ISP 模块的参数。
   - 对于已经调试过的相机传感器，可参考 ISP 图像处理算法文档 `Espressif Image Process Algorithm for ISP <https://github.com/espressif/esp-video-components/tree/master/esp_ipa#espressif-image-process-algorithm-for-isp>`__ 微调图像效果。
 
@@ -389,3 +402,10 @@ esp-video-components 如何向相机传感器输出 XVCLK？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   XVCLK/XCLK/MCLK 是相机传感器的主输入时钟，可由外部晶振提供，也可由 MCU 的某个管脚输出。可参考 `esp_cam_sensor xclk_generator 测试示例 <https://github.com/espressif/esp-video-components/blob/master/esp_cam_sensor/test_apps/xclk_generator/main/test_xclk_generator.c>`__。
+
+-------------
+
+ESP32-P4 支持 HDR（High Dynamic Range，高动态范围）功能吗？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  ESP32-P4 的 ISP 仅支持线性模式，不支持 HDR 模式。若要在 ESP32-P4 上获取高动态图像，可以使用内置 ISP 的相机传感器，例如 SC121AT。

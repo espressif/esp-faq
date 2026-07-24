@@ -52,24 +52,23 @@ Is a higher PCLK always better for the camera?
   - Theoretically, the higher the PCLK is, the faster the data transmission will be. However, in actual use, a higher PCLK also means a higher requirement on the processing speed of the chip.
   - The current ESP32 and ESP32-S2 chips realize parallel communication through the I2S interface. Too high a PCLK will cause parallel data to be out of sync, resulting in image jitter or even screen flicker.
   - ESP32-S3 uses an independent LCD-CAM interface, which can support a higher PCLK frequency.
-
-   - For ESP32, the upper limit of PCLK is 8 MHz.
-   - For ESP32-S2, the upper limit of PCLK is 32 MHz.
-   - For ESP32-S3, the upper limit of PCLK is 40 MHz.
+  - For ESP32, the upper limit of PCLK is 8 MHz.
+  - For ESP32-S2, the upper limit of PCLK is 32 MHz.
+  - For ESP32-S3, the upper limit of PCLK is 40 MHz.
 
 --------------
 
 Do the ESP32 series chips support the MIPI interface?
 -------------------------------------------------------
 
-  - ESP32-P4 supports the MIPI interface.
+  ESP32-P4 supports the MIPI interface.
 
 --------------
 
 Do the ESP32 series chips support the USB2.0 interface?
 ---------------------------------------------------------
 
-  - ESP32-S2 and ESP32-S3 support USB2.0 full-speed interface (12 Mbps). In addition, ESP32-P4 also supports USB2.0 high-speed interface (480 Mbps).
+  ESP32-S2 and ESP32-S3 support USB2.0 full-speed interface (12 Mbps). In addition, ESP32-P4 also supports USB2.0 high-speed interface (480 Mbps).
 
 --------------
 
@@ -101,19 +100,19 @@ How to troubleshoot when the camera fails to run?
 
   - Unable to recognize the camera model:
 
-   - Check whether the pins correspond correctly, especially for XCLK, SIOC, and SIOD.
-   - The clock frequency input by XCLK may be too low or the camera power supply is abnormal, causing the camera to fail to run normally.
-   - There are too many devices mounted on SIOC and SIOD, causing the polled read to return the address ID of a device other than the camera. In this case, it is recommended to fix the camera ID to remove the polling step.
+    - Check whether the pins correspond correctly, especially for XCLK, SIOC, and SIOD.
+    - The clock frequency input by XCLK may be too low or the camera power supply is abnormal, causing the camera to fail to run normally.
+    - There are too many devices mounted on SIOC and SIOD, causing the polled read to return the address ID of a device other than the camera. In this case, it is recommended to fix the camera ID to remove the polling step.
 
   - The camera model is recognized, but there is no image display:
 
-   - Check whether there is a signal on the camera data pin, and whether MCLK is input normally.
-   - Check whether the camera register parameters are configured correctly.
+    - Check whether there is a signal on the camera data pin, and whether MCLK is input normally.
+    - Check whether the camera register parameters are configured correctly.
 
   - The camera image display is abnormal:
 
-   - Check the code to see whether the output format is RGB, YUV, or JPEG, and whether it meets the format required by the receiving end.
-   - Try to lower the PCLK frequency.
+    - Check the code to see whether the output format is RGB, YUV, or JPEG, and whether it meets the format required by the receiving end.
+    - Try to lower the PCLK frequency.
 
 --------------
 
@@ -122,8 +121,8 @@ Does ESP32 support video stream transmission?
 
   - The operation of video stream transmission is divided into binary transmission and video stream encoding and decoding.
 
-   - Binary transmission: ESP32 itself supports binary transmission, so whether the video stream transmission is supported depends on the network bandwidth of the transmission. The current ESP32 TCP bandwidth is 20 MB/s, please refer to `Wi-Fi test data <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#disconnected-state-sleep>`_.
-   - Video stream encoding and decoding is not yet supported on ESP32.
+    - Binary transmission: ESP32 itself supports binary transmission, so whether the video stream transmission is supported depends on the network bandwidth of the transmission. The current ESP32 TCP bandwidth is 20 MB/s, please refer to `Wi-Fi test data <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/wifi.html#disconnected-state-sleep>`_.
+    - Video stream encoding and decoding is not yet supported on ESP32.
 
 --------------
 
@@ -140,6 +139,8 @@ Where are the examples related to the camera solution stored?
   - Please refer to `ESP-WHO <https://github.com/espressif/esp-who>`_.
   - Please refer to `esp-iot-solution <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera>`_.
   - Please refer to `esp-dev-kits <https://github.com/espressif/esp-dev-kits>`_.
+  - Please refer to `esp-webrtc-solution <https://github.com/espressif/esp-webrtc-solution>`__.
+  - Please refer to `esp-gmf <https://github.com/espressif/esp-gmf>`__.
   - For common examples of the ESP32-P4 series, please visit `esp-video/examples <https://github.com/espressif/esp-video-components/tree/master/esp_video/examples>`_.
   - For examples of using ESP32-P4 together with an LCD screen, please visit `esp-iot-solution/examples/camera/video_lcd_display <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/video_lcd_display>`_.
 
@@ -152,7 +153,7 @@ Does ESP32 support a camera with a 12-bit DVP interface?
 
 -----------------
 
-Can ESP32 use a camera without JEPG encoding to obtain JPEG images?
+Can ESP32 use a camera without JPEG encoding to obtain JPEG images?
 --------------------------------------------------------------------
 
   If the camera itself does not support JPEG encoding, you can refer to our `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/pic_server>`_ example, to implement software JPEG encoding on the ESP32 device. This method encodes YUV422 or RGB565 data through software to obtain JPEG images.
@@ -235,14 +236,14 @@ Does ESP32-S3 support the GB28181 protocol?
 Is there any reference for ESP32/ESP32-S2/ESP32-S3 to recognize the QR code through the camera?
 -------------------------------------------------------------------------------------------------
 
-  Yes, please refer to the `code recognition <https://github.com/espressif/esp-who/tree/master/examples/code_recognition>`_ in ESP-WHO.
+  Yes, please refer to the `qrcode_recognition <https://github.com/espressif/esp-who/tree/master/examples/qrcode_recognition>`__ example in ESP-WHO.
 
 --------------
 
 When adding the SD-card interface and camera interface for OV5640 sensor, we found that some pins of different ESP32 drivers conflicted with each other. Please suggest pins for the camera interface and SD-card interface.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  The `ESP-WROVER-KIT development board <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-wrover-kit-v3.html>`__ includes the camera and SD card circuits, so you can refer to pins configuration of `the ESP-WROVER-KIT V3 getting started guide <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-wrover-kit-v3.html>`__.
+  The `ESP-WROVER-KIT development board <https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp-wrover-kit/user_guide.html>`__ includes the camera and SD card circuits. For pin configuration, see the `ESP-WROVER-KIT user guide <https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp-wrover-kit/user_guide.html#id12>`__.
 
 --------------
 
@@ -256,10 +257,10 @@ Can a driver for a specific camera model be added if the currently supported cam
 How to add a custom resolution?
 --------------------------------
 
-  Suppose you need a resolution of 640x240, you can use the custom resolution in the following two ways:
-  - Configure the sensor to work at the typical resolution of 640x480, and then only use the upper half of the data (640x240).
-  - Add the identifier FRAMESIZE_640*240 in `esp32-camera/driver/include/sensor.h <https://github.com/espressif/esp32-camera/blob/master/driver/include/sensor.h#L92>`__, and define the length and width of that resolution in `esp32-camera/driver/sensor.c <https://github.com/espressif/esp32-camera/blob/master/driver/sensor.c#L31>`__ as {640, 240, ASPECT_RATIO_16X9}. This method requires support for custom resolutions in the sensor’s driver to work properly.
+  Suppose you need a resolution of 640 × 240, you can use the custom resolution in the following two ways:
 
+  - Configure the sensor to work at the typical resolution of 640 × 480, and then only use the upper half of the data (640 × 240).
+  - Add the identifier ``FRAMESIZE_640x240`` in `esp32-camera/driver/include/sensor.h <https://github.com/espressif/esp32-camera/blob/master/driver/include/sensor.h#L92>`__, and define the length and width of that resolution in `esp32-camera/driver/sensor.c <https://github.com/espressif/esp32-camera/blob/master/driver/sensor.c#L31>`__ as ``{640, 240, ASPECT_RATIO_16X9}``. This method requires support for custom resolutions in the sensor's driver to work properly.
 
 --------------
 
@@ -267,8 +268,9 @@ How to modify the register configuration of the camera sensor?
 ---------------------------------------------------------------
 
   Suppose you need to change the register configuration of the OV5640 sensor. This can be achieved in two ways:
-  - Directly configure the relevant registers using write_reg() in the reset() function of esp32-camera/sensors/ov5640.c.
-  - Configure the relevant registers at the application layer through the set_reg() function:
+
+  - Directly configure the relevant registers using ``write_reg()`` in the ``reset()`` function of ``esp32-camera/sensors/ov5640.c``.
+  - Configure the relevant registers at the application layer through the ``set_reg()`` function:
 
   .. code-block:: c
 
@@ -283,6 +285,7 @@ What is the reason for triggering "cam_hal: EV-VSYNC-OVF" in esp32-camera?
 --------------------------------------------------------------------------
 
   This issue occurs when the frame synchronization signal triggered by the sensor is too fast. You can troubleshoot it following the steps below:
+
   - Run the `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/pic_server>`_ example. If this example runs normally, it indicates that the issue is not hardware-related.
   - Check the XCLK and resolution specified during sensor initialization. A smaller resolution or a larger XCLK can cause the frame synchronization signal triggered by the sensor to be too fast. Note that the XCLK used by the sensor should match the specified resolution.
 
@@ -302,8 +305,8 @@ What could be the reason for the following warning log appearing in the Camera a
     W (8022) cam_haL:FB-OVF
     W (8042) cam_haL:FB-OVF
 
-  The above warning log indicates a frame buffer overflow, which is caused by too fast a frame rate. You can try to reduce the XCLK (Note that the XCLK of ESP32S3 is divided from the 80 MHz clock by default, so the size of XCLK must be divisible by 80 MHz).
-  Specifically, if the sensor is operating in JPEG mode, you can try to increase the size of the jpeg recv buffer by increasing the value of the `Custom JPEG mode frame size (bytes)` option in menuconfig.
+  The above warning log indicates a frame buffer overflow, which is caused by too fast a frame rate. You can try to reduce the XCLK (Note that the XCLK of ESP32-S3 is divided from the 80 MHz clock by default, so the size of XCLK must be divisible by 80 MHz).
+  Specifically, if the sensor is operating in JPEG mode, you can try to increase the size of the JPEG recv buffer by increasing the value of the ``Custom JPEG mode frame size (bytes)`` option in menuconfig.
 
 -------------------
 
@@ -312,10 +315,10 @@ What is the difference between the two capture modes of the ESP32-Camera?
 
   After initialization, the camera sensor pushes image data to the receiver on the ESP32.
 
-  - When the configured receive mode is CAMERA_GRAB_WHEN_EMPTY, the background driver writes image data to the frame_buffer as long as there is an idle frame_buffer. When all the frame_buffers are exhausted, the new image data pushed by the camera sensor will be forcibly discarded due to the lack of available frame_buffer.
-  - When the configured receive mode is CAMERA_GRAB_LATEST, the number of frame_buffers that the application layer can obtain is fb_count - 1. This is because the background driver occupies one frame_buffer and tries to refresh the latest data into this frame_buffer.
+  - When the configured receive mode is ``CAMERA_GRAB_WHEN_EMPTY``, the background driver writes image data to the frame_buffer as long as there is an idle frame_buffer. When all the frame_buffers are exhausted, the new image data pushed by the camera sensor will be forcibly discarded due to the lack of available frame_buffer.
+  - When the configured receive mode is ``CAMERA_GRAB_LATEST``, the number of frame_buffers that the application layer can obtain is fb_count - 1. This is because the background driver occupies one frame_buffer and tries to refresh the latest data into this frame_buffer.
 
-Note that the capturing does not occur when calling `esp_camera_fb_get`. The capturing is an ongoing process, and we can only control the frame_buffer used by the backend to obtain new data. Therefore, if you want to immediately obtain a new image, try executing the following code:
+  Note that the capturing does not occur when calling ``esp_camera_fb_get``. The capturing is an ongoing process, and we can only control the frame_buffer used by the backend to obtain new data. Therefore, if you want to immediately obtain a new image, try executing the following code:
 
   .. code-block:: c
 
@@ -329,14 +332,14 @@ Note that the capturing does not occur when calling `esp_camera_fb_get`. The cap
 How to implement frame skipping with the `esp32-camera <https://github.com/espressif/esp32-camera>`_ SDK?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  You can call `esp_camera_fb_return(esp_camera_fb_get());` to discard the current frame, that is, to skip the frame that is being fetched.
+  You can call ``esp_camera_fb_return(esp_camera_fb_get());`` to discard the current frame, that is, to skip the frame that is being fetched.
 
 -------------
 
 Can ESP32-S3 connect to two cameras and display split screen?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  ESP32-S3 can connect to two cameras with SPI interfaces (with a relatively small resolution, 240*320). However, if using the DVP interface, multiple cameras cannot be used simultaneously. In such cases, the ESP32-P4 is a more suitable option.
+  ESP32-S3 can connect to two cameras with SPI interfaces (with a relatively small resolution, 240 × 320). However, if using the DVP interface, multiple cameras cannot be used simultaneously. In such cases, the ESP32-P4 is a more suitable option.
 
 -------------
 
@@ -353,33 +356,43 @@ How to scale image data?
   - For JPEG images, use the `esp_new_jpeg <https://components.espressif.com/components/espressif/esp_new_jpeg/>`_ component to directly scale down the decoded data during the decoding process.
   - For RGB or YUV data, use the `PPA <https://docs.espressif.com/projects/esp-idf/en/latest/esp32p4/api-reference/peripherals/ppa.html>`_ peripheral (only supported on P series chips), or use the software-based image processing component `esp_image_effects <https://components.espressif.com/components/espressif/esp_image_effects>`_ for scaling.
 
+-------------
+
 What's the difference between the two camera application components esp32-camera and esp-video?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-- The chips supported by esp32-camera include ESP32, ESP32-S2, ESP32-S3. In addition, this component only supports camera sensors using the DVP interface.
-- The chips supported by esp-video include ESP32-P4, ESP32-S3, and the ESP32-C series chips. This component supports camera sensors with interfaces including SPI, DVP, USB, and MIPI-CSI.
+  - The chips supported by esp32-camera include ESP32, ESP32-S2, and ESP32-S3. In addition, this component only supports camera sensors that use the DVP interface.
+  - The chips supported by esp-video include ESP32-P4, ESP32-S3, ESP32-S31, and the ESP32-C series. This component supports camera sensors with SPI, DVP, USB, MIPI-CSI, and similar interfaces.
 
+-------------
 
 How to add a new camera driver for applications using the esp-video framework?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Please refer to the document `add_new_camera_sensor_driver <https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor#steps-to-add-a-new-camera-sensor-driver>`__.
+  Please refer to the document `add_new_camera_sensor_driver <https://github.com/espressif/esp-video-components/tree/master/esp_cam_sensor#steps-to-add-a-new-camera-sensor-driver>`__.
+
+-------------
 
 Can I connect multiple cameras to ESP32-P4?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Sure. The DVP and MIPI-CSI interfaces of ESP32-P4 can each connect to one camera. The USB and SPI interfaces can each connect to multiple cameras.
 
+-------------
+
 Is it necessary to pair a camera sensor that can only output RAW format data with an ISP module to output clear images?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Yes. RAW data is unprocessed raw data, which requires the ISP module to perform operations such as noise reduction, color restoration, and automatic exposure control.
+
+-------------
 
 What equipment is needed to debug the ISP module?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Debugging the ISP module requires standard light sources, colorimeters, 24-color cards, and other equipment.
 
+  - For projects that have not yet been evaluated, refer to the `camera sensor support policy <https://github.com/espressif/esp-video-components/blob/master/esp_cam_sensor/SUPPORT_POLICY.md>`__.
   - For projects that have passed evaluation, you can `contact Espressif <https://www.espressif.com/en/contact-us/technical-inquiries>`__ for assistance in debugging ISP module parameters.
   - For camera sensors that have already been debugged, you can fine-tune the image effects by referring to the ISP image processing algorithm document `Espressif Image Process Algorithm for ISP <https://github.com/espressif/esp-video-components/tree/master/esp_ipa#espressif-image-process-algorithm-for-isp>`__.
 
@@ -389,3 +402,10 @@ How does esp-video-components output XVCLK to the camera sensor?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   XVCLK/XCLK/MCLK is the master input clock for the camera sensor. It can be supplied by an external crystal oscillator or from an MCU pin. See the `esp_cam_sensor xclk_generator test example <https://github.com/espressif/esp-video-components/blob/master/esp_cam_sensor/test_apps/xclk_generator/main/test_xclk_generator.c>`__.
+
+-------------
+
+Does ESP32-P4 support HDR (High Dynamic Range)?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The ISP on ESP32-P4 only supports linear mode and does not support HDR mode. To capture high-dynamic-range images on ESP32-P4, use a camera sensor with a built-in ISP, such as SC121AT.
