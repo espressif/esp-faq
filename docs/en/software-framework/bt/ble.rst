@@ -137,7 +137,7 @@ How does ESP32 Bluetooth® LE enter Light-sleep mode?
 Are there any documentation references for ESP32 BluFi networking?
 ---------------------------------------------------------------------------------
 
-  For BluFi networking, please refer to `ESP32 Blufi <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/blufi.html?highlight=blufi>`_. For BluFi networking examples, please refer to `Blufi <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/blufi>`_.
+  For BluFi networking, please refer to `ESP32 Blufi <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/ble/blufi.html?highlight=blufi>`_. For BluFi networking examples, please refer to `Blufi <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/blufi>`_.
 
 --------------
 

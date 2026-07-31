@@ -141,7 +141,7 @@ Where can I find the reference design for connecting an external PSRAM to ESP32-
 Can I use ESP32 to play music with PWM or DAC?
 ----------------------------------------------
 
-  You may use ESP32 to play music with PWM or DAC, and we recommend you play voice prompts. To run a test, please refer to `esp-adf/examples/player/pipeline_play_mp3_with_dac_or_pwm <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_play_mp3_with_dac_or_pwm>`_.
+  You may use ESP32 to play music with PWM or DAC, and we recommend you play voice prompts. To run a test, please refer to `esp-adf/examples/player/pipeline_play_mp3_with_dac_or_pwm <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/player/pipeline_play_mp3_with_dac_or_pwm>`_.
 
 ------------
 

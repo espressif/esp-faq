@@ -137,7 +137,7 @@ ESP32 Bluetooth® LE 如何进入 Light-sleep 模式呢？
 选择 ESP32 芯片实现蓝牙配网的方式，是否有文档可以提供参考？
 -----------------------------------------------------------
 
-  蓝牙配网说明可参考 `ESP32 Blufi <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/blufi.html?highlight=blufi>`_。蓝牙配网示例可以参考 `Blufi <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/blufi>`_。
+  蓝牙配网说明可参考 `ESP32 Blufi <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/ble/blufi.html>`_。蓝牙配网示例可以参考 `Blufi <https://github.com/espressif/esp-idf/tree/master/examples/bluetooth/blufi>`_。
 
 --------------
 
