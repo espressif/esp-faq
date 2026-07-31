@@ -141,7 +141,7 @@ ESP32-D2WD 外接 PSRAM 的参考设计？
 ESP32 是否可以用 PWM 或 DAC 来播放音乐？
 ----------------------------------------------------------------------------
 
-  ESP32 可以用 PWM 或 DAC 来播放音乐，推荐用于提示音播放，可基于 `esp-adf/examples/player/pipeline_play_mp3_with_dac_or_pwm <https://github.com/espressif/esp-adf/tree/master/examples/player/pipeline_play_mp3_with_dac_or_pwm>`_ 例程进行测试。
+  ESP32 可以用 PWM 或 DAC 来播放音乐，推荐用于提示音播放，可基于 `esp-adf/examples/player/pipeline_play_mp3_with_dac_or_pwm <https://github.com/espressif/esp-adf/tree/release/v2.x/examples/player/pipeline_play_mp3_with_dac_or_pwm>`_ 例程进行测试。
 
 --------------
 

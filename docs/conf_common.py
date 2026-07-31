@@ -45,6 +45,7 @@ pygments_style = 'sphinx'
 exclude_patterns = ['_build']
 
 linkcheck_anchors = False
+linkcheck_timeout = 15
 
 linkcheck_exclude_documents = ['index',  # several false positives due to the way we link to different sections
                                ]
