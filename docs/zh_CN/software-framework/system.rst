@@ -763,7 +763,7 @@ ESP8266 在 Deep-sleep 模式下如何唤醒？
 如何烧录自定义 Mac 地址？
 ---------------------------------------------
 
-  可以先了解 ESP 模块 Mac 的机制，请参考 `Mac 地址介绍 <https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/system/system.html?highlight=MAC%20address/>`_。目前烧录自定义 Mac 地址有 2 种方案：
+  可以先了解 ESP 模块 Mac 的机制，请参考 `Mac 地址介绍 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/system/misc_system_api.html#mac-address>`_。目前烧录自定义 Mac 地址有 2 种方案：
 
   - 方案 1：直接烧到 eFuse blk3 中，可以保证不被修改；
   - 方案 2：存储到 flash 中。不推荐将 Mac 地址存放在默认 NVS 分区中，建议创建一块自定义的 NVS 分区用来存储自定义的 Mac 地址。关于自定义 Mac 地址的使用，可以参考 `base_mac_address <https://github.com/espressif/esp-idf/tree/master/examples/system/base_mac_address/>`_。

@@ -83,7 +83,7 @@
 - 如两项条目是互为选择的关系，应使用项目符号列表罗列（非数字列表），并在段前介绍性文字中说明这二者的关系。
 - 正文中（不论列表还是段落），每一行之前需空两格。
 - 如某项条目后需跟注释或说明性文字，应缩进该注释，使其成为子条目。
-- 关于列表中标点符号的使用，请参考 `Espressif Manual of Style <https://espressifsystems.sharepoint.com/sites/Documentation/Lists/Internal%20Document/DispForm.aspx?ID=1&e=eApbSw>`_ 中的章节 “Punctuation in Lists”。
+- 关于列表中标点符号的使用，请参考 `Espressif Manual of Style <https://mos.espressif.com/punctuation.html#punctuation-in-lists>`_ 中的章节 “Punctuation in Lists”。
 
 更多关于列表格式的规则指导，请参考 `ESP-Docs > Writing Documentation <https://docs.espressif.com/projects/esp-docs/en/latest/writing-documentation/index.html>`__。请参阅下文文字与图片示例模版。
 

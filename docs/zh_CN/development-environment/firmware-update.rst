@@ -41,7 +41,7 @@ macOS 与 Linux 如何烧录固件？
 ESP32 是否支持使用 JTAG 管脚直接烧录程序？
 -------------------------------------------------------------------------
 
-  ESP32 支持使用 `JTAG 管脚 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html#id1>`__ 直接烧写程序，请参考 `上传待调试的应用程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`__。详细步骤参见： `Windows 环境下，使用 ESP32 JTAG 接口进行固件下载 <https://blog.csdn.net/Marchtwentytwo/article/details/148540368?>`__。
+  ESP32 支持使用 `JTAG 管脚 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/configure-other-jtag.html#id1>`__ 直接烧写程序，请参考 `上传待调试的应用程序 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-guides/jtag-debugging/index.html#jtag-upload-app-debug>`__。详细步骤参见： `Windows 环境下，使用 ESP32 JTAG 接口进行固件下载 <https://blog.csdn.net/Marchtwentytwo/article/details/148540368>`__。
 
   **注意**：量产烧录推荐使用 `Flash 下载工具 <https://docs.espressif.com/projects/esp-techpedia/zh_CN/latest/esp-friends/get-started/try-firmware/try-firmware-platform.html#flash>`__ 烧写固件。详细说明参见： `选择合适的烧录平台 <https://docs.espressif.com/projects/esp-techpedia/zh_CN/latest/esp-friends/get-started/try-firmware/try-firmware-platform.html#id1>`__。
 

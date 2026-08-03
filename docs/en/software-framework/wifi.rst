@@ -1083,7 +1083,7 @@ Does ESP32 Wi-Fi work with PSRAM?
 
   Please follow the steps below to troubleshoot the issue:
 
-  - Firstly, use the `Wi-Fi error code <https://docs.espressif.com/projects/espressif-esp-faq/en/latest/software-framework/wifi.html#connect-while-esp32-connecting-wi-fi-how-can-i-determine-the-reason-of-failure-by-error-codes>`_ to determine the possible cause for the failure.
+  - Firstly, use the `Wi-Fi error code <https://docs.espressif.com/projects/esp-faq/en/latest/software-framework/wifi.html#connect-while-esp32-connecting-wi-fi-how-can-i-determine-the-reason-of-failure-by-error-codes>`_ to determine the possible cause for the failure.
   - Then, try connecting another device, such as a phone, to the router to determine whether this is a problem with the router or ESP32.
 
     - If the phone cannot connect to the router either, please check if there is any problem with the router.
