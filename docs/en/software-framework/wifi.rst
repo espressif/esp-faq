@@ -1352,15 +1352,15 @@ How to prevent any radio frequency waves from being sent in ESP32 Wi-Fi Scan mod
 What is the default 802.11 Wi-Fi protocol when the ESP32-C6 is in Wi-Fi AP mode?
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  - When ESP32-C6 enables Wi-Fi AP mode, it uses the mixed mode of 802.11b/g/n by default. The protocol can be set via `esp_wifi_set_protocol() <https://docs.espressif.com/projects/esp-idf/en/v5.1.2/esp32c6/api-reference/network/esp_wifi.html#_CPPv421esp_wifi_set_protocol16wifi_interface_t7uint8_t>`_.
-  - ESP32-C6 does not support 802.11ax in AP mode.
+  - When ESP32-C6 enables Wi-Fi AP mode, it uses the mixed mode of 802.11b/g/n by default.
+  - If you want to enable SoftAP in 802.11ax mode, you can first call `esp_wifi_set_bandwidth() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c6/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_bandwidth16wifi_interface_t16wifi_bandwidth_t>`__ to set the bandwidth to 20 MHz, and then call `esp_wifi_set_protocol() <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c6/api-reference/network/esp_wifi.html#_CPPv421esp_wifi_set_protocol16wifi_interface_t7uint8_t>`__ to configure the protocol to 802.11ax.
 
 -------------------
 
 Why can't the ESP32 Wi-Fi Station connect to a Wi-Fi hotspot in 2.4 GHz Enhanced Open mode?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Connection to 2.4 GHz Wi-Fi hotspots in Enhanced Open mode is only supported on ESP-IDF release/v5.2 and above. Additionally, the ``Component config > ``Wi-Fi`` > ``Enable OWE STA`` configuration option should be enabled. For more information, please refer to the `Wi-Fi Enhanced Open <https://github.com/espressif/esp-idf/blob/release/v5.2/docs/en/api-guides/wifi-security.rst#wi-fi-enhanced-open>`_ guide.
+  - Connection to 2.4 GHz Wi-Fi hotspots in Enhanced Open mode is only supported on ESP-IDF release/v5.2 and above. Additionally, the ``Component config`` > ``Wi-Fi`` > ``Enable OWE STA`` configuration option should be enabled. For more information, please refer to the `Wi-Fi Enhanced Open <https://github.com/espressif/esp-idf/blob/release/v5.2/docs/en/api-guides/wifi-security.rst#wi-fi-enhanced-open>`_ guide.
   - When connecting to a router in this security mode, do not set any password.
 
 --------------
@@ -1387,7 +1387,7 @@ Does ESP32-S3 support AP and STA working simultaneously?
 
 --------------
 
-Does the ESP Wi-Fi module support power save mode in SoftAp mode?
+Does the ESP Wi-Fi module support power save mode in SoftAP mode?
 ------------------------------------------------------------------------------------------------------------------------------------
 
   This feature is currently not supported.
@@ -1584,12 +1584,12 @@ Does the Wi-Fi of ESP32-C5 support the simultaneous use of sniffer (promiscuous 
 
   Yes, RF coexistence is supported. Sniffer mode and STA mode can be configured to operate in parallel via the Wi-Fi API `esp_wifi_set_promiscuous(true)`.
 
----------------
+--------------
 
-When enabling the 5G band softAP on C5, will DFS be activated to avoid interference with radar on the same channel?
+When enabling the 5 GHz band SoftAP on ESP32-C5, will DFS be activated to avoid interference with radar on the same channel?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  The current C5 hardware cannot detect radar signals and therefore cannot temporarily disable DFS channels. However, logic to disable DFS channels will be considered in future updates.
+  The current ESP32-C5 hardware cannot detect radar signals and therefore cannot temporarily disable DFS channels. However, logic to disable DFS channels will be considered in future updates.
 
 ---------------
 
