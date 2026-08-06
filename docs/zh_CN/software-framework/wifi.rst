@@ -172,7 +172,7 @@ Wi-Fi 信道是什么？可以自行选择信道吗？
 ESP8266 SoftAP + Station 模式下，连接的 192.168.4.X ⽹段时，为什么会失败？
 ----------------------------------------------------------------------------------------------
 
-  ESP8266 SoftAP 默认使用网段 192.168.4.*，IP 地址是 192.168.4.1。ESP8266 如果要连接 192.168.4.X 的路由时，不能分辨是要连接⾃⼰本身的 SoftAp 还是外部路由，所以会造成错误。
+  ESP8266 SoftAP 默认使用网段 192.168.4.*，IP 地址是 192.168.4.1。ESP8266 如果要连接 192.168.4.X 的路由时，不能分辨是要连接⾃⼰本身的 SoftAP 还是外部路由，所以会造成错误。
 
 --------------
 
@@ -194,7 +194,7 @@ ESP8266/ESP32/ESP32-S2/S3/C2/C3/C6/C5/C61 是否支持 web/softAP 配网？
 
 --------------
 
-[Connect] ESP8266 和 ESP32 作为 softap 模式如何隐藏 SSID？
+[Connect] ESP8266 和 ESP32 作为 SoftAP 模式如何隐藏 SSID？
 ----------------------------------------------------------------
 
   要隐藏 ESP8266 或 ESP32 作为 SoftAP 模式下的 SSID，可以通过以下方法实现：
@@ -488,7 +488,7 @@ ESP32 系列芯片每次连接服务器都会执行域名解析吗？
   - 测试过程中有较多的 Wi-Fi 数据收发。数据收发越多，进入休眠状态的机会越少，平均电流就越高。
   - 测试用的路由器发送 beacon 时间点不准确。Station 需要定时醒来监听 beacon，若 beacon 时间点不准确，station 会等待较长时间，进入休眠状态的时间就越少，平均电流就越高。
   - 测试过程中有外设模块在工作，请关闭外设模块再进行测试。
-  - 开启了 station + softap 模式，modem sleep 只在 station only 模式下才会降低电流。
+  - 开启了 station + SoftAP 模式，modem sleep 只在 station only 模式下才会降低电流。
 
 --------------
 
@@ -1352,15 +1352,15 @@ ESP 模组支持 Wi-Fi HaLow 功能吗？
 ESP32-C6 开启 Wi-Fi AP 模式时，默认使用的 802.11 Wi-Fi 协议类型是什么？
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-  - ESP32-C6 开启 Wi-Fi AP 模式时，默认使用 802.11b/g/n 混合模式。可通过 `esp_wifi_set_protocol() <https://docs.espressif.com/projects/esp-idf/zh_CN/v5.1.2/esp32c6/api-reference/network/esp_wifi.html#_CPPv421esp_wifi_set_protocol16wifi_interface_t7uint8_t>`_ 设置协议类型。
-  - ESP32-C6 暂时不支持在 AP 模式下设置为 802.11ax 模式。
+  - ESP32-C6 开启 Wi-Fi AP 模式时，默认使用 802.11b/g/n 混合模式。
+  - 如果想在 802.11ax 模式下开启 SoftAP，可以先调用 `esp_wifi_set_bandwidth() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c6/api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_bandwidth16wifi_interface_t16wifi_bandwidth_t>`__ 将带宽设置为 20 MHz，然后再使用 `esp_wifi_set_protocol() <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c6/api-reference/network/esp_wifi.html#_CPPv421esp_wifi_set_protocol16wifi_interface_t7uint8_t>`__ 修改协议为 802.11ax。
 
 -------------------
 
-ESP32 Wi-Fi Station 无法连接上 2.4 GHz Enhanced Open mode 模式的 Wi-Fi 热点，是什么原因？
+ESP32 Wi-Fi Station 无法连接上 2.4 GHz Enhanced Open 模式的 Wi-Fi 热点，是什么原因？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 仅在 release/v5.2 及以上版本的 ESP-IDF SDK 上支持连接 2.4 GHz 的 Enhanced Open mode 模式的 Wi-Fi 热点。并且在软件上需要开启 ``Component config > ``Wi-Fi`` > ``Enable OWE STA`` 配置选项，请参见 `Wi-Fi Enhanced Open <https://github.com/espressif/esp-idf/blob/release/v5.2/docs/en/api-guides/wifi-security.rst#wi-fi-enhanced-open>`_ 说明。
+  - 仅在 release/v5.2 及以上版本的 ESP-IDF SDK 上支持连接 2.4 GHz 的 Enhanced Open 模式的 Wi-Fi 热点。并且在软件上需要开启 ``Component config`` > ``Wi-Fi`` > ``Enable OWE STA`` 配置选项，请参见 `Wi-Fi Enhanced Open <https://github.com/espressif/esp-idf/blob/release/v5.2/docs/en/api-guides/wifi-security.rst#wi-fi-enhanced-open>`_ 说明。
   - 另外，在连接该加密模式的路由器时，注意不要设置密码。
 
 --------------
@@ -1387,7 +1387,7 @@ ESP32-S3 支持 AP 和 STA 同时工作吗？
 
 --------------
 
-ESP Wi-Fi 模块在 SoftAp 模式下支持省电机制吗？
+ESP Wi-Fi 模块在 SoftAP 模式下支持省电机制吗？
 ------------------------------------------------------------------------------------------------------------------------------------
 
   目前暂不支持该功能。
@@ -1584,12 +1584,12 @@ ESP32-C5 的 Wi-Fi 是否支持 sniffer （混杂模式）与 STA 模式同时�
 
   是的，支持 RF 共存，可通过 Wi-Fi API `esp_wifi_set_promiscuous(true)` 配置 sniffer 模式与 STA 模式并行工作。
 
----------------
+--------------
 
-C5 启用 5G 频段 softAP 时，是否会启用 DFS 以避免对同信道雷达的干扰？
+ESP32-C5 启用 5 GHz 频段 SoftAP 时，是否会启用 DFS 以避免对同信道雷达的干扰？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  当前 C5 硬件上无法感知是否有雷达信号来暂时禁用 DFS 信道，后续会考虑添加禁用 DFS 信道的逻辑。
+  当前 ESP32-C5 硬件上无法感知是否有雷达信号来暂时禁用 DFS 信道，后续会考虑添加禁用 DFS 信道的逻辑。
 
 ---------------
 
