@@ -1083,7 +1083,7 @@ ESP32 Wi-Fi 可以使用 PSRAM 吗？
 
   可以按以下步骤来排查问题：
 
-  - 首先通过 `Wi-Fi 错误码 <https://docs.espressif.com/projects/espressif-esp-faq/zh_CN/latest/software-framework/wifi.html#connect-esp32-wi-fi>`_ 判断可能的失败原因。
+  - 首先通过 `Wi-Fi 错误码 <https://docs.espressif.com/projects/esp-faq/zh_CN/latest/software-framework/wifi.html#connect-esp32-wi-fi>`_ 判断可能的失败原因。
   - 然后，当在 ESP32 连接不上路由器时，尝试连接其他设备到该路由器来定位是路由器还是 ESP32 问题：
 
     - 如手机也无法连上路由器，请排查路由器是否存在问题。

@@ -166,7 +166,7 @@ Which image decoding formats are supported by LCD applications on ESP series chi
     - Sliced formats (optimized for embedded memory): SJPG, SPNG, SQOI
     - Hardware acceleration (supported chips only): JPEG, PJPG
 
-  - **Based on LVGL built-in libraries**: LVGL itself also provides decoding support for PNG, BMP, GIF, and other formats. For details, please refer to `LVGL libs <https://docs.lvgl.io/master/libs/index.html>`__.
+  - **Based on LVGL built-in libraries**: LVGL itself also provides decoding support for PNG, BMP, GIF, and other formats. For details, please refer to `LVGL libs <https://lvgl.io/docs/open/libs>`__.
   - **EAF animation format**: An Espressif custom animation format, originally designed for screen refreshing with the `esp_emote_gfx <https://components.espressif.com/components/espressif2022/esp_emote_gfx>`__ component (segmented decoding), and also adapted to LVGL. Refer to the `LVGL EAF Player Example <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/gui/lvgl_eaf_player>`__.
 
 --------------------------
@@ -365,7 +365,7 @@ How to deal with diagonal tearing on the SPI screen after the hardware is rotate
 
   .. note::
 
-    ``sw_rotate``, ``full_refresh``, and ``direct_mode`` are **LVGL v8** APIs. Rotation in LVGL v9 works differently; please refer to `LVGL v9 Rotation Notes <https://docs.lvgl.io/9.1/API/display/index.html>`__.
+    ``sw_rotate``, ``full_refresh``, and ``direct_mode`` are **LVGL v8** APIs. Rotation in LVGL v9 works differently; please refer to `LVGL v9 Rotation Notes <https://lvgl.io/docs/open/9.1/API/display/>`__.
 
 ---------------------------
 

@@ -113,7 +113,7 @@ ESP32 Boot 启动模式不正常如何排查？
 ESP32-S2 是否可以使用 JTAG 进行下载调试？
 -----------------------------------------
 
-  可以，说明文档请参考 `ESP32-S2 JTAG 调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/jtag-debugging/>`_，具体步骤参考 `ESP32-S3 JTAG Debugging User Guide <https://blog.csdn.net/Marchtwentytwo/article/details/129561010?>`__。
+  可以，说明文档请参考 `ESP32-S2 JTAG 调试 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-guides/jtag-debugging/>`_，具体步骤参考 `ESP32-S3 JTAG Debugging User Guide <https://blog.csdn.net/Marchtwentytwo/article/details/129561010>`__。
 
 --------------
 
@@ -136,7 +136,7 @@ ESP32-S2 是否可以使用 JTAG 进行下载调试？
 -----------------------------------------------------
 
   - 请确保 ESP8266 启动时，Strapping 管脚处于所需的电平。如果外部连接的外设使 Strapping 管脚进⼊到错误的电平，ESP8266 可能进⼊错误的操作模式。在⽆有效程序的情况下，看⻔狗计时器将复位芯⽚。
-  - 因此在设计实践中，建议仅将 Strapping 管脚⽤于连接高阻态外部器件的输⼊，这样便不会在上电时强制 Strapping 管脚为高/低电平。详情请参考 `ESP8266 Boot Mode Selection <https://github.com/espressif/esptool/wiki/ESP8266-Boot-Mode-Selection>`_。
+  - 因此在设计实践中，建议仅将 Strapping 管脚⽤于连接高阻态外部器件的输⼊，这样便不会在上电时强制 Strapping 管脚为高/低电平。详情请参考 `ESP8266 Boot Mode Selection <https://docs.espressif.com/projects/esptool/en/latest/esp8266/advanced-topics/boot-mode-selection.html>`_。
 
 --------------
 

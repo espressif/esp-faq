@@ -113,7 +113,7 @@ How to monitor the free space of the task stack?
 Is it possible to use JTAG to debug with ESP32-S2？
 -------------------------------------------------------
 
-  Yes. For detailed information, please refer to `ESP32-S2 JTAG Debugging <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/api-guides/jtag-debugging/>`__. For specific steps, refer to `ESP32-S3 JTAG Debugging User Guide <https://blog.csdn.net/Marchtwentytwo/article/details/129561010?>`__.
+  Yes. For detailed information, please refer to `ESP32-S2 JTAG Debugging <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/api-guides/jtag-debugging/>`__. For specific steps, refer to `ESP32-S3 JTAG Debugging User Guide <https://blog.csdn.net/Marchtwentytwo/article/details/129561010>`__.
 
 --------------
 
@@ -136,7 +136,7 @@ ESP8266 enters boot mode (2,7) and hits a watchdog reset. What could be wrong?
 ---------------------------------------------------------------------------------
 
   - Please make sure that when ESP8266 boots, the strapping pins are held in the required logic levels. If externally connected peripherals drive the strapping pins to an inappropriate logic level, ESP8266 may boot into a wrong mode of operation. With the absence of a valid program, the WDT may then reset the chip.
-  - Thus, in design practices, it is recommended to only use the strapping pins for input to high resistive external devices so that the strapping pin is not forced high/low at power-up. For more information, please refer to `ESP8266 Boot Mode Selection <https://github.com/espressif/esptool/wiki/ESP8266-Boot-Mode-Selection>`_.
+  - Thus, in design practices, it is recommended to only use the strapping pins for input to high resistive external devices so that the strapping pin is not forced high/low at power-up. For more information, please refer to `ESP8266 Boot Mode Selection <https://docs.espressif.com/projects/esptool/en/latest/esp8266/advanced-topics/boot-mode-selection.html>`_.
 
 ---------------
 

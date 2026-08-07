@@ -128,7 +128,7 @@ ESP-ADF 支持语音识别唤醒词自定义开发吗？
 ESP-ADF 是否支持 ESP32-LyraTD-MSC v2.1 开发板跑 Alexa 例程？
 ---------------------------------------------------------------------
 
-  - ESP-ADF 中还没有直接支持 Alexa 的例程。对于 Alexa 例程，请参考 `esp-va-sdk <https://github.com/espressif/esp-avs-sdk>`_。
+  - ESP-ADF 中还没有直接支持 Alexa 的例程。对于 Alexa 例程，请参考 `esp-va-sdk <https://github.com/espressif/esp-va-sdk>`_。
   - 需要注意的是，从 2024 年下半年开始，Alexa 已关闭了主机侧（Built-in）语音接口。如果后续需要接入 Alexa 语音生态，可以尝试使用 ACK 方案或 Matter 方案。
 
 --------------

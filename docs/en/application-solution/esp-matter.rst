@@ -28,7 +28,7 @@ What learning materials are available to get started with ESP Matter?
   You can refer to:
 
   - `ESP Matter GitHub <https://github.com/espressif/esp-matter>`__
-  - `Espressif Matter series blog <https://blog.espressif.com/matter-38ccf1d60bcd>`__
+  - `Espressif Matter series blog <https://developer.espressif.com/blog/matter/>`__
   - `Espressif Matter solution video <https://www.bilibili.com/video/BV1sV4y1x74U>`__
   - `Espressif Matter Demo video <https://www.bilibili.com/video/BV1ha411K7p2>`__
 

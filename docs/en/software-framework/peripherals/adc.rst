@@ -138,7 +138,7 @@ Why can't the measured voltage reach the nominal 3100 mV when the ESP32-S3 ADC i
   When ESP32-S3 ADC1 or ADC2 is configured as ``ADC_ATTEN_DB_12``, the voltage measurement range is ``0 ~ 3100 mV``. However, the maximum voltage measurement value of some chips is less than ``3100 mV``. The following two methods can be used to solve this problem:
 
 - Solution 1: Try to avoid using the boundary voltage values. You can use a divider circuit to reduce the input voltage to an intermediate value for higher accuracy and consistency.
-- Solution 2: Use the software `ADC Range Extension Solution <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/others/adc_range.html>`_ to extend the maximum measurement voltage to ``3300 mV``. This solution is supported in IDF v4.4.8 and v5.3.1 for ESP32-S2 and ESP32-S3 chips, and can be ported to other IDF versions based on this solution.
+- Solution 2: Use the software `ADC Range Extension Solution <https://docs.espressif.com/projects/esp-iot-solution/en/latest/others/adc_range.html>`_ to extend the maximum measurement voltage to ``3300 mV``. This solution is supported in IDF v4.4.8 and v5.3.1 for ESP32-S2 and ESP32-S3 chips, and can be ported to other IDF versions based on this solution.
 
 -------------
 
@@ -178,7 +178,7 @@ When using ESP-IDF v5.1 to test ADC2 based on the ESP32-S3-WROOM-1 module, input
     I (456346) EXAMPLE: ADC2 Channel[1] Cali Voltage: 4985 mV
 
   - With normal ADC raw data readings, the reason why ADC conversion value becomes 5 V is because that the effective measurement range of ESP32-S3 ADC is 2900 mV. Please refer to the `ESP32-S3 ADC attenuation level corresponding effective measurement range <https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32s3/schematic-checklist.html#adc>`_.
-  - An input voltage exceeding 2900 mV is undefined, which would lead to this situation. If you need to measure an input voltage greater than 2900 mV, it is recommended to use voltage division or adopt the `ESP32-S3 ADC Range Extension Solution <https://docs.espressif.com/projects/espressif-esp-iot-solution/en/latest/others/adc_range.html#esp32-s3-adc>`_.
+  - An input voltage exceeding 2900 mV is undefined, which would lead to this situation. If you need to measure an input voltage greater than 2900 mV, it is recommended to use voltage division or adopt the `ESP32-S3 ADC Range Extension Solution <https://docs.espressif.com/projects/esp-iot-solution/en/latest/others/adc_range.html#esp32-s3-adc>`_.
 
 Can the reference source of the ADC be externally applied? If it can be applied, which pin should it be applied to? What is the internal reference voltage of the ADC?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------

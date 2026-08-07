@@ -83,7 +83,7 @@ Please add new Q&A items and do updates according to the guidelines as follows:
 - If two items are alternatives, use a bullet list (not numbered list) and indicate their relationship in the introductory phrase.
 - Always add two spaces before an listed item or paragraph in the answer.
 - When a separate notice or explanatory paragraph follows a item, indent that separate material to the text of the parent list item.
-- Follow list punctuation rules described in `Espressif Manual of Style <https://espressifsystems.sharepoint.com/sites/Documentation/Lists/Internal%20Document/DispForm.aspx?ID=1&e=eApbSw>`_, Section Punctuation in Lists.
+- Follow list punctuation rules described in `Espressif Manual of Style <https://mos.espressif.com/punctuation.html#punctuation-in-lists>`_, Section Punctuation in Lists.
 
 For more guidance on the rules of list formatting, please refer to `ESP-Docs > Writing Documentation <https://docs.espressif.com/projects/esp-docs/en/latest/writing-documentation/index.html>`__. Please refer to the text and image example templates below.
 

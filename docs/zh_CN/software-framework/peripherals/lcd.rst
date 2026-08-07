@@ -166,7 +166,7 @@ ESP 系列芯片的 LCD 应用支持哪些图片解码格式？
     - 分片格式（针对嵌入式内存优化）：SJPG、SPNG、SQOI
     - 硬件加速（仅支持的芯片）：JPEG、PJPG
 
-  - **基于 LVGL 内置库**：LVGL 本身也提供了 PNG、BMP、GIF 等格式的解码支持，具体见 `LVGL libs <https://docs.lvgl.io/master/libs/index.html>`__。
+  - **基于 LVGL 内置库**：LVGL 本身也提供了 PNG、BMP、GIF 等格式的解码支持，具体见 `LVGL libs <https://lvgl.io/docs/open/libs>`__。
   - **EAF 动图格式**：乐鑫自定义动图格式，原生设计用于配合 `esp_emote_gfx <https://components.espressif.com/components/espressif2022/esp_emote_gfx>`__ 组件刷屏（分段解码），也已适配至 LVGL，参考 `EAF 动图格式示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/display/gui/lvgl_eaf_player>`__。
 
 ------------------------
@@ -365,7 +365,7 @@ SPI 屏幕上的图片在硬件旋转 90 度或 270 度后会出现斜撕裂的�
 
   .. note::
 
-    ``sw_rotate``、 ``full_refresh``、 ``direct_mode`` 均为 **LVGL v8** 的 API。LVGL v9 的旋转方式有所不同，请参考 `LVGL v9 旋转说明 <https://docs.lvgl.io/9.1/API/display/index.html>`__。
+    ``sw_rotate``、 ``full_refresh``、 ``direct_mode`` 均为 **LVGL v8** 的 API。LVGL v9 的旋转方式有所不同，请参考 `LVGL v9 旋转说明 <https://lvgl.io/docs/open/9.1/API/display/>`__。
 
 ---------------------------
 

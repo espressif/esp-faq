@@ -138,7 +138,7 @@ ESP32-S3 ADC 配置为 ``ADC_ATTEN_DB_12`` 时，为何测量电压无法达到�
   ESP32-S3 ADC1 或 ADC2 配置为 ``ADC_ATTEN_DB_12`` 时，测量电压范围为 ``0 ~ 3100 mV``，但部分芯片最大电压测量值小于 ``3100 mV``，可使用以下两种方法来解决这个问题：
 
 - 方案 1：避开使用边界电压值，可通过外部分压电路将输入电压维持在中间电压值附近，以获得更高的精度和一致性。
-- 方案 2：使用软件 `ADC 扩展量程方案 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/others/adc_range.html>`_ ，将最大测量电压扩展到 ``3300 mV``。 该方案已经在 IDF v4.4.8 与 v5.3.1 中支持 ESP32-S2 与 ESP32-S3 芯片，可基于该方案在其他 IDF 版本上进行移植。
+- 方案 2：使用软件 `ADC 扩展量程方案 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/others/adc_range.html>`_ ，将最大测量电压扩展到 ``3300 mV``。 该方案已经在 IDF v4.4.8 与 v5.3.1 中支持 ESP32-S2 与 ESP32-S3 芯片，可基于该方案在其他 IDF 版本上进行移植。
 
 --------------
 
@@ -178,7 +178,7 @@ ESP32 在同一个 ADC 控制器下，能同时支持部分 ADC 通道是 DMA �
     I (456346) EXAMPLE: ADC2 Channel[1] Cali Voltage: 4985 mV
 
   - ADC Raw Data 读数正常，ADC 转换值变成 5 V 是因为 ESP32-S3 ADC 有效测量范围是 2900 mV，参见 `ESP32-S3 ADC 衰减等级对应有效测量范围 <https://docs.espressif.com/projects/esp-hardware-design-guidelines/zh_CN/latest/esp32s3/schematic-checklist.html#adc>`_。
-  - 超过 2900 mV 的输入电压是未定义的输入电压，因此会出现这种情况。如果要测量大于 2900 mV 的输入电压建议分压或采用 `ESP32-S3 ADC 扩展量程方案 <https://docs.espressif.com/projects/espressif-esp-iot-solution/zh_CN/latest/others/adc_range.html#esp32-s3-adc>`_。
+  - 超过 2900 mV 的输入电压是未定义的输入电压，因此会出现这种情况。如果要测量大于 2900 mV 的输入电压建议分压或采用 `ESP32-S3 ADC 扩展量程方案 <https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/others/adc_range.html#esp32-s3-adc>`_。
 
 ADC 的参考基准源能否从外部加？如果可以加，应该加在哪个引脚？ADC 的内部基准电压是多少？
 ------------------------------------------------------------------------------------------------------------------------------------------------------

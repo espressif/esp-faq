@@ -128,7 +128,7 @@ Does ESP-ADF support customizing voice recognition wake-up words?
 Does ESP-ADF support running Alexa examples on the ESP32-LyraTD-MSC v2.1 development board?
 --------------------------------------------------------------------------------------------------------
 
-  - ESP-ADF does not directly support Alexa examples. For Alexa examples, please refer to `esp-va-sdk <https://github.com/espressif/esp-avs-sdk>`_.
+  - ESP-ADF does not directly support Alexa examples. For Alexa examples, please refer to `esp-va-sdk <https://github.com/espressif/esp-va-sdk>`_.
   - Please note that since the second half of 2024, Alexa has disabled the host-side (built-in) voice interface. If you need to connect to the Alexa voice ecosystem in the future, you can try using the ACK or Matter solution.
 
 --------------
