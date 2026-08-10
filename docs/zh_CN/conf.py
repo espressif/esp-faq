@@ -34,5 +34,3 @@ latex_documents = [
   ('index', 'ReadtheDocsTemplate.tex', project,
    copyright, 'manual'),
 ]
-
-html_js_files += ['js/chatbot_widget_cn.js']
