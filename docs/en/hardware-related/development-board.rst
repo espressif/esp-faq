@@ -47,7 +47,7 @@ In `ESP32-Korvo-DU1906 <https://docs.espressif.com/projects/esp-adf/en/latest/de
 
 --------------
 
-Is there an Ethernet development board that supports POE power supply?
+Is there an Ethernet development board that supports PoE power supply?
 ----------------------------------------------------------------------------
 
   `ESP32-Ethernet-Kit <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-ethernet-kit.html>`_ can satisfy this requirement.
@@ -57,7 +57,7 @@ Is there an Ethernet development board that supports POE power supply?
 The LED light on the `ESP32-DevKitC <https://www.espressif.com/en/products/devkits/esp32-devkitc/overview>`__ development board does not light up and the device manager cannot find the device. Why?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Check if the power supply is normal: After supplying power for the board through USB, use a multimeter to test whether there is voltage between the VCC and GND pins.
+  - Check if the power supply is normal: After supplying power to the board through USB, use a multimeter to test whether there is voltage between the VCC and GND pins.
   - Check if it is a specific development board fault: Check if other `ESP32-DevKitC <https://www.espressif.com/en/products/devkits/esp32-devkitc/overview>`__ development boards can be powered up with this USB cable.
   - If you cannot locate the reason using the above methods, you can connect the board through a USB to TTL device. You only need to connect the VCC, GND, TXD pins of `ESP32-DevKitC <https://www.espressif.com/en/products/devkits/esp32-devkitc/overview>`__ to test whether it is caused by chip problems, and to check with the serial port tool whether it can print logs.
   - If possible, please test whether the serial port driver chip has voltage. For the circuit, you can refer to the `ESP32-DevKitC schematic <https://www.espressif.com/sites/default/files/documentation/esp32-devkitc-v4_reference_design_0.zip>`_.
@@ -78,7 +78,7 @@ I can't find the serial port in the device manager after connecting the ESP32 de
 
   - Driver not installed: Before connecting the ESP32 development board to a Windows computer, you need to install the driver. If the driver is not installed or installed incorrectly, the development board will not be recognized as a serial port device. Download and install the `FT232R USB UART driver <https://www.usb-drivers.org/ft232r-usb-uart-driver.html>`_.
   - Loose or damaged USB cable: If the USB cable is loose or damaged, the development board cannot be correctly recognized. Users can replace the USB cable or check if the USB cable is plugged in tightly to ensure a normal connection between the USB cable and the computer.
-  - Faulty development board: If the above two reasons can be excluded, it may be because development board itself is faulty. Users can try connecting to other USB ports or other computers for testing, or detect and repair the development board.
+  - Faulty development board: If the above two reasons can be excluded, it may be because the development board itself is faulty. Users can try connecting to other USB ports or other computers for testing, or detect and repair the development board.
 
   It should be noted that when testing the connection of the development board, you need to confirm whether the serial port settings and driver settings of the development board are correct. Some development boards need to manually select the correct port and baud rate in the serial port settings to connect to the computer. At the same time, some drivers also need to manually set the port and baud rate to ensure consistency with the development board settings.
 
@@ -101,12 +101,14 @@ How long does it take for the ESP-WROOM-02D module to restart after the reset si
 According to the schematic of `ESP32-LyraT-Mini <https://espressif-docs.readthedocs-hosted.com/projects/esp-adf/en/latest/design-guide/dev-boards/get-started-esp32-lyrat-mini.html>`__, the analog output of the ES8311 codec chip is connected to the input of the ES7243 ADC chip. What is the purpose of this?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  The hardware acquisition circuit of the AEC reference signal simultaneously transmits the DAC output of the Codec (ES8311) to the speaker PA and the ADC (ES7243) AINLP/N, of which the signal collected would be send back to the ESP32 as the reference signal for the AEC algorithm.
+  The hardware acquisition circuit of the AEC reference signal simultaneously transmits the DAC output of the Codec (ES8311) to the speaker PA and the ADC (ES7243) AINLP/N, of which the signal collected would be sent back to the ESP32 as the reference signal for the AEC algorithm.
 
 -----------------
 
-When using the `ESP32-MINI-1 <https://www.espressif.com/sites/default/files/documentation/esp32-mini-1_datasheet_en.pdf>`__ module, the serial port printed the follows log when powered on. What could be the reason?
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Why does the `ESP32-MINI-1 <https://www.espressif.com/sites/default/files/documentation/esp32-mini-1_datasheet_en.pdf>`__ module print the following two types of logs after power-up?
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The log for ESP32 (ECO V3) is as follows:
 
   .. code-block:: text
 
@@ -121,7 +123,18 @@ When using the `ESP32-MINI-1 <https://www.espressif.com/sites/default/files/docu
       invalid header: 0xffffffff
       ets Jul 29 2019 12:21:46
 
-  The is because flash is not programmed.
+  The log for ESP32 (ECO V1) is as follows:
+
+  .. code-block:: text
+
+      rst:0x10 (RTCWDT_RTC_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+      flash read err, 1000
+      ets_main.c 371
+      ets Jun 8 2016 00:22:57
+
+  Both types of logs above indicate that the ESP32-MINI-1 module's flash has not yet been burned with firmware. Different ECO versions of the ROM Bootloader give different prompts: ESP32 (ECO V3) prints ``invalid header: 0xffffffff``, while ESP32 (ECO V1) prints ``flash read err, 1000``.
+
+  If the module has not yet been flashed with firmware, this is a normal phenomenon. After flashing the firmware to the flash, it can start normally after re-powering.
 
 ---------------
 
@@ -130,4 +143,4 @@ Which GPIO is connected to the RGB LED of the `ESP32-S3-DevKitC-1 <https://docs.
 
   - The RGB LED on the `ESP32-S3-DevKitC-1 v1.0 <https://dl.espressif.com/dl/SCH_ESP32-S3-DEVKITC-1_V1_20210312C.pdf>`_ development board is connected to GPIO48.
   - The RGB LED on the `ESP32-S3-DevKitC-1 v1.1 <https://dl.espressif.com/dl/schematics/SCH_ESP32-S3-DevKitC-1_V1.1_20221130.pdf>`_ development board is connected to GPIO38.
-  - The reason why the `ESP32-S3-DevKitC-1 v1.1 <https://dl.espressif.com/dl/schematics/SCH_ESP32-S3-DevKitC-1_V1.1_20221130.pdf>`_ development board changed the RGB LED pin to GPIO38 is that the `ESP32-S3R8V <https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf>`_ chip’s VDD_SPI voltage has been set to 1.8 V. Therefore, unlike other GPIOs, GPIO47 and GPIO48 in the VDD_SPI power domain of this chip also operate at 1.8 V.
+  - The reason why the `ESP32-S3-DevKitC-1 v1.1 <https://dl.espressif.com/dl/schematics/SCH_ESP32-S3-DevKitC-1_V1.1_20221130.pdf>`_ development board changed the RGB LED pin to GPIO38 is that the `ESP32-S3R8V <https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf>`_ chip's VDD_SPI voltage has been set to 1.8 V. Therefore, unlike other GPIOs, GPIO47 and GPIO48 in the VDD_SPI power domain of this chip also operate at 1.8 V.
