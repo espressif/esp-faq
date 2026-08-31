@@ -409,3 +409,10 @@ Does ESP32-P4 support HDR (High Dynamic Range)?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The ISP on ESP32-P4 only supports linear mode and does not support HDR mode. To capture high-dynamic-range images on ESP32-P4, use a camera sensor with a built-in ISP, such as SC121AT.
+
+-------------
+
+Why can't data from the camera sensor be received after the device is first powered on or restarted?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The camera sensor requires the correct power-up sequence to function properly. Please refer to the datasheet of the camera sensor and check the power-up sequence of each pin. It is recommended to use an external crystal oscillator to provide the clock for the camera sensor; if the GPIO of the host controller is used to provide the clock for the camera sensor, it is suggested that the host controller controls the PWDN (Power Down) pin of the camera sensor through an additional GPIO to achieve more precise power control.
