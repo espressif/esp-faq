@@ -202,13 +202,13 @@ Windows 环境下如何将 esp-idf SDK 和相关工具链从 GitHub 镜像到国
 
       .. code:: doscon
 
-        git config --global url."https://jihulab.com/esp-mirror/".insteadOf "https://github.com/"
+        git config --global url."https://git.espressif.com.cn/".insteadOf "https://github.com/"
 
       解除镜像源设置：
 
       .. code:: doscon
 
-        git config --global --unset url."https://jihulab.com/esp-mirror/".insteadOf
+        git config --global --unset url."https://git.espressif.com.cn/".insteadOf
         git config --global --list
 
     - **ESP-IDF 工具镜像**

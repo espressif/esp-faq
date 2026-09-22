@@ -202,13 +202,13 @@ How to mirror esp-idf SDK and related toolchains from GitHub to domestic sources
 
       .. code:: doscon
 
-        git config --global url."https://jihulab.com/esp-mirror/".insteadOf "https://github.com/"
+        git config --global url."https://git.espressif.com.cn/".insteadOf "https://github.com/"
 
       To remove the mirror settings:
 
       .. code:: doscon
 
-        git config --global --unset url."https://jihulab.com/esp-mirror/".insteadOf
+        git config --global --unset url."https://git.espressif.com.cn/".insteadOf
         git config --global --list
 
     - **ESP-IDF tools mirror**
