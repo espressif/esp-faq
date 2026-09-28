@@ -276,3 +276,19 @@ ESP-IDF 工具链何时可以支持为 ESP32-E22 构建项目？
 -----------------------------------------------------------------------------------------------------------------------------------------
 
   ESP32-E22 不支持基于 ESP-IDF 的软件二次开发。目前没有开放 ESP32-E22 芯片代码和工具链的计划。
+
+--------------
+
+在 Windows 上编译依赖较多的 ESP-IDF 工程时，Ninja 报错 ``CreateProcess: The parameter is incorrect. (is the command line too long?)``，应如何解决？
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  该错误通常是 Ninja 生成的 GCC 命令超过了 Windows ``CreateProcess`` 的命令行长度限制。可在工程目录执行：
+
+  .. code-block:: doscon
+
+    idf.py -D CMAKE_NINJA_FORCE_RESPONSE_FILE=ON reconfigure
+    idf.py build
+
+  这会让 CMake/Ninja 把大量 ``-I``、``-D`` 等参数写入 response file，以缩短实际命令行。如果配置时提示 ``CMAKE_NINJA_FORCE_RESPONSE_FILE`` 未被工程使用，可以忽略；该变量由生成器读取。执行 ``idf.py fullclean`` 后，需要重新带上该参数配置。
+
+  缩短工程和 ESP-IDF 的路径也可缓解问题，但不如启用 response file 稳妥。
