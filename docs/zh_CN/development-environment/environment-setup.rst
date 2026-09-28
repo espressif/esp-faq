@@ -269,3 +269,10 @@ ESP 芯片支持哪些操作系统和开发环境 / IDE？
     - `Arduino IDE <https://github.com/espressif/arduino-esp32>`_ ，基于封装了部分 ESP-IDF 能力的 Arduino core，上手更简单。
 
   - 其他常见第三方开发环境：CLion、CircuitPython、MicroPython、PlatformIO、Toit、UIFlow、Wokwi 等，具体可见 `ESP-Techpedia <https://docs.espressif.com/projects/esp-techpedia/zh_CN/latest/esp-friends/get-started/environment-setup.html>`_。
+
+----------------
+
+ESP-IDF 工具链何时可以支持为 ESP32-E22 构建项目？
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+  ESP32-E22 不支持基于 ESP-IDF 的软件二次开发。目前没有开放 ESP32-E22 芯片代码和工具链的计划。
