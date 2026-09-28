@@ -333,3 +333,8 @@ How to use software Secure Boot?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Please refer to `Signed App Verification Without Hardware Secure Boot <https://docs.espressif.com/projects/esp-idf/en/latest/esp32c5/security/secure-boot-v2.html#signed-app-verify-v2>`_.
+
+After enabling flash encryption, can the esp_partition_mmap() function still be used to access unencrypted plaintext data?
+--------------------------------------------------------------------------------------------------------------------------
+
+  No. When reading data via memory mapping, the data passes through the cache, which automatically invokes the decryption module. Therefore, plaintext data must be read using the relevant esp_flash or esp_partition APIs instead.
