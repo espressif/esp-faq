@@ -588,3 +588,11 @@ Does ESP32-E22 support external PSRAM and flash expansion?
 -------------------------------------------------------------------------------------------------------------------
 
   ESP32-E22 supports external flash but does not support external PSRAM.
+
+-------------------
+
+What is the difference between the ESP32-S31-WROOM-1 and ESP32-S31-WROOM-3 modules?
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - The ESP32-S31-WROOM-1 module uses a castellated (stamp-hole) package and is hardware pin-to-pin compatible with the ESP32-S3-WROOM-1/2 modules.
+  - The ESP32-S31-WROOM-3 module uses a surface-mount (SMD) package, similar in style to the ESP32-S3-MINI-1 module's package.
