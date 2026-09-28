@@ -574,3 +574,10 @@ Which products support powering the RTC separately with a backup battery?
     - When providing backup power to the RTC power domain via VBAT, an external 32.768 kHz crystal oscillator is required.
     - The chip automatically switches the RTC power domain to the VBAT supply only after entering Deep-sleep mode; automatic switching is not supported in Light-sleep mode.
     - If the main power supply is unexpectedly lost, the chip cannot automatically switch to the VBAT supply to keep RTC timing.
+
+-------------
+
+What are the hardware differences between the ESP32-P4 v1.3 and v3.x versions of the chip?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  For detailed explanations of chip design differences, refer to: `ESP32-P4 Chip Revision v3.x User Guide <https://documentation.espressif.com/esp32-p4-chip-revision-v3.x_user_guide_en.pdf>`__
