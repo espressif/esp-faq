@@ -1135,3 +1135,10 @@ When ESP32-C5 uses flash and PSRAM simultaneously with mismatched bus clock freq
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   For details and the solution, see: `Bug Advisory for System Stability Issues When Using PSRAM on ESP32-C5 and ESP32-C61 <https://documentation.espressif.com/AR2026-002_Bug_Advisory_for_System_Stability_Issues_When_Using_PSRAM_on_ESP32-C5_and_ESP32-C61_EN.html>`__.
+
+---------------
+
+Is Linux driver code available for ESP32-E22?
+-------------------------------------------------------------------------------------------------------------------
+
+  See: `esp32e22-linux-driver <https://github.com/espressif/esp32e22-linux-driver>`__.
