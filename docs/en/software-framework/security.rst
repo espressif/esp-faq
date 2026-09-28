@@ -338,3 +338,10 @@ After enabling flash encryption, can the esp_partition_mmap() function still be 
 --------------------------------------------------------------------------------------------------------------------------
 
   No. When reading data via memory mapping, the data passes through the cache, which automatically invokes the decryption module. Therefore, plaintext data must be read using the relevant esp_flash or esp_partition APIs instead.
+
+---------------------
+
+Does ESP32-E22 support Secure Boot and flash encryption to ensure hardware security?
+------------------------------------------------------------------------------------------------------------------------------
+
+  Secure Boot is supported when ESP32-E22 is used with external flash.
