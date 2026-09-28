@@ -269,3 +269,10 @@ Which operating systems and development environments/IDEs are supported by Espre
     - `Arduino IDE <https://github.com/espressif/arduino-esp32>`_, based on the Arduino core that encapsulates some of the ESP-IDF capabilities, is easier to get started with.
 
   - Other common third-party development environments: CLion, CircuitPython, MicroPython, PlatformIO, Toit, UIFlow, Wokwi, etc. For details, see `ESP-Techpedia <https://docs.espressif.com/projects/esp-techpedia/en/latest/esp-friends/get-started/environment-setup.html>`_.
+
+----------------
+
+When will the ESP-IDF toolchain support building projects for ESP32-E22?
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+  ESP32-E22 does not support secondary software development based on ESP-IDF. There are currently no plans to open the ESP32-E22 chip source code or toolchain.
