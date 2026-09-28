@@ -1114,3 +1114,10 @@ ESP32 系列芯片是否支持对引导加载程序进行远程更新？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   支持。可以参考示例：`partitions_ota <https://github.com/espressif/esp-idf/tree/master/examples/system/ota/partitions_ota>`_。
+
+-----------------
+
+ESP32-P4 v3.x 版本的芯片在哪个版本的 ESP-IDF SDK 中开始支持？
+--------------------------------------------------------------------------------------------------------------------------
+
+  参见 `ESP32-P4 系列 v3.2 芯片版本升级 v1.3 版本需求收集及停产计划说明 <https://documentation.espressif.com/PCN202600801_ESP32-P4_Chip_Revision_v3.2_Upgrade_Chip_Revision_v1.3_Demand_Collection_and_EOL_Plan_Description.pdf>`__。

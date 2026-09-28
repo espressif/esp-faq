@@ -1114,3 +1114,10 @@ Does the ESP32 series chip support remote updates for the bootloader?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Yes. You can refer to the example: `partitions_ota <https://github.com/espressif/esp-idf/tree/master/examples/system/ota/partitions_ota>`_.
+
+-----------------
+
+Which version of the ESP-IDF SDK started supporting the ESP32-P4 v3.x chip revisions?
+--------------------------------------------------------------------------------------------------------------------------
+
+  Refer to `ESP32-P4 Chip Revision v3.2 Upgrade Chip Revision v1.3 Demand Collection and EOL Plan Description <https://documentation.espressif.com/PCN202600801_ESP32-P4_Chip_Revision_v3.2_Upgrade_Chip_Revision_v1.3_Demand_Collection_and_EOL_Plan_Description.pdf>`__
