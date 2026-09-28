@@ -1121,3 +1121,10 @@ Which version of the ESP-IDF SDK started supporting the ESP32-P4 v3.x chip revis
 --------------------------------------------------------------------------------------------------------------------------
 
   Refer to `ESP32-P4 Chip Revision v3.2 Upgrade Chip Revision v1.3 Demand Collection and EOL Plan Description <https://documentation.espressif.com/PCN202600801_ESP32-P4_Chip_Revision_v3.2_Upgrade_Chip_Revision_v1.3_Demand_Collection_and_EOL_Plan_Description.pdf>`__
+
+-----------------
+
+When upgrading an ESP32-C6 from a v5.2-based bootloader.bin to a v6.0.1 app.bin, the device fails to boot properly. For detailed information and logs, see the issue: `ESP32-C6 v5.2 bootloader resets after jumping to ESP-IDF v6.0.1 app (IDFGH-17871) <https://github.com/espressif/esp-idf/issues/18769>`__.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The root cause is a CPU memory-protection configuration incompatibility between the affected ESP-IDF application version and the older bootloader. The configuration locked by the old bootloader conflicts with the expected configuration of the new application. For details and the recommended solution, see: `Bug Advisory Concerning Bootloader Forward Compatibility Issue Affecting OTA Updates on ESP32-C6 / ESP32-H2 <https://documentation.espressif.com/AR2026-007_Bug_Advisory_Concerning_Bootloader_Forward_Compatibility_Issue_Affecting_OTA_Updates_on_ESP32-C6_ESP32-H2_EN.html>`__.
