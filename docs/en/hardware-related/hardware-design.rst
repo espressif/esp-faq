@@ -581,3 +581,10 @@ What are the hardware differences between the ESP32-P4 v1.3 and v3.x versions of
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   For detailed explanations of chip design differences, refer to: `ESP32-P4 Chip Revision v3.x User Guide <https://documentation.espressif.com/esp32-p4-chip-revision-v3.x_user_guide_en.pdf>`__
+
+--------------
+
+Does ESP32-E22 support external PSRAM and flash expansion?
+-------------------------------------------------------------------------------------------------------------------
+
+  ESP32-E22 supports external flash but does not support external PSRAM.
