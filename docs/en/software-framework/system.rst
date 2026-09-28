@@ -1128,3 +1128,10 @@ When upgrading an ESP32-C6 from a v5.2-based bootloader.bin to a v6.0.1 app.bin,
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The root cause is a CPU memory-protection configuration incompatibility between the affected ESP-IDF application version and the older bootloader. The configuration locked by the old bootloader conflicts with the expected configuration of the new application. For details and the recommended solution, see: `Bug Advisory Concerning Bootloader Forward Compatibility Issue Affecting OTA Updates on ESP32-C6 / ESP32-H2 <https://documentation.espressif.com/AR2026-007_Bug_Advisory_Concerning_Bootloader_Forward_Compatibility_Issue_Affecting_OTA_Updates_on_ESP32-C6_ESP32-H2_EN.html>`__.
+
+---------------
+
+When ESP32-C5 uses flash and PSRAM simultaneously with mismatched bus clock frequencies, the system may become unstable, and a small number of chips may experience random crashes.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  For details and the solution, see: `Bug Advisory for System Stability Issues When Using PSRAM on ESP32-C5 and ESP32-C61 <https://documentation.espressif.com/AR2026-002_Bug_Advisory_for_System_Stability_Issues_When_Using_PSRAM_on_ESP32-C5_and_ESP32-C61_EN.html>`__.
