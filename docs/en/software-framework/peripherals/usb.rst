@@ -482,3 +482,10 @@ Can the RNDIS example in esp-iot-solution support 5G modules?
 ------------------------------------------------------------------------------------------------------------------------
 
   Yes. Any module that supports the RNDIS driver (4G or 5G) is compatible.
+
+---------------
+
+How do I test the USB CDC throughput of ESP32-P4, and what is the approximate throughput when the endpoint buffer is set to 8192?
+-------------------------------------------------------------------------------------------------------------------------------------
+
+  See the firmware and scripts in the `CDC throughput test example <https://github.com/espressif/esp-usb/blob/master/device/esp_tinyusb/test_apps/cdc/pytest_cdc_throughput.py>`__ to run the test. With the endpoint buffer set to 8192 bytes, the measured USB CDC throughput of ESP32-P4 is about 220–230 Mbit/s.
