@@ -148,6 +148,6 @@
 ------------
 
 为什么 ESP32-S3-BOX-3B 的出厂演示不显示温湿度数据？
--------------------------------------------------------
+-------------------------------------------------------------
 
-  ESP32-S3-BOX-3B 不附带 `ESP32-S3-BOX-3-SENSOR <https://github.com/espressif/esp-box/blob/master/docs/hardware_overview/esp32_s3_box_3/hardware_overview_for_box_3.md#esp32-s3-box-3-sensor>`__ 配件，因此没有温湿度数据属于正常现象。该配件集成了温湿度传感器、红外发射器和接收器、雷达传感器、18650 可充电电池插槽以及 MicroSD 卡插槽。
+  ESP32-S3-BOX-3B 不附带 `ESP32-S3-BOX-3-SENSOR <https://github.com/espressif/esp-box/blob/master/docs/hardware_overview/esp32_s3_box_3/hardware_overview_for_box_3.md#esp32-s3-box-3-sensor>`__ 配件，因此出厂演示不显示温湿度数据是正常现象。该配件集成了温湿度传感器、红外发射器和接收器、雷达传感器、18650 可充电电池插槽以及 MicroSD 卡插槽。
