@@ -15,7 +15,7 @@
 
 --------------
 
-ESP32 以太网开发板示例出现 "emac: Reset EMAC Timeout" 有哪些原因？
+ESP32 以太网开发板例程出现 "emac: Reset EMAC Timeout" 有哪些原因？
 -------------------------------------------------------------------------
 
   此 log 为 EMAC 初始化超时，与 RMII 时钟有关，建议排查硬件问题，查看 PHY 晶振是否虚焊等。
@@ -68,11 +68,11 @@ ESP32 外接 LAN8720，GPIO0 对其提供 CLK，Ethernet 例程初始化出错�
 
   - 请检查 IO0 上是否有电容。作为 CLK 输出 pin 的时候最好 IO0 上没有接电容，这会影响时序。
   - GPIO0 输出 RMII 时钟切记在 Kconfig 中要勾选 ``CONFIG_PHY_CLOCK_GPIO0_OUT``。
-  - 另外，以太网部分除了可以参考 example 中的 README 讲解，也可以参阅官方文档 `API 参考 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html>`_。
+  - 另外，以太网部分除了可以参考例程中的 README 讲解，也可以参阅官方文档 `API 参考 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html>`_。
 
 --------------
 
-使用 ESP-IDF 中的 Ethernet 示例时，出现错误代码 "Timed out waiting for PHY register 0x3 to have value 0xc0f0 (mask 0xfff0). Current value 0xffff"，请问该如何解决？
+使用 ESP-IDF 中的 Ethernet 例程时，出现错误代码 "Timed out waiting for PHY register 0x3 to have value 0xc0f0 (mask 0xfff0). Current value 0xffff"，请问该如何解决？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   - 请参考：`BBS issue <https://www.esp32.com/viewtopic.php?f=12&t=6322&p=27381#p27381>`_ 与 `Github issue <https://github.com/espressif/esp-idf/pull/1127#issuecomment-340727923>`_。
@@ -81,7 +81,7 @@ ESP32 外接 LAN8720，GPIO0 对其提供 CLK，Ethernet 例程初始化出错�
       a. 检查 MDIO 和 MDC 的接线是否错误
       b. 检查 RMII 需要的 50 MHz 时钟是否正常
       c. 检查 PHY 地址是否配置正确（包括软件和硬件）
-      
+
   - 强烈建议检查一遍控制 PHY 地址的 strap 引脚，保证其不要悬空，**不要默认**！确保这些 strap 引脚已经被外部电阻上拉或者下拉了。
   - 如果还是不够确定 PHY 地址究竟是多少，可以在软件中尝试设置 PHY 地址从 0 开始到 31，然后读取 PHY ID 寄存器，看看是否能够读到正常的数据，如果正确，记录下当前 PHY 地址。
 
@@ -93,7 +93,7 @@ ESP32 外接 LAN8720，GPIO0 对其提供 CLK，Ethernet 例程初始化出错�
 
   由于 ESP-IDF v4.1 以及以上版本会摒弃掉 tcp/ip 的接口，推荐使用 `ESP-NETIF <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_netif.html>`_ 的接口。
 
-  参考示例代码如下：
+  参考例程代码如下：
 
   .. code-block:: c
 
@@ -143,30 +143,30 @@ ESP32-Ethernet-Kit 开发板模组替换成 ESP32-WROOM-32D 以太网功能是�
   .. code-block:: text
 
     E (5556) emac: Timed out waiting for PHY rdgister 0x2 to have value 0x0022 (mask 0xffff). Current value 0xffff
-    E (6556) emac: Timed out waiting for PHY register 0x3 to have value 0x1430 (mask 0xfff0). Current value 0xffff 
+    E (6556) emac: Timed out waiting for PHY register 0x3 to have value 0x1430 (mask 0xfff0). Current value 0xffff
 
-  - 此报错说明硬件电路有问题，RMII 时钟没有正常供给 PHY，遇到读 PHY 寄存器失败。关于 RMII 时钟部分，可参见 `说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html>`_。
-  
+  此报错说明硬件电路有问题，RMII 时钟没有正常供给 PHY，遇到读 PHY 寄存器失败。关于 RMII 时钟部分，可参见 `说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html>`_。
+
 ----------------
 
 ESP32 以太网支持 MII 接口吗？
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 硬件支持，软件正在适配中，用户自行实现可参考 `Ethernet doc <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html>`_。 
+  硬件支持，软件正在适配中，用户自行实现可参考 `Ethernet doc <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_eth.html>`_。
 
 --------------------------------
 
-ESP32-S2 是否可以外接以太网？ 
+ESP32-S2 是否可以外接以太网？
 ------------------------------------------------------------------------
 
-  - 可以，目前 ESP-IDF 已经提供了 DM9051 模块的驱动，该模块内部集成以太网的 MAC 和 PHY 功能，可以和 MCU 之间通过 SPI 接口进行通讯。DM9051 上集成了 MAC+PHY 的模块，请参考 `参考示例 <https://github.com/espressif/esp-idf/tree/master/examples/ethernet/>`_ 以及 `使用说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-reference/network/index.html#id1>`_。
+  可以，目前 ESP-IDF 已经提供了 DM9051 模块的驱动，该模块内部集成以太网的 MAC 和 PHY 功能，可以和 MCU 之间通过 SPI 接口进行通讯。DM9051 上集成了 MAC+PHY 的模块，请参考 `参考例程 <https://github.com/espressif/esp-idf/tree/master/examples/ethernet/>`_ 以及 `使用说明 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-reference/network/index.html#id1>`_。
 
 ---------------------
 
 ESP32 是否支持 EMAC 与 SPI 以太网模块同时使用？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - 支持，ESP32 可同时使用 EMAC 和一至两个 SPI 以太网模块。可基于 `esp-idf/examples/ethernet/basic <https://github.com/espressif/esp-idf/tree/master/examples/ethernet/basic>`_ 例程在 menuconfig 中同时开启 PHY 和 SPI 以太网进行测试。
+  支持，ESP32 可同时使用 EMAC 和一至两个 SPI 以太网模块。可基于 `esp-idf/examples/ethernet/basic <https://github.com/espressif/esp-idf/tree/master/examples/ethernet/basic>`_ 例程在 menuconfig 中同时开启 PHY 和 SPI 以太网进行测试。
 
 ---------------------
 
@@ -174,3 +174,10 @@ ESP32 是否支持 EMAC 与 SPI 以太网模块同时使用？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   可以在 ESP-IDF 库中的 ``ethernetif.c`` 文件里添加调试打印，重点检查 TCP 序列号和确认号 (ACK)，确定延迟是否来自以太网层或 LWIP 层。
+
+---------------------
+
+ESP32-S3 的以太网是否支持 VLAN 虚拟网络接口？
+------------------------------------------------
+
+  支持。可参考 ESP-IDF 的 `examples/network/vlan_support <https://github.com/espressif/esp-idf/tree/master/examples/network/vlan_support>`__ 例程创建 VLAN 虚拟网络接口。
