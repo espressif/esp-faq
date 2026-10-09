@@ -145,28 +145,28 @@ When using ESP32 to design a self-developed Ethernet board, after downloaded the
     E (5556) emac: Timed out waiting for PHY rdgister 0x2 to have value 0x0022 (mask 0xffff). Current value 0xffff
     E (6556) emac: Timed out waiting for PHY register 0x3 to have value 0x1430 (mask 0xfff0). Current value 0xffff 
 
-  - This error indicates something is wrong with your hardware circuit. The RMII clock is not working normally with the PHY, causing the PHY failed to read registers. For the more information about RMII clock, please refer to `Instructions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html>`_.
+  This error indicates something is wrong with your hardware circuit. The RMII clock is not working normally with the PHY, causing the PHY failed to read registers. For the more information about RMII clock, please refer to `Instructions <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html>`_.
   
 ----------------
 
 Does ESP32 Ethernet support MII interface?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Supported on hardware level, software adaptation is in development. Please refer to `Ethernet doc <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html>`_ for self implementation. 
+  Supported on hardware level, software adaptation is in development. Please refer to `Ethernet doc <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_eth.html>`_ for self implementation.
 
 --------------------------------
 
-Is it possible to connect ESP32-S2 to Ethernet externally? 
+Is it possible to connect ESP32-S2 to Ethernet externally?
 ------------------------------------------------------------------------
 
-  - Yes, ESP-IDF currently provides drivers for the DM9051 module, which has integrated Ethernet MAC and PHY functionality and can communicate with the MCU via the SPI interface. The DM9051 has an integrated MAC+PHY module, please refer to `example reference <https://github.com/espressif/esp- idf/tree/master/examples/ethernet/> `_ and `API reference <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32s2/api-reference/network/index.html#id1>`_.
+  Yes, ESP-IDF currently provides drivers for the DM9051 module, which has integrated Ethernet MAC and PHY functionality and can communicate with the MCU via the SPI interface. The DM9051 has an integrated MAC+PHY module, please refer to `example reference <https://github.com/espressif/esp-idf/tree/master/examples/ethernet/>`_ and `API reference <https://docs.espressif.com/projects/esp-idf/en/latest/esp32s2/api-reference/network/index.html>`__.
 
 ------------
 
 Do the ESP32 series chips support to use EMAC and SPI-Ethernet modules simultaneously?
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - Yes. ESP32 series chips support to use EMAC and one or two SPI-Ethernet modules simultaneously. You can start PHY and SPI-Ethernet modules simultaneously in menuconfig to test by referring to the example `esp-idf/examples/ethernet/basic <https://github.com/espressif/esp-idf/tree/master/examples/ethernet/basic>`_.
+  Yes. ESP32 series chips support to use EMAC and one or two SPI-Ethernet modules simultaneously. You can start PHY and SPI-Ethernet modules simultaneously in menuconfig to test by referring to the example `esp-idf/examples/ethernet/basic <https://github.com/espressif/esp-idf/tree/master/examples/ethernet/basic>`_.
 
 ---------------------
 
@@ -174,3 +174,10 @@ How to diagnose packet delay issues in ESP32 Fast Ethernet transmission?
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Please add debug prints in ``ethernetif.c`` file in the ESP-IDF repository, focusing on checking the TCP sequence number and acknowledgment number (ACK), to help determine whether the delay comes from the Ethernet layer or the LWIP layer.
+
+---------------------
+
+Does the Ethernet of ESP32-S3 support VLAN virtual network interfaces?
+----------------------------------------------------------------------
+
+  Yes. See the ESP-IDF `examples/network/vlan_support <https://github.com/espressif/esp-idf/tree/master/examples/network/vlan_support>`__ example to create a VLAN virtual network interface.
