@@ -144,3 +144,10 @@ Which GPIO is connected to the RGB LED of the `ESP32-S3-DevKitC-1 <https://docs.
   - The RGB LED on the `ESP32-S3-DevKitC-1 v1.0 <https://dl.espressif.com/dl/SCH_ESP32-S3-DEVKITC-1_V1_20210312C.pdf>`_ development board is connected to GPIO48.
   - The RGB LED on the `ESP32-S3-DevKitC-1 v1.1 <https://dl.espressif.com/dl/schematics/SCH_ESP32-S3-DevKitC-1_V1.1_20221130.pdf>`_ development board is connected to GPIO38.
   - The reason why the `ESP32-S3-DevKitC-1 v1.1 <https://dl.espressif.com/dl/schematics/SCH_ESP32-S3-DevKitC-1_V1.1_20221130.pdf>`_ development board changed the RGB LED pin to GPIO38 is that the `ESP32-S3R8V <https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf>`_ chip's VDD_SPI voltage has been set to 1.8 V. Therefore, unlike other GPIOs, GPIO47 and GPIO48 in the VDD_SPI power domain of this chip also operate at 1.8 V.
+
+---------------
+
+Why does the ESP32-S3-BOX-3B factory demo not display temperature and humidity data?
+-------------------------------------------------------------------------------------------
+
+  ESP32-S3-BOX-3B does not come with the `ESP32-S3-BOX-3-SENSOR <https://github.com/espressif/esp-box/blob/master/docs/hardware_overview/esp32_s3_box_3/hardware_overview_for_box_3.md#esp32-s3-box-3-sensor>`__ accessory, so it is normal that the factory demo does not display temperature and humidity data. This accessory integrates a temperature and humidity sensor, an IR emitter and receiver, a radar sensor, an 18650 rechargeable battery slot, and a MicroSD card slot.
