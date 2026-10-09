@@ -33,7 +33,7 @@ What are the output image formats of the camera?
 What parameters does the camera support for adjustment?
 --------------------------------------------------------------
 
-  The camera supports adjustment of the following parameters: built-in image mode parameters such as image data transfer speed (PCLK), camera output format, resolution, output image size, white balance, GAMMA correction.
+  The camera supports adjustment of the following parameters: built-in image mode parameters such as image data transfer speed (PCLK), camera output format, resolution, output image size, white balance, and Gamma correction.
 
 --------------
 
@@ -181,7 +181,7 @@ What is the frame rate when ESP32 transfers 1080P video via RTSP using the DVP c
 
 --------------
 
-ESP32-S3 only supports MJPEG encoding, but H264/H265 format encoding is needed when implementing rtsp/rtmp streaming. Is there any encoding that supports H264/H265 format?
+ESP32-S3 only supports MJPEG encoding, but H.264/H.265 encoding is required for RTSP/RTMP streaming. Is there an encoder that supports H.264/H.265?
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   Currently, ESP32-S3 does not support hardware-accelerated H.264/H.265 encoding. However, you can use software encoders, such as the FFmpeg library and the x264/x265 library, to convert MJPEG frames captured from the OV2640 into H.264/H.265 encoded frames. The conversion performance depends on the processor performance, which may affect the frame rate.
@@ -201,14 +201,14 @@ It takes five seconds for ESP32-S2 to display the camera image from power-on. Is
   Yes, please refer to the following:
 
   - Try to remove some delay functions in ``esp_camera_init()``.
-  - Change the sccb clock frequency in ``menuconfig`` > ``component config`` > ``camera configuration`` to 400000.
+  - Change the SCCB clock frequency in ``menuconfig`` > ``component config`` > ``camera configuration`` to 400000.
 
 --------------
 
 Can ESP32 directly support 24 MHz frequency to the GC0308 camera?
 ------------------------------------------------------------------------
 
-  It might not be feasible. According to tests, the maximum stable test value of XCLK ESP32 supported for GC0308 is 20 MHz.
+  No. Tests show that the maximum stable XCLK ESP32 can provide to the GC0308 is 20 MHz.
 
 --------------
 
@@ -219,7 +219,7 @@ Does ESP32/ESP32-S3 support the MMS streaming protocol?
 
 --------------
 
-When debugging the GC2145 camera with ESP32-S3, the maximum supported resolution seems to be 1024x768. If it is adjusted to a larger resolution, such as 1280x720, it will print cam_hal: EV-EOF-OVF error. How to solve this issue?
+When debugging the GC2145 camera with ESP32-S3, the maximum supported resolution seems to be 1024 × 768. If it is adjusted to a larger resolution, such as 1280 × 720, it will print cam_hal: EV-EOF-OVF error. How to solve this issue?
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   In this case, it is necessary to reduce the PCLK of GC2145. For specific methods, try to configure a smaller XCLK and debug the PLL clock coefficient of the camera.
@@ -416,3 +416,28 @@ Why can't data from the camera sensor be received after the device is first powe
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The camera sensor requires the correct power-up sequence to function properly. Please refer to the datasheet of the camera sensor and check the power-up sequence of each pin. It is recommended to use an external crystal oscillator to provide the clock for the camera sensor; if the GPIO of the host controller is used to provide the clock for the camera sensor, it is suggested that the host controller controls the PWDN (Power Down) pin of the camera sensor through an additional GPIO to achieve more precise power control.
+
+-------------
+
+Why is the first frame green after the device is first powered on or restarted?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  The image processor usually needs the first frame before it can generate brightness and color statistics from that frame. Therefore, the first frame is often not corrected by the image processor. Discard the first few frames after power-on in the project code to avoid using images with incorrect colors.
+
+-------------
+
+How can a correctly colored image be received sooner after the device is first powered on or restarted?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - A typical approach is to add an ambient-light sensor so that the image processor can obtain the ambient-light brightness sooner.
+  - You can also use a camera sensor that supports AOV (Always On Video), so that the host can obtain the ambient-light spectrum sooner.
+  - See `Optimizing Performance <https://docs.espressif.com/projects/esp-idf/en/latest/esp32p4/api-guides/performance/index.html>`__ to reduce the time spent during startup.
+
+-------------
+
+Why does the image encoding rate drop significantly when the PPA and Codec peripherals are used together on ESP32-P4?
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - First, check how many data lines the flash and PSRAM on the device use, and enable the maximum data transfer capability in the configuration menu.
+  - Next, enable ``CONFIG_SPIRAM_SPEED_250M`` and ``CONFIG_CACHE_L2_CACHE_LINE_128B`` in the configuration menu to improve the CPU processing capability.
+  - Finally, try the asynchronous processing mechanism of the `esp_capture <https://components.espressif.com/components/espressif/esp_capture>`__ component to improve the frame rate.

@@ -33,7 +33,7 @@ ESP32 系列芯片支持哪种类型的摄像头？
 摄像头支持哪些参数调整？
 -------------------------
 
-  图像数据传输速度 (PCLK)、摄像头输出格式、分辨率、输出图像大小、白平衡、GAMMA 校正等摄像头自带的图像模式参数调整。
+  图像数据传输速度 (PCLK)、摄像头输出格式、分辨率、输出图像大小、白平衡、Gamma 校正等摄像头自带的图像模式参数调整。
 
 --------------
 
@@ -51,7 +51,7 @@ ESP32 系列芯片支持哪种类型的摄像头？
 
   - 理论上，PCLK 速度越高，数据传输越快，但实际使用中，PCLK 越高也意味着对芯片的处理速度要求越高。
   - 当前 ESP32 和 ESP32-S2 芯片并口通信是通过 I2S 接口实现的，过高的 PCLK 会导致并口数据无法同步，出现图像抖动甚至花屏的现象。
-  - ESP32-S3 使用独立的 LCD—CAM 接口，可以支持更高的 PCLK 频率。
+  - ESP32-S3 使用独立的 LCD-CAM 接口，可以支持更高的 PCLK 频率。
   - ESP32 的 PCLK 上限为 8 MHz。
   - ESP32-S2 的 PCLK 上限为 32 MHz。
   - ESP32-S3 的 PCLK 上限为 40 MHz。
@@ -133,7 +133,7 @@ ESP-EYE 的出厂固件在哪里？
 
 --------------
 
-Camera 方案相关的示例存放在哪里？
+Camera 方案相关的例程存放在哪里？
 ------------------------------------------------------------------------
 
   - 请参考 `ESP-WHO <https://github.com/espressif/esp-who>`_。
@@ -141,8 +141,8 @@ Camera 方案相关的示例存放在哪里？
   - 请参考 `esp-dev-kits <https://github.com/espressif/esp-dev-kits>`_。
   - 请参考 `esp-webrtc-solution <https://github.com/espressif/esp-webrtc-solution>`__。
   - 请参考 `esp-gmf <https://github.com/espressif/esp-gmf>`__。
-  - 要查看 ESP32-P4 系列的常用示例，请前往 `esp-video/examples <https://github.com/espressif/esp-video-components/tree/master/esp_video/examples>`_。
-  - 有关 ESP32-P4 系列与 LCD 屏幕结合使用的示例，请前往 `esp-iot-solution/examples/camera/video_lcd_display <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/video_lcd_display>`_。
+  - 要查看 ESP32-P4 系列的常用例程，前往 `esp-video/examples <https://github.com/espressif/esp-video-components/tree/master/esp_video/examples>`_。
+  - 要查看 ESP32-P4 系列与 LCD 屏幕结合使用的例程，前往 `esp-iot-solution/examples/camera/video_lcd_display <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/video_lcd_display>`_。
 
 --------------
 
@@ -181,7 +181,7 @@ ESP32 使用 DVP 摄像头通过 RTSP 传输 1080P 的视频可以达到多少�
 
 --------------
 
-ESP32-S3 只支持 MJPEG 编码，但在实现 rtsp/rtmp 推流的时候需要支持 H264/H265 格式的编码，请问是否有支持 H264/H265 格式的编码？
+ESP32-S3 只支持 MJPEG 编码，但在实现 RTSP/RTMP 推流的时候需要支持 H.264/H.265 格式的编码。是否有支持 H.264/H.265 格式的编码器？
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   目前 ESP32-S3 不支持硬件加速的 H.264/H.265 编码。但是，可以使用软件编码器，例如 FFmpeg 库和 x264/x265 库，将从 OV2640 采集到的 MJPEG 帧转换为 H.264/H.265 编码帧。转换的性能取决于处理器性能，可能会影响帧率。
@@ -201,14 +201,14 @@ ESP32-S2 从上电到显示摄像头图像需要 5 秒，是否有改善的空�
   有改善的空间，参考如下：
 
   - 尝试去掉 ``esp_camera_init()`` 里的一些延时函数。
-  - 更改 ``menuconfig`` > ``component config`` > ``camera configuration`` 里的 sccb 的时钟频率为 400000。
+  - 更改 ``menuconfig`` > ``component config`` > ``camera configuration`` 里的 SCCB 时钟频率为 400000。
 
 --------------
 
 ESP32 可以直接给 GC0308 摄像头提供 24 MHz 频率吗？
 ------------------------------------------------------------------------
 
-  恐怕不行。经测试，ESP32 提供给 GC0308 的 XCLK 最大的稳定测试值为 20 MHz。
+  不可以。经测试，ESP32 提供给 GC0308 的 XCLK 最大稳定值为 20 MHz。
 
 --------------
 
@@ -219,7 +219,7 @@ ESP32/ESP32-S3 是否支持 MMS 串流协议？
 
 --------------
 
-使用 ESP32-S3 调试 GC2145 摄像头时，发现支持的最大分辨率为 1024x768，若是调至更大的分辨率，如 1280x720，会提示 cam_hal: EV-EOF-OVF 错误，有什么解决方法？
+使用 ESP32-S3 调试 GC2145 摄像头时，发现支持的最大分辨率为 1024 × 768，若是调至更大的分辨率，如 1280 × 720，会提示 cam_hal: EV-EOF-OVF 错误，有什么解决方法？
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   这种情况下，需要降低 GC2145 的 PCLK。可以尝试配置更小的 XCLK，以及调试该摄像头的 PLL 时钟系数。
@@ -257,7 +257,7 @@ ESP32/ESP32-S2/ESP32-S3 是否有通过摄像头识别二维码的参考？
 如何增加一个自定义的分辨率？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  假设您需要的分辨率为 640 × 240，可以通过下述两种方法使用自定义分辨率：
+  假设需要的分辨率为 640 × 240，可以通过下述两种方法使用自定义分辨率：
 
   - 配置 sensor 工作在典型的分辨率 640 × 480 上，然后只使用其中的上半部分数据 (640 × 240)。
   - 在 `esp32-camera/driver/include/sensor.h <https://github.com/espressif/esp32-camera/blob/master/driver/include/sensor.h#L92>`__ 中增加标识 ``FRAMESIZE_640x240``，然后在 `esp32-camera/driver/sensor.c <https://github.com/espressif/esp32-camera/blob/master/driver/sensor.c#L31>`__ 中增加该分辨率的长度与宽度的定义 ``{640, 240, ASPECT_RATIO_16X9}``。这种方式需要 sensor 的驱动支持自定义分辨率才能正常工作。
@@ -267,7 +267,7 @@ ESP32/ESP32-S2/ESP32-S3 是否有通过摄像头识别二维码的参考？
 如何修改摄像头传感器的寄存器配置？
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  假设您需要更改 OV5640 传感器的寄存器配置，可以通过下述两种方法实现：
+  假设需要更改 OV5640 传感器的寄存器配置，可以通过下述两种方法实现：
 
   - 直接在 ``esp32-camera/sensors/ov5640.c`` 的 ``reset()`` 函数中使用 ``write_reg()`` 配置相关的寄存器。
   - 在应用层通过 ``set_reg()`` 函数配置相关的寄存器：
@@ -286,7 +286,7 @@ esp32-camera 中触发 "cam_hal: EV-VSYNC-OVF" 是什么原因？
 
   这是传感器触发的帧同步信号过快导致的问题。可以按照下面的步骤进行排查：
 
-  - 运行 `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/pic_server>`_ 示例。如果该示例能够正常运行，则说明该问题不是硬件问题。
+  - 运行 `esp-iot-solution/examples/camera/pic_server <https://github.com/espressif/esp-iot-solution/tree/master/examples/camera/pic_server>`_ 例程。如果该例程能够正常运行，则说明该问题不是硬件问题。
   - 检查初始化传感器时指定的 XCLK 和分辨率的大小。分辨率变小或是 XCLK 变大，均可能导致传感器触发的帧同步信号过快。请注意，传感器使用的 XCLK 应该和当前指定的分辨率大小匹配。
 
 -------------------
@@ -401,7 +401,7 @@ ESP32-S3 是否支持 10 位 DVP 摄像头？
 esp-video-components 如何向相机传感器输出 XVCLK？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  XVCLK/XCLK/MCLK 是相机传感器的主输入时钟，可由外部晶振提供，也可由 MCU 的某个管脚输出。可参考 `esp_cam_sensor xclk_generator 测试示例 <https://github.com/espressif/esp-video-components/blob/master/esp_cam_sensor/test_apps/xclk_generator/main/test_xclk_generator.c>`__。
+  XVCLK/XCLK/MCLK 是相机传感器的主输入时钟，可由外部晶振提供，也可由 MCU 的某个管脚输出。可参考 `esp_cam_sensor xclk_generator 测试例程 <https://github.com/espressif/esp-video-components/blob/master/esp_cam_sensor/test_apps/xclk_generator/main/test_xclk_generator.c>`__。
 
 -------------
 
@@ -416,3 +416,28 @@ ESP32-P4 支持 HDR（High Dynamic Range，高动态范围）功能吗？
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   相机传感器需要正确的上电时序才能正常工作。请参考相机传感器的技术资料，检查各个管脚的上电时序。推荐使用外部晶振为相机传感器提供时钟；若使用主控的 GPIO 为相机传感器提供时钟，建议主控通过额外的 GPIO 来控制相机传感器的 PWDN (Power Down) 管脚，以实现更加精准的上下电控制。
+
+-------------
+
+设备首次上电或者重启后，收到的第一帧图像为什么是绿色的？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  图像处理器往往需要在收到第一帧后，才能根据第一帧的图像数据生成反映亮度、颜色的统计信息。因此，第一帧的数据往往是未经图像处理器校正的。可以在工程代码中丢弃设备上电后的前几帧，避免使用颜色不正常的图像。
+
+-------------
+
+设备首次上电或者重启后，如何更快地收到颜色正确的图像？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 典型的方案是增加环境光传感器，使图像处理器更快获得环境光的亮度信息。
+  - 还可以选用支持 AOV (Always On Video) 的相机传感器，使主控更快获得环境光的光谱信息。
+  - 参考 `优化性能 <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32p4/api-guides/performance/index.html>`__，减少系统启动阶段所消耗的时间。
+
+-------------
+
+ESP32-P4 上同时使用 PPA 外设和 Codec 外设时，为什么图像编码速率下降很多？
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  - 首先，检查设备所用 flash 和 PSRAM 的数据线数量，并在配置菜单中启用最大的数据传输能力。
+  - 其次，在配置菜单中启用 ``CONFIG_SPIRAM_SPEED_250M`` 和 ``CONFIG_CACHE_L2_CACHE_LINE_128B`` 配置项，提高 CPU 的处理能力。
+  - 最后，可以尝试使用 `esp_capture <https://components.espressif.com/components/espressif/esp_capture>`__ 组件的异步处理机制来改善帧率。
