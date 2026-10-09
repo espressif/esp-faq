@@ -65,8 +65,6 @@ Since ESP32-S2 has removed the SDIO interface, does it still support external TF
 Does ESP32-S2 support eMMC?
 --------------------------------------------------------------------------------------------------
 
-  :CHIP\: ESP32-S2:
-
   No.
 
 ----------------------
@@ -96,3 +94,16 @@ Does ESP32-P4 SDIO host support mounting two SDIO slave devices (such as ESP32-C
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   The SDIO host driver supports mounting two SDIO slaves simultaneously. For details, refer to the `SDMMC driver resource allocation test <https://github.com/espressif/esp-idf/blob/60720790264d036c698b5cb6e326a5231dc37b64/components/esp_driver_sdmmc/test_apps/sdmmc/main/test_sd_driver_resource.c#L75>`__ in ESP-IDF, which includes the ``TEST_CASE("SDMMC slot exhausted allocation", "[sdmmc]")`` test case.
+
+--------------------
+
+When ESP32-P4 communicates with ESP32-C5 over SDIO, can ESP32-P4 control the GPIOs on ESP32-C5?
+---------------------------------------------------------------------------------------------------
+
+  Yes. Starting from esp_hosted v2.10.0, ESP-Hosted-MCU provides the GPIO Expander feature. ESP32-P4 can control GPIOs on the ESP32-C5 coprocessor over SDIO and RPC, without adding ``custom_rpc``.
+
+  After configuring and flashing the host and coprocessor firmware, call the ``esp_hosted_cp_gpio_*`` APIs on ESP32-P4 to configure GPIO direction and pull-up/pull-down resistors, set or read levels, and reset pins. For the implementation, see the `ESP-Hosted-MCU GPIO Expander example <https://github.com/espressif/esp-hosted-mcu/blob/main/examples/gpio_expander/README.md>`__.
+
+  This feature controls remote GPIOs through ESP-Hosted RPC. It is not the same as operating local GPIOs directly. For high-frequency switching or latency-sensitive use, test with the actual call rate and Wi-Fi load.
+
+  When selecting ESP32-C5 pins, also avoid the SDIO pins and any pins already in use.

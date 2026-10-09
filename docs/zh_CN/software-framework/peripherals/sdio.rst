@@ -15,19 +15,19 @@
 
 --------------
 
-SDIO 最⾼速度能⽀持到多少？
+SDIO 最高速度能支持到多少？
 --------------------------------------
 
-  - ESP32 SDIO 时钟最高 50 MHz，最⾼支持 4-线 模式。
-  - ESP32-S3 SDIO 时钟最高 80 MHz，最⾼支持 8-线 模式。
+  - ESP32 SDIO 时钟最高 50 MHz，最高支持 4 线模式。
+  - ESP32-S3 SDIO 时钟最高 80 MHz，最高支持 8 线模式。
   - 实际应用速率，同时受到存储媒介读写速率影响。
 
 --------------
 
-ESP8266 的 SDIO 是否⽀持连接 SD 卡？
+ESP8266 的 SDIO 是否支持连接 SD 卡？
 --------------------------------------------
 
-  ESP8266 仅有 SDIO 从机接口，因此不⽀持连接 SD 卡。如需要 ESP 芯片连接 SD 卡，请选择支持 SD/MMC 主机接口的 ESP 芯片如 ESP32-S3。
+  ESP8266 仅有 SDIO 从机接口，因此不支持连接 SD 卡。如需要 ESP 芯片连接 SD 卡，请选择支持 SD/MMC 主机接口的 ESP 芯片如 ESP32-S3。
 
 --------------
 
@@ -65,8 +65,6 @@ ESP32-S2 取消了 SDIO 接口，是否还支持外接 TF 卡？
 ESP32-S2 支持 eMMC 吗？
 --------------------------------------------------------------------------------------------------
 
-  :CHIP\: ESP32-S2:
-
   不支持。
 
 ----------------
@@ -96,3 +94,16 @@ ESP32-P4 的 SDIO 主机是否支持同时挂载两个 SDIO 从机（如 ESP32-C
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   SDIO 主机驱动已支持同时挂载两个 SDIO 从机。可参考 ESP-IDF 中的 `SDMMC 驱动资源分配测试 <https://github.com/espressif/esp-idf/blob/60720790264d036c698b5cb6e326a5231dc37b64/components/esp_driver_sdmmc/test_apps/sdmmc/main/test_sd_driver_resource.c#L75>`__，其中包括 ``TEST_CASE("SDMMC slot exhausted allocation", "[sdmmc]")`` 测试用例。
+
+--------------------
+
+ESP32-P4 与 ESP32-C5 通过 SDIO 通信时，ESP32-P4 能否控制 ESP32-C5 的 GPIO？
+-------------------------------------------------------------------------------
+
+  可以。ESP-Hosted-MCU 从 esp_hosted v2.10.0 起提供 GPIO Expander 功能，ESP32-P4 可通过 SDIO 和 RPC 控制 ESP32-C5 协处理器上的 GPIO，无需自行新增 ``custom_rpc``。
+
+  配置并烧录对应的主机和协处理器固件后，可在 ESP32-P4 侧调用 ``esp_hosted_cp_gpio_*`` 系列 API，配置 GPIO 方向和上下拉、设置或读取电平，以及复位管脚。具体实现可参考 `ESP-Hosted-MCU GPIO Expander 示例 <https://github.com/espressif/esp-hosted-mcu/blob/main/examples/gpio_expander/README.md>`__。
+
+  该功能通过 ESP-Hosted RPC 控制远端 GPIO，不等同于直接操作本地 GPIO。对于高频切换或对时延敏感的场景，应结合实际调用频率和 Wi-Fi 负载进行测试。
+
+  选择 ESP32-C5 管脚时，还需避开 SDIO 和其他已占用的管脚。
