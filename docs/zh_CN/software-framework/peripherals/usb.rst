@@ -77,14 +77,14 @@ ESP32-S2 支持的 USB 协议是 OTG 1.1，速度最高是 12 Mbps。能和 USB 
 ESP32-S2/S3 支持 USB 摄像头吗？
 ----------------------------------------------------------------
 
-  支持。ESP32-S2/ESP32-S3 USB Host UVC 示例代码请参考 `usb_hub_dual_camera <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_hub_dual_camera>`__。该示例可以只连接一个 USB 摄像头，也可以通过 HUB 连接多个 USB 摄像头。
+  支持。ESP32-S2/ESP32-S3 USB Host UVC 例程代码请参考 `usb_hub_dual_camera <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_hub_dual_camera>`__。该例程可以只连接一个 USB 摄像头，也可以通过 HUB 连接多个 USB 摄像头。
 
 ---------------
 
 ESP32-S3 是否支持带有麦克风和扬声器的 USB 摄像头？
 ----------------------------------------------------------------
 
-  支持。示例代码请分别参考：
+  支持。例程代码请分别参考：
 
   - 音频： `audio_player <https://github.com/espressif/esp-usb/tree/master/host/class/uac/usb_host_uac/examples/audio_player>`__。
   - 摄像头： `basic_uvc_stream <https://github.com/espressif/esp-usb/tree/master/host/class/uvc/usb_host_uvc/examples/basic_uvc_stream>`__。
@@ -93,7 +93,7 @@ ESP32-S3 是否支持带有麦克风和扬声器的 USB 摄像头？
 
 ---------------
 
-是否有 ESP32-S2 做 U 盘 (MSC DEVICE) 的参考示例？
+是否有 ESP32-S2 做 U 盘 (MSC DEVICE) 的参考例程？
 ----------------------------------------------------------------------------------------------------------------
 
   请参考 `usb_msc_wireless_disk demo <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/device/usb_msc_wireless_disk>`_。目前测试的平均读写速度为：读 540 KB/s，写 350 KB/s。
@@ -153,7 +153,7 @@ ESP32-S3 支持 USB CDC 输出程序日志和下载固件吗？
 ESP32-S3 是否支持 USB Device 为 Class 0 的裝置?
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  支持，可参考示例： `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/v5.0-dev/components/tinyusb/additions/src/usb_descriptors.c>`__。当 Class code == 00H 时，class 类别由 interface 指定。
+  支持，可参考例程： `esp-idf/components/tinyusb/additions/src/usb_descriptors.c <https://github.com/espressif/esp-idf/blob/v5.0-dev/components/tinyusb/additions/src/usb_descriptors.c>`__。当 Class code == 00H 时，class 类别由 interface 指定。
 
 ---------------
 
@@ -193,9 +193,9 @@ ESP32-S2/ESP32-S3 是否有 USB 4G 上网方案？
 
 有，根据 4G 模组的支持情况分别参考（推荐使用 ECM/RNDIS）：
 
-* PPP 协议： `USB CDC 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_4g_module>`__
-* ECM 协议： `USB ECM 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_ecm_4g_module>`__
-* RNDIS 协议： `USB RNDIS 4G 模组示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_rndis_4g_module>`__
+* PPP 协议： `USB CDC 4G 模组例程 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_4g_module>`__
+* ECM 协议： `USB ECM 4G 模组例程 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_ecm_4g_module>`__
+* RNDIS 协议： `USB RNDIS 4G 模组例程 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_rndis_4g_module>`__
 
 ---------------------
 
@@ -228,7 +228,7 @@ ESP32-S2/ESP32-S3 是否有 USB 4G 上网方案？
 是否支持使用 USB HUB 同时连接 4G 模组和 USB 声卡？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  支持。推荐使用 RNDIS/ECM 协议的 4G 模组和 USB UAC 声卡。分别参考 :ref:`4G 上网方案 <4g_network_solution>` 和 `USB UAC 声卡示例 <https://github.com/espressif/esp-usb/tree/master/host/class/uac/usb_host_uac/examples/audio_player>`__。
+  支持。推荐使用 RNDIS/ECM 协议的 4G 模组和 USB UAC 声卡。分别参考 :ref:`4G 上网方案 <4g_network_solution>` 和 `USB UAC 声卡例程 <https://github.com/espressif/esp-usb/tree/master/host/class/uac/usb_host_uac/examples/audio_player>`__。
 
 ---------------------
 
@@ -239,10 +239,10 @@ ESP32-S2/ESP32-S3 是否有 USB 4G 上网方案？
 
 ---------------------
 
-ESP32-S2/ESP32-S3 是否有 USB CDC Host 示例？
+ESP32-S2/ESP32-S3 是否有 USB CDC Host 例程？
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  有，请参考 `ESP-IDF USB CDC Host 示例 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/cdc>`__ 或 `esp-iot-solution USB CDC Host 示例 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_basic>`__。
+  有，请参考 `ESP-IDF USB CDC Host 例程 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/cdc>`__ 或 `esp-iot-solution USB CDC Host 例程 <https://github.com/espressif/esp-iot-solution/tree/master/examples/usb/host/usb_cdc_basic>`__。
 
 ---------------------
 
@@ -302,7 +302,7 @@ ESP32-S3 USB 使能 RNDIS 和 CDC 功能后发现 PC 能识别到 COM 口，但�
 请问 ESP32-S2/ESP32-S3 是否支持 USB CDC NCM 协议？
 ---------------------------------------------------------------------------------------------------
 
-  请参考 `USB NCM 示例 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device/tusb_ncm>`__。
+  请参考 `USB NCM 例程 <https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/device/tusb_ncm>`__。
 
 ---------------
 
@@ -395,7 +395,7 @@ USB UAC 设备如何与主机的音频进行同步?
 
   因为 USB 总线并非时钟总线，每一次传输的间隔并不是固定的，所以 UAC 设备设备可能会出现音画不同步，噪声等现象。建议使用 feedback 端点与主机进行同步，通过 feedback 端点让主机多发或少发数据，从而完成音频同步。
 
-  `usb_device_uac <https://components.espressif.com/components/espressif/usb_device_uac/versions/0.1.1>`__ 组件已经支持了 feedback 端点，可以参考该组件的示例代码实现 USB UAC 设备的音频同步。
+  `usb_device_uac <https://components.espressif.com/components/espressif/usb_device_uac/versions/0.1.1>`__ 组件已经支持了 feedback 端点，可以参考该组件的例程代码实现 USB UAC 设备的音频同步。
 
 ------------
 
@@ -482,3 +482,10 @@ esp-iot-solution 中的 RNDIS 例程是否可以支持 5G 模组？
 ------------------------------------------------------------------------------------------------------------------------
 
   支持。只要是支持 RNDIS 驱动的模组（无论是 4G 还是 5G）都可以兼容。
+
+---------------
+
+如何测试 ESP32-P4 的 USB CDC 吞吐量，端点缓冲区设为 8192 时大约能达到多少？
+--------------------------------------------------------------------------------
+
+  可以参考 `CDC 吞吐测试例程 <https://github.com/espressif/esp-usb/blob/master/device/esp_tinyusb/test_apps/cdc/pytest_cdc_throughput.py>`__ 中的固件和脚本进行测试。将端点缓冲区配置为 8192 字节时，ESP32-P4 的 USB CDC 吞吐量实测约为 220～230 Mbit/s。
