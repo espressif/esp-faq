@@ -199,3 +199,12 @@ How to use the two-point calibration scheme for ADC on ESP32?
 -------------------------------------------------------------
 
   ESP32 uses a reference voltage for ADC calibration by default. To improve the consistency of ADC measurements, you can switch the calibration scheme in eFuse to two-point calibration scheme. However, eFuse changes are irreversible, so please proceed with caution. It is also recommended to use the software-based two-point calibration scheme for ADC: `adc_tp_calibration <https://components.espressif.com/components/espressif/adc_tp_calibration/versions/0.1.0>`_.
+
+------------
+
+Does the ESP32-S31 ADC support _P / _N differential sampling?
+-------------------------------------------------------------
+
+  - The ADC of ESP32-S31 only supports single-ended sampling mode.
+  - ADC pin names include ``_P`` and ``_N`` suffixes, but the current ESP-IDF does not support Differential ADC measurements.
+  - In the implementation of ESP-IDF, ADC channels are still used as regular ADC channels such as ``ADC_CH0``, ``ADC_CH1``, instead of being configured as a pair of differential inputs.

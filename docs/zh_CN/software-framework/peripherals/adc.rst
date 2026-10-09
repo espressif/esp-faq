@@ -199,3 +199,12 @@ ESP32 如何使用 ADC 两点校准方案？
 ---------------------------------------------------------
 
   ESP32 芯片出厂默认使用参考电压进行 ADC 校准，如果希望提高 ADC 测量的一致性，您可以修改 eFuse 中的校准方案为两点校准方案，但 eFuse 的更改是不可逆的，请谨慎操作。同时，推荐使用软件 ADC 两点校准方案：`adc_tp_calibration <https://components.espressif.com/components/espressif/adc_tp_calibration/versions/0.1.0>`_。
+
+------------
+
+ESP32-S31 ADC 是否支持 _P / _N 差分采样？
+---------------------------------------------------------
+
+  - ESP32-S31 的 ADC 仅支持单端（Single-ended）采样模式。
+  - ADC 引脚命名中包含 ``_P`` 和 ``_N`` 后缀，但当前 ESP-IDF 并不支持差分 ADC（Differential ADC）测量。
+  - ESP-IDF 的实现中，ADC 通道仍按照 ``ADC_CH0``、``ADC_CH1`` 等普通 ADC 通道使用，而不是作为一对差分输入进行配置。
