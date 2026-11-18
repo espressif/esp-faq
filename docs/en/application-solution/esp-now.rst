@@ -186,10 +186,10 @@ Why does testing the `esp-idf/examples/wifi/espnow <https://github.com/espressif
 How do I obtain the corresponding RSSI when transferring data using ESP-NOW?
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  - The following describes how to obtain RSSI at the ESP-IDF protocol layer (``esp_now``). The method depends on the ESP-IDF version (the signature of the receive callback ``esp_now_recv_cb_t`` changed in v5.1):
+  - The following describes how to obtain RSSI at the ESP-IDF protocol layer (``esp_now``). The method depends on the ESP-IDF version (the signature of the receive callback ``esp_now_recv_cb_t`` changed in v5.0.1):
 
-    - Before ESP-IDF v5.1: the callback only provides ``mac_addr`` / ``data`` / ``data_len`` and does not include ``rx_ctrl``, so RSSI cannot be read from the callback. On older versions, you can only capture same-channel 802.11 frames in promiscuous (sniffer) mode, read ``rx_ctrl.rssi``, and correlate them with ESP-NOW packets by source MAC. Upgrading to v5.1 or later is recommended so that RSSI can be read directly from the callback.
-    - ESP-IDF v5.1 and later: the first callback argument is ``esp_now_recv_info_t``. Read RSSI from the ``rssi`` field of its ``rx_ctrl`` member (type `wifi_pkt_rx_ctrl_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv418wifi_pkt_rx_ctrl_t>`__).
+    - Before ESP-IDF v5.0.1: the callback only provides ``mac_addr`` / ``data`` / ``data_len`` and does not include ``rx_ctrl``, so RSSI cannot be read from the callback. On older versions, you can only capture same-channel 802.11 frames in promiscuous (sniffer) mode, read ``rx_ctrl.rssi``, and correlate them with ESP-NOW packets by source MAC. Upgrading to v5.0.1 or later is recommended so that RSSI can be read directly from the callback.
+    - ESP-IDF v5.0.1 and later: the first callback argument is ``esp_now_recv_info_t``. Read RSSI from the ``rssi`` field of its ``rx_ctrl`` member (type `wifi_pkt_rx_ctrl_t <https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html#_CPPv418wifi_pkt_rx_ctrl_t>`__).
 
   - If you use the `esp-now component <https://github.com/espressif/esp-now>`__, you do not need to handle the version difference yourself: the component data receive callback (``handler_for_data_t`` registered via ``espnow_set_config_for_data_type()``) provides ``wifi_pkt_rx_ctrl_t *rx_ctrl`` directly. Read ``rx_ctrl->rssi``.
 
