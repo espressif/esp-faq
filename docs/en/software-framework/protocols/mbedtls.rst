@@ -146,7 +146,7 @@ Is the WolfSSL license included with Espressif chips?
 During OTA upgrade, Mbedtls reports an error (e.g., -0x7780). How to resolve this?
 --------------------------------------------------------------------------------------------------------------------------------------------
 
-  0x7780 indicates that the device received an alert message sent by the peer. For example, when the Espressif device uses a self-signed CA certificate and acts as an HTTP server, if a PC browser accesses the server, the PC will send such an alert message. However, this does not affect normal communication. In other cases, it is recommended to enable Mbedtls debug logs to investigate further.
+  -0x7780 indicates that the device received a fatal TLS alert message from the peer, and the TLS handshake is aborted. Enable mbedTLS debug logs to check the alert type and description. Also check the peer TLS logs or use a packet capture for further analysis. Based on the alert description, identify the root cause and correct the corresponding configuration, such as a certificate chain/CA issue, certificate validity or hostname, TLS version, or cipher suite mismatch.
 
 -------------
 
