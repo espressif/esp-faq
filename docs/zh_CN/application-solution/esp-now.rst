@@ -187,10 +187,10 @@ ESP-NOW 应用是否支持通过每个 Wi-Fi 信道发送数据包？
 使用 ESP-NOW 传输数据，如何获取对应的 RSSI？
 ---------------------------------------------------------------------------------------------------------------------------
 
-  - 以下为 ESP-IDF 协议层 (``esp_now``) 的获取方式，与 ESP-IDF 版本有关（接收回调 ``esp_now_recv_cb_t`` 的签名在 v5.1 发生了变化）：
+  - 以下为 ESP-IDF 协议层 (``esp_now``) 的获取方式，与 ESP-IDF 版本有关（接收回调 ``esp_now_recv_cb_t`` 的签名在 v5.0.1 发生了变化）：
 
-    - ESP-IDF v5.1 之前：回调仅提供 ``mac_addr`` / ``data`` / ``data_len``，不含 ``rx_ctrl``，无法在回调内获取 RSSI。如需在旧版本获取，只能用混杂 (sniffer) 模式抓取同信道 802.11 帧的 ``rx_ctrl.rssi``，并自行按源 MAC 与 ESP-NOW 数据包关联。建议升级到 v5.1 及以上，以便直接从回调获取。
-    - ESP-IDF v5.1 及以上：回调的第一个参数为 ``esp_now_recv_info_t``，可通过其 ``rx_ctrl`` 字段（类型为 `wifi_pkt_rx_ctrl_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv418wifi_pkt_rx_ctrl_t>`__ ）中的 ``rssi`` 获取对应的 RSSI。
+    - ESP-IDF v5.0.1 之前：回调仅提供 ``mac_addr`` / ``data`` / ``data_len``，不含 ``rx_ctrl``，无法在回调内获取 RSSI。如需在旧版本获取，只能用混杂 (sniffer) 模式抓取同信道 802.11 帧的 ``rx_ctrl.rssi``，并自行按源 MAC 与 ESP-NOW 数据包关联。建议升级到 v5.0.1 及以上，以便直接从回调获取。
+    - ESP-IDF v5.0.1 及以上：回调的第一个参数为 ``esp_now_recv_info_t``，可通过其 ``rx_ctrl`` 字段（类型为 `wifi_pkt_rx_ctrl_t <https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/api-reference/network/esp_wifi.html#_CPPv418wifi_pkt_rx_ctrl_t>`__ ）中的 ``rssi`` 获取对应的 RSSI。
 
   - 若使用 `esp-now 组件 <https://github.com/espressif/esp-now>`__，则无需自行处理上述版本差异：组件的数据接收回调（通过 ``espnow_set_config_for_data_type()`` 注册的 ``handler_for_data_t``）直接提供 ``wifi_pkt_rx_ctrl_t *rx_ctrl`` 参数，读取 ``rx_ctrl->rssi`` 即可。
 
